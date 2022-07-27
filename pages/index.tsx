@@ -8,18 +8,26 @@ const saintsQueryDocument = gql`
   query {
     saint {
       name
+      image_main {
+        id
+      }
       biography
       birth_date
       birth_location
       death_date
       death_location
+      photos {
+        directus_files_id {
+          id
+        }
+      }
     }
   }
 `;
 
 const getSaints = async () => {
   const { saint } = await request(
-    'https://rontnles.directus.app/graphql',
+    'https://4hi7oa87.directus.app/graphql',
     saintsQueryDocument
   );
   return saint;
