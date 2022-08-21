@@ -1,0 +1,30 @@
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
+import { Saint } from '../../components/SaintSummary/interfaces';
+import { getSaints } from '../../queries/getSaints';
+import SaintSummary from '../../components/SaintSummary/SaintSummary';
+import Page from '../../components/Page/Page';
+
+const Home = () => {
+  const { data } = useQuery(['saints'], getSaints);
+
+  return (
+    <Page>
+      {data?.map((saint: Saint, i: number) => (
+        <SaintSummary key={i} {...saint} />
+      ))}
+    </Page>
+  );
+};
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery(['saints'], getSaints);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
+
+export default Home;
