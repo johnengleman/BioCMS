@@ -1,1 +1,1 @@
-export { default } from './saint';
+export { default } from './saints';
