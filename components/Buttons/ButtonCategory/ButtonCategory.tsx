@@ -5,8 +5,8 @@ type Props = {
   bg: String
 }
 
-const Button = ({ text, bg }: Props) => {
+const ButtonCategory = ({ text, bg }: Props) => {
   return <S.Button bg={bg}>{text}</S.Button>
 }
 
-export default Button
+export default ButtonCategory

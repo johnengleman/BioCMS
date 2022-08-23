@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Gradient = styled.div`
-  background: linear-gradient(to right, red, orange);
+  background: linear-gradient(to right, #4a6bbf, #ffb800);
   padding: 3px;
   border-radius: 5px;
   margin-top: -20px;

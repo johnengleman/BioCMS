@@ -11,6 +11,7 @@ import { getSaint } from '../../queries/getSaint'
 import Page from '../../components/Page/Page'
 import Powers from '../../components/Powers/Powers'
 import Name from '../../components/Name/Name'
+import ButtonAction from '../../components/Buttons/ButtonAction/ButtonAction'
 
 const SaintBio = () => {
   const router = useRouter()
@@ -29,9 +30,10 @@ const SaintBio = () => {
           <S.ImageContainer>
             <S.Image>
               <Image
-                src={`https://4hi7oa87.directus.app/assets/${data?.photos[0]?.directus_files_id?.id}?key=profile`}
-                height="300"
+                src={`https://4hi7oa87.directus.app/assets/${data?.photos[0]?.directus_files_id?.id}`}
+                height="275"
                 width="225"
+                layout="fixed"
                 alt=""
               />
             </S.Image>
@@ -46,6 +48,30 @@ const SaintBio = () => {
             </S.Summary>
             <Powers />
           </S.SummaryContainer>
+          <S.Pictures>
+            <Image
+              src={`https://4hi7oa87.directus.app/assets/${data?.photos[1]?.directus_files_id?.id}?key=profile`}
+              height="125"
+              width="115"
+              layout="fixed"
+              alt=""
+            />
+            <Image
+              src={`https://4hi7oa87.directus.app/assets/${data?.photos[2]?.directus_files_id?.id}?key=profile`}
+              height="125"
+              width="115"
+              layout="fixed"
+              alt=""
+            />
+            <Image
+              src={`https://4hi7oa87.directus.app/assets/${data?.photos[3]?.directus_files_id?.id}?key=profile`}
+              height="125"
+              width="115"
+              layout="fixed"
+              alt=""
+            />
+            <ButtonAction text="Show All Photos" />
+          </S.Pictures>
         </S.Header>
       </div>
     </Page>

@@ -1,13 +1,13 @@
-import Button from '../Buttons/Buttons'
+import ButtonCategory from '../Buttons/ButtonCategory/ButtonCategory'
 import * as S from './styles'
 
 const Powers = () => (
   <S.Powers>
-    <Button
+    <ButtonCategory
       text="Healing"
       bg="#E4EDFB"
     />
-    <Button
+    <ButtonCategory
       text="Clairvoyant"
       bg="#88FEB7"
     />
