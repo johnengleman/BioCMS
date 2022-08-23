@@ -1,34 +1,35 @@
-import Link from 'next/link';
+import Link from 'next/link'
+import * as S from './styles'
 
 const Navigation = () => {
   return (
-    <div className='shadow-lg mb-4'>
-      <div className='w-4/5 mx-auto flex items-center h-14'>
-        <ul className='flex gap-8'>
-          <li className='text-[#464646] transition-all opacity-70 text-base cursor-pointer rounded border border-transparent hover:border-slate-300 hover:opacity-100 py-1 px-6'>
-            <Link href='/saints'>
+    <S.Container>
+      <S.Navigation>
+        <ul>
+          <S.Button>
+            <Link href="/saints">
               <a>Saints</a>
             </Link>
-          </li>
-          <li className='text-[#464646] transition-all opacity-70 text-base cursor-pointer rounded border border-transparent hover:border-slate-300 hover:opacity-100 py-1 px-6'>
-            <Link href='/quotes'>
-              <a>Quotes</a>
+          </S.Button>
+          <S.Button>
+            <Link href="/saints">
+              <a>Saints</a>
             </Link>
-          </li>
-          <li className='text-[#464646] transition-all opacity-70 text-base cursor-pointer rounded border border-transparent hover:border-slate-300 hover:opacity-100 py-1 px-6'>
-            <Link href='/books'>
-              <a>Books</a>
+          </S.Button>
+          <S.Button>
+            <Link href="/saints">
+              <a>Saints</a>
             </Link>
-          </li>
-          <li className='text-[#464646] transition-all opacity-70 text-base cursor-pointer rounded border border-transparent hover:border-slate-300 hover:opacity-100 py-1 px-6'>
-            <Link href='/churches'>
-              <a>Churches</a>
+          </S.Button>
+          <S.Button>
+            <Link href="/saints">
+              <a>Saints</a>
             </Link>
-          </li>
+          </S.Button>
         </ul>
-      </div>
-    </div>
-  );
-};
+      </S.Navigation>
+    </S.Container>
+  )
+}
 
-export default Navigation;
+export default Navigation

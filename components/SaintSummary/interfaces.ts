@@ -1,8 +1,7 @@
 export interface Saint {
+  id: string;
   name: string;
-  image_main: {
-    id: string;
-  };
+  summary: string;
   biography: string;
   birth_date: string;
   birth_location: string;

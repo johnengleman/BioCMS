@@ -1,16 +1,17 @@
 import Navigation from '../Navigation/Navigation';
+import * as S from './styles';
 
 type Props = {
   children: JSX.Element;
 };
 
 const Page = ({ children }: Props) => (
-  <div className='min-h-screen'>
+  <S.Page>
     <Navigation />
-    <main className='flex flex-row flex-wrap gap-4 mx-auto w-4/5'>
+    <S.Body>
       {children}
-    </main>
-  </div>
+    </S.Body>
+  </S.Page>
 );
 
 export default Page;

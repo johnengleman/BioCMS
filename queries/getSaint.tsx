@@ -1,8 +1,8 @@
 import { request, gql } from 'graphql-request';
 
 const query = gql`
-  query {
-    saint {
+  query getSaint($id: GraphQLStringOrFloat!) {
+    saint(filter: { id: { _eq: $id } }) {
       id
       name
       summary
@@ -20,10 +20,11 @@ const query = gql`
   }
 `;
 
-export const getSaints = async () => {
+export const getSaint = async (id?: string) => {
   const { saint } = await request(
     'https://4hi7oa87.directus.app/graphql',
-    query
+    query,
+    { id }
   );
-  return saint;
+  return saint[0];
 };

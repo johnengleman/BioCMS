@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { Saint } from '../../components/SaintSummary/interfaces';
 import { getSaints } from '../../queries/getSaints';
@@ -10,7 +11,11 @@ const Home = () => {
   return (
     <Page>
       {data?.map((saint: Saint, i: number) => (
-        <SaintSummary key={i} {...saint} />
+        <Link key={i} href={`/saints/${saint?.id}`}>
+          <a>
+            <SaintSummary {...saint} />
+          </a>
+        </Link>
       ))}
     </Page>
   );
