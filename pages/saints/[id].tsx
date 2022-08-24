@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
-import Image from 'next/image'
 import {
   dehydrate,
   QueryClient,
@@ -9,9 +8,9 @@ import {
 import * as S from './styles'
 import { getSaint } from '../../queries/getSaint'
 import Page from '../../components/Page/Page'
-import Powers from '../../components/Powers/Powers'
-import Name from '../../components/Name/Name'
-import ButtonAction from '../../components/Buttons/ButtonAction/ButtonAction'
+import HeaderSummary from '../../components/HeaderSummary/HeaderSummary'
+import HeaderImage from '../../components/HeaderImage/HeaderImage'
+import HeaderImages from '../../components/HeaderImages/HeaderImages'
 
 const SaintBio = () => {
   const router = useRouter()
@@ -25,55 +24,23 @@ const SaintBio = () => {
 
   return (
     <Page>
-      <div>
-        <S.Header>
-          <S.ImageContainer>
-            <S.Image>
-              <Image
-                src={`https://4hi7oa87.directus.app/assets/${data?.photos[0]?.directus_files_id?.id}`}
-                height="275"
-                width="225"
-                layout="fixed"
-                alt=""
-              />
-            </S.Image>
-            <Name name={data?.name} />
-          </S.ImageContainer>
-          <S.SummaryContainer>
-            <S.Summary>
-              Sit at pellentesque eu egestas placerat
-              commodo. Et quam luctus posuere feugiat.
-              Pulvinar fusce odio tortor, sit sit. In
-              habitant volutpat netus sit sed.
-            </S.Summary>
-            <Powers />
-          </S.SummaryContainer>
-          <S.Pictures>
-            <Image
-              src={`https://4hi7oa87.directus.app/assets/${data?.photos[1]?.directus_files_id?.id}?key=profile`}
-              height="125"
-              width="115"
-              layout="fixed"
-              alt=""
-            />
-            <Image
-              src={`https://4hi7oa87.directus.app/assets/${data?.photos[2]?.directus_files_id?.id}?key=profile`}
-              height="125"
-              width="115"
-              layout="fixed"
-              alt=""
-            />
-            <Image
-              src={`https://4hi7oa87.directus.app/assets/${data?.photos[3]?.directus_files_id?.id}?key=profile`}
-              height="125"
-              width="115"
-              layout="fixed"
-              alt=""
-            />
-            <ButtonAction text="Show All Photos" />
-          </S.Pictures>
-        </S.Header>
-      </div>
+      <S.Saint>
+        <div className="header">
+          <HeaderImage
+            imageId={data?.photos[0]?.directus_files_id?.id}
+            name={data?.name}
+          />
+          <HeaderSummary />
+          <HeaderImages
+            imageIds={[
+              data?.photos[1]?.directus_files_id?.id,
+              data?.photos[2]?.directus_files_id?.id,
+              data?.photos[3]?.directus_files_id?.id,
+            ]}
+          />
+        </div>
+        <div className="body"></div>
+      </S.Saint>
     </Page>
   )
 }
