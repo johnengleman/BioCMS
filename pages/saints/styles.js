@@ -16,5 +16,6 @@ export const Saint = styled.div`
   .quotes {
     display: flex;
     gap: 20px;
+    margin-bottom: 25px;
   }
 `

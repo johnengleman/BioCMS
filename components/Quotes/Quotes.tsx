@@ -48,13 +48,17 @@ const Quotes = ({ quotes }: QuotesProps) => {
     )
   }
 
-  return quotes.map((quote: QuoteProps, i) => (
-    <Quote
-      key={i}
-      text={quote.text}
-      topic={quote.topic}
-    />
-  ))
+  return (
+    <>
+      {quotes.map((quote: QuoteProps, i) => (
+        <Quote
+          key={i}
+          text={quote.text}
+          topic={quote.topic}
+        />
+      ))}
+    </>
+  )
 }
 
 export default Quotes

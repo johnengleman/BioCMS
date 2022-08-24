@@ -13,6 +13,7 @@ import HeaderSummary from '../../components/HeaderSummary/HeaderSummary'
 import HeaderImage from '../../components/HeaderImage/HeaderImage'
 import HeaderImages from '../../components/HeaderImages/HeaderImages'
 import Quotes from '../../components/Quotes/Quotes'
+import Bio from '../../components/Bio/Bio'
 
 const SaintBio = () => {
   const router = useRouter()
@@ -47,6 +48,7 @@ const SaintBio = () => {
           <div className="quotes">
             <Quotes quotes={data?.saint_quotes} />
           </div>
+          <Bio text={data?.biography} />
         </div>
       </S.Saint>
     </Page>
