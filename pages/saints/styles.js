@@ -10,8 +10,11 @@ export const Saint = styled.div`
     background-size: cover;
     height: 330px;
     align-items: flex-end;
+    margin-bottom: 25px;
   }
 
-  .body {
+  .quotes {
+    display: flex;
+    gap: 20px;
   }
 `

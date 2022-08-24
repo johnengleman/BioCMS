@@ -1,4 +1,4 @@
-import { request, gql } from 'graphql-request';
+import { request, gql } from 'graphql-request'
 
 const query = gql`
   query getSaint($id: GraphQLStringOrFloat!) {
@@ -16,15 +16,19 @@ const query = gql`
           id
         }
       }
+      saint_quotes {
+        text
+        topics
+      }
     }
   }
-`;
+`
 
 export const getSaint = async (id?: string) => {
   const { saint } = await request(
     'https://4hi7oa87.directus.app/graphql',
     query,
-    { id }
-  );
-  return saint[0];
-};
+    { id },
+  )
+  return saint[0]
+}

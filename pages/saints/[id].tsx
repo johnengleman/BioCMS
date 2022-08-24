@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
+
 import {
   dehydrate,
   QueryClient,
@@ -11,6 +12,7 @@ import Page from '../../components/Page/Page'
 import HeaderSummary from '../../components/HeaderSummary/HeaderSummary'
 import HeaderImage from '../../components/HeaderImage/HeaderImage'
 import HeaderImages from '../../components/HeaderImages/HeaderImages'
+import Quotes from '../../components/Quotes/Quotes'
 
 const SaintBio = () => {
   const router = useRouter()
@@ -21,6 +23,8 @@ const SaintBio = () => {
   const { data } = useQuery(['saint', id], () =>
     getSaint(id),
   )
+
+  console.log(data)
 
   return (
     <Page>
@@ -39,7 +43,11 @@ const SaintBio = () => {
             ]}
           />
         </div>
-        <div className="body"></div>
+        <div className="body">
+          <div className="quotes">
+            <Quotes quotes={data?.saint_quotes} />
+          </div>
+        </div>
       </S.Saint>
     </Page>
   )
