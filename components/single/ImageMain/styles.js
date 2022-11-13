@@ -1,11 +1,9 @@
 import styled from 'styled-components'
 
 export const ImageContainer = styled.div`
-  width: 260px;
   margin: 0 20px 20px 20px;
 
   .image {
-    width: 225px;
     border-radius: 10px;
     margin: 0 auto;
     overflow: hidden;

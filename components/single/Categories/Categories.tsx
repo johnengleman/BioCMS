@@ -1,7 +1,7 @@
-import ButtonCategory from '../Buttons/ButtonCategory/ButtonCategory'
+import ButtonCategory from '../../global/Buttons/ButtonCategory/ButtonCategory'
 import * as S from './styles'
 
-const Powers = () => (
+const Categories = () => (
   <S.Powers>
     <ButtonCategory
       text="Healing"
@@ -14,4 +14,4 @@ const Powers = () => (
   </S.Powers>
 )
 
-export default Powers
+export default Categories;

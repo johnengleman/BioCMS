@@ -7,24 +7,16 @@ const Navigation = () => {
       <S.Navigation>
         <ul>
           <S.Button>
-            <Link href="/saints">
-              <a>Saints</a>
-            </Link>
+            <Link href="/saints">Saints</Link>
           </S.Button>
           <S.Button>
-            <Link href="/saints">
-              <a>Saints</a>
-            </Link>
+            <Link href="/saints">Saints</Link>
           </S.Button>
           <S.Button>
-            <Link href="/saints">
-              <a>Saints</a>
-            </Link>
+            <Link href="/saints">Saints</Link>
           </S.Button>
           <S.Button>
-            <Link href="/saints">
-              <a>Saints</a>
-            </Link>
+            <Link href="/saints">Saints</Link>
           </S.Button>
         </ul>
       </S.Navigation>

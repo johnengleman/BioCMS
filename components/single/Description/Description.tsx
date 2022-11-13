@@ -1,11 +1,11 @@
-import ShowMore from '../ShowMore/ShowMore'
+import ShowMore from '../../global/ShowMore/ShowMore'
 import * as S from './styles'
 
 type Props = {
   text: string
 }
 
-const Bio = ({ text }: Props) => (
+const Description = ({ text }: Props) => (
   <S.Bio>
     <div
       className="text"
@@ -15,4 +15,4 @@ const Bio = ({ text }: Props) => (
   </S.Bio>
 )
 
-export default Bio
+export default Description;

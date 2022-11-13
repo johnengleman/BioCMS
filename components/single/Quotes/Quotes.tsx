@@ -1,7 +1,7 @@
 import { Carousel } from '@mantine/carousel'
 import * as S from './styles'
-import ButtonCategory from '../Buttons/ButtonCategory/ButtonCategory'
-import ShowMore from '../ShowMore/ShowMore'
+import ButtonCategory from '../../global/Buttons/ButtonCategory/ButtonCategory'
+import ShowMore from '../../global/ShowMore/ShowMore'
 
 type QuoteProps = {
   text: String

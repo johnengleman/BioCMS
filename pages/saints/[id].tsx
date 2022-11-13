@@ -8,12 +8,12 @@ import {
 } from '@tanstack/react-query'
 import * as S from './styles'
 import { getSaint } from '../../queries/getSaint'
-import Page from '../../components/Page/Page'
-import HeaderSummary from '../../components/HeaderSummary/HeaderSummary'
-import HeaderImage from '../../components/HeaderImage/HeaderImage'
-import HeaderImages from '../../components/HeaderImages/HeaderImages'
-import Quotes from '../../components/Quotes/Quotes'
-import Bio from '../../components/Bio/Bio'
+import Page from '../../components/global/Page/Page'
+import { Powers } from '../../components/single/Categories/styles'
+import HeaderImage from '../../components/single/ImageMain/ImageMain'
+import HeaderImages from '../../components/single/Images/Images'
+import Quotes from '../../components/single/Quotes/Quotes'
+import Bio from '../../components/single/Description/Description'
 
 const SaintBio = () => {
   const router = useRouter()
@@ -35,7 +35,13 @@ const SaintBio = () => {
             imageId={data?.photos[0]?.directus_files_id?.id}
             name={data?.name}
           />
-          <HeaderSummary />
+          <div className="summary">
+            Sit at pellentesque eu egestas placerat commodo.
+            Et quam luctus posuere feugiat. Pulvinar fusce
+            odio tortor, sit sit. In habitant volutpat netus
+            sit sed.
+          </div>
+          <Powers />
           <HeaderImages
             imageIds={[
               data?.photos[1]?.directus_files_id?.id,

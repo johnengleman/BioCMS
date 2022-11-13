@@ -25,7 +25,7 @@ export default function Slider({ photos }) {
         <SwiperSlide key={i}>
           <Image
             alt='profile'
-            src={`https://4hi7oa87.directus.app/assets/${photo.directus_files_id?.id}?key=profile2`}
+            src={`https://4hi7oa87.directus.app/assets/${photo.directus_files_id?.id}`}
             layout='fixed'
             width={300}
             height={300}

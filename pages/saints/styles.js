@@ -8,14 +8,21 @@ export const Saint = styled.div`
     margin: 10px 0;
     background-image: url(${headerBg.src});
     background-size: cover;
-    height: 330px;
     align-items: flex-end;
     margin-bottom: 25px;
+    height: 500px;
   }
 
   .quotes {
     display: flex;
     gap: 20px;
     margin-bottom: 25px;
+  }
+
+  .summary {
+    color: #525252;
+    margin: 40px 0 20px 0;
+    font-size: 14px;
+    line-height: 18px;
   }
 `

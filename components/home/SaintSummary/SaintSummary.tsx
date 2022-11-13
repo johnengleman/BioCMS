@@ -5,10 +5,10 @@ import {
   faChurch,
   faQuoteRight,
 } from '@fortawesome/free-solid-svg-icons'
-import Name from '../Name/Name'
+import Name from '../../global/Name/Name'
 
 import { Saint } from './interfaces'
-import Slider from '../Slider/Slider'
+import Slider from '../../global/Slider/Slider'
 
 export default function SaintSummary(props: Saint) {
   const {
