@@ -6,7 +6,7 @@ type Props = {
   imageIds: string[]
 }
 
-const Images = ({ imageIds }: Props) => (
+const ImagesMini = ({ imageIds }: Props) => (
   <S.Pictures>
     {imageIds.map((id, i) => (
       <Image
@@ -22,4 +22,4 @@ const Images = ({ imageIds }: Props) => (
   </S.Pictures>
 )
 
-export default Images
+export default ImagesMini

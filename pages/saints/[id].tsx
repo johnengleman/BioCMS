@@ -9,11 +9,10 @@ import {
 import * as S from './styles'
 import { getSaint } from '../../queries/getSaint'
 import Page from '../../components/global/Page/Page'
-import { Powers } from '../../components/single/Categories/styles'
-import HeaderImage from '../../components/single/ImageMain/ImageMain'
-import HeaderImages from '../../components/single/Images/Images'
+import ImageMain from '../../components/single/ImageMain/ImageMain'
 import Quotes from '../../components/single/Quotes/Quotes'
 import Bio from '../../components/single/Description/Description'
+import Categories from '../../components/single/Categories/Categories'
 
 const SaintBio = () => {
   const router = useRouter()
@@ -31,28 +30,19 @@ const SaintBio = () => {
     <Page>
       <S.Saint>
         <div className="header">
-          <HeaderImage
+          <ImageMain
             imageId={data?.photos[0]?.directus_files_id?.id}
             name={data?.name}
           />
-          <div className="summary">
-            Sit at pellentesque eu egestas placerat commodo.
-            Et quam luctus posuere feugiat. Pulvinar fusce
-            odio tortor, sit sit. In habitant volutpat netus
-            sit sed.
+          <div className="col">
+            <div className="summary">{data?.summary}</div>
+            <Categories data={data?.categories} />
           </div>
-          <Powers />
-          <HeaderImages
-            imageIds={[
-              data?.photos[1]?.directus_files_id?.id,
-              data?.photos[2]?.directus_files_id?.id,
-              data?.photos[3]?.directus_files_id?.id,
-            ]}
-          />
         </div>
         <div className="body">
           <div className="quotes">
             <Quotes quotes={data?.saint_quotes} />
+            <Categories />
           </div>
           <Bio text={data?.biography} />
         </div>

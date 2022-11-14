@@ -9,15 +9,6 @@ const Navigation = () => {
           <S.Button>
             <Link href="/saints">Saints</Link>
           </S.Button>
-          <S.Button>
-            <Link href="/saints">Saints</Link>
-          </S.Button>
-          <S.Button>
-            <Link href="/saints">Saints</Link>
-          </S.Button>
-          <S.Button>
-            <Link href="/saints">Saints</Link>
-          </S.Button>
         </ul>
       </S.Navigation>
     </S.Container>

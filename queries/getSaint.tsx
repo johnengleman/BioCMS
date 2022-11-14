@@ -11,6 +11,7 @@ const query = gql`
       death_date
       birth_location
       death_location
+      categories
       photos {
         directus_files_id {
           id

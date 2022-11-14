@@ -1,17 +1,20 @@
 import ButtonCategory from '../../global/Buttons/ButtonCategory/ButtonCategory'
 import * as S from './styles'
 
-const Categories = () => (
+type Props = {
+  data: string
+}
+
+const Categories = ({ data }: Props) => (
   <S.Powers>
-    <ButtonCategory
-      text="Healing"
-      bg="#E4EDFB"
-    />
-    <ButtonCategory
-      text="Clairvoyant"
-      bg="#88FEB7"
-    />
+    {data?.map((category, i) => (
+      <ButtonCategory
+        text={category}
+        bg="#E4EDFB"
+        key={i}
+      />
+    ))}
   </S.Powers>
 )
 
-export default Categories;
+export default Categories
