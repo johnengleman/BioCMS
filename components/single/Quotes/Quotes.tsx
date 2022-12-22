@@ -16,7 +16,6 @@ const Quote = ({ text, topic }: QuoteProps) => (
         text="topic"
         bg="#CCEBD9"
       />
-      <ShowMore />
     </div>
   </S.Quote>
 )

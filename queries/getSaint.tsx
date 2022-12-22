@@ -17,6 +17,15 @@ const query = gql`
           id
         }
       }
+      saint_books {
+        author
+        title
+        link
+        pages
+        image {
+          id
+        }
+      }
       saint_quotes {
         text
         topics

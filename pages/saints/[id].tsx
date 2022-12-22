@@ -13,6 +13,7 @@ import ImageMain from '../../components/single/ImageMain/ImageMain'
 import Quotes from '../../components/single/Quotes/Quotes'
 import Bio from '../../components/single/Description/Description'
 import Categories from '../../components/single/Categories/Categories'
+import Books from '../../components/single/Books/Books'
 
 const SaintBio = () => {
   const router = useRouter()
@@ -45,6 +46,7 @@ const SaintBio = () => {
             <Categories />
           </div>
           <Bio text={data?.biography} />
+          <Books books={data?.saint_books}/>
         </div>
       </S.Saint>
     </Page>

@@ -6,4 +6,5 @@ export const Bio = styled.div`
   box-shadow: 0 10px 30px 0 rgb(0, 0, 0, 0.3);
   border-radius: 20px;
   padding: 60px;
+  margin-bottom: 30px;
 `
