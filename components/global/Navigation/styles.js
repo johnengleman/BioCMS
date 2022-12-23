@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { device } from '../../../styles/devices'
 
 export const Container = styled.div`
   margin-bottom: 10px;
@@ -8,9 +9,13 @@ export const Container = styled.div`
 export const Navigation = styled.div`
   display: flex;
   align-items: center;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   height: 60px;
+
+  @media ${device.laptop} {
+    width: 80%;
+  }
 
   ul {
     display: flex;

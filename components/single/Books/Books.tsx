@@ -58,7 +58,13 @@ const Books = ({ books }: BooksProps) => (
           slideGap="sm"
           align="end"
           height="190px"
-          slidesToScroll={4}
+          slidesToScroll={1}
+          breakpoints={[
+            {
+              maxWidth: 'md',
+              slideSize: '100%',
+            },
+          ]}
         >
           {books?.map((book, i) => (
             <Carousel.Slide key={i}>

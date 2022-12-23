@@ -15,16 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{
-            /** Put your mantine theme override here */
-            colorScheme: 'light',
-          }}
-        >
-          <Component {...pageProps} />
-        </MantineProvider>
+        <Component {...pageProps} />
       </Hydrate>
     </QueryClientProvider>
   )

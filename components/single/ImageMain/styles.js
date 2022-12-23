@@ -1,8 +1,13 @@
 import styled from 'styled-components'
+import { device } from '../../../styles/devices'
 
 export const ImageContainer = styled.div`
-  margin: 0 20px 20px 20px;
-  min-width: 350px;
+  margin-bottom: 20px;
+
+  @media ${device.laptop} {
+    margin: 0 20px 20px 20px;
+    min-width: 350px;
+  }
 
   .image {
     border-radius: 10px;
