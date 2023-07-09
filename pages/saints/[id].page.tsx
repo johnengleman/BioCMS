@@ -25,8 +25,6 @@ const SaintBio = () => {
     getSaint(id),
   )
 
-  console.log(data)
-
   return (
     <Page>
       <S.Saint>

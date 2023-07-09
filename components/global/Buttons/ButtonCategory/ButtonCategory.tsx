@@ -1,8 +1,8 @@
 import * as S from './styles'
 
 type Props = {
-  text: String
-  bg: String
+  text: string
+  bg: string
 }
 
 const ButtonCategory = ({ text, bg }: Props) => {

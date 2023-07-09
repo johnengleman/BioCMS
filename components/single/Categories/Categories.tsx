@@ -2,7 +2,7 @@ import ButtonCategory from '../../global/Buttons/ButtonCategory/ButtonCategory'
 import * as S from './styles'
 
 type Props = {
-  data: string
+  data?: []
 }
 
 const Categories = ({ data }: Props) => (
