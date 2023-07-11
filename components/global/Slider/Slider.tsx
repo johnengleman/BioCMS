@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import * as S from './styles'
 
 // Import Swiper styles
 import 'swiper/css';
