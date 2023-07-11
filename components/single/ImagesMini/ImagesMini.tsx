@@ -11,7 +11,7 @@ const ImagesMini = ({ imageIds }: Props) => (
     {imageIds.map((id, i) => (
       <Image
         key={i}
-        src={`https://4hi7oa87.directus.app/assets/${id}`}
+        src={`https://saints-cms.onrender.com/assets/${id}`}
         height="140"
         width="125"
         layout="fixed"

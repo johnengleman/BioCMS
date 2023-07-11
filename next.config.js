@@ -6,7 +6,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['4hi7oa87.directus.app'],
+    domains: ['saints-cms.onrender.com'],
   },
   pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js']
 }

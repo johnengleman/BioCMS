@@ -24,6 +24,7 @@ const SaintBio = () => {
   const { data } = useQuery(['saint', id], () =>
     getSaint(id),
   )
+  console.log(data)
 
   return (
     <Page>
@@ -40,11 +41,11 @@ const SaintBio = () => {
         </div>
         <div className="body">
           <div className="quotes">
-            <Quotes quotes={data?.saint_quotes} />
+            <Quotes quotes={data?.quotes} />
             <Categories />
           </div>
           <Bio text={data?.biography} />
-          <Books books={data?.saint_books}/>
+          <Books books={data?.books} />
         </div>
       </S.Saint>
     </Page>

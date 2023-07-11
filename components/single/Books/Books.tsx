@@ -5,9 +5,12 @@ import SectionHeader from '../../global/SectionHeader/SectionHeader'
 
 type BookProps = {
   title: string
-  author: string
+  author: {
+    name: string
+  }
   link: string
-  image: {
+  pages?: string
+  book_cover: {
     id: string
   }
 }
@@ -16,7 +19,8 @@ const Book = ({
   title,
   author,
   link,
-  image,
+  pages,
+  book_cover,
 }: BookProps) => {
   return (
     <S.Book>
@@ -25,7 +29,7 @@ const Book = ({
         className="book-image"
       >
         <Image
-          src={`https://4hi7oa87.directus.app/assets/${image?.id}`}
+          src={`https://saints-cms.onrender.com/assets/${book_cover?.id}`}
           height="150"
           width="140"
           alt=""
@@ -36,7 +40,7 @@ const Book = ({
         className="book-info"
       >
         <div className="book-name">{title}</div>
-        <div className="book-author">{author}</div>
+        <div className="book-author">{author.name}</div>
         <div className="book-link">Buy On Amazon</div>
       </a>
     </S.Book>
@@ -73,7 +77,7 @@ const Books = ({ books }: BooksProps) => (
                 title={book?.title}
                 author={book?.author}
                 link={book?.link}
-                image={book?.image}
+                book_cover={book?.book_cover}
               />
             </Carousel.Slide>
           ))}

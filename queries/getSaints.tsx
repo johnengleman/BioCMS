@@ -2,7 +2,7 @@ import { request, gql } from 'graphql-request';
 
 const query = gql`
   query {
-    saint {
+    saints {
       id
       name
       summary
@@ -21,9 +21,9 @@ const query = gql`
 `;
 
 export const getSaints = async () => {
-  const { saint } = await request(
-    'https://4hi7oa87.directus.app/graphql',
+  const { saints } = await request(
+    'https://saints-cms.onrender.com/graphql',
     query
   );
-  return saint;
+  return saints;
 };

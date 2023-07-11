@@ -25,7 +25,7 @@ type QuotesProps = {
 }
 
 const Quotes = ({ quotes }: QuotesProps) => {
-  if (quotes.length > 3) {
+  if (quotes?.length > 3) {
     return (
       <Carousel
         withIndicators
@@ -35,7 +35,7 @@ const Quotes = ({ quotes }: QuotesProps) => {
         align="start"
         slidesToScroll={3}
       >
-        {quotes.map((quote: QuoteProps, i) => (
+        {quotes?.map((quote: QuoteProps, i) => (
           <Carousel.Slide key={i}>
             <Quote
               text={quote.text}
@@ -49,7 +49,7 @@ const Quotes = ({ quotes }: QuotesProps) => {
 
   return (
     <>
-      {quotes.map((quote: QuoteProps, i) => (
+      {quotes?.map((quote: QuoteProps, i) => (
         <Quote
           key={i}
           text={quote.text}

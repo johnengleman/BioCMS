@@ -11,7 +11,7 @@ const ImageMain = ({ imageId, name }: Props) => (
   <S.ImageContainer>
     <div className="image">
       <Image
-        src={`https://4hi7oa87.directus.app/assets/${imageId}`}
+        src={`https://saints-cms.onrender.com/assets/${imageId}`}
         height="450"
         width="350"
         alt=""

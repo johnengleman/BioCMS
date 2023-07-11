@@ -2,7 +2,7 @@ import { request, gql } from 'graphql-request'
 
 const query = gql`
   query getSaint($id: GraphQLStringOrFloat!) {
-    saint(filter: { id: { _eq: $id } }) {
+    saints(filter: { id: { _eq: $id } }) {
       id
       name
       summary
@@ -17,16 +17,18 @@ const query = gql`
           id
         }
       }
-      saint_books {
-        author
+      books {
+        author {
+          name
+        }
         title
         link
         pages
-        image {
+        book_cover {
           id
         }
       }
-      saint_quotes {
+      quotes {
         text
         topics
       }
@@ -35,10 +37,10 @@ const query = gql`
 `
 
 export const getSaint = async (id?: string) => {
-  const { saint } = await request(
-    'https://4hi7oa87.directus.app/graphql',
+  const { saints } = await request(
+    'https://saints-cms.onrender.com/graphql',
     query,
     { id },
   )
-  return saint[0]
+  return saints[0]
 }
