@@ -14,6 +14,7 @@ import Quotes from '../../components/single/Quotes/Quotes'
 import Bio from '../../components/single/Description/Description'
 import Categories from '../../components/single/Categories/Categories'
 import Books from '../../components/single/Books/Books'
+import ImagesMini from '../../components/single/ImagesMini/ImagesMini'
 
 const SaintBio = () => {
   const router = useRouter()
@@ -24,7 +25,8 @@ const SaintBio = () => {
   const { data } = useQuery(['saint', id], () =>
     getSaint(id),
   )
-  console.log(data)
+
+  console.log(data.photos)
 
   return (
     <Page>
@@ -34,9 +36,12 @@ const SaintBio = () => {
             imageId={data?.photos[0]?.directus_files_id?.id}
             name={data?.name}
           />
-          <div className="col">
+          <div
+            className="col"
+            style={{ justifyContent: 'space-between' }}
+          >
             <div className="summary">{data?.summary}</div>
-            <Categories data={data?.categories} />
+            <ImagesMini imageIds={data.photos} />
           </div>
         </div>
         <div className="body">

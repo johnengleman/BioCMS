@@ -10,7 +10,11 @@ export const Bio = styled.div`
   border-radius: 10px;
 
   @media ${device.laptop} {
-    padding: 60px;
+    padding: 40px;
     border-radius: 20px;
+  }
+
+  .p {
+    font-size: 18px;
   }
 `

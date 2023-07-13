@@ -1,3 +1,4 @@
+import { sanitize } from 'isomorphic-dompurify'
 import * as S from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -17,6 +18,7 @@ export default function SaintSummary(props: Saint) {
     birth_date,
     death_date,
     photos,
+    categories,
   } = props
 
   const getYear = (date: string): number => {
@@ -33,9 +35,21 @@ export default function SaintSummary(props: Saint) {
       </S.SliderContainer>
       <S.BioContainer>
         <Name name={name} />
+        <S.Tags>
+          {categories.map((category, index) => (
+            <div
+              key={index}
+              className="tag"
+            >
+              {category}
+            </div>
+          ))}
+        </S.Tags>
         <S.SummaryContainer>
           <S.Summary
-            dangerouslySetInnerHTML={{ __html: biography }}
+            dangerouslySetInnerHTML={{
+              __html: sanitize(biography),
+            }}
           />
           <S.Dates>
             {getYear(birth_date)}-{getYear(death_date)} AD,{' '}
@@ -48,6 +62,7 @@ export default function SaintSummary(props: Saint) {
             <FontAwesomeIcon
               icon={faBook}
               fontSize="12px"
+              style={{ color: '#676666c2' }}
             />
             <S.Count>0</S.Count>
           </S.FooterButton>
@@ -55,6 +70,7 @@ export default function SaintSummary(props: Saint) {
             <FontAwesomeIcon
               icon={faChurch}
               fontSize="12px"
+              style={{ color: '#676666c2' }}
             />
             <S.Count>0</S.Count>
           </S.FooterButton>
@@ -62,6 +78,7 @@ export default function SaintSummary(props: Saint) {
             <FontAwesomeIcon
               icon={faQuoteRight}
               fontSize="12px"
+              style={{ color: '#676666c2' }}
             />
             <S.Count>0</S.Count>
           </S.FooterButton>

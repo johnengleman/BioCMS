@@ -1,8 +1,8 @@
 import { request, gql } from 'graphql-request'
 
 const query = gql`
-  query getSaint($id: GraphQLStringOrFloat!) {
-    saints(filter: { id: { _eq: $id } }) {
+  query getSaint($id: ID!) {
+    saints_by_id(id: $id) {
       id
       name
       summary
@@ -37,10 +37,10 @@ const query = gql`
 `
 
 export const getSaint = async (id?: string) => {
-  const { saints } = await request(
+  const { saints_by_id } = await request(
     'https://saints-cms.onrender.com/graphql',
     query,
     { id },
   )
-  return saints[0]
+  return saints_by_id
 }

@@ -43,7 +43,7 @@ export const Saint = styled.div`
 
     @media ${device.laptop} {
       color: #525252;
-      margin: 40px 0 20px 0;
+      margin: 0 0 20px 0;
       max-width: 80%;
     }
   }

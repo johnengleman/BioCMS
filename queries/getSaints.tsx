@@ -1,4 +1,4 @@
-import { request, gql } from 'graphql-request';
+import { request, gql } from 'graphql-request'
 
 const query = gql`
   query {
@@ -7,6 +7,7 @@ const query = gql`
       name
       summary
       biography
+      categories
       birth_date
       death_date
       birth_location
@@ -18,12 +19,12 @@ const query = gql`
       }
     }
   }
-`;
+`
 
 export const getSaints = async () => {
   const { saints } = await request(
     'https://saints-cms.onrender.com/graphql',
-    query
-  );
-  return saints;
-};
+    query,
+  )
+  return saints
+}

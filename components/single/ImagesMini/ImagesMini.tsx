@@ -8,10 +8,10 @@ type Props = {
 
 const ImagesMini = ({ imageIds }: Props) => (
   <S.Pictures>
-    {imageIds.map((id, i) => (
+    {imageIds.map((image, i) => (
       <Image
         key={i}
-        src={`https://saints-cms.onrender.com/assets/${id}`}
+        src={`https://saints-cms.onrender.com/assets/${image.directus_files_id.id}`}
         height="140"
         width="125"
         layout="fixed"

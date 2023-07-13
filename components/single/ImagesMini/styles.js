@@ -5,7 +5,7 @@ export const Pictures = styled.div`
   align-content: flex-end;
   gap: 10px;
   align-items: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 70px;
 
   img {
     border-radius: 10px;

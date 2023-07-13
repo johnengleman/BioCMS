@@ -5,7 +5,7 @@ export const Quote = styled.div`
   min-width: 30%;
   border: 1px solid #dcdcdc;
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px 20px;
 
   .text {
     color: #353535;
