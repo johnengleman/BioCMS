@@ -1,24 +1,45 @@
 import { Carousel } from '@mantine/carousel'
+import { Text, Paper } from '@mantine/core'
 import * as S from './styles'
 import ButtonCategory from '../../global/Buttons/ButtonCategory/ButtonCategory'
 import ShowMore from '../../global/ShowMore/ShowMore'
 
 type QuoteProps = {
   text: String
-  topic: String
+  topics: String[]
+  quoteIndex: Number
+  quoteTotal: Number
 }
 
-const Quote = ({ text, topic }: QuoteProps) => (
-  <S.Quote>
-    <div className="text">{text}</div>
-    <div className="footer">
-      <ButtonCategory
-        text="topic"
-        bg="#CCEBD9"
-      />
-    </div>
-  </S.Quote>
-)
+const Quote = ({
+  text,
+  topics,
+  quoteIndex,
+  quoteTotal,
+}: QuoteProps) => {
+  return (
+    <S.Quote>
+      <div className="c-text">
+        <p className="text">{text}</p>
+      </div>
+      <div className="footer">
+        <div className="c-topics">
+          {topics?.map((topic, index) => (
+            <div
+              key={index}
+              className="topic"
+            >
+              {topic}
+            </div>
+          ))}
+        </div>
+        <div className="quoteNumber">
+          <p>{`${quoteIndex}/${quoteTotal}`}</p>
+        </div>
+      </div>
+    </S.Quote>
+  )
+}
 
 type QuotesProps = {
   quotes: QuoteProps[]
@@ -27,23 +48,25 @@ type QuotesProps = {
 const Quotes = ({ quotes }: QuotesProps) => {
   if (quotes?.length > 3) {
     return (
-      <Carousel
-        withIndicators
-        slideSize="33.333333%"
-        slideGap="md"
-        loop
-        align="start"
-        slidesToScroll={3}
-      >
-        {quotes?.map((quote: QuoteProps, i) => (
-          <Carousel.Slide key={i}>
-            <Quote
-              text={quote.text}
-              topic={quote.topic}
-            />
-          </Carousel.Slide>
-        ))}
-      </Carousel>
+      <S.SlideContainer>
+        <Carousel
+          slideSize="33.333333%"
+          slideGap="md"
+          slidesToScroll={3}
+          loop={true}
+        >
+          {quotes?.map((quote: QuoteProps, i) => (
+            <Carousel.Slide key={i}>
+              <Quote
+                text={quote.text}
+                topics={quote.topics}
+                quoteIndex={i + 1}
+                quoteTotal={quotes.length}
+              />
+            </Carousel.Slide>
+          ))}
+        </Carousel>
+      </S.SlideContainer>
     )
   }
 
@@ -53,7 +76,9 @@ const Quotes = ({ quotes }: QuotesProps) => {
         <Quote
           key={i}
           text={quote.text}
-          topic={quote.topic}
+          topics={quote.topics}
+          quoteIndex={i + 1}
+          quoteTotal={quotes.length}
         />
       ))}
     </>

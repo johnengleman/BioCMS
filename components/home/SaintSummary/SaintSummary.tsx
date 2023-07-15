@@ -36,7 +36,7 @@ export default function SaintSummary(props: Saint) {
       <S.BioContainer>
         <Name name={name} />
         <S.Tags>
-          {categories.map((category, index) => (
+          {categories?.map((category, index) => (
             <div
               key={index}
               className="tag"

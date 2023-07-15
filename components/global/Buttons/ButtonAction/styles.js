@@ -13,6 +13,7 @@ export const Button = styled.button`
   gap: 7px;
   width: max-content;
   cursor: pointer;
+  width: 125px;
 `
 
 export const Hamburger = styled.div`

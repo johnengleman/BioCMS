@@ -1,3 +1,4 @@
+import { Space } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 
@@ -26,8 +27,6 @@ const SaintBio = () => {
     getSaint(id),
   )
 
-  console.log(data.photos)
-
   return (
     <Page>
       <S.Saint>
@@ -45,10 +44,7 @@ const SaintBio = () => {
           </div>
         </div>
         <div className="body">
-          <div className="quotes">
-            <Quotes quotes={data?.quotes} />
-            <Categories />
-          </div>
+          <Quotes quotes={data?.quotes} />
           <Bio text={data?.biography} />
           <Books books={data?.books} />
         </div>

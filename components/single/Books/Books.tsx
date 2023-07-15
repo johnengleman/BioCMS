@@ -53,37 +53,34 @@ type BooksProps = {
 
 const Books = ({ books }: BooksProps) => (
   <>
-    <S.BooksContainer>
-      <SectionHeader name="Books" />
-      <div className="carousel-container">
-        <Carousel
-          withIndicators
-          slideSize="25%"
-          slideGap="sm"
-          align="end"
-          height="190px"
-          slidesToScroll={1}
-          breakpoints={[
-            {
-              maxWidth: 'md',
-              slideSize: '100%',
-            },
-          ]}
-        >
-          {books?.map((book, i) => (
-            <Carousel.Slide key={i}>
-              <Book
-                key={i}
-                title={book?.title}
-                author={book?.author}
-                link={book?.link}
-                book_cover={book?.book_cover}
-              />
-            </Carousel.Slide>
-          ))}
-        </Carousel>
-      </div>
-    </S.BooksContainer>
+    <SectionHeader name="Books" />
+    <div className="carousel-container">
+      <Carousel
+        slideSize="25%"
+        slideGap="sm"
+        align="start"
+        height="190px"
+        slidesToScroll={1}
+        breakpoints={[
+          {
+            maxWidth: 'md',
+            slideSize: '100%',
+          },
+        ]}
+      >
+        {books?.map((book, i) => (
+          <Carousel.Slide key={i}>
+            <Book
+              key={i}
+              title={book?.title}
+              author={book?.author}
+              link={book?.link}
+              book_cover={book?.book_cover}
+            />
+          </Carousel.Slide>
+        ))}
+      </Carousel>
+    </div>
   </>
 )
 

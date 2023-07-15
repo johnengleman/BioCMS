@@ -29,6 +29,8 @@ export default function Slider({ photos }) {
             width={300}
             height={300}
             style={{ objectFit: 'contain' }}
+            placeholder='blur'
+            blurDataURL='url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFUlEQVR42mP8z8BQz0AEYBxVSF+FABJADveWkH6oAAAAAElFTkSuQmCC)'
           />
         </SwiperSlide>
       ))}

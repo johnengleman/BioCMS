@@ -15,6 +15,8 @@ const query = gql`
       photos {
         directus_files_id {
           id
+          width
+          height
         }
       }
       books {

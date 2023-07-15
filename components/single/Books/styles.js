@@ -1,16 +1,7 @@
 import styled from 'styled-components'
 
 export const BooksContainer = styled.div`
-  margin-bottom: 50px;
 
-  .carousel-container {
-    max-width: 1300px;
-
-    .mantine-Carousel-indicators {
-      button {
-        background-color: black;
-      }
-    }
   }
 `
 
