@@ -3,7 +3,13 @@ import * as S from './styles'
 import ButtonAction from '../../global/Buttons/ButtonAction/ButtonAction'
 
 type Props = {
-  imageIds: string[]
+  imageIds: {
+    directus_files_id: {
+      id: string
+      width: number
+      height: number
+    }
+  }[]
 }
 
 const ImagesMini = ({ imageIds }: Props) => (
