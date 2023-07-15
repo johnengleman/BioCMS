@@ -24,7 +24,7 @@
     "components/global/Name/styles.js",
     "components/global/Navigation/styles.js",
     "components/global/page/styles.js",
-    "components/home/SaintSummary/styles.js",
+    "components/saints/summary/styles.js",
     "pages/saints/styles.js",
     "pages/saints/components/Powers/styles.js"
   ],

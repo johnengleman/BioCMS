@@ -10,12 +10,12 @@ import {
 import * as S from './styles'
 import { getSaint } from '../../queries/getSaint'
 import Page from '../../components/global/Page/Page'
-import ImageMain from '../../components/single/ImageMain/ImageMain'
-import Quotes from '../../components/single/Quotes/Quotes'
-import Bio from '../../components/single/Description/Description'
-import Categories from '../../components/single/Categories/Categories'
-import Books from '../../components/single/Books/Books'
-import ImagesMini from '../../components/single/ImagesMini/ImagesMini'
+import ImageMain from '../../components/saints/single/ImageMain/ImageMain'
+import Quotes from '../../components/saints/single/Quotes/Quotes'
+import Bio from '../../components/saints/single/Description/Description'
+import Categories from '../../components/saints/single/Categories/Categories'
+import Books from '../../components/saints/single/Books/Books'
+import ImagesMini from '../../components/saints/single/ImagesMini/ImagesMini'
 
 const SaintBio = () => {
   const router = useRouter()

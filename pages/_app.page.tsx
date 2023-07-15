@@ -5,6 +5,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { MantineProvider } from '@mantine/core'
+import Head from 'next/head'
 
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
@@ -15,6 +16,12 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+        </Head>
         <Component {...pageProps} />
       </Hydrate>
     </QueryClientProvider>

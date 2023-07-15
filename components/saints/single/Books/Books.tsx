@@ -1,7 +1,7 @@
 import { Carousel } from '@mantine/carousel'
 import Image from 'next/image'
 import * as S from './styles'
-import SectionHeader from '../../global/SectionHeader/SectionHeader'
+import SectionHeader from '../../../global/SectionHeader/SectionHeader'
 
 type BookProps = {
   title: string

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import * as S from './styles'
-import ButtonAction from '../../global/Buttons/ButtonAction/ButtonAction'
+import ButtonAction from '../../../global/Buttons/ButtonAction/ButtonAction'
 
 type Props = {
   imageIds: {

@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import * as S from './styles'
-import Name from '../../global/Name/Name'
+import Name from '../../../global/Name/Name'
 
 type Props = {
   name: String
