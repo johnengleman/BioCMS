@@ -1,44 +1,56 @@
 import styled from 'styled-components'
+import { device } from '../../../../styles/devices'
 
-export const BooksContainer = styled.div`
-
-  }
-`
-
-export const Book = styled.div`
-  height: 150px;
-  max-width: 300px;
-  width: 300px;
+export const Book = styled.a`
   display: flex;
-  gap: 10px;
+  gap: 20px;
+  width: 100%;
+  color: inherit;
 
-  a {
-    color: inherit;
+  @media ${device.tablet} {
+    width: calc(50% - 20px);
   }
 
-  .book-image {
-    min-width: 100px;
+  @media ${device.laptopL} {
+    width: calc(33% - 20px);
+  }
+
+  img {
+    border-radius: 5px;
   }
 
   .book-info {
-    width: 200px;
+    width: 300px;
+    margin-top: 5px;
   }
 
   .book-name {
     font-size: 14px;
     font-weight: 700;
-    line-height: 1;
-    margin-bottom: 5px;
+    line-height: 1.2;
+    width: 100%;
+
+    @media ${device.laptop} {
+      font-size: 1rem;
+    }
   }
 
   .book-author {
     font-size: 12px;
-    color: #807b7b;
+    color: #4e4d4d;
     margin-bottom: 10px;
+
+    @media ${device.laptop} {
+      font-size: 14px;
+    }
   }
 
   .book-link {
     font-size: 12px;
     text-decoration: underline;
+
+    @media ${device.laptop} {
+      font-size: 14px;
+    }
   }
 `

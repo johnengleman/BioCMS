@@ -1,12 +1,22 @@
 import { Text, Paper, Spoiler } from '@mantine/core'
 import { sanitize } from 'isomorphic-dompurify'
-import * as S from './styles'
+import Timeline from '../Timeline/Timeline'
 
 type Props = {
   text: string
+  birthDate: string
+  birthLocation: string
+  deathDate: string
+  deathLocation: string
 }
 
-const Description = ({ text }: Props) => (
+const Description = ({
+  text,
+  birthDate,
+  birthLocation,
+  deathDate,
+  deathLocation,
+}: Props) => (
   <Paper
     shadow="md"
     p="lg"
@@ -19,6 +29,12 @@ const Description = ({ text }: Props) => (
       hideLabel="Hide"
       transitionDuration={100}
     >
+      <Timeline
+        birthDate={birthDate}
+        birthLocation={birthLocation}
+        deathDate={deathDate}
+        deathLocation={deathLocation}
+      />
       <div
         className="text"
         dangerouslySetInnerHTML={{ __html: sanitize(text) }}

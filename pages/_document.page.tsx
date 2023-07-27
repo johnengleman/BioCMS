@@ -6,6 +6,7 @@ import Document, {
   NextScript,
 } from 'next/document'
 import Script from 'next/script'
+import Footer from '../components/global/Footer/Footer'
 
 const getInitialProps = createGetInitialProps()
 export default class _Document extends Document {

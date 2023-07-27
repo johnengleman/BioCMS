@@ -17,6 +17,8 @@ export const Quote = styled.div`
     padding: 10px 20px;
     border-radius: 5px;
     width: calc(100% + 35px);
+    box-shadow: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.05),
+      0 0.0625rem 0.125rem rgba(0, 0, 0, 0.1);
 
     .text {
       color: #353535;

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Title, Flex } from '@mantine/core'
 import * as S from './styles'
 
-type BookProps = {
+type ChurchProps = {
   title: string
   author: {
     name: string
@@ -14,19 +14,23 @@ type BookProps = {
   }
 }
 
-const Book = ({
+const Church = ({
   title,
   author,
   link,
   pages,
   book_cover,
-}: BookProps) => {
+}: ChurchProps) => {
   return (
-    <S.Book href={link}>
+    <S.Church>
+      <a
+        href={link}
+        className="church-image"
+      >
         {book_cover?.id ? (
           <Image
-            src={`https://saints-cms.onrender.com/assets/${book_cover?.id}?fit=inside&height=170&width=140`}
-            height="170"
+            src={`https://saints-cms.onrender.com/assets/${book_cover?.id}`}
+            height="150"
             width="140"
             alt=""
             unoptimized={true}
@@ -35,36 +39,35 @@ const Book = ({
           <div
             className="placeholder"
             style={{
-              height: '170px',
-              width: '140px',
-              minWidth: '140px',
-              borderRadius: '5px',
+              height: '140px',
+              width: '100px',
               background: 'lightgray',
             }}
           ></div>
         )}
-      <div
-        className="book-info"
+      </a>
+      <a
+        href={link}
+        className="church-info"
       >
-        <div className="book-name">{title}</div>
-        <div className="book-author">{author.name}</div>
-        <div className="book-link">Buy On Amazon</div>
-      </div>
-    </S.Book>
+        <div className="church-name">{title}</div>
+        <div className="church-location">{author.name}</div>
+      </a>
+    </S.Church>
   )
 }
 
-type BooksProps = {
-  books: BookProps[]
+type ChurchesProps = {
+  churches: ChurchProps[]
 }
 
-const Books = ({ books }: BooksProps) => (
+const Churches = ({ churches }: ChurchesProps) => (
   <>
     <Title
       order={3}
       mb={10}
     >
-      Books
+      Churches
     </Title>
 
     <Flex
@@ -73,11 +76,10 @@ const Books = ({ books }: BooksProps) => (
       justify="space-between"
       mb="50px"
     >
-      {books?.map((book, i) => (
-        <Book
+      {churches?.map((book, i) => (
+        <Church
           key={i}
           title={book?.title}
-          author={book?.author}
           link={book?.link}
           book_cover={book?.book_cover}
         />
@@ -86,4 +88,4 @@ const Books = ({ books }: BooksProps) => (
   </>
 )
 
-export default Books
+export default Churches

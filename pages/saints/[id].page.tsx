@@ -13,8 +13,8 @@ import Page from '../../components/global/Page/Page'
 import ImageMain from '../../components/saints/single/ImageMain/ImageMain'
 import Quotes from '../../components/saints/single/Quotes/Quotes'
 import Bio from '../../components/saints/single/Description/Description'
-import Categories from '../../components/saints/single/Categories/Categories'
 import Books from '../../components/saints/single/Books/Books'
+import Churches from '../../components/saints/single/Churches/Churches'
 import ImagesMini from '../../components/saints/single/ImagesMini/ImagesMini'
 
 const SaintBio = () => {
@@ -45,8 +45,15 @@ const SaintBio = () => {
         </div>
         <div className="body">
           <Quotes quotes={data?.quotes} />
-          <Bio text={data?.biography} />
+          <Bio
+            text={data?.biography}
+            birthDate={data?.birth_date}
+            birthLocation={data?.birth_location}
+            deathDate={data?.death_date}
+            deathLocation={data?.death_location}
+          />
           <Books books={data?.books} />
+          <Churches />
         </div>
       </S.Saint>
     </Page>

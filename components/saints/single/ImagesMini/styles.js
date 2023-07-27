@@ -9,16 +9,11 @@ export const PicturesContainer = styled.div`
 export const Pictures = styled.div`
   display: flex;
   align-content: flex-end;
-  gap: 10px;
+  gap: 15px;
   align-items: flex-end;
   margin-bottom: 70px;
 
-  .image-container {
-    position: relative;
-    height: 140px;
-
-    img {
-      border-radius: 5px;
+  img {
+      border-radius: 10px;
     }
-  }
 `

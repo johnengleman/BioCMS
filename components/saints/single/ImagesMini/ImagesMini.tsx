@@ -17,25 +17,14 @@ const ImagesMini = ({ imageIds }: Props) => (
     <ButtonAction text="Show All Photos" />
     <S.Pictures>
       {imageIds.map((image, i) => (
-        <div
-          key={i}
-          className="image-container"
-          style={{
-            position: 'relative',
-            height: '140px',
-            aspectRatio: `${
-              image.directus_files_id.width /
-              image.directus_files_id.height
-            }`,
-          }}
-        >
-          <Image
-            src={`https://saints-cms.onrender.com/assets/${image.directus_files_id.id}`}
-            fill={true}
-            alt=""
-            unoptimized={true}
-          />
-        </div>
+        <Image
+        key={i}
+        src={`https://saints-cms.onrender.com/assets/${image.directus_files_id.id}?fit=cover&height=150&width=125`}
+        width={125}
+        height={150}
+        alt=""
+        unoptimized={true}
+      />
       ))}
     </S.Pictures>
   </S.PicturesContainer>

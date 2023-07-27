@@ -26,7 +26,8 @@
     "components/global/page/styles.js",
     "components/saints/summary/styles.js",
     "pages/saints/styles.js",
-    "pages/saints/components/Powers/styles.js"
+    "pages/saints/components/Powers/styles.js",
+    "components/saints/single/Churches/styles.js"
   ],
   "exclude": ["node_modules"]
 }
