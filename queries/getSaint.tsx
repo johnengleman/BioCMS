@@ -1,5 +1,56 @@
 import { request, gql } from 'graphql-request'
 
+type Photo = {
+  directus_files_id: {
+    id: string
+  }
+}
+
+type Book = {
+  author: string
+  title: string
+  link: string
+  pages: number
+  book_cover: {
+    id: string
+  }
+}
+
+type Quote = {
+  text: string
+  topics: string[]
+}
+
+type Church = {
+  name: string
+  website: string
+  image: {
+    id: string
+  }
+  city: string
+  country: string
+}
+
+type Saint = {
+  id: string
+  name: string
+  summary: string
+  biography: string
+  birth_date: string
+  death_date: string
+  birth_location: string
+  death_location: string
+  categories: string[]
+  photos: Photo[]
+  books: Book[]
+  quotes: Quote[]
+  churches: Church[]
+}
+
+type Response = {
+  saints_by_id: Saint
+}
+
 const query = gql`
   query getSaint($id: ID!) {
     saints_by_id(id: $id) {
@@ -15,14 +66,10 @@ const query = gql`
       photos {
         directus_files_id {
           id
-          width
-          height
         }
       }
       books {
-        author {
-          name
-        }
+        author
         title
         link
         pages
@@ -34,12 +81,21 @@ const query = gql`
         text
         topics
       }
+      churches {
+        name
+        website
+        image {
+          id
+        }
+        city
+        country
+      }
     }
   }
 `
 
 export const getSaint = async (id?: string) => {
-  const { saints_by_id } = await request(
+  const { saints_by_id } = await request<Response>(
     'https://saints-cms.onrender.com/graphql',
     query,
     { id },

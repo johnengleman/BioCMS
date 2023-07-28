@@ -1,34 +1,29 @@
 import styled from 'styled-components'
 
-export const Church = styled.div`
-  height: 150px;
+export const Church = styled.a`
   display: flex;
-  gap: 10px;
-  width: calc(33% - 20px);
+  flex-direction: column;
+  width: calc(30% - 20px);
+  color: inherit;
 
-  a {
-    color: inherit;
+  img,
+  .image-placeholder {
+    border-radius: 10px;
   }
 
-  .church-image {
-    min-width: 100px;
-  }
-
-  .church-info {
+  .image-placeholder {
     width: 300px;
-    margin-top: 5px;
+    height: 175px;
+    background-color: #d9d9d9;
   }
 
-  .church-name {
-    font-size: 14px;
+  .name {
+    font-size: 16px;
     font-weight: 700;
-    line-height: 1;
-    margin-bottom: 10px;
-    width: 100%;
+    margin-top: 10px;
   }
 
-  .church-link {
-    font-size: 12px;
-    text-decoration: underline;
+  .location {
+    font-size: 14px;
   }
 `

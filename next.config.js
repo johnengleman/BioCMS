@@ -8,7 +8,15 @@ const nextConfig = {
   images: {
     domains: ['saints-cms.onrender.com'],
   },
-  pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js']
+  images: {
+    unoptimized: true,
+  },
+  pageExtensions: [
+    'page.tsx',
+    'page.ts',
+    'page.jsx',
+    'page.js',
+  ],
 }
 
 module.exports = nextConfig

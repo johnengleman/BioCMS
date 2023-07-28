@@ -27,37 +27,41 @@ const SaintBio = () => {
     getSaint(id),
   )
 
-  return (
-    <Page>
-      <S.Saint>
-        <div className="header">
-          <ImageMain
-            imageId={data?.photos[0]?.directus_files_id?.id}
-            name={data?.name}
-          />
-          <div
-            className="col"
-            style={{ justifyContent: 'space-between' }}
-          >
-            <div className="summary">{data?.summary}</div>
-            <ImagesMini imageIds={data.photos} />
+  if (data) {
+    return (
+      <Page>
+        <S.Saint>
+          <div className="header">
+            <ImageMain
+              imageId={
+                data?.photos[0]?.directus_files_id?.id
+              }
+              name={data.name}
+            />
+            <div
+              className="col"
+              style={{ justifyContent: 'space-between' }}
+            >
+              <div className="summary">{data?.summary}</div>
+              <ImagesMini imageIds={data?.photos} />
+            </div>
           </div>
-        </div>
-        <div className="body">
-          <Quotes quotes={data?.quotes} />
-          <Bio
-            text={data?.biography}
-            birthDate={data?.birth_date}
-            birthLocation={data?.birth_location}
-            deathDate={data?.death_date}
-            deathLocation={data?.death_location}
-          />
-          <Books books={data?.books} />
-          <Churches />
-        </div>
-      </S.Saint>
-    </Page>
-  )
+          <div className="body">
+            <Quotes quotes={data?.quotes} />
+            <Bio
+              text={data?.biography}
+              birthDate={data?.birth_date}
+              birthLocation={data?.birth_location}
+              deathDate={data?.death_date}
+              deathLocation={data?.death_location}
+            />
+            <Books books={data?.books} />
+            <Churches churches={data?.churches} />
+          </div>
+        </S.Saint>
+      </Page>
+    )
+  }
 }
 
 export const getServerSideProps: GetServerSideProps =

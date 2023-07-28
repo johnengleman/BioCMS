@@ -1,11 +1,13 @@
 import { Carousel } from '@mantine/carousel'
 import * as S from './styles'
 
-type QuoteProps = {
-  text: String
-  topics: String[]
-  quoteIndex: Number
-  quoteTotal: Number
+type QuotesProps = {
+  quotes: QuoteData[]
+}
+
+type QuoteData = {
+  text: string
+  topics: string[]
 }
 
 const Quote = ({
@@ -13,7 +15,7 @@ const Quote = ({
   topics,
   quoteIndex,
   quoteTotal,
-}: QuoteProps) => {
+}) => {
   return (
     <S.Quote>
       <div className="c-text">
@@ -38,10 +40,6 @@ const Quote = ({
   )
 }
 
-type QuotesProps = {
-  quotes: QuoteProps[]
-}
-
 const Quotes = ({ quotes }: QuotesProps) => {
   if (quotes?.length > 3) {
     return (
@@ -52,7 +50,7 @@ const Quotes = ({ quotes }: QuotesProps) => {
           slidesToScroll={3}
           loop={true}
         >
-          {quotes?.map((quote: QuoteProps, i) => (
+          {quotes?.map((quote: QuoteData, i) => (
             <Carousel.Slide key={i}>
               <Quote
                 text={quote.text}
@@ -69,7 +67,7 @@ const Quotes = ({ quotes }: QuotesProps) => {
 
   return (
     <>
-      {quotes?.map((quote: QuoteProps, i) => (
+      {quotes?.map((quote: QuoteData, i) => (
         <Quote
           key={i}
           text={quote.text}

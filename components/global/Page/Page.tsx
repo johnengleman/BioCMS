@@ -4,7 +4,7 @@ import * as S from './styles'
 import Footer from '../Footer/Footer'
 
 type Props = {
-  children: JSX.Element
+  children: React.ReactNode
 }
 
 const Page = ({ children }: Props) => (

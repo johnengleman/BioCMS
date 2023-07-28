@@ -4,14 +4,14 @@ import Name from '../../../global/Name/Name'
 
 type Props = {
   name: String
-  imageId: String
+  imageId?: String
 }
 
 const ImageMain = ({ imageId, name }: Props) => (
   <S.ImageContainer>
     <div className="image">
       <Image
-        src={`https://saints-cms.onrender.com/assets/${imageId}`}
+        src={`https://saints-cms.onrender.com/assets/${imageId}?fit=contain&height=450&width=350`}
         height="450"
         width="350"
         alt=""

@@ -12,18 +12,20 @@ import Page from '../../components/global/Page/Page'
 const Home = () => {
   const { data } = useQuery(['saints'], getSaints)
 
-  return (
-    <Page>
-      {data?.map((saint: Saint, i: number) => (
-        <Link
-          key={i}
-          href={`/saints/${saint?.id}`}
-        >
-          <SaintSummary {...saint} />
-        </Link>
-      ))}
-    </Page>
-  )
+  if (data) {
+    return (
+      <Page>
+        {data?.map((saint: Saint, i: number) => (
+          <Link
+            key={i}
+            href={`/saints/${saint?.id}`}
+          >
+            <SaintSummary {...saint} />
+          </Link>
+        ))}
+      </Page>
+    )
+  }
 }
 
 export async function getServerSideProps() {
