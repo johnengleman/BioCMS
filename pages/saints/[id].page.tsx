@@ -17,6 +17,7 @@ import Books from '../../components/saints/single/Books/Books'
 import Churches from '../../components/saints/single/Churches/Churches'
 import ImagesMini from '../../components/saints/single/ImagesMini/ImagesMini'
 import RelatedPeople from '../../components/saints/single/RelatedPeople/RelatedPeople'
+import Tomb from '../../components/saints/single/Tomb/Tomb'
 
 const SaintBio = () => {
   const router = useRouter()
@@ -82,6 +83,11 @@ const SaintBio = () => {
             </div>
             <div className="rightRail">
               <RelatedPeople data={relatedSaintsWithName} />
+              <Tomb
+                imageId={data?.tomb.id}
+                location={data?.tomb_location}
+                church={data?.tomb_church_name}
+              />
             </div>
           </div>
         </S.Saint>

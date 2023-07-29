@@ -6,6 +6,10 @@ type Photo = {
   }
 }
 
+type Tomb = {
+  id: string
+}
+
 type Book = {
   author: string
   title: string
@@ -54,6 +58,9 @@ type Saint = {
   quotes: Quote[]
   churches: Church[]
   related_to: RelatedTo[]
+  tomb: Tomb
+  tomb_location: string
+  tomb_church_name: string
 }
 
 type Response = {
@@ -100,6 +107,11 @@ const query = gql`
         country
       }
       related_to
+      tomb {
+        id
+      }
+      tomb_church_name
+      tomb_location
     }
   }
 `

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Title, Flex } from '@mantine/core'
+import { Title, Flex, Spoiler } from '@mantine/core'
 import * as S from './styles'
 
 const RelatedItem = ({
@@ -30,34 +30,35 @@ const RelatedItem = ({
   )
 }
 
-// type BooksProps = {
-//   books: BookProps[]
-// }
-
 const RelatedPeople = ({ data }) => {
   if (data?.length) {
     return (
-      <>
-        <Title
-          order={3}
-          mb={10}
-        >
-          Related
-        </Title>
+      <Flex
+        gap="sm"
+        direction="column"
+        mb="40px"
+      >
+        <Title order={3}>Related</Title>
 
-        <Flex
-          gap="md"
-          wrap="wrap"
-          mb="50px"
+        <Spoiler
+          maxHeight={220}
+          showLabel="Show All Related"
+          hideLabel="Hide"
+          transitionDuration={150}
         >
-          {data?.map((relatedPerson, i) => (
-            <RelatedItem
-              key={i}
-              {...relatedPerson}
-            />
-          ))}
-        </Flex>
-      </>
+          <Flex
+            gap="md"
+            wrap="wrap"
+          >
+            {data?.map((relatedPerson, i) => (
+              <RelatedItem
+                key={i}
+                {...relatedPerson}
+              />
+            ))}
+          </Flex>
+        </Spoiler>
+      </Flex>
     )
   }
 
