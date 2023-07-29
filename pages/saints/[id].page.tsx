@@ -1,4 +1,3 @@
-import { Space } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { GetServerSideProps } from 'next'
 
@@ -6,6 +5,7 @@ import {
   dehydrate,
   QueryClient,
   useQuery,
+  useQueries,
 } from '@tanstack/react-query'
 import * as S from './styles'
 import { getSaint } from '../../queries/getSaint'
@@ -16,6 +16,7 @@ import Bio from '../../components/saints/single/Description/Description'
 import Books from '../../components/saints/single/Books/Books'
 import Churches from '../../components/saints/single/Churches/Churches'
 import ImagesMini from '../../components/saints/single/ImagesMini/ImagesMini'
+import RelatedPeople from '../../components/saints/single/RelatedPeople/RelatedPeople'
 
 const SaintBio = () => {
   const router = useRouter()
@@ -25,6 +26,26 @@ const SaintBio = () => {
 
   const { data } = useQuery(['saint', id], () =>
     getSaint(id),
+  )
+
+  const relatedSaints = data?.related_to || []
+  const relatedSaintQueries = useQueries({
+    queries: relatedSaints?.map((relationship) => ({
+      queryKey: ['saint', relationship.saint.key],
+      queryFn: () =>
+        getSaint(relationship.saint.key.toString()),
+    })),
+  })
+
+  const relatedSaintsWithName = relatedSaints.map(
+    (saint, i) => ({
+      name: relatedSaintQueries[i]?.data?.name,
+      photo:
+        relatedSaintQueries[i]?.data?.photos[0]
+          ?.directus_files_id.id,
+      id: saint.saint.key,
+      relationship_type: saint.relationship_type,
+    }),
   )
 
   if (data) {
@@ -47,16 +68,21 @@ const SaintBio = () => {
             </div>
           </div>
           <div className="body">
-            <Quotes quotes={data?.quotes} />
-            <Bio
-              text={data?.biography}
-              birthDate={data?.birth_date}
-              birthLocation={data?.birth_location}
-              deathDate={data?.death_date}
-              deathLocation={data?.death_location}
-            />
-            <Books books={data?.books} />
-            <Churches churches={data?.churches} />
+            <div className="main">
+              <Quotes quotes={data?.quotes} />
+              <Bio
+                text={data?.biography}
+                birthDate={data?.birth_date}
+                birthLocation={data?.birth_location}
+                deathDate={data?.death_date}
+                deathLocation={data?.death_location}
+              />
+              <Books books={data?.books} />
+              <Churches churches={data?.churches} />
+            </div>
+            <div className="rightRail">
+              <RelatedPeople data={relatedSaintsWithName} />
+            </div>
           </div>
         </S.Saint>
       </Page>

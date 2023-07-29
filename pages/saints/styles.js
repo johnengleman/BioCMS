@@ -47,4 +47,19 @@ export const Saint = styled.div`
       max-width: 80%;
     }
   }
+
+  .body {
+    display: flex;
+    gap: 50px;
+
+    .main {
+      width: 70%;
+    }
+
+    .rightRail {
+      width: 20%;
+      border-left: 1px solid #dee2e6;
+      padding-left: 30px;
+    }
+  }
 `

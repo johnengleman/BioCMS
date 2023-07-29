@@ -31,6 +31,14 @@ type Church = {
   country: string
 }
 
+type RelatedTo = {
+  saint: {
+    key: number
+    collection: string
+  }
+  relationship_type: string
+}
+
 type Saint = {
   id: string
   name: string
@@ -45,6 +53,7 @@ type Saint = {
   books: Book[]
   quotes: Quote[]
   churches: Church[]
+  related_to: RelatedTo[]
 }
 
 type Response = {
@@ -90,6 +99,7 @@ const query = gql`
         city
         country
       }
+      related_to
     }
   }
 `

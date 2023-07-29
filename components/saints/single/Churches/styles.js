@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const Church = styled.a`
   display: flex;
   flex-direction: column;
-  width: calc(30% - 20px);
   color: inherit;
 
   img,
