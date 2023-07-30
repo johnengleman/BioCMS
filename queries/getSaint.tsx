@@ -43,6 +43,11 @@ type RelatedTo = {
   relationship_type: string
 }
 
+type Prayer = {
+  prayer_name: string
+  prayer_text: string
+}
+
 type Saint = {
   id: string
   name: string
@@ -61,6 +66,7 @@ type Saint = {
   tomb: Tomb
   tomb_location: string
   tomb_church_name: string
+  prayers: Prayer[]
 }
 
 type Response = {
@@ -107,6 +113,7 @@ const query = gql`
         country
       }
       related_to
+      prayers
       tomb {
         id
       }

@@ -14,6 +14,18 @@ export const Bio = styled.div`
     border-radius: 20px;
   }
 
+  .summary {
+    font-weight: 500;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 1.4;
+    color: #000;
+    margin-bottom: 20px;
+    color: #525252;
+    padding-bottom: 20px;
+    border-bottom: 1px solid lightblue;
+  }
+
   .p {
     font-size: 18px;
   }

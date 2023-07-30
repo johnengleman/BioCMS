@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Title, Flex } from '@mantine/core'
+import { Title } from '@mantine/core'
 import * as S from './styles'
 
 type TombProps = {

@@ -15,6 +15,6 @@ export const Body = styled.main`
   margin-top: 25px;
 
   @media ${device.laptop} {
-    margin-top: 50px;
+    margin-top: 20px;
   }
 `

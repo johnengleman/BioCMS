@@ -12,7 +12,7 @@ const RelatedItem = ({
     <S.Related href={id}>
       {photo ? (
         <Image
-          src={`https://saints-cms.onrender.com/assets/${photo}?fit=contain&height=100&width=75`}
+          src={`https://saints-cms.onrender.com/assets/${photo}?fit=cover&height=100&width=75`}
           height="100"
           width="75"
           alt=""

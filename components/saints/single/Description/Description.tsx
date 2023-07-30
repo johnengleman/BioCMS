@@ -1,6 +1,7 @@
 import { Text, Paper, Spoiler } from '@mantine/core'
 import { sanitize } from 'isomorphic-dompurify'
 import Timeline from '../Timeline/Timeline'
+import * as S from './styles'
 
 type Props = {
   text: string
@@ -8,6 +9,7 @@ type Props = {
   birthLocation: string
   deathDate: string
   deathLocation: string
+  summary: string
 }
 
 const Description = ({
@@ -16,15 +18,11 @@ const Description = ({
   birthLocation,
   deathDate,
   deathLocation,
+  summary,
 }: Props) => (
-  <Paper
-    shadow="md"
-    p="lg"
-    mb={30}
-    withBorder
-  >
+  <S.Bio>
     <Spoiler
-      maxHeight={150}
+      maxHeight={210}
       showLabel="Show more"
       hideLabel="Hide"
       transitionDuration={100}
@@ -35,12 +33,13 @@ const Description = ({
         deathDate={deathDate}
         deathLocation={deathLocation}
       />
+      <div className="summary">{summary}</div>
       <div
         className="text"
         dangerouslySetInnerHTML={{ __html: sanitize(text) }}
       />
     </Spoiler>
-  </Paper>
+  </S.Bio>
 )
 
 export default Description

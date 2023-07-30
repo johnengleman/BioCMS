@@ -23,7 +23,7 @@ const Church = ({
     <S.Church href={website}>
       {image?.id ? (
         <Image
-          src={`https://saints-cms.onrender.com/assets/${image?.id}?fit=contain&height=175&width=300`}
+          src={`https://saints-cms.onrender.com/assets/${image?.id}?fit=cover&height=175&width=300`}
           height="175"
           width="300"
           alt=""

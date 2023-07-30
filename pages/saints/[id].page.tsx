@@ -15,9 +15,9 @@ import Quotes from '../../components/saints/single/Quotes/Quotes'
 import Bio from '../../components/saints/single/Description/Description'
 import Books from '../../components/saints/single/Books/Books'
 import Churches from '../../components/saints/single/Churches/Churches'
-import ImagesMini from '../../components/saints/single/ImagesMini/ImagesMini'
 import RelatedPeople from '../../components/saints/single/RelatedPeople/RelatedPeople'
 import Tomb from '../../components/saints/single/Tomb/Tomb'
+import Name from '../../components/global/Name/Name'
 
 const SaintBio = () => {
   const router = useRouter()
@@ -54,19 +54,8 @@ const SaintBio = () => {
       <Page>
         <S.Saint>
           <div className="header">
-            <ImageMain
-              imageId={
-                data?.photos[0]?.directus_files_id?.id
-              }
-              name={data.name}
-            />
-            <div
-              className="col"
-              style={{ justifyContent: 'space-between' }}
-            >
-              <div className="summary">{data?.summary}</div>
-              <ImagesMini imageIds={data?.photos} />
-            </div>
+            <Name name={data.name} />
+            <ImageMain images={data.photos} />
           </div>
           <div className="body">
             <div className="main">
@@ -77,6 +66,7 @@ const SaintBio = () => {
                 birthLocation={data?.birth_location}
                 deathDate={data?.death_date}
                 deathLocation={data?.death_location}
+                summary={data?.summary}
               />
               <Books books={data?.books} />
               <Churches churches={data?.churches} />

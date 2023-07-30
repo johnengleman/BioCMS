@@ -3,22 +3,51 @@ import { device } from '../../../../styles/devices'
 
 export const ImageContainer = styled.div`
   margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  align-content: flex-end;
+  gap: 10px;
+  position: relative;
 
-  @media ${device.laptop} {
-    margin: 0 20px 20px 20px;
-    min-width: 350px;
-  }
-
-  .image {
-    border-radius: 10px;
-    margin: 0 auto;
+  .image1,
+  .image2,
+  .image3,
+  .image4,
+  .image5 {
     overflow: hidden;
-    box-shadow: 4px 0 4px 0 rgba(0, 0, 0, 0.25);
-    width: 90%;
+    position: relative;
+    height: 450px;
 
     img {
-      width: 100%;
-      height: auto;
+      object-fit: cover;
+      object-position: 50% 10%;
+      cursor: pointer;
+      transition: filter 0.3s ease;
+
+      &:hover {
+        filter: brightness(0.6);
+      }
     }
+  }
+
+  .image2,
+  .image3,
+  .image4,
+  .image5 {
+    width: 16.67%;
+  }
+
+  .image1 {
+    width: 33.33%;
+
+    img {
+      border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px;
+    }
+  }
+
+  .image5 img {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
   }
 `

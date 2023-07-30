@@ -3,17 +3,21 @@ import styled from 'styled-components'
 export const Button = styled.button`
   background-color: #d9d9d9;
   color: black;
-  border: 2px solid white;
-  font-size: 11px;
+  border: 1px solid #000;
+  line-height: 1;
   font-weight: 600;
+  font-size: 12px;
   border-radius: 5px;
   display: flex;
   align-items: center;
-  padding: 5px 10px;
-  gap: 7px;
+  padding: 8px 10px;
+  gap: 10px;
   width: max-content;
   cursor: pointer;
-  width: 125px;
+  position: absolute;
+  bottom: 20px;
+  right: 3.5%;
+  cursor: pointer;
 `
 
 export const Hamburger = styled.div`
