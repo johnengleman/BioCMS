@@ -1,11 +1,12 @@
 import * as S from './styles'
 
 type Props = {
-  text: String
+  text: string
+  onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const ButtonAction = ({ text }: Props) => (
-  <S.Button>
+const ButtonAction = ({ text, onClick }: Props) => (
+  <S.Button onClick={onClick}>
     <S.Hamburger>
       <div />
       <div />

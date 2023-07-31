@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { device } from '../../../../styles/devices'
 
 export const ImageContainer = styled.div`
   margin-bottom: 20px;
@@ -7,7 +6,6 @@ export const ImageContainer = styled.div`
   display: flex;
   align-content: flex-end;
   gap: 10px;
-  position: relative;
 
   .image1,
   .image2,
@@ -16,17 +14,10 @@ export const ImageContainer = styled.div`
   .image5 {
     overflow: hidden;
     position: relative;
-    height: 450px;
 
     img {
       object-fit: cover;
       object-position: 50% 10%;
-      cursor: pointer;
-      transition: filter 0.3s ease;
-
-      &:hover {
-        filter: brightness(0.6);
-      }
     }
   }
 
@@ -35,18 +26,26 @@ export const ImageContainer = styled.div`
   .image4,
   .image5 {
     width: 16.67%;
+    height: 300px;
+    align-self: flex-end;
   }
 
   .image1 {
     width: 33.33%;
+    height: 450px;
+    position: relative;
 
     img {
-      border-bottom-left-radius: 10px;
-      border-top-left-radius: 10px;
+      border-radius: 10px;
     }
   }
 
-  .image5 img {
+  .image2 img {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  .image:last-child img {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
   }

@@ -16,8 +16,12 @@ export const Button = styled.button`
   cursor: pointer;
   position: absolute;
   bottom: 20px;
-  right: 3.5%;
-  cursor: pointer;
+  left: 25px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `
 
 export const Hamburger = styled.div`

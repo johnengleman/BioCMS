@@ -74,7 +74,7 @@ const SaintBio = () => {
             <div className="rightRail">
               <RelatedPeople data={relatedSaintsWithName} />
               <Tomb
-                imageId={data?.tomb.id}
+                imageId={data?.tomb?.id}
                 location={data?.tomb_location}
                 church={data?.tomb_church_name}
               />

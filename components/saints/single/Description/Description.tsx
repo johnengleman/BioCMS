@@ -22,10 +22,10 @@ const Description = ({
 }: Props) => (
   <S.Bio>
     <Spoiler
-      maxHeight={210}
+      maxHeight={400}
       showLabel="Show more"
       hideLabel="Hide"
-      transitionDuration={100}
+      transitionDuration={250}
     >
       <Timeline
         birthDate={birthDate}

@@ -3,6 +3,8 @@ import { request, gql } from 'graphql-request'
 type Photo = {
   directus_files_id: {
     id: string
+    width: number
+    height: number
   }
 }
 
@@ -88,6 +90,8 @@ const query = gql`
       photos {
         directus_files_id {
           id
+          width
+          height
         }
       }
       books {
