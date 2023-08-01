@@ -9,7 +9,7 @@
     "lint": "next lint && npx tsc --noEmit"
   },
   "engines": {
-    "node": "20.5.0"
+    "node": "18.x"
   },
   "husky": {
     "hooks": {
