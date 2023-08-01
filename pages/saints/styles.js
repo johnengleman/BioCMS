@@ -4,6 +4,8 @@ import { device } from '../../styles/devices'
 
 export const Saint = styled.div`
   width: 100%;
+  font-family: var(--font-inter);
+  color: #212121;
 
   .col {
     display: flex;
@@ -20,6 +22,16 @@ export const Saint = styled.div`
   .body {
     display: flex;
     gap: 50px;
+
+    &.rightRailNoContent {
+      .main {
+        width: 100%;
+      }
+
+      .rightRail {
+        display: none;
+      }
+    }
 
     .main {
       width: 70%;

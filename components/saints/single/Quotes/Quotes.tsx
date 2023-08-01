@@ -18,9 +18,7 @@ const Quote = ({
 }) => {
   return (
     <S.Quote>
-      <div className="c-text">
-        <p className="text">{text}</p>
-      </div>
+      <p className="c-text">{text}</p>
       <div className="footer">
         <div className="c-topics">
           {topics?.map((topic, index) => (
@@ -45,10 +43,8 @@ const Quotes = ({ quotes }: QuotesProps) => {
     return (
       <S.SlideContainer>
         <Carousel
-          slideSize="33.333333%"
-          slideGap="md"
-          slidesToScroll={3}
-          loop={true}
+          slideSize="20%"
+          slidesToScroll={5}
         >
           {quotes?.map((quote: QuoteData, i) => (
             <Carousel.Slide key={i}>

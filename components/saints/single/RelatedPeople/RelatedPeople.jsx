@@ -12,9 +12,9 @@ const RelatedItem = ({
     <S.Related href={id}>
       {photo ? (
         <Image
-          src={`https://saints-cms.onrender.com/assets/${photo}?fit=cover&height=100&width=75`}
-          height="100"
-          width="75"
+          src={`https://saints-cms.onrender.com/assets/${photo}?fit=cover&height=150&width=100`}
+          height="150"
+          width="100"
           alt=""
         />
       ) : (
@@ -41,7 +41,7 @@ const RelatedPeople = ({ data }) => {
         <Title order={3}>Related</Title>
 
         <Spoiler
-          maxHeight={220}
+          maxHeight={350}
           showLabel="Show All Related"
           hideLabel="Hide"
           transitionDuration={150}

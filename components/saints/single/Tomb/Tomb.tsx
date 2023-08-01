@@ -20,9 +20,9 @@ const Tomb = ({ imageId, location, church }: TombProps) => {
         </Title>
         <S.Tomb>
           <Image
-            src={`https://saints-cms.onrender.com/assets/${imageId}?fit=cover&height=125&width=300`}
-            height="125"
-            width="300"
+            src={`https://saints-cms.onrender.com/assets/${imageId}?fit=cover&height=150&width=350`}
+            height="150"
+            width="350"
             alt=""
           />
           {church && <p className="church">{church}</p>}

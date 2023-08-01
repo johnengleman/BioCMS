@@ -6,11 +6,12 @@ export const Tomb = styled.div`
   }
 
   .church {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
+    margin-top: 5px;
   }
 
   .location {
-    font-size: 12px;
+    font-size: 14px;
   }
 `

@@ -10,10 +10,10 @@ export const Related = styled.div`
   }
 
   .placeholder {
-    height: 100px;
-    width: 75px;
-    min-width: 75px;
-    border-radius: 5px;
+    height: 150px;
+    width: 100px;
+    min-width: 100px;
+    border-radius: 3px;
     background: lightgray;
   }
 
@@ -23,13 +23,13 @@ export const Related = styled.div`
     justify-content: center;
 
     .relationship {
-      font-size: 1rem;
+      font-size: 14px;
       line-height: 1;
       margin-bottom: 0.3rem;
     }
 
     .name {
-      font-size: 1rem;
+      font-size: 16px;
       font-weight: 700;
       line-height: 1.1;
     }

@@ -10,11 +10,12 @@ export const Body = styled.main`
   flex-wrap: wrap;
   margin: 0 auto;
   gap: 1rem;
-  width: 80%;
+  width: 95%;
   max-width: 1440px;
   margin-top: 25px;
 
   @media ${device.laptop} {
     margin-top: 20px;
+    width: 80%;
   }
 `

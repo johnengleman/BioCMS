@@ -17,7 +17,7 @@ import Books from '../../components/saints/single/Books/Books'
 import Churches from '../../components/saints/single/Churches/Churches'
 import RelatedPeople from '../../components/saints/single/RelatedPeople/RelatedPeople'
 import Tomb from '../../components/saints/single/Tomb/Tomb'
-import Name from '../../components/global/Name/Name'
+import NameTag from '../../components/saints/single/NameTag/NameTag'
 
 const SaintBio = () => {
   const router = useRouter()
@@ -49,17 +49,27 @@ const SaintBio = () => {
     }),
   )
 
+  const rightRailNoContent =
+    !data?.tomb?.id && !relatedSaintsWithName.length
+
   if (data) {
     return (
       <Page>
         <S.Saint>
           <div className="header">
-            <Name name={data.name} />
+            <NameTag
+              name={data.name}
+              birth={data.birth_date}
+              death={data.death_date}
+            />
             <ImageMain images={data.photos} />
           </div>
-          <div className="body">
+          <div
+            className={`body ${
+              rightRailNoContent ? 'rightRailNoContent' : ''
+            }`}
+          >
             <div className="main">
-              <Quotes quotes={data?.quotes} />
               <Bio
                 text={data?.biography}
                 birthDate={data?.birth_date}
@@ -68,6 +78,7 @@ const SaintBio = () => {
                 deathLocation={data?.death_location}
                 summary={data?.summary}
               />
+              <Quotes quotes={data?.quotes} />
               <Books books={data?.books} />
               <Churches churches={data?.churches} />
             </div>

@@ -25,32 +25,21 @@ export const Book = styled.a`
   }
 
   .book-name {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     line-height: 1.2;
     width: 100%;
-
-    @media ${device.laptop} {
-      font-size: 1rem;
-    }
+    margin-bottom: 5px;
   }
 
   .book-author {
-    font-size: 12px;
+    font-size: 14px;
     color: #4e4d4d;
-    margin-bottom: 10px;
-
-    @media ${device.laptop} {
-      font-size: 14px;
-    }
+    margin-bottom: 5px;
   }
 
   .book-link {
-    font-size: 12px;
+    font-size: 14px;
     text-decoration: underline;
-
-    @media ${device.laptop} {
-      font-size: 14px;
-    }
   }
 `

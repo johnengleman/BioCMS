@@ -23,9 +23,9 @@ const Book = ({
     <S.Book href={link}>
       {book_cover?.id ? (
         <Image
-          src={`https://saints-cms.onrender.com/assets/${book_cover?.id}?fit=contain&height=170&width=140`}
-          height="170"
-          width="140"
+          src={`https://saints-cms.onrender.com/assets/${book_cover?.id}?fit=contain&height=200&width=150`}
+          height="200"
+          width="150"
           alt=""
         />
       ) : (

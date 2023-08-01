@@ -9,6 +9,18 @@ const Navigation = () => {
           <S.Button>
             <Link href="/saints">Saints</Link>
           </S.Button>
+
+          <S.Button>
+            <Link href="/books">Books</Link>
+          </S.Button>
+
+          <S.Button>
+            <Link href="/quotes">Quotes</Link>
+          </S.Button>
+
+          <S.Button>
+            <Link href="/churches">Churches</Link>
+          </S.Button>
         </ul>
       </S.Navigation>
     </S.Container>

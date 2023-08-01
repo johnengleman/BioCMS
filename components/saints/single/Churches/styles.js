@@ -7,7 +7,7 @@ export const Church = styled.a`
 
   img,
   .image-placeholder {
-    border-radius: 10px;
+    border-radius: 5px;
   }
 
   .image-placeholder {
@@ -19,7 +19,7 @@ export const Church = styled.a`
   .name {
     font-size: 16px;
     font-weight: 700;
-    margin-top: 10px;
+    margin-top: 5px;
   }
 
   .location {
