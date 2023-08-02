@@ -1,4 +1,3 @@
-import { sanitize } from 'isomorphic-dompurify'
 import * as S from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -6,20 +5,21 @@ import {
   faChurch,
   faQuoteRight,
 } from '@fortawesome/free-solid-svg-icons'
-import Name from '../../global/Name/Name'
+import Summary from '../../global/Summary/Summary'
 
 import { Saint } from './interfaces'
-import Slider from '../../global/Slider/Slider'
 
 export default function SaintSummary(props: Saint) {
   const {
     name,
-    biography,
     birth_date,
     death_date,
     photos,
     categories,
+    summary,
   } = props
+
+  console.log(props)
 
   const getYear = (date: string): number => {
     const newDate = new Date(date)
@@ -30,11 +30,11 @@ export default function SaintSummary(props: Saint) {
 
   return (
     <S.SaintSummary>
-      <S.SliderContainer>
-        <Slider photos={photos} />
-      </S.SliderContainer>
-      <S.BioContainer>
-        <Name name={name} />
+      <Summary
+        name={name}
+        photo={photos[0]?.directus_files_id?.id}
+        summary={summary}
+      >
         <S.Tags>
           {categories?.map((category, index) => (
             <div
@@ -45,45 +45,38 @@ export default function SaintSummary(props: Saint) {
             </div>
           ))}
         </S.Tags>
-        <S.SummaryContainer>
-          <S.Summary
-            dangerouslySetInnerHTML={{
-              __html: sanitize(biography),
-            }}
-          />
-          <S.Dates>
-            {getYear(birth_date)}-{getYear(death_date)} AD,{' '}
-            {age} years
-          </S.Dates>
-        </S.SummaryContainer>
+        {/* <div className="dates">
+          {getYear(birth_date)}-{getYear(death_date)} AD,{' '}
+          {age} years
+        </div> */}
 
         <S.Footer>
-          <S.FooterButton>
+          <div className="footer-button">
             <FontAwesomeIcon
               icon={faBook}
               fontSize="12px"
               style={{ color: '#676666c2' }}
             />
             <S.Count>0</S.Count>
-          </S.FooterButton>
-          <S.FooterButton>
+          </div>
+          <div className="footer-button">
             <FontAwesomeIcon
               icon={faChurch}
               fontSize="12px"
               style={{ color: '#676666c2' }}
             />
             <S.Count>0</S.Count>
-          </S.FooterButton>
-          <S.FooterButton>
+          </div>
+          <div className="footer-button">
             <FontAwesomeIcon
               icon={faQuoteRight}
               fontSize="12px"
               style={{ color: '#676666c2' }}
             />
             <S.Count>0</S.Count>
-          </S.FooterButton>
+          </div>
         </S.Footer>
-      </S.BioContainer>
+      </Summary>
     </S.SaintSummary>
   )
 }

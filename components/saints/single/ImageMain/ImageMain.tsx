@@ -12,7 +12,7 @@ const ImageMain = ({ images }) => {
     <S.ImageContainer>
       <div className="image1">
         <Image
-          src={`https://saints-cms.onrender.com/assets/${image1.directus_files_id.id}`}
+          src={`https://saints-cms.onrender.com/assets/${image1?.directus_files_id.id}`}
           fill={true}
           alt=""
         />
@@ -21,7 +21,7 @@ const ImageMain = ({ images }) => {
       {image2 && (
         <div className="image image2">
           <Image
-            src={`https://saints-cms.onrender.com/assets/${image2.directus_files_id.id}`}
+            src={`https://saints-cms.onrender.com/assets/${image2?.directus_files_id.id}`}
             fill={true}
             alt=""
           />

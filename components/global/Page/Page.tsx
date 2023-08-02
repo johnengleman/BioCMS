@@ -11,7 +11,6 @@ const Page = ({ children }: Props) => (
   <S.Page>
     <Navigation />
     <S.Body>{children}</S.Body>
-    <Footer />
   </S.Page>
 )
 

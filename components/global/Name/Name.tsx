@@ -4,10 +4,6 @@ type Props = {
   name: String
 }
 
-const Name = ({ name }: Props) => (
-  <S.Gradient>
-    <S.Name>{name}</S.Name>
-  </S.Gradient>
-)
+const Name = ({ name }: Props) => <S.Name>{name}</S.Name>
 
 export default Name
