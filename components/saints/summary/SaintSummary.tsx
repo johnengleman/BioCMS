@@ -19,8 +19,6 @@ export default function SaintSummary(props: Saint) {
     summary,
   } = props
 
-  console.log(props)
-
   const getYear = (date: string): number => {
     const newDate = new Date(date)
     return newDate.getFullYear()

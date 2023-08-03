@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import NextNProgress from 'nextjs-progressbar';
 import {
   Hydrate,
   QueryClient,
@@ -32,6 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               content="width=device-width, initial-scale=1.0"
             />
           </Head>
+          <NextNProgress />
           <main className={inter.variable}>
             <Component {...pageProps} />
           </main>

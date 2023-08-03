@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import { GetServerSideProps } from 'next'
 
 import {
   dehydrate,
@@ -9,6 +8,7 @@ import {
 } from '@tanstack/react-query'
 import * as S from './styles'
 import { getSaint } from '../../queries/getSaint'
+import { getSaints } from '../../queries/getSaints'
 import Page from '../../components/global/Page/Page'
 import ImageMain from '../../components/saints/single/ImageMain/ImageMain'
 import Quotes from '../../components/saints/single/Quotes/Quotes'
@@ -97,7 +97,7 @@ const SaintBio = () => {
   }
 }
 
-export const getServerSideProps: GetServerSideProps =
+export const getStaticProps =
   async ({ params }) => {
     const id = Array.isArray(params?.id)
       ? params?.id[0]
@@ -114,5 +114,12 @@ export const getServerSideProps: GetServerSideProps =
       },
     }
   }
+
+  export const getStaticPaths = async () => {
+    return {
+      paths: [],
+      fallback: "blocking"
+    };
+  };
 
 export default SaintBio
