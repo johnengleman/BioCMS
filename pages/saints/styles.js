@@ -1,6 +1,4 @@
 import styled from 'styled-components'
-import headerBg from '../../resources/images/layered-waves-haikei.svg'
-import { device } from '../../styles/devices'
 
 export const Saint = styled.div`
   width: 100%;

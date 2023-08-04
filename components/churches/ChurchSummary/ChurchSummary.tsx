@@ -1,6 +1,6 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import * as S from './styles'
-import Summary from '../../global/Summary/Summary'
 
 export default function ChurchSummary(props) {
   const { name, image, website, city, country } = props
@@ -8,14 +8,17 @@ export default function ChurchSummary(props) {
   return (
     <Link href={website}>
       <S.ChurchSummary>
-        <Summary
-          name={name}
-          photo={image.id}
-        >
-          <p>
-            {city}, {country}
-          </p>
-        </Summary>
+        <div className="image">
+          <Image
+            alt="profile"
+            src={`https://saints-cms.onrender.com/assets/${image?.id}`}
+            fill={true}
+          />
+        </div>
+        <p className="name">{name}</p>
+        <p className="location">
+          {city}, {country}
+        </p>
       </S.ChurchSummary>
     </Link>
   )

@@ -10,7 +10,7 @@ export const Name = styled.div`
   border-radius: 10px;
   font-weight: 500;
   position: absolute;
-  top: 280px;
+  top: 355px;
   left: 5%;
   z-index: 2;
   width: 90%;

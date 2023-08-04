@@ -17,6 +17,9 @@ export default function SaintSummary(props: Saint) {
     photos,
     categories,
     summary,
+    quotes,
+    books,
+    churches,
   } = props
 
   const getYear = (date: string): number => {
@@ -52,26 +55,26 @@ export default function SaintSummary(props: Saint) {
           <div className="footer-button">
             <FontAwesomeIcon
               icon={faBook}
-              fontSize="12px"
+              fontSize="10px"
               style={{ color: '#676666c2' }}
             />
-            <S.Count>0</S.Count>
+            <S.Count>{books?.length}</S.Count>
           </div>
           <div className="footer-button">
             <FontAwesomeIcon
               icon={faChurch}
-              fontSize="12px"
+              fontSize="10px"
               style={{ color: '#676666c2' }}
             />
-            <S.Count>0</S.Count>
+            <S.Count>{churches?.length}</S.Count>
           </div>
           <div className="footer-button">
             <FontAwesomeIcon
               icon={faQuoteRight}
-              fontSize="12px"
+              fontSize="10px"
               style={{ color: '#676666c2' }}
             />
-            <S.Count>0</S.Count>
+            <S.Count>{quotes?.length}</S.Count>
           </div>
         </S.Footer>
       </Summary>

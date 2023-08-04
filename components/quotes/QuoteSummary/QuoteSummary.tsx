@@ -5,7 +5,9 @@ export default function QuoteSummary(props) {
 
   return (
     <S.QuoteSummary>
-      <p>{text}</p>
+      {topics && <div className="topic">{topics}</div>}
+      <p className="text">{text}</p>
+      <p className="source">{author.name}</p>
     </S.QuoteSummary>
   )
 }

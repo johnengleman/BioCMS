@@ -1,4 +1,3 @@
-import { Flex } from '@mantine/core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCross } from '@fortawesome/free-solid-svg-icons'
 import * as S from './styles'

@@ -1,48 +1,6 @@
 import styled from 'styled-components'
-import { colors } from '../../../styles/colors'
 
-export const SaintSummary = styled.div`
-  width: 300px;
-  background: white;
-  border: 1px solid lavender;
-  border-radius: 20px;
-  position: relative;
-  background-color: ${colors.mint};
-  box-shadow: -5px 4px 24px -5px rgba(0, 0, 0, 0.74);
-
-  .image {
-    width: 100%;
-    position: relative;
-    height: 300px;
-    z-index: 2;
-
-    img {
-      object-fit: cover;
-      object-position: 50% 10%;
-      border-radius: 20px;
-    }
-  }
-
-  .bioContainer {
-    position: relative;
-    z-index: 1;
-    width: 90%;
-    padding: 1rem 1rem 0.5rem 1rem;
-    border-radius: 10px;
-    width: 100%;
-
-    .summary {
-      color: #1a4760;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      display: -webkit-box;
-      -webkit-line-clamp: 8;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      font-size: 14px;
-    }
-  }
-`
+export const SaintSummary = styled.div``
 
 export const Tags = styled.div`
   display: flex;
@@ -84,7 +42,7 @@ export const Footer = styled.div`
 
 export const Count = styled.span`
   color: #676666c2;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
-  margin-left: 7px;
+  margin-left: 5px;
 `

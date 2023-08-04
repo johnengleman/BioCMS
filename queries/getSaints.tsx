@@ -6,6 +6,18 @@ type Photo = {
   }
 }
 
+type Book = {
+  title: string
+}
+
+type Quote = {
+  text: string
+}
+
+type Church = {
+  name: string
+}
+
 type Saint = {
   id: string
   name: string
@@ -17,6 +29,9 @@ type Saint = {
   death_location: string
   categories: string[]
   photos: Photo[]
+  quotes: Quote[]
+  books: Book[]
+  churches: Church[]
 }
 
 type Response = {
@@ -35,6 +50,15 @@ const query = gql`
       death_date
       birth_location
       death_location
+      books {
+        title
+      }
+      churches {
+        name
+      }
+      quotes {
+        text
+      }
       photos {
         directus_files_id {
           id

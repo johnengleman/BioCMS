@@ -19,8 +19,6 @@ import RelatedPeople from '../../components/saints/single/RelatedPeople/RelatedP
 import Tomb from '../../components/saints/single/Tomb/Tomb'
 import NameTag from '../../components/saints/single/NameTag/NameTag'
 
-export const runtime = 'experimental-edge';
-
 const SaintBio = () => {
   const router = useRouter()
   const id = Array.isArray(router?.query?.id)

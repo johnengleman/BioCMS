@@ -1,6 +1,8 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
+import Image from 'next/image'
 import Link from 'next/link'
 import * as S from './styles'
-import Summary from '../../global/Summary/Summary'
 
 export default function BookSummary(props) {
   const {
@@ -15,13 +17,26 @@ export default function BookSummary(props) {
   return (
     <Link href={link || ''}>
       <S.BookSummary>
-        <Summary
-          name={title}
-          photo={book_cover?.id}
-        >
-          <p>Pages: {pages}</p>
-          <p>Author: {author}</p>
-        </Summary>
+        <div className="image">
+          <Image
+            alt="profile"
+            src={`https://saints-cms.onrender.com/assets/${book_cover?.id}`}
+            fill={true}
+          />
+        </div>
+        <div className="info">
+          <p className="title">{title}</p>
+          <p className="author">{author}</p>
+        </div>
+
+        <div className="amazon">
+          <FontAwesomeIcon
+            icon={faCartShopping}
+            fontSize="12px"
+            style={{ color: '#fff' }}
+          />
+          <p>Buy on Amazon</p>
+        </div>
       </S.BookSummary>
     </Link>
   )

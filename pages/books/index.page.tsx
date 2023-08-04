@@ -7,19 +7,22 @@ import { Book } from '../../components/books/BookSummary/interface'
 import { getBooks } from '../../queries/getBooks'
 import BookSummary from '../../components/books/BookSummary/BookSummary'
 import Page from '../../components/global/Page/Page'
+import * as S from './styles'
 
 const Home = () => {
-  const { data } = useQuery(['churches'], getBooks)
+  const { data } = useQuery(['books'], getBooks)
 
   if (data) {
     return (
       <Page>
-        {data?.map((book: Book, i: number) => (
-          <BookSummary
-            key={i}
-            {...book}
-          />
-        ))}
+        <S.Books>
+          {data?.map((book: Book, i: number) => (
+            <BookSummary
+              key={i}
+              {...book}
+            />
+          ))}
+        </S.Books>
       </Page>
     )
   }
@@ -33,7 +36,7 @@ export async function getStaticProps() {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
-    revalidate: 10
+    revalidate: 10,
   }
 }
 

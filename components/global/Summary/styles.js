@@ -20,7 +20,7 @@ export const Summary = styled.div`
   .image {
     width: 100%;
     position: relative;
-    height: 300px;
+    height: 375px;
     z-index: 2;
 
     img {
