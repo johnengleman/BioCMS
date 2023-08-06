@@ -27,7 +27,10 @@ export const Bio = styled.div`
     border-bottom: 1px solid lightblue;
   }
 
-  .p {
-    font-size: 18px;
-  }
-`
+  .text {
+    font-size: 14px;
+
+    p {
+      margin-bottom: 1rem;
+    }
+  }`;

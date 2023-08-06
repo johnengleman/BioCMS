@@ -1,11 +1,12 @@
 import * as S from './styles'
+import Link from 'next/link'
+import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBook,
   faChurch,
   faQuoteRight,
 } from '@fortawesome/free-solid-svg-icons'
-import Summary from '../../global/Summary/Summary'
 
 import { Saint } from './interfaces'
 
@@ -20,6 +21,7 @@ export default function SaintSummary(props: Saint) {
     quotes,
     books,
     churches,
+    id,
   } = props
 
   const getYear = (date: string): number => {
@@ -31,12 +33,23 @@ export default function SaintSummary(props: Saint) {
 
   return (
     <S.SaintSummary>
-      <Summary
-        name={name}
-        photo={photos[0]?.directus_files_id?.id}
-        summary={summary}
+      <Link
+        className="saint-summary"
+        href={`/saints/${id}`}
       >
-        <S.Tags>
+        <div className="image">
+          <Image
+            alt="profile"
+            src={`https://saints-cms.onrender.com/assets/${photos[0]?.directus_files_id?.id}`}
+            fill={true}
+          />
+        </div>
+        <div className="name">{name}</div>
+
+        <div className="bioContainer">
+          <div className="summary">{summary}</div>
+        </div>
+        <div className="tags">
           {categories?.map((category, index) => (
             <div
               key={index}
@@ -45,13 +58,13 @@ export default function SaintSummary(props: Saint) {
               {category}
             </div>
           ))}
-        </S.Tags>
+        </div>
         {/* <div className="dates">
           {getYear(birth_date)}-{getYear(death_date)} AD,{' '}
           {age} years
         </div> */}
 
-        <S.Footer>
+        <div className="footer">
           <div className="footer-button">
             <FontAwesomeIcon
               icon={faBook}
@@ -76,8 +89,8 @@ export default function SaintSummary(props: Saint) {
             />
             <S.Count>{quotes?.length}</S.Count>
           </div>
-        </S.Footer>
-      </Summary>
+        </div>
+      </Link>
     </S.SaintSummary>
   )
 }

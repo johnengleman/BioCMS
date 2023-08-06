@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import {
   dehydrate,
   QueryClient,
@@ -8,6 +7,7 @@ import { Saint } from '../../components/saints/summary/interfaces'
 import { getSaints } from '../../queries/getSaints'
 import SaintSummary from '../../components/saints/summary/SaintSummary'
 import Page from '../../components/global/Page/Page'
+import Masonry from 'react-masonry-css'
 
 const Home = () => {
   const { data } = useQuery(['saints'], getSaints)
@@ -15,14 +15,18 @@ const Home = () => {
   if (data) {
     return (
       <Page>
-        {data?.map((saint: Saint, i: number) => (
-          <Link
-            key={i}
-            href={`/saints/${saint?.id}`}
-          >
-            <SaintSummary {...saint} />
-          </Link>
-        ))}
+        <Masonry
+          breakpointCols={5}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {data?.map((saint: Saint, i: number) => (
+            <SaintSummary
+              {...saint}
+              key={i}
+            />
+          ))}
+        </Masonry>
       </Page>
     )
   }
@@ -36,7 +40,7 @@ export async function getStaticProps() {
     props: {
       dehydratedState: dehydrate(queryClient),
     },
-    revalidate: 10
+    revalidate: 10,
   }
 }
 

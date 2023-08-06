@@ -7,6 +7,7 @@ type BookProps = {
   author: string
   link: string
   pages?: number
+  description: string
   book_cover: {
     id: string
   }
@@ -18,6 +19,7 @@ const Book = ({
   link,
   pages,
   book_cover,
+  description,
 }: BookProps) => {
   return (
     <S.Book href={link}>
@@ -43,6 +45,9 @@ const Book = ({
       <div className="book-info">
         <div className="book-name">{title}</div>
         <div className="book-author">{author}</div>
+        <div className="book-description">
+          {description}
+        </div>
         <div className="book-link">Buy On Amazon</div>
       </div>
     </S.Book>
@@ -65,9 +70,9 @@ const Books = ({ books }: BooksProps) => {
         </Title>
 
         <Flex
-          gap="md"
+          gap="lg"
           wrap="wrap"
-          justify="space-between"
+          justify="flex-start"
           mb="50px"
         >
           {books?.map((book, i) => (

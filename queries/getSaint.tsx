@@ -17,6 +17,7 @@ type Book = {
   title: string
   link: string
   pages: number
+  description: string
   book_cover: {
     id: string
   }
@@ -99,6 +100,7 @@ const query = gql`
         title
         link
         pages
+        description
         book_cover {
           id
         }

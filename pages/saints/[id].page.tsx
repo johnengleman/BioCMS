@@ -97,29 +97,28 @@ const SaintBio = () => {
   }
 }
 
-export const getStaticProps =
-  async ({ params }) => {
-    const id = Array.isArray(params?.id)
-      ? params?.id[0]
-      : params?.id
+export const getStaticProps = async ({ params }) => {
+  const id = Array.isArray(params?.id)
+    ? params?.id[0]
+    : params?.id
 
-    const queryClient = new QueryClient()
-    await queryClient.prefetchQuery(['saint', id], () =>
-      getSaint(id),
-    )
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery(['saint', id], () =>
+    getSaint(id),
+  )
 
-    return {
-      props: {
-        dehydratedState: dehydrate(queryClient),
-      },
-    }
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
   }
+}
 
-  export const getStaticPaths = async () => {
-    return {
-      paths: [],
-      fallback: "blocking"
-    };
-  };
+export const getStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  }
+}
 
 export default SaintBio

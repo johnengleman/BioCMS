@@ -2,8 +2,7 @@ import styled from 'styled-components'
 import { colors } from '../../../styles/colors'
 
 export const QuoteSummary = styled.div`
-  width: 25%;
-  min-width: 300px;
+  width: calc(20% - 1rem);
   background-color: ${colors.gold};
   padding: 30px 20px 40px 20px;
   border-radius: 5px;

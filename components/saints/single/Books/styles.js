@@ -21,7 +21,6 @@ export const Book = styled.a`
 
   .book-info {
     width: 300px;
-    margin-top: 5px;
   }
 
   .book-name {
@@ -29,13 +28,19 @@ export const Book = styled.a`
     font-weight: 700;
     line-height: 1.2;
     width: 100%;
-    margin-bottom: 5px;
   }
 
   .book-author {
     font-size: 14px;
     color: #4e4d4d;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+  }
+
+  .book-description {
+    font-size: 14px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    color: #2b2b2b;
   }
 
   .book-link {
