@@ -8,7 +8,6 @@ import {
 } from '@tanstack/react-query'
 import * as S from './styles'
 import { getSaint } from '../../queries/getSaint'
-import { getSaints } from '../../queries/getSaints'
 import Page from '../../components/global/Page/Page'
 import ImageMain from '../../components/saints/single/ImageMain/ImageMain'
 import Quotes from '../../components/saints/single/Quotes/Quotes'
@@ -18,6 +17,8 @@ import Churches from '../../components/saints/single/Churches/Churches'
 import RelatedPeople from '../../components/saints/single/RelatedPeople/RelatedPeople'
 import Tomb from '../../components/saints/single/Tomb/Tomb'
 import NameTag from '../../components/saints/single/NameTag/NameTag'
+
+export const runtime = 'experimental-edge'
 
 const SaintBio = () => {
   const router = useRouter()
