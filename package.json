@@ -49,6 +49,7 @@
     "eslint": "8.45.0",
     "eslint-config-next": "^13.4.12",
     "husky": "^8.0.3",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "@cloudflare/next-on-pages": "https://prerelease-registry.devprod.cloudflare.dev/next-on-pages/runs/5786546906/npm-package-next-on-pages-418"
   }
 }
