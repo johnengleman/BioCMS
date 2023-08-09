@@ -25,6 +25,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <Head>
           <meta
+            name="google-site-verification"
+            content="WyfYuxG-VseN6Coy0vRff1FC3vaQgyDTyD15brOmylE"
+          />
+          <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
