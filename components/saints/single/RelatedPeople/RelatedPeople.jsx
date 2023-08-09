@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Title, Flex, Spoiler } from '@mantine/core'
+import Title from '../../../global/Title/Title'
 import * as S from './styles'
 
 const RelatedItem = ({
@@ -9,7 +9,7 @@ const RelatedItem = ({
   relationship_type,
 }) => {
   return (
-    <S.Related href={id}>
+    <S.RelatedPerson href={id}>
       {photo ? (
         <Image
           src={`https://saints-cms.onrender.com/assets/${photo}?fit=cover&height=150&width=100`}
@@ -26,39 +26,22 @@ const RelatedItem = ({
         </div>
         <div className="name">{name}</div>
       </div>
-    </S.Related>
+    </S.RelatedPerson>
   )
 }
 
 const RelatedPeople = ({ data }) => {
   if (data?.length) {
     return (
-      <Flex
-        gap="sm"
-        direction="column"
-        mb="40px"
-      >
-        <Title order={3}>Related</Title>
-
-        <Spoiler
-          maxHeight={350}
-          showLabel="Show All Related"
-          hideLabel="Hide"
-          transitionDuration={150}
-        >
-          <Flex
-            gap="md"
-            wrap="wrap"
-          >
-            {data?.map((relatedPerson, i) => (
-              <RelatedItem
-                key={i}
-                {...relatedPerson}
-              />
-            ))}
-          </Flex>
-        </Spoiler>
-      </Flex>
+      <S.RelatedPeople>
+        <Title>Related</Title>
+        {data?.map((relatedPerson, i) => (
+          <RelatedItem
+            key={i}
+            {...relatedPerson}
+          />
+        ))}
+      </S.RelatedPeople>
     )
   }
 

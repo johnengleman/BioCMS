@@ -1,7 +1,5 @@
-import { AppShell, Navbar, Header } from '@mantine/core'
 import Navigation from '../Navigation/Navigation'
 import * as S from './styles'
-import Footer from '../Footer/Footer'
 
 type Props = {
   children: React.ReactNode

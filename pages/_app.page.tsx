@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import NextNProgress from 'nextjs-progressbar';
+import NextNProgress from 'nextjs-progressbar'
 import {
   Hydrate,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import { MantineProvider } from '@mantine/core'
 import NextApp, { AppProps, AppContext } from 'next/app'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
@@ -21,25 +20,20 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
 
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-    >
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <Head>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1.0"
-            />
-          </Head>
-          <NextNProgress />
-          <main className={inter.variable}>
-            <Component {...pageProps} />
-          </main>
-        </Hydrate>
-      </QueryClientProvider>
-    </MantineProvider>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+        </Head>
+        <NextNProgress />
+        <main className={inter.variable}>
+          <Component {...pageProps} />
+        </main>
+      </Hydrate>
+    </QueryClientProvider>
   )
 }
 
@@ -47,9 +41,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await NextApp.getInitialProps(appContext)
   return {
     ...appProps,
-    colorScheme:
-      //   getCookie('mantine-color-scheme', appContext.ctx) ||
-      'dark',
+    colorScheme: 'dark',
   }
 }
 

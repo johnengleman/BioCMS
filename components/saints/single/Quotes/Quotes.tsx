@@ -1,4 +1,3 @@
-import { Carousel } from '@mantine/carousel'
 import * as S from './styles'
 
 type QuotesProps = {
@@ -42,21 +41,15 @@ const Quotes = ({ quotes }: QuotesProps) => {
   if (quotes?.length > 3) {
     return (
       <S.SlideContainer>
-        <Carousel
-          slideSize="20%"
-          slidesToScroll={5}
-        >
-          {quotes?.map((quote: QuoteData, i) => (
-            <Carousel.Slide key={i}>
-              <Quote
-                text={quote.text}
-                topics={quote.topics}
-                quoteIndex={i + 1}
-                quoteTotal={quotes.length}
-              />
-            </Carousel.Slide>
-          ))}
-        </Carousel>
+        {quotes?.map((quote: QuoteData, i) => (
+          <Quote
+            key={i}
+            text={quote.text}
+            topics={quote.topics}
+            quoteIndex={i + 1}
+            quoteTotal={quotes.length}
+          />
+        ))}
       </S.SlideContainer>
     )
   }

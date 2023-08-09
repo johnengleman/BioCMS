@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Title, Flex } from '@mantine/core'
+import Title from '../../../global/Title/Title'
 import * as S from './styles'
 
 type BookProps = {
@@ -62,26 +62,15 @@ const Books = ({ books }: BooksProps) => {
   if (books.length) {
     return (
       <>
-        <Title
-          order={3}
-          mb={10}
-        >
-          Books
-        </Title>
-
-        <Flex
-          gap="lg"
-          wrap="wrap"
-          justify="flex-start"
-          mb="50px"
-        >
+        <Title>Books</Title>
+        <S.Books>
           {books?.map((book, i) => (
             <Book
               key={i}
               {...book}
             />
           ))}
-        </Flex>
+        </S.Books>
       </>
     )
   }

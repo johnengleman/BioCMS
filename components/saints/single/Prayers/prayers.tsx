@@ -1,4 +1,4 @@
-// import { Title, Flex } from '@mantine/core'
+// import { Flex } from '@mantine/core'
 
 // const Prayers = ({ data }) => {
 //   if (data.length) {

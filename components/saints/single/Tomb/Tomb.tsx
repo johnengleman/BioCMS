@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Title } from '@mantine/core'
+import Title from '../../../global/Title/Title'
 import * as S from './styles'
 
 type TombProps = {
@@ -12,12 +12,7 @@ const Tomb = ({ imageId, location, church }: TombProps) => {
   if (imageId) {
     return (
       <>
-        <Title
-          order={3}
-          mb={10}
-        >
-          Tomb
-        </Title>
+        <Title>Tomb</Title>
         <S.Tomb>
           <Image
             src={`https://saints-cms.onrender.com/assets/${imageId}?fit=cover&height=150&width=350`}

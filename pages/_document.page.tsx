@@ -1,4 +1,3 @@
-import { createGetInitialProps } from '@mantine/next'
 import Document, {
   Head,
   Html,
@@ -7,11 +6,7 @@ import Document, {
 } from 'next/document'
 import Script from 'next/script'
 import Footer from '../components/global/Footer/Footer'
-
-const getInitialProps = createGetInitialProps()
 export default class _Document extends Document {
-  static getInitialProps = getInitialProps
-
   render() {
     return (
       <Html>

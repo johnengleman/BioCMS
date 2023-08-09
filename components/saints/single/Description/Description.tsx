@@ -1,5 +1,3 @@
-import { Text, Paper, Spoiler } from '@mantine/core'
-import { sanitize } from 'isomorphic-dompurify'
 import Timeline from '../Timeline/Timeline'
 import * as S from './styles'
 
@@ -21,24 +19,19 @@ const Description = ({
   summary,
 }: Props) => (
   <S.Bio>
-    <Spoiler
-      maxHeight={400}
-      showLabel="Show more"
-      hideLabel="Hide"
-      transitionDuration={250}
-    >
-      <Timeline
-        birthDate={birthDate}
-        birthLocation={birthLocation}
-        deathDate={deathDate}
-        deathLocation={deathLocation}
-      />
-      <div className="summary">{summary}</div>
+    <Timeline
+      birthDate={birthDate}
+      birthLocation={birthLocation}
+      deathDate={deathDate}
+      deathLocation={deathLocation}
+    />
+    <div className="summary">{summary}</div>
+    {typeof window !== 'undefined' && (
       <div
         className="text"
-        dangerouslySetInnerHTML={{ __html: sanitize(text) }}
+        dangerouslySetInnerHTML={{ __html: text }}
       />
-    </Spoiler>
+    )}
   </S.Bio>
 )
 

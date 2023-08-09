@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import * as S from './styles'
-import PhotosModal from '../ImagesModal/ImagesModal'
+// import PhotosModal from '../ImagesModal/ImagesModal'
 
 // type Props = {
 //   image: String
@@ -16,7 +16,7 @@ const ImageMain = ({ images }) => {
           fill={true}
           alt=""
         />
-        <PhotosModal images={images} />
+        {/* <PhotosModal images={images} /> */}
       </div>
       {image2 && (
         <div className="image image2">

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Related = styled.div`
+export const RelatedPerson = styled.div`
   display: flex;
 
   img,
@@ -34,4 +34,10 @@ export const Related = styled.div`
       line-height: 1.1;
     }
   }
+`
+
+export const RelatedPeople = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
 `

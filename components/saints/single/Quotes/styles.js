@@ -46,8 +46,4 @@ export const Quote = styled.div`
   }
 `
 
-export const SlideContainer = styled.div`
-  .mantine-Carousel-container {
-    align-items: center;
-  }
-`
+export const SlideContainer = styled.div``

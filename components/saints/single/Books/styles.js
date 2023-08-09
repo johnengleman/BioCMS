@@ -48,3 +48,11 @@ export const Book = styled.a`
     text-decoration: underline;
   }
 `
+
+export const Books = styled.div`
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-bottom: 50px;
+`
