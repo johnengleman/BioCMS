@@ -4,7 +4,6 @@ import {
   dehydrate,
   QueryClient,
   useQuery,
-  useQueries,
 } from '@tanstack/react-query'
 import * as S from './styles'
 import { getSaint } from '../../queries/getSaint'
@@ -19,7 +18,7 @@ import NameTag from '../../components/saints/single/NameTag/NameTag'
 
 export const runtime = 'experimental-edge'
 
-const SaintBio = () => {
+const SaintBio = (props) => {
   const router = useRouter()
   const id = Array.isArray(router?.query?.id)
     ? router?.query?.id[0]
@@ -29,28 +28,7 @@ const SaintBio = () => {
     getSaint(id),
   )
 
-  const relatedSaints = data?.related_to || []
-  const relatedSaintQueries = useQueries({
-    queries: relatedSaints?.map((relationship) => ({
-      queryKey: ['saint', relationship.saint.key],
-      queryFn: () =>
-        getSaint(relationship.saint.key.toString()),
-    })),
-  })
-
-  const relatedSaintsWithName = relatedSaints.map(
-    (saint, i) => ({
-      name: relatedSaintQueries[i]?.data?.name,
-      photo:
-        relatedSaintQueries[i]?.data?.photos[0]
-          ?.directus_files_id.id,
-      id: saint.saint.key,
-      relationship_type: saint.relationship_type,
-    }),
-  )
-
-  const rightRailNoContent =
-    !data?.tomb?.id && !relatedSaintsWithName.length
+  const { relatedSaints } = props
 
   if (data) {
     return (
@@ -59,22 +37,18 @@ const SaintBio = () => {
           <div className="header">
             <NameTag
               name={data.name}
-              birth={data.birth_date}
-              death={data.death_date}
+              birth={data.birth_year}
+              death={data.death_year}
             />
             <ImageMain images={data.photos} />
           </div>
-          <div
-            className={`body ${
-              rightRailNoContent ? 'rightRailNoContent' : ''
-            }`}
-          >
+          <div className="body">
             <div className="main">
               <Bio
                 text={data?.biography}
-                birthDate={data?.birth_date}
+                birthDate={data?.birth_year}
                 birthLocation={data?.birth_location}
-                deathDate={data?.death_date}
+                deathDate={data?.death_year}
                 deathLocation={data?.death_location}
                 summary={data?.summary}
               />
@@ -82,7 +56,7 @@ const SaintBio = () => {
               <Books books={data?.books} />
             </div>
             <div className="rightRail">
-              <RelatedPeople data={relatedSaintsWithName} />
+              <RelatedPeople data={relatedSaints} />
               <Tomb
                 imageId={data?.tomb?.id}
                 location={data?.tomb_location}
@@ -106,16 +80,49 @@ export const getStaticProps = async ({ params }) => {
     getSaint(id),
   )
 
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/getRelatedSaints/?id=${id}`,
+  )
+  const relatedSaints = await res.json()
+
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
+      relatedSaints: relatedSaints
+        .filter((saint) => saint.id !== id)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 4),
     },
   }
 }
 
 export const getStaticPaths = async () => {
+  const res = await fetch(
+    'https://saints-cms.onrender.com/graphql',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        query: `
+          query {
+            saints {
+              id
+            }
+          }
+        `,
+      }),
+    },
+  )
+
+  const resData = await res.json()
+  const paths = resData.data.saints.map((saint) => ({
+    params: { id: saint.id },
+  }))
+
   return {
-    paths: [],
+    paths,
     fallback: 'blocking',
   }
 }

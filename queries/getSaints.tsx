@@ -23,15 +23,14 @@ type Saint = {
   name: string
   summary: string
   biography: string
-  birth_date: string
-  death_date: string
+ birth_year: number
+  death_year: number
   birth_location: string
   death_location: string
   categories: string[]
   photos: Photo[]
   quotes: Quote[]
   books: Book[]
-  churches: Church[]
 }
 
 type Response = {
@@ -46,15 +45,12 @@ const query = gql`
       summary
       biography
       categories
-      birth_date
-      death_date
+      birth_year
+      death_year
       birth_location
       death_location
       books {
         title
-      }
-      churches {
-        name
       }
       quotes {
         text

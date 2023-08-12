@@ -13,14 +13,13 @@ import { Saint } from './interfaces'
 export default function SaintSummary(props: Saint) {
   const {
     name,
-    birth_date,
-    death_date,
+    birth_year,
+    death_year,
     photos,
     categories,
     summary,
     quotes,
     books,
-    churches,
     id,
   } = props
 
@@ -28,8 +27,6 @@ export default function SaintSummary(props: Saint) {
     const newDate = new Date(date)
     return newDate.getFullYear()
   }
-
-  const age = getYear(death_date) - getYear(birth_date)
 
   return (
     <S.SaintSummary>
@@ -60,7 +57,7 @@ export default function SaintSummary(props: Saint) {
           ))}
         </div>
         {/* <div className="dates">
-          {getYear(birth_date)}-{getYear(death_date)} AD,{' '}
+          {getYear(birth_year)}-{getYear(death_year)} AD,{' '}
           {age} years
         </div> */}
 
@@ -74,12 +71,6 @@ export default function SaintSummary(props: Saint) {
             <S.Count>{books?.length}</S.Count>
           </div>
           <div className="footer-button">
-            <FontAwesomeIcon
-              icon={faChurch}
-              fontSize="10px"
-              style={{ color: '#676666c2' }}
-            />
-            <S.Count>{churches?.length}</S.Count>
           </div>
           <div className="footer-button">
             <FontAwesomeIcon

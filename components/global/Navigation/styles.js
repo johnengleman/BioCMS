@@ -16,7 +16,7 @@ export const Navigation = styled.div`
   max-width: 1460px;
 
   @media ${device.laptop} {
-    width: 80%;
+    width: 90%;
     justify-content: flex-start;
   }
 

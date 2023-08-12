@@ -16,7 +16,7 @@ export const Body = styled.main`
 
   @media ${device.laptop} {
     margin-top: 20px;
-    width: 80%;
+    width: 90%;
   }
 
   .my-masonry-grid {

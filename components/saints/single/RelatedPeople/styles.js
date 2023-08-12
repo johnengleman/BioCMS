@@ -9,29 +9,40 @@ export const RelatedPerson = styled.div`
     border-radius: 5px;
   }
 
-  .placeholder {
-    height: 150px;
-    width: 100px;
-    min-width: 100px;
-    border-radius: 3px;
-    background: lightgray;
-  }
-
   .person-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    .relationship {
-      font-size: 14px;
-      line-height: 1;
-      margin-bottom: 0.3rem;
-    }
-
     .name {
       font-size: 16px;
       font-weight: 700;
       line-height: 1.1;
+      color: #1d1e1c;
+    }
+
+    .dates {
+      font-size: 12px;
+      color: #1d1e1c;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+
+      .tag {
+        padding: 2px 12px;
+        background-color: #ccebd9;
+        font-size: 9px;
+        font-weight: 500;
+        border-radius: 2px;
+        color: #54846d;
+        font-weight: 500;
+        min-width: fit-content;
+      }
     }
   }
 `
@@ -39,5 +50,6 @@ export const RelatedPerson = styled.div`
 export const RelatedPeople = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 1rem;
   margin-bottom: 40px;
 `

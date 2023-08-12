@@ -6,7 +6,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import NextApp, { AppProps, AppContext } from 'next/app'
+import { AppProps } from 'next/app'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 
@@ -34,21 +34,13 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
         </Head>
         <NextNProgress />
-        <main className={inter.variable}>
+        <main className={inter.className}>
           <Component {...pageProps} />
           <Analytics />
         </main>
       </Hydrate>
     </QueryClientProvider>
   )
-}
-
-MyApp.getInitialProps = async (appContext: AppContext) => {
-  const appProps = await NextApp.getInitialProps(appContext)
-  return {
-    ...appProps,
-    colorScheme: 'dark',
-  }
 }
 
 export default MyApp

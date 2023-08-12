@@ -3,9 +3,9 @@ import * as S from './styles'
 
 type Props = {
   text: string
-  birthDate: string
+  birthDate: number
   birthLocation: string
-  deathDate: string
+  deathDate: number
   deathLocation: string
   summary: string
 }

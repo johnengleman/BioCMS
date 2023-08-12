@@ -3,18 +3,15 @@ export interface Saint {
   name: string
   summary: string
   biography: string
-  birth_date: string
+ birth_year: number
   birth_location: string
-  death_date: string
+  death_year: number
   death_location: string
   books: {
     title: string
   }[]
   quotes: {
     text: string
-  }[]
-  churches: {
-    name: string
   }[]
   categories: string[]
   photos: {

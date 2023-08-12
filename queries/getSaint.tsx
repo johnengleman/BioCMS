@@ -56,15 +56,14 @@ type Saint = {
   name: string
   summary: string
   biography: string
-  birth_date: string
-  death_date: string
+ birth_year: number
+  death_year: number
   birth_location: string
   death_location: string
   categories: string[]
   photos: Photo[]
   books: Book[]
   quotes: Quote[]
-  churches: Church[]
   related_to: RelatedTo[]
   tomb: Tomb
   tomb_location: string
@@ -83,8 +82,8 @@ const query = gql`
       name
       summary
       biography
-      birth_date
-      death_date
+     birth_year
+      death_year
       birth_location
       death_location
       categories
@@ -109,16 +108,6 @@ const query = gql`
         text
         topics
       }
-      churches {
-        name
-        website
-        image {
-          id
-        }
-        city
-        country
-      }
-      related_to
       prayers
       tomb {
         id

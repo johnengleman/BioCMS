@@ -1,9 +1,9 @@
 import * as S from './styles'
 
 type Props = {
-  birthDate: string
+  birthDate: number | string
   birthLocation: string
-  deathDate: string
+  deathDate: number | string
   deathLocation: string
 }
 

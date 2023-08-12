@@ -1,32 +1,43 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import Title from '../../../global/Title/Title'
 import * as S from './styles'
 
 const RelatedItem = ({
   name,
-  photo,
+  birth_year,
+  death_year,
+  photos,
   id,
-  relationship_type,
+  categories,
 }) => {
   return (
-    <S.RelatedPerson href={id}>
-      {photo ? (
+    <Link href={id}>
+      <S.RelatedPerson>
         <Image
-          src={`https://saints-cms.onrender.com/assets/${photo}?fit=cover&height=150&width=100`}
+          src={`https://saints-cms.onrender.com/assets/${photos[0].directus_files_id.id}?fit=cover&height=150&width=100`}
           height="150"
           width="100"
           alt=""
         />
-      ) : (
-        <div className="placeholder"></div>
-      )}
-      <div className="person-info">
-        <div className="relationship">
-          {relationship_type}
+        <div className="person-info">
+          <div className="name">{name}</div>
+          <div className="dates">
+            {birth_year || '?'}-{death_year || '?'}
+          </div>
+          <div className="tags">
+            {categories.map((category, i) => (
+              <div
+                className="tag"
+                key={i}
+              >
+                {category.replace(/-/g, ' ')}
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="name">{name}</div>
-      </div>
-    </S.RelatedPerson>
+      </S.RelatedPerson>
+    </Link>
   )
 }
 
@@ -34,7 +45,7 @@ const RelatedPeople = ({ data }) => {
   if (data?.length) {
     return (
       <S.RelatedPeople>
-        <Title>Related</Title>
+        <Title>Related Saints</Title>
         {data?.map((relatedPerson, i) => (
           <RelatedItem
             key={i}
