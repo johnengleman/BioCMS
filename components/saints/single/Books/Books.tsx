@@ -59,7 +59,7 @@ type BooksProps = {
 }
 
 const Books = ({ books }: BooksProps) => {
-  if (books.length) {
+  if (books?.length) {
     return (
       <>
         <Title>Books</Title>

@@ -6,6 +6,10 @@ import * as S from './styles'
 //   image: String
 // }
 const ImageMain = ({ images }) => {
+  if (!images) {
+    return null
+  }
+
   const [image1, image2, image3, image4, image5] = images
 
   return (

@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBook,
-  faChurch,
   faQuoteRight,
 } from '@fortawesome/free-solid-svg-icons'
 
@@ -20,7 +19,7 @@ export default function SaintSummary(props: Saint) {
     summary,
     quotes,
     books,
-    id,
+    slug,
   } = props
 
   const getYear = (date: string): number => {
@@ -32,7 +31,7 @@ export default function SaintSummary(props: Saint) {
     <S.SaintSummary>
       <Link
         className="saint-summary"
-        href={`/saints/${id}`}
+        href={`/saints/${slug}`}
       >
         <div className="image">
           <Image
@@ -70,8 +69,7 @@ export default function SaintSummary(props: Saint) {
             />
             <S.Count>{books?.length}</S.Count>
           </div>
-          <div className="footer-button">
-          </div>
+          <div className="footer-button"></div>
           <div className="footer-button">
             <FontAwesomeIcon
               icon={faQuoteRight}

@@ -28,24 +28,6 @@ type Quote = {
   topics: string[]
 }
 
-type Church = {
-  name: string
-  website: string
-  image: {
-    id: string
-  }
-  city: string
-  country: string
-}
-
-type RelatedTo = {
-  saint: {
-    key: number
-    collection: string
-  }
-  relationship_type: string
-}
-
 type Prayer = {
   prayer_name: string
   prayer_text: string
@@ -55,8 +37,9 @@ type Saint = {
   id: string
   name: string
   summary: string
+  slug: string
   biography: string
- birth_year: number
+  birth_year: number
   death_year: number
   birth_location: string
   death_location: string
@@ -64,7 +47,6 @@ type Saint = {
   photos: Photo[]
   books: Book[]
   quotes: Quote[]
-  related_to: RelatedTo[]
   tomb: Tomb
   tomb_location: string
   tomb_church_name: string
@@ -72,17 +54,17 @@ type Saint = {
 }
 
 type Response = {
-  saints_by_id: Saint
+  saints: Saint
 }
 
 const query = gql`
-  query getSaint($id: ID!) {
-    saints_by_id(id: $id) {
+  query getSaint($slug: String!) {
+    saints(filter: { slug: { _eq: $slug } }) {
       id
       name
       summary
       biography
-     birth_year
+      birth_year
       death_year
       birth_location
       death_location
@@ -118,11 +100,11 @@ const query = gql`
   }
 `
 
-export const getSaint = async (id?: string) => {
-  const { saints_by_id } = await request<Response>(
+export const getSaint = async (slug?: String) => {
+  const { saints } = await request<Response>(
     'https://saints-cms.onrender.com/graphql',
     query,
-    { id },
+    { slug },
   )
-  return saints_by_id
+  return saints[0]
 }

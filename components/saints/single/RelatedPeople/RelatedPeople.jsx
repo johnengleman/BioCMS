@@ -8,11 +8,11 @@ const RelatedItem = ({
   birth_year,
   death_year,
   photos,
-  id,
+  slug,
   categories,
 }) => {
   return (
-    <Link href={id}>
+    <Link href={slug}>
       <S.RelatedPerson>
         <Image
           src={`https://saints-cms.onrender.com/assets/${photos[0].directus_files_id.id}?fit=cover&height=150&width=100`}

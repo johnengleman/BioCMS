@@ -16,16 +16,16 @@ import RelatedPeople from '../../components/saints/single/RelatedPeople/RelatedP
 import Tomb from '../../components/saints/single/Tomb/Tomb'
 import NameTag from '../../components/saints/single/NameTag/NameTag'
 
-export const runtime = 'experimental-edge'
+// export const runtime = 'experimental-edge'
 
 const SaintBio = (props) => {
   const router = useRouter()
-  const id = Array.isArray(router?.query?.id)
-    ? router?.query?.id[0]
-    : router?.query?.id
+  const slug = Array.isArray(router?.query?.slug)
+    ? router?.query?.slug[0]
+    : router?.query?.slug
 
-  const { data } = useQuery(['saint', id], () =>
-    getSaint(id),
+  const { data } = useQuery(['saints', slug], () =>
+    getSaint(slug),
   )
 
   const { relatedSaints } = props
@@ -40,7 +40,7 @@ const SaintBio = (props) => {
               birth={data.birth_year}
               death={data.death_year}
             />
-            <ImageMain images={data.photos} />
+            <ImageMain images={data?.photos} />
           </div>
           <div className="body">
             <div className="main">
@@ -71,17 +71,17 @@ const SaintBio = (props) => {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const id = Array.isArray(params?.id)
-    ? params?.id[0]
-    : params?.id
+  const slug = Array.isArray(params?.slug)
+    ? params?.slug[0]
+    : params?.slug
 
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery(['saint', id], () =>
-    getSaint(id),
+  await queryClient.prefetchQuery(['saints', slug], () =>
+    getSaint(slug),
   )
 
   const res = await fetch(
-    `${process.env.PUBLIC_API_URL}/api/getRelatedSaints/?id=${id}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/getRelatedSaints/?slug=${slug}`,
   )
   const relatedSaints = await res.json()
 
@@ -89,7 +89,7 @@ export const getStaticProps = async ({ params }) => {
     props: {
       dehydratedState: dehydrate(queryClient),
       relatedSaints: relatedSaints
-        .filter((saint) => saint.id !== id)
+        .filter((saint) => saint.slug !== slug)
         .sort(() => Math.random() - 0.5)
         .slice(0, 4),
     },
@@ -108,7 +108,7 @@ export const getStaticPaths = async () => {
         query: `
           query {
             saints {
-              id
+              slug
             }
           }
         `,
@@ -118,7 +118,7 @@ export const getStaticPaths = async () => {
 
   const resData = await res.json()
   const paths = resData.data.saints.map((saint) => ({
-    params: { id: saint.id },
+    params: { slug: saint.slug },
   }))
 
   return {

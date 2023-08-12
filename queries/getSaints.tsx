@@ -20,10 +20,11 @@ type Church = {
 
 type Saint = {
   id: string
+  slug: string
   name: string
   summary: string
   biography: string
- birth_year: number
+  birth_year: number
   death_year: number
   birth_location: string
   death_location: string
@@ -41,6 +42,7 @@ const query = gql`
   query {
     saints {
       id
+      slug
       name
       summary
       biography

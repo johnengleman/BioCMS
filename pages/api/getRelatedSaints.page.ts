@@ -1,14 +1,15 @@
 import type { NextRequest } from 'next/server'
 import { gql } from 'graphql-request'
 
-export const config = {
-  runtime: 'edge',
-}
+// export const config = {
+//   runtime: 'edge',
+// }
 
 const allSaints = gql`
   query {
     saints {
       id
+      slug
       name
       birth_year
       death_year
@@ -23,9 +24,10 @@ const allSaints = gql`
 `
 
 const getSaintCategories = gql`
-  query getSaintCategories($id: ID!) {
-    saints_by_id(id: $id) {
+  query getSaintCategories($slug: String!) {
+    saints(filter: { slug: { _eq: $slug } }) {
       id
+      slug
       name
       categories
     }
@@ -53,19 +55,18 @@ const getData = async (
   return await res.json()
 }
 
-export default async function handler(req: NextRequest) {
-  const { searchParams } = new URL(req.url)
-  const id = searchParams.get('id') ?? undefined
+export default async function handler(req, res) {
+  const slug = req.query.slug ?? undefined
 
   try {
     const allSaintsData = await getData(allSaints)
     const saintCategoryData = await getData(
       getSaintCategories,
-      { id: id },
+      { slug: slug },
     )
 
     const targetCategories = new Set(
-      saintCategoryData.data.saints_by_id.categories,
+      saintCategoryData.data.saints[0].categories,
     )
     const relatedSaints = allSaintsData.data.saints.filter(
       (saint) =>
@@ -74,18 +75,8 @@ export default async function handler(req: NextRequest) {
         ),
     )
 
-    return new Response(JSON.stringify(relatedSaints), {
-      status: 200,
-      headers: {
-        'content-type': 'application/json',
-      },
-    })
+    res.status(200).json(relatedSaints)
   } catch (error) {
-    return new Response('An error occurred', {
-      status: 500,
-      headers: {
-        'content-type': 'application/json',
-      },
-    })
+    res.status(500).json({ error: 'failed to load data' })
   }
 }
