@@ -81,7 +81,7 @@ export const getStaticProps = async ({ params }) => {
   )
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/getRelatedSaints/?id=${id}`,
+    `${process.env.PUBLIC_API_URL}/api/getRelatedSaints/?id=${id}`,
   )
   const relatedSaints = await res.json()
 

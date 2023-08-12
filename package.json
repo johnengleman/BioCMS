@@ -39,7 +39,8 @@
     "styled-components": "6.0.4",
     "stylis-plugin-rtl": "^2.1.1",
     "swiper": "^8.4.7",
-    "swr": "^2.2.1"
+    "swr": "^2.2.1",
+    "wrangler": "^3.5.0"
   },
   "devDependencies": {
     "@cloudflare/next-on-pages": "^1.5.0",
