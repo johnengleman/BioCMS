@@ -122,6 +122,10 @@ export const getStaticPaths = async () => {
     },
   )
 
+  if (res.headers['content-type'] === 'text/html') {
+    return null
+  }
+
   const resData = await res.json()
 
   const paths = resData.data.saints.map((saint) => ({
