@@ -14,20 +14,26 @@ import Books from '../../components/saints/single/Books/Books'
 import RelatedPeople from '../../components/saints/single/RelatedPeople/RelatedPeople'
 import Tomb from '../../components/saints/single/Tomb/Tomb'
 import NameTag from '../../components/saints/single/NameTag/NameTag'
+import ErrorPage from 'next/error'
 
 // export const runtime = 'experimental-edge'
 
 const SaintBio = (props) => {
   const router = useRouter()
+
   const slug = Array.isArray(router?.query?.slug)
     ? router?.query?.slug[0]
     : router?.query?.slug
 
-  const { data } = useQuery(['saints', slug], () =>
+  const { data = null } = useQuery(['saints', slug], () =>
     getSaint(slug),
   )
 
-  const { relatedSaints } = props
+  if (!router.isFallback && !data) {
+    return <ErrorPage statusCode={404} />
+  }
+
+  const { relatedSaints = null } = props
 
   if (data) {
     return (
@@ -35,9 +41,9 @@ const SaintBio = (props) => {
         <S.Saint>
           <div className="header">
             <NameTag
-              name={data.name}
-              birth={data.birth_year}
-              death={data.death_year}
+              name={data?.name}
+              birth={data?.birth_year}
+              death={data?.death_year}
             />
             <ImageMain images={data?.photos} />
           </div>

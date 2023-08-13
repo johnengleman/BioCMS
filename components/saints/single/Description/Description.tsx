@@ -26,12 +26,10 @@ const Description = ({
       deathLocation={deathLocation}
     />
     <div className="summary">{summary}</div>
-    {typeof window !== 'undefined' && (
-      <div
-        className="text"
-        dangerouslySetInnerHTML={{ __html: text }}
-      />
-    )}
+    <div
+      className="text"
+      dangerouslySetInnerHTML={{ __html: text }}
+    />
   </S.Bio>
 )
 
