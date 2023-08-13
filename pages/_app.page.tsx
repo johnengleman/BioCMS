@@ -26,7 +26,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Head>
           <meta
             name="google-site-verification"
-            content="WyfYuxG-VseN6Coy0vRff1FC3vaQgyDTyD15brOmylE"
+            content="MpAUyfDuciR572ZaxGUSNT-lQwkUN_k2QAKMiMnO9RY"
           />
           <meta
             name="viewport"
