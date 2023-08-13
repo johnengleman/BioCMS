@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-
 import {
   dehydrate,
   QueryClient,
@@ -93,6 +92,7 @@ export const getStaticProps = async ({ params }) => {
         .sort(() => Math.random() - 0.5)
         .slice(0, 4),
     },
+    revalidate: 60,
   }
 }
 
@@ -117,6 +117,7 @@ export const getStaticPaths = async () => {
   )
 
   const resData = await res.json()
+
   const paths = resData.data.saints.map((saint) => ({
     params: { slug: saint.slug },
   }))
