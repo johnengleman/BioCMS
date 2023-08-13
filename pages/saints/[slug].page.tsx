@@ -122,20 +122,20 @@ export const getStaticPaths = async () => {
     },
   )
 
-  if (res.headers['content-type'] === 'text/html') {
-    return null
+  if (res.ok) {
+    const resData = await res.json()
+
+    const paths = resData.data.saints.map((saint) => ({
+      params: { slug: saint.slug },
+    }))
+
+    return {
+      paths,
+      fallback: 'blocking',
+    }
   }
-
-  const resData = await res.json()
-
-  const paths = resData.data.saints.map((saint) => ({
-    params: { slug: saint.slug },
-  }))
-
-  return {
-    paths,
-    fallback: 'blocking',
-  }
+  const error = await res.text()
+  console.log(error)
 }
 
 export default SaintBio
