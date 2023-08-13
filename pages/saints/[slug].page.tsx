@@ -85,27 +85,30 @@ export const getStaticProps = async ({ params }) => {
     getSaint(slug),
   )
 
-  // const res = await fetch(
-  //   `${process.env.NEXT_PUBLIC_API_URL}/api/getRelatedSaints/?slug=${slug}`,
-  // )
+  const res = await fetch(
+    `${process.env.API_URL}/api/getRelatedSaints/?slug=${slug}`,
+  )
 
-  // if (!res.ok) {
-  //   throw new Error(`HTTP error! Status: ${res.status}`)
-  // }
+  if (!res.ok) {
+    throw new Error(`HTTP error! Status: ${res.status}`)
+  }
 
-  // let relatedSaints
+  let relatedSaints
 
-  // try {
-  //   relatedSaints = await res.json()
-  // } catch (error) {
-  //   console.error('Error parsing JSON:', res.text())
-  //   relatedSaints = null
-  // }
+  try {
+    relatedSaints = await res.json()
+  } catch (error) {
+    console.error('Error parsing JSON:', res.text())
+    relatedSaints = null
+  }
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      relatedSaints: [],
+      relatedSaints: relatedSaints
+        .filter((saint) => saint.slug !== slug)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 4),
     },
     revalidate: 60,
   }
