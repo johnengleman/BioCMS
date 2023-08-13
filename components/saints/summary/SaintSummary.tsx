@@ -36,7 +36,7 @@ export default function SaintSummary(props: Saint) {
         <div className="image">
           <Image
             alt="profile"
-            src={`https://saints-cms.onrender.com/assets/${photos[0]?.directus_files_id?.id}`}
+            src={`https://saints-cms.onrender.com/assets/${photos[0]?.directus_files_id?.id}?key=summary`}
             fill={true}
           />
         </div>

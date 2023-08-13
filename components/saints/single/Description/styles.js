@@ -28,9 +28,12 @@ export const Bio = styled.div`
   }
 
   .text {
-    font-size: 14px;
-
     p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #202122;
+      font-family: sans-serif;
       margin-bottom: 1rem;
     }
-  }`;
+  }
+`
