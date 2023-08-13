@@ -8,6 +8,7 @@ import { Quote } from '../../components/quotes/QuoteSummary/interface'
 import { getQuotes } from '../../queries/getQuotes'
 import QuoteSummary from '../../components/quotes/QuoteSummary/QuoteSummary'
 import Page from '../../components/global/Page/Page'
+import * as S from './styles'
 
 const Home = () => {
   const { data } = useQuery(['quotes'], getQuotes)

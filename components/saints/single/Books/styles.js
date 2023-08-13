@@ -8,12 +8,8 @@ export const Book = styled.a`
   color: inherit;
   text-decoration: none;
 
-  @media ${device.tablet} {
-    width: calc(50% - 20px);
-  }
-
   @media ${device.laptopL} {
-    width: calc(33% - 20px);
+    width: calc(50% - 20px);
   }
 
   img {
@@ -55,5 +51,9 @@ export const Books = styled.div`
   gap: 20px;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
+
+  @media ${device.tablet} {
+    margin-bottom: 50px;
+  }
 `

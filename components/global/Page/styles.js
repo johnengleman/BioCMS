@@ -7,16 +7,16 @@ export const Page = styled.div`
 
 export const Body = styled.main`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   margin: 0 auto;
   gap: 1rem;
-  width: 95%;
+  width: 90%;
   max-width: 1420px;
   margin-top: 25px;
 
   @media ${device.laptop} {
     margin-top: 20px;
-    width: 90%;
   }
 
   .my-masonry-grid {

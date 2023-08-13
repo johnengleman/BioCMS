@@ -2,11 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCross } from '@fortawesome/free-solid-svg-icons'
 import * as S from './styles'
 
-const NameTag = ({ name, birth, death }) => {
-  const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-  }
-
+const NameTag = ({ name, birth, death, tags }) => {
   return (
     <S.NameTag>
       <h1 className="name">{name}</h1>
@@ -17,20 +13,16 @@ const NameTag = ({ name, birth, death }) => {
           style={{ color: '#222222' }}
         />
         <p>
-          {
-            new Date(birth).toLocaleDateString(
-              'en-US',
-              options,
-            ) as string
-          }
-          -
-          {
-            new Date(death).toLocaleDateString(
-              'en-US',
-              options,
-            ) as string
-          }
+          {birth}-{death}
         </p>
+        {tags.map((tag, i) => (
+          <div
+            key={i}
+            className="tag"
+          >
+            {tag}
+          </div>
+        ))}
       </div>
     </S.NameTag>
   )

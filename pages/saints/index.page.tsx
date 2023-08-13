@@ -9,9 +9,33 @@ import { getSaints } from '../../queries/getSaints'
 import SaintSummary from '../../components/saints/summary/SaintSummary'
 import Page from '../../components/global/Page/Page'
 import Masonry from 'react-masonry-css'
+import useBreakpoints from '../../components/hooks/useBreakPoints'
 
 const Home = () => {
   const { data } = useQuery(['saints'], getSaints)
+  const {
+    isMobileS,
+    isMobileM,
+    isMobileL,
+    isTablet,
+    isLaptop,
+  } = useBreakpoints()
+
+  const getColumnsToRender = () => {
+    if (isMobileS || isMobileM) {
+      return 1
+    }
+    if (isMobileL) {
+      return 2
+    }
+    if (isTablet) {
+      return 3
+    }
+    if (isLaptop) {
+      return 4
+    }
+    return 5
+  }
 
   if (data) {
     return (
@@ -33,7 +57,7 @@ const Home = () => {
         </Head>
         <Page>
           <Masonry
-            breakpointCols={5}
+            breakpointCols={getColumnsToRender()}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column"
           >

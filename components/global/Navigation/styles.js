@@ -13,7 +13,7 @@ export const Navigation = styled.div`
   width: 100%;
   margin: 0 auto;
   height: 60px;
-  max-width: 1460px;
+  max-width: 1430px;
 
   @media ${device.laptop} {
     width: 90%;

@@ -34,6 +34,8 @@ const SaintBio = (props) => {
     return <ErrorPage statusCode={404} />
   }
 
+  console.log(data)
+
   const { relatedSaints = null } = props
 
   if (data) {
@@ -56,6 +58,7 @@ const SaintBio = (props) => {
                 name={data?.name}
                 birth={data?.birth_year}
                 death={data?.death_year}
+                tags={data?.categories}
               />
               <ImageMain images={data?.photos} />
             </div>

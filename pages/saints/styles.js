@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { device } from '../../styles/devices'
 
 export const Saint = styled.div`
   width: 100%;
@@ -19,26 +20,45 @@ export const Saint = styled.div`
 
   .body {
     display: flex;
-    gap: 50px;
+    flex-direction: column;
 
-    &.rightRailNoContent {
-      .main {
-        width: 100%;
-      }
+    @media ${device.tablet} {
+      flex-direction: row;
+      gap: 30px;
+    }
 
-      .rightRail {
-        display: none;
-      }
+    @media ${device.laptop} {
+      gap: 40px;
+    }
+
+    @media ${device.laptopL} {
+      gap: 50px;
     }
 
     .main {
-      width: 70%;
+      width: 100%;
+
+      @media ${device.tablet} {
+        width: 60%;
+      }
     }
 
     .rightRail {
-      width: 20%;
-      border-left: 1px solid #dee2e6;
-      padding-left: 30px;
+      width: 100%;
+
+      @media ${device.tablet} {
+        width: 40%;
+        padding-left: 30px;
+        border-left: 1px solid #dee2e6;
+      }
+
+      @media ${device.laptop} {
+        padding-left: 40px;
+      }
+
+      @media ${device.laptopL} {
+        padding-left: 50px;
+      }
     }
   }
 `

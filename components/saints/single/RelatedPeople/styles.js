@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const RelatedPerson = styled.div`
+  margin-bottom: 40px;
+
   a {
     text-decoration: none;
     display: flex;
@@ -53,6 +55,4 @@ export const RelatedPerson = styled.div`
 export const RelatedPeople = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 40px;
 `

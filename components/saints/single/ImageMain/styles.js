@@ -2,11 +2,23 @@ import styled from 'styled-components'
 import { device } from '../../../../styles/devices'
 
 export const ImageContainer = styled.div`
-  margin-bottom: 50px;
   width: 100%;
   display: flex;
   align-content: flex-end;
-  gap: 10px;
+  margin-bottom: 25px;
+
+  @media ${device.tablet} {
+    gap: 10px;
+    margin-bottom: 35px;
+  }
+
+  @media ${device.laptop} {
+    margin-bottom: 50px;
+  }
+
+  @media ${device.laptopL} {
+    margin-bottom: 65px;
+  }
 
   .image1,
   .image2,

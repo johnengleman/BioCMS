@@ -1,12 +1,29 @@
 import styled from 'styled-components'
 import { colors } from '../../../styles/colors'
+import { device } from '../../../styles/devices'
 
 export const QuoteSummary = styled.div`
-  width: calc(20% - 1rem);
+  width: 100%;
   background-color: ${colors.gold};
   padding: 30px 20px 40px 20px;
   border-radius: 5px;
   position: relative;
+
+  @media ${device.mobileL} {
+    width: calc(50% - 1rem);
+  }
+
+  @media ${device.tablet} {
+    width: calc(33% - 1rem);
+  }
+
+  @media ${device.laptop} {
+    width: calc(25% - 1rem);
+  }
+
+  @media ${device.laptopL} {
+    width: calc(20% - 1rem);
+  }
 
   .topic {
     background-color: ${colors.violet};
@@ -31,8 +48,8 @@ export const QuoteSummary = styled.div`
     font-size: 1rem;
 
     &::first-letter {
-      font-size: 2rem;
       color: ${colors.brown};
+      font-size: 1.5rem;
     }
   }
 
@@ -43,6 +60,17 @@ export const QuoteSummary = styled.div`
     color: ${colors.mint};
     position: absolute;
     bottom: 20px;
-    right: 30px;
+    left: 20px;
+    width: 90%;
+
+    @media ${device.tablet} {
+      right: 30px;
+      width: 75%;
+    }
+
+    @media ${device.laptopL} {
+      width: fit-content;
+      right: 0;
+    }
   }
 `
