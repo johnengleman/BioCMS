@@ -88,7 +88,19 @@ export const getStaticProps = async ({ params }) => {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/getRelatedSaints/?slug=${slug}`,
   )
-  const relatedSaints = await res.json()
+
+  if (!res.ok) {
+    throw new Error(`HTTP error! Status: ${res.status}`)
+  }
+
+  let relatedSaints
+
+  try {
+    relatedSaints = await res.json()
+  } catch (error) {
+    console.error('Error parsing JSON:', res.text())
+    relatedSaints = null
+  }
 
   return {
     props: {
