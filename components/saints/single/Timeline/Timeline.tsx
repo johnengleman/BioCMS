@@ -13,29 +13,11 @@ const Timeline = ({
   deathDate = '?',
   deathLocation = '?',
 }: Props) => {
-  const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }
-
   return (
     <S.Timeline>
       <div className="dates">
-        <div className="birth">
-          {
-            new Date(birthDate).toLocaleDateString(
-              'en-US',
-              options,
-            ) as string
-          }
-        </div>
-        <div className="death">
-          {new Date(deathDate).toLocaleDateString(
-            'en-US',
-            options,
-          )}
-        </div>
+        <div className="birth">{birthDate}</div>
+        <div className="death">{deathDate}</div>
       </div>
       <div className="bar"></div>
       <div className="locations">

@@ -34,8 +34,6 @@ const SaintBio = (props) => {
     return <ErrorPage statusCode={404} />
   }
 
-  console.log(data)
-
   const { relatedSaints = null } = props
 
   if (data) {

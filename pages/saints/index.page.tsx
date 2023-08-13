@@ -8,8 +8,11 @@ import { Saint } from '../../components/saints/summary/interfaces'
 import { getSaints } from '../../queries/getSaints'
 import SaintSummary from '../../components/saints/summary/SaintSummary'
 import Page from '../../components/global/Page/Page'
+import Filter from '../../components/global/Filter/Filter'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../components/hooks/useBreakPoints'
+
+export const runtime = 'experimental-edge'
 
 const Home = () => {
   const { data } = useQuery(['saints'], getSaints)
@@ -56,6 +59,7 @@ const Home = () => {
           />
         </Head>
         <Page>
+          <Filter />
           <Masonry
             breakpointCols={getColumnsToRender()}
             className="my-masonry-grid"
