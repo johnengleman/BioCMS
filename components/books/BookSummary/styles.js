@@ -11,6 +11,10 @@ export const BookSummary = styled.div`
     }
   }
 
+  a {
+    text-decoration: none;
+  }
+
   .image {
     width: 100%;
     position: relative;

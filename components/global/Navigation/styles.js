@@ -33,6 +33,7 @@ export const Button = styled.li`
   border-radius: 5px;
   border: 1px solid transparent;
   padding: 2px 15px;
+  list-style-type: none;
 
   @media ${device.tablet} {
     padding: 2px 20px;

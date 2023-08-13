@@ -13,6 +13,7 @@ export const SaintSummary = styled.div`
     background-color: ${colors.mint};
     box-shadow: -5px 5px 15px -5px rgba(0, 0, 0, 0.74);
     cursor: pointer;
+    text-decoration: none;
 
     &:hover {
       img {
@@ -48,6 +49,7 @@ export const SaintSummary = styled.div`
       z-index: 2;
       width: 90%;
       line-height: 1.1;
+      box-sizing: border-box;
     }
 
     .bioContainer {
@@ -56,7 +58,6 @@ export const SaintSummary = styled.div`
       width: 90%;
       padding: 1.5rem 1rem 0.5rem 1rem;
       border-radius: 10px;
-      width: 100%;
 
       .summary {
         color: #1a4760;

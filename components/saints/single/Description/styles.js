@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { device } from '../../../../styles/devices'
 
 export const Bio = styled.div`
-  width: 100%;
   color: #0e0e0e;
   padding: 20px;
   margin-bottom: 25px;

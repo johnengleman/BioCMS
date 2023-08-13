@@ -12,8 +12,8 @@ const RelatedItem = ({
   categories,
 }) => {
   return (
-    <Link href={slug}>
-      <S.RelatedPerson>
+    <S.RelatedPerson>
+      <Link href={slug}>
         <Image
           src={`https://saints-cms.onrender.com/assets/${photos[0].directus_files_id.id}?fit=cover&height=150&width=100`}
           height="150"
@@ -36,8 +36,8 @@ const RelatedItem = ({
             ))}
           </div>
         </div>
-      </S.RelatedPerson>
-    </Link>
+      </Link>
+    </S.RelatedPerson>
   )
 }
 

@@ -6,6 +6,7 @@ export const Book = styled.a`
   gap: 20px;
   width: 100%;
   color: inherit;
+  text-decoration: none;
 
   @media ${device.tablet} {
     width: calc(50% - 20px);

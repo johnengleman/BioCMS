@@ -1,7 +1,10 @@
 import styled from 'styled-components'
 
 export const RelatedPerson = styled.div`
-  display: flex;
+  a {
+    text-decoration: none;
+    display: flex;
+  }
 
   img,
   .placeholder {

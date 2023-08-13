@@ -19,6 +19,7 @@ const ImageMain = ({ images }) => {
           src={`https://saints-cms.onrender.com/assets/${image1?.directus_files_id.id}?key=profile`}
           fill={true}
           alt=""
+          priority={true}
         />
         {/* <PhotosModal images={images} /> */}
       </div>

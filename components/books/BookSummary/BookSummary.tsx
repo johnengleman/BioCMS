@@ -15,8 +15,8 @@ export default function BookSummary(props) {
   } = props
 
   return (
-    <Link href={link || ''}>
-      <S.BookSummary>
+    <S.BookSummary>
+      <Link href={link || ''}>
         <div className="image">
           <Image
             alt="profile"
@@ -37,7 +37,7 @@ export default function BookSummary(props) {
           />
           <p>Buy on Amazon</p>
         </div>
-      </S.BookSummary>
-    </Link>
+      </Link>
+    </S.BookSummary>
   )
 }
