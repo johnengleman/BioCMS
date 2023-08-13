@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import {
   dehydrate,
   QueryClient,
@@ -13,14 +14,27 @@ const Home = () => {
 
   if (data) {
     return (
-      <Page>
-        {data?.map((quote: Quote, i: number) => (
-          <QuoteSummary
-            key={i}
-            {...quote}
+      <>
+        <Head>
+          <title key="title">
+            Wisdom of the Ages: Quotes from Eastern Orthodox
+            Saints
+          </title>
+          <meta
+            key="description"
+            name="description"
+            content={`Dive into a curated collection of profound quotes from revered Eastern Orthodox saints. Discover timeless wisdom, spiritual teachings, and reflections that illuminate the essence of faith and devotion.`}
           />
-        ))}
-      </Page>
+        </Head>
+        <Page>
+          {data?.map((quote: Quote, i: number) => (
+            <QuoteSummary
+              key={i}
+              {...quote}
+            />
+          ))}
+        </Page>
+      </>
     )
   }
 }

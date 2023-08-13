@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import {
   dehydrate,
   QueryClient,
@@ -14,16 +15,29 @@ const Home = () => {
 
   if (data) {
     return (
-      <Page>
-        <S.Books>
-          {data?.map((book: Book, i: number) => (
-            <BookSummary
-              key={i}
-              {...book}
-            />
-          ))}
-        </S.Books>
-      </Page>
+      <>
+        <Head>
+          <title key="title">
+            Wisdom Written: Books by Orthodox Saints and
+            Tales about Their Lives
+          </title>
+          <meta
+            key="description"
+            name="description"
+            content={`Discover a diverse collection of books, including writings by revered Eastern Orthodox saints sharing their insights and teachings, as well as detailed accounts about their spiritual journeys and legacies. Embark on a literary pilgrimage through faith, history, and enlightenment.`}
+          />
+        </Head>
+        <Page>
+          <S.Books>
+            {data?.map((book: Book, i: number) => (
+              <BookSummary
+                key={i}
+                {...book}
+              />
+            ))}
+          </S.Books>
+        </Page>
+      </>
     )
   }
 }

@@ -3,6 +3,7 @@ import {
   QueryClient,
   useQuery,
 } from '@tanstack/react-query'
+import Head from 'next/head'
 import { Saint } from '../../components/saints/summary/interfaces'
 import { getSaints } from '../../queries/getSaints'
 import SaintSummary from '../../components/saints/summary/SaintSummary'
@@ -14,20 +15,38 @@ const Home = () => {
 
   if (data) {
     return (
-      <Page>
-        <Masonry
-          breakpointCols={5}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
-          {data?.map((saint: Saint, i: number) => (
-            <SaintSummary
-              {...saint}
-              key={i}
-            />
-          ))}
-        </Masonry>
-      </Page>
+      <>
+        <Head>
+          <title key="title">
+            Eastern Orthodox Saints: Spiritual Journeys,
+            Books, and Quotes
+          </title>
+          <meta
+            key="description"
+            name="description"
+            content="Discover the rich histories and inspiring stories of Orthodox saints. Dive deep into their lives, their contributions to the faith, and their enduring legacies. From their teachings to miracles, our comprehensive profiles provide a window into the spiritual journeys of these holy figures"
+          />
+          <meta
+            name="keywords"
+            content="Eastern Orthodox, saints, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious quotes, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
+          />
+        </Head>
+        <Page>
+          <Masonry
+            breakpointCols={5}
+            className="my-masonry-grid"
+            columnClassName="my-masonry-grid_column"
+          >
+            {data?.map((saint, i: number) => (
+              <SaintSummary
+                {...saint}
+                key={i}
+                priority={i < 8 ? true : false}
+              />
+            ))}
+          </Masonry>
+        </Page>
+      </>
     )
   }
 }

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint && npx tsc --noEmit"
+    "lint": "next lint && npx tsc --noEmit",
+    "postbuild": "next-sitemap"
   },
   "engines": {
     "node": "18.x"
@@ -32,6 +33,7 @@
     "graphql-request": "^6.1.0",
     "isomorphic-dompurify": "^1.8.0",
     "next": "^13.4.12",
+    "next-sitemap": "^4.2.2",
     "nextjs-progressbar": "0.0.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

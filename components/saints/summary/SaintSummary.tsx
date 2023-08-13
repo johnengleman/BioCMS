@@ -9,7 +9,7 @@ import {
 
 import { Saint } from './interfaces'
 
-export default function SaintSummary(props: Saint) {
+export default function SaintSummary(props) {
   const {
     name,
     birth_year,
@@ -20,6 +20,7 @@ export default function SaintSummary(props: Saint) {
     quotes,
     books,
     slug,
+    priority,
   } = props
 
   const getYear = (date: string): number => {
@@ -38,6 +39,7 @@ export default function SaintSummary(props: Saint) {
             alt="profile"
             src={`https://saints-cms.onrender.com/assets/${photos[0]?.directus_files_id?.id}?key=summary`}
             fill={true}
+            priority={priority}
           />
         </div>
         <div className="name">{name}</div>

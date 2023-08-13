@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: http://orthodoxsaints.wiki
+
+# Sitemaps
+Sitemap: http://orthodoxsaints.wiki/sitemap.xml

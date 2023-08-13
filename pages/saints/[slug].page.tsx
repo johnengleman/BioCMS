@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import {
   dehydrate,
@@ -37,40 +38,52 @@ const SaintBio = (props) => {
 
   if (data) {
     return (
-      <Page>
-        <S.Saint>
-          <div className="header">
-            <NameTag
-              name={data?.name}
-              birth={data?.birth_year}
-              death={data?.death_year}
-            />
-            <ImageMain images={data?.photos} />
-          </div>
-          <div className="body">
-            <div className="main">
-              <Bio
-                text={data?.biography}
-                birthDate={data?.birth_year}
-                birthLocation={data?.birth_location}
-                deathDate={data?.death_year}
-                deathLocation={data?.death_location}
-                summary={data?.summary}
+      <>
+        <Head>
+          <title key="title">
+            {data.name}: Life, Legacy, and Teachings
+          </title>
+          <meta
+            key="description"
+            name="description"
+            content={`Explore the detailed biography of ${data.name}, capturing their profound spiritual journey. Dive into inspiring quotes, view captivating images, discover related books, and connect with other related saints of the Eastern Orthodox tradition.`}
+          />
+        </Head>
+        <Page>
+          <S.Saint>
+            <div className="header">
+              <NameTag
+                name={data?.name}
+                birth={data?.birth_year}
+                death={data?.death_year}
               />
-              {/* <Quotes quotes={data?.quotes} /> */}
-              <Books books={data?.books} />
+              <ImageMain images={data?.photos} />
             </div>
-            <div className="rightRail">
-              <RelatedPeople data={relatedSaints} />
-              <Tomb
-                imageId={data?.tomb?.id}
-                location={data?.tomb_location}
-                church={data?.tomb_church_name}
-              />
+            <div className="body">
+              <div className="main">
+                <Bio
+                  text={data?.biography}
+                  birthDate={data?.birth_year}
+                  birthLocation={data?.birth_location}
+                  deathDate={data?.death_year}
+                  deathLocation={data?.death_location}
+                  summary={data?.summary}
+                />
+                {/* <Quotes quotes={data?.quotes} /> */}
+                <Books books={data?.books} />
+              </div>
+              <div className="rightRail">
+                <RelatedPeople data={relatedSaints} />
+                <Tomb
+                  imageId={data?.tomb?.id}
+                  location={data?.tomb_location}
+                  church={data?.tomb_church_name}
+                />
+              </div>
             </div>
-          </div>
-        </S.Saint>
-      </Page>
+          </S.Saint>
+        </Page>
+      </>
     )
   }
 }

@@ -20,7 +20,7 @@ export default function BookSummary(props) {
         <div className="image">
           <Image
             alt="profile"
-            src={`https://saints-cms.onrender.com/assets/${book_cover?.id}`}
+            src={`https://saints-cms.onrender.com/assets/${book_cover?.id}?key=book`}
             fill={true}
           />
         </div>
