@@ -9,21 +9,20 @@ export const Container = styled.div`
 export const Navigation = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
+  justify-content: flex-start;
+  width: 90%;
   margin: 0 auto;
   height: 60px;
   max-width: 1430px;
-
-  @media ${device.laptop} {
-    width: 90%;
-    justify-content: flex-start;
-  }
 
   ul {
     display: flex;
     gap: 5px;
     padding: 0;
+
+    li:first-child {
+      margin-left: -10px;
+    }
   }
 `
 
@@ -42,7 +41,8 @@ export const Button = styled.li`
   a {
     transition: all cubic-bezier(0.215, 0.61, 0.355, 1);
     text-decoration: none;
-    color: #464646;
+    color: #000;
+    font-weight: 600;
     opacity: 0.7;
   }
   &:hover {

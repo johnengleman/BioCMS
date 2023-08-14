@@ -1,10 +1,6 @@
 import type { NextRequest } from 'next/server'
 import { gql } from 'graphql-request'
 
-// export const config = {
-//   runtime: 'edge',
-// }
-
 const allSaints = gql`
   query {
     saints {

@@ -17,8 +17,6 @@ import Tomb from '../../components/saints/single/Tomb/Tomb'
 import NameTag from '../../components/saints/single/NameTag/NameTag'
 import ErrorPage from 'next/error'
 
-// export const runtime = 'experimental-edge'
-
 const SaintBio = (props) => {
   const router = useRouter()
 

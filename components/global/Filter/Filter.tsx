@@ -1,8 +1,9 @@
 import * as S from './styles'
-import { Carousel } from '@trendyol-js/react-carousel';
+import Carousel from '../Carousel/Caorusel'
 
-const Filter = () => {
+const Filter = ({ setFilter, selectedFilter }) => {
   const filters = [
+    'All',
     'Martyrs',
     'Missionaries',
     'Fools-for-Christ',
@@ -22,10 +23,20 @@ const Filter = () => {
 
   return (
     <S.Filter>
-      <Carousel show={3} slide={1}>
-          {
-            filters.map((filter, i) => <div key={i}>{filter}</div>)
-          }
+      <Carousel
+        options={{ slidesToScroll: 3, align: 'center' }}
+      >
+        {filters.map((filter, i) => (
+          <div
+            key={i}
+            className={`embla__slide ${
+              filter === selectedFilter ? 'selected' : ''
+            }`}
+            onClick={() => setFilter(filter)}
+          >
+            {filter.replace(/-/g, ' ')}
+          </div>
+        ))}
       </Carousel>
     </S.Filter>
   )

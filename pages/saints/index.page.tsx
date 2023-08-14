@@ -3,6 +3,7 @@ import {
   QueryClient,
   useQuery,
 } from '@tanstack/react-query'
+import { useState } from 'react'
 import Head from 'next/head'
 import { Saint } from '../../components/saints/summary/interfaces'
 import { getSaints } from '../../queries/getSaints'
@@ -12,10 +13,9 @@ import Filter from '../../components/global/Filter/Filter'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../components/hooks/useBreakPoints'
 
-export const runtime = 'experimental-edge'
-
 const Home = () => {
   const { data } = useQuery(['saints'], getSaints)
+  const [filter, setFilter] = useState('')
   const {
     isMobileS,
     isMobileM,
@@ -40,6 +40,19 @@ const Home = () => {
     return 5
   }
 
+  const filterSaints = (saint) => {
+    if (filter === '' || filter === 'All') {
+      return true
+    } else if (
+      saint.categories.some(
+        (category) => category === filter,
+      )
+    ) {
+      return true
+    }
+    return false
+  }
+
   if (data) {
     return (
       <>
@@ -59,19 +72,24 @@ const Home = () => {
           />
         </Head>
         <Page>
-          <Filter />
+          <Filter
+            setFilter={setFilter}
+            selectedFilter={filter}
+          />
           <Masonry
             breakpointCols={getColumnsToRender()}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column"
           >
-            {data?.map((saint, i: number) => (
-              <SaintSummary
-                {...saint}
-                key={i}
-                priority={i < 8 ? true : false}
-              />
-            ))}
+            {data
+              ?.filter(filterSaints)
+              ?.map((saint, i: number) => (
+                <SaintSummary
+                  {...saint}
+                  key={i}
+                  priority={i < 8 ? true : false}
+                />
+              ))}
           </Masonry>
         </Page>
       </>
