@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import Title from '../../../global/Title/Title'
+import ImageGlobal from '../../../global/ImageGlobal/ImageGlobal'
 import * as S from './styles'
 
 const RelatedItem = ({
@@ -14,10 +15,11 @@ const RelatedItem = ({
   return (
     <S.RelatedPerson>
       <Link href={slug}>
-        <Image
+        <ImageGlobal
           src={`https://saints-cms.onrender.com/assets/${photos[0].directus_files_id.id}?fit=cover&height=150&width=100`}
           height="150"
           width="100"
+          fill={false}
           alt=""
         />
         <div className="person-info">

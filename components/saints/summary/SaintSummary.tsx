@@ -2,6 +2,8 @@ import * as S from './styles'
 import Link from 'next/link'
 import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
+import { faCross } from '@fortawesome/free-solid-svg-icons'
 import {
   faBook,
   faQuoteRight,
@@ -34,8 +36,16 @@ export default function SaintSummary(props) {
         className="saint-summary"
         href={`/saints/${slug}`}
       >
+        <div className="death">
+          {death_year}
+          <FontAwesomeIcon
+            icon={faCross}
+            fontSize="10px"
+            style={{ color: '#fff' }}
+          />
+        </div>
         <div className="image">
-          <Image
+          <ImageGlobal
             alt="profile"
             src={`https://saints-cms.onrender.com/assets/${photos[0]?.directus_files_id?.id}?key=summary`}
             fill={true}

@@ -15,7 +15,7 @@ import useBreakpoints from '../../components/hooks/useBreakPoints'
 
 const Home = () => {
   const { data } = useQuery(['saints'], getSaints)
-  const [filter, setFilter] = useState('')
+  const [filter, setFilter] = useState('All')
   const {
     isMobileS,
     isMobileM,
@@ -41,7 +41,7 @@ const Home = () => {
   }
 
   const filterSaints = (saint) => {
-    if (filter === '' || filter === 'All') {
+    if (filter === 'All') {
       return true
     } else if (
       saint.categories.some(
@@ -83,6 +83,7 @@ const Home = () => {
           >
             {data
               ?.filter(filterSaints)
+              ?.sort((a, b) => a.death_year - b.death_year)
               ?.map((saint, i: number) => (
                 <SaintSummary
                   {...saint}

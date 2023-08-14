@@ -1,15 +1,14 @@
 import styled from 'styled-components'
 
 export const RelatedPerson = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 
   a {
     text-decoration: none;
     display: flex;
   }
 
-  img,
-  .placeholder {
+  .image {
     margin-right: 10px;
     border-radius: 5px;
   }

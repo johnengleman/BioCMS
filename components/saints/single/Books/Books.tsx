@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Title from '../../../global/Title/Title'
+import ImageGlobal from '../../../global/ImageGlobal/ImageGlobal'
 import * as S from './styles'
 
 type BookProps = {
@@ -24,10 +25,11 @@ const Book = ({
   return (
     <S.Book href={link}>
       {book_cover?.id ? (
-        <Image
+        <ImageGlobal
           src={`https://saints-cms.onrender.com/assets/${book_cover?.id}?fit=contain&height=200&width=150`}
-          height="200"
-          width="150"
+          height={200}
+          width={150}
+          fill={false}
           alt=""
         />
       ) : (

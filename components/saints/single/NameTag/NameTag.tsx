@@ -20,7 +20,7 @@ const NameTag = ({ name, birth, death, tags }) => {
             key={i}
             className="tag"
           >
-            {tag}
+            {tag.replace(/-/g, ' ')}
           </div>
         ))}
       </div>

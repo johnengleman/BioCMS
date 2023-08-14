@@ -5,12 +5,6 @@ export const BookSummary = styled.div`
   width: 250px;
   cursor: pointer;
 
-  &:hover {
-    img {
-      transform: scale(1.02);
-    }
-  }
-
   a {
     text-decoration: none;
   }

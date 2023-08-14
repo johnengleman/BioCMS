@@ -17,7 +17,28 @@ export const SaintSummary = styled.div`
 
     &:hover {
       img {
-        transform: scale(1.02);
+        transform: scale(1.01);
+      }
+    }
+
+    .death {
+      position: absolute;
+      top: -10px;
+      right: -8px;
+      padding: 8px 12px;
+      z-index: 5;
+      background: ${colors.violet};
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 15px;
+      font-size: 12px;
+      box-shadow: -2px 4px 10px 0px #121023;
+      gap: 3px;
+
+      svg {
+        margin-bottom: 2px;
       }
     }
 
@@ -28,7 +49,7 @@ export const SaintSummary = styled.div`
       z-index: 2;
 
       img {
-        transition: transform 0.5s ease-in-out;
+        transition: transform 0.5s ease;
         object-fit: cover;
         object-position: 50% 10%;
         border-radius: 20px;

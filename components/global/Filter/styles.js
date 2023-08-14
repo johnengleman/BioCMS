@@ -6,13 +6,8 @@ export const Filter = styled.div`
   margin-top: 10px;
   margin-bottom: 20px;
 
-  @media ${device.tablet} {
-    margin-top: 20px;
-    margin-bottom: 30px;
-  }
-
   .embla__container {
-    gap: 20px;
+    padding: 20px 0;
   }
 
   .embla__slide {
@@ -26,6 +21,14 @@ export const Filter = styled.div`
     padding: 7px 20px;
     border-radius: 10px;
     border: 2px solid #dddddd;
+    margin-right: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out,
+      border-color 0.1s ease-in-out;
+
+    &.visible {
+      opacity: 1;
+    }
 
     &:hover,
     &.selected {
@@ -34,7 +37,8 @@ export const Filter = styled.div`
   }
 
   .embla__viewport {
-    padding: 0 10px;
+    padding-right: 0 10px;
+    transition: margin 0.1s ease-in-out;
 
     @media ${device.tablet} {
       padding: 0 25px;
@@ -76,6 +80,29 @@ export const Filter = styled.div`
       @media ${device.tablet} {
         width: 40px;
       }
+    }
+  }
+
+  .placeholder {
+    width: 100%;
+    visibility: hidden;
+  }
+
+  .sticky {
+    will-change: scroll-position;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
+    width: 100%; /* Ensure it spans the full width when sticky */
+    z-index: 1000; /* This is to ensure it stays above other content. Adjust as necessary. */
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid lightgray;
+
+    .embla {
+      width: 90%;
+      margin: 0 auto;
+      max-width: 1420px;
     }
   }
 `

@@ -3,6 +3,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 import Link from 'next/link'
 import * as S from './styles'
+import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 
 export default function BookSummary(props) {
   const {
@@ -18,7 +19,7 @@ export default function BookSummary(props) {
     <S.BookSummary>
       <Link href={link || ''}>
         <div className="image">
-          <Image
+          <ImageGlobal
             alt="profile"
             src={`https://saints-cms.onrender.com/assets/${book_cover?.id}?key=book`}
             fill={true}

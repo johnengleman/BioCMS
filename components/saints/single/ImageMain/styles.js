@@ -5,19 +5,22 @@ export const ImageContainer = styled.div`
   width: 100%;
   display: flex;
   align-content: flex-end;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 20px;
 
   @media ${device.tablet} {
     gap: 10px;
-    margin-bottom: 35px;
+    margin-bottom: 25px;
   }
 
   @media ${device.laptop} {
-    margin-bottom: 50px;
+    margin-bottom: 25px;
   }
 
   @media ${device.laptopL} {
-    margin-bottom: 65px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
   }
 
   .image1,
