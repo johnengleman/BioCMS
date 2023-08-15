@@ -9,7 +9,7 @@ export const Container = styled.div`
 export const Navigation = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   width: 90%;
   margin: 0 auto;
   height: 60px;

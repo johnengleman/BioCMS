@@ -53,6 +53,8 @@ const Home = () => {
     return false
   }
 
+  //console.log(data)
+
   if (data) {
     return (
       <>
@@ -71,7 +73,7 @@ const Home = () => {
             content="Eastern Orthodox, saints, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious quotes, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
           />
         </Head>
-        <Page>
+        <Page saints={data}>
           <Filter
             setFilter={setFilter}
             selectedFilter={filter}
