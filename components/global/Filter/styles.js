@@ -39,9 +39,12 @@ export const Filter = styled.div`
   .embla__viewport {
     padding-right: 0 10px;
     transition: margin 0.1s ease-in-out;
+    justify-content: flex-start;
+    display: flex;
 
     @media ${device.tablet} {
       padding: 0 25px;
+      justify-content: center;
     }
 
     &::after {
@@ -57,8 +60,10 @@ export const Filter = styled.div`
         rgba(255, 255, 255, 1) 0%,
         rgba(0, 0, 0, 0) 100%
       );
+      display: none;
 
       @media ${device.tablet} {
+        display: block;
         width: 40px;
       }
     }
@@ -76,8 +81,10 @@ export const Filter = styled.div`
         rgba(255, 255, 255, 1) 0%,
         rgba(0, 0, 0, 0) 100%
       );
+      display: none;
 
       @media ${device.tablet} {
+        display: block;
         width: 40px;
       }
     }

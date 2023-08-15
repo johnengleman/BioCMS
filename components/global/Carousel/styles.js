@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { device } from '../../../styles/devices'
 
 export const carousel = styled.div`
   .embla {
@@ -31,6 +32,11 @@ export const carousel = styled.div`
     transition: transform 0.2s ease-in-out,
       box-shadow 0.2s ease-in-out;
     z-index: 2; /* Position the button above the pseudo-element */
+    display: none;
+
+    @media ${device.tablet} {
+      display: block;
+    }
 
     &.disabled {
       opacity: 0;
