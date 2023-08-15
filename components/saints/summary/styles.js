@@ -15,12 +15,6 @@ export const SaintSummary = styled.div`
     cursor: pointer;
     text-decoration: none;
 
-    &:hover {
-      img {
-        transform: scale(1.01);
-      }
-    }
-
     .death {
       position: absolute;
       top: -10px;

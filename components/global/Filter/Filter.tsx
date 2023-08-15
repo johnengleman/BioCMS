@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, useMemo } from 'react'
 import * as S from './styles'
 import Carousel from '../Carousel/Caorusel'
+import { flushSync } from 'react-dom'
 
 const Filter = ({ setFilter, selectedFilter }) => {
   const [isSticky, setIsSticky] = useState(false)
@@ -8,6 +9,11 @@ const Filter = ({ setFilter, selectedFilter }) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const originalOffsetTop = useRef<number>(0)
   const pageLoadedRef = useRef<boolean>(false)
+  const canUseTransition = useRef<boolean>(false);
+
+  if(typeof window !== 'undefined') {
+    canUseTransition.current = typeof (document as any)?.startViewTransition === 'function'
+  }
 
   const filters = useMemo(
     () => [
@@ -124,11 +130,23 @@ const Filter = ({ setFilter, selectedFilter }) => {
                 }`}
                 onClick={() => {
                   pageLoadedRef.current = true
-                  setFilter(
-                    selectedFilter !== filter
-                      ? filter
-                      : 'All',
-                  )
+                  if (canUseTransition.current) {
+                    (document as any)?.startViewTransition(() => {
+                      flushSync(() => {
+                        setFilter(
+                          selectedFilter !== filter
+                            ? filter
+                            : 'All',
+                        )
+                      })
+                    })
+                  } else {
+                    setFilter(
+                      selectedFilter !== filter
+                        ? filter
+                        : 'All',
+                    )
+                  }
                 }}
               >
                 {filter.replace(/-/g, ' ')}

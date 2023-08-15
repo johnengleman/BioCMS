@@ -88,6 +88,7 @@ const Home = () => {
                 <SaintSummary
                   {...saint}
                   key={i}
+                  transitionName={`saint-${i}`}
                   priority={i < 8 ? true : false}
                 />
               ))}

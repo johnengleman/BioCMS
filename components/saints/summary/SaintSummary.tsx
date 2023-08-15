@@ -23,6 +23,7 @@ export default function SaintSummary(props) {
     books,
     slug,
     priority,
+    transitionName,
   } = props
 
   const getYear = (date: string): number => {
@@ -31,7 +32,9 @@ export default function SaintSummary(props) {
   }
 
   return (
-    <S.SaintSummary>
+    <S.SaintSummary
+      style={{ viewTransitionName: transitionName }}
+    >
       <Link
         className="saint-summary"
         href={`/saints/${slug}`}
