@@ -36,6 +36,10 @@ const Search = ({ saints }) => {
     }
   }, [searchInput, saints])
 
+  if (!saints) {
+    return null
+  }
+
   return (
     <S.Search>
       <div className="input-wrapper">
