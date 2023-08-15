@@ -16,6 +16,7 @@ import RelatedPeople from '../../components/saints/single/RelatedPeople/RelatedP
 import Tomb from '../../components/saints/single/Tomb/Tomb'
 import NameTag from '../../components/saints/single/NameTag/NameTag'
 import ErrorPage from 'next/error'
+import { getSaints } from '../../queries/getSaints'
 
 const SaintBio = (props) => {
   const router = useRouter()
@@ -26,6 +27,10 @@ const SaintBio = (props) => {
 
   const { data = null } = useQuery(['saints', slug], () =>
     getSaint(slug),
+  )
+  const { data: saintsData } = useQuery(
+    ['saints'],
+    getSaints,
   )
 
   if (!router.isFallback && !data) {
@@ -47,7 +52,7 @@ const SaintBio = (props) => {
             content={`Explore the detailed biography of ${data.name}, capturing their profound spiritual journey. Dive into inspiring quotes, view captivating images, discover related books, and connect with other related saints of the Eastern Orthodox tradition.`}
           />
         </Head>
-        <Page>
+        <Page saints={saintsData}>
           <S.Saint>
             <div className="header">
               <NameTag
@@ -96,6 +101,8 @@ export const getStaticProps = async ({ params }) => {
   await queryClient.prefetchQuery(['saints', slug], () =>
     getSaint(slug),
   )
+
+  await queryClient.prefetchQuery(['saints'], getSaints)
 
   const res = await fetch(
     `${process.env.API_URL}/api/getRelatedSaints/?slug=${slug}`,

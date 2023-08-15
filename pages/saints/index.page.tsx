@@ -53,8 +53,6 @@ const Home = () => {
     return false
   }
 
-  //console.log(data)
-
   if (data) {
     return (
       <>
