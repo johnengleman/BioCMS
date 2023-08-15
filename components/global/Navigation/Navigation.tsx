@@ -10,9 +10,9 @@ const Navigation = () => {
             <Link href="/saints">Saints</Link>
           </S.Button>
 
-          <S.Button>
+          {/* <S.Button>
             <Link href="/books">Books</Link>
-          </S.Button>
+          </S.Button> */}
 
           <S.Button>
             <Link href="/quotes">Quotes</Link>

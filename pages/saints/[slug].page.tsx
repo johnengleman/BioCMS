@@ -69,7 +69,7 @@ const SaintBio = (props) => {
                   summary={data?.summary}
                 />
                 {/* <Quotes quotes={data?.quotes} /> */}
-                <Books books={data?.books} />
+                {/* <Books books={data?.books} /> */}
               </div>
               <div className="rightRail">
                 <RelatedPeople data={relatedSaints} />
