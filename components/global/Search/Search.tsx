@@ -1,15 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import ImageGlobal from '../ImageGlobal/ImageGlobal'
 import * as S from './styles'
 import Fuse from 'fuse.js'
 import { Saint } from '../../saints/summary/interfaces'
+import { useOnClickOutside } from 'usehooks-ts'
 
 const Search = ({ saints }) => {
+  const ref = useRef(null)
   const [searchInput, setSearchInput] = useState('')
   const [searchOptions, setSearchOptions] = useState<
     Saint[]
   >([])
+
+  const handleClickOutside = () => {
+    setSearchInput('')
+  }
 
   useEffect(() => {
     const strippedSearch = searchInput
@@ -36,12 +42,14 @@ const Search = ({ saints }) => {
     }
   }, [searchInput, saints])
 
+  useOnClickOutside(ref, handleClickOutside)
+
   if (!saints) {
     return null
   }
 
   return (
-    <S.Search>
+    <S.Search ref={ref}>
       <div className="input-wrapper">
         <i className="fa-solid fa-magnifying-glass search-icon"></i>
         <input
@@ -58,6 +66,7 @@ const Search = ({ saints }) => {
             key={i}
             className="result"
             href={`/saints/${option.slug}`}
+            onClick={() => setSearchInput('')}
           >
             <div className="profile">
               <ImageGlobal
@@ -67,7 +76,12 @@ const Search = ({ saints }) => {
                 height={35}
               />
             </div>
-            <div className="name">{option.name}</div>
+            <div className="info">
+              <div className="name">{option.name}</div>
+              <div className="dates">
+                {option.birth_year} - {option.death_year}
+              </div>
+            </div>
           </Link>
         ))}
       </div>

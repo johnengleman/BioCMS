@@ -37,13 +37,17 @@ export const Search = styled.div`
     display: block;
     position: absolute;
     background-color: white;
-    min-width: 270px;
+    min-width: 290px;
     border: 1px solid #ddd;
     z-index: 1000;
     right: 0;
-    top: 50px;
+    top: 45px;
     width: fit-content;
     border-radius: 15px;
+
+    &:empty {
+      display: none;
+    }
   }
 
   .dropdown-content .result {
@@ -59,6 +63,20 @@ export const Search = styled.div`
     width: 100%;
     border-bottom: 1px solid #dee2e6;
 
+    &:first-child {
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+
+    &:hover {
+      background-color: #dee2e6;
+    }
+
     &:last-child {
       border-bottom: none;
     }
@@ -73,9 +91,21 @@ export const Search = styled.div`
     overflow: hidden;
   }
 
+  .info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3px;
+  }
+
   .name {
     font-weight: 600;
     color: #333a3f;
+    line-height: 1.2;
+  }
+
+  .dates {
+    font-size: 12px;
+    color: #7f7f7f;
   }
 
   /* Show the dropdown menu on hover */
