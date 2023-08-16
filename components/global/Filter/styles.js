@@ -44,7 +44,6 @@ export const Filter = styled.div`
 
     @media ${device.tablet} {
       padding: 0 25px;
-      justify-content: center;
     }
 
     &::after {

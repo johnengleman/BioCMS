@@ -2,8 +2,14 @@ import styled from 'styled-components'
 import { device } from '../../../styles/devices'
 
 export const Container = styled.div`
-  margin-bottom: 10px;
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.1);
+  background-image: url('/footer.png');
+  background-size: cover; /* This will cover the entire viewport */
+  background-repeat: no-repeat; /* Important if the image is smaller than the footer */
+  background-position: center 45%; /* This will center the image */
+  height: 200px; /* Or whatever height you want */
+  margin-bottom: 20px;
+  position: relative;
+  border-bottom: 2px solid #522900;
 `
 
 export const Navigation = styled.div`
@@ -14,6 +20,9 @@ export const Navigation = styled.div`
   margin: 0 auto;
   height: 60px;
   max-width: 1430px;
+  position: absolute;
+  bottom: 10px;
+  margin-left: 5%;
 
   ul {
     display: flex;
@@ -41,14 +50,16 @@ export const Button = styled.li`
   a {
     transition: all cubic-bezier(0.215, 0.61, 0.355, 1);
     text-decoration: none;
-    color: #000;
+    letter-spacing: 1px;
+    color: #fff;
     font-weight: 600;
-    opacity: 0.7;
-  }
-  &:hover {
-    border: 1px solid lightgray;
-    a {
-      opacity: 1;
+    font-size: 16px;
+    opacity: 1;
+    border-bottom: 3px solid transparent;
+    transition: border 0.1s ease-in-out;
+
+    &:hover {
+      border-bottom: 3px solid white;
     }
   }
 `

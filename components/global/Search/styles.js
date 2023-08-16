@@ -14,9 +14,9 @@ export const Search = styled.div`
     height: 40px;
     border-radius: 20px;
     border: 2px solid #dee2e6;
-    font-size: 16px;
+    font-size: 15px;
     outline: none;
-    padding-left: 40px;
+    padding-left: 38px;
     font-weight: 400;
   }
 
@@ -26,10 +26,10 @@ export const Search = styled.div`
 
   .search-icon {
     position: absolute;
-    left: 10px; /* Adjust based on your design preference */
-    top: 31%;
+    left: 8px; /* Adjust based on your design preference */
+    top: 33%;
     left: 17px;
-    font-size: 16px; /* Adjust based on your design preference */
+    font-size: 15px; /* Adjust based on your design preference */
     color: #7f7f7f; /* Adjust based on your design preference */
   }
 
