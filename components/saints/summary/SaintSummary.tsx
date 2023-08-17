@@ -74,12 +74,12 @@ export default function SaintSummary(props) {
         </div>
         <div className="footer">
           <div className="footer-button">
-            <FontAwesomeIcon icon={faBook} />
+            {/* <FontAwesomeIcon icon={faBook} /> */}
             <S.Count>{books?.length}</S.Count>
           </div>
           <div className="footer-button"></div>
           <div className="footer-button">
-            <FontAwesomeIcon icon={faQuoteLeft} />
+            {/* <FontAwesomeIcon icon={faQuoteLeft} /> */}
             <S.Count>{quotes?.length}</S.Count>
           </div>
         </div>

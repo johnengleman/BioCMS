@@ -51,7 +51,6 @@ const Search = ({ saints }) => {
   return (
     <S.Search ref={ref}>
       <div className="input-wrapper">
-        <i className="fa-solid fa-magnifying-glass search-icon"></i>
         <input
           type="text"
           className="input"
