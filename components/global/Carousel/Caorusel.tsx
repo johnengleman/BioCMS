@@ -12,7 +12,13 @@ import {
 import * as S from './styles'
 
 const Carousel = ({ children, options }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    slidesToScroll: 'auto',
+    align: 'start',
+    loop: true,
+    skipSnaps: true,
+    dragFree: true,
+  })
   const [prevBtnDisabled, setPrevBtnDisabled] =
     useState(true)
   const [nextBtnDisabled, setNextBtnDisabled] =

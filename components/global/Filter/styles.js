@@ -1,10 +1,18 @@
 import styled from 'styled-components'
 import { device } from '../../../styles/devices'
+import { colors, variables } from '../../../styles/colors'
 
 export const Filter = styled.div`
   width: 100%;
-  margin-top: 10px;
+  background-color: ${variables.filterBackground};
+  padding: 20px 0px 5px 0px;
+  border-radius: 8px;
   margin-bottom: 20px;
+  margin-top: 10px;
+
+  @media ${device.tablet} {
+    padding: 20px 30px 10px 30px;
+  }
 
   .embla__container {
     padding: 20px 0;
@@ -18,6 +26,7 @@ export const Filter = styled.div`
     min-width: fit-content;
     border-bottom: 2px solid transparent;
     transition: border;
+    background-color: #fff;
     padding: 7px 20px;
     border-radius: 10px;
     border: 2px solid #dddddd;
@@ -32,7 +41,7 @@ export const Filter = styled.div`
 
     &:hover,
     &.selected {
-      border: 2px solid #4e4e4e;
+      border: 2px solid ${colors.gold};
     }
   }
 
@@ -56,14 +65,14 @@ export const Filter = styled.div`
       top: 0;
       background: linear-gradient(
         90deg,
-        rgba(255, 255, 255, 1) 0%,
+        ${variables.filterBackground} 0%,
         rgba(0, 0, 0, 0) 100%
       );
       display: none;
 
       @media ${device.tablet} {
         display: block;
-        width: 40px;
+        width: 50px;
       }
     }
 
@@ -77,14 +86,14 @@ export const Filter = styled.div`
       top: 0;
       background: linear-gradient(
         270deg,
-        rgba(255, 255, 255, 1) 0%,
+        ${variables.filterBackground} 0%,
         rgba(0, 0, 0, 0) 100%
       );
       display: none;
 
       @media ${device.tablet} {
         display: block;
-        width: 40px;
+        width: 50px;
       }
     }
   }
@@ -109,6 +118,23 @@ export const Filter = styled.div`
       width: 90%;
       margin: 0 auto;
       max-width: 1420px;
+
+      .embla__viewport {
+        &::after {
+          background: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(0, 0, 0, 0) 100%
+          );
+        }
+        &::before {
+          background: linear-gradient(
+            270deg,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(0, 0, 0, 0) 100%
+          );
+        }
+      }
     }
   }
 `

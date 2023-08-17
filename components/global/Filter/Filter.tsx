@@ -2,37 +2,31 @@ import { useEffect, useState, useRef, useMemo } from 'react'
 import * as S from './styles'
 import Carousel from '../Carousel/Caorusel'
 import { flushSync } from 'react-dom'
+import Header from '../Header/Header'
 
-const Filter = ({ setFilter, selectedFilter }) => {
+const Filter = ({
+  setFilter,
+  selectedFilter,
+  options,
+  title,
+}) => {
   const [isSticky, setIsSticky] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const wrapperRef = useRef<HTMLDivElement>(null)
   const originalOffsetTop = useRef<number>(0)
   const pageLoadedRef = useRef<boolean>(false)
-  const canUseTransition = useRef<boolean>(false);
+  const canUseTransition = useRef<boolean>(false)
 
-  if(typeof window !== 'undefined') {
-    canUseTransition.current = typeof (document as any)?.startViewTransition === 'function'
+  if (typeof window !== 'undefined') {
+    canUseTransition.current =
+      typeof (document as any)?.startViewTransition ===
+      'function'
   }
-
-  const filters = useMemo(
-    () => [
-      'All',
-      'Fools-for-Christ',
-      'Holy-Women',
-      'Hermits',
-      'Bishops',
-      'Monastics',
-      'Confessors',
-      'Warriors',
-    ],
-    [],
-  )
 
   useEffect(() => {
     const delayIncrement = 150 // Time in milliseconds. Adjust as necessary.
 
-    filters.forEach((_, i) => {
+    options.forEach((_, i) => {
       setTimeout(() => {
         const slide = document.querySelector(
           `.embla__slide:nth-child(${i + 1})`,
@@ -40,7 +34,7 @@ const Filter = ({ setFilter, selectedFilter }) => {
         slide?.classList.add('visible')
       }, i * delayIncrement)
     })
-  }, [filters])
+  }, [options])
 
   useEffect(() => {
     let isCurrentlySticky = false // Outside of the observer to track the state
@@ -90,6 +84,7 @@ const Filter = ({ setFilter, selectedFilter }) => {
 
   return (
     <S.Filter>
+      <Header>{title}</Header>
       <div ref={wrapperRef}>
         <div
           className={isSticky ? 'placeholder' : ''}
@@ -105,12 +100,14 @@ const Filter = ({ setFilter, selectedFilter }) => {
         >
           <Carousel
             options={{
-              slidesToScroll: 3,
+              slidesToScroll: 'auto',
               align: 'start',
               loop: true,
+              skipSnaps: true,
+              dragFree: true,
             }}
           >
-            {filters.map((filter, i) => (
+            {options?.map((filter, i) => (
               <div
                 key={i}
                 className={`embla__slide ${
@@ -123,15 +120,17 @@ const Filter = ({ setFilter, selectedFilter }) => {
                 onClick={() => {
                   pageLoadedRef.current = true
                   if (canUseTransition.current) {
-                    (document as any)?.startViewTransition(() => {
-                      flushSync(() => {
-                        setFilter(
-                          selectedFilter !== filter
-                            ? filter
-                            : 'All',
-                        )
-                      })
-                    })
+                    ;(document as any)?.startViewTransition(
+                      () => {
+                        flushSync(() => {
+                          setFilter(
+                            selectedFilter !== filter
+                              ? filter
+                              : 'All',
+                          )
+                        })
+                      },
+                    )
                   } else {
                     setFilter(
                       selectedFilter !== filter

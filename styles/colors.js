@@ -5,3 +5,7 @@ export const colors = {
   sienna: '#CE6C47',
   mint: '#F2F7F2',
 }
+
+export const variables = {
+  filterBackground: '#f1f0f0b1',
+}

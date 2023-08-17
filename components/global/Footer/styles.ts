@@ -7,7 +7,7 @@ export const Footer = styled.div`
       rgba(0, 0, 0, 0.4),
       rgba(0, 0, 0, 0.4)
     ),
-    url('/footer.png');
+    url('/footer.webp');
   background-size: cover; /* This will cover the entire viewport */
   background-repeat: no-repeat; /* Important if the image is smaller than the footer */
   background-position: center 58%; /* This will center the image */

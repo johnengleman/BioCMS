@@ -25,7 +25,7 @@ export const carousel = styled.div`
     min-width: 28px;
     min-height: 28px;
     height: 28px;
-    background: none;
+    background: #fff;
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 50%;
     cursor: pointer;

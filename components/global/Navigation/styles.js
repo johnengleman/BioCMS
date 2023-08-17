@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { device } from '../../../styles/devices'
 
 export const Container = styled.div`
-  background-image: url('/footer.png');
+  background-image: url('/footer.webp');
   background-size: cover; /* This will cover the entire viewport */
   background-repeat: no-repeat; /* Important if the image is smaller than the footer */
   background-position: center 45%; /* This will center the image */

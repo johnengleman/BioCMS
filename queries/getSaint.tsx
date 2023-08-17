@@ -5,6 +5,7 @@ type Photo = {
     id: string
     width: number
     height: number
+    description: string
   }
 }
 
@@ -74,6 +75,7 @@ const query = gql`
           id
           width
           height
+          description
         }
       }
       books {

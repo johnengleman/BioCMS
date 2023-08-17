@@ -49,7 +49,7 @@ const SaintBio = (props) => {
           <meta
             key="description"
             name="description"
-            content={`Explore the detailed biography of ${data.name}, capturing their profound spiritual journey. Dive into inspiring quotes, view captivating images, discover related books, and connect with other related saints of the Eastern Orthodox tradition.`}
+            content={`Discover ${data.name}'s spiritual journey in the Eastern Orthodox tradition. Explore their quotes, images, and related books.`}
           />
         </Head>
         <Page saints={saintsData}>
@@ -61,7 +61,10 @@ const SaintBio = (props) => {
                 death={data?.death_year}
                 tags={data?.categories}
               />
-              <ImageMain images={data?.photos} />
+              <ImageMain
+                images={data?.photos}
+                name={data.name}
+              />
             </div>
             <div className="body">
               <div className="main">

@@ -22,7 +22,7 @@ const ImageGlobal = ({
 
   return (
     <div
-      className="image"
+      className="image-global"
       style={{
         position: 'relative',
         height: fill ? '100%' : `${height}px`,

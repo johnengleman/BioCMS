@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import {
   dehydrate,
@@ -8,10 +9,37 @@ import { Quote } from '../../components/quotes/QuoteSummary/interface'
 import { getQuotes } from '../../queries/getQuotes'
 import QuoteSummary from '../../components/quotes/QuoteSummary/QuoteSummary'
 import Page from '../../components/global/Page/Page'
+import Filter from '../../components/global/Filter/Filter'
 import * as S from './styles'
+
+const options = [
+  'All',
+  'Fools-for-Christ',
+  'Holy-Women',
+  'Hermits',
+  'Bishops',
+  'Monastics',
+  'Confessors',
+  'Warriors',
+  'Fools-for-Christ',
+  'Holy-Women',
+  'Hermits',
+  'Bishops',
+  'Monastics',
+  'Confessors',
+  'Warriors',
+  'Fools-for-Christ',
+  'Holy-Women',
+  'Hermits',
+  'Bishops',
+  'Monastics',
+  'Confessors',
+  'Warriors',
+]
 
 const Home = () => {
   const { data } = useQuery(['quotes'], getQuotes)
+  const [filter, setFilter] = useState('All')
 
   if (data) {
     return (
@@ -24,10 +52,16 @@ const Home = () => {
           <meta
             key="description"
             name="description"
-            content={`Dive into a curated collection of profound quotes from revered Eastern Orthodox saints. Discover timeless wisdom, spiritual teachings, and reflections that illuminate the essence of faith and devotion.`}
+            content={`Explore profound quotes from Eastern Orthodox saints. Discover timeless wisdom and the essence of faith.`}
           />
         </Head>
         <Page>
+          <Filter
+            setFilter={setFilter}
+            selectedFilter={filter}
+            options={options}
+            title="Explore the Orthodox Quotes"
+          />
           {data?.map((quote: Quote, i: number) => (
             <QuoteSummary
               key={i}

@@ -4,14 +4,42 @@ import {
   QueryClient,
   useQuery,
 } from '@tanstack/react-query'
+import { useState } from 'react'
 import { Book } from '../../components/books/BookSummary/interface'
 import { getBooks } from '../../queries/getBooks'
 import BookSummary from '../../components/books/BookSummary/BookSummary'
 import Page from '../../components/global/Page/Page'
+import Filter from '../../components/global/Filter/Filter'
 import * as S from './styles'
+
+const options = [
+  'All',
+  'Fools-for-Christ',
+  'Holy-Women',
+  'Hermits',
+  'Bishops',
+  'Monastics',
+  'Confessors',
+  'Warriors',
+  'Fools-for-Christ',
+  'Holy-Women',
+  'Hermits',
+  'Bishops',
+  'Monastics',
+  'Confessors',
+  'Warriors',
+  'Fools-for-Christ',
+  'Holy-Women',
+  'Hermits',
+  'Bishops',
+  'Monastics',
+  'Confessors',
+  'Warriors',
+]
 
 const Home = () => {
   const { data } = useQuery(['books'], getBooks)
+  const [filter, setFilter] = useState('All')
 
   if (data) {
     return (
@@ -24,10 +52,16 @@ const Home = () => {
           <meta
             key="description"
             name="description"
-            content={`Discover a diverse collection of books, including writings by revered Eastern Orthodox saints sharing their insights and teachings, as well as detailed accounts about their spiritual journeys and legacies. Embark on a literary pilgrimage through faith, history, and enlightenment.`}
+            content="Explore books by Eastern Orthodox saints. Dive into their teachings, journeys, and legacies. A literary pilgrimage of faith."
           />
         </Head>
         <Page>
+          <Filter
+            setFilter={setFilter}
+            selectedFilter={filter}
+            options={options}
+            title="Explore the Orthodox Books"
+          />
           <S.Books>
             {data?.map((book: Book, i: number) => (
               <BookSummary

@@ -5,7 +5,7 @@ import ImageGlobal from '../../../global/ImageGlobal/ImageGlobal'
 // type Props = {
 //   image: String
 // }
-const ImageMain = ({ images }) => {
+const ImageMain = ({ images, name }) => {
   if (!images) {
     return null
   }
@@ -17,6 +17,10 @@ const ImageMain = ({ images }) => {
       <div className="image1">
         <ImageGlobal
           fill={true}
+          alt={
+            image1?.directus_files_id?.description ||
+            `Image of ${name}, the eastern orthodox saint`
+          }
           src={`https://saints-cms.onrender.com/assets/${image1?.directus_files_id.id}?key=profile`}
         />
         {/* <PhotosModal images={images} /> */}
@@ -25,6 +29,10 @@ const ImageMain = ({ images }) => {
         <div className="image image2">
           <ImageGlobal
             fill={true}
+            alt={
+              image2?.directus_files_id?.description ||
+              `Image of ${name}, the eastern orthodox saint`
+            }
             src={`https://saints-cms.onrender.com/assets/${image2?.directus_files_id.id}?key=profile`}
           />
         </div>
@@ -33,6 +41,10 @@ const ImageMain = ({ images }) => {
         <div className="image image3">
           <ImageGlobal
             fill={true}
+            alt={
+              image3?.directus_files_id?.description ||
+              `Image of ${name}, the eastern orthodox saint`
+            }
             src={`https://saints-cms.onrender.com/assets/${image3.directus_files_id.id}?key=profile`}
           />
         </div>
@@ -41,6 +53,10 @@ const ImageMain = ({ images }) => {
         <div className="image image4">
           <ImageGlobal
             fill={true}
+            alt={
+              image4?.directus_files_id?.description ||
+              `Image of ${name}, the eastern orthodox saint`
+            }
             src={`https://saints-cms.onrender.com/assets/${image4.directus_files_id.id}?key=profile`}
           />
         </div>
@@ -49,6 +65,10 @@ const ImageMain = ({ images }) => {
         <div className="image image5">
           <ImageGlobal
             fill={true}
+            alt={
+              image5?.directus_files_id?.description ||
+              `Image of ${name}, the eastern orthodox saint`
+            }
             src={`https://saints-cms.onrender.com/assets/${image5.directus_files_id.id}?key=profile`}
           />
         </div>

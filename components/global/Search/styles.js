@@ -10,7 +10,7 @@ export const Search = styled.div`
   }
 
   .input {
-    width: 200px;
+    width: 180px;
     height: 40px;
     border-radius: 20px;
     border: 2px solid #dee2e6;
@@ -18,6 +18,11 @@ export const Search = styled.div`
     outline: none;
     padding-left: 38px;
     font-weight: 400;
+    transition: width 0.3s ease-in-out;
+
+    &:focus {
+      width: 220px;
+    }
   }
 
   .input-wrapper {
@@ -44,9 +49,11 @@ export const Search = styled.div`
     top: 45px;
     width: fit-content;
     border-radius: 15px;
+    transition: opacity 0.25s ease-in-out;
 
     &:empty {
-      display: none;
+      opacity: 0;
+      border: none;
     }
   }
 

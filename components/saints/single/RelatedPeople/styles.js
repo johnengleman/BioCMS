@@ -8,9 +8,14 @@ export const RelatedPerson = styled.div`
     display: flex;
   }
 
-  .image {
+  .image-global {
     margin-right: 10px;
     border-radius: 5px;
+
+    img {
+
+      border-radius: 5px;
+    }
   }
 
   .person-info {

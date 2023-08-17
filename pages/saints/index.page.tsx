@@ -12,6 +12,32 @@ import Page from '../../components/global/Page/Page'
 import Filter from '../../components/global/Filter/Filter'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../components/hooks/useBreakPoints'
+import Header from '../../components/global/Header/Header'
+
+const options = [
+  'All',
+  'Fools-for-Christ',
+  'Holy-Women',
+  'Hermits',
+  'Bishops',
+  'Monastics',
+  'Confessors',
+  'Warriors',
+  'Fools-for-Christ',
+  'Holy-Women',
+  'Hermits',
+  'Bishops',
+  'Monastics',
+  'Confessors',
+  'Warriors',
+  'Fools-for-Christ',
+  'Holy-Women',
+  'Hermits',
+  'Bishops',
+  'Monastics',
+  'Confessors',
+  'Warriors',
+]
 
 const Home = () => {
   const { data } = useQuery(['saints'], getSaints)
@@ -58,13 +84,13 @@ const Home = () => {
       <>
         <Head>
           <title key="title">
-            Eastern Orthodox Saints: Spiritual Journeys,
+            Eastern Orthodox Saints: Spiritual Biographies,
             Books, and Quotes
           </title>
           <meta
             key="description"
             name="description"
-            content="Discover the rich histories and inspiring stories of Orthodox saints. Dive deep into their lives, their contributions to the faith, and their enduring legacies. From their teachings to miracles, our comprehensive profiles provide a window into the spiritual journeys of these holy figures"
+            content="Explore the lives and legacies of Orthodox saints. From teachings to miracles, delve into their spiritual journeys."
           />
           <meta
             name="keywords"
@@ -75,6 +101,8 @@ const Home = () => {
           <Filter
             setFilter={setFilter}
             selectedFilter={filter}
+            options={options}
+            title="Explore the Orthodox Saints"
           />
           <Masonry
             breakpointCols={getColumnsToRender()}

@@ -1,12 +1,11 @@
 import * as S from './styles'
 import Link from 'next/link'
-import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import { faCross } from '@fortawesome/free-solid-svg-icons'
+import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import {
   faBook,
-  faQuoteRight,
+  faQuoteLeft,
 } from '@fortawesome/free-solid-svg-icons'
 
 import { Saint } from './interfaces'
@@ -49,7 +48,10 @@ export default function SaintSummary(props) {
         </div>
         <div className="image">
           <ImageGlobal
-            alt="profile"
+            alt={
+              photos[0]?.directus_files_id?.description ||
+              `Image of ${name}, the eastern orthodox saint`
+            }
             src={`https://saints-cms.onrender.com/assets/${photos[0]?.directus_files_id?.id}?key=summary`}
             fill={true}
             priority={priority}
@@ -70,27 +72,14 @@ export default function SaintSummary(props) {
             </div>
           ))}
         </div>
-        {/* <div className="dates">
-          {getYear(birth_year)}-{getYear(death_year)} AD,{' '}
-          {age} years
-        </div> */}
-
         <div className="footer">
           <div className="footer-button">
-            <FontAwesomeIcon
-              icon={faBook}
-              fontSize="10px"
-              style={{ color: '#676666c2' }}
-            />
+            <FontAwesomeIcon icon={faBook} />
             <S.Count>{books?.length}</S.Count>
           </div>
           <div className="footer-button"></div>
           <div className="footer-button">
-            <FontAwesomeIcon
-              icon={faQuoteRight}
-              fontSize="10px"
-              style={{ color: '#676666c2' }}
-            />
+            <FontAwesomeIcon icon={faQuoteLeft} />
             <S.Count>{quotes?.length}</S.Count>
           </div>
         </div>
