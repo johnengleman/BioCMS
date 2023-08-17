@@ -13,7 +13,6 @@ export const RelatedPerson = styled.div`
     border-radius: 5px;
 
     img {
-
       border-radius: 5px;
     }
   }
@@ -45,7 +44,7 @@ export const RelatedPerson = styled.div`
       .tag {
         padding: 2px 12px;
         background-color: #ccebd9;
-        font-size: 9px;
+        font-size: 10px;
         font-weight: 500;
         border-radius: 2px;
         color: #54846d;

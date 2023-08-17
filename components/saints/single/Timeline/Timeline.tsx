@@ -1,5 +1,11 @@
 import * as S from './styles'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faCakeCandles,
+  faTombstone,
+} from '@fortawesome/pro-duotone-svg-icons'
+
 type Props = {
   birthDate: number | string
   birthLocation: string
@@ -16,8 +22,20 @@ const Timeline = ({
   return (
     <S.Timeline>
       <div className="dates">
-        <div className="birth">{birthDate}</div>
-        <div className="death">{deathDate}</div>
+        <div className="birth">
+          {birthDate}
+          <FontAwesomeIcon
+            icon={faCakeCandles}
+            size="lg"
+          />
+        </div>
+        <div className="death">
+          {deathDate}
+          <FontAwesomeIcon
+            icon={faTombstone}
+            size="lg"
+          />
+        </div>
       </div>
       <div className="bar"></div>
       <div className="locations">

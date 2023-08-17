@@ -1,5 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/pro-duotone-svg-icons'
 import ImageGlobal from '../ImageGlobal/ImageGlobal'
 import * as S from './styles'
 import Fuse from 'fuse.js'
@@ -51,6 +53,7 @@ const Search = ({ saints }) => {
   return (
     <S.Search ref={ref}>
       <div className="input-wrapper">
+        <FontAwesomeIcon icon={faMagnifyingGlass} />
         <input
           type="text"
           className="input"

@@ -45,7 +45,6 @@ export default class MyDocument extends Document {
           <NextScript />
           <Script
             src="https://kit.fontawesome.com/76900a3b53.js"
-            strategy="beforeInteractive"
           ></Script>
         </body>
       </Html>

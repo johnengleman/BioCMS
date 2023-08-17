@@ -23,7 +23,7 @@ export const NameTag = styled.div`
     .tag {
       padding: 2px 12px;
       background-color: #ccebd9;
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 500;
       border-radius: 5px;
       color: #54846d;

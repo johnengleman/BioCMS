@@ -96,7 +96,7 @@ export const SaintSummary = styled.div`
       .tag {
         padding: 2px 12px;
         background-color: #ccebd9;
-        font-size: 9px;
+        font-size: 10px;
         font-weight: 500;
         border-radius: 5px;
         color: #54846d;
@@ -114,10 +114,8 @@ export const SaintSummary = styled.div`
       .footer-button {
         background: none;
         border: none;
-
-        svg {
-          vertical-align: baseline;
-        }
+        display: flex;
+        align-items: center;
       }
 
       .dates {
@@ -131,7 +129,7 @@ export const SaintSummary = styled.div`
 
 export const Count = styled.span`
   color: #676666c2;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
-  margin-left: 5px;
+  margin-left: 10px;
 `

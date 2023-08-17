@@ -1,5 +1,11 @@
 import * as S from './styles'
 import Link from 'next/link'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faBookOpenCover,
+  faCommentQuote,
+  faCross,
+} from '@fortawesome/pro-duotone-svg-icons'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 
 import { Saint } from './interfaces'
@@ -32,7 +38,10 @@ export default function SaintSummary(props) {
         className="saint-summary"
         href={`/saints/${slug}`}
       >
-        <div className="death">{death_year}</div>
+        <div className="death">
+          {death_year}
+          <FontAwesomeIcon icon={faCross} />
+        </div>
         <div className="image">
           <ImageGlobal
             alt={
@@ -61,10 +70,28 @@ export default function SaintSummary(props) {
         </div>
         <div className="footer">
           <div className="footer-button">
+            <FontAwesomeIcon
+              icon={faBookOpenCover}
+              style={
+                {
+                  '--fa-primary-color': '#241e4e',
+                  '--fa-secondary-color': '#241e4e',
+                } as any
+              }
+            />
             <S.Count>{books?.length}</S.Count>
           </div>
-          <div className="footer-button"></div>
           <div className="footer-button">
+            <FontAwesomeIcon
+              icon={faCommentQuote}
+              flip="horizontal"
+              style={
+                {
+                  '--fa-primary-color': '#241e4e',
+                  '--fa-secondary-color': '#241e4e',
+                } as any
+              }
+            />
             <S.Count>{quotes?.length}</S.Count>
           </div>
         </div>

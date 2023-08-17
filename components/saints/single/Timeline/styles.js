@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Timeline = styled.div`
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 
   .dates,
   .locations {
@@ -15,8 +15,20 @@ export const Timeline = styled.div`
     font-weight: 700;
   }
 
+  .birth,
+  .death {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+
+    svg {
+      margin-left: 5px;
+      padding-bottom: 4px;
+    }
+  }
+
   .locations {
-    font-size: 10px;
+    font-size: 12px;
     color: #a1a1a1;
     font-weight: 600;
   }
@@ -25,5 +37,6 @@ export const Timeline = styled.div`
     height: 2px;
     width: 100%;
     background-color: #d0d0d0;
+    margin: 3px 0;
   }
 `

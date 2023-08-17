@@ -29,13 +29,12 @@ export const Search = styled.div`
     position: relative;
   }
 
-  .search-icon {
+  svg {
     position: absolute;
     left: 8px; /* Adjust based on your design preference */
     top: 33%;
-    left: 17px;
+    left: 15px;
     font-size: 15px; /* Adjust based on your design preference */
-    color: #7f7f7f; /* Adjust based on your design preference */
   }
 
   .dropdown-content {
