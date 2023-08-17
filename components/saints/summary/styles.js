@@ -14,6 +14,11 @@ export const SaintSummary = styled.div`
     box-shadow: -5px 5px 15px -5px rgba(0, 0, 0, 0.74);
     cursor: pointer;
     text-decoration: none;
+    transition: all 0.1s ease-in-out;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
 
     .death {
       position: absolute;
