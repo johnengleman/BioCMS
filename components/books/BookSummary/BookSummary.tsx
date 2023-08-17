@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import Image from 'next/image'
 import Link from 'next/link'
 import * as S from './styles'
@@ -31,12 +29,7 @@ export default function BookSummary(props) {
         </div>
 
         <div className="amazon">
-          <FontAwesomeIcon
-            icon={faCartShopping}
-            fontSize="12px"
-            style={{ color: '#fff' }}
-          />
-          <p>Buy on Amazon</p>
+          <p>View on Amazon</p>
         </div>
       </Link>
     </S.BookSummary>

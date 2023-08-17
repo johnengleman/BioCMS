@@ -4,11 +4,6 @@ import React, {
   useEffect,
 } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faAngleLeft,
-  faAngleRight,
-} from '@fortawesome/free-solid-svg-icons'
 import * as S from './styles'
 
 const Carousel = ({ children, options }) => {
@@ -52,9 +47,7 @@ const Carousel = ({ children, options }) => {
             prevBtnDisabled ? 'disabled' : ''
           }`}
           onClick={scrollPrev}
-        >
-          <FontAwesomeIcon icon={faAngleLeft} />
-        </button>
+        ></button>
         <div
           className="embla__viewport"
           ref={emblaRef}
@@ -66,9 +59,7 @@ const Carousel = ({ children, options }) => {
             nextBtnDisabled ? 'disabled' : ''
           }`}
           onClick={scrollNext}
-        >
-          <FontAwesomeIcon icon={faAngleRight} />
-        </button>
+        ></button>
       </div>
     </S.carousel>
   )

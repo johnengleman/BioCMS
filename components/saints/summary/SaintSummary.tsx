@@ -1,12 +1,6 @@
 import * as S from './styles'
 import Link from 'next/link'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCross } from '@fortawesome/free-solid-svg-icons'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
-import {
-  faBook,
-  faQuoteLeft,
-} from '@fortawesome/free-solid-svg-icons'
 
 import { Saint } from './interfaces'
 
@@ -38,14 +32,7 @@ export default function SaintSummary(props) {
         className="saint-summary"
         href={`/saints/${slug}`}
       >
-        <div className="death">
-          {death_year}
-          <FontAwesomeIcon
-            icon={faCross}
-            fontSize="10px"
-            style={{ color: '#fff' }}
-          />
-        </div>
+        <div className="death">{death_year}</div>
         <div className="image">
           <ImageGlobal
             alt={
@@ -74,12 +61,10 @@ export default function SaintSummary(props) {
         </div>
         <div className="footer">
           <div className="footer-button">
-            {/* <FontAwesomeIcon icon={faBook} /> */}
             <S.Count>{books?.length}</S.Count>
           </div>
           <div className="footer-button"></div>
           <div className="footer-button">
-            {/* <FontAwesomeIcon icon={faQuoteLeft} /> */}
             <S.Count>{quotes?.length}</S.Count>
           </div>
         </div>
