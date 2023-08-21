@@ -41,7 +41,7 @@ const Home = (props) => {
             title="Latest Added"
             options={{}}
           >
-            {mostRecentlyCreatedBooks.map((book, i) => (
+            {mostRecentlyCreatedBooks?.map((book, i) => (
               <Slide
                 key={i}
                 {...book}

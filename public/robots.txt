@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: http://orthodoxsaints.wiki
+Host: https://orthodoxsaints.wiki
 
 # Sitemaps
-Sitemap: http://orthodoxsaints.wiki/sitemap.xml
+Sitemap: https://orthodoxsaints.wiki/sitemap.xml
