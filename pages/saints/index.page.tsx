@@ -12,7 +12,9 @@ import Page from '../../components/global/Page/Page'
 import Filter from '../../components/global/Filter/Filter'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../components/hooks/useBreakPoints'
-import Header from '../../components/global/Header/Header'
+import { fetchAPIQuery } from '../../queries/fetchApiQuery'
+import Mini from '../../components/saints/Mini/Mini'
+import RecentlyUpdated from '../../components/recentlyUpdated/RecentlyUpdated'
 
 const options = [
   'All',
@@ -39,9 +41,10 @@ const options = [
   'Warriors',
 ]
 
-const Home = () => {
+const Home = (props) => {
   const { data } = useQuery(['saints'], getSaints)
   const [filter, setFilter] = useState('All')
+  const { mostRecentlyUpdatedSaints } = props
   const {
     isMobileS,
     isMobileM,
@@ -98,11 +101,19 @@ const Home = () => {
           />
         </Head>
         <Page saints={data}>
+          {/* <RecentlyUpdated title="Newest Saint Profiles">
+            {mostRecentlyUpdatedSaints?.map((saint, i) => (
+              <Mini
+                key={i}
+                {...saint}
+              />
+            ))}
+          </RecentlyUpdated> */}
           <Filter
             setFilter={setFilter}
             selectedFilter={filter}
             options={options}
-            title="Explore the Orthodox Saints"
+            title="Explore all the Orthodox Saints"
           />
           <Masonry
             breakpointCols={getColumnsToRender()}
@@ -131,9 +142,19 @@ export async function getStaticProps() {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery(['saints'], getSaints)
 
+  const today = new Date()
+  today.setDate(today.getDate() - 14)
+  const twoWeeksAgoDateTimeString = today
+    .toISOString()
+    .slice(0, 19)
+  const mostRecentlyUpdatedSaints = await fetchAPIQuery(
+    'getMostRecentlyUpdatedSaints',
+  )
+
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
+      mostRecentlyUpdatedSaints,
     },
     revalidate: 60,
   }

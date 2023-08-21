@@ -9,9 +9,7 @@ type BookProps = {
   link: string
   pages?: number
   description: string
-  book_cover: {
-    id: string
-  }
+  book_image: string
 }
 
 const Book = ({
@@ -19,38 +17,23 @@ const Book = ({
   author,
   link,
   pages,
-  book_cover,
+  book_image,
   description,
 }: BookProps) => {
   return (
-    <S.Book href={link}>
-      {book_cover?.id ? (
-        <ImageGlobal
-          src={`https://saints-cms.onrender.com/assets/${book_cover?.id}?fit=contain&height=200&width=150`}
-          height={200}
-          width={150}
-          fill={false}
-          alt=""
-        />
-      ) : (
-        <div
-          className="placeholder"
-          style={{
-            height: '170px',
-            width: '140px',
-            minWidth: '140px',
-            borderRadius: '5px',
-            background: 'lightgray',
-          }}
-        ></div>
-      )}
+    <S.Book>
+      <div
+        className="image"
+        dangerouslySetInnerHTML={{
+          __html: book_image,
+        }}
+      ></div>
       <div className="book-info">
         <div className="book-name">{title}</div>
         <div className="book-author">{author}</div>
         <div className="book-description">
           {description}
         </div>
-        <div className="book-link">Buy On Amazon</div>
       </div>
     </S.Book>
   )
@@ -63,17 +46,17 @@ type BooksProps = {
 const Books = ({ books }: BooksProps) => {
   if (books?.length) {
     return (
-      <>
+      <S.Books>
         <Title>Books</Title>
-        <S.Books>
+        <div className="books-container">
           {books?.map((book, i) => (
             <Book
               key={i}
               {...book}
             />
           ))}
-        </S.Books>
-      </>
+        </div>
+      </S.Books>
     )
   }
 

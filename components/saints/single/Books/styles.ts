@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { device } from '../../../../styles/devices'
 
-export const Book = styled.a`
+export const Book = styled.div`
   display: flex;
   gap: 20px;
   width: 100%;
@@ -47,13 +47,16 @@ export const Book = styled.a`
 `
 
 export const Books = styled.div`
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
   margin-bottom: 35px;
 
   @media ${device.tablet} {
     margin-bottom: 50px;
+  }
+
+  .books-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 `

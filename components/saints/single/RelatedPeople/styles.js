@@ -58,4 +58,7 @@ export const RelatedPerson = styled.div`
 export const RelatedPeople = styled.div`
   display: flex;
   flex-direction: column;
+  border-top: 1px solid #dee2e6;
+  padding-top: 2rem;
+  margin-top: 2rem;
 `

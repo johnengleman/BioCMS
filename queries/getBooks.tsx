@@ -1,15 +1,17 @@
 import { request, gql } from 'graphql-request'
 
-type Book = {
+export type Book = {
   id: string
   link: string
   title: string
-  book_cover: {
-    id: string
-  }
   pages: number
-  category: string
   author: string
+  date_created: string
+  description_part_1: string
+  description_part_2: string
+  book_image: string
+  genre: string
+  topics: JSON
 }
 
 type Response = {
@@ -22,12 +24,14 @@ const query = gql`
       id
       link
       title
-      book_cover {
-        id
-      }
       pages
-      category
       author
+      date_created
+      description_part_1
+      description_part_2
+      book_image
+      genre
+      topics
     }
   }
 `

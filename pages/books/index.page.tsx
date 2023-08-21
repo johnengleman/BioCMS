@@ -5,41 +5,22 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import { useState } from 'react'
-import { Book } from '../../components/books/BookSummary/interface'
+import { Book } from '../../queries/getBooks'
 import { getBooks } from '../../queries/getBooks'
 import BookSummary from '../../components/books/BookSummary/BookSummary'
 import Page from '../../components/global/Page/Page'
-import Filter from '../../components/global/Filter/Filter'
+import { fetchAPIQuery } from '../../queries/fetchApiQuery'
+import RecentlyUpdated from '../../components/recentlyUpdated/RecentlyUpdated'
+import Slide from '../../components/books/Slide/Slide'
+import Filter from '../../components/books/Filter/Filter'
+import TopAuthor from '../../components/books/TopAuthor/TopAuthor'
 import * as S from './styles'
 
-const options = [
-  'All',
-  'Fools-for-Christ',
-  'Holy-Women',
-  'Hermits',
-  'Bishops',
-  'Monastics',
-  'Confessors',
-  'Warriors',
-  'Fools-for-Christ',
-  'Holy-Women',
-  'Hermits',
-  'Bishops',
-  'Monastics',
-  'Confessors',
-  'Warriors',
-  'Fools-for-Christ',
-  'Holy-Women',
-  'Hermits',
-  'Bishops',
-  'Monastics',
-  'Confessors',
-  'Warriors',
-]
-
-const Home = () => {
+const Home = (props) => {
+  const { mostRecentlyCreatedBooks, topAuthors } = props
   const { data } = useQuery(['books'], getBooks)
-  const [filter, setFilter] = useState('All')
+  const [selectedGenre, setSelectedGenre] =
+    useState('All Genres')
 
   if (data) {
     return (
@@ -56,20 +37,61 @@ const Home = () => {
           />
         </Head>
         <Page>
-          <Filter
-            setFilter={setFilter}
-            selectedFilter={filter}
-            options={options}
-            title="Explore the Orthodox Books"
-          />
-          <S.Books>
-            {data?.map((book: Book, i: number) => (
-              <BookSummary
+          <RecentlyUpdated
+            title="Latest Added"
+            options={{}}
+          >
+            {mostRecentlyCreatedBooks.map((book, i) => (
+              <Slide
                 key={i}
                 {...book}
               />
             ))}
-          </S.Books>
+          </RecentlyUpdated>
+
+          <S.Container>
+            <S.ByAuthor>
+              <h3>Top Authors</h3>
+              <S.TopAuthorsContainer>
+                {topAuthors.map((author, i) => (
+                  <TopAuthor
+                    key={i}
+                    {...author}
+                  />
+                ))}
+              </S.TopAuthorsContainer>
+            </S.ByAuthor>
+
+            <S.ByGenre>
+              <Filter
+                title="Popular by Genre"
+                genres={[
+                  'All Genres',
+                  'Homilies',
+                  'Hymns',
+                  'Biography',
+                  'Commentary',
+                ]}
+                selectedGenre={selectedGenre}
+                setSelectedGenre={setSelectedGenre}
+              />
+              <S.Books>
+                {data
+                  ?.filter(
+                    (book) =>
+                      selectedGenre === 'All Genres' ||
+                      book.genre ===
+                        selectedGenre.toLowerCase(),
+                  )
+                  .map((book: Book, i: number) => (
+                    <BookSummary
+                      key={i}
+                      {...book}
+                    />
+                  ))}
+              </S.Books>
+            </S.ByGenre>
+          </S.Container>
         </Page>
       </>
     )
@@ -79,10 +101,18 @@ const Home = () => {
 export async function getStaticProps() {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery(['books'], getBooks)
+  const mostRecentlyCreatedBooks = await fetchAPIQuery(
+    'getMostRecentlyCreatedBooks',
+  )
+  const topAuthors = await fetchAPIQuery('getTopAuthors', {
+    limit: 5,
+  })
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
+      mostRecentlyCreatedBooks,
+      topAuthors,
     },
     revalidate: 60,
   }

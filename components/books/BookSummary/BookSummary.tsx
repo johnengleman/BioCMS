@@ -2,36 +2,68 @@ import Image from 'next/image'
 import Link from 'next/link'
 import * as S from './styles'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
+import StarRating from '../../global/StarRating/StarRating'
+import useBreakpoints from '../../hooks/useBreakPoints'
 
 export default function BookSummary(props) {
   const {
+    id,
     link,
     title,
-    book_cover,
     pages,
-    category,
     author,
+    date_created,
+    description_part_1,
+    description_part_2,
+    book_image,
+    genre,
+    topics,
   } = props
+
+  const { isTablet } = useBreakpoints()
 
   return (
     <S.BookSummary>
-      <Link href={link || ''}>
-        <div className="image">
-          <ImageGlobal
-            alt="profile"
-            src={`https://saints-cms.onrender.com/assets/${book_cover?.id}?key=book`}
-            fill={true}
-          />
+      <div className="content">
+        <div className="dots">
+          <div className="dot"></div>
+          <div className="dot"></div>
+          <div className="dot"></div>
         </div>
-        <div className="info">
-          <p className="title">{title}</p>
-          <p className="author">{author}</p>
+        <div className="col col-1">
+          <div
+            className="image"
+            dangerouslySetInnerHTML={{
+              __html: book_image,
+            }}
+          ></div>
+          <Link href={link || ''}>
+            <button className="book-link">
+              See the Book
+            </button>
+          </Link>
         </div>
 
-        <div className="amazon">
-          <p>View on Amazon</p>
+        <div className="info">
+          <h2 className="title">{title}</h2>
+          <h3 className="author">by {author}</h3>
+          {/* <StarRating rating={rating} /> */}
+          <div
+            className="description"
+            dangerouslySetInnerHTML={{
+              __html: description_part_1,
+            }}
+          />
+          {!isTablet && (
+            <div
+              className="description"
+              dangerouslySetInnerHTML={{
+                __html: description_part_2,
+              }}
+            />
+          )}
         </div>
-      </Link>
+      </div>
     </S.BookSummary>
   )
 }

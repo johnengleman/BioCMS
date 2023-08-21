@@ -7,5 +7,10 @@ export const colors = {
 }
 
 export const variables = {
-  filterBackground: '#f1f0f0b1',
+  filterBackground: '#e6e6e6',
+  headlineColor: '#515151',
+  textColor: '#333',
+  slideBackground1: '#eab5d2',
+  slideBackground2: '#faabae',
+  slideBackground3: '#95d6e3',
 }

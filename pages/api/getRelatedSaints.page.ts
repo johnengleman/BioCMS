@@ -1,4 +1,3 @@
-import type { NextRequest } from 'next/server'
 import { gql } from 'graphql-request'
 
 const allSaints = gql`

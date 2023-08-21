@@ -6,18 +6,18 @@ export const SaintSummary = styled.div`
     display: block;
     width: 100%;
     height: 100%;
-    background-color: white;
     border: 1px solid lavender;
     border-radius: 20px;
     position: relative;
     background-color: ${colors.mint};
-    box-shadow: -5px 5px 15px -5px rgba(0, 0, 0, 0.74);
+    background: #ffffff;
+    box-shadow: -6px 6px 16px #e6e6e6, 6px -6px 16px #ffffff;
     cursor: pointer;
     text-decoration: none;
     transition: all 0.1s ease-in-out;
 
     &:hover {
-      filter: brightness(0.9);
+      filter: brightness(0.95);
     }
 
     .death {

@@ -10,13 +10,15 @@ import { getSaint } from '../../queries/getSaint'
 import Page from '../../components/global/Page/Page'
 import ImageMain from '../../components/saints/single/ImageMain/ImageMain'
 import Quotes from '../../components/saints/single/Quotes/Quotes'
-import Bio from '../../components/saints/single/Description/Description'
+import Biography from '../../components/saints/single/Biography/Biography'
+import TextSection from '../../components/saints/single/TextSection/TextSecton'
 import Books from '../../components/saints/single/Books/Books'
 import RelatedPeople from '../../components/saints/single/RelatedPeople/RelatedPeople'
 import Tomb from '../../components/saints/single/Tomb/Tomb'
 import NameTag from '../../components/saints/single/NameTag/NameTag'
 import ErrorPage from 'next/error'
 import { getSaints } from '../../queries/getSaints'
+import { fetchAPIQuery } from '../../queries/fetchApiQuery'
 
 const SaintBio = (props) => {
   const router = useRouter()
@@ -68,7 +70,7 @@ const SaintBio = (props) => {
             </div>
             <div className="body">
               <div className="main">
-                <Bio
+                <Biography
                   text={data?.biography}
                   birthDate={data?.birth_year}
                   birthLocation={data?.birth_location}
@@ -76,16 +78,24 @@ const SaintBio = (props) => {
                   deathLocation={data?.death_location}
                   summary={data?.summary}
                 />
-                {/* <Quotes quotes={data?.quotes} /> */}
-                {/* <Books books={data?.books} /> */}
+                <TextSection
+                  title="Miracles"
+                  text={data?.miracles}
+                />
+                <TextSection
+                  title="Legacy and Influence"
+                  text={data?.legacy_and_influence}
+                />
               </div>
               <div className="rightRail">
-                <RelatedPeople data={relatedSaints} />
+                <Books books={data?.books} />
                 <Tomb
                   imageId={data?.tomb?.id}
                   location={data?.tomb_location}
                   church={data?.tomb_church_name}
                 />
+                <RelatedPeople data={relatedSaints} />
+                {/* <Quotes quotes={data?.quotes} /> */}
               </div>
             </div>
           </S.Saint>
@@ -106,29 +116,15 @@ export const getStaticProps = async ({ params }) => {
   )
 
   await queryClient.prefetchQuery(['saints'], getSaints)
-
-  const res = await fetch(
-    `${process.env.API_URL}/api/getRelatedSaints/?slug=${slug}`,
+  const relatedSaints = await fetchAPIQuery(
+    `getRelatedSaints/?slug=${slug}`,
   )
-
-  if (!res.ok) {
-    throw new Error(`HTTP error! Status: ${res.status}`)
-  }
-
-  let relatedSaints
-
-  try {
-    relatedSaints = await res.json()
-  } catch (error) {
-    console.error('Error parsing JSON:', res.text())
-    relatedSaints = null
-  }
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
       relatedSaints: relatedSaints
-        .filter((saint) => saint.slug !== slug)
+        ?.filter((saint) => saint.slug !== slug)
         .sort(() => Math.random() - 0.5)
         .slice(0, 4),
     },

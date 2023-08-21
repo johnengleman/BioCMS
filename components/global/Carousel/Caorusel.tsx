@@ -15,9 +15,9 @@ const Carousel = ({ children, options }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     slidesToScroll: 'auto',
     align: 'start',
-    loop: true,
     skipSnaps: true,
     dragFree: true,
+    ...options,
   })
   const [prevBtnDisabled, setPrevBtnDisabled] =
     useState(true)

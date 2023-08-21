@@ -18,10 +18,8 @@ type Book = {
   title: string
   link: string
   pages: number
-  description: string
-  book_cover: {
-    id: string
-  }
+  description_part_1: string
+  book_image: string
 }
 
 type Quote = {
@@ -40,6 +38,8 @@ type Saint = {
   summary: string
   slug: string
   biography: string
+  miracles: string
+  legacy_and_influence: string
   birth_year: number
   death_year: number
   birth_location: string
@@ -65,6 +65,8 @@ const query = gql`
       name
       summary
       biography
+      miracles
+      legacy_and_influence
       birth_year
       death_year
       birth_location
@@ -83,10 +85,8 @@ const query = gql`
         title
         link
         pages
-        description
-        book_cover {
-          id
-        }
+        description_part_1
+        book_image
       }
       quotes {
         text
