@@ -16,7 +16,8 @@ import TopAuthor from '../../components/books/TopAuthor/TopAuthor'
 import * as S from './styles'
 
 const Home = (props) => {
-  const { mostRecentlyCreatedBooks, topAuthors } = props
+  const { mostRecentlyCreatedBooks = [], topAuthors = [] } =
+    props
   const { data } = useQuery(['books'], getBooks)
   const [selectedGenre, setSelectedGenre] =
     useState('All Genres')
@@ -113,7 +114,7 @@ export async function getStaticProps() {
       limit: 5,
     })
   } catch (error) {
-    topAuthors = {}
+    topAuthors = []
   }
 
   return {
