@@ -95,14 +95,26 @@ const Home = (props) => {
 }
 
 export async function getStaticProps() {
+  let mostRecentlyCreatedBooks, topAuthors
+
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery(['books'], getBooks)
-  const mostRecentlyCreatedBooks = await fetchAPIQuery(
-    'getMostRecentlyCreatedBooks',
-  )
-  const topAuthors = await fetchAPIQuery('getTopAuthors', {
-    limit: 5,
-  })
+
+  try {
+    mostRecentlyCreatedBooks = await fetchAPIQuery(
+      'getMostRecentlyCreatedBooks',
+    )
+  } catch (error) {
+    mostRecentlyCreatedBooks = []
+  }
+
+  try {
+    topAuthors = await fetchAPIQuery('getTopAuthors', {
+      limit: 5,
+    })
+  } catch (error) {
+    topAuthors = {}
+  }
 
   return {
     props: {

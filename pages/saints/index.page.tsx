@@ -5,7 +5,6 @@ import {
 } from '@tanstack/react-query'
 import { useState } from 'react'
 import Head from 'next/head'
-import { Saint } from '../../components/saints/summary/interfaces'
 import { getSaints } from '../../queries/getSaints'
 import SaintSummary from '../../components/saints/summary/SaintSummary'
 import Page from '../../components/global/Page/Page'
@@ -13,8 +12,6 @@ import Filter from '../../components/global/Filter/Filter'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../components/hooks/useBreakPoints'
 import { fetchAPIQuery } from '../../queries/fetchApiQuery'
-import Mini from '../../components/saints/Mini/Mini'
-import RecentlyUpdated from '../../components/recentlyUpdated/RecentlyUpdated'
 
 const options = [
   'All',
@@ -139,6 +136,7 @@ const Saints = (props) => {
 }
 
 export async function getStaticProps() {
+  let mostRecentlyUpdatedSaints
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery(['saints'], getSaints)
 
@@ -147,9 +145,14 @@ export async function getStaticProps() {
   const twoWeeksAgoDateTimeString = today
     .toISOString()
     .slice(0, 19)
-  const mostRecentlyUpdatedSaints = await fetchAPIQuery(
-    'getMostRecentlyUpdatedSaints',
-  )
+
+  try {
+    mostRecentlyUpdatedSaints = await fetchAPIQuery(
+      'getMostRecentlyUpdatedSaints',
+    )
+  } catch (error) {
+    mostRecentlyUpdatedSaints = []
+  }
 
   return {
     props: {
