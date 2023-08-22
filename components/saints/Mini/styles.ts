@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { device } from '../../../styles/devices'
 import { colors } from '../../../styles/colors'
 
 export const Mini = styled.div`

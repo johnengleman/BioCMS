@@ -1,8 +1,5 @@
-import Image from 'next/image'
 import Link from 'next/link'
 import * as S from './styles'
-import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
-import StarRating from '../../global/StarRating/StarRating'
 import useBreakpoints from '../../hooks/useBreakPoints'
 
 export default function BookSummary(props) {

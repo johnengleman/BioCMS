@@ -9,7 +9,6 @@ import * as S from './styles'
 import { getSaint } from '../../queries/getSaint'
 import Page from '../../components/global/Page/Page'
 import ImageMain from '../../components/saints/single/ImageMain/ImageMain'
-import Quotes from '../../components/saints/single/Quotes/Quotes'
 import Biography from '../../components/saints/single/Biography/Biography'
 import TextSection from '../../components/saints/single/TextSection/TextSecton'
 import Books from '../../components/saints/single/Books/Books'
@@ -18,8 +17,10 @@ import Tomb from '../../components/saints/single/Tomb/Tomb'
 import NameTag from '../../components/saints/single/NameTag/NameTag'
 import ErrorPage from 'next/error'
 import { getSaints } from '../../queries/getSaints'
-import { fetchAPIQuery } from '../../queries/fetchApiQuery'
-import { APIResponse } from '../../queries/fetchApiQuery'
+import {
+  fetchAPIQuery,
+  APIResponse,
+} from '../../queries/fetchApiQuery'
 
 const SaintBio = (props) => {
   const router = useRouter()

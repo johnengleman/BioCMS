@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors, variables } from '../../../styles/colors'
+import { variables } from '../../../styles/colors'
 import { device } from '../../../styles/devices'
 
 export const TopAuthor = styled.div`

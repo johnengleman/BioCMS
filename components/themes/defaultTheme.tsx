@@ -1,6 +1,6 @@
 // components/themes/defaultTheme.tsx
-import { DefaultTheme } from 'styled-components'
-export const defaultTheme: DefaultTheme = {
+
+export const defaultTheme = {
   name: 'default',
   borderRadius: '4px',
   bodyColor: '#ffffff',

@@ -5,8 +5,7 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import { useState } from 'react'
-import { Book } from '../../queries/getBooks'
-import { getBooks } from '../../queries/getBooks'
+import { Book, getBooks } from '../../queries/getBooks'
 import BookSummary from '../../components/books/BookSummary/BookSummary'
 import Page from '../../components/global/Page/Page'
 import { fetchAPIQuery } from '../../queries/fetchApiQuery'
@@ -37,10 +36,7 @@ const Home = (props) => {
           />
         </Head>
         <Page>
-          <RecentlyUpdated
-            title="Latest Added"
-            options={{}}
-          >
+          <RecentlyUpdated title="Latest Added">
             {mostRecentlyCreatedBooks?.map((book, i) => (
               <Slide
                 key={i}
@@ -81,9 +77,9 @@ const Home = (props) => {
                     (book) =>
                       selectedGenre === 'All Genres' ||
                       book.genre ===
-                        selectedGenre.toLowerCase(),
+                        selectedGenre?.toLowerCase(),
                   )
-                  .map((book: Book, i: number) => (
+                  ?.map((book: Book, i: number) => (
                     <BookSummary
                       key={i}
                       {...book}

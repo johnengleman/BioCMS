@@ -2,7 +2,11 @@ import Carousel from '../global/Carousel/Caorusel'
 import * as S from './styles'
 import Header from '../global/Header/Header'
 
-const RecentlyUpdated = ({ children, title, options }) => (
+const RecentlyUpdated = ({
+  children = [],
+  title = '',
+  options = {},
+}) => (
   <S.RecentlyUpdated>
     <div className="header-container">
       <Header>{title}</Header>

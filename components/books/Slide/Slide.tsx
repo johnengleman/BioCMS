@@ -1,7 +1,5 @@
 import Link from 'next/link'
-import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import * as S from './styles'
-import useBreakpoints from '../../hooks/useBreakPoints'
 
 const Mini = ({
   link,
