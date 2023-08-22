@@ -1,4 +1,24 @@
-import { gql } from 'graphql-request'
+import { request, gql } from 'graphql-request'
+
+interface Photo {
+  directus_files_id: {
+    id: number
+  }
+}
+
+interface Saint {
+  id: number
+  slug: string
+  name: string
+  birth_year?: number // The ? indicates that the property is optional
+  death_year?: number
+  categories: string[]
+  photos: Photo[]
+}
+
+interface Response {
+  saints: Saint[]
+}
 
 const allSaints = gql`
   query {
@@ -18,7 +38,7 @@ const allSaints = gql`
   }
 `
 
-const getSaintCategories = gql`
+const saintCategories = gql`
   query getSaintCategories($slug: String!) {
     saints(filter: { slug: { _eq: $slug } }) {
       id
@@ -29,48 +49,40 @@ const getSaintCategories = gql`
   }
 `
 
-const getData = async (
-  queryFunc,
-  variables?: Record<string, any>,
-) => {
-  const res = await fetch(
+export const getAllSaints = async () => {
+  const { saints } = await request<Response>(
     'https://saints-cms.onrender.com/graphql',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        query: queryFunc.toString(),
-        variables,
-      }),
-    },
+    allSaints,
   )
+  return saints
+}
 
-  return await res.json()
+export const getSaintCategories = async (slug) => {
+  const { saints } = await request<Response>(
+    'https://saints-cms.onrender.com/graphql',
+    saintCategories,
+    { slug },
+  )
+  return saints
 }
 
 export default async function handler(req, res) {
   const slug = req.query.slug ?? undefined
 
   try {
-    const allSaintsData = await getData(allSaints)
-    const saintCategoryData = await getData(
-      getSaintCategories,
-      { slug: slug },
-    )
+    const allSaintsData = await getAllSaints()
+    const saintCategoryData = await getSaintCategories(slug)
 
     const targetCategories = new Set(
-      saintCategoryData.data.saints[0].categories,
+      saintCategoryData[0].categories,
     )
-    const relatedSaints = allSaintsData.data.saints.filter(
-      (saint) =>
-        saint.categories.some((category) =>
-          targetCategories.has(category),
-        ),
+    const relatedSaints = allSaintsData.filter((saint) =>
+      saint.categories.some((category) =>
+        targetCategories.has(category),
+      ),
     )
 
-    res.status(200).json(relatedSaints)
+    res.status(200).json(relatedSaints || [])
   } catch (error) {
     res.status(500).json({ error: 'failed to load data' })
   }

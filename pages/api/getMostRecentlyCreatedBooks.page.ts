@@ -63,9 +63,7 @@ const lastYCreatedBooks = gql`
   }
 `
 
-export const getBooksCreatedSinceX = async (
-  lastUpdate,
-): Promise<Book[]> => {
+export const getBooksCreatedSinceX = async (lastUpdate) => {
   if (!lastUpdate) {
     return []
   }
@@ -78,9 +76,7 @@ export const getBooksCreatedSinceX = async (
   return books
 }
 
-export const getLastYCreatedBooks = async (
-  limit,
-): Promise<Book[]> => {
+export const getLastYCreatedBooks = async (limit) => {
   const { books } = await request<Response>(
     'https://saints-cms.onrender.com/graphql',
     lastYCreatedBooks,
@@ -104,7 +100,7 @@ export default async function handler(req, res) {
       )
     }
 
-    res.status(200).json(mostRecentlyUpdatedBooks)
+    res.status(200).json(mostRecentlyUpdatedBooks || [])
   } catch (error) {
     res.status(500).json({ error })
   }

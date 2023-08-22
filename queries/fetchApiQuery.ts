@@ -1,11 +1,9 @@
-interface IAPIResponse {
-  [key: string]: any
-}
+export type APIResponse = any[]
 
 type queries = [
   'getMostRecentlyCreatedBooks',
   'getMostRecentlyUpdatedSaints',
-  `getRelatedSaints/?slug=${string}`,
+  `getRelatedSaints`,
   'getTopAuthors',
 ]
 
@@ -26,26 +24,27 @@ const createQueryParams = (options) => {
 const fetchAPIQuery = async (
   query: queries[number],
   options?: Record<string, any>,
-): Promise<IAPIResponse | null> => {
-  try {
-    const response = await fetch(
-      `${
-        process.env.API_URL
-      }/api/${query}${createQueryParams(options)}`,
+): Promise<APIResponse | null> => {
+  console.log(
+    'url: ',
+    `${process.env.API_URL}/api/${query}${createQueryParams(
+      options,
+    )}`,
+  )
+  const response = await fetch(
+    `${process.env.API_URL}/api/${query}${createQueryParams(
+      options,
+    )}`,
+  )
+
+  if (!response.ok) {
+    throw new Error(
+      `HTTP error! Status: ${response.status}`,
     )
-
-    if (!response.ok) {
-      throw new Error(
-        `HTTP error! Status: ${response.status}`,
-      )
-    }
-
-    const data = await response.json()
-    return data
-  } catch (error) {
-    console.error('Error during API request:', error)
-    return null
   }
+
+  const data = await response.json()
+  return data
 }
 
 export { fetchAPIQuery }

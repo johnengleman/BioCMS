@@ -53,7 +53,7 @@ const Home = (props) => {
             <S.ByAuthor>
               <h3>Top Authors</h3>
               <S.TopAuthorsContainer>
-                {topAuthors.map((author, i) => (
+                {topAuthors?.map((author, i) => (
                   <TopAuthor
                     key={i}
                     {...author}

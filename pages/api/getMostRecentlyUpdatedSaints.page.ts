@@ -105,7 +105,7 @@ export default async function handler(req, res) {
         await getLastYCreatedSaints(limit)
     }
 
-    res.status(200).json(mostRecentlyUpdatedSaints)
+    res.status(200).json(mostRecentlyUpdatedSaints || [])
   } catch (error) {
     res.status(500).json({ error })
   }

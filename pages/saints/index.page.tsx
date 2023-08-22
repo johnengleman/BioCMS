@@ -41,7 +41,7 @@ const options = [
   'Warriors',
 ]
 
-const Home = (props) => {
+const Saints = (props) => {
   const { data } = useQuery(['saints'], getSaints)
   const [filter, setFilter] = useState('All')
   const { mostRecentlyUpdatedSaints } = props
@@ -160,4 +160,4 @@ export async function getStaticProps() {
   }
 }
 
-export default Home
+export default Saints

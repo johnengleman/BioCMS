@@ -19,6 +19,7 @@ import NameTag from '../../components/saints/single/NameTag/NameTag'
 import ErrorPage from 'next/error'
 import { getSaints } from '../../queries/getSaints'
 import { fetchAPIQuery } from '../../queries/fetchApiQuery'
+import { APIResponse } from '../../queries/fetchApiQuery'
 
 const SaintBio = (props) => {
   const router = useRouter()
@@ -106,6 +107,8 @@ const SaintBio = (props) => {
 }
 
 export const getStaticProps = async ({ params }) => {
+  let relatedSaints: APIResponse = []
+
   const slug = Array.isArray(params?.slug)
     ? params?.slug[0]
     : params?.slug
@@ -116,9 +119,18 @@ export const getStaticProps = async ({ params }) => {
   )
 
   await queryClient.prefetchQuery(['saints'], getSaints)
-  const relatedSaints = await fetchAPIQuery(
-    `getRelatedSaints/?slug=${slug}`,
-  )
+
+  try {
+    const saintsResponse = await fetchAPIQuery(
+      'getRelatedSaints',
+      {
+        slug,
+      },
+    )
+    relatedSaints = saintsResponse || []
+  } catch (error) {
+    console.error(error)
+  }
 
   return {
     props: {
@@ -161,7 +173,7 @@ export const getStaticPaths = async () => {
 
     return {
       paths,
-      fallback: 'blocking',
+      fallback: true,
     }
   }
   const error = await res.text()
