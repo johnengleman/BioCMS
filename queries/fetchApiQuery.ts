@@ -25,12 +25,6 @@ const fetchAPIQuery = async (
   query: queries[number],
   options?: Record<string, any>,
 ): Promise<APIResponse | null> => {
-  console.log(
-    'url: ',
-    `${process.env.API_URL}/api/${query}${createQueryParams(
-      options,
-    )}`,
-  )
   const response = await fetch(
     `${process.env.API_URL}/api/${query}${createQueryParams(
       options,
