@@ -66,7 +66,7 @@ export const TextSection = styled.div<{
       }
     }
     p {
-      font-size: 14px;
+      font-size: 0.9375rem;
       line-height: 1.6;
       color: #202122;
       font-family: sans-serif;

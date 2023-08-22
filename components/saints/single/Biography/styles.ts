@@ -64,7 +64,7 @@ export const Bio = styled.div<{ $readMore?: Boolean }>`
     }
 
     p {
-      font-size: 14px;
+      font-size: 0.9375rem;
       line-height: 1.6;
       color: #202122;
       font-family: sans-serif;
