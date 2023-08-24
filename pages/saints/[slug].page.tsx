@@ -60,12 +60,12 @@ const SaintBio = (props) => {
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: data.name,
-    birthDate: data.birth_year,
-    deathDate: data.death_year,
-    birthPlace: data.birth_location,
-    deathPlace: data.death_location,
-    description: data.summary,
+    name: data?.name,
+    birthDate: data?.birth_year,
+    deathDate: data?.death_year,
+    birthPlace: data?.birth_location,
+    deathPlace: data?.death_location,
+    description: data?.summary,
     affiliation: 'Eastern Orthodox Church',
   }
 
@@ -74,7 +74,7 @@ const SaintBio = (props) => {
       <>
         <Head>
           <title key="title">
-            {data.name}: Life, Legacy, and Teachings
+            {data?.name}: Life, Legacy, and Teachings
           </title>
           <link
             rel="canonical"
@@ -97,7 +97,7 @@ const SaintBio = (props) => {
             <div className="leftRail">
               <ImageMain
                 images={data?.photos}
-                name={data.name}
+                name={data?.name}
               />
             </div>
             <div
@@ -105,7 +105,7 @@ const SaintBio = (props) => {
               ref={myRef}
             >
               <NameTag
-                name={data.name}
+                name={data?.name}
                 tags={data?.categories}
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}

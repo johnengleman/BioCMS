@@ -10,7 +10,6 @@ type Props = {
 }
 
 const Biography = (props) => {
-  console.log(props.biography)
   return (
     <S.Bio>
       <div
