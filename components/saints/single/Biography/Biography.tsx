@@ -12,6 +12,7 @@ type Props = {
 const Biography = (props) => {
   return (
     <S.Bio>
+      <h2>Life</h2>
       <div
         className="text"
         dangerouslySetInnerHTML={{

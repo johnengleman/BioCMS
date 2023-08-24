@@ -22,19 +22,6 @@ export const TextSection = styled.div<{
     padding: 10px 40px 20px 40px;
   }
 
-  h2 {
-    position: absolute;
-    top: -15px;
-    left: -10px;
-    background: ${colors.violet};
-    color: ${colors.gold};
-    padding: 5px 20px;
-    font-size: 0.8rem;
-    font-weight: 500;
-    border-radius: 3px;
-    transform: rotate(-4deg);
-  }
-
   .summary {
     font-weight: 500;
     font-size: 14px;
@@ -52,7 +39,8 @@ export const TextSection = styled.div<{
     overflow: hidden;
     margin-top: 30px;
 
-    h3 {
+    h3,
+    h2 {
       color: #666;
       font-weight: 500;
       font-size: 1.2rem;
