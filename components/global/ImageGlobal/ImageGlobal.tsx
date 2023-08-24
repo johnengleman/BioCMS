@@ -27,6 +27,7 @@ const ImageGlobal = ({
         position: 'relative',
         height: fill ? '100%' : `${height}px`,
         width: fill ? '100%' : `${width}px`,
+        minWidth: fill ? '100%' : `${width}px`,
       }}
     >
       <Skeleton

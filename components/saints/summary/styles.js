@@ -2,6 +2,12 @@ import styled from 'styled-components'
 import { colors } from '../../../styles/colors'
 
 export const SaintSummary = styled.div`
+  @keyframes show {
+    from {
+      translate: 0 50%;
+    }
+  }
+
   .saint-summary {
     display: block;
     width: 100%;
@@ -14,7 +20,7 @@ export const SaintSummary = styled.div`
     box-shadow: -6px 6px 16px #e6e6e6, 6px -6px 16px #ffffff;
     cursor: pointer;
     text-decoration: none;
-    transition: all 0.1s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     &:hover {
       filter: brightness(0.95);

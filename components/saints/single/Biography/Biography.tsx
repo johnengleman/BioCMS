@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import Timeline from '../Timeline/Timeline'
-import ReadMore from '../../../global/ReadMore/ReadMore'
 import * as S from './styles'
 
 type Props = {
@@ -12,35 +9,16 @@ type Props = {
   summary: string
 }
 
-const Biography = ({
-  text,
-  birthDate,
-  birthLocation,
-  deathDate,
-  deathLocation,
-  summary,
-}: Props) => {
-  const [readMore, setReadMore] = useState(false)
-
+const Biography = (props) => {
+  console.log(props.biography)
   return (
-    <S.Bio $readMore={readMore}>
-      <h2 className="title">Life</h2>
-      <Timeline
-        birthDate={birthDate}
-        birthLocation={birthLocation}
-        deathDate={deathDate}
-        deathLocation={deathLocation}
-      />
+    <S.Bio>
       <div
         className="text"
-        dangerouslySetInnerHTML={{ __html: text }}
+        dangerouslySetInnerHTML={{
+          __html: props.biography,
+        }}
       />
-      <div className="footer">
-        <ReadMore
-          onClick={() => setReadMore(!readMore)}
-          readMore={readMore}
-        />
-      </div>
     </S.Bio>
   )
 }

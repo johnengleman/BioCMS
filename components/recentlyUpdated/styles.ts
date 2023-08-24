@@ -11,7 +11,7 @@ export const RecentlyUpdated = styled.div`
   border-radius: 8px;
 
   .header-container {
-    width: 90%;
+    width: 95%;
     max-width: 1420px;
     margin: 0 auto;
 

@@ -8,12 +8,14 @@ export const Book = styled.div`
   color: inherit;
   text-decoration: none;
 
-  @media ${device.laptopL} {
-    width: calc(50% - 20px);
-  }
+  .image {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
 
-  img {
-    border-radius: 5px;
+    img {
+      border-radius: 5px;
+    }
   }
 
   .book-info {
@@ -48,6 +50,10 @@ export const Book = styled.div`
 
 export const Books = styled.div`
   margin-bottom: 35px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 12px;
+  padding: 30px;
 
   @media ${device.tablet} {
     margin-bottom: 50px;

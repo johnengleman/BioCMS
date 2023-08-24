@@ -3,7 +3,7 @@ import { device } from '../../../styles/devices'
 
 export const Page = styled.div`
   min-height: 100vh;
-  background-color: #f3f5f7;
+  background-color: #fff;
 `
 
 export const Body = styled.main`
@@ -14,10 +14,9 @@ export const Body = styled.main`
   gap: 1rem;
   width: 90%;
   max-width: 1420px;
-  margin-top: 25px;
 
-  @media ${device.laptop} {
-    margin-top: 20px;
+  @media ${device.tablet} {
+    width: 95%;
   }
 
   .my-masonry-grid {

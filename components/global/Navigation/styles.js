@@ -6,8 +6,8 @@ export const Container = styled.div`
   background-size: cover; /* This will cover the entire viewport */
   background-repeat: no-repeat; /* Important if the image is smaller than the footer */
   background-position: center 45%; /* This will center the image */
-  height: 200px; /* Or whatever height you want */
-  margin-bottom: 20px;
+  height: 100px; /* Or whatever height you want */
+  margin-bottom: 50px;
   position: relative;
   border-bottom: 2px solid #522900;
 `
@@ -16,13 +16,11 @@ export const Navigation = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
   height: 60px;
   max-width: 1430px;
-  position: absolute;
-  bottom: 10px;
-  margin-left: 5%;
+  padding-top: 60px;
 
   ul {
     display: flex;

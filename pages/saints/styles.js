@@ -5,60 +5,42 @@ export const Saint = styled.div`
   width: 100%;
   font-family: var(--font-inter);
   color: #212121;
+  display: flex;
+  gap: 60px;
 
-  .col {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  .leftRail {
+    width: 150px;
+    padding-top: 80px;
+    display: none;
+
+    @media ${device.laptop} {
+      display: block;
+    }
   }
 
-  .quotes {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 25px;
-  }
-
-  .body {
-    display: flex;
-    flex-direction: column;
+  .main {
+    width: 100%;
 
     @media ${device.tablet} {
-      flex-direction: row;
-      gap: 30px;
+      width: calc(100% - 300px);
     }
 
     @media ${device.laptop} {
-      gap: 40px;
+      width: calc(100% - 500px);
+    }
+  }
+
+  .rightRail {
+    width: 300px;
+    padding-top: 200px;
+    display: none;
+
+    @media ${device.tablet} {
+      display: block;
     }
 
-    @media ${device.laptopL} {
-      gap: 50px;
-    }
-
-    .main {
-      width: 100%;
-
-      @media ${device.tablet} {
-        width: 60%;
-      }
-    }
-
-    .rightRail {
-      width: 100%;
-
-      @media ${device.tablet} {
-        width: 40%;
-        padding-left: 30px;
-        border-left: 1px solid #dee2e6;
-      }
-
-      @media ${device.laptop} {
-        padding-left: 40px;
-      }
-
-      @media ${device.laptopL} {
-        padding-left: 50px;
-      }
+    @media ${device.laptop} {
+      width: 350px;
     }
   }
 `

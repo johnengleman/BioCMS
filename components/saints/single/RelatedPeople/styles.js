@@ -11,6 +11,7 @@ export const RelatedPerson = styled.div`
   .image-global {
     margin-right: 10px;
     border-radius: 5px;
+    box-shadow: -6px 6px 16px #e6e6e6, 6px -6px 16px #ffffff;
 
     img {
       border-radius: 5px;
