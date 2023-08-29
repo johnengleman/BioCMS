@@ -32,9 +32,8 @@ const fetchAPIQuery = async (
   )
 
   if (!response.ok) {
-    throw new Error(
-      `HTTP error! Status: ${response.status}`,
-    )
+    console.error(`HTTP error! Status: ${response.status}`)
+    return []
   }
 
   const data = await response.json()
