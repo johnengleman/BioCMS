@@ -12,7 +12,7 @@ export default function BookSummary(props) {
     date_created,
     description_part_1,
     description_part_2,
-    book_cover,
+    amazon_book_cover,
     genre,
     topics,
   } = props
@@ -31,7 +31,7 @@ export default function BookSummary(props) {
           <div
             className="image"
             dangerouslySetInnerHTML={{
-              __html: book_cover,
+              __html: amazon_book_cover,
             }}
           ></div>
           <Link href={store_link || ''}>

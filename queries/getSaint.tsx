@@ -19,7 +19,7 @@ type Book = {
   store_link: string
   pages: number
   description_part_1: string
-  book_cover: string
+  amazon_amazon_book_cover: string
 }
 
 type Saying = {
@@ -83,7 +83,7 @@ const query = gql`
         store_link
         pages
         description_part_1
-        book_cover
+        amazon_book_cover
       }
       sayings {
         text

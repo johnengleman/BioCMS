@@ -9,7 +9,7 @@ export type Book = {
   date_created: string
   description_part_1: string
   description_part_2: string
-  book_cover: string
+  amazon_book_cover: string
   genre: string
   topics: JSON
 }
@@ -29,7 +29,7 @@ const query = gql`
       date_created
       description_part_1
       description_part_2
-      book_cover
+      amazon_book_cover
       genre
       topics
     }

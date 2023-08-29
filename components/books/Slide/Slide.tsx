@@ -5,7 +5,7 @@ const Mini = ({
   store_link,
   title,
   author,
-  book_cover,
+  amazon_book_cover,
   description_part_1,
 }) => {
   return (
@@ -14,7 +14,7 @@ const Mini = ({
         <div
           className="image"
           dangerouslySetInnerHTML={{
-            __html: book_cover,
+            __html: amazon_book_cover,
           }}
         />
         <div className="info">

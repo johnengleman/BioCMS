@@ -9,7 +9,7 @@ type BookProps = {
   store_link: string
   pages?: number
   description: string
-  book_cover: string
+  amazon_book_cover: string
 }
 
 const Book = ({
@@ -17,7 +17,7 @@ const Book = ({
   author,
   store_link,
   pages,
-  book_cover,
+  amazon_book_cover,
   description,
 }: BookProps) => {
   return (
@@ -25,7 +25,7 @@ const Book = ({
       <div
         className="image"
         dangerouslySetInnerHTML={{
-          __html: book_cover,
+          __html: amazon_book_cover,
         }}
       ></div>
       <div className="book-info">
