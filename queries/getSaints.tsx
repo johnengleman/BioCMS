@@ -1,6 +1,6 @@
 import { request, gql } from 'graphql-request'
 
-type Photo = {
+type Image = {
   directus_files_id: {
     id: string
     description: string
@@ -11,7 +11,7 @@ type Book = {
   title: string
 }
 
-type Quote = {
+type Saying = {
   text: string
 }
 
@@ -29,9 +29,9 @@ type Saint = {
   death_year: number
   birth_location: string
   death_location: string
-  categories: string[]
-  photos: Photo[]
-  quotes: Quote[]
+  tags: string[]
+  images: Image[]
+  sayings: Saying[]
   books: Book[]
 }
 
@@ -47,7 +47,7 @@ const query = gql`
       name
       summary
       biography
-      categories
+      tags
       birth_year
       death_year
       birth_location
@@ -55,13 +55,12 @@ const query = gql`
       books {
         title
       }
-      quotes {
+      sayings {
         text
       }
-      photos {
+      images {
         directus_files_id {
           id
-          description
         }
       }
     }
@@ -70,7 +69,7 @@ const query = gql`
 
 export const getSaints = async () => {
   const { saints } = await request<Response>(
-    'https://saints-cms.onrender.com/graphql',
+    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
     query,
   )
   return saints

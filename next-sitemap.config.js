@@ -1,6 +1,6 @@
 async function getSlugs() {
   const res = await fetch(
-    'https://saints-cms.onrender.com/graphql',
+    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
     {
       method: 'POST',
       headers: {

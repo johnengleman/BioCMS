@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCross } from '@fortawesome/pro-duotone-svg-icons'
 import * as S from './styles'
 
-const Mini = ({ slug, death_year, photos, name }) => (
+const Mini = ({ slug, death_year, images, name }) => (
   <S.Mini>
     <Link
       className="saint-mini"
@@ -17,10 +17,10 @@ const Mini = ({ slug, death_year, photos, name }) => (
       <div className="image">
         <ImageGlobal
           alt={
-            photos[0]?.directus_files_id?.description ||
+            images[0]?.directus_files_id?.description ||
             `Image of ${name}, the eastern orthodox saint`
           }
-          src={`https://saints-cms.onrender.com/assets/${photos[0]?.directus_files_id?.id}?key=summary`}
+          src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${images[0]?.directus_files_id.id}?key=summary`}
           fill={true}
         />
       </div>

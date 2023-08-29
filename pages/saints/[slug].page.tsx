@@ -83,7 +83,7 @@ const SaintBio = (props) => {
           <meta
             key="description"
             name="description"
-            content={`Discover ${data.name}'s spiritual journey in the Eastern Orthodox tradition. Explore their quotes, images, and related books.`}
+            content={`Discover ${data.name}'s spiritual journey in the Eastern Orthodox tradition. Explore their sayings, images, and related books.`}
           />
           <script
             type="application/ld+json"
@@ -96,7 +96,7 @@ const SaintBio = (props) => {
           <S.Saint>
             <div className="leftRail">
               <ImageMain
-                images={data?.photos}
+                images={data?.images}
                 name={data?.name}
               />
             </div>
@@ -106,7 +106,7 @@ const SaintBio = (props) => {
             >
               <NameTag
                 name={data?.name}
-                tags={data?.categories}
+                tags={data?.tags}
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
               />
@@ -121,7 +121,7 @@ const SaintBio = (props) => {
                 church={data?.tomb_church_name}
               />
               <RelatedPeople data={relatedSaints} />
-              {/* <Quotes quotes={data?.quotes} /> */}
+              {/* <Quotes quotes={data?.sayings} /> */}
             </div>
           </S.Saint>
         </Page>
@@ -170,7 +170,7 @@ export const getStaticProps = async ({ params }) => {
 
 export const getStaticPaths = async () => {
   const res = await fetch(
-    'https://saints-cms.onrender.com/graphql',
+    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
     {
       method: 'POST',
       headers: {

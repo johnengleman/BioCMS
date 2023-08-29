@@ -10,7 +10,7 @@ type DirectusFile = {
 type Saint = {
   id: number
   name: string
-  photos: { directus_files_id: DirectusFile }[]
+  images: { directus_files_id: DirectusFile }[]
   books_func: { count: number }
 }
 
@@ -24,7 +24,7 @@ const getAuthorsWithAtLeastTwoBooks = gql`
     saints(filter: { books_func: { count: { _gt: 1 } } }) {
       id
       name
-      photos(limit: 1) {
+      images(limit: 1) {
         directus_files_id {
           id
           width
@@ -41,7 +41,7 @@ const getAuthorsWithAtLeastTwoBooks = gql`
 
 export const getTopAuthors = async (limit) => {
   const { saints } = await request<Response>(
-    'https://saints-cms.onrender.com/graphql',
+    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
     getAuthorsWithAtLeastTwoBooks,
   )
   return saints

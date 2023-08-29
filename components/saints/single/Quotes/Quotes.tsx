@@ -1,10 +1,10 @@
 import * as S from './styles'
 
-type QuotesProps = {
-  quotes: QuoteData[]
+type SayingsProps = {
+  sayings: SayingData[]
 }
 
-type QuoteData = {
+type SayingData = {
   text: string
   topics: string[]
 }
@@ -37,17 +37,17 @@ const Quote = ({
   )
 }
 
-const Quotes = ({ quotes }: QuotesProps) => {
-  if (quotes?.length > 3) {
+const Quotes = ({ sayings }: SayingsProps) => {
+  if (sayings?.length > 3) {
     return (
       <S.SlideContainer>
-        {quotes?.map((quote: QuoteData, i) => (
+        {sayings?.map((quote: SayingData, i) => (
           <Quote
             key={i}
             text={quote.text}
             topics={quote.topics}
             quoteIndex={i + 1}
-            quoteTotal={quotes.length}
+            quoteTotal={sayings.length}
           />
         ))}
       </S.SlideContainer>
@@ -56,13 +56,13 @@ const Quotes = ({ quotes }: QuotesProps) => {
 
   return (
     <>
-      {quotes?.map((quote: QuoteData, i) => (
+      {sayings?.map((saying: SayingData, i) => (
         <Quote
           key={i}
-          text={quote.text}
-          topics={quote.topics}
+          text={saying.text}
+          topics={saying.topics}
           quoteIndex={i + 1}
-          quoteTotal={quotes.length}
+          quoteTotal={sayings?.length}
         />
       ))}
     </>

@@ -49,14 +49,20 @@ export const Book = styled.div`
 `
 
 export const Books = styled.div`
-  margin-bottom: 35px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  border: 1px solid rgb(221, 221, 221);
-  border-radius: 12px;
-  padding: 30px;
+  height: 1200px;
 
   @media ${device.tablet} {
     margin-bottom: 50px;
+  }
+
+  .container {
+    margin-bottom: 35px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border: 1px solid rgb(221, 221, 221);
+    border-radius: 12px;
+    padding: 30px;
+    position: sticky;
+    top: 40px;
   }
 
   .books-container {

@@ -1,6 +1,6 @@
 import { request, gql } from 'graphql-request'
 
-type Quote = {
+type Saying = {
   id: string
   text: string
   topics: JSON
@@ -11,27 +11,25 @@ type Quote = {
 }
 
 type Response = {
-  quotes: Quote[]
+  sayings: Saying[]
 }
 
 const query = gql`
   query {
-    quotes {
+    sayings {
       id
       text
-      topics
       author {
         name
       }
-      source
     }
   }
 `
 
-export const getQuotes = async () => {
-  const { quotes } = await request<Response>(
-    'https://saints-cms.onrender.com/graphql',
+export const getSayings = async () => {
+  const { sayings } = await request<Response>(
+    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
     query,
   )
-  return quotes
+  return sayings
 }

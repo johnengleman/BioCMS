@@ -72,7 +72,7 @@ const Search = ({ saints }) => {
           >
             <div className="profile">
               <ImageGlobal
-                src={`https://saints-cms.onrender.com/assets/${option.photos[0]?.directus_files_id.id}?key=search`}
+                src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${option.images[0]?.directus_files_id.id}?key=search`}
                 fill={false}
                 width={35}
                 height={35}

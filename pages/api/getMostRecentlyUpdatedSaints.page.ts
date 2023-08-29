@@ -12,8 +12,7 @@ type Saint = {
   date_created: string
   death_year: number // Assuming death_year is a number. Adjust if necessary.
   name: string
-  dea?: string // Using a question mark to indicate that "dea" might be optional.
-  photos: { directus_files_id: DirectusFile }[]
+  images: { directus_files_id: DirectusFile }[]
 }
 
 type Response = {
@@ -32,7 +31,7 @@ const saintsCreatedSinceX = gql`
       death_year
       name
       dea
-      photos {
+      images {
         directus_files_id {
           id
           width
@@ -56,7 +55,7 @@ const lastYCreatedSaints = gql`
       date_created
       death_year
       name
-      photos {
+      images {
         directus_files_id {
           id
           width
@@ -76,7 +75,7 @@ export const getSaintsCreatedSinceX = async (
   }
 
   const { saints } = await request<Response>(
-    'https://saints-cms.onrender.com/graphql',
+    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
     saintsCreatedSinceX,
     { date: lastUpdate },
   )
@@ -85,7 +84,7 @@ export const getSaintsCreatedSinceX = async (
 
 export const getLastYCreatedSaints = async (limit) => {
   const { saints } = await request<Response>(
-    'https://saints-cms.onrender.com/graphql',
+    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
     lastYCreatedSaints,
     { limit },
   )

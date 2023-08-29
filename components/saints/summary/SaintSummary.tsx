@@ -15,10 +15,10 @@ export default function SaintSummary(props) {
     name,
     birth_year,
     death_year,
-    photos,
-    categories,
+    images,
+    tags,
     summary,
-    quotes,
+    sayings,
     books,
     slug,
     priority,
@@ -45,10 +45,10 @@ export default function SaintSummary(props) {
         <div className="image">
           <ImageGlobal
             alt={
-              photos[0]?.directus_files_id?.description ||
+              images[0]?.directus_files_id?.description ||
               `Image of ${name}, the eastern orthodox saint`
             }
-            src={`https://saints-cms.onrender.com/assets/${photos[0]?.directus_files_id?.id}?key=summary`}
+            src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${images[0]?.directus_files_id.id}?key=summary`}
             fill={true}
             priority={priority}
           />
@@ -59,7 +59,7 @@ export default function SaintSummary(props) {
           <div className="summary">{summary}</div>
         </div>
         <div className="tags">
-          {categories?.map((category, index) => (
+          {tags?.map((category, index) => (
             <div
               key={index}
               className="tag"
@@ -92,7 +92,7 @@ export default function SaintSummary(props) {
                 } as any
               }
             />
-            <S.Count>{quotes?.length}</S.Count>
+            <S.Count>{sayings?.length}</S.Count>
           </div>
         </div>
       </Link>

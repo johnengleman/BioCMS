@@ -6,7 +6,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['saints-cms.onrender.com'],
+    NEXT_PUBLIC_DOMAINs: ['saints-cms.onrender.com'],
   },
   images: {
     unoptimized: true,

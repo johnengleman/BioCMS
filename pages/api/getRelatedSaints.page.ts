@@ -1,6 +1,6 @@
 import { request, gql } from 'graphql-request'
 
-interface Photo {
+interface Image {
   directus_files_id: {
     id: number
   }
@@ -12,8 +12,8 @@ interface Saint {
   name: string
   birth_year?: number // The ? indicates that the property is optional
   death_year?: number
-  categories: string[]
-  photos: Photo[]
+  tags: string[]
+  images: Image[]
 }
 
 interface Response {
@@ -28,8 +28,8 @@ const allSaints = gql`
       name
       birth_year
       death_year
-      categories
-      photos {
+      tags
+      images {
         directus_files_id {
           id
         }
@@ -38,29 +38,29 @@ const allSaints = gql`
   }
 `
 
-const saintCategories = gql`
-  query getSaintCategories($slug: String!) {
+const saintTags = gql`
+  query getSaintTags($slug: String!) {
     saints(filter: { slug: { _eq: $slug } }) {
       id
       slug
       name
-      categories
+      tags
     }
   }
 `
 
 export const getAllSaints = async () => {
   const { saints } = await request<Response>(
-    'https://saints-cms.onrender.com/graphql',
+    '${process.env.NEXT_PUBLIC_DOMAIN}/graphql',
     allSaints,
   )
   return saints
 }
 
-export const getSaintCategories = async (slug) => {
+export const getSaintTags= async (slug) => {
   const { saints } = await request<Response>(
-    'https://saints-cms.onrender.com/graphql',
-    saintCategories,
+    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
+    saintTags,
     { slug },
   )
   return saints
@@ -71,14 +71,14 @@ export default async function handler(req, res) {
 
   try {
     const allSaintsData = await getAllSaints()
-    const saintCategoryData = await getSaintCategories(slug)
+    const saintTagData = await getSaintTags(slug)
 
-    const targetCategories = new Set(
-      saintCategoryData[0].categories,
+    const targetTags = new Set(
+      saintTagData[0].tags,
     )
     const relatedSaints = allSaintsData.filter((saint) =>
-      saint.categories.some((category) =>
-        targetCategories.has(category),
+      saint.tags.some((category) =>
+        targetTags.has(category),
       ),
     )
 

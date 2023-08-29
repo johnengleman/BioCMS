@@ -15,7 +15,7 @@ const Tomb = ({ imageId, location, church }: TombProps) => {
         <Title>Relics</Title>
         <S.Tomb>
           <Image
-            src={`https://saints-cms.onrender.com/assets/${imageId}?fit=cover&height=150&width=350`}
+            src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${imageId}?fit=cover&height=150&width=350`}
             height="150"
             width="350"
             alt=""

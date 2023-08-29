@@ -2,10 +2,10 @@ import Link from 'next/link'
 import * as S from './styles'
 
 const Mini = ({
-  link,
+  store_link,
   title,
   author,
-  book_image,
+  book_cover,
   description_part_1,
 }) => {
   return (
@@ -14,7 +14,7 @@ const Mini = ({
         <div
           className="image"
           dangerouslySetInnerHTML={{
-            __html: book_image,
+            __html: book_cover,
           }}
         />
         <div className="info">
@@ -27,7 +27,7 @@ const Mini = ({
               __html: description_part_1,
             }}
           />
-          <Link href={link || ''}>
+          <Link href={store_link || ''}>
             <button className="book-link">
               See The Book
             </button>

@@ -5,14 +5,14 @@ import useBreakpoints from '../../hooks/useBreakPoints'
 export default function BookSummary(props) {
   const {
     id,
-    link,
+    store_link,
     title,
     pages,
     author,
     date_created,
     description_part_1,
     description_part_2,
-    book_image,
+    book_cover,
     genre,
     topics,
   } = props
@@ -31,10 +31,10 @@ export default function BookSummary(props) {
           <div
             className="image"
             dangerouslySetInnerHTML={{
-              __html: book_image,
+              __html: book_cover,
             }}
           ></div>
-          <Link href={link || ''}>
+          <Link href={store_link || ''}>
             <button className="book-link">
               See the Book
             </button>

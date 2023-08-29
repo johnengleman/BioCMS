@@ -8,15 +8,15 @@ const RelatedItem = ({
   name,
   birth_year,
   death_year,
-  photos,
+  images,
   slug,
-  categories,
+  tags,
 }) => {
   return (
     <S.RelatedPerson>
       <Link href={slug}>
         <ImageGlobal
-          src={`https://saints-cms.onrender.com/assets/${photos[0].directus_files_id.id}?fit=cover&height=150&width=100`}
+          src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${images[0].directus_files_id.id}?fit=cover&height=150&width=100`}
           height="150"
           width="100"
           fill={false}
@@ -28,7 +28,7 @@ const RelatedItem = ({
             {birth_year || '?'}-{death_year || '?'}
           </div>
           <div className="tags">
-            {categories.map((category, i) => (
+            {tags.map((category, i) => (
               <div
                 className="tag"
                 key={i}

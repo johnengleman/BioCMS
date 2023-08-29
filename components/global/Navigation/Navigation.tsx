@@ -10,13 +10,14 @@ const Navigation = ({ saints }) => {
           <S.Button>
             <Link href="/saints">Saints</Link>
           </S.Button>
-
           <S.Button>
             <Link href="/books">Books</Link>
           </S.Button>
-
           <S.Button>
-            <Link href="/quotes">Quotes</Link>
+            <Link href="/sayings">Sayings</Link>
+          </S.Button>
+          <S.Button>
+            <Link href="/prayers">Prayers</Link>
           </S.Button>
         </ul>
         <Search saints={saints} />

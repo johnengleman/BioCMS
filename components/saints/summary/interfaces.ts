@@ -11,11 +11,11 @@ export interface Saint {
   books: {
     title: string
   }[]
-  quotes: {
+  sayings: {
     text: string
   }[]
-  categories: string[]
-  photos: {
+  tags: string[]
+  images: {
     directus_files_id: {
       id: string
     }

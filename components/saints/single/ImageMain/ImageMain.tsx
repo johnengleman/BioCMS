@@ -18,7 +18,7 @@ const ImageMain = ({ images, name }) => {
             image?.directus_files_id?.description ||
             `Image of ${name}, the eastern orthodox saint`
           }
-          src={`https://saints-cms.onrender.com/assets/${image?.directus_files_id.id}?key=profile`}
+          src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${image?.directus_files_id.id}?key=profile`}
         />
       ))}
     </S.ImageContainer>

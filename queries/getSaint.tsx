@@ -1,6 +1,6 @@
 import { request, gql } from 'graphql-request'
 
-type Photo = {
+type Image = {
   directus_files_id: {
     id: string
     width: number
@@ -16,13 +16,13 @@ type Tomb = {
 type Book = {
   author: string
   title: string
-  link: string
+  store_link: string
   pages: number
   description_part_1: string
-  book_image: string
+  book_cover: string
 }
 
-type Quote = {
+type Saying = {
   text: string
   topics: string[]
 }
@@ -44,10 +44,10 @@ type Saint = {
   death_year: number
   birth_location: string
   death_location: string
-  categories: string[]
-  photos: Photo[]
+  tags: string[]
+  images: Image[]
   books: Book[]
-  quotes: Quote[]
+  sayings: Saying[]
   tomb: Tomb
   tomb_location: string
   tomb_church_name: string
@@ -71,40 +71,36 @@ const query = gql`
       death_year
       birth_location
       death_location
-      categories
-      photos {
+      tags
+      images {
         directus_files_id {
           id
-          width
-          height
-          description
         }
       }
       books {
         author
         title
-        link
+        store_link
         pages
         description_part_1
-        book_image
+        book_cover
       }
-      quotes {
+      sayings {
         text
-        topics
       }
-      prayers
-      tomb {
-        id
-      }
-      tomb_church_name
-      tomb_location
+      # prayers
+      # tomb {
+      #   id
+      # }
+      # tomb_church_name
+      # tomb_location
     }
   }
 `
 
 export const getSaint = async (slug?: String) => {
   const { saints } = await request<Response>(
-    'https://saints-cms.onrender.com/graphql',
+    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
     query,
     { slug },
   )

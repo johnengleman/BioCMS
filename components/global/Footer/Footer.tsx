@@ -11,7 +11,7 @@ const Footer = () => (
       <div className="row">
         <Link href="/saints">Saints</Link>
         <Link href="/books">Books</Link>
-        <Link href="/quotes">Quotes</Link>
+        <Link href="/sayings">Sayings</Link>
       </div>
     </div>
   </S.Footer>

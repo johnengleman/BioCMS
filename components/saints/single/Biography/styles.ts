@@ -38,8 +38,6 @@ export const Bio = styled.div<{ $readMore?: Boolean }>`
       color: #222;
       font-weight: 500;
       font-size: 1.2rem;
-      border-top: 1px solid #ddd;
-      padding-top: 1rem;
       margin-top: 2rem;
       padding-left: 1rem;
       padding-bottom: 0.5rem;

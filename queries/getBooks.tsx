@@ -2,14 +2,14 @@ import { request, gql } from 'graphql-request'
 
 export type Book = {
   id: string
-  link: string
+  store_link: string
   title: string
   pages: number
   author: string
   date_created: string
   description_part_1: string
   description_part_2: string
-  book_image: string
+  book_cover: string
   genre: string
   topics: JSON
 }
@@ -22,14 +22,14 @@ const query = gql`
   query {
     books {
       id
-      link
+      store_link
       title
       pages
       author
       date_created
       description_part_1
       description_part_2
-      book_image
+      book_cover
       genre
       topics
     }
@@ -38,7 +38,7 @@ const query = gql`
 
 export const getBooks = async () => {
   const { books } = await request<Response>(
-    'https://saints-cms.onrender.com/graphql',
+    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
     query,
   )
   return books

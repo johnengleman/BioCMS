@@ -6,7 +6,7 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import { Quote } from '../../components/quotes/QuoteSummary/interface'
-import { getQuotes } from '../../queries/getQuotes'
+import { getSayings } from '../../queries/getQuotes'
 import QuoteSummary from '../../components/quotes/QuoteSummary/QuoteSummary'
 import Page from '../../components/global/Page/Page'
 import Filter from '../../components/global/Filter/Filter'
@@ -38,7 +38,7 @@ const options = [
 ]
 
 const Home = () => {
-  const { data } = useQuery(['quotes'], getQuotes)
+  const { data } = useQuery(['quotes'], getSayings)
   const [filter, setFilter] = useState('All')
 
   if (data) {
@@ -76,7 +76,7 @@ const Home = () => {
 
 export async function getStaticProps() {
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery(['quotes'], getQuotes)
+  await queryClient.prefetchQuery(['quotes'], getSayings)
 
   return {
     props: {

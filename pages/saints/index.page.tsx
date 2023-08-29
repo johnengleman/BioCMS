@@ -50,6 +50,8 @@ const Saints = (props) => {
     isLaptop,
   } = useBreakpoints()
 
+  console.log(process.env.NEXT_PUBLIC_DOMAIN)
+
   const getColumnsToRender = () => {
     if (isMobileS || isMobileM) {
       return 1
@@ -70,8 +72,8 @@ const Saints = (props) => {
     if (filter === 'All') {
       return true
     } else if (
-      saint.categories.some(
-        (category) => category === filter,
+      saint.tags.some(
+        (tag) => tag === filter,
       )
     ) {
       return true
@@ -94,7 +96,7 @@ const Saints = (props) => {
           />
           <meta
             name="keywords"
-            content="Eastern Orthodox, saints, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious quotes, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
+            content="Eastern Orthodox, saints, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
           />
         </Head>
         <Page saints={data}>

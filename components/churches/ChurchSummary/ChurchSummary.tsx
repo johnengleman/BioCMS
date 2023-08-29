@@ -11,7 +11,7 @@ export default function ChurchSummary(props) {
         <div className="image">
           <Image
             alt="profile"
-            src={`https://saints-cms.onrender.com/assets/${image?.id}`}
+            src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${image?.id}`}
             fill={true}
           />
         </div>

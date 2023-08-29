@@ -6,18 +6,18 @@ import * as S from './styles'
 type BookProps = {
   title: string
   author: string
-  link: string
+  store_link: string
   pages?: number
   description: string
-  book_image: string
+  book_cover: string
 }
 
 const Book = ({
   title,
   author,
-  link,
+  store_link,
   pages,
-  book_image,
+  book_cover,
   description,
 }: BookProps) => {
   return (
@@ -25,7 +25,7 @@ const Book = ({
       <div
         className="image"
         dangerouslySetInnerHTML={{
-          __html: book_image,
+          __html: book_cover,
         }}
       ></div>
       <div className="book-info">
@@ -47,14 +47,16 @@ const Books = ({ books }: BooksProps) => {
   if (books?.length) {
     return (
       <S.Books>
-        <Title>Books</Title>
-        <div className="books-container">
-          {books?.map((book, i) => (
-            <Book
-              key={i}
-              {...book}
-            />
-          ))}
+        <div className='container'>
+          <Title>Books</Title>
+          <div className="books-container">
+            {books?.map((book, i) => (
+              <Book
+                key={i}
+                {...book}
+              />
+            ))}
+          </div>
         </div>
       </S.Books>
     )
