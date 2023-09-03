@@ -6,10 +6,22 @@ export const Container = styled.div`
   background-size: cover; /* This will cover the entire viewport */
   background-repeat: no-repeat; /* Important if the image is smaller than the footer */
   background-position: center 45%; /* This will center the image */
-  height: 100px; /* Or whatever height you want */
+  height: 150px; /* Or whatever height you want */
   margin-bottom: 50px;
   position: relative;
   border-bottom: 2px solid #522900;
+  border-top: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px 0;
+`
+export const Row = styled.div`
+  width: 95%;
+  max-width: 1350px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
 `
 
 export const Navigation = styled.div`
@@ -18,18 +30,28 @@ export const Navigation = styled.div`
   justify-content: space-between;
   width: 95%;
   margin: 0 auto;
-  height: 60px;
-  max-width: 1430px;
-  padding-top: 60px;
+  max-width: 1350px;
+  flex-direction: column;
 
-  ul {
+  @media ${device.tablet} {
+    flex-direction: row;
+  }
+
+  ul.pages {
     display: flex;
     gap: 5px;
     padding: 0;
+    margin: 0;
 
     li:first-child {
-      margin-left: -10px;
+      margin-left: -20px;
     }
+  }
+
+  .rightItems {
+    display: flex;
+    gap: 5px;
+    align-items: center;
   }
 `
 

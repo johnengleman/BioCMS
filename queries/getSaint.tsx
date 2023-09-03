@@ -66,7 +66,7 @@ const query = gql`
       summary
       biography
       miracles
-      legacy_and_influence
+      legacy_influence
       birth_year
       death_year
       birth_location

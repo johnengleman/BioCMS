@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import * as S from './styles'
-import ReadMore from '../../../global/ReadMore/ReadMore'
+import ReadMore from '../../ReadMore/ReadMore'
 
 const TextSection = ({ title, text }) => {
   const [readMore, setReadMore] = useState(false)

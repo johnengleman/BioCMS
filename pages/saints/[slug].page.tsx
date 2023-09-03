@@ -8,7 +8,7 @@ import {
 } from '@tanstack/react-query'
 import * as S from './styles'
 import { getSaint } from '../../queries/getSaint'
-import Page from '../../components/global/Page/Page'
+import Page from '../../components/page/Page/Page'
 import ImageMain from '../../components/saints/single/ImageMain/ImageMain'
 import Biography from '../../components/saints/single/Biography/Biography'
 import Books from '../../components/saints/single/Books/Books'

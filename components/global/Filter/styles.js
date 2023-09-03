@@ -117,7 +117,7 @@ export const Filter = styled.div`
     .embla {
       width: 90%;
       margin: 0 auto;
-      max-width: 1420px;
+      max-width: 1350px;
 
       .embla__viewport {
         &::after {

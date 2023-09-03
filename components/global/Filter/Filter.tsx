@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useMemo } from 'react'
 import * as S from './styles'
 import Carousel from '../Carousel/Caorusel'
 import { flushSync } from 'react-dom'
-import Header from '../Header/Header'
+import Header from '../../page/Header/Header'
 
 const Filter = ({
   setFilter,
@@ -150,4 +150,4 @@ const Filter = ({
   )
 }
 
-export default Filter
+export default Filter;

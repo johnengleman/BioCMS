@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import * as S from './styles'
-import useBreakpoints from '../../hooks/useBreakPoints'
+import useBreakpoints from '../../../hooks/useBreakPoints'
 
 export default function BookSummary(props) {
   const {

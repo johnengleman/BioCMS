@@ -19,19 +19,13 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "pages/index.jsx",
-    "components/global/Name/styles.js",
-    "components/global/Navigation/styles.js",
-    "components/global/page/styles.js",
-    "components/saints/summary/styles.js",
-    "pages/saints/styles.js",
-    "pages/saints/components/Powers/styles.js",
     ".next/types/**/*.ts"
   ],
   "exclude": ["node_modules"]

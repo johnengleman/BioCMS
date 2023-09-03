@@ -4,6 +4,7 @@ import { device } from '../../../styles/devices'
 export const Search = styled.div`
   position: relative;
   display: none;
+  margin-bottom: 10px;
 
   @media ${device.tablet} {
     display: block;

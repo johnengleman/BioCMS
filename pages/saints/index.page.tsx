@@ -4,14 +4,16 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { getSaints } from '../../queries/getSaints'
 import SaintSummary from '../../components/saints/summary/SaintSummary'
-import Page from '../../components/global/Page/Page'
+import Page from '../../components/page/Page/Page'
 import Filter from '../../components/global/Filter/Filter'
 import Masonry from 'react-masonry-css'
-import useBreakpoints from '../../components/hooks/useBreakPoints'
+import useBreakpoints from '../../hooks/useBreakPoints'
 import { fetchAPIQuery } from '../../queries/fetchApiQuery'
+import { properties } from '../../properties'
 
 const options = [
   'All',
@@ -39,7 +41,12 @@ const options = [
 ]
 
 const Saints = (props) => {
-  const { data } = useQuery(['saints'], getSaints)
+  const router = useRouter()
+  const church = router.query.church || 'all'
+  const { data } = useQuery(['saints', church], () =>
+    getSaints(church),
+  )
+
   const [filter, setFilter] = useState('All')
   const { mostRecentlyUpdatedSaints } = props
   const {
@@ -49,8 +56,6 @@ const Saints = (props) => {
     isTablet,
     isLaptop,
   } = useBreakpoints()
-
-  console.log(process.env.NEXT_PUBLIC_DOMAIN)
 
   const getColumnsToRender = () => {
     if (isMobileS || isMobileM) {
@@ -71,11 +76,7 @@ const Saints = (props) => {
   const filterSaints = (saint) => {
     if (filter === 'All') {
       return true
-    } else if (
-      saint.tags.some(
-        (tag) => tag === filter,
-      )
-    ) {
+    } else if (saint.tags.some((tag) => tag === filter)) {
       return true
     }
     return false
@@ -92,7 +93,7 @@ const Saints = (props) => {
           <meta
             key="description"
             name="description"
-            content="Explore the lives and legacies of Orthodox saints. From teachings to miracles, delve into their spiritual journeys."
+            content="Explore the lives and legacies of Catholic and Orthodox saints. From teachings to miracles, delve into their spiritual journeys."
           />
           <meta
             name="keywords"
@@ -112,7 +113,11 @@ const Saints = (props) => {
             setFilter={setFilter}
             selectedFilter={filter}
             options={options}
-            title="Explore all the Orthodox Saints"
+            title={
+              properties[
+                !Array.isArray(church) ? church : 'all'
+              ].filterTitle
+            }
           />
           <Masonry
             breakpointCols={getColumnsToRender()}
@@ -137,10 +142,13 @@ const Saints = (props) => {
   }
 }
 
-export async function getStaticProps() {
+export async function getStaticProps({ params }) {
+  const church = params?.church || 'all'
   let mostRecentlyUpdatedSaints
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery(['saints'], getSaints)
+  await queryClient.prefetchQuery(['saints', church], () =>
+    getSaints(church),
+  )
 
   const today = new Date()
   today.setDate(today.getDate() - 14)

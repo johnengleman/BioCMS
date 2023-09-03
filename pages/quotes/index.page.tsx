@@ -8,7 +8,7 @@ import {
 import { Quote } from '../../components/quotes/QuoteSummary/interface'
 import { getSayings } from '../../queries/getQuotes'
 import QuoteSummary from '../../components/quotes/QuoteSummary/QuoteSummary'
-import Page from '../../components/global/Page/Page'
+import Page from '../../components/page/Page/Page'
 import Filter from '../../components/global/Filter/Filter'
 import * as S from './styles'
 

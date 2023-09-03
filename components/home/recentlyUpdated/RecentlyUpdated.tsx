@@ -1,6 +1,6 @@
-import Carousel from '../global/Carousel/Caorusel'
+import Carousel from '../../global/Carousel/Caorusel'
 import * as S from './styles'
-import Header from '../global/Header/Header'
+import Header from '../../page/Header/Header'
 
 const RecentlyUpdated = ({
   children = [],

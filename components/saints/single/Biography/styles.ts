@@ -36,7 +36,7 @@ export const Bio = styled.div<{ $readMore?: Boolean }>`
     h3,
     h2 {
       color: #222;
-      font-weight: 500;
+      font-weight: 650;
       font-size: 1.2rem;
       margin-top: 2rem;
       padding-left: 1rem;
@@ -54,10 +54,9 @@ export const Bio = styled.div<{ $readMore?: Boolean }>`
 
     p,
     ul {
-      font-size: 0.9375rem;
+      font-size: 17px;
       line-height: 1.6;
       color: #222;
-      font-family: sans-serif;
       padding-bottom: 1rem;
       border-left: 1px solid #ddd;
       padding-left: 1rem;

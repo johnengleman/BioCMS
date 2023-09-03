@@ -18,6 +18,7 @@
     "import/no-dynamic-require": "error",
     "import/no-webpack-loader-syntax": "error",
     "react/react-in-jsx-scope": "off",
+    "react/jsx-uses-react": "off",
     "react/prop-types": "off",
     "import/no-named-as-default": "off"
   },

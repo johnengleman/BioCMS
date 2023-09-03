@@ -39,7 +39,7 @@ type Response = {
   saints: Saint[]
 }
 
-const query = gql`
+const allSaintsQuery = gql`
   query {
     saints {
       id
@@ -67,10 +67,49 @@ const query = gql`
   }
 `
 
-export const getSaints = async () => {
-  const { saints } = await request<Response>(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-    query,
-  )
-  return saints
+const churchSaintsQuery = gql`
+  query getSaint($church: String!) {
+    saints(
+      filter: { venerated_in: { _contains: $church } }
+    ) {
+      id
+      slug
+      name
+      summary
+      biography
+      tags
+      birth_year
+      death_year
+      birth_location
+      death_location
+      books {
+        title
+      }
+      sayings {
+        text
+      }
+      images {
+        directus_files_id {
+          id
+        }
+      }
+    }
+  }
+`
+
+export const getSaints = async (church) => {
+  if (church === 'all') {
+    const { saints } = await request<Response>(
+      `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
+      allSaintsQuery,
+    )
+    return saints
+  } else {
+    const { saints } = await request<Response>(
+      `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
+      churchSaintsQuery,
+      { church },
+    )
+    return saints
+  }
 }

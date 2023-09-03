@@ -42,7 +42,7 @@ export const TextSection = styled.div<{
     h3,
     h2 {
       color: #666;
-      font-weight: 500;
+      font-weight: 650;
       font-size: 1.2rem;
       border-bottom: 1px solid #ddd;
       padding-bottom: 0.25rem;
@@ -57,7 +57,6 @@ export const TextSection = styled.div<{
       font-size: 0.9375rem;
       line-height: 1.6;
       color: #202122;
-      font-family: sans-serif;
       margin-bottom: 1rem;
     }
   }

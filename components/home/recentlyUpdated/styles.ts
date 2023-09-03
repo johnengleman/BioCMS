@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { device } from '../../styles/devices'
-import { variables } from '../../styles/colors'
+import { device } from '../../../styles/devices'
+import { variables } from '../../../styles/colors'
 
 export const RecentlyUpdated = styled.div`
   display: flex;
@@ -12,7 +12,7 @@ export const RecentlyUpdated = styled.div`
 
   .header-container {
     width: 95%;
-    max-width: 1420px;
+    max-width: 1350x;
     margin: 0 auto;
 
     h1,

@@ -3,7 +3,6 @@ import { device } from '../../styles/devices'
 
 export const Saint = styled.div`
   width: 100%;
-  font-family: var(--font-inter);
   color: #212121;
   display: flex;
   gap: 60px;

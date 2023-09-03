@@ -13,7 +13,7 @@ export const Body = styled.main`
   margin: 0 auto;
   gap: 1rem;
   width: 90%;
-  max-width: 1420px;
+  max-width: 1350px;
 
   @media ${device.tablet} {
     width: 95%;

@@ -6,7 +6,7 @@ import Document, {
   DocumentContext,
 } from 'next/document'
 import Script from 'next/script'
-import Footer from '../components/global/Footer/Footer'
+import Footer from '../components/page/Footer/Footer'
 import { ServerStyleSheet } from 'styled-components'
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
