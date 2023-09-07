@@ -29,7 +29,7 @@ const Mini = ({
           />
           <Link href={store_link || ''}>
             <button className="book-link">
-              See The Book
+              Check Current Price
             </button>
           </Link>
         </div>

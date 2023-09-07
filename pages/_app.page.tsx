@@ -4,7 +4,7 @@ import { useLocalStorage } from 'usehooks-ts'
 import { defaultTheme } from '../themes/defaultTheme'
 import { GlobalStyle } from '../themes/GlobalStyle'
 import NextNProgress from 'nextjs-progressbar'
-import { ChurchProvider } from '../context/ChurchContext'
+import { SiteProvider } from '../context/SiteContext'
 import { Analytics } from '@vercel/analytics/react'
 import {
   Hydrate,
@@ -12,7 +12,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { AppProps } from 'next/app'
-import { Manrope, Roboto } from 'next/font/google'
+import { Inter } from 'next/font/google'
 import Head from 'next/head'
 
 import { config } from '@fortawesome/fontawesome-svg-core'
@@ -20,16 +20,9 @@ config.autoAddCss = false
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import '../styles/globals.css'
 
-const manrope = Manrope({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-Manrope',
-  display: 'swap',
-})
-
-const roboto = Roboto({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-Roboto',
+  variable: '--font-Inter',
   display: 'swap',
 })
 
@@ -40,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <ChurchProvider>
+      <SiteProvider>
         <QueryClientProvider client={queryClient}>
           <Hydrate state={pageProps.dehydratedState}>
             <Head>
@@ -54,15 +47,13 @@ function MyApp({ Component, pageProps }: AppProps) {
               />
             </Head>
             <NextNProgress />
-            <main
-              className={`${manrope.variable} ${roboto.variable}`}
-            >
+            <main className={inter.className}>
               <Component {...pageProps} />
               <Analytics />
             </main>
           </Hydrate>
         </QueryClientProvider>
-      </ChurchProvider>
+      </SiteProvider>
     </ThemeProvider>
   )
 }

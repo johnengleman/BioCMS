@@ -5,7 +5,7 @@ import {
   useContext,
 } from 'react'
 import { useRouter } from 'next/router'
-import { ChurchContext } from '../../../context/ChurchContext'
+import { SiteContext } from '../../../context/SiteContext'
 import CatholicCross from '../../global/Icons/CatholicCross/CatholicCross'
 import OrthodoxCross from '../../global/Icons/OrthodoxCross/OrthodoxCross'
 import * as S from './styles'
@@ -15,7 +15,7 @@ const ChurchToggle = () => {
   const church = router.query.church || 'all'
 
   const { selectedChurch, setSelectedChurch } =
-    useContext(ChurchContext)
+    useContext(SiteContext)
   const [buttonDimensions, setButtonDimensions] = useState({
     offsetLeft: 211,
     width: 43,
@@ -34,7 +34,7 @@ const ChurchToggle = () => {
 
       if (el && el instanceof HTMLElement) {
         setButtonDimensions({
-          offsetLeft: el.offsetLeft,
+          offsetLeft: el.offsetLeft - 3,
           width: el.clientWidth,
           height: el.clientHeight,
         })
@@ -63,7 +63,7 @@ const ChurchToggle = () => {
 
     const newQuery = {
       ...router.query,
-      church,
+      church: church[0]
     }
     router.push(
       {

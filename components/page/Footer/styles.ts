@@ -11,15 +11,14 @@ export const Footer = styled.div`
   background-size: cover; /* This will cover the entire viewport */
   background-repeat: no-repeat; /* Important if the image is smaller than the footer */
   background-position: center 58%; /* This will center the image */
-  height: 250px; /* Or whatever height you want */
+  height: 100px; /* Or whatever height you want */
   color: #fff;
   width: 100%;
-  margin-top: 70px;
   position: relative;
   border-top: 2px solid #522900;
 
   @media ${device.tablet} {
-    height: 450px;
+    height: 200px;
   }
 
   .links {

@@ -1,9 +1,10 @@
 export const colors = {
   gold: '#CCAD00',
-  brown: '#522900',
+  red: '#4C4637',
+  lightGray: '#B2AB99',
+  mediumGray: '#00CEB1',
+  darkGray: '#00957D',
   violet: '#241E4E',
-  sienna: '#CE6C47',
-  mint: '#F2F7F2',
 }
 
 export const variables = {

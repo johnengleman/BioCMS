@@ -36,7 +36,7 @@ export default function BookSummary(props) {
           ></div>
           <Link href={store_link || ''}>
             <button className="book-link">
-              See the Book
+              Check Current Price
             </button>
           </Link>
         </div>

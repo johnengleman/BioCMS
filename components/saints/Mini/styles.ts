@@ -2,68 +2,86 @@ import styled from 'styled-components'
 import { colors } from '../../../styles/colors'
 
 export const Mini = styled.div`
-  width: 10%;
-  height: 225px;
-  min-width: 150px;
-  display: block;
-  margin-right: 15px;
-
   .saint-mini {
     position: relative;
-    display: block;
-    height: 85%;
-    margin-top: 7%;
+    display: flex;
+    height: 100%;
+    margin: 20px;
+    height: 240px;
+    width: 500px;
+    margin-bottom: 20px;
+    border: 1px solid rgb(221, 221, 221);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 8px;
+    border-radius: 12px;
+    gap: 20px;
+
+    &:first-child {
+      margin-left: 0;
+    }
   }
 
   .image {
-    width: 100%;
-    position: relative;
     height: 100%;
+    width: 150px;
+    min-width: 150px;
     z-index: 2;
+    position: relative;
 
     img {
       transition: transform 0.5s ease;
       object-fit: cover;
-      object-position: 50% 10%;
+      /* border-bottom-left-radius: 10px;
+      border-top-left-radius: 10px; */
       border-radius: 10px;
+      box-shadow: rgba(0, 0, 0, 0.12) 0px 3px 8px;
     }
   }
 
-  .name {
-    background-color: ${colors.brown};
-    color: #ccebd9;
-    text-align: center;
-    font-size: 11px;
-    padding: 6px 15px;
-    border-radius: 5px;
-    font-weight: 500;
-    position: absolute;
-    bottom: -20px;
-    left: 5%;
-    z-index: 2;
-    width: 90%;
-    line-height: 1.1;
-    box-sizing: border-box;
-  }
+  .bio {
+    padding: 10px 20px 20px 0;
+    color: #222;
 
-  .death {
-    position: absolute;
-    top: -10px;
-    right: -8px;
-    padding: 6px 10px;
-    z-index: 5;
-    background: ${colors.violet};
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
-    font-size: 10px;
-    box-shadow: -2px 4px 10px 0px #121023;
-    gap: 3px;
+    h2 {
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 3px;
+    }
 
-    svg {
-      margin-bottom: 2px;
+    p {
+      line-height: 1.3;
+      font-size: 13px;
+      color: #626262;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 0.5rem;
+      margin-top: 1rem;
+
+      .tag {
+        padding: 2px 12px;
+        font-size: 10px;
+        letter-spacing: 0.5px;
+        border-radius: 4px;
+        color: #a1a1a1;
+        min-width: fit-content;
+        border: 1px solid #c6c6c6;
+      }
+    }
+
+    .header {
+      margin-bottom: 1rem;
+      color: #333;
+
+      .death {
+        font-size: 12px;
+        display: flex;
+        line-height: 1;
+        gap: 5px;
+        align-items: center;
+      }
     }
   }
 `

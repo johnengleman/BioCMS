@@ -4,26 +4,21 @@ import { device } from '../../../styles/devices'
 export const Search = styled.div`
   position: relative;
   display: none;
-  margin-bottom: 10px;
 
   @media ${device.tablet} {
     display: block;
   }
 
   .input {
-    width: 180px;
-    height: 40px;
-    border-radius: 20px;
-    border: 2px solid #dee2e6;
-    font-size: 15px;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid #dee2e6;
+    font-size: 14px;
     outline: none;
-    padding-left: 38px;
+    padding-left: 10px;
     font-weight: 400;
     transition: width 0.3s ease-in-out;
-
-    &:focus {
-      width: 220px;
-    }
   }
 
   .input-wrapper {
@@ -32,9 +27,8 @@ export const Search = styled.div`
 
   svg {
     position: absolute;
-    left: 8px; /* Adjust based on your design preference */
-    top: 33%;
-    left: 15px;
+    top: 28%;
+    right: 15px;
     font-size: 15px; /* Adjust based on your design preference */
   }
 
@@ -42,13 +36,13 @@ export const Search = styled.div`
     display: block;
     position: absolute;
     background-color: white;
-    min-width: 290px;
+    min-width: 200px;
     border: 1px solid #ddd;
     z-index: 1000;
     right: 0;
     top: 45px;
     width: fit-content;
-    border-radius: 15px;
+    border-radius: 5px;
     transition: opacity 0.25s ease-in-out;
 
     &:empty {
@@ -71,13 +65,13 @@ export const Search = styled.div`
     border-bottom: 1px solid #dee2e6;
 
     &:first-child {
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
     }
 
     &:last-child {
-      border-bottom-left-radius: 15px;
-      border-bottom-right-radius: 15px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
     }
 
     &:hover {

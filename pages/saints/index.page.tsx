@@ -3,8 +3,10 @@ import {
   QueryClient,
   useQuery,
 } from '@tanstack/react-query'
-import { useState } from 'react'
 import { useRouter } from 'next/router'
+import * as S from './styles'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
 import Head from 'next/head'
 import { getSaints } from '../../queries/getSaints'
 import SaintSummary from '../../components/saints/summary/SaintSummary'
@@ -15,39 +17,27 @@ import useBreakpoints from '../../hooks/useBreakPoints'
 import { fetchAPIQuery } from '../../queries/fetchApiQuery'
 import { properties } from '../../properties'
 
-const options = [
-  'All',
-  'Fools-for-Christ',
-  'Holy-Women',
-  'Hermits',
-  'Bishops',
-  'Monastics',
-  'Confessors',
-  'Warriors',
-  'Fools-for-Christ',
-  'Holy-Women',
-  'Hermits',
-  'Bishops',
-  'Monastics',
-  'Confessors',
-  'Warriors',
-  'Fools-for-Christ',
-  'Holy-Women',
-  'Hermits',
-  'Bishops',
-  'Monastics',
-  'Confessors',
-  'Warriors',
-]
-
 const Saints = (props) => {
   const router = useRouter()
   const church = router.query.church || 'all'
-  const { data } = useQuery(['saints', church], () =>
-    getSaints(church),
+  const saintCategory = router.query.category || 'all'
+  const sort = router.query.sort || 'chronological-asc'
+
+  const { data, isError, isLoading } = useQuery(
+    ['saints', church, saintCategory, sort],
+    () =>
+      getSaints(
+        Array.isArray(church) ? church[0] : church,
+        Array.isArray(saintCategory)
+          ? saintCategory[0]
+          : saintCategory,
+        Array.isArray(sort) ? sort[0] : sort,
+      ),
+    {
+      enabled: !!saintCategory || !!church, // This ensures the query is run only when the category is available
+    },
   )
 
-  const [filter, setFilter] = useState('All')
   const { mostRecentlyUpdatedSaints } = props
   const {
     isMobileS,
@@ -73,94 +63,105 @@ const Saints = (props) => {
     return 5
   }
 
-  const filterSaints = (saint) => {
-    if (filter === 'All') {
-      return true
-    } else if (saint.tags.some((tag) => tag === filter)) {
-      return true
+  const handleSetSaintCategory = (category) => {
+    const newQuery = {
+      ...router.query,
+      category: category.toLowerCase(),
     }
-    return false
+    router.push(
+      {
+        pathname: router.pathname,
+        query: newQuery,
+      },
+      undefined,
+      { shallow: true },
+    )
   }
 
-  if (data) {
-    return (
-      <>
-        <Head>
-          <title key="title">
-            Eastern Orthodox Saints: Spiritual Biographies,
-            Books, and Quotes
-          </title>
-          <meta
-            key="description"
-            name="description"
-            content="Explore the lives and legacies of Catholic and Orthodox saints. From teachings to miracles, delve into their spiritual journeys."
-          />
-          <meta
-            name="keywords"
-            content="Eastern Orthodox, saints, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
-          />
-        </Head>
-        <Page saints={data}>
-          {/* <RecentlyUpdated title="Newest Saint Profiles">
-            {mostRecentlyUpdatedSaints?.map((saint, i) => (
-              <Mini
-                key={i}
-                {...saint}
-              />
-            ))}
-          </RecentlyUpdated> */}
-          <Filter
-            setFilter={setFilter}
-            selectedFilter={filter}
-            options={options}
-            title={
-              properties[
-                !Array.isArray(church) ? church : 'all'
-              ].filterTitle
-            }
-          />
+  return (
+    <>
+      <Head>
+        <title key="title">
+          Eastern Orthodox Saints: Spiritual Biographies,
+          Books, and Quotes
+        </title>
+        <meta
+          key="description"
+          name="description"
+          content="Explore the lives and legacies of Catholic and Orthodox saints. From teachings to miracles, delve into their spiritual journeys."
+        />
+        <meta
+          name="keywords"
+          content="Eastern Orthodox, saints, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
+        />
+      </Head>
+      <Page saints={data}>
+        <Filter
+          setFilter={(church) =>
+            handleSetSaintCategory(church)
+          }
+          selectedFilter={saintCategory}
+          options={properties.saintCategories}
+          title={
+            properties[
+              !Array.isArray(church) ? church : 'all'
+            ].filterTitle
+          }
+        />
+        {isLoading && (
+          <p className="error">Fetching Saints</p>
+        )}
+        {!isLoading && !data?.length && (
+          <p className="error">
+            No saints found.{' '}
+            <FontAwesomeIcon icon={faFaceFrownSlight} />
+          </p>
+        )}
+        {isError && (
+          <p className="error">
+            Error.{' '}
+            <FontAwesomeIcon icon={faFaceFrownSlight} />
+          </p>
+        )}
+        {data && (
           <Masonry
             breakpointCols={getColumnsToRender()}
             className="my-masonry-grid"
             columnClassName="my-masonry-grid_column"
           >
-            {data
-              ?.filter(filterSaints)
-              ?.sort((a, b) => a.death_year - b.death_year)
-              ?.map((saint, i: number) => (
-                <SaintSummary
-                  {...saint}
-                  key={i}
-                  transitionName={`saint-${i}`}
-                  priority={i < 8 ? true : false}
-                />
-              ))}
+            {data?.map((saint, i: number) => (
+              <SaintSummary
+                {...saint}
+                key={i}
+                transitionName={`saint-${i}`}
+                priority={i < 8 ? true : false}
+              />
+            ))}
           </Masonry>
-        </Page>
-      </>
-    )
-  }
+        )}
+      </Page>
+    </>
+  )
 }
 
-export async function getStaticProps({ params }) {
-  const church = params?.church || 'all'
-  let mostRecentlyUpdatedSaints
+export async function getStaticProps({ query }) {
+  const church = query?.church || 'all'
+  const saintCategory = query?.category || 'all'
+  const sort = query?.sort || 'chronological-asc'
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery(['saints', church], () =>
-    getSaints(church),
+  await queryClient.prefetchQuery(
+    ['saints', church, saintCategory, sort],
+    () => getSaints(church, saintCategory, sort),
   )
 
-  const today = new Date()
-  today.setDate(today.getDate() - 14)
-  const twoWeeksAgoDateTimeString = today
-    .toISOString()
-    .slice(0, 19)
+  let mostRecentlyUpdatedSaints
 
   try {
     mostRecentlyUpdatedSaints = await fetchAPIQuery(
       'getMostRecentlyUpdatedSaints',
     )
   } catch (error) {
+    console.log(error)
     mostRecentlyUpdatedSaints = []
   }
 

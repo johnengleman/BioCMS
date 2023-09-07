@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import {
@@ -34,10 +34,10 @@ const SaintBio = (props) => {
   const { data = null } = useQuery(['saints', slug], () =>
     getSaint(slug),
   )
-  const { data: saintsData } = useQuery(
-    ['saints'],
-    getSaints,
-  )
+  // const { data: saintsData } = useQuery(
+  //   ['saints'],
+  //   getSaints,
+  // )
 
   // useEffect(() => {
   //   if (myRef.current) {
@@ -92,7 +92,7 @@ const SaintBio = (props) => {
             }}
           />
         </Head>
-        <Page saints={saintsData}>
+        <Page>
           <S.Saint>
             <div className="leftRail">
               <ImageMain
@@ -106,7 +106,7 @@ const SaintBio = (props) => {
             >
               <NameTag
                 name={data?.name}
-                tags={data?.tags}
+                tags={data?.categories}
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
               />
@@ -142,7 +142,7 @@ export const getStaticProps = async ({ params }) => {
     getSaint(slug),
   )
 
-  await queryClient.prefetchQuery(['saints'], getSaints)
+  // await queryClient.prefetchQuery(['saints'], getSaints)
 
   try {
     const saintsResponse = await fetchAPIQuery(

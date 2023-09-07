@@ -31,7 +31,6 @@ const query = gql`
       description_part_2
       amazon_book_cover
       genre
-      topics
     }
   }
 `

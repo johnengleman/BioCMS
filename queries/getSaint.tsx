@@ -71,7 +71,7 @@ const query = gql`
       death_year
       birth_location
       death_location
-      tags
+      categories
       images {
         directus_files_id {
           id

@@ -1,60 +1,60 @@
 import styled from 'styled-components'
+import { colors } from '../../../styles/colors'
 
 export const ChurchToggle = styled.div`
-  border-radius: 7px;
+  border-radius: 20px;
+  background-color: rgb(229, 231, 235);
   height: fit-content;
   width: fit-content;
+  cursor: pointer;
 
   .button {
     position: absolute;
-    border-radius: 7px;
+    border-radius: 30px;
     z-index: 0;
     transition: all 0.15s ease-in-out;
     background-color: #fff;
     border: 1px solid #ddd;
+    box-sizing: content-box;
   }
 
   ul {
     list-style: none;
     margin: 0;
-    padding: 3px 0;
+    padding: 2px 3px;
     display: flex;
     position: relative;
+    cursor: pointer;
 
     li {
       list-style: none;
-      padding: 4px 10px;
-      font-size: 11px;
-      color: #fff;
-      font-weight: 550;
+      padding: 3px 15px;
+      font-size: 10px;
+      color: ${colors.darkGray};
       cursor: pointer;
       transition: all 0.15s ease-in-out;
       z-index: 1;
       display: flex;
       align-items: center;
       gap: 5px;
-      text-transform: uppercase;
       border: 1px solid transparent;
-      border-radius: 7px;
-      margin-right: 3px;
+      border-radius: 10px;
       line-height: 1;
-
-      &:last-child {
-        margin-right: 0;
-      }
-
       &:not(.active):hover {
-        border: 1px solid #bdbdbd;
+        color: #000;
+
+        svg g {
+          fill: #000;
+        }
       }
 
       svg g {
-        fill: #fff;
+        fill: ${colors.darkGray};
         transition: all 0.15s ease-in-out;
       }
 
       &.active {
         color: #000;
-        font-weight: 550;
 
         svg g {
           fill: #000;

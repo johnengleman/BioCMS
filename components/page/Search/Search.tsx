@@ -53,14 +53,14 @@ const Search = ({ saints }) => {
   return (
     <S.Search ref={ref}>
       <div className="input-wrapper">
-        <FontAwesomeIcon icon={faMagnifyingGlass} />
         <input
           type="text"
           className="input"
-          placeholder="Search"
+          placeholder="Search for anything"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
+        <FontAwesomeIcon icon={faMagnifyingGlass} />
       </div>
       <div className="dropdown-content">
         {searchOptions.map((option, i) => (

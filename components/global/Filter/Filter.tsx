@@ -1,8 +1,15 @@
 import { useEffect, useState, useRef, useMemo } from 'react'
 import * as S from './styles'
 import Carousel from '../Carousel/Caorusel'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { flushSync } from 'react-dom'
-import Header from '../../page/Header/Header'
+import Toggle from '../Toggle/Toggle'
+import {
+  faCalendarDays,
+  faCameraRetro,
+  faFire,
+  faFamily,
+} from '@fortawesome/pro-duotone-svg-icons'
 
 const Filter = ({
   setFilter,
@@ -49,7 +56,7 @@ const Filter = ({
         isCurrentlySticky
       ) {
         requestAnimationFrame(() => {
-          setIsSticky(false)
+          //   setIsSticky(false)
           isCurrentlySticky = false
         })
       }
@@ -58,7 +65,7 @@ const Filter = ({
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting && !isCurrentlySticky) {
-          setIsSticky(true)
+          // setIsSticky(true)
           isCurrentlySticky = true
         }
       },
@@ -67,7 +74,7 @@ const Filter = ({
       },
     )
 
-    window.addEventListener('scroll', handleScroll)
+    // window.addEventListener('scroll', handleScroll)
 
     if (ref.current) {
       originalOffsetTop.current = ref.current.offsetTop
@@ -84,70 +91,118 @@ const Filter = ({
 
   return (
     <S.Filter>
-      <Header>{title}</Header>
-      <div ref={wrapperRef}>
-        <div
-          className={isSticky ? 'placeholder' : ''}
-          style={{
-            height: isSticky
-              ? `${ref.current?.offsetHeight}px`
-              : '0',
-          }}
-        ></div>
-        <div
-          ref={ref}
-          className={isSticky ? 'sticky' : ''}
-        >
-          <Carousel
-            options={{
-              slidesToScroll: 'auto',
-              align: 'start',
-              loop: true,
-              skipSnaps: true,
-              dragFree: true,
+      <div className="content-container">
+        <p className="instruction">Use Preset?</p>
+        <div className="bento-container">
+          <div className="bento active">
+            <h3>Patron Saints</h3>
+            <FontAwesomeIcon
+              icon={faFamily}
+              style={{
+                fontSize: '20px',
+                '--fa-primary-color': '#ccad00',
+                '--fa-secondary-color': '#ccad00',
+              }}
+            />
+          </div>
+          {/* <div className="bento">
+          <h3>Top 100 Most Popular</h3>
+          <FontAwesomeIcon
+            icon={faFire}
+            style={{
+              fontSize: '20px',
+              '--fa-primary-color': '#ccad00',
+              '--fa-secondary-color': '#ccad00',
             }}
+          />
+        </div> */}
+          <div className="bento">
+            <h3>20th Century Saints</h3>
+            <FontAwesomeIcon
+              icon={faCameraRetro}
+              style={{
+                fontSize: '20px',
+                '--fa-primary-color': '#ccad00',
+                '--fa-secondary-color': '#ccad00',
+              }}
+            />
+          </div>
+          <div className="bento">
+            <h3>Saints by Months</h3>
+            <FontAwesomeIcon
+              icon={faCalendarDays}
+              style={{
+                fontSize: '20px',
+                '--fa-primary-color': '#ccad00',
+                '--fa-secondary-color': '#ccad00',
+              }}
+            />
+          </div>
+        </div>
+        <p className="instruction">Add Filter?</p>
+        <div ref={wrapperRef}>
+          <div
+            className={isSticky ? 'placeholder' : ''}
+            style={{
+              height: isSticky
+                ? `${ref.current?.offsetHeight}px`
+                : '0',
+            }}
+          ></div>
+          <div
+            ref={ref}
+            className={
+              isSticky
+                ? 'slide-container sticky'
+                : 'slide-container'
+            }
           >
-            {options?.map((filter, i) => (
-              <div
-                key={i}
-                className={`embla__slide ${
-                  filter === selectedFilter
-                    ? 'selected visible'
-                    : pageLoadedRef.current
-                    ? 'visible'
-                    : ''
-                }`}
-                onClick={() => {
-                  pageLoadedRef.current = true
-                  if (canUseTransition.current) {
-                    ;(document as any)?.startViewTransition(
-                      () => {
+            {options?.map((filter, i) => {
+              const filterLowerCase = filter.toLowerCase()
+              return (
+                <div
+                  key={i}
+                  className={`slide ${
+                    filterLowerCase === selectedFilter
+                      ? 'selected visible'
+                      : pageLoadedRef.current
+                      ? 'visible'
+                      : ''
+                  }`}
+                  onClick={() => {
+                    pageLoadedRef.current = true
+                    if (canUseTransition.current) {
+                      ;(
+                        document as any
+                      )?.startViewTransition(() => {
                         flushSync(() => {
                           setFilter(
-                            selectedFilter !== filter
+                            selectedFilter !==
+                              filterLowerCase
                               ? filter
-                              : 'All',
+                              : 'all',
                           )
                         })
-                      },
-                    )
-                  } else {
-                    setFilter(
-                      selectedFilter !== filter
-                        ? filter
-                        : 'All',
-                    )
-                  }
-                }}
-              >
-                {filter.replace(/-/g, ' ')}
-              </div>
-            ))}
-          </Carousel>
+                      })
+                    } else {
+                      setFilter(
+                        selectedFilter !== filterLowerCase
+                          ? filter
+                          : 'all',
+                      )
+                    }
+                  }}
+                >
+                  {filter.replace(/-/g, ' ')}
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
+      <Toggle />
     </S.Filter>
   )
 }
 
-export default Filter;
+export default Filter

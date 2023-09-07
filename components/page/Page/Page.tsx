@@ -1,5 +1,5 @@
 import React from 'react'
-import Navigation from '../Navigation/Navigation'
+import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { Saint } from '../../saints/summary/interfaces'
 import * as S from './styles'
@@ -11,7 +11,7 @@ type Props = {
 
 const Page = ({ children, saints }: Props) => (
   <S.Page>
-    <Navigation saints={saints} />
+    <Header saints={saints} />
     <S.Body>{children}</S.Body>
     <Footer />
   </S.Page>

@@ -35,7 +35,6 @@ const booksCreatedSinceX = gql`
       description_part_2
       amazon_book_cover
       genre
-      topics
     }
   }
 `
@@ -58,7 +57,6 @@ const lastYCreatedBooks = gql`
       description_part_2
       amazon_book_cover
       genre
-      topics
     }
   }
 `

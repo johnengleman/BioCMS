@@ -6,19 +6,15 @@ export const RecentlyUpdated = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  margin: 20px 0;
-  padding: 20px 0;
   border-radius: 8px;
+  max-width: 1350px;
+  margin: 0 auto;
 
   .header-container {
-    width: 95%;
-    max-width: 1350x;
-    margin: 0 auto;
-
     h1,
     h2 {
-      margin-bottom: 20px;
-      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-size: 2em;
     }
   }
 

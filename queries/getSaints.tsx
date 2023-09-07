@@ -29,87 +29,104 @@ type Saint = {
   death_year: number
   birth_location: string
   death_location: string
-  tags: string[]
+  categories: string[]
   images: Image[]
   sayings: Saying[]
   books: Book[]
+  tags: string[]
 }
 
 type Response = {
   saints: Saint[]
 }
 
-const allSaintsQuery = gql`
-  query {
-    saints {
-      id
-      slug
-      name
-      summary
-      biography
-      tags
-      birth_year
-      death_year
-      birth_location
-      death_location
-      books {
-        title
-      }
-      sayings {
-        text
-      }
-      images {
-        directus_files_id {
-          id
+function getSaintsQuery(church, category, sort) {
+  // Variables declaration
+  let variablesList: string[] = []
+  if (church !== 'all') {
+    variablesList.push('$church: String!')
+  }
+  if (category !== 'all') {
+    variablesList.push('$category: String!')
+  }
+
+  // Filter construction
+  let filterList: string[] = []
+  if (church !== 'all') {
+    filterList.push('venerated_in: { _icontains: $church }')
+  }
+  if (category !== 'all') {
+    filterList.push('categories: { _icontains: $category }')
+  }
+
+  // Building the query
+  let baseQuery = `
+    query getSaint${
+      variablesList.length > 0
+        ? `(${variablesList.join(', ')})`
+        : ''
+    } {
+      saints(
+        sort: "${sort}"
+        filter: {
+          ${filterList.join(', ')}
+        }
+      ) {
+        id
+        slug
+        name
+        summary
+        biography
+        categories
+        birth_year
+        death_year
+        birth_location
+        death_location
+        books {
+          title
+        }
+        sayings {
+          text
+        }
+        images {
+          directus_files_id {
+            id
+          }
         }
       }
     }
-  }
-`
+  `
 
-const churchSaintsQuery = gql`
-  query getSaint($church: String!) {
-    saints(
-      filter: { venerated_in: { _contains: $church } }
-    ) {
-      id
-      slug
-      name
-      summary
-      biography
-      tags
-      birth_year
-      death_year
-      birth_location
-      death_location
-      books {
-        title
-      }
-      sayings {
-        text
-      }
-      images {
-        directus_files_id {
-          id
-        }
-      }
-    }
-  }
-`
+  return baseQuery
+}
 
-export const getSaints = async (church) => {
-  if (church === 'all') {
-    const { saints } = await request<Response>(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-      allSaintsQuery,
-    )
-    return saints
-  } else {
-    const { saints } = await request<Response>(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-      churchSaintsQuery,
-      { church },
-    )
-    return saints
+const parseSort = (sort) => {
+  if (sort === 'newest-asc') {
+    return 'date_created'
   }
+  if (sort === 'newest-desc') {
+    return '-date_created'
+  }
+  if (sort === 'chronological-asc') {
+    return 'death_year'
+  }
+  if (sort === 'chronological-desc') {
+    return '-death_year'
+  }
+}
+
+export const getSaints = async (
+  church = 'all',
+  category = 'all',
+  sort = 'chronological-asc',
+) => {
+  const { saints } = await request<Response>(
+    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
+    getSaintsQuery(church, category, parseSort(sort)),
+    {
+      church,
+      category,
+    },
+  )
+  return saints
 }

@@ -1,38 +1,38 @@
 import React, { createContext, useState } from 'react'
 
-type ChurchContextType = {
+type SiteContextType = {
   selectedChurch: string
   setSelectedChurch: React.Dispatch<
     React.SetStateAction<string>
   >
 }
 
-type ChurchProviderProps = {
+type SiteProviderProps = {
   children: React.ReactNode
 }
 
-const defaultContextValue: ChurchContextType = {
+const defaultContextValue: SiteContextType = {
   selectedChurch: '',
   setSelectedChurch: () => {},
 }
 
-const ChurchContext = createContext<ChurchContextType>(
+const SiteContext = createContext<SiteContextType>(
   defaultContextValue,
 )
 
-const ChurchProvider = ({
+const SiteProvider = ({
   children,
-}: ChurchProviderProps): React.JSX.Element => {
+}: SiteProviderProps): React.JSX.Element => {
   const [selectedChurch, setSelectedChurch] =
-    useState('All')
+    useState('all')
 
   return (
-    <ChurchContext.Provider
+    <SiteContext.Provider
       value={{ selectedChurch, setSelectedChurch }}
     >
       {children}
-    </ChurchContext.Provider>
+    </SiteContext.Provider>
   )
 }
 
-export { ChurchProvider, ChurchContext }
+export { SiteProvider, SiteContext }

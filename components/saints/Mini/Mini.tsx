@@ -4,16 +4,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCross } from '@fortawesome/pro-duotone-svg-icons'
 import * as S from './styles'
 
-const Mini = ({ slug, death_year, images, name }) => (
+const Mini = ({
+  slug,
+  death_year,
+  images,
+  name,
+  summary,
+  categories,
+}) => (
   <S.Mini>
     <Link
       className="saint-mini"
       href={`/saints/${slug}`}
     >
-      <div className="death">
-        {death_year}
-        <FontAwesomeIcon icon={faCross} />
-      </div>
       <div className="image">
         <ImageGlobal
           alt={
@@ -24,7 +27,27 @@ const Mini = ({ slug, death_year, images, name }) => (
           fill={true}
         />
       </div>
-      <div className="name">{name}</div>
+      <div className="bio">
+        <h2 className="name">{name}</h2>
+        <div className="header">
+          <div className="location"></div>
+          <div className="death">
+            {death_year}
+            <FontAwesomeIcon icon={faCross} />
+          </div>
+        </div>
+        <p>{summary}</p>
+        <div className="tags">
+          {categories?.map((category, index) => (
+            <div
+              key={index}
+              className="tag"
+            >
+              {category}
+            </div>
+          ))}
+        </div>
+      </div>
     </Link>
   </S.Mini>
 )

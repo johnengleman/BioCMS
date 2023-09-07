@@ -43,3 +43,9 @@ export const Saint = styled.div`
     }
   }
 `
+
+export const FilterCustomizeRow = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+`

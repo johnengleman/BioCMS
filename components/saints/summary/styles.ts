@@ -10,20 +10,24 @@ export const SaintSummary = styled.div`
 
   .saint-summary {
     display: block;
-    width: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(11, 7, 43, 1) 100%
+    );
     height: 100%;
     border: 1px solid lavender;
     border-radius: 20px;
     position: relative;
-    background-color: ${colors.mint};
-    background: #ffffff;
     box-shadow: -6px 6px 16px #e6e6e6, 6px -6px 16px #ffffff;
     cursor: pointer;
     text-decoration: none;
     transition: all 0.2s ease-in-out;
 
     &:hover {
-      filter: brightness(0.95);
+      .bioContainer .summary {
+        color: #e4e4e4;
+      }
     }
 
     .death {
@@ -33,7 +37,7 @@ export const SaintSummary = styled.div`
       padding: 8px 12px;
       z-index: 5;
       background: ${colors.violet};
-      color: white;
+      color: #d8d8d8;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -57,43 +61,45 @@ export const SaintSummary = styled.div`
         transition: transform 0.5s ease;
         object-fit: cover;
         object-position: 50% 10%;
-        border-radius: 20px;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
       }
-    }
 
-    .name {
-      background-color: ${colors.brown};
-      color: #ccebd9;
-      text-align: center;
-      font-size: 16px;
-      padding: 6px 15px;
-      border-radius: 10px;
-      font-weight: 500;
-      position: absolute;
-      top: 360px;
-      left: 5%;
-      z-index: 2;
-      width: 90%;
-      line-height: 1.1;
-      box-sizing: border-box;
+      .name {
+        background: linear-gradient(
+          360deg,
+          rgba(0, 0, 0, 0.92) 20%,
+          rgba(0, 0, 0, 0.7) 60%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        color: #fff;
+        padding: 30px 1rem 0 1rem;
+        height: 60px;
+        font-weight: 600;
+        position: absolute;
+        bottom: 0;
+        z-index: 2;
+        width: 100%;
+        line-height: 1.1;
+        box-sizing: border-box;
+        font-family: var(--font-Manrope);
+      }
     }
 
     .bioContainer {
       position: relative;
       z-index: 1;
-      width: 90%;
-      padding: 1.5rem 1rem 0.5rem 1rem;
-      border-radius: 10px;
+      width: 100%;
+      padding: 0 1rem;
+      border-radius: 20px;
 
       .summary {
-        color: #1a4760;
+        color: #bcbcbc;
         margin-top: 10px;
-        margin-bottom: 0.5rem;
-        display: -webkit-box;
-        -webkit-line-clamp: 10;
-        -webkit-box-orient: vertical;
         overflow: hidden;
         font-size: 14px;
+        transition: all 0.2s ease-in-out;
+        margin: 1rem 0;
       }
     }
 
@@ -101,17 +107,15 @@ export const SaintSummary = styled.div`
       display: flex;
       flex-wrap: wrap;
       gap: 7px;
-      padding: 0 1rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
 
       .tag {
         padding: 2px 12px;
-        background-color: #ccebd9;
+        background-color: #393650ab;
         font-size: 10px;
-        font-weight: 500;
-        border-radius: 5px;
-        color: #54846d;
-        font-weight: 600;
+        letter-spacing: 0.5px;
+        border-radius: 4px;
+        color: #ccad00;
         min-width: fit-content;
       }
     }
@@ -119,28 +123,29 @@ export const SaintSummary = styled.div`
     .footer {
       display: flex;
       justify-content: space-between;
+      gap: 5px;
       padding: 0 1rem;
       margin-bottom: 1rem;
+      border-radius: 20px;
+      width: 100%;
+      bottom: 0;
+      z-index: 2;
 
-      .footer-button {
+      .count {
         background: none;
         border: none;
         display: flex;
+        gap: 8px;
         align-items: center;
-      }
+        font-size: 13px;
 
-      .dates {
-        font-size: 10px;
-        color: #676666c2;
-        text-align: right;
+        .number {
+          color: #555555;
+          font-family: var(--font-Roboto);
+          font-weight: 600;
+          line-height: 1;
+        }
       }
     }
   }
-`
-
-export const Count = styled.span`
-  color: #676666c2;
-  font-size: 15px;
-  font-weight: 600;
-  margin-left: 10px;
 `

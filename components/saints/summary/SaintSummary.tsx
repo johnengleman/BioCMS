@@ -1,11 +1,13 @@
 import * as S from './styles'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCross } from '@fortawesome/pro-duotone-svg-icons'
 import {
-  faBookOpenCover,
+  faBooks,
   faCommentQuote,
-  faCross,
-} from '@fortawesome/pro-duotone-svg-icons'
+  faStarChristmas,
+  faPersonPraying,
+} from '@fortawesome/sharp-solid-svg-icons'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 
 import { Saint } from './interfaces'
@@ -16,7 +18,7 @@ export default function SaintSummary(props) {
     birth_year,
     death_year,
     images,
-    tags,
+    categories,
     summary,
     sayings,
     books,
@@ -52,47 +54,44 @@ export default function SaintSummary(props) {
             fill={true}
             priority={priority}
           />
+          <div className="name">{name}</div>
         </div>
-        <div className="name">{name}</div>
-
         <div className="bioContainer">
+          <div className="tags">
+            {categories?.map((category, index) => (
+              <div
+                key={index}
+                className="tag"
+              >
+                {category}
+              </div>
+            ))}
+          </div>
           <div className="summary">{summary}</div>
         </div>
-        <div className="tags">
-          {tags?.map((category, index) => (
-            <div
-              key={index}
-              className="tag"
-            >
-              {category}
-            </div>
-          ))}
-        </div>
         <div className="footer">
-          <div className="footer-button">
+          <div className="count">
             <FontAwesomeIcon
-              icon={faBookOpenCover}
-              style={
-                {
-                  '--fa-primary-color': '#241e4e',
-                  '--fa-secondary-color': '#241e4e',
-                } as any
-              }
+              icon={faBooks}
+              style={{ color: '#555555' }}
             />
-            <S.Count>{books?.length}</S.Count>
+            <span className="number">{books?.length}</span>
           </div>
-          <div className="footer-button">
+          <div className="count">
+            <FontAwesomeIcon
+              icon={faStarChristmas}
+              style={{ color: '#555555' }}
+            />
+            <span className="number">{books?.length}</span>
+          </div>
+          <div className="count">
             <FontAwesomeIcon
               icon={faCommentQuote}
-              flip="horizontal"
-              style={
-                {
-                  '--fa-primary-color': '#241e4e',
-                  '--fa-secondary-color': '#241e4e',
-                } as any
-              }
+              style={{ color: '#555555' }}
             />
-            <S.Count>{sayings?.length}</S.Count>
+            <span className="number">
+              {sayings?.length}
+            </span>
           </div>
         </div>
       </Link>

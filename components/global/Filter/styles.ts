@@ -3,22 +3,91 @@ import { device } from '../../../styles/devices'
 import { colors, variables } from '../../../styles/colors'
 
 export const Filter = styled.div`
-  width: 100%;
-  background-color: ${variables.filterBackground};
-  padding: 20px 0px 5px 0px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  margin-top: 10px;
+  width: 100vw;
+  min-width: 100vw;
+  height: min-content;
+  border: 1px solid #dfdfdf;
+  padding: 50px 0;
+  position: relative;
+  margin-top: -30px;
+  margin-bottom: 30px;
+  background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url('/footer.webp');
+  background-size: cover; /* This will cover the entire viewport */
+  background-repeat: no-repeat; /* Important if the image is smaller than the footer */
+  background-position: center 45%; /* This will center the image */
 
-  @media ${device.tablet} {
-    padding: 20px 30px 10px 30px;
+  .content-container {
+    max-width: 1350px;
+    margin: 0 auto;
+    width: 95%;
   }
 
-  .embla__container {
-    padding: 20px 0;
+  .instruction {
+    color: #c1c0c0;
+    font-size: 14px;
   }
 
-  .embla__slide {
+  .bento-container {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.5rem 0 2.5rem 0;
+
+    .bento {
+      border: 1px solid #e7e7e7;
+      height: 60px;
+      width: calc(25% - 0.5rem);
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 30px;
+      align-items: center;
+      border-radius: 10px;
+      cursor: pointer;
+      gap: 10px;
+      border: 3px solid transparent;
+      transition: all 0.1s ease-in-out;
+      background: linear-gradient(
+        90deg,
+        rgba(36, 30, 78, 1) 0%,
+        rgba(49, 45, 76, 1) 100%
+      );
+
+      &:hover {
+        border: 3px solid #ffffff;
+        h3 {
+          color: #ffecec;
+        }
+      }
+
+      &.active {
+        border: 3px solid #ffffff;
+
+        h3 {
+          color: #ffecec;
+        }
+      }
+
+      h3 {
+        font-weight: 300;
+        font-size: 18px;
+        color: rgb(233, 230, 253);
+        line-height: 1.1;
+      }
+    }
+  }
+
+  .slide-container {
+    padding: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .slide {
     font-size: 12px;
     color: rgb(113, 113, 113);
     cursor: pointer;
@@ -30,7 +99,6 @@ export const Filter = styled.div`
     padding: 7px 20px;
     border-radius: 10px;
     border: 2px solid #dddddd;
-    margin-right: 20px;
     opacity: 0;
     transition: opacity 0.5s ease-in-out,
       border-color 0.1s ease-in-out;
@@ -63,11 +131,11 @@ export const Filter = styled.div`
       width: 20px;
       left: 0;
       top: 0;
-      background: linear-gradient(
+      /* background: linear-gradient(
         90deg,
-        ${variables.filterBackground} 0%,
+        #fff 0%,
         rgba(0, 0, 0, 0) 100%
-      );
+      ); */
       display: none;
 
       @media ${device.tablet} {
@@ -84,11 +152,11 @@ export const Filter = styled.div`
       width: 20px;
       right: 0;
       top: 0;
-      background: linear-gradient(
+      /* background: linear-gradient(
         270deg,
-        ${variables.filterBackground} 0%,
+        #fff 0%,
         rgba(0, 0, 0, 0) 100%
-      );
+      ); */
       display: none;
 
       @media ${device.tablet} {

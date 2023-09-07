@@ -86,15 +86,11 @@ h6 {
   isolation: isolate;
 }
 
-html {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-Manrope);
+.error {
+  font-size: 25px;
+  font-weight: 700;
+  margin: 0 auto;
+  height: 400px;
+  display: flex;
+  align-items: center;
 }

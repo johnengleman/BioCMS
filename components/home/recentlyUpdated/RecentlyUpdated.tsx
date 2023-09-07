@@ -1,6 +1,5 @@
 import Carousel from '../../global/Carousel/Caorusel'
 import * as S from './styles'
-import Header from '../../page/Header/Header'
 
 const RecentlyUpdated = ({
   children = [],
@@ -8,9 +7,7 @@ const RecentlyUpdated = ({
   options = {},
 }) => (
   <S.RecentlyUpdated>
-    <div className="header-container">
-      <Header>{title}</Header>
-    </div>
+    <div className="header-container"></div>
     <Carousel options={options}>{children}</Carousel>
   </S.RecentlyUpdated>
 )

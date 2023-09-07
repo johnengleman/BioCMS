@@ -30,7 +30,8 @@ const saintsCreatedSinceX = gql`
       date_created
       death_year
       name
-      dea
+      summary
+      categories
       images {
         directus_files_id {
           id
@@ -54,6 +55,8 @@ const lastYCreatedSaints = gql`
       id
       date_created
       death_year
+      summary
+      categories
       name
       images {
         directus_files_id {
