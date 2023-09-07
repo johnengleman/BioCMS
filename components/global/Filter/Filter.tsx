@@ -140,7 +140,10 @@ const Filter = ({
           </div>
         </div>
         <p className="instruction">Add Filter?</p>
-        <div ref={wrapperRef}>
+        <div
+          ref={wrapperRef}
+          className="filter-container"
+        >
           <div
             className={isSticky ? 'placeholder' : ''}
             style={{

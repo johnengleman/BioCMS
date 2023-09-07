@@ -11,44 +11,59 @@ export const Filter = styled.div`
   position: relative;
   margin-top: -30px;
   margin-bottom: 30px;
-  background-image: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.5),
-      rgba(0, 0, 0, 0.5)
-    ),
-    url('/footer.webp');
-  background-size: cover; /* This will cover the entire viewport */
-  background-repeat: no-repeat; /* Important if the image is smaller than the footer */
-  background-position: center 45%; /* This will center the image */
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.7)
+      ),
+      url('/footer.webp');
+    background-size: cover; /* This will cover the entire viewport */
+    background-repeat: no-repeat; /* Important if the image is smaller than the footer */
+    background-position: center 45%; /* This will center the image */
+    transform: scaleX(-1);
+    z-index: 0;
+  }
 
   .content-container {
     max-width: 1350px;
     margin: 0 auto;
     width: 95%;
+    position: relative;
+    z-index: 2;
   }
 
   .instruction {
-    color: #c1c0c0;
-    font-size: 14px;
+    color: #dadada;
+    font-size: 12px;
+    text-align: left;
   }
 
   .bento-container {
     display: flex;
     gap: 0.5rem;
     margin: 0.5rem 0 2.5rem 0;
+    justify-content: flex-start;
 
     .bento {
       border: 1px solid #e7e7e7;
-      height: 60px;
-      width: calc(25% - 0.5rem);
       display: flex;
+      gap: 20px;
       justify-content: space-between;
-      padding: 20px 30px;
+      padding: 15px 25px;
       align-items: center;
       border-radius: 10px;
       cursor: pointer;
-      gap: 10px;
-      border: 3px solid transparent;
+      gap: 30px;
+      border: 1px solid transparent;
       transition: all 0.1s ease-in-out;
       background: linear-gradient(
         90deg,
@@ -57,14 +72,14 @@ export const Filter = styled.div`
       );
 
       &:hover {
-        border: 3px solid #ffffff;
+        border: 1px solid #dadada;
         h3 {
           color: #ffecec;
         }
       }
 
       &.active {
-        border: 3px solid #ffffff;
+        border: 1px solid #ffffff;
 
         h3 {
           color: #ffecec;
@@ -72,19 +87,26 @@ export const Filter = styled.div`
       }
 
       h3 {
-        font-weight: 300;
-        font-size: 18px;
+        font-weight: 400;
+        font-size: 16px;
         color: rgb(233, 230, 253);
         line-height: 1.1;
       }
     }
   }
 
+  .filter-container {
+    display: flex;
+    justify-content: flex-start;
+  }
+
   .slide-container {
     padding: 10px 0;
     display: flex;
     flex-wrap: wrap;
+    width: 50%;
     gap: 0.5rem;
+    justify-content: flex-start;
   }
 
   .slide {
@@ -96,7 +118,7 @@ export const Filter = styled.div`
     border-bottom: 2px solid transparent;
     transition: border;
     background-color: #fff;
-    padding: 7px 20px;
+    padding: 4px 15px;
     border-radius: 10px;
     border: 2px solid #dddddd;
     opacity: 0;
