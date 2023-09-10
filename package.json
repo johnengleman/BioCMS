@@ -15,7 +15,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-push": "npm run lint"
     }
   },
   "dependencies": {
@@ -32,6 +32,7 @@
     "@vercel/analytics": "^1.0.1",
     "axios": "^1.4.0",
     "babel-plugin-macros": "^3.1.0",
+    "cheerio": "^1.0.0-rc.12",
     "dompurify": "^3.0.5",
     "embla-carousel-react": "^8.0.0-rc11",
     "fuse.js": "^6.6.2",
@@ -51,7 +52,8 @@
     "stylis-plugin-rtl": "^2.1.1",
     "swr": "^2.2.1",
     "tocbot": "^4.21.1",
-    "usehooks-ts": "^2.9.1"
+    "usehooks-ts": "^2.9.1",
+    "word-count": "^0.2.2"
   },
   "devDependencies": {
     "@types/node": "20.4.2",

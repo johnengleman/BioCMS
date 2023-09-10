@@ -45,7 +45,7 @@ const Home = () => {
     return (
       <>
         <Head>
-          <title key="title">
+          <title>
             Wisdom of the Ages: Quotes from Eastern Orthodox
             Saints
           </title>

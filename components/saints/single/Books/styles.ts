@@ -3,35 +3,37 @@ import { device } from '../../../../styles/devices'
 
 export const Book = styled.div`
   display: flex;
-  gap: 20px;
-  width: 100%;
+  flex-direction: column;
+  gap: 10px;
+  width: 150px;
   color: inherit;
   text-decoration: none;
+  align-items: center;
+  margin-bottom: 2rem;
 
   .image {
-    width: 100px;
-    min-width: 100px;
-    max-width: 100px;
+    height: 225px;
+    width: auto;
 
     img {
-      border-radius: 5px;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 7px;
+      border: 1px solid #acabab;
     }
   }
 
-  .book-info {
-    width: 300px;
-  }
-
   .book-name {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 14px;
+    font-weight: 600;
     line-height: 1.2;
     width: 100%;
+    color: #2b2b2b;
   }
 
   .book-author {
-    font-size: 14px;
-    color: #4e4d4d;
+    font-size: 13px;
+    color: #9b9b9b;
     margin-bottom: 15px;
   }
 
@@ -49,26 +51,17 @@ export const Book = styled.div`
 `
 
 export const Books = styled.div`
-  height: 1200px;
+  padding-top: 1rem;
 
-  @media ${device.tablet} {
-    margin-bottom: 50px;
-  }
-
-  .container {
-    margin-bottom: 35px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-    border: 1px solid rgb(221, 221, 221);
-    border-radius: 12px;
-    padding: 30px;
-    position: sticky;
-    top: 40px;
+  h3 {
+    margin-bottom: 0.5rem;
   }
 
   .books-container {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+    flex-direction: row;
     justify-content: flex-start;
   }
 `

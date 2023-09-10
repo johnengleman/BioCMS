@@ -7,28 +7,19 @@ type queries = [
   'getTopAuthors',
 ]
 
-const createQueryParams = (options) => {
-  let queryParams = ''
-
-  if (options) {
-    queryParams = '?'
-    for (const [key, value] of Object.entries(options)) {
-      queryParams += `${key}=${value}&`
-    }
-    queryParams = queryParams.slice(0, -1)
-  }
-
-  return queryParams
-}
-
 const fetchAPIQuery = async (
   query: queries[number],
   options?: Record<string, any>,
 ): Promise<APIResponse | null> => {
   const response = await fetch(
-    `${process.env.API_URL}/api/${query}${createQueryParams(
-      options,
-    )}`,
+    `${process.env.API_URL}/api/${query}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(options),
+    },
   )
 
   if (!response.ok) {

@@ -15,7 +15,7 @@ export const BookSummary = styled.div`
 
     @media ${device.tablet} {
       margin: 0 0 0 30px;
-      width: 100%;
+      width: 75%;
     }
 
     &.col-1 {

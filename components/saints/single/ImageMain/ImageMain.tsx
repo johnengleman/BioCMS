@@ -1,26 +1,30 @@
 import * as S from './styles'
 import ImageGlobal from '../../../global/ImageGlobal/ImageGlobal'
 
-const ImageMain = ({ images, name }) => {
+const ImageMain = ({ images, name, limit = 1 }) => {
   if (!images) {
     return null
   }
 
-  https: return (
+  return (
     <S.ImageContainer>
-      {images.map((image, i) => (
-        <ImageGlobal
-          key={i}
-          fill={false}
-          width={150}
-          height={200}
-          alt={
-            image?.directus_files_id?.description ||
-            `Image of ${name}, the eastern orthodox saint`
-          }
-          src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${image?.directus_files_id.id}?key=profile`}
-        />
-      ))}
+      {images.map((image, i) => {
+        if (i < limit) {
+          return (
+            <ImageGlobal
+              key={i}
+              fill={false}
+              width={250}
+              height={350}
+              alt={
+                image?.directus_files_id?.description ||
+                `Image of ${name}, the eastern orthodox saint`
+              }
+              src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${image?.directus_files_id.id}?key=profile`}
+            />
+          )
+        }
+      })}
     </S.ImageContainer>
   )
 }

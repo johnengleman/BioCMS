@@ -7,7 +7,7 @@ export const Filter = styled.div`
   min-width: 100vw;
   height: min-content;
   border: 1px solid #dfdfdf;
-  padding: 50px 0;
+  padding: 40px 0;
   position: relative;
   margin-top: -30px;
   margin-bottom: 30px;
@@ -22,8 +22,8 @@ export const Filter = styled.div`
     bottom: 0;
     background-image: linear-gradient(
         to right,
-        rgba(0, 0, 0, 0.1),
-        rgba(0, 0, 0, 0.7)
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.5)
       ),
       url('/footer.webp');
     background-size: cover; /* This will cover the entire viewport */
@@ -33,12 +33,22 @@ export const Filter = styled.div`
     z-index: 0;
   }
 
+  h1 {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
   .content-container {
     max-width: 1350px;
     margin: 0 auto;
-    width: 95%;
+    width: 90%;
     position: relative;
     z-index: 2;
+
+    @media ${device.laptop} {
+      width: 75%;
+    }
   }
 
   .instruction {
@@ -50,16 +60,23 @@ export const Filter = styled.div`
   .bento-container {
     display: flex;
     gap: 0.5rem;
-    margin: 0.5rem 0 2.5rem 0;
+    margin: 0.5rem 0 1.5rem 0;
     justify-content: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    @media ${device.tablet} {
+      flex-direction: row;
+    }
 
     .bento {
       border: 1px solid #e7e7e7;
       display: flex;
       gap: 20px;
       justify-content: space-between;
-      padding: 15px 25px;
+      padding: 12px 15px;
       align-items: center;
+      flex-wrap: wrap;
       border-radius: 10px;
       cursor: pointer;
       gap: 30px;
@@ -70,6 +87,10 @@ export const Filter = styled.div`
         rgba(36, 30, 78, 1) 0%,
         rgba(49, 45, 76, 1) 100%
       );
+
+      @media ${device.laptop} {
+        padding: 15px 25px;
+      }
 
       &:hover {
         border: 1px solid #dadada;
@@ -104,9 +125,17 @@ export const Filter = styled.div`
     padding: 10px 0;
     display: flex;
     flex-wrap: wrap;
-    width: 50%;
+    width: 100%;
     gap: 0.5rem;
     justify-content: flex-start;
+
+    @media ${device.tablet} {
+      width: 75%;
+    }
+
+    @media ${device.laptop} {
+      width: 50%;
+    }
   }
 
   .slide {
@@ -121,13 +150,6 @@ export const Filter = styled.div`
     padding: 4px 15px;
     border-radius: 10px;
     border: 2px solid #dddddd;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out,
-      border-color 0.1s ease-in-out;
-
-    &.visible {
-      opacity: 1;
-    }
 
     &:hover,
     &.selected {
@@ -205,7 +227,7 @@ export const Filter = styled.div`
     border-bottom: 1px solid lightgray;
 
     .embla {
-      width: 90%;
+      width: 75%;
       margin: 0 auto;
       max-width: 1350px;
 

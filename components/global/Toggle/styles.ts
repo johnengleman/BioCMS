@@ -23,8 +23,9 @@ export const Toggle = styled.div`
 
   .dropdown {
     position: absolute;
-    top: 35px;
+    top: 40px;
     right: 0;
+    width: 225px;
     background-color: lavender;
     border-radius: 5px;
     display: none;
@@ -45,6 +46,7 @@ export const Toggle = styled.div`
         padding: 5px 20px;
         width: max-content;
         margin: 0;
+        width: 100%;
         cursor: pointer;
         color: #333;
 

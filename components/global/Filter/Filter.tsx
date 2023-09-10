@@ -92,7 +92,8 @@ const Filter = ({
   return (
     <S.Filter>
       <div className="content-container">
-        <p className="instruction">Use Preset?</p>
+        <h1>Find a saint, find a friend.</h1>
+        <p className="instruction">Use a preset?</p>
         <div className="bento-container">
           <div className="bento active">
             <h3>Patron Saints</h3>
@@ -139,7 +140,7 @@ const Filter = ({
             />
           </div>
         </div>
-        <p className="instruction">Add Filter?</p>
+        <p className="instruction">Add a filter?</p>
         <div
           ref={wrapperRef}
           className="filter-container"

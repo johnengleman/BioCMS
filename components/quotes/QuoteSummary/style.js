@@ -69,7 +69,6 @@ export const QuoteSummary = styled.div`
     }
 
     @media ${device.laptopL} {
-      width: fit-content;
       right: 0;
     }
   }

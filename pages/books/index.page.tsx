@@ -26,7 +26,7 @@ const Home = (props) => {
     return (
       <>
         <Head>
-          <title key="title">
+          <title>
             Wisdom Written: Books by Orthodox Saints and
             Tales about Their Lives
           </title>

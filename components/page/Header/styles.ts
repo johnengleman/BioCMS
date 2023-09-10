@@ -8,7 +8,7 @@ export const Header = styled.div`
   box-shadow: 0px 5px 20px -3px rgba(0, 0, 0, 0.1);
 
   .content {
-    width: 95%;
+    width: 75%;
     max-width: 1350px;
     margin: 0 auto;
     display: flex;

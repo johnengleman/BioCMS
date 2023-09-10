@@ -20,6 +20,11 @@ export const NameTag = styled.div`
       font-weight: 600;
     }
 
+    .date {
+      color: #9b9b9b;
+      font-size: 14px;
+    }
+
     .tag {
       padding: 2px 12px;
       background-color: #ccebd9;

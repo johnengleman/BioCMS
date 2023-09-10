@@ -77,12 +77,12 @@ export const SaintSummary = styled.div`
         height: 60px;
         font-weight: 600;
         position: absolute;
+        margin-bottom: -1px;
         bottom: 0;
         z-index: 2;
         width: 100%;
         line-height: 1.1;
         box-sizing: border-box;
-        font-family: var(--font-Manrope);
       }
     }
 
@@ -141,7 +141,6 @@ export const SaintSummary = styled.div`
 
         .number {
           color: #555555;
-          font-family: var(--font-Roboto);
           font-weight: 600;
           line-height: 1;
         }

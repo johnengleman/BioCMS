@@ -47,16 +47,14 @@ const Books = ({ books }: BooksProps) => {
   if (books?.length) {
     return (
       <S.Books>
-        <div className='container'>
-          <Title>Books</Title>
-          <div className="books-container">
-            {books?.map((book, i) => (
-              <Book
-                key={i}
-                {...book}
-              />
-            ))}
-          </div>
+        <h3>My Books</h3>
+        <div className="books-container">
+          {books?.map((book, i) => (
+            <Book
+              key={i}
+              {...book}
+            />
+          ))}
         </div>
       </S.Books>
     )

@@ -10,15 +10,16 @@ const RelatedItem = ({
   death_year,
   images,
   slug,
-  tags,
+  categories,
+  summary,
 }) => {
   return (
     <S.RelatedPerson>
       <Link href={slug}>
         <ImageGlobal
-          src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${images[0].directus_files_id.id}?fit=cover&height=150&width=100`}
-          height="150"
-          width="100"
+          src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${images[0].directus_files_id.id}?fit=cover&height=175&width=125`}
+          height="175"
+          width="125"
           fill={false}
           alt=""
         />
@@ -28,7 +29,7 @@ const RelatedItem = ({
             {birth_year || '?'}-{death_year || '?'}
           </div>
           <div className="tags">
-            {tags.map((category, i) => (
+            {categories.map((category, i) => (
               <div
                 className="tag"
                 key={i}
@@ -37,6 +38,7 @@ const RelatedItem = ({
               </div>
             ))}
           </div>
+          <div className="summary">{summary}</div>
         </div>
       </Link>
     </S.RelatedPerson>
@@ -47,13 +49,15 @@ const RelatedPeople = ({ data }) => {
   if (data?.length) {
     return (
       <S.RelatedPeople>
-        <Title>Related Saints</Title>
-        {data?.map((relatedPerson, i) => (
-          <RelatedItem
-            key={i}
-            {...relatedPerson}
-          />
-        ))}
+        <h3>Similar Saints</h3>
+        <div className="similar-saints-container">
+          {data?.map((relatedPerson, i) => (
+            <RelatedItem
+              key={i}
+              {...relatedPerson}
+            />
+          ))}
+        </div>
       </S.RelatedPeople>
     )
   }

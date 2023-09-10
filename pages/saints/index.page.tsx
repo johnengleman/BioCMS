@@ -14,7 +14,6 @@ import Page from '../../components/page/Page/Page'
 import Filter from '../../components/global/Filter/Filter'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
-import { fetchAPIQuery } from '../../queries/fetchApiQuery'
 import { properties } from '../../properties'
 
 const Saints = (props) => {
@@ -81,7 +80,7 @@ const Saints = (props) => {
   return (
     <>
       <Head>
-        <title key="title">
+        <title>
           Eastern Orthodox Saints: Spiritual Biographies,
           Books, and Quotes
         </title>
@@ -105,7 +104,7 @@ const Saints = (props) => {
           title={
             properties[
               !Array.isArray(church) ? church : 'all'
-            ].filterTitle
+            ]?.filterTitle
           }
         />
         {isLoading && (
@@ -148,27 +147,16 @@ export async function getStaticProps({ query }) {
   const church = query?.church || 'all'
   const saintCategory = query?.category || 'all'
   const sort = query?.sort || 'chronological-asc'
+
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery(
     ['saints', church, saintCategory, sort],
     () => getSaints(church, saintCategory, sort),
   )
 
-  let mostRecentlyUpdatedSaints
-
-  try {
-    mostRecentlyUpdatedSaints = await fetchAPIQuery(
-      'getMostRecentlyUpdatedSaints',
-    )
-  } catch (error) {
-    console.log(error)
-    mostRecentlyUpdatedSaints = []
-  }
-
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      mostRecentlyUpdatedSaints,
     },
     revalidate: 60,
   }

@@ -12,7 +12,7 @@ interface Saint {
   name: string
   birth_year?: number // The ? indicates that the property is optional
   death_year?: number
-  tags: string[]
+  categories: string[]
   images: Image[]
 }
 
@@ -20,7 +20,7 @@ interface Response {
   saints: Saint[]
 }
 
-const allSaints = gql`
+const relatedSaints = gql`
   query {
     saints {
       id
@@ -28,7 +28,8 @@ const allSaints = gql`
       name
       birth_year
       death_year
-      tags
+      categories
+      summary
       images {
         directus_files_id {
           id
@@ -38,47 +39,23 @@ const allSaints = gql`
   }
 `
 
-const saintTags = gql`
-  query getSaintTags($slug: String!) {
-    saints(filter: { slug: { _eq: $slug } }) {
-      id
-      slug
-      name
-      tags
-    }
-  }
-`
-
-export const getAllSaints = async () => {
-  const { saints } = await request<Response>(
-    '${process.env.NEXT_PUBLIC_DOMAIN}/graphql',
-    allSaints,
-  )
-  return saints
-}
-
-export const getSaintTags= async (slug) => {
+export const getRelatedSaints = async () => {
   const { saints } = await request<Response>(
     `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-    saintTags,
-    { slug },
+    relatedSaints,
   )
   return saints
 }
 
 export default async function handler(req, res) {
-  const slug = req.query.slug ?? undefined
+  const categories = req.body.categories ?? undefined
 
   try {
-    const allSaintsData = await getAllSaints()
-    const saintTagData = await getSaintTags(slug)
+    const allSaints = await getRelatedSaints()
 
-    const targetTags = new Set(
-      saintTagData[0].tags,
-    )
-    const relatedSaints = allSaintsData.filter((saint) =>
-      saint.tags.some((category) =>
-        targetTags.has(category),
+    const relatedSaints = allSaints.filter((saint) =>
+      saint.categories.some((category) =>
+        categories.includes(category),
       ),
     )
 

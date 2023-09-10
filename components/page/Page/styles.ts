@@ -7,7 +7,6 @@ export const Page = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
 `
 
 export const Body = styled.main`
@@ -16,14 +15,10 @@ export const Body = styled.main`
   flex-wrap: wrap;
   margin: 0 auto;
   gap: 1rem;
-  width: 90%;
+  width: 75%;
   max-width: 1350px;
   min-height: calc(100vh - 450px - 150px);
   padding: 30px 0 50px 0;
-
-  @media ${device.tablet} {
-    width: 95%;
-  }
 
   .my-masonry-grid {
     display: flex;
