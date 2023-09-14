@@ -16,10 +16,8 @@ import RelatedPeople from '../../../components/saint/RelatedPeople/RelatedPeople
 import Tomb from '../../../components/saint/Tomb/Tomb'
 import ErrorPage from 'next/error'
 import NameTag from '../../../components/saint/NameTag/NameTag'
-import Summary from '../../../components/saint/Summary/Summary'
-import TableOfContentFeatures from '../../../components/saint/TableOfContentsFeatures/TableOfContentsFeatures'
-import BentoSection from '../../../components/saint/BentoSection/BentoSection'
-import SectionTitle from '../../../components/saint/SectionTitle/SectionTitle'
+import TableOfContents from '../../../components/saint/TableOfContentsText/TableOfContentsText'
+import formatDate from '../../../utils/dates'
 import {
   fetchAPIQuery,
   APIResponse,
@@ -78,65 +76,45 @@ const SaintBio = (props) => {
         />
       </Head>
       <Page>
-        <div className={styles.SaintSingle}>
-          <div className={styles.hero}>
-            <div className={styles.heroContent}>
+        <div className={styles.SaintBio}>
+          <div className={styles.content}>
+            <div className={styles.leftRail}>
               <ImageMain
                 images={data?.images}
                 name={data?.name}
                 limit={1}
               />
-              <div className={styles.heroText}>
-                <NameTag
-                  name={data?.name}
-                  tags={data?.categories}
-                  birthYear={data?.birth_year}
-                  deathYear={data?.death_year}
-                />
-                <Summary summary={data?.summary} />
+              <TableOfContents mainRef={refElement} />
+            </div>
+            <div
+              className={styles.main}
+              ref={refElement}
+            >
+              <NameTag
+                name={data?.name}
+                tags={data?.categories}
+                birthYear={data?.birth_year}
+                deathYear={data?.death_year}
+              />
+              <div>
+                Updated on {formatDate(data?.date_updated)}
               </div>
+              <div
+                className={styles.text}
+                dangerouslySetInnerHTML={{
+                  __html: data.biography,
+                }}
+              />
+            </div>
+            <div className={styles.rightRail}>
+              <Books
+                books={data?.books}
+                inRightRail={true}
+              />
             </div>
           </div>
 
-          <div className={styles.content}>
-            <div className={styles.leftRail}>
-              <TableOfContentFeatures />
-            </div>
-            <div className={styles.main}>
-              <SectionTitle>About Me</SectionTitle>
-              <div className={styles.bentoSection}>
-                <BentoSection
-                  full={true}
-                  title="My Life"
-                  data={data.biography}
-                  link={`/saints/${slug}/biography`}
-                  href=""
-                />
-                <BentoSection
-                  full={false}
-                  title="My Miracles"
-                  data={data.miracles}
-                />
-                <BentoSection
-                  full={false}
-                  title="My Teachings"
-                  data={data.miracles}
-                />
-                <BentoSection
-                  full={false}
-                  title="My Legacy"
-                  data={data.miracles}
-                />
-              </div>
-              <Books books={data?.books} />
-              <Tomb
-                imageId={data?.tomb?.id}
-                location={data?.tomb_location}
-                church={data?.tomb_church_name}
-              />
-              <RelatedPeople data={relatedSaints} />
-            </div>
-          </div>
+          <RelatedPeople data={relatedSaints} />
         </div>
       </Page>
     </>

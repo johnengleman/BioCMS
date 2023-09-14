@@ -44,6 +44,7 @@ type Saint = {
   death_year: number
   birth_location: string
   death_location: string
+  update_updated: string
   tags: string[]
   images: Image[]
   books: Book[]
@@ -71,6 +72,7 @@ const query = gql`
       death_year
       birth_location
       death_location
+      date_updated
       categories
       images {
         directus_files_id {

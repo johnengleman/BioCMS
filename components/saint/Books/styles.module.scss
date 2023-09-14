@@ -1,0 +1,131 @@
+.book {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  width: calc(50% - 1rem);
+  min-width: 450px;
+  color: inherit;
+  text-decoration: none;
+  align-items: center;
+  border: 1px solid #ccad0048;
+  padding: 20px 30px;
+  border-radius: 10px;
+
+  .image {
+    height: 225px;
+    width: 150px;
+    min-width: 150px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+      rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+    img {
+      min-height: 100%;
+      min-width: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+
+  .bookInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    margin-top: 20px;
+
+    .bookName {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.2;
+      width: 100%;
+      color: #000;
+      margin-bottom: 10px;
+    }
+
+    .bookAuthor {
+      font-size: 14px;
+      color: #484848;
+      margin-bottom: 10px;
+    }
+
+    .bookDescription {
+      font-size: 14px;
+      line-height: 1.2;
+      color: #737373;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .bookLink {
+      font-size: 14px;
+      text-decoration: underline;
+    }
+
+    .ctaBtn {
+      background-color: transparent;
+      color: var(--violet);
+      border: 1px solid var(--gold);
+      border-radius: 15px;
+      padding: 5px 20px;
+      display: block;
+      transition: all 0.2s ease-in-out;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: fit-content;
+
+      &:hover {
+        border: 1px solid transparent;
+        background-color: var(--violet);
+        color: var(--gold);
+      }
+    }
+  }
+}
+
+.books {
+  padding-top: 1rem;
+  margin-bottom: 2rem;
+
+  h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .booksContainer {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+}
+
+.inRightRail.books {
+  padding: 0;
+  margin: 0;
+
+  .booksContainer {
+    gap: 40px;
+  }
+
+  .book {
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    min-width: unset;
+    border: none;
+    gap: 5px;
+
+    .bookInfo {
+      margin-top: 0;
+    }
+
+    .bookDescription,
+    .bookAuthor,
+    .bookName {
+      display: none;
+    }
+  }
+}

@@ -4,14 +4,14 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
-import * as S from './styles'
+import styles from './styles.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
 import Head from 'next/head'
 import { getSaints } from '../../queries/getSaints'
-import SaintSummary from '../../components/saints/summary/SaintSummary'
+import SaintSummary from '../../components/home/summary/SaintSummary'
 import Page from '../../components/page/Page/Page'
-import Filter from '../../components/global/Filter/Filter'
+import Filter from '../../components/home/Filter/Filter'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
 import { properties } from '../../properties'
@@ -122,22 +122,24 @@ const Saints = (props) => {
             <FontAwesomeIcon icon={faFaceFrownSlight} />
           </p>
         )}
-        {data && (
-          <Masonry
-            breakpointCols={getColumnsToRender()}
-            className="my-masonry-grid"
-            columnClassName="my-masonry-grid_column"
-          >
-            {data?.map((saint, i: number) => (
-              <SaintSummary
-                {...saint}
-                key={i}
-                transitionName={`saint-${i}`}
-                priority={i < 8 ? true : false}
-              />
-            ))}
-          </Masonry>
-        )}
+        <div className={styles.saintHome}>
+          {data && (
+            <Masonry
+              breakpointCols={getColumnsToRender()}
+              className="my-masonry-grid"
+              columnClassName="my-masonry-grid_column"
+            >
+              {data?.map((saint, i: number) => (
+                <SaintSummary
+                  {...saint}
+                  key={i}
+                  transitionName={`saint-${i}`}
+                  priority={i < 8 ? true : false}
+                />
+              ))}
+            </Masonry>
+          )}
+        </div>
       </Page>
     </>
   )

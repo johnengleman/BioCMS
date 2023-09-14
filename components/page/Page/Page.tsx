@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
-import { Saint } from '../../saints/summary/interfaces'
+import { Saint } from '../../home/summary/interfaces'
 import * as S from './styles'
 
 type Props = {
@@ -11,7 +11,9 @@ type Props = {
 
 const Page = ({ children, saints }: Props) => (
   <S.Page>
-    <Header saints={saints} />
+    <Header
+      saints={saints}
+    />
     <S.Body>{children}</S.Body>
     <Footer />
   </S.Page>

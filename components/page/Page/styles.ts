@@ -13,12 +13,7 @@ export const Body = styled.main`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin: 0 auto;
   gap: 1rem;
-  width: 75%;
-  max-width: 1350px;
-  min-height: calc(100vh - 450px - 150px);
-  padding: 30px 0 50px 0;
 
   .my-masonry-grid {
     display: flex;

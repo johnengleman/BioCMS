@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from '@fortawesome/pro-duotone-svg-icons'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import * as S from './styles'
 import Fuse from 'fuse.js'
-import { Saint } from '../../saints/summary/interfaces'
+import { Saint } from '../../home/summary/interfaces'
 import { useOnClickOutside } from 'usehooks-ts'
 
 const Search = ({ saints }) => {

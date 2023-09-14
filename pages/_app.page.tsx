@@ -18,7 +18,9 @@ import Head from 'next/head'
 import { config } from '@fortawesome/fontawesome-svg-core'
 config.autoAddCss = false
 import '@fortawesome/fontawesome-svg-core/styles.css'
-import '../styles/globals.css'
+
+import '../styles/variables.css';
+import '../styles/globals.css';
 
 const inter = Inter({
   subsets: ['latin'],

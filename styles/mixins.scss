@@ -1,0 +1,14 @@
+@mixin text-styles($size, $line-height, $font: '') {
+  font-size: $size;
+  line-height: $line-height;
+  text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-synthesis: weight;
+
+  @if $font == 'Average' {
+    font-family: 'Average', 'Georgia', serif;
+  } @else if $font != '' {
+    font-family: $font, 'Arial', sans-serif;
+  }
+}

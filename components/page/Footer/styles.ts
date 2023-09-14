@@ -9,8 +9,8 @@ export const Footer = styled.div`
   display: flex;
 
   .content {
-    width: 75%;
-    width: 1350px;
+    width: 90%;
+    width: 1450px;
     margin: 0 auto;
     display: flex;
     align-items: center;

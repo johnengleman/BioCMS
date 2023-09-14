@@ -55,6 +55,7 @@ const ChurchToggle = () => {
 
   const handleSetChurch = (e, church) => {
     const liElement = e.target.closest('li')
+
     setButtonDimensions({
       offsetLeft: liElement.offsetLeft,
       width: liElement.clientWidth,
@@ -63,7 +64,7 @@ const ChurchToggle = () => {
 
     const newQuery = {
       ...router.query,
-      church: church[0]
+      church: church
     }
     router.push(
       {

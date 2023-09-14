@@ -1,0 +1,40 @@
+.stickyContainer {
+  position: relative;
+  height: calc(100% - 300px);
+}
+
+.TableOfContentsFeatures {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-left: 10px;
+  position: sticky;
+  top: 100px;
+
+  li {
+    &.active {
+      background-color: #3187e3;
+      border-radius: 5px;
+      a {
+        color: #fff;
+      }
+    }
+
+    a {
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px;
+      color: #333;
+
+      cursor: pointer;
+      transition: all 0.1s ease-in-out;
+
+      .icon {
+        border-radius: 5px;
+        padding: 3px 8px;
+      }
+    }
+  }
+}
