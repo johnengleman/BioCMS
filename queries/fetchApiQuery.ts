@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export type APIResponse = any[]
 
 type queries = [
@@ -11,24 +13,21 @@ const fetchAPIQuery = async (
   query: queries[number],
   options?: Record<string, any>,
 ): Promise<APIResponse | null> => {
-  const response = await fetch(
-    `${process.env.API_URL}/api/${query}`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+  try {
+    const response = await axios.post(
+      `${process.env.API_URL}/api/${query}`,
+      options,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-      body: JSON.stringify(options),
-    },
-  )
+    )
 
-  if (!response.ok) {
-    console.error(`HTTP error! Status: ${response.status}`)
+    return response.data
+  } catch (error) {
     return []
   }
-
-  const data = await response.json()
-  return data
 }
 
 export { fetchAPIQuery }
