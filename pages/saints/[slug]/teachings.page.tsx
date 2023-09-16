@@ -95,7 +95,7 @@ const SaintBio = (props) => {
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
               />
-              <div>
+              <div className={styles.updated}>
                 Updated on {formatDate(data?.date_updated)}
               </div>
               <div

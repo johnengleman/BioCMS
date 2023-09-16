@@ -10,8 +10,8 @@ export const Search = styled.div`
   }
 
   .input {
-    width: 200px;
-    height: 30px;
+    width: 350px;
+    height: 35px;
     border-radius: 5px;
     border: 1px solid #dee2e6;
     font-size: 14px;
@@ -36,7 +36,7 @@ export const Search = styled.div`
     display: block;
     position: absolute;
     background-color: white;
-    min-width: 200px;
+    min-width: 350px;
     border: 1px solid #ddd;
     z-index: 1000;
     right: 0;

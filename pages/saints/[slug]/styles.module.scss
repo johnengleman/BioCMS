@@ -76,6 +76,13 @@
         max-width: calc(100% - 500px);
       }
 
+      .updated {
+        font-weight: 400;
+        font-size: 14px;
+        color: #888;
+        margin-top: 15px;
+      }
+
       .text {
         margin-top: 20px;
         border-left: 1px solid rgb(228, 227, 227);
@@ -83,6 +90,12 @@
 
         h3 {
           margin: 30px 0 10px 0;
+        }
+
+        h2 {
+          font-size: 20px;
+          margin-top: 20px;
+          color: #333;
         }
 
         p {

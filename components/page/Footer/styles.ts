@@ -7,6 +7,7 @@ export const Footer = styled.div`
   color: #fff;
   width: 100%;
   display: flex;
+  margin-top: 150px;
 
   .content {
     width: 90%;

@@ -14,7 +14,7 @@ const SMButtons = ({ transparent }) => (
         icon={faSquareXTwitter}
         style={{
           color: transparent ? '#ffffff' : '#ccad00',
-          fontSize: '30px',
+          fontSize: '35px',
         }}
       />
     </div>
@@ -23,7 +23,7 @@ const SMButtons = ({ transparent }) => (
         icon={faSquareFacebook}
         style={{
           color: transparent ? '#ffffff' : '#ccad00',
-          fontSize: '30px',
+          fontSize: '35px',
         }}
       />
     </div>

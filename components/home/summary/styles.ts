@@ -100,6 +100,21 @@ export const SaintSummary = styled.div`
         font-size: 14px;
         transition: all 0.2s ease-in-out;
         margin: 1rem 0;
+
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+
+          li,
+          p {
+            display: inline;
+          }
+
+          strong {
+            font-weight: 400;
+          }
+        }
       }
     }
 

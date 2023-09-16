@@ -75,7 +75,7 @@ export const Navigation = styled.div<{
   a {
     color: ${(props) =>
       props.transparent ? '#fff' : '#333'};
-    font-size: 14px;
+    font-size: 16px;
     padding: 4px 10px;
     font-weight: 500;
     letter-spacing: 0.5px;
