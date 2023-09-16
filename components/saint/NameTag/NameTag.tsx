@@ -11,7 +11,7 @@ const NameTag = ({ name, tags, birthYear, deathYear }) => {
         <span className="date">
           {birthYear}-{deathYear}
         </span>
-        {tags.map((tag, i) => (
+        {tags?.map((tag, i) => (
           <div
             key={i}
             className="tag"

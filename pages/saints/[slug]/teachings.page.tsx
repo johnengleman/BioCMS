@@ -101,7 +101,8 @@ const SaintBio = (props) => {
               <div
                 className={styles.text}
                 dangerouslySetInnerHTML={{
-                  __html: data?.teachings[0].teaching || '',
+                  __html:
+                    data?.teachings[0]?.teaching || '',
                 }}
               />
             </div>
