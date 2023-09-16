@@ -7,7 +7,6 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import styles from './styles.module.scss'
-import { Saint } from '../../../types/types'
 import { getSaint } from '../../../queries/getSaint'
 import Page from '../../../components/page/Page/Page'
 import ImageMain from '../../../components/saint/ImageMain/ImageMain'
@@ -16,6 +15,7 @@ import RelatedPeople from '../../../components/saint/RelatedPeople/RelatedPeople
 import ErrorPage from 'next/error'
 import NameTag from '../../../components/saint/NameTag/NameTag'
 import TableOfContents from '../../../components/saint/TableOfContentsText/TableOfContentsText'
+import { Saint } from '../../../types/types'
 import formatDate from '../../../utils/dates'
 import {
   fetchAPIQuery,
@@ -101,7 +101,7 @@ const SaintBio = (props) => {
               <div
                 className={styles.text}
                 dangerouslySetInnerHTML={{
-                  __html: data?.biography || '',
+                  __html: data?.legacy_influence || '',
                 }}
               />
             </div>
@@ -114,6 +114,7 @@ const SaintBio = (props) => {
               )}
             </div>
           </div>
+
           <RelatedPeople data={relatedSaints} />
         </div>
       </Page>

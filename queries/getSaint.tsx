@@ -1,62 +1,8 @@
 import { request, gql } from 'graphql-request'
-
-type Image = {
-  directus_files_id: {
-    id: string
-    width: number
-    height: number
-    description: string
-  }
-}
-
-type Tomb = {
-  id: string
-}
-
-type Book = {
-  author: string
-  title: string
-  store_link: string
-  pages: number
-  description_part_1: string
-  amazon_amazon_book_cover: string
-}
-
-type Saying = {
-  text: string
-  topics: string[]
-}
-
-type Prayer = {
-  prayer_name: string
-  prayer_text: string
-}
-
-type Saint = {
-  id: string
-  name: string
-  summary: string
-  slug: string
-  biography: string
-  miracles: string
-  legacy_and_influence: string
-  birth_year: number
-  death_year: number
-  birth_location: string
-  death_location: string
-  update_updated: string
-  tags: string[]
-  images: Image[]
-  books: Book[]
-  sayings: Saying[]
-  tomb: Tomb
-  tomb_location: string
-  tomb_church_name: string
-  prayers: Prayer[]
-}
+import { Saint } from '../types/types'
 
 type Response = {
-  saints: Saint
+  saints: Saint[]
 }
 
 const query = gql`
@@ -91,6 +37,9 @@ const query = gql`
       }
       sayings {
         text
+      }
+      teachings {
+        teachings
       }
       # prayers
       # tomb {

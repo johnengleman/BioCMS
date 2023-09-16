@@ -4,14 +4,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faBrightness,
   faStarChristmas,
+  faBookOpenReader,
 } from '@fortawesome/pro-duotone-svg-icons'
 import { load } from 'cheerio'
 import count from 'word-count'
 import styles from './styles.module.scss'
 
-function extractH2s(htmlString) {
+function extractH2s(htmlString: string): string[] {
   const $ = load(htmlString)
-  const h2s = []
+  const h2s: string[] = []
 
   $('h2').each((index, element) => {
     h2s.push($(element).text())
@@ -26,8 +27,8 @@ const getIcon = (title) => {
       <FontAwesomeIcon
         icon={faBrightness}
         style={{
-          color: `#77788a`,
-          fontSize: '20px',
+          color: `var(--gold)`,
+          fontSize: '16px',
         }}
       />
     )
@@ -37,8 +38,8 @@ const getIcon = (title) => {
       <FontAwesomeIcon
         icon={faStarChristmas}
         style={{
-          color: `#77788a`,
-          fontSize: '20px',
+          color: `var(--gold)`,
+          fontSize: '16px',
         }}
       />
     )
@@ -46,51 +47,76 @@ const getIcon = (title) => {
 }
 
 interface BentoSectionProps {
-  title: string
   data?: string
   link?: string
-  full?: boolean
 }
 
 const BentoSection: React.FC<BentoSectionProps> = ({
-  title,
   data,
   link,
-  full,
 }) => {
   if (!data) {
     return null
   }
 
-  const wordCount = count(data)
+  // if (typeof data !== 'string') {
+  //   console.log(data)
+  // }
+  const wordCount =
+    typeof data === 'string' ? count(data) : ''
   const h2s = extractH2s(data)
 
   return (
-    <div
-      className={`${styles.bentoSection} ${
-        full ? styles.bentoSectionFull : ''
-      }`}
-    >
-      <div className={styles.header}>
-        <h3>{title}</h3>
-        {getIcon(title)}
-      </div>
-      <div className={styles.toc}>
-        {h2s.map((h2, i) => (
-          <div key={i}>
-            <span className={styles.dash}>{i + 1}. </span>
-            <span className={styles.h2}>{h2}</span>
+    <div className={styles.bentoSection}>
+      <div className={styles.content}>
+        <div className={styles.toc}>
+          <div className={styles.chapters}>Chapters</div>
+          <div className={styles.list}>
+            {h2s.map((h2, i) => (
+              <div
+                key={i}
+                className={styles.item}
+              >
+                <span className={styles.dash}>
+                  {i + 1}.
+                </span>
+                <span className={styles.h2}>{h2}</span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
 
-      <div className={styles.footer}>
-        <Link href={link || ''}>
-          <button>Read</button>
-        </Link>
-        <span className={styles.wordCount}>
-          {wordCount} words
-        </span>
+          <div className={styles.footer}>
+            <span className={styles.wordCount}>
+              {wordCount} words
+            </span>
+          </div>
+        </div>
+
+        <div className={styles.text}>
+          <div className={styles.expand}>
+            <div
+              className={styles.preview}
+              dangerouslySetInnerHTML={{
+                __html: data,
+              }}
+            ></div>
+          </div>
+
+          <div className={styles.footer}>
+            <Link href={link || ''}>
+              <button>
+                <FontAwesomeIcon
+                  icon={faBookOpenReader}
+                  style={{
+                    color: `var(--violet)`,
+                    fontSize: '14px',
+                  }}
+                />
+                Continue Reading
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   )

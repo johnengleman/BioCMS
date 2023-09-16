@@ -1,16 +1,25 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as S from './styles'
 
-const TableOfContentsText = ({ mainRef }) => {
-  const [elements, setElements] = useState([])
-  const [activeHeading, setActiveHeading] = useState(null)
+type MainRefType = React.RefObject<HTMLElement>
+
+const TableOfContentsText: React.FC<{
+  mainRef: MainRefType
+}> = ({ mainRef }) => {
+  const [elements, setElements] = useState<HTMLElement[]>(
+    [],
+  )
+  const [activeHeading, setActiveHeading] = useState('')
 
   useEffect(() => {
-    const nodeList = mainRef.current.querySelectorAll('h2')
-    const elementsArray: [] = [...nodeList]
+    const nodeList =
+      mainRef.current?.querySelectorAll<HTMLElement>(
+        'h2',
+      ) || []
+    const elementsArray = Array.from(nodeList)
     setElements(elementsArray)
 
-    nodeList.forEach((h2, index) => {
+    nodeList?.forEach((h2, index) => {
       h2.id = `heading-${index}`
     })
   }, [mainRef])

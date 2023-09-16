@@ -57,8 +57,12 @@ const Books = ({ books, inRightRail }: BooksProps) => {
           inRightRail ? `${styles.inRightRail}` : ''
         }`}
       >
-        <SectionTitle inRightRail={inRightRail}>
-          My Books
+        <SectionTitle
+          inRightRail={inRightRail}
+          id="section-books"
+          dataSection="books"
+        >
+          Books
         </SectionTitle>
         <div className={styles.booksContainer}>
           {books?.map((book, i) => (

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { colors } from '../../../styles/colors'
 
 export const RelatedPerson = styled.div`
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   width: calc(50% - 15px);
   border-radius: 10px;
 
@@ -12,13 +12,18 @@ export const RelatedPerson = styled.div`
   }
 
   .image-global {
-    margin-right: 10px;
-    box-shadow: -6px 6px 16px #e6e6e6, 6px -6px 16px #ffffff;
+    height: 225px;
+    width: 150px;
+    margin-right: 15px;
+    min-width: 150px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+      rgba(0, 0, 0, 0.22) 0px 10px 10px;
 
     img {
-      border-radius: 5px;
+      min-height: 100%;
+      min-width: 100%;
       object-fit: cover;
-      border: 1px solid #acabab;
+      border-radius: 5px;
     }
   }
 
@@ -62,13 +67,13 @@ export const RelatedPerson = styled.div`
 
     .summary {
       color: #737373;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 1.25;
       margin-top: 15px;
       position: relative;
       overflow: hidden;
       display: -webkit-box;
-      -webkit-line-clamp: 4;
+      -webkit-line-clamp: 6;
       -webkit-box-orient: vertical;
       overflow: hidden;
 
@@ -95,15 +100,9 @@ export const RelatedPeople = styled.div`
   }
 
   .similar-saints-container {
-    /* border: 1px solid rgb(221, 221, 221);
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-    border-radius: 12px;
-    padding: 24px; */
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
-
-    gap: 10px;
   }
 `

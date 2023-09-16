@@ -2,8 +2,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft } from '@fortawesome/sharp-solid-svg-icons'
 import styles from './styles.module.scss'
 
-const SectionTitle = ({ children, inRightRail }) => (
+const SectionTitle = ({
+  children,
+  inRightRail,
+  id,
+  dataSection,
+}) => (
   <div
+    id={id}
+    data-section={dataSection}
     className={`${styles.sectionTitle} ${
       inRightRail ? styles.inRightRail : ''
     }`}
@@ -12,7 +19,7 @@ const SectionTitle = ({ children, inRightRail }) => (
     <FontAwesomeIcon
       icon={faAngleLeft}
       rotation={180}
-      size="2xl"
+      size="xl"
       style={{ color: 'rgba(36, 30, 78, 1)' }}
     />
   </div>

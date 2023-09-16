@@ -4,21 +4,58 @@ import {
   faBrightness,
   faBooks,
   faFamily,
+  faStarChristmas,
+  faFeather,
+  faWind,
+  faFlowerTulip,
 } from '@fortawesome/pro-regular-svg-icons'
 import styles from './styles.module.scss'
 
+const tocConfig = {
+  biography: {
+    backgroundColor: '#7d7b2e',
+    icon: faFlowerTulip,
+    name: 'Biography',
+  },
+  miracles: {
+    backgroundColor: '#e61c18',
+    icon: faStarChristmas,
+    name: 'Miracles',
+  },
+  teachings: {
+    backgroundColor: '#2b335d',
+    icon: faFeather,
+    name: 'Teachings',
+  },
+  legacy: {
+    backgroundColor: '#2b5d51',
+    icon: faWind,
+    name: 'Legacy',
+  },
+  similarSaints: {
+    backgroundColor: '#92a729',
+    icon: faFamily,
+    name: 'Similar Saints',
+  },
+  books: {
+    backgroundColor: '#3e6f2b',
+    icon: faBooks,
+    name: 'Books',
+  },
+}
+
 const TableOfContentFeatures = () => {
-  const [elements, setElements] = useState([])
-  const [activeHeading, setActiveHeading] = useState(null)
+  const [elements, setElements] = useState<HTMLElement[]>(
+    [],
+  )
+  const [activeHeading, setActiveHeading] = useState('')
 
   useEffect(() => {
-    const nodeList = document.querySelectorAll('h2')
-    const elementsArray: [] = [...nodeList]
+    const nodeList = document.querySelectorAll<HTMLElement>(
+      '[id*="section"]',
+    )
+    const elementsArray = Array.from(nodeList)
     setElements(elementsArray)
-
-    nodeList.forEach((h2, index) => {
-      h2.id = `heading-${index}`
-    })
   }, [])
 
   useEffect(() => {
@@ -47,75 +84,41 @@ const TableOfContentFeatures = () => {
   return (
     <div className={styles.stickyContainer}>
       <ul className={styles.TableOfContentsFeatures}>
-        <li
-          className={
-            activeHeading === `heading-0`
-              ? styles.active
-              : ''
+        {elements.map((element, i) => {
+          const section = element.dataset.section
+
+          if (section) {
+            return (
+              <li
+                key={i}
+                className={
+                  activeHeading === `${element.id}`
+                    ? styles.active
+                    : ''
+                }
+              >
+                <a href={`#${element.id}`}>
+                  <div
+                    className={styles.icon}
+                    style={{
+                      backgroundColor:
+                        tocConfig[section]?.backgroundColor,
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={tocConfig[section]?.icon}
+                      style={{
+                        color: `#fff`,
+                        fontSize: '16px',
+                      }}
+                    />
+                  </div>
+                  {tocConfig[section]?.name}
+                </a>
+              </li>
+            )
           }
-        >
-          <a href="#heading-0">
-            <div
-              className={styles.icon}
-              style={{ backgroundColor: '#7d7b2e' }}
-            >
-              <FontAwesomeIcon
-                icon={faBrightness}
-                style={{
-                  color: `#fff`,
-                  fontSize: '16px',
-                }}
-              />
-            </div>
-            About Me
-          </a>
-        </li>
-        <li
-          className={
-            activeHeading === `heading-1`
-              ? styles.active
-              : ''
-          }
-        >
-          <a href="#heading-1">
-            <div
-              className={styles.icon}
-              style={{ backgroundColor: '#066681' }}
-            >
-              <FontAwesomeIcon
-                icon={faBooks}
-                style={{
-                  color: `#fff`,
-                  fontSize: '16px',
-                }}
-              />
-            </div>
-            My Books
-          </a>
-        </li>
-        <li
-          className={
-            activeHeading === `heading-2`
-              ? styles.active
-              : ''
-          }
-        >
-          <a href="#heading-2">
-            <div
-              className={styles.icon}
-              style={{ backgroundColor: '#c54e4e' }}
-            >
-              <FontAwesomeIcon
-                icon={faFamily}
-                style={{
-                  color: `#fff`,
-                  fontSize: '16px',
-                }}
-              />
-            </div>
-            Related Saints
-          </a>
-        </li>
+        })}
       </ul>
     </div>
   )

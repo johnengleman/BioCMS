@@ -16,9 +16,9 @@ const RelatedItem = ({
     <S.RelatedPerson>
       <Link href={slug}>
         <ImageGlobal
-          src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${images[0].directus_files_id.id}?fit=cover&height=175&width=125`}
-          height="175"
-          width="125"
+          src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${images[0].directus_files_id.id}?fit=cover&height=225&width=150`}
+          height="225"
+          width="150"
           fill={false}
           alt=""
         />
@@ -48,7 +48,12 @@ const RelatedPeople = ({ data }) => {
   if (data?.length) {
     return (
       <S.RelatedPeople>
-        <SectionTitle>Similar Saints</SectionTitle>
+        <SectionTitle
+          id="section-similar-saints"
+          dataSection="similarSaints"
+        >
+          Similar Saints
+        </SectionTitle>
         <div className="similar-saints-container">
           {data?.map((relatedPerson, i) => (
             <RelatedItem

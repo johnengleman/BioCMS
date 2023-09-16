@@ -6,11 +6,11 @@ import {
   QueryClient,
   useQuery,
 } from '@tanstack/react-query'
+import { Saint } from '../../../types/types'
 import styles from './styles.module.scss'
 import { getSaint } from '../../../queries/getSaint'
 import Page from '../../../components/page/Page/Page'
 import ImageMain from '../../../components/saint/ImageMain/ImageMain'
-import Biography from '../../../components/saint/Biography/Biography'
 import Books from '../../../components/saint/Books/Books'
 import RelatedPeople from '../../../components/saint/RelatedPeople/RelatedPeople'
 import Tomb from '../../../components/saint/Tomb/Tomb'
@@ -27,7 +27,6 @@ import {
 
 const SaintBio = (props) => {
   const router = useRouter()
-  const refElement = useRef(null)
 
   const slug = Array.isArray(router?.query?.slug)
     ? router?.query?.slug[0]
@@ -59,7 +58,7 @@ const SaintBio = (props) => {
     <>
       <Head>
         <title>
-          {`${data.name}: Life, Legacy, and Teachings`}
+          {`${data?.name}: Life, Legacy, and Teachings`}
         </title>
         <link
           rel="canonical"
@@ -68,7 +67,7 @@ const SaintBio = (props) => {
         <meta
           key="description"
           name="description"
-          content={`Discover ${data.name}'s spiritual journey in the Eastern Orthodox tradition. Explore their sayings, images, and related books.`}
+          content={`Discover ${data?.name}'s spiritual journey in the Eastern Orthodox tradition. Explore their sayings, images, and related books.`}
         />
         <script
           type="application/ld+json"
@@ -103,37 +102,76 @@ const SaintBio = (props) => {
               <TableOfContentFeatures />
             </div>
             <div className={styles.main}>
-              <SectionTitle>About Me</SectionTitle>
-              <div className={styles.bentoSection}>
+              <div>
+                <SectionTitle
+                  inRightRail={false}
+                  id="section-bio"
+                  dataSection="biography"
+                >
+                  Biography
+                </SectionTitle>
                 <BentoSection
-                  full={true}
-                  title="My Life"
-                  data={data.biography}
+                  data={data?.biography}
                   link={`/saints/${slug}/biography`}
-                  href=""
-                />
-                <BentoSection
-                  full={false}
-                  title="My Miracles"
-                  data={data.miracles}
-                />
-                <BentoSection
-                  full={false}
-                  title="My Teachings"
-                  data={data.miracles}
-                />
-                <BentoSection
-                  full={false}
-                  title="My Legacy"
-                  data={data.miracles}
                 />
               </div>
-              <Books books={data?.books} />
-              <Tomb
+              {data?.teachings[0] && (
+                <div>
+                  <SectionTitle
+                    inRightRail={false}
+                    id="section-teachings"
+                    dataSection="teachings"
+                  >
+                    Teachings
+                  </SectionTitle>
+                  <BentoSection
+                    data={data?.teachings[0].teaching}
+                    link={`/saints/${slug}/teachings`}
+                  />
+                </div>
+              )}
+              {data?.miracles && (
+                <div>
+                  <SectionTitle
+                    inRightRail={false}
+                    id="section-miracles"
+                    dataSection="miracles"
+                  >
+                    Miracles
+                  </SectionTitle>
+                  <BentoSection
+                    data={data.miracles}
+                    link={`/saints/${slug}/miracles`}
+                  />
+                </div>
+              )}
+
+              {data?.legacy_influence && (
+                <div>
+                  <SectionTitle
+                    inRightRail={false}
+                    id="section-legacy"
+                    dataSection="legacy"
+                  >
+                    Legacy
+                  </SectionTitle>
+                  <BentoSection
+                    data={data.legacy_influence}
+                    link={`/saints/${slug}/legacy`}
+                  />
+                </div>
+              )}
+              {data?.books && (
+                <Books
+                  inRightRail={false}
+                  books={data?.books}
+                />
+              )}
+              {/* <Tomb
                 imageId={data?.tomb?.id}
                 location={data?.tomb_location}
                 church={data?.tomb_church_name}
-              />
+              /> */}
               <RelatedPeople data={relatedSaints} />
             </div>
           </div>
@@ -154,10 +192,10 @@ export const getStaticProps = async ({ params }) => {
   await queryClient.prefetchQuery(['saints', slug], () =>
     getSaint(slug),
   )
-  const saintData = queryClient.getQueryData([
+  const saintData: Saint = queryClient.getQueryData([
     'saints',
     slug,
-  ])
+  ]) as Saint
 
   try {
     const saintsResponse = await fetchAPIQuery(

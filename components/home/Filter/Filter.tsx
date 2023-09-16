@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useMemo } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import * as S from './styles'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { flushSync } from 'react-dom'
@@ -96,22 +96,24 @@ const Filter = ({
           Find a saint, find a
           <span className="metaphor">
             <Typewriter
-              options={{
-                strings: [
-                  'Light in the Darkness.',
-                  'Pillar of Faith.',
-                  'Soldier for Christ.',
-                  'Temple of the Holy Spirit.',
-                  'Light to the World.',
-                  'Friend.',
-                ],
-                cursor: '',
-                deleteSpeed: 70,
-                delay: 35,
-                pauseFor: 3000,
-                autoStart: true,
-                loop: true,
-              }}
+              options={
+                {
+                  strings: [
+                    'Light in the Darkness.',
+                    'Pillar of Faith.',
+                    'Soldier for Christ.',
+                    'Temple of the Holy Spirit.',
+                    'Light to the World.',
+                    'Friend.',
+                  ],
+                  cursor: '',
+                  deleteSpeed: 20,
+                  delay: 80,
+                  pauseFor: 3000,
+                  autoStart: true,
+                  loop: true,
+                } as any
+              }
             />
           </span>
         </h1>

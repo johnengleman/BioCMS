@@ -1,40 +1,5 @@
-import { request, gql } from 'graphql-request'
-
-type Image = {
-  directus_files_id: {
-    id: string
-    description: string
-  }
-}
-
-type Book = {
-  title: string
-}
-
-type Saying = {
-  text: string
-}
-
-type Church = {
-  name: string
-}
-
-type Saint = {
-  id: string
-  slug: string
-  name: string
-  summary: string
-  biography: string
-  birth_year: number
-  death_year: number
-  birth_location: string
-  death_location: string
-  categories: string[]
-  images: Image[]
-  sayings: Saying[]
-  books: Book[]
-  tags: string[]
-}
+import { request } from 'graphql-request'
+import { Saint } from '../types/types'
 
 type Response = {
   saints: Saint[]
