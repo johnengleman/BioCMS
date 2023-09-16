@@ -77,19 +77,16 @@ export const RelatedPerson = styled.div`
       -webkit-box-orient: vertical;
       overflow: hidden;
 
-      /* &:before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        border-bottom-right-radius: 15px;
-        background: linear-gradient(
-          to bottom,
-          rgba(255, 255, 255, 0.5),
-          #fff
-        );
-      } */
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: inline;
+          line-height: 1.4;
+        }
+      }
     }
   }
 `

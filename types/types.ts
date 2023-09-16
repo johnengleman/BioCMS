@@ -32,7 +32,7 @@ type Prayer = {
 }
 
 export type Teachings = {
-  teaching: string
+  teachings: string
 }
 
 export type Saint = {

@@ -37,7 +37,12 @@ const RelatedItem = ({
               </div>
             ))}
           </div>
-          <div className="summary">{summary}</div>
+          <div
+            className="summary"
+            dangerouslySetInnerHTML={{
+              __html: summary,
+            }}
+          ></div>
         </div>
       </Link>
     </S.RelatedPerson>
