@@ -154,11 +154,11 @@ export const Filter = styled.div`
     background-color: #521613;
     padding: 4px 15px;
     border-radius: 10px;
-    border: 1px solid #7e3b38;
+    border: 1px solid #af5f5b;
 
     &:hover,
     &.selected {
-      border: 2px solid ${colors.gold};
+      border: 1px solid ${colors.gold};
     }
   }
 
