@@ -59,6 +59,19 @@ export default async function handler(req, res) {
       ),
     )
 
+    // Test if relatedSaints can be serialized
+    try {
+      JSON.stringify(relatedSaints)
+    } catch (e) {
+      console.error(
+        'relatedSaints cannot be serialized:',
+        e,
+      )
+      return res
+        .status(500)
+        .json({ error: 'Data serialization error' })
+    }
+
     res.status(200).json(relatedSaints || [])
   } catch (error) {
     res.status(500).json({ error: 'failed to load data' })
