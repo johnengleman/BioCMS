@@ -110,10 +110,6 @@ export const SaintSummary = styled.div`
           p {
             display: inline;
           }
-
-          strong {
-            font-weight: 400;
-          }
         }
       }
     }
