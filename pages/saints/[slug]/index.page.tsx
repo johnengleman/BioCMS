@@ -62,7 +62,7 @@ const SaintBio = (props) => {
         </title>
         <link
           rel="canonical"
-          href={`${process.env.SITE_URL}/saints/${slug}`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}`}
         />
         <meta
           key="description"

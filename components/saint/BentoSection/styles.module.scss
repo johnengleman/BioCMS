@@ -19,10 +19,12 @@
 
   .header {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
     align-items: center;
     background-color: #eaeaea;
     height: 40px;
+    color: #333;
+    font-size: 14px;
 
     svg {
       margin-right: 30px;

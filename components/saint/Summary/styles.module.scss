@@ -8,24 +8,23 @@
 
   ul {
     list-style-type: square;
-    color: var(--gold);
     margin-left: -20px;
 
     li {
       margin-bottom: 10px;
       margin-left: 0;
       max-width: 800px;
+      font-size: 16px;
+      font-weight: 450;
 
-      p {
-        color: #222;
-        font-size: 16px;
-        font-weight: 450;
+      &::marker {
+        color: var(--gold);
+      }
 
-        strong {
-          color: #888;
-          font-weight: 450;
-          text-decoration: underline;
-        }
+      strong {
+        color: #888;
+        font-weight: 600;
+        text-decoration: underline;
       }
     }
   }
