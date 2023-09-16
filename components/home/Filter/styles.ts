@@ -145,16 +145,16 @@ export const Filter = styled.div`
 
   .slide {
     font-size: 12px;
-    color: rgb(113, 113, 113);
+    color: #f1e1e0;
     cursor: pointer;
     flex: unset;
     min-width: fit-content;
     border-bottom: 2px solid transparent;
     transition: border;
-    background-color: #fff;
+    background-color: #521613;
     padding: 4px 15px;
     border-radius: 10px;
-    border: 2px solid #dddddd;
+    border: 1px solid #7e3b38;
 
     &:hover,
     &.selected {
