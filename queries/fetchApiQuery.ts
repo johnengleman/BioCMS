@@ -18,7 +18,7 @@ const fetchAPIQuery = async (
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(options),
+      body: JSON.stringify(options || {}),
     },
   )
 
