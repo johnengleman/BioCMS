@@ -20,7 +20,10 @@ const RelatedItem = ({
           height="225"
           width="150"
           fill={false}
-          alt=""
+          alt={
+            images[0]?.directus_files_id?.description ||
+            `Image of the orthodox and catholic saint ${name}`
+          }
         />
         <div className="person-info">
           <div className="name">{name}</div>

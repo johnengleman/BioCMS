@@ -49,23 +49,20 @@ const SaintBio = (props) => {
     birthPlace: data?.birth_location,
     deathPlace: data?.death_location,
     description: data?.summary,
-    affiliation: 'Eastern Orthodox Church',
   }
 
   return (
     <>
       <Head>
-        <title>
-          {`${data?.name}: Life, Legacy, and Teachings`}
-        </title>
+        <title>{`${data?.name}: their Teachings`}</title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/teachings`}
         />
         <meta
           key="description"
           name="description"
-          content={`Discover ${data?.name}'s spiritual journey in the Eastern Orthodox tradition. Explore their sayings, images, and related books.`}
+          content={`Discover the teachings of ${data?.name} and their sayings, legacy, miracles, teachings and related books.`}
         />
         <script
           type="application/ld+json"

@@ -18,7 +18,7 @@ const ImageMain = ({ images, name, limit = 1 }) => {
               height={400}
               alt={
                 image?.directus_files_id?.description ||
-                `Image of ${name}, the eastern orthodox saint`
+                `Image of the orthodox and catholic saint ${name}`
               }
               src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${image?.directus_files_id.id}?key=profile`}
             />
