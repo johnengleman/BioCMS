@@ -93,7 +93,7 @@ const Filter = ({
     <S.Filter>
       <div className="content-container">
         <h1>
-          Find a saint, find a
+          Find a Saint, find a
           <span className="metaphor">
             <Typewriter
               options={
