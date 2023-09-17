@@ -81,17 +81,18 @@ const Saints = (props) => {
     <>
       <Head>
         <title>
-          Eastern Orthodox Saints: Spiritual Biographies,
-          Books, and Quotes
+          Browse and discover all the Catholic Saints:
+          Spiritual Biographies, Teachings, Sayings,
+          Miracles Books, and Quotes
         </title>
         <meta
           key="description"
           name="description"
-          content="Explore the lives and legacies of Catholic and Orthodox saints. From teachings to miracles, delve into their spiritual journeys."
+          content="Explore the lives and legacies of Catholic saints. From teachings to miracles, delve into their spiritual journeys."
         />
         <meta
           name="keywords"
-          content="Eastern Orthodox, saints, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
+          content="Roman Catholic, Eastern Orthodox saints, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
         />
       </Head>
       <Page saints={data}>
