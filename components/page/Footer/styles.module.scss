@@ -1,23 +1,36 @@
-import styled from 'styled-components'
-import { device } from '../../../styles/devices'
+@import './../../../styles/breakpoints.scss';
 
-export const Footer = styled.div`
+.footer {
   background-color: #343434;
-  height: 60px; /* Or whatever height you want */
+  height: 100px;
   color: #fff;
   width: 100%;
   display: flex;
-  margin-top: 150px;
+
+  @include breakpoint(laptop) {
+    height: 100px;
+    margin-top: 150px;
+  }
 
   .content {
     width: 90%;
-    width: 1450px;
-    margin: 0 auto;
+    max-width: 1450px;
+    margin: 20px auto;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+
+    @include breakpoint(tablet) {
+      align-items: center;
+    }
 
     .left {
       justify-content: flex-start;
+      flex-direction: column;
+      gap: 15px;
+
+      @include breakpoint(tablet) {
+        flex-direction: row;
+      }
     }
 
     .center {
@@ -39,10 +52,15 @@ export const Footer = styled.div`
       margin: 0 20px;
       font-size: 14px;
       transition: all 0.1s ease-in-out;
+      font-weight: 700;
+
+      @include breakpoint(tablet) {
+        margin: 0 20px;
+      }
 
       &:hover {
         color: #999;
       }
     }
   }
-`
+}

@@ -1,32 +1,39 @@
 import Link from 'next/link'
-import * as S from './styles'
 import { useRouter } from 'next/router'
 import Search from '../Search/Search'
 import SMButtons from '../SMButtons/SMButtons'
+import styles from './styles.module.scss'
 
 const Header = ({ saints }) => {
   const router = useRouter()
   const isSaintsPage =
     router.pathname.startsWith('/saints/')
   return (
-    <S.Header transparent={isSaintsPage}>
-      <div className="row row-1">
-        <div className="content">
-          <div className="col left">
-            <S.Navigation transparent={isSaintsPage}>
+    <div
+      className={`${styles.header} ${
+        isSaintsPage ? styles.transparent : ''
+      }
+}`}
+    >
+      <div className={styles.row}>
+        <div className={styles.content}>
+          <div className={`${styles.col} ${styles.left}`}>
+            <div className={styles.navigation}>
               <Link href="/saints">Saints</Link>
               {/* <Link href="/books">Books</Link>
               <Link href="/teachings">Teachings</Link> */}
-            </S.Navigation>
+            </div>
           </div>
-          <div className="col center"></div>
-          <div className="col right">
+          <div
+            className={`${styles.col} ${styles.center}`}
+          ></div>
+          <div className={`${styles.col} ${styles.right}`}>
             <Search saints={saints} />
             <SMButtons transparent={isSaintsPage} />
           </div>
         </div>
       </div>
-    </S.Header>
+    </div>
   )
 }
 

@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import SectionTitle from '../SectionTitle/SectionTitle'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
-const RelatedItem = ({
+const SimilarSaint = ({
   name,
   birth_year,
   death_year,
@@ -13,7 +13,7 @@ const RelatedItem = ({
   summary,
 }) => {
   return (
-    <S.RelatedPerson>
+    <div className={styles.similarSaint}>
       <Link href={slug}>
         <ImageGlobal
           src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${images[0].directus_files_id.id}?fit=cover&height=225&width=150`}
@@ -25,15 +25,15 @@ const RelatedItem = ({
             `Image of the orthodox and catholic saint ${name}`
           }
         />
-        <div className="person-info">
-          <div className="name">{name}</div>
-          <div className="dates">
+        <div className={styles.personInfo}>
+          <div className={styles.name}>{name}</div>
+          <div className={styles.dates}>
             {birth_year || '?'}-{death_year || '?'}
           </div>
-          <div className="tags">
+          <div className={styles.tags}>
             {categories.map((category, i) => (
               <div
-                className="tag"
+                className={styles.tag}
                 key={i}
               >
                 {category.replace(/-/g, ' ')}
@@ -41,40 +41,40 @@ const RelatedItem = ({
             ))}
           </div>
           <div
-            className="summary"
+            className={styles.summary}
             dangerouslySetInnerHTML={{
               __html: summary,
             }}
           ></div>
         </div>
       </Link>
-    </S.RelatedPerson>
+    </div>
   )
 }
 
-const RelatedPeople = ({ data }) => {
+const SimilarSaints = ({ data }) => {
   if (data?.length) {
     return (
-      <S.RelatedPeople>
+      <div className={styles.similarSaints}>
         <SectionTitle
           id="section-similar-saints"
           dataSection="similarSaints"
         >
           Similar Saints
         </SectionTitle>
-        <div className="similar-saints-container">
-          {data?.map((relatedPerson, i) => (
-            <RelatedItem
+        <div className={styles.similarSaintsContainer}>
+          {data?.map((saint, i) => (
+            <SimilarSaint
               key={i}
-              {...relatedPerson}
+              {...saint}
             />
           ))}
         </div>
-      </S.RelatedPeople>
+      </div>
     )
   }
 
   return null
 }
 
-export default RelatedPeople
+export default SimilarSaints

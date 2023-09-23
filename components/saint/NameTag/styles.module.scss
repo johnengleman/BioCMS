@@ -1,13 +1,17 @@
-import styled from 'styled-components'
+@import './../../../styles/breakpoints.scss';
 
-export const NameTag = styled.div`
+.nameTag {
   margin-bottom: 15px;
 
   .name {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 600;
     line-height: 1;
     color: #000;
+
+    @include breakpoint(tablet) {
+      font-size: 28px;
+    }
   }
 
   .info {
@@ -37,4 +41,4 @@ export const NameTag = styled.div`
       min-width: fit-content;
     }
   }
-`
+}

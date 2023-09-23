@@ -1,7 +1,4 @@
-import styled from 'styled-components'
-import { colors } from '../../../styles/colors'
-
-export const ChurchToggle = styled.div`
+.churchToggle {
   border-radius: 20px;
   background-color: rgb(229, 231, 235);
   height: fit-content;
@@ -30,7 +27,7 @@ export const ChurchToggle = styled.div`
       list-style: none;
       padding: 3px 15px;
       font-size: 10px;
-      color: ${colors.darkGray};
+      color: var(--darkGray);
       cursor: pointer;
       transition: all 0.15s ease-in-out;
       z-index: 1;
@@ -49,7 +46,7 @@ export const ChurchToggle = styled.div`
       }
 
       svg g {
-        fill: ${colors.darkGray};
+        fill: var(--lightGray);
         transition: all 0.15s ease-in-out;
       }
 
@@ -62,4 +59,4 @@ export const ChurchToggle = styled.div`
       }
     }
   }
-`
+}

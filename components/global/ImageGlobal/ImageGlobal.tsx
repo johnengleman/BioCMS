@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import styles from './styles.module.scss'
 
 const ImageGlobal = ({
   src,
@@ -22,7 +23,7 @@ const ImageGlobal = ({
 
   return (
     <div
-      className="image-global"
+      className={styles.imageGlobal}
       style={{
         position: 'relative',
         height: fill ? '100%' : `${height}px`,

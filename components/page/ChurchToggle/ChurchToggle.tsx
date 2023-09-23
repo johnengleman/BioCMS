@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import { SiteContext } from '../../../context/SiteContext'
 import CatholicCross from '../../global/Icons/CatholicCross/CatholicCross'
 import OrthodoxCross from '../../global/Icons/OrthodoxCross/OrthodoxCross'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 const ChurchToggle = () => {
   const router = useRouter()
@@ -64,7 +64,7 @@ const ChurchToggle = () => {
 
     const newQuery = {
       ...router.query,
-      church: church
+      church: church,
     }
     router.push(
       {
@@ -79,13 +79,13 @@ const ChurchToggle = () => {
   }
 
   return (
-    <S.ChurchToggle>
+    <div className={styles.churchToggle}>
       <ul
-        className="switch"
+        className={styles.switch}
         ref={churchToggleRef}
       >
         <div
-          className="button"
+          className={styles.button}
           style={{
             width: buttonDimensions.width,
             height: buttonDimensions.height,
@@ -94,8 +94,10 @@ const ChurchToggle = () => {
         ></div>
         <li
           data-church="catholic"
-          className={`option ${
-            selectedChurch === 'catholic' ? 'active' : ''
+          className={`${styles.option} ${
+            selectedChurch === 'catholic'
+              ? styles.active
+              : ''
           }`}
           onClick={(e) => handleSetChurch(e, 'catholic')}
         >
@@ -105,8 +107,10 @@ const ChurchToggle = () => {
         </li>
         <li
           data-church="orthodox"
-          className={`option ${
-            selectedChurch === 'orthodox' ? 'active' : ''
+          className={`${styles.option} ${
+            selectedChurch === 'orthodox'
+              ? styles.active
+              : ''
           }`}
           onClick={(e) => handleSetChurch(e, 'orthodox')}
         >
@@ -115,8 +119,8 @@ const ChurchToggle = () => {
         </li>
         <li
           data-church="all"
-          className={`option ${
-            selectedChurch === 'all' ? 'active' : ''
+          className={`${styles.option} ${
+            selectedChurch === 'all' ? styles.active : ''
           }`}
           onClick={(e) => {
             handleSetChurch(e, 'all')
@@ -125,7 +129,7 @@ const ChurchToggle = () => {
           All
         </li>
       </ul>
-    </S.ChurchToggle>
+    </div>
   )
 }
 

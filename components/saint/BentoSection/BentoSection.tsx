@@ -59,18 +59,20 @@ const BentoSection: React.FC<BentoSectionProps> = ({
     return null
   }
 
-  // if (typeof data !== 'string') {
-  //   console.log(data)
-  // }
   const wordCount =
     typeof data === 'string' ? count(data) : ''
   const h2s = extractH2s(data)
 
   return (
     <div className={styles.bentoSection}>
-      <div className={styles.content}>
+      {!!h2s.length && (
         <div className={styles.toc}>
-          <div className={styles.chapters}>Chapters</div>
+          <div className={styles.header}>
+            Chapters
+            <span className={styles.wordCount}>
+              ({wordCount} words)
+            </span>
+          </div>
           <div className={styles.list}>
             {h2s.map((h2, i) => (
               <div
@@ -84,38 +86,44 @@ const BentoSection: React.FC<BentoSectionProps> = ({
               </div>
             ))}
           </div>
-
-          <div className={styles.footer}>
+        </div>
+      )}
+      <div
+        className={`${styles.text} ${
+          !h2s.length ? styles.full : ''
+        }`}
+      >
+        <div className={styles.header}>
+          {h2s.length ? (
+            h2s[0]
+          ) : (
             <span className={styles.wordCount}>
-              {wordCount} words
+              ({wordCount} words)
             </span>
-          </div>
+          )}
+        </div>
+        <div className={styles.previewContainer}>
+          <div
+            className={styles.preview}
+            dangerouslySetInnerHTML={{
+              __html: data,
+            }}
+          ></div>
         </div>
 
-        <div className={styles.text}>
-          <div className={styles.expand}>
-            <div
-              className={styles.preview}
-              dangerouslySetInnerHTML={{
-                __html: data,
-              }}
-            ></div>
-          </div>
-
-          <div className={styles.footer}>
-            <Link href={link || ''}>
-              <button>
-                <FontAwesomeIcon
-                  icon={faBookOpenReader}
-                  style={{
-                    color: `var(--violet)`,
-                    fontSize: '14px',
-                  }}
-                />
-                Continue Reading
-              </button>
-            </Link>
-          </div>
+        <div className={styles.footer}>
+          <Link href={link || ''}>
+            <button>
+              <FontAwesomeIcon
+                icon={faBookOpenReader}
+                style={{
+                  color: `var(--violet)`,
+                  fontSize: '14px',
+                }}
+              />
+              Continue Reading
+            </button>
+          </Link>
         </div>
       </div>
     </div>

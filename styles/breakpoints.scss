@@ -69,9 +69,9 @@ $is-amp: false !default;
   }
 }
 
-// @mixin between-breakpoints($pointA, $pointB) {
-//   /* stylelint-disable-next-line */
-//   @media only screen and (min-width: map-get($breakpoint, $pointA)) and (max-width: map-get($breakpoint, $pointB) - 1) {
-//     @content;
-//   }
-// }
+@mixin between-breakpoints($pointA, $pointB) {
+  /* stylelint-disable-next-line */
+  @media only screen and (min-width: map-get($breakpoint, $pointA)) and (max-width: map-get($breakpoint, $pointB) - 1) {
+    @content;
+  }
+}

@@ -1,7 +1,10 @@
 import * as S from './styles'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
+import useBreakpoints from '../../../hooks/useBreakPoints'
 
 const ImageMain = ({ images, name, limit = 1 }) => {
+  const { isTablet } = useBreakpoints()
+
   if (!images) {
     return null
   }
@@ -14,8 +17,8 @@ const ImageMain = ({ images, name, limit = 1 }) => {
             <ImageGlobal
               key={i}
               fill={false}
-              width={300}
-              height={400}
+              width={isTablet ? 200 : 300}
+              height={isTablet ? 264 : 400}
               alt={
                 image?.directus_files_id?.description ||
                 `Image of the orthodox and catholic saint ${name}`

@@ -1,16 +1,15 @@
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import styles from './styles.module.scss'
 import {
   faSquareXTwitter,
   faSquareFacebook,
 } from '@fortawesome/free-brands-svg-icons'
 
-import * as S from './styles'
-
 const SMButtons = ({ transparent }) => (
-  <S.SocialMediaButtons>
+  <div className={styles.socialMediaButtons}>
     <Link href="https://twitter.com/findasaint">
-      <div className="button">
+      <div className={styles.buttons}>
         <FontAwesomeIcon
           icon={faSquareXTwitter}
           style={{
@@ -21,7 +20,7 @@ const SMButtons = ({ transparent }) => (
       </div>
     </Link>
     <Link href="https://www.facebook.com/groups/findasaint">
-      <div className="button">
+      <div className={styles.buttons}>
         <FontAwesomeIcon
           icon={faSquareFacebook}
           style={{
@@ -31,7 +30,7 @@ const SMButtons = ({ transparent }) => (
         />
       </div>
     </Link>
-  </S.SocialMediaButtons>
+  </div>
 )
 
 export default SMButtons

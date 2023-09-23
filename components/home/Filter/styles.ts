@@ -34,14 +34,23 @@ export const Filter = styled.div`
 
   h1 {
     color: #fff;
-    font-size: 2.5rem;
+    font-size: 1.8;
     margin-bottom: 1.5rem;
     display: flex;
+    flex-direction: column;
+
+    @media ${device.laptop} {
+      flex-direction: row;
+      font-size: 2.5rem;
+    }
   }
 
   .metaphor {
-    margin-left: 10px;
     text-decoration: underline;
+
+    @media ${device.laptop} {
+      margin-left: 10px;
+    }
   }
 
   .content-container {
