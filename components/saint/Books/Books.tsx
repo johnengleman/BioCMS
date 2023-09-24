@@ -62,7 +62,7 @@ const Books = ({ books, inRightRail }: BooksProps) => {
           id="section-books"
           dataSection="books"
         >
-          Books
+          Related Books
         </SectionTitle>
         <div className={styles.booksContainer}>
           {books?.map((book, i) => (

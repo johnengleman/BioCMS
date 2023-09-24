@@ -56,7 +56,7 @@ const Search = ({ saints }) => {
         <input
           type="text"
           className="input"
-          placeholder="Search for saints"
+          placeholder="Search For Saints"
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />

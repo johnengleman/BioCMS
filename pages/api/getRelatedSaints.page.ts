@@ -59,7 +59,6 @@ export default async function handler(req, res) {
       ),
     )
 
-    // Test if relatedSaints can be serialized
     try {
       JSON.stringify(relatedSaints)
     } catch (e) {
