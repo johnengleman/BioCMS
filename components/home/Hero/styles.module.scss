@@ -1,0 +1,61 @@
+@import './../../../styles/breakpoints.scss';
+
+.hero {
+  width: 100vw;
+  min-width: 100vw;
+  height: min-content;
+  border: 1px solid #dfdfdf;
+  padding: 40px 0;
+  position: relative;
+  margin-bottom: 30px;
+  position: relative;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, 0.5)
+      ),
+      url('/footer.webp');
+    background-size: cover; /* This will cover the entire viewport */
+    background-repeat: no-repeat; /* Important if the image is smaller than the footer */
+    background-position: center 45%; /* This will center the image */
+    transform: scaleX(-1);
+    z-index: 0;
+  }
+
+  .contentContainer {
+    max-width: 1450px;
+    margin: 0 auto;
+    width: 90%;
+    position: relative;
+
+    h1 {
+      color: #fff;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+
+      @include breakpoint(laptop) {
+        flex-direction: row;
+        font-size: 2.5rem;
+      }
+    }
+
+    .metaphor {
+      text-decoration: underline;
+
+      @include breakpoint(laptop) {
+        margin-left: 10px;
+      }
+    }
+  }
+}

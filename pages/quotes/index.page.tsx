@@ -56,12 +56,11 @@ const Home = () => {
           />
         </Head>
         <Page>
-          <Filter
-            setFilter={setFilter}
+          {/* <Filter
             selectedFilter={filter}
             options={options}
             title="Explore the Orthodox Quotes"
-          />
+          /> */}
           {data?.map((quote: Quote, i: number) => (
             <QuoteSummary
               key={i}

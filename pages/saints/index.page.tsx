@@ -11,33 +11,35 @@ import Head from 'next/head'
 import { getSaints } from '../../queries/getSaints'
 import SaintSummary from '../../components/home/summary/SaintSummary'
 import Page from '../../components/page/Page/Page'
-import Filter from '../../components/home/Filter/Filter'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
-import { properties } from '../../properties'
+import Hero from '../../components/home/Hero/Hero'
 
-const Saints = (props) => {
+const Saints = () => {
   const router = useRouter()
   const church = router.query.church || 'all'
-  const saintCategory = router.query.category || 'all'
+  const saintFilter = router.query.filter || 'all'
+  const saintPreset = router.query.preset || 'none'
   const sort = router.query.sort || 'chronological-asc'
 
   const { data, isError, isLoading } = useQuery(
-    ['saints', church, saintCategory, sort],
+    ['saints', church, saintFilter, saintPreset, sort],
     () =>
       getSaints(
         Array.isArray(church) ? church[0] : church,
-        Array.isArray(saintCategory)
-          ? saintCategory[0]
-          : saintCategory,
+        Array.isArray(saintFilter)
+          ? saintFilter[0]
+          : saintFilter,
+        Array.isArray(saintPreset)
+          ? saintPreset[0]
+          : saintPreset,
         Array.isArray(sort) ? sort[0] : sort,
       ),
     {
-      enabled: !!saintCategory || !!church, // This ensures the query is run only when the category is available
+      enabled: !!saintFilter || !!church || !!saintPreset, // This ensures the query is run only when the category is available
     },
   )
 
-  const { mostRecentlyUpdatedSaints } = props
   const {
     isMobileS,
     isMobileM,
@@ -62,10 +64,25 @@ const Saints = (props) => {
     return 5
   }
 
-  const handleSetSaintCategory = (category) => {
+  const handleSetSaintFilter = (filter) => {
     const newQuery = {
       ...router.query,
-      category: category.toLowerCase(),
+      filter: filter.toLowerCase(),
+    }
+    router.push(
+      {
+        pathname: router.pathname,
+        query: newQuery,
+      },
+      undefined,
+      { shallow: true },
+    )
+  }
+
+  const handleSetSaintPreset = (preset) => {
+    const newQuery = {
+      ...router.query,
+      preset: preset.toLowerCase(),
     }
     router.push(
       {
@@ -96,17 +113,12 @@ const Saints = (props) => {
         />
       </Head>
       <Page saints={data}>
-        <Filter
-          setFilter={(church) =>
-            handleSetSaintCategory(church)
-          }
-          selectedFilter={saintCategory}
-          options={properties.saintCategories}
-          title={
-            properties[
-              !Array.isArray(church) ? church : 'all'
-            ]?.filterTitle
-          }
+        <Hero
+          handleSetSaintFilter={handleSetSaintFilter}
+          saintFilter={saintFilter}
+          handleSetSaintPreset={handleSetSaintPreset}
+          saintPreset={saintPreset}
+          church={church}
         />
         {isLoading && (
           <p className="error">Fetching Saints</p>
@@ -148,13 +160,14 @@ const Saints = (props) => {
 
 export async function getStaticProps({ query }) {
   const church = query?.church || 'all'
-  const saintCategory = query?.category || 'all'
+  const saintFilter = query?.filter || 'all'
+  const saintPreset = query?.preset || 'none'
   const sort = query?.sort || 'chronological-asc'
 
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery(
-    ['saints', church, saintCategory, sort],
-    () => getSaints(church, saintCategory, sort),
+    ['saints', church, saintFilter, saintPreset, sort],
+    () => getSaints(church, saintFilter, saintPreset, sort),
   )
 
   return {

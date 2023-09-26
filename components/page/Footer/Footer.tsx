@@ -7,11 +7,13 @@ import { faCircleQuestion } from '@fortawesome/pro-regular-svg-icons'
 import styles from './styles.module.scss'
 
 const Footer = () => {
-  const router = useRouter()
-
   const [inView, setInView] = useState(false)
+  const router = useRouter()
+  const animateFooter =
+    router.pathname === '/saints' || router.pathname === '/'
+
   useEffect(() => {
-    if (router.pathname === '/saints') {
+    if (animateFooter) {
       const handleScroll = () => {
         if (window.scrollY > 0 && window.scrollY < 1500) {
           setInView(true)
@@ -31,12 +33,12 @@ const Footer = () => {
         window.removeEventListener('scroll', handleScroll)
       }
     }
-  }, [router.pathname])
+  }, [animateFooter])
 
   return (
     <div
       className={`${styles.footer} ${
-        router.pathname === '/saints' ? styles.animated : ''
+        animateFooter ? styles.animated : ''
       }
       } ${inView ? styles.inView : ''}`}
     >

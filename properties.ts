@@ -8,7 +8,7 @@ export const properties = {
   catholic: {
     filterTitle: 'All Catholic Saints',
   },
-  saintCategories: [
+  saintFilters: [
     'All',
     'Ascetics',
     'Bishops',
