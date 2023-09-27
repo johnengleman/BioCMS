@@ -37,12 +37,16 @@ module.exports = {
     }))
 
     const staticPaths = [
+      // {
+      //   loc: `${config.siteUrl}/quotes`,
+      //   lastmod: new Date().toISOString(),
+      // },
+      // {
+      //   loc: `${config.siteUrl}/books`,
+      //   lastmod: new Date().toISOString(),
+      // },
       {
-        loc: `${config.siteUrl}/quotes`,
-        lastmod: new Date().toISOString(),
-      },
-      {
-        loc: `${config.siteUrl}/books`,
+        loc: `${config.siteUrl}/about`,
         lastmod: new Date().toISOString(),
       },
     ]
