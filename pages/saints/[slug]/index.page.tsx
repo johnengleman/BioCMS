@@ -9,6 +9,7 @@ import {
 import { Saint } from '../../../types/types'
 import styles from './styles.module.scss'
 import { getSaint } from '../../../queries/getSaint'
+import { getSearchData } from '../../../queries/getSearchData'
 import Page from '../../../components/page/Page/Page'
 import ImageMain from '../../../components/saint/ImageMain/ImageMain'
 import Books from '../../../components/saint/Books/Books'
@@ -27,6 +28,7 @@ import {
 
 const SaintBio = (props) => {
   const router = useRouter()
+  const church = router.query.church || 'all'
 
   const slug = Array.isArray(router?.query?.slug)
     ? router?.query?.slug[0]
@@ -34,6 +36,12 @@ const SaintBio = (props) => {
 
   const { data = null } = useQuery(['saints', slug], () =>
     getSaint(slug),
+  )
+
+  const { data: searchData } = useQuery(
+    ['search', church],
+    () =>
+      getSearchData(Array.isArray(church) ? church[0] : church)
   )
 
   if (!router.isFallback && !data) {
@@ -76,7 +84,7 @@ const SaintBio = (props) => {
           }}
         />
       </Head>
-      <Page>
+      <Page searchData={searchData}>
         <div className={styles.SaintSingle}>
           <div className={styles.hero}>
             <div className={styles.heroContent}>
@@ -183,6 +191,7 @@ const SaintBio = (props) => {
 
 export const getStaticProps = async ({ params }) => {
   let relatedSaints: APIResponse = []
+  const church = params?.church || 'all'
 
   const slug = Array.isArray(params?.slug)
     ? params?.slug[0]
@@ -196,6 +205,11 @@ export const getStaticProps = async ({ params }) => {
     'saints',
     slug,
   ]) as Saint
+
+  await queryClient.prefetchQuery(
+    ['search', church],
+    () => getSearchData(church),
+  )
 
   try {
     const saintsResponse = await fetchAPIQuery(

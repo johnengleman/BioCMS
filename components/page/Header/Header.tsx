@@ -4,7 +4,7 @@ import Search from '../Search/Search'
 import SMButtons from '../SMButtons/SMButtons'
 import styles from './styles.module.scss'
 
-const Header = ({ saints }) => {
+const Header = ({ searchData }) => {
   const router = useRouter()
   const isSaintsPage =
     router.pathname.startsWith('/saints/')
@@ -28,7 +28,7 @@ const Header = ({ saints }) => {
             className={`${styles.col} ${styles.center}`}
           ></div>
           <div className={`${styles.col} ${styles.right}`}>
-            <Search saints={saints} />
+            <Search searchData={searchData} />
             <SMButtons transparent={isSaintsPage} />
           </div>
         </div>

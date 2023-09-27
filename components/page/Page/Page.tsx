@@ -6,13 +6,13 @@ import * as S from './styles'
 
 type Props = {
   children: React.ReactNode
-  saints?: Saint[]
+  searchData?: Saint[]
 }
 
-const Page = ({ children, saints }: Props) => (
+const Page = ({ children, searchData }: Props) => (
   <S.Page>
     <Header
-      saints={saints}
+      searchData={searchData}
     />
     <S.Body>{children}</S.Body>
     <Footer />

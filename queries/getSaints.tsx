@@ -5,7 +5,7 @@ type Response = {
   saints: Saint[]
 }
 
-function getSaintsQuery(church, category, sort) {
+function getSaintsQuery(church, category, saintPreset, sort) {
   // Variables declaration
   let variablesList: string[] = []
   if (church !== 'all') {
@@ -17,12 +17,22 @@ function getSaintsQuery(church, category, sort) {
 
   // Filter construction
   let filterList: string[] = []
+  let churchList: string[] = []
   if (church !== 'all') {
-    filterList.push('venerated_in: { _icontains: $church }')
+    churchList.push('venerated_in: { _icontains: $church }')
   }
   if (category !== 'all') {
-    filterList.push('categories: { _icontains: $category }')
+    filterList.push('{ categories: { _icontains: $category } }')
   }
+  if(saintPreset === 'patron') {
+    filterList.push('{ categories: { _icontains: "Patron Saints" } }')
+  }
+  if(saintPreset === '20th-century-saints') {
+    filterList.push('{ death_year: { _gte: 1900 } }')
+  }
+  // if(saintPreset === 'saints-by-months') {
+  //   filterList.push('{ death_year: { _gte: 1900 } }')
+  // }
 
   // Building the query
   let baseQuery = `
@@ -34,7 +44,10 @@ function getSaintsQuery(church, category, sort) {
       saints(
         sort: "${sort}"
         filter: {
-          ${filterList.join(', ')}
+          ${churchList}
+          _and: [
+            ${filterList.join(', ')}
+          ]
         }
       ) {
         id
@@ -65,106 +78,6 @@ function getSaintsQuery(church, category, sort) {
   return baseQuery
 }
 
-function getPatronSaints(sort) {
-  const query = `query getSaint {
-        saints(
-          sort: "${sort}"
-           filter: {
-           categories: { _icontains: "patron saints" }
-        }
-          ) {
-            id
-            slug
-            name
-            summary
-            biography
-            categories
-            birth_year
-            death_year
-            birth_location
-            death_location
-            categories
-            books {
-              title
-            }
-            sayings {
-              text
-            }
-            images {
-              directus_files_id {
-                id
-              }
-            }
-          }
-        }
-      `
-  return query
-}
-
-function get20thCenturySaints(sort) {
-  const query = `query getSaint {
-        saints(
-          sort: "${sort}"
-          ) {
-            id
-            slug
-            name
-            summary
-            biography
-            categories
-            birth_year
-            death_year
-            birth_location
-            death_location
-            books {
-              title
-            }
-            sayings {
-              text
-            }
-            images {
-              directus_files_id {
-                id
-              }
-            }
-          }
-        }
-      `
-  return query
-}
-
-function SaintsByMonths(sort) {
-  const query = `query getSaint {
-        saints(
-          sort: "${sort}"
-          ) {
-            id
-            slug
-            name
-            summary
-            biography
-            categories
-            birth_year
-            death_year
-            birth_location
-            death_location
-            books {
-              title
-            }
-            sayings {
-              text
-            }
-            images {
-              directus_files_id {
-                id
-              }
-            }
-          }
-        }
-      `
-  return query
-}
-
 const parseSort = (sort) => {
   if (sort === 'newest-asc') {
     return 'date_created'
@@ -186,35 +99,14 @@ export const getSaints = async (
   saintPreset = 'none',
   sort = 'chronological-asc',
 ) => {
-  console.log('preset', saintPreset)
 
-  if (saintPreset === 'patron') {
-    const { saints } = await request<Response>(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-      getPatronSaints(parseSort(sort)),
-    )
-    return saints
-  } else if (saintPreset === '20th-century-saints') {
-    const { saints } = await request<Response>(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-      get20thCenturySaints(parseSort(sort)),
-    )
-    return saints
-  } else if (saintPreset === 'saints-by-months') {
-    const { saints } = await request<Response>(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-      SaintsByMonths(parseSort(sort)),
-    )
-    return saints
-  } else {
-    const { saints } = await request<Response>(
-      `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-      getSaintsQuery(church, category, parseSort(sort)),
-      {
-        church,
-        category,
-      },
-    )
-    return saints
-  }
+  const { saints } = await request<Response>(
+    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
+    getSaintsQuery(church, category, saintPreset, parseSort(sort)),
+    {
+      church,
+      category,
+    },
+  )
+  return saints
 }

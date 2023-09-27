@@ -8,7 +8,7 @@ import Fuse from 'fuse.js'
 import { Saint } from '../../home/summary/interfaces'
 import { useOnClickOutside } from 'usehooks-ts'
 
-const Search = ({ saints }) => {
+const Search = ({ searchData }) => {
   const ref = useRef(null)
   const [searchInput, setSearchInput] = useState('')
   const [searchOptions, setSearchOptions] = useState<
@@ -26,7 +26,7 @@ const Search = ({ saints }) => {
       .trim()
       .toLowerCase()
 
-    const fuse = new Fuse(saints, {
+    const fuse = new Fuse(searchData, {
       keys: ['name'],
       threshold: 0.3, // Increase threshold for more leniency
       shouldSort: true,
@@ -42,11 +42,11 @@ const Search = ({ saints }) => {
     } else {
       setSearchOptions([])
     }
-  }, [searchInput, saints])
+  }, [searchInput, searchData])
 
   useOnClickOutside(ref, handleClickOutside)
 
-  if (!saints) {
+  if (!searchData) {
     return null
   }
 

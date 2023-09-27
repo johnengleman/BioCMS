@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
 import Head from 'next/head'
 import { getSaints } from '../../queries/getSaints'
+import { getSearchData } from '../../queries/getSearchData'
 import SaintSummary from '../../components/home/summary/SaintSummary'
 import Page from '../../components/page/Page/Page'
 import Masonry from 'react-masonry-css'
@@ -39,6 +40,13 @@ const Saints = () => {
       enabled: !!saintFilter || !!church || !!saintPreset, // This ensures the query is run only when the category is available
     },
   )
+
+  const { data: searchData } = useQuery(
+    ['search', church],
+    () =>
+      getSearchData(Array.isArray(church) ? church[0] : church)
+  )
+
 
   const {
     isMobileS,
@@ -112,7 +120,7 @@ const Saints = () => {
           content="Roman Catholic, Eastern Orthodox saints, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
         />
       </Head>
-      <Page saints={data}>
+      <Page searchData={searchData}>
         <Hero
           handleSetSaintFilter={handleSetSaintFilter}
           saintFilter={saintFilter}
@@ -168,6 +176,11 @@ export async function getStaticProps({ query }) {
   await queryClient.prefetchQuery(
     ['saints', church, saintFilter, saintPreset, sort],
     () => getSaints(church, saintFilter, saintPreset, sort),
+  )
+
+  await queryClient.prefetchQuery(
+    ['search', church],
+    () => getSearchData(church),
   )
 
   return {

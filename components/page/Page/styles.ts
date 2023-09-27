@@ -6,7 +6,6 @@ export const Page = styled.div`
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 `
 
 export const Body = styled.main`
@@ -14,6 +13,8 @@ export const Body = styled.main`
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
+  flex-direction: column;
+  align-items: center;
 
   .my-masonry-grid {
     display: flex;

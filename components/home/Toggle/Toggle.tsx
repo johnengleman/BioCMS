@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
-import * as S from './styles'
+import styles from './styles.module.scss';
 
 const Toggle = () => {
   const router = useRouter()
@@ -24,18 +24,18 @@ const Toggle = () => {
   }
 
   return (
-    <S.Toggle>
+    <div className={styles.sortToggle}>
       <span
-        className="selected"
+        className={styles.selected}
         onClick={() => setShowMenu(!showMenu)}
       >
-        sort by <span className='direction'>{sort}</span>
+        sort by <span className="direction">{sort}</span>
       </span>
       <div
-        className={`dropdown ${showMenu ? 'visible' : ''}`}
+        className={`${styles.dropdown} ${showMenu ? styles.visible : ''}`}
       >
         <ul>
-          <li
+          {/* <li
             onClick={() =>
               handleSetShowMenu('Newest - Asc')
             }
@@ -48,7 +48,7 @@ const Toggle = () => {
             }
           >
             Newest - Desc
-          </li>
+          </li> */}
           <li
             onClick={() =>
               handleSetShowMenu('Chronological - Asc')
@@ -65,7 +65,7 @@ const Toggle = () => {
           </li>
         </ul>
       </div>
-    </S.Toggle>
+      </div>
   )
 }
 

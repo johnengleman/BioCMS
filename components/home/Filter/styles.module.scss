@@ -14,14 +14,12 @@
     justify-content: flex-start;
     flex-direction: column;
     flex-wrap: wrap;
-    display: none;
 
     @include breakpoint(tablet) {
       flex-direction: row;
     }
 
     .preset {
-      border: 1px solid #e7e7e7;
       display: flex;
       gap: 20px;
       justify-content: space-between;
@@ -31,7 +29,7 @@
       border-radius: 10px;
       cursor: pointer;
       gap: 30px;
-      border: 1px solid transparent;
+      border: 2px solid transparent;
       transition: all 0.1s ease-in-out;
       background: linear-gradient(
         90deg,
@@ -44,7 +42,7 @@
       }
 
       &:hover {
-        border: 1px solid #dadada;
+        border: 2px solid #dadada;
 
         h3 {
           color: #ffecec;
@@ -52,7 +50,7 @@
       }
 
       &.active {
-        border: 1px solid #ffffff;
+        border: 2px solid #ffffff;
 
         h3 {
           color: #ffecec;
@@ -90,16 +88,16 @@
       cursor: pointer;
       flex: unset;
       min-width: fit-content;
-      border-bottom: 2px solid transparent;
-      transition: border;
+      transition: all 0.1s ease-in-out;
       background-color: #521613;
-      padding: 4px 15px;
-      border-radius: 10px;
-      border: 1px solid #af5f5b;
+      padding: 3px 15px;
+      border-radius: 7px;
+      letter-spacing: 0.25px;
+      border: 1px solid #3f3e3e;
 
       &:hover,
       &.selected {
-        border: 1px solid var(--gold);
+        border: 1px solid #fff;
       }
     }
   }

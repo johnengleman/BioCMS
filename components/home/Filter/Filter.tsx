@@ -28,10 +28,12 @@ const Filter = ({
 
   return (
     <div className={styles.filter}>
-      {/* <p className={styles.instructions}>Use a preset?</p> */}
+      <p className={styles.instructions}>Use a preset?</p>
       <div className={styles.presetContainer}>
         <button
-          className={`${styles.preset} ${styles.active}`}
+          className={`${styles.preset} ${
+            selectedPreset === 'patron' ? styles.active : ''
+          }`}
           onClick={() => {
             if (canUseTransition.current) {
               ;(document as any)?.startViewTransition(
@@ -40,7 +42,7 @@ const Filter = ({
                     setSaintPreset(
                       selectedPreset !== 'patron'
                         ? 'patron'
-                        : null,
+                        : 'none',
                     )
                   })
                 },
@@ -49,7 +51,7 @@ const Filter = ({
               setSaintPreset(
                 selectedPreset !== 'patron'
                   ? 'patron'
-                  : null,
+                  : 'none',
               )
             }
           }}
@@ -75,7 +77,35 @@ const Filter = ({
             }}
           />
         </div> */}
-        <button className={`${styles.preset}`}>
+        <button
+          className={`${styles.preset} ${
+            selectedPreset === '20th-century-saints'
+              ? styles.active
+              : ''
+          }`}
+          onClick={() => {
+            if (canUseTransition.current) {
+              ;(document as any)?.startViewTransition(
+                () => {
+                  flushSync(() => {
+                    setSaintPreset(
+                      selectedPreset !==
+                        '20th-century-saints'
+                        ? '20th-century-saints'
+                        : 'none',
+                    )
+                  })
+                },
+              )
+            } else {
+              setSaintPreset(
+                selectedPreset !== '20th-century-saints'
+                  ? '20th-century-saints'
+                  : 'none',
+              )
+            }
+          }}
+        >
           <h3>20th Century Saints</h3>
           <FontAwesomeIcon
             icon={faCameraRetro}
@@ -86,7 +116,34 @@ const Filter = ({
             }}
           />
         </button>
-        <button className={`${styles.preset}`}>
+        {/* <button
+          className={`${styles.preset} ${
+            selectedPreset === 'saints-by-months'
+              ? styles.active
+              : ''
+          }`}
+          onClick={() => {
+            if (canUseTransition.current) {
+              ;(document as any)?.startViewTransition(
+                () => {
+                  flushSync(() => {
+                    setSaintPreset(
+                      selectedPreset !== 'saints-by-months'
+                        ? 'saints-by-months'
+                        : 'none',
+                    )
+                  })
+                },
+              )
+            } else {
+              setSaintPreset(
+                selectedPreset !== 'saints-by-months'
+                  ? 'saints-by-months'
+                  : 'none',
+              )
+            }
+          }}
+        >
           <h3>Saints by Months</h3>
           <FontAwesomeIcon
             icon={faCalendarDays}
@@ -96,7 +153,7 @@ const Filter = ({
               '--fa-secondary-color': '#ccad00',
             }}
           />
-        </button>
+        </button> */}
       </div>
       <p className={styles.instructions}>Add a filter?</p>
       <div className={styles.slideContainer}>
