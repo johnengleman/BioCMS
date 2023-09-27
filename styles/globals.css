@@ -99,3 +99,21 @@ h6 {
   display: flex;
   align-items: center;
 }
+
+.my-masonry-grid {
+  display: flex;
+  width: auto;
+  margin-left: -15px;
+}
+.my-masonry-grid_column {
+  padding-left: 20px; /* gutter size */
+  background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column .saint-summary {
+  /* change div to reference your elements you put in <Masonry> */
+
+  margin-bottom: 20px;
+  border-radius: 20px;
+}

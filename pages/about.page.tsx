@@ -23,7 +23,7 @@ const About = () => {
           content="Roman Catholic, Eastern Orthodox saints, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
         />
       </Head>
-      <Page>
+      <Page spaceBetween={true}>
         <div className={styles.about}>
           <div className={styles.col}>
             <p className={styles.heading}>

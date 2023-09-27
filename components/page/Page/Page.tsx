@@ -2,21 +2,28 @@ import React from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { Saint } from '../../home/summary/interfaces'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 type Props = {
   children: React.ReactNode
   searchData?: Saint[]
+  spaceBetween?: boolean
 }
 
-const Page = ({ children, searchData }: Props) => (
-  <S.Page>
-    <Header
-      searchData={searchData}
-    />
-    <S.Body>{children}</S.Body>
+const Page = ({
+  children,
+  searchData,
+  spaceBetween,
+}: Props) => (
+  <div
+    className={`${styles.page} ${
+      spaceBetween ? styles.spaceBetween : ''
+    }`}
+  >
+    <Header searchData={searchData} />
+    <div className={styles.body}>{children}</div>
     <Footer />
-  </S.Page>
+  </div>
 )
 
 export default Page
