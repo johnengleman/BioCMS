@@ -110,9 +110,9 @@ export async function getStaticProps() {
   }
 
   try {
-    topAuthors = await fetchAPIQuery('getTopAuthors', {
-      limit: 5,
-    })
+    topAuthors = await fetchAPIQuery(
+      `getTopAuthors?limit=books`,
+    )
   } catch (error) {
     topAuthors = []
   }

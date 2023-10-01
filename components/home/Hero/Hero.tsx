@@ -9,6 +9,7 @@ const Hero = ({
   handleSetSaintPreset,
   saintPreset,
   church,
+  filters,
 }) => {
   return (
     <div className={styles.hero}>
@@ -39,11 +40,15 @@ const Hero = ({
           </span>
         </h1>
         <Filter
-          setSaintFilter={(saintFilter) => handleSetSaintFilter(saintFilter)}
-          setSaintPreset={(saintPreset) => handleSetSaintPreset(saintPreset)}
+          setSaintFilter={(saintFilter) =>
+            handleSetSaintFilter(saintFilter)
+          }
+          setSaintPreset={(saintPreset) =>
+            handleSetSaintPreset(saintPreset)
+          }
           selectedFilter={saintFilter}
           selectedPreset={saintPreset}
-          options={properties.saintFilters}
+          filters={filters}
           title={
             properties[
               !Array.isArray(church) ? church : 'all'

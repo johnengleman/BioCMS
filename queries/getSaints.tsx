@@ -5,13 +5,18 @@ type Response = {
   saints: Saint[]
 }
 
-function getSaintsQuery(church, category, saintPreset, sort) {
+function getSaintsQuery(
+  church,
+  category,
+  saintPreset,
+  sort,
+) {
   // Variables declaration
   let variablesList: string[] = []
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
-  if (category !== 'all') {
+  if (category !== 'none') {
     variablesList.push('$category: String!')
   }
 
@@ -21,13 +26,17 @@ function getSaintsQuery(church, category, saintPreset, sort) {
   if (church !== 'all') {
     churchList.push('venerated_in: { _icontains: $church }')
   }
-  if (category !== 'all') {
-    filterList.push('{ categories: { _icontains: $category } }')
+  if (category !== 'none') {
+    filterList.push(
+      '{ categories: { _icontains: $category } }',
+    )
   }
-  if(saintPreset === 'patron') {
-    filterList.push('{ categories: { _icontains: "Patron Saints" } }')
+  if (saintPreset === 'patron') {
+    filterList.push(
+      '{ categories: { _icontains: "Patron Saints" } }',
+    )
   }
-  if(saintPreset === '20th-century-saints') {
+  if (saintPreset === '20th-century-saints') {
     filterList.push('{ death_year: { _gte: 1900 } }')
   }
   // if(saintPreset === 'saints-by-months') {
@@ -36,7 +45,7 @@ function getSaintsQuery(church, category, saintPreset, sort) {
 
   // Building the query
   let baseQuery = `
-    query getSaint${
+    query getSaints${
       variablesList.length > 0
         ? `(${variablesList.join(', ')})`
         : ''
@@ -95,18 +104,19 @@ const parseSort = (sort) => {
 
 export const getSaints = async (
   church = 'all',
-  category = 'all',
+  category = 'none',
   saintPreset = 'none',
   sort = 'chronological-asc',
 ) => {
-
   const { saints } = await request<Response>(
     `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-    getSaintsQuery(church, category, saintPreset, parseSort(sort)),
-    {
+    getSaintsQuery(
       church,
       category,
-    },
+      saintPreset,
+      parseSort(sort),
+    ),
+    { category, church, saintPreset },
   )
   return saints
 }

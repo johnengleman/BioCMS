@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import {
@@ -41,7 +41,9 @@ const SaintBio = (props) => {
   const { data: searchData } = useQuery(
     ['search', church],
     () =>
-      getSearchData(Array.isArray(church) ? church[0] : church)
+      getSearchData(
+        Array.isArray(church) ? church[0] : church,
+      ),
   )
 
   if (!router.isFallback && !data) {
@@ -206,15 +208,13 @@ export const getStaticProps = async ({ params }) => {
     slug,
   ]) as Saint
 
-  await queryClient.prefetchQuery(
-    ['search', church],
-    () => getSearchData(church),
+  await queryClient.prefetchQuery(['search', church], () =>
+    getSearchData(church),
   )
 
   try {
     const saintsResponse = await fetchAPIQuery(
-      'getRelatedSaints',
-      { categories: saintData?.categories },
+      `getRelatedSaints?categories=${saintData?.categories.join()}`,
     )
     relatedSaints = saintsResponse || []
   } catch (error) {

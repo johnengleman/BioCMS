@@ -86,7 +86,8 @@
       font-size: 12px;
       color: #f1e1e0;
       cursor: pointer;
-      flex: unset;
+      display: flex;
+      align-items: center;
       min-width: fit-content;
       transition: all 0.1s ease-in-out;
       background-color: #521613;
@@ -94,6 +95,30 @@
       border-radius: 7px;
       letter-spacing: 0.25px;
       border: 1px solid #3f3e3e;
+      gap: 10px;
+
+      &.disabled {
+        color: #594b4a;
+        pointer-events: none;
+      }
+
+      .name {
+        font-weight: 600;
+      }
+
+      .count {
+        border-radius: 50%;
+        height: 15px;
+        width: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 9px;
+        font-weight: 700;
+        line-height: 15px;
+        background-color: var(--gold);
+        color: var(--violet);
+      }
 
       &:hover,
       &.selected {

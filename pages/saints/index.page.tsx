@@ -14,14 +14,17 @@ import SaintSummary from '../../components/home/summary/SaintSummary'
 import Page from '../../components/page/Page/Page'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
+import { fetchAPIQuery } from '../../queries/fetchApiQuery'
 import Hero from '../../components/home/Hero/Hero'
 
-const Saints = () => {
+const Saints = (props) => {
   const router = useRouter()
   const church = router.query.church || 'all'
-  const saintFilter = router.query.filter || 'all'
+  const saintFilter = router.query.filter || 'none'
   const saintPreset = router.query.preset || 'none'
   const sort = router.query.sort || 'chronological-asc'
+
+  const { filters = {} } = props
 
   const { data, isError, isLoading } = useQuery(
     ['saints', church, saintFilter, saintPreset, sort],
@@ -44,9 +47,10 @@ const Saints = () => {
   const { data: searchData } = useQuery(
     ['search', church],
     () =>
-      getSearchData(Array.isArray(church) ? church[0] : church)
+      getSearchData(
+        Array.isArray(church) ? church[0] : church,
+      ),
   )
-
 
   const {
     isMobileS,
@@ -127,6 +131,7 @@ const Saints = () => {
           handleSetSaintPreset={handleSetSaintPreset}
           saintPreset={saintPreset}
           church={church}
+          filters={filters}
         />
         {isLoading && (
           <p className="error">Fetching Saints</p>
@@ -167,25 +172,32 @@ const Saints = () => {
 }
 
 export async function getStaticProps({ query }) {
+  let filters
+  try {
+    filters = await fetchAPIQuery('getFilters')
+  } catch (error) {
+    filters = []
+  }
+
   const church = query?.church || 'all'
-  const saintFilter = query?.filter || 'all'
+  const category = query?.filter || 'none'
   const saintPreset = query?.preset || 'none'
   const sort = query?.sort || 'chronological-asc'
 
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery(
-    ['saints', church, saintFilter, saintPreset, sort],
-    () => getSaints(church, saintFilter, saintPreset, sort),
+    ['saints', church, category, saintPreset, sort],
+    () => getSaints(church, category, saintPreset, sort),
   )
 
-  await queryClient.prefetchQuery(
-    ['search', church],
-    () => getSearchData(church),
+  await queryClient.prefetchQuery(['search', church], () =>
+    getSearchData(church),
   )
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
+      filters,
     },
     revalidate: 60,
   }

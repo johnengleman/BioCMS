@@ -2,28 +2,13 @@ import axios from 'axios'
 
 export type APIResponse = any[]
 
-type queries = [
-  'getMostRecentlyCreatedBooks',
-  'getMostRecentlyUpdatedSaints',
-  `getRelatedSaints`,
-  'getTopAuthors',
-]
-
 const fetchAPIQuery = async (
-  query: queries[number],
-  options?: Record<string, any>,
+  query: string,
 ): Promise<APIResponse | null> => {
   try {
-    const response = await axios.post(
+    const response = await axios.get(
       `${process.env.API_URL}/api/${query}`,
-      options,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
     )
-
     return response.data
   } catch (error) {
     return []

@@ -55,7 +55,7 @@ export type Saint = {
   images: Image[]
   books: Book[]
   tomb: Tomb
-  categories: string
+  categories: string[]
   tomb_location: string
   tomb_church_name: string
   date_updated: string

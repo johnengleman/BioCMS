@@ -1,5 +1,6 @@
-import { useRef } from 'react'
+import { useRef, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { SiteContext } from '../../../context/SiteContext'
 import { flushSync } from 'react-dom'
 import Toggle from '../Toggle/Toggle'
 import {
@@ -15,10 +16,11 @@ const Filter = ({
   selectedFilter,
   setSaintPreset,
   selectedPreset,
-  options,
   title,
+  filters = {},
 }) => {
   const canUseTransition = useRef<boolean>(false)
+  const { selectedChurch } = useContext(SiteContext)
 
   if (typeof window !== 'undefined') {
     canUseTransition.current =
@@ -157,37 +159,55 @@ const Filter = ({
       </div>
       <p className={styles.instructions}>Add a filter?</p>
       <div className={styles.slideContainer}>
-        {options?.map((filter, i) => {
-          const selectedF =
-            filter.toLowerCase() === selectedFilter
-          return (
-            <div
-              key={i}
-              className={`${styles.slide} ${
-                selectedF ? styles.selected : ''
-              }`}
-              onClick={() => {
-                if (canUseTransition.current) {
-                  ;(document as any)?.startViewTransition(
-                    () => {
-                      flushSync(() => {
-                        setSaintFilter(
-                          !selectedF ? filter : 'all',
-                        )
-                      })
-                    },
-                  )
-                } else {
-                  setSaintFilter(
-                    !selectedF ? filter : 'all',
-                  )
-                }
-              }}
-            >
-              {filter.replace(/-/g, ' ')}
-            </div>
-          )
-        })}
+        {filters[selectedChurch][selectedPreset]?.map(
+          (filter, i) => {
+            const selectedF =
+              filter?.name.toLowerCase() === selectedFilter
+            return (
+              <button
+                key={i}
+                className={`${styles.slide} ${
+                  selectedF ? styles.selected : ''
+                } ${
+                  filter?.count === 0 &&
+                  filter?.name !== 'None'
+                    ? styles.disabled
+                    : ''
+                }`}
+                onClick={() => {
+                  if (canUseTransition.current) {
+                    ;(document as any)?.startViewTransition(
+                      () => {
+                        flushSync(() => {
+                          setSaintFilter(
+                            !selectedF
+                              ? filter?.name
+                              : 'all',
+                          )
+                        })
+                      },
+                    )
+                  } else {
+                    setSaintFilter(
+                      !selectedF ? filter?.name : 'all',
+                    )
+                  }
+                }}
+              >
+                <span className={styles.name}>
+                  {filter?.name !== 'None'
+                    ? filter?.name.replace(/-/g, ' ')
+                    : 'All'}
+                </span>
+                {filter?.count !== 0 && (
+                  <div className={styles.count}>
+                    {filter?.count}
+                  </div>
+                )}
+              </button>
+            )
+          },
+        )}
       </div>
       <Toggle />
     </div>

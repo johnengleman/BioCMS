@@ -10,7 +10,7 @@ interface Saint {
   id: number
   slug: string
   name: string
-  birth_year?: number // The ? indicates that the property is optional
+  birth_year?: number
   death_year?: number
   categories: string[]
   images: Image[]
@@ -48,7 +48,8 @@ export const getRelatedSaints = async () => {
 }
 
 export default async function handler(req, res) {
-  const categories = req.body.categories ?? undefined
+  const categories =
+    req.query.categories.split(',') ?? undefined
 
   try {
     const allSaints = await getRelatedSaints()
