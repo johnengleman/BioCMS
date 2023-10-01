@@ -159,7 +159,7 @@ const Filter = ({
       </div>
       <p className={styles.instructions}>Add a filter?</p>
       <div className={styles.slideContainer}>
-        {filters['all']?.[selectedPreset]?.map(
+        {filters[selectedChurch]?.[selectedPreset]?.map(
           (filter, i) => {
             const selectedF =
               filter?.name.toLowerCase() === selectedFilter
@@ -182,14 +182,14 @@ const Filter = ({
                           setSaintFilter(
                             !selectedF
                               ? filter?.name
-                              : 'all',
+                              : 'none',
                           )
                         })
                       },
                     )
                   } else {
                     setSaintFilter(
-                      !selectedF ? filter?.name : 'all',
+                      !selectedF ? filter?.name : 'none',
                     )
                   }
                 }}
