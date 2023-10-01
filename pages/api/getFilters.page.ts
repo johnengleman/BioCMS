@@ -202,10 +202,10 @@ export default async function handler(req, res) {
       },
     }
 
-    // res.setHeader(
-    //   'Cache-Control',
-    //   'public, max-age=86400, stale-while-revalidate=86400',
-    // )
+    res.setHeader(
+      'Cache-Control',
+      'public, max-age=86400, stale-while-revalidate=86400',
+    )
     res.status(200).json(filters || [])
   } catch (error) {
     res.status(500).json({ error: 'failed to load data' })
