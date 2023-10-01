@@ -12,7 +12,7 @@ type SiteProviderProps = {
 }
 
 const defaultContextValue: SiteContextType = {
-  selectedChurch: '',
+  selectedChurch: 'all',
   setSelectedChurch: () => {},
 }
 

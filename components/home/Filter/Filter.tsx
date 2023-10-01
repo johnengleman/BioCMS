@@ -13,14 +13,14 @@ import styles from './styles.module.scss'
 
 const Filter = ({
   setSaintFilter,
-  selectedFilter,
+  selectedFilter = 'none',
   setSaintPreset,
-  selectedPreset,
+  selectedPreset = 'none',
   title,
   filters = {},
 }) => {
   const canUseTransition = useRef<boolean>(false)
-  const { selectedChurch } = useContext(SiteContext)
+  const { selectedChurch = 'all' } = useContext(SiteContext)
 
   if (typeof window !== 'undefined') {
     canUseTransition.current =
@@ -159,7 +159,7 @@ const Filter = ({
       </div>
       <p className={styles.instructions}>Add a filter?</p>
       <div className={styles.slideContainer}>
-        {filters[selectedChurch][selectedPreset]?.map(
+        {filters['all']?.[selectedPreset]?.map(
           (filter, i) => {
             const selectedF =
               filter?.name.toLowerCase() === selectedFilter
