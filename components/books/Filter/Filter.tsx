@@ -1,5 +1,5 @@
 import React from 'react'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 type FilterProps = {
   title: string
@@ -14,7 +14,7 @@ const Filter: React.FC<FilterProps> = ({
   setSelectedGenre,
   selectedGenre = '',
 }) => (
-  <S.Filter>
+  <div className={styles.Filter}>
     <div className="title">{title}</div>
     <div className="genres">
       {genres?.map((genre, i) => (
@@ -29,7 +29,7 @@ const Filter: React.FC<FilterProps> = ({
         </div>
       ))}
     </div>
-  </S.Filter>
+  </div>
 )
 
 export default Filter

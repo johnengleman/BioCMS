@@ -10,7 +10,7 @@ import { getSayings } from '../../queries/getQuotes'
 import QuoteSummary from '../../components/quotes/QuoteSummary/QuoteSummary'
 import Page from '../../components/page/Page/Page'
 import Filter from '../../components/home/Filter/Filter'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 const options = [
   'All',

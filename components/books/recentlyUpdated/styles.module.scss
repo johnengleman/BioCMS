@@ -1,8 +1,9 @@
-import styled from 'styled-components'
-import { device } from '../../../styles/devices'
-import { variables } from '../../../styles/colors'
+// import styled from 'styled-components'
+// import { device } from '../../../styles/devices'
+// import { variables } from '../../../styles/colors'
+@import './../../../styles/breakpoints.scss';
 
-export const RecentlyUpdated = styled.div`
+.recentlyUpdated {
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -10,7 +11,7 @@ export const RecentlyUpdated = styled.div`
   max-width: 1450px;
   margin: 0 auto;
 
-  .header-container {
+  .headerContainer {
     h1,
     h2 {
       margin-bottom: 10px;
@@ -43,4 +44,4 @@ export const RecentlyUpdated = styled.div`
   .embla__prev {
     left: 50px;
   }
-`
+}

@@ -1,12 +1,12 @@
 import ButtonCategory from '../../global/Buttons/ButtonCategory/ButtonCategory'
-import * as S from './styles'
+import styles from './styes.module.scss'
 
 type Props = {
   data?: []
 }
 
 const Categories = ({ data }: Props) => (
-  <S.Powers>
+  <div className={styles.powers}>
     {data?.map((category, i) => (
       <ButtonCategory
         text={category}
@@ -14,7 +14,7 @@ const Categories = ({ data }: Props) => (
         key={i}
       />
     ))}
-  </S.Powers>
+  </div>
 )
 
 export default Categories

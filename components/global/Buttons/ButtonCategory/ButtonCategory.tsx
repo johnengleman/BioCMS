@@ -1,4 +1,4 @@
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 type Props = {
   text: string
@@ -6,7 +6,7 @@ type Props = {
 }
 
 const ButtonCategory = ({ text, bg }: Props) => {
-  return <S.Button bg={bg}>{text}</S.Button>
+  return <div className={styles.button}>{text}</div>
 }
 
 export default ButtonCategory

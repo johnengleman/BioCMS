@@ -1,8 +1,8 @@
-import styled from 'styled-components'
-import { device } from '../../../styles/devices'
-import { colors } from '../../../styles/colors'
+// import styled from 'styled-components'
+// import { device } from '../../../styles/devices'
+// import { colors } from '../../../styles/colors'
 
-export const Bio = styled.div<{ $readMore?: Boolean }>`
+.bio {
   color: #0e0e0e;
   margin-bottom: 60px;
   border-radius: 10px;
@@ -30,7 +30,7 @@ export const Bio = styled.div<{ $readMore?: Boolean }>`
   }
 
   .text {
-    height: calc(100% - 100px);
+    height: calc(100 % - 100px);
     overflow: hidden;
 
     h3,
@@ -48,7 +48,7 @@ export const Bio = styled.div<{ $readMore?: Boolean }>`
       }
     }
 
-    .ac-horizontal-separator {
+    .ac-horizontalSeparator {
       margin-top: 2rem;
     }
 
@@ -61,10 +61,10 @@ export const Bio = styled.div<{ $readMore?: Boolean }>`
       border-left: 1px solid #ddd;
       padding-left: 1rem;
 
-      &:has(+ h3),
-      &:last-child {
-        padding-bottom: 0;
-      }
+      // &:has(+ h3),
+      // &:last - child {
+      //   padding - bottom: 0;
+      // }
     }
 
     ul {
@@ -93,4 +93,4 @@ export const Bio = styled.div<{ $readMore?: Boolean }>`
       }
     }
   }
-`
+}

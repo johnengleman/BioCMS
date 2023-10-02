@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 const Mini = ({
   store_link,
@@ -9,7 +9,7 @@ const Mini = ({
   description_part_1,
 }) => {
   return (
-    <S.Slide>
+    <div className={styles.slide}>
       <div className="content">
         <div
           className="image"
@@ -34,7 +34,7 @@ const Mini = ({
           </Link>
         </div>
       </div>
-    </S.Slide>
+    </div>
   )
 }
 

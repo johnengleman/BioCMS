@@ -1,8 +1,8 @@
-import styled from 'styled-components'
-import { colors } from '../../../styles/colors'
-import { device } from '../../../styles/devices'
+// import styled from 'styled-components'
+// import { colors } from '../../../styles/colors'
+// import { device } from '../../../styles/devices'
 
-export const TableOfContents = styled.div`
+.tableOfContents {
   position: relative;
   height: calc(100% - 700px);
   margin-top: 50px;
@@ -23,14 +23,14 @@ export const TableOfContents = styled.div`
       &:hover {
         a {
           color: #222;
-          border-bottom: 1px solid ${colors.gold};
+          //  border-bottom: 1px solid ${colors.gold};
         }
       }
 
       &.active {
         a {
           color: #222;
-          border-bottom: 1px solid ${colors.gold};
+          //   border-bottom: 1px solid ${colors.gold};
         }
       }
 
@@ -41,4 +41,4 @@ export const TableOfContents = styled.div`
       }
     }
   }
-`
+}

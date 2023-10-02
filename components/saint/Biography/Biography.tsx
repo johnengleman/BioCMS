@@ -1,4 +1,4 @@
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 type Props = {
   text: string
@@ -11,15 +11,15 @@ type Props = {
 
 const Biography = (props) => {
   return (
-    <S.Bio>
+    <div className={styles.bio}>
       <h2>Life</h2>
       <div
-        className="text"
+        className={styles.text}
         dangerouslySetInnerHTML={{
           __html: props.biography,
         }}
       />
-    </S.Bio>
+    </div>
   )
 }
 

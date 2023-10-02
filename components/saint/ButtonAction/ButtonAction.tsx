@@ -1,20 +1,19 @@
 import React from 'react'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 type Props = {
   text: string
-  onClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const ButtonAction = ({ text, onClick }: Props) => (
-  <S.Button onClick={onClick}>
-    <S.Hamburger>
+const ButtonAction = ({ text }: Props) => (
+  <div className={styles.button}>
+    <div className={styles.hamburger}>
       <div />
       <div />
       <div />
-    </S.Hamburger>
+    </div>
     {text}
-  </S.Button>
+  </div>
 )
 
 export default ButtonAction

@@ -1,26 +1,26 @@
-import styled from 'styled-components'
-import { colors, variables } from '../../../styles/colors'
-import { device } from '../../../styles/devices'
+// import { colors, variables } from '../../../styles/colors'
+// import { device } from '../../../styles/devices'
+@import './../../../styles/breakpoints.scss';
 
-export const Filter = styled.div`
+.Filter {
   border-bottom: 1px solid #e2e2e2;
   width: 100%;
   font-size: 1.2rem;
-  color: ${variables.headlineColor};
+  color: #000;
   font-weight: 600;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
   margin-bottom: 30px;
 
-  @media ${device.tablet} {
+  @include breakpoint(tablet) {
     flex-direction: row;
   }
 
   .title {
     margin-bottom: 0.5rem;
 
-    @media ${device.tablet} {
+    @include breakpoint(tablet) {
       margin-bottom: 0;
     }
   }
@@ -40,10 +40,10 @@ export const Filter = styled.div`
         content: '';
         position: absolute;
         bottom: 0;
-        left: calc((100% - 25px) / 2);
+        left: calc((100 % - 25px) / 2);
         height: 3px;
         width: 25px;
-        background-color: ${colors.violet};
+        background-color: var(--violet);
         opacity: 0;
       }
 
@@ -56,4 +56,4 @@ export const Filter = styled.div`
       }
     }
   }
-`
+}

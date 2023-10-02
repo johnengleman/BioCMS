@@ -1,4 +1,4 @@
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 type SayingsProps = {
   sayings: SayingData[]
@@ -16,7 +16,7 @@ const Quote = ({
   quoteTotal,
 }) => {
   return (
-    <S.Quote>
+    <div className={styles.quote}>
       <p className="c-text">{text}</p>
       <div className="footer">
         <div className="c-topics">
@@ -33,14 +33,14 @@ const Quote = ({
           <p>{`${quoteIndex}/${quoteTotal}`}</p>
         </div>
       </div>
-    </S.Quote>
+    </div>
   )
 }
 
 const Quotes = ({ sayings }: SayingsProps) => {
   if (sayings?.length > 3) {
     return (
-      <S.SlideContainer>
+      <div className="slide-container">
         {sayings?.map((quote: SayingData, i) => (
           <Quote
             key={i}
@@ -50,7 +50,7 @@ const Quotes = ({ sayings }: SayingsProps) => {
             quoteTotal={sayings.length}
           />
         ))}
-      </S.SlideContainer>
+      </div>
     )
   }
 

@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import * as S from './styles'
 import ReadMore from '../ReadMore/ReadMore'
+import styles from './styles.module.scss'
 
 const TextSection = ({ title, text }) => {
   const [readMore, setReadMore] = useState(false)
@@ -10,7 +10,7 @@ const TextSection = ({ title, text }) => {
   }
 
   return (
-    <S.TextSection $readMore={readMore}>
+    <div className={styles.textSection}>
       <h2 className="title">{title}</h2>
       <div
         className="text"
@@ -24,7 +24,7 @@ const TextSection = ({ title, text }) => {
           readMore={readMore}
         />
       </div>
-    </S.TextSection>
+    </div>
   )
 }
 

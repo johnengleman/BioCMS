@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import styles from './styles.module.scss'
 import {
   faSquareXTwitter,
   faSquareFacebook,
 } from '@fortawesome/free-brands-svg-icons'
+import styles from './styles.module.scss'
 
 const SMButtons = ({ transparent }) => (
   <div className={styles.socialMediaButtons}>

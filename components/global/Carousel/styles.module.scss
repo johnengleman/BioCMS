@@ -1,7 +1,8 @@
-import styled from 'styled-components'
-import { device } from '../../../styles/devices'
+// import styled from 'styled-components'
+// import { device } from '../../../styles/devices'
 
-export const carousel = styled.div`
+.carousel {
+
   .embla {
     display: flex;
     justify-content: space-between;
@@ -30,7 +31,7 @@ export const carousel = styled.div`
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.2s ease-in-out,
-      box-shadow 0.2s ease-in-out;
+    box-shadow 0.2s ease-in-out;
     z-index: 2; /* Position the button above the pseudo-element */
     display: none;
 
@@ -67,4 +68,4 @@ export const carousel = styled.div`
       opacity: 1; /* Show the shadow on hover and active states */
     }
   }
-`
+};

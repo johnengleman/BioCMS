@@ -1,8 +1,8 @@
-import styled from 'styled-components'
-import { device } from '../../../styles/devices'
-import { colors } from '../../../styles/colors'
+// import styled from 'styled-components'
+// import { device } from '../../../styles/devices'
+// import { colors } from '../../../styles/colors'
 
-export const ImageContainer = styled.div`
+.imageContainer {
   .image-global {
     position: relative;
 
@@ -25,4 +25,4 @@ export const ImageContainer = styled.div`
       border-radius: 10px;
     }
   }
-`
+}

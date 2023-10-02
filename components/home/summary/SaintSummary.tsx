@@ -1,4 +1,3 @@
-import * as S from './styles'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCross } from '@fortawesome/pro-duotone-svg-icons'
@@ -9,8 +8,7 @@ import {
   faPersonPraying,
 } from '@fortawesome/sharp-solid-svg-icons'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
-
-import { Saint } from './interfaces'
+import styles from './styles.module.scss'
 
 export default function SaintSummary(props) {
   const {
@@ -33,73 +31,74 @@ export default function SaintSummary(props) {
   }
 
   return (
-    <S.SaintSummary
+    <Link
+      className={styles.saintSummary}
+      href={`/saints/${slug}`}
       style={{ viewTransitionName: transitionName }}
     >
-      <Link
-        className="saint-summary"
-        href={`/saints/${slug}`}
-      >
-        <div className="death">
-          <FontAwesomeIcon icon={faCross} />
-          {death_year}
+      <div className={styles.death}>
+        <FontAwesomeIcon icon={faCross} />
+        {death_year}
+      </div>
+      <div className={styles.image}>
+        <ImageGlobal
+          alt={
+            images[0]?.directus_files_id?.description ||
+            `Image of ${name}, the eastern orthodox saint`
+          }
+          src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${images[0]?.directus_files_id.id}?key=summary`}
+          fill={true}
+          priority={priority}
+        />
+      </div>
+      <div className={styles.bioContainer}>
+        <div className={styles.name}>{name}</div>
+        <div className={styles.tags}>
+          {categories?.map((category, index) => (
+            <div
+              key={index}
+              className={styles.tag}
+            >
+              {category}
+            </div>
+          ))}
         </div>
-        <div className="image">
-          <ImageGlobal
-            alt={
-              images[0]?.directus_files_id?.description ||
-              `Image of ${name}, the eastern orthodox saint`
-            }
-            src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${images[0]?.directus_files_id.id}?key=summary`}
-            fill={true}
-            priority={priority}
-          />
-          <div className="name">{name}</div>
-        </div>
-        <div className="bioContainer">
-          <div className="tags">
-            {categories?.map((category, index) => (
-              <div
-                key={index}
-                className="tag"
-              >
-                {category}
-              </div>
-            ))}
-          </div>
-          <div
-            className="summary"
-            dangerouslySetInnerHTML={{
-              __html: summary,
-            }}
-          ></div>
-        </div>
-        <div className="footer">
-          <div className="count">
+        <div
+          className={styles.summary}
+          dangerouslySetInnerHTML={{
+            __html: summary.concat('<span>..</span>'),
+          }}
+        ></div>
+        <div className={styles.footer}>
+          <div className={styles.count}>
             <FontAwesomeIcon
               icon={faBooks}
               style={{ color: '#555555' }}
             />
-            <span className="number">{books?.length}</span>
+            <span className={styles.number}>
+              {books?.length}
+            </span>
           </div>
-          <div className="count">
+          <div className={styles.count}>
             <FontAwesomeIcon
               icon={faStarChristmas}
               style={{ color: '#555555' }}
             />
-            <span className="number">{books?.length}</span>
+            <span className={styles.number}>
+              {books?.length}
+            </span>
           </div>
-          <div className="count">
+          <div className={styles.count}>
             <FontAwesomeIcon
               icon={faCommentQuote}
               style={{ color: '#555555' }}
             />
-            <span className="number">
+            <span className={styles.number}>
               {sayings?.length}
             </span>
           </div>
         </div>
-      </Link>
-    </S.SaintSummary>
+      </div>
+    </Link>
   )
 }

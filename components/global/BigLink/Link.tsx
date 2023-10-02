@@ -1,7 +1,3 @@
-import * as S from './styles'
-
-const BigLink = ({ anchorText }) => (
-  <S.BigLink>{anchorText}</S.BigLink>
-)
+const BigLink = ({ anchorText }) => <div>{anchorText}</div>
 
 export default BigLink

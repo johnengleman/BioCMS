@@ -1,6 +1,6 @@
-import { useRef, useContext } from 'react'
+import { useRef, useEffect, useState } from 'react'
+import Cookies from 'js-cookie'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { SiteContext } from '../../../context/SiteContext'
 import { flushSync } from 'react-dom'
 import Toggle from '../Toggle/Toggle'
 import {
@@ -20,13 +20,25 @@ const Filter = ({
   filters = {},
 }) => {
   const canUseTransition = useRef<boolean>(false)
-  const { selectedChurch = 'all' } = useContext(SiteContext)
+  const [selectedChurch, setSelectedChurch] =
+    useState('all')
 
   if (typeof window !== 'undefined') {
     canUseTransition.current =
       typeof (document as any)?.startViewTransition ===
       'function'
   }
+
+  useEffect(() => {
+    const cookie = Cookies.get('findasaint.com')
+
+    try {
+      const data = JSON.parse(cookie)
+      setSelectedChurch(data.church)
+    } catch (err) {
+      console.error(err)
+    }
+  }, [])
 
   return (
     <div className={styles.filter}>

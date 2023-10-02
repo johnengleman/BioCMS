@@ -1,15 +1,15 @@
 import Carousel from '../../global/Carousel/Caorusel'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 const RecentlyUpdated = ({
   children = [],
   title = '',
   options = {},
 }) => (
-  <S.RecentlyUpdated>
-    <div className="header-container"></div>
+  <div className={styles.recentlyUpdated}>
+    <div className={styles.headerContainer}></div>
     <Carousel options={options}>{children}</Carousel>
-  </S.RecentlyUpdated>
+  </div>
 )
 
 export default RecentlyUpdated

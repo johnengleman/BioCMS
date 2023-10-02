@@ -1,9 +1,10 @@
 import {
   useState,
-  useEffect,
   useRef,
+  useEffect,
   useContext,
 } from 'react'
+import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import { SiteContext } from '../../../context/SiteContext'
 import CatholicCross from '../../global/Icons/CatholicCross/CatholicCross'
@@ -12,10 +13,9 @@ import styles from './styles.module.scss'
 
 const ChurchToggle = () => {
   const router = useRouter()
-  const church = router.query.church || 'all'
-
-  const { selectedChurch, setSelectedChurch } =
+  const { selectedChurch = 'all', setSelectedChurch } =
     useContext(SiteContext)
+
   const [buttonDimensions, setButtonDimensions] = useState({
     offsetLeft: 211,
     width: 43,
@@ -26,7 +26,8 @@ const ChurchToggle = () => {
     null,
   )
 
-  const handleSetChurchFromQuery = (church = 'all') => {
+  const updateToggle = (church = 'all') => {
+    // Updates toggle to match cookie
     if (churchToggleRef.current) {
       const el = churchToggleRef.current.querySelector(
         `[data-church="${church}"]`,
@@ -42,41 +43,53 @@ const ChurchToggle = () => {
     }
   }
 
-  useEffect(() => {
-    handleSetChurchFromQuery()
-  }, [setSelectedChurch, church])
-
-  useEffect(() => {
-    if (church && !Array.isArray(church)) {
-      setSelectedChurch(church)
-      handleSetChurchFromQuery(church)
-    }
-  }, [setSelectedChurch, church])
-
-  const handleSetChurch = (e, church) => {
+  const updateCookieAndToggle = (e, church) => {
+    // Updates toggle
     const liElement = e.target.closest('li')
-
     setButtonDimensions({
       offsetLeft: liElement.offsetLeft,
       width: liElement.clientWidth,
       height: liElement.clientHeight,
     })
 
-    const newQuery = {
-      ...router.query,
-      church: church,
-    }
-    router.push(
-      {
-        pathname: router.pathname,
-        query: newQuery,
-      },
-      undefined,
-      { shallow: true },
+    // Updates toggle
+    Cookies.set(
+      'findasaint.com',
+      JSON.stringify({ church: church }),
     )
 
-    setSelectedChurch(church)
+    // Only add query to url if on saint homepage
+    const onSaintHomepage =
+      router.pathname === '/saints' ||
+      router.pathname === '/'
+
+    if (onSaintHomepage) {
+      const newQuery = {
+        ...router.query,
+        church: church,
+      }
+      router.push(
+        {
+          pathname: router.pathname,
+          query: newQuery,
+        },
+        undefined,
+        { shallow: true },
+      )
+    }
   }
+
+  useEffect(() => {
+    const cookie = Cookies.get('findasaint.com')
+
+    try {
+      const data = JSON.parse(cookie)
+      setSelectedChurch(data.church)
+      updateToggle(data.church)
+    } catch (err) {
+      console.error(err)
+    }
+  }, [setSelectedChurch])
 
   return (
     <div className={styles.churchToggle}>
@@ -99,7 +112,9 @@ const ChurchToggle = () => {
               ? styles.active
               : ''
           }`}
-          onClick={(e) => handleSetChurch(e, 'catholic')}
+          onClick={(e) =>
+            updateCookieAndToggle(e, 'catholic')
+          }
         >
           <CatholicCross />
           Roman <br />
@@ -112,7 +127,9 @@ const ChurchToggle = () => {
               ? styles.active
               : ''
           }`}
-          onClick={(e) => handleSetChurch(e, 'orthodox')}
+          onClick={(e) =>
+            updateCookieAndToggle(e, 'orthodox')
+          }
         >
           <OrthodoxCross />
           Eastern <br /> Orthodox
@@ -123,7 +140,7 @@ const ChurchToggle = () => {
             selectedChurch === 'all' ? styles.active : ''
           }`}
           onClick={(e) => {
-            handleSetChurch(e, 'all')
+            updateCookieAndToggle(e, 'all')
           }}
         >
           All

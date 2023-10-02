@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 export default function ChurchSummary(props) {
   const { name, image, website, city, country } = props
 
   return (
     <Link href={website}>
-      <S.ChurchSummary>
+      <div>
         <div className="image">
           <Image
             alt="profile"
@@ -19,7 +19,7 @@ export default function ChurchSummary(props) {
         <p className="location">
           {city}, {country}
         </p>
-      </S.ChurchSummary>
+      </div>
     </Link>
   )
 }

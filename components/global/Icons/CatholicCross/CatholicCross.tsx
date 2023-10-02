@@ -1,7 +1,7 @@
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 const CatholicCross = ({ fill = '#000' }) => (
-  <S.CatholicCross>
+  <div className={styles.catholicCross}>
     <svg
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +39,7 @@ l67 -7 7 -67 c7 -78 47 -222 78 -283 36 -72 93 -150 154 -211 268 -269 688
         />
       </g>
     </svg>
-  </S.CatholicCross>
+  </div>
 )
 
 export default CatholicCross

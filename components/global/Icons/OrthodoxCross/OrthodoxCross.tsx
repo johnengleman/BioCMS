@@ -1,7 +1,7 @@
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 const OrthodoxCross = ({ fill = '#000' }) => (
-  <S.OrthodoxCross>
+  <div className={styles.OrthodoxCross}>
     <svg
       version="1.0"
       xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ c-40 18 -413 194 -828 391 -415 197 -797 377 -847 401 l-93 43 0 -887 0 -887
         />
       </g>
     </svg>
-  </S.OrthodoxCross>
+  </div>
 )
 
 export default OrthodoxCross

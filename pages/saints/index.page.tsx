@@ -1,3 +1,5 @@
+import { useState, useEffect, useContext } from 'react'
+import Cookies from 'js-cookie'
 import {
   dehydrate,
   QueryClient,
@@ -15,15 +17,16 @@ import Page from '../../components/page/Page/Page'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
 import { fetchAPIQuery } from '../../queries/fetchApiQuery'
+import { SiteContext } from '../../context/SiteContext'
 import Hero from '../../components/home/Hero/Hero'
 
 const Saints = (props) => {
   const router = useRouter()
-  const church = router.query.church || 'all'
   const saintFilter = router.query.filter || 'none'
   const saintPreset = router.query.preset || 'none'
   const sort = router.query.sort || 'chronological-asc'
-
+  const { selectedChurch = 'all' } = useContext(SiteContext)
+  const church = selectedChurch
   const { filters = {} } = props
 
   const { data, isError, isLoading } = useQuery(
@@ -199,7 +202,7 @@ export async function getStaticProps({ query }) {
       dehydratedState: dehydrate(queryClient),
       filters,
     },
-    revalidate: 60,
+    revalidate: 600,
   }
 }
 

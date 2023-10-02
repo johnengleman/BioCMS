@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import * as S from './styles'
 import useBreakpoints from '../../../hooks/useBreakPoints'
+import styles from './styles.module.scss'
 
 export default function BookSummary(props) {
   const {
@@ -20,12 +20,12 @@ export default function BookSummary(props) {
   const { isTablet } = useBreakpoints()
 
   return (
-    <S.BookSummary>
-      <div className="content">
-        <div className="dots">
-          <div className="dot"></div>
-          <div className="dot"></div>
-          <div className="dot"></div>
+    <div className={styles.bookSummary}>
+      <div className={styles.content}>
+        <div className={styles.dots}>
+          <div className={styles.dot}></div>
+          <div className={styles.dot}></div>
+          <div className={styles.dot}></div>
         </div>
         <div className="col col-1">
           <div
@@ -61,6 +61,6 @@ export default function BookSummary(props) {
           )}
         </div>
       </div>
-    </S.BookSummary>
+    </div>
   )
 }

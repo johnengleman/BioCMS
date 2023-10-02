@@ -1,10 +1,14 @@
 import React from 'react'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 const Title = ({
   children,
 }: {
   children: React.ReactNode
-}) => <S.Title>{children}</S.Title>
+}) => (
+  <div className={styles.title}>
+    <h3>{children}</h3>
+  </div>
+)
 
 export default Title

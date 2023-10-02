@@ -13,7 +13,7 @@ import RecentlyUpdated from '../../components/books/recentlyUpdated/RecentlyUpda
 import Slide from '../../components/books/Slide/Slide'
 import Filter from '../../components/books/Filter/Filter'
 import TopAuthor from '../../components/books/TopAuthor/TopAuthor'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 const Home = (props) => {
   const { mostRecentlyCreatedBooks = [], topAuthors = [] } =
@@ -46,20 +46,20 @@ const Home = (props) => {
             ))}
           </RecentlyUpdated>
 
-          <S.Container>
-            <S.ByAuthor>
+          <div className={styles.container}>
+            <div className={styles.byAuthor}>
               <h3>Top Authors</h3>
-              <S.TopAuthorsContainer>
+              <div className={styles.topAuthorsContainer}>
                 {topAuthors?.map((author, i) => (
                   <TopAuthor
                     key={i}
                     {...author}
                   />
                 ))}
-              </S.TopAuthorsContainer>
-            </S.ByAuthor>
+              </div>
+            </div>
 
-            <S.ByGenre>
+            <div>
               <Filter
                 title="Popular by Genre"
                 genres={[
@@ -72,7 +72,7 @@ const Home = (props) => {
                 selectedGenre={selectedGenre}
                 setSelectedGenre={setSelectedGenre}
               />
-              <S.Books>
+              <div className={styles.books}>
                 {data
                   ?.filter(
                     (book) =>
@@ -86,9 +86,9 @@ const Home = (props) => {
                       {...book}
                     />
                   ))}
-              </S.Books>
-            </S.ByGenre>
-          </S.Container>
+              </div>
+            </div>
+          </div>
         </Page>
       </>
     )

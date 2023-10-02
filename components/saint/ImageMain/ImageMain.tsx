@@ -1,6 +1,6 @@
-import * as S from './styles'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import useBreakpoints from '../../../hooks/useBreakPoints'
+import styles from './styles.module.scss'
 
 const ImageMain = ({ images, name, limit = 1 }) => {
   const { isTablet } = useBreakpoints()
@@ -10,7 +10,7 @@ const ImageMain = ({ images, name, limit = 1 }) => {
   }
 
   return (
-    <S.ImageContainer>
+    <div className={styles.imageContainer}>
       {images.map((image, i) => {
         if (i < limit) {
           return (
@@ -28,7 +28,7 @@ const ImageMain = ({ images, name, limit = 1 }) => {
           )
         }
       })}
-    </S.ImageContainer>
+    </div>
   )
 }
 

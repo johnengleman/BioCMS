@@ -1,4 +1,4 @@
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 type Props = {
   name: string
@@ -6,7 +6,11 @@ type Props = {
 
 const SectionHeader = ({ name }: Props) => {
   if (name) {
-    return <S.SectionHeader>{name}</S.SectionHeader>
+    return (
+      <div className={styles.sectionHeader}>
+        <h2>{name}</h2>
+      </div>
+    )
   }
   return null
 }

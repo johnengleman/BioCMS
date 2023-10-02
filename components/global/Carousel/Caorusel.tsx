@@ -9,7 +9,7 @@ import {
   faAngleRight,
 } from '@fortawesome/pro-duotone-svg-icons'
 import useEmblaCarousel from 'embla-carousel-react'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 const Carousel = ({ children, options }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -45,8 +45,8 @@ const Carousel = ({ children, options }) => {
   }, [emblaApi, onSelect])
 
   return (
-    <S.carousel>
-      <div className="embla">
+    <div className={styles.carousel}>
+      <div className={styles.embla}>
         <button
           className={`embla__prev ${
             prevBtnDisabled ? 'disabled' : ''
@@ -70,7 +70,7 @@ const Carousel = ({ children, options }) => {
           <FontAwesomeIcon icon={faAngleRight} />
         </button>
       </div>
-    </S.carousel>
+    </div>
   )
 }
 

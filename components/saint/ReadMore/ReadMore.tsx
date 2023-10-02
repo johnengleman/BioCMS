@@ -1,9 +1,12 @@
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 const ReadMore = ({ onClick, readMore }) => (
-  <S.ReadMore onClick={onClick}>
+  <div
+    className={styles.readMore}
+    onClick={onClick}
+  >
     {!readMore ? 'Read More' : 'Collapse'}
-  </S.ReadMore>
+  </div>
 )
 
 export default ReadMore

@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-
-export const Tomb = styled.div`
+.tomb {
   img {
     border-radius: 5px;
   }
@@ -14,4 +12,4 @@ export const Tomb = styled.div`
   .location {
     font-size: 14px;
   }
-`
+}

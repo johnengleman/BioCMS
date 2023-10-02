@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-
-export const ChurchSummary = styled.div`
+.ChurchSummary {
   width: 400px;
   cursor: pointer;
 
@@ -33,4 +31,4 @@ export const ChurchSummary = styled.div`
   p {
     color: #1a4760;
   }
-`
+}

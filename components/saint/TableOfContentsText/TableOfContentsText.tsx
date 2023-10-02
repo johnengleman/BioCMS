@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 type MainRefType = React.RefObject<HTMLElement>
 
@@ -48,7 +48,7 @@ const TableOfContentsText: React.FC<{
   }, [elements])
 
   return (
-    <S.TableOfContents>
+    <div className={styles.tableOfContents}>
       <ul className="sticky">
         {elements?.map((element, i) => (
           <li
@@ -65,7 +65,7 @@ const TableOfContentsText: React.FC<{
           </li>
         ))}
       </ul>
-    </S.TableOfContents>
+    </div>
   )
 }
 

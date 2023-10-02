@@ -1,8 +1,8 @@
 import ReactStars from 'react-stars'
-import * as S from './styles'
+import styles from './styles.module.scss'
 
 const StarRating = ({ rating }) => (
-  <S.Rating>
+  <div className={styles.rating}>
     <ReactStars
       count={5}
       size={16}
@@ -11,7 +11,7 @@ const StarRating = ({ rating }) => (
       edit={false}
     />
     <p>{rating}</p>
-  </S.Rating>
+  </div>
 )
 
 export default StarRating
