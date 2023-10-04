@@ -1,6 +1,4 @@
-// import styled from 'styled-components'
-// import { variables } from '../../../styles/colors'
-// import { device } from '../../../styles/devices'
+@import './../../../styles/breakpoints.scss';
 
 .Slide {
   width: 750px;
@@ -8,19 +6,19 @@
   position: relative;
 
   &:nth-child(3n + 1) .content {
-   // background-color: ${variables.slideBackground1};
+    // background-color: ${variables.slideBackground1};
 
     .description::after {
-      background: linear-gradient(
-        to bottom,
-        rgba(255, 255, 255, 0),
-        ${variables.slideBackground1}
-      );
+      // background: linear-gradient(
+      //   to bottom,
+      //   rgba(255, 255, 255, 0),
+      //   ${variables.slideBackground1}
+      // );
     }
   }
 
   &:nth-child(3n + 2) .content {
-   // background-color: ${variables.slideBackground2};
+    // background-color: ${variables.slideBackground2};
 
     .description::after {
       // background: linear-gradient(
@@ -32,7 +30,7 @@
   }
 
   &:nth-child(3n + 3) .content {
-  //  background-color: ${variables.slideBackground3};
+    //  background-color: ${variables.slideBackground3};
 
     .description::after {
       // background: linear-gradient(
@@ -43,7 +41,7 @@
     }
   }
 
-  @media ${device.tablet} {
+  @include breakpoint(tablet) {
     margin-bottom: 50px;
   }
 
@@ -53,7 +51,7 @@
     width: min-content;
     margin: 0 auto;
 
-   @include breakpoint(tablet) {
+    @include breakpoint(tablet) {
       position: absolute;
       top: 35px;
       left: 40px;
@@ -62,7 +60,7 @@
     img {
       max-width: 100px;
 
-     @include breakpoint(tablet) {
+      @include breakpoint(tablet) {
         max-width: 200px;
       }
     }
@@ -92,7 +90,7 @@
     flex-direction: column;
     position: relative;
 
-  @include breakpoint(tablet) {
+    @include breakpoint(tablet) {
       flex-direction: row;
       padding: 30px;
       gap: 40px;
@@ -100,7 +98,7 @@
     }
 
     .info {
-    @include breakpoint(tablet) {
+      @include breakpoint(tablet) {
         width: 65%;
         display: flex;
         flex-direction: column;
@@ -118,7 +116,7 @@
       text-align: center;
       color: #fff;
 
-    @include breakpoint(tablet) {
+      @include breakpoint(tablet) {
         text-align: left;
       }
     }
@@ -131,7 +129,7 @@
       text-align: center;
       color: #fff;
 
-     @include breakpoint(tablet) {
+      @include breakpoint(tablet) {
         text-align: left;
       }
     }
@@ -158,4 +156,4 @@
       }
     }
   }
-};
+}

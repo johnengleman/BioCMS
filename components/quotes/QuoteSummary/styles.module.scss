@@ -26,14 +26,14 @@
   // }
 
   .topic {
-   // background - color: ${ colors.violet };
+    // background - color: ${ colors.violet };
     position: absolute;
     top: -10px;
     left: -10px;
     display: flex;
     justify-content: center;
     align-items: center;
-  //  color: ${ colors.mint };
+    //  color: ${ colors.mint };
     font-weight: 700;
     padding: 2px 20px;
     border-radius: 3px;
@@ -43,12 +43,12 @@
 
   .text {
     font-weight: 600;
-   // color: ${ colors.violet };
+    // color: ${ colors.violet };
     margin-bottom: 30px;
     font-size: 1rem;
 
     &::first-letter {
-      color: ${ colors.brown };
+      //  color: ${ colors.brown };
       font-size: 1.5rem;
     }
   }
@@ -57,19 +57,19 @@
     line-height: 1;
     font-size: 14px;
     font-style: italic;
-   // color: ${ colors.mint };
+    // color: ${ colors.mint };
     position: absolute;
     bottom: 20px;
     left: 20px;
-    width: 90 %;
+    width: 90%;
 
-    @media ${ device.tablet } {
-      right: 30px;
-      width: 75 %;
-    }
+    // @media ${ device.tablet } {
+    //   right: 30px;
+    //   width: 75 %;
+    // }
 
-    @media ${ device.laptopL } {
-      right: 0;
-    }
+    // @media ${ device.laptopL } {
+    //   right: 0;
+    // }
   }
-};
+}

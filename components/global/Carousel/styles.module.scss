@@ -1,8 +1,6 @@
-// import styled from 'styled-components'
-// import { device } from '../../../styles/devices'
+@import './../../../styles/breakpoints.scss';
 
 .carousel {
-
   .embla {
     display: flex;
     justify-content: space-between;
@@ -31,11 +29,11 @@
     border-radius: 50%;
     cursor: pointer;
     transition: transform 0.2s ease-in-out,
-    box-shadow 0.2s ease-in-out;
+      box-shadow 0.2s ease-in-out;
     z-index: 2; /* Position the button above the pseudo-element */
     display: none;
 
-    @media ${device.tablet} {
+    @include breakpoint(tablet) {
       display: block;
     }
 
@@ -68,4 +66,4 @@
       opacity: 1; /* Show the shadow on hover and active states */
     }
   }
-};
+}
