@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { flushSync } from 'react-dom'
+import { useRouter } from 'next/router'
 import Toggle from '../Toggle/Toggle'
 import {
   faCalendarDays,
@@ -11,14 +12,13 @@ import {
 } from '@fortawesome/pro-duotone-svg-icons'
 import styles from './styles.module.scss'
 
-const Filter = ({
-  setSaintFilter,
-  selectedFilter = 'none',
-  setSaintPreset,
-  selectedPreset = 'none',
-  title,
-  filters = {},
-}) => {
+type presetTypes = ['none', 'patron', '20th-century-saints']
+
+const Filter = ({ title, filters = {} }) => {
+  const router = useRouter()
+  const selectedFilter = router.query.filter || 'none'
+  const selectedPreset =
+    router.query.preset || ('none' as any)
   const canUseTransition = useRef<boolean>(false)
   const [selectedChurch, setSelectedChurch] =
     useState('all')
@@ -32,13 +32,45 @@ const Filter = ({
   useEffect(() => {
     const cookie = Cookies.get('findasaint.com')
 
-    try {
-      const data = JSON.parse(cookie)
-      setSelectedChurch(data.church)
-    } catch (err) {
-      console.error(err)
+    if (cookie) {
+      try {
+        const data = JSON.parse(cookie)
+        setSelectedChurch(data.church)
+      } catch (err) {
+        console.error(err)
+      }
     }
   }, [])
+
+  const setSaintFilter = (filter) => {
+    const newQuery = {
+      ...router.query,
+      filter: filter.toLowerCase(),
+    }
+    router.push(
+      {
+        pathname: router.pathname,
+        query: newQuery,
+      },
+      undefined,
+      { shallow: true },
+    )
+  }
+
+  const setSaintPreset = (preset) => {
+    const newQuery = {
+      ...router.query,
+      preset: preset.toLowerCase(),
+    }
+    router.push(
+      {
+        pathname: router.pathname,
+        query: newQuery,
+      },
+      undefined,
+      { shallow: true },
+    )
+  }
 
   return (
     <div className={styles.filter}>

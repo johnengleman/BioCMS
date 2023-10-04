@@ -13,11 +13,6 @@
   "engines": {
     "node": "18.x"
   },
-  "husky": {
-    "hooks": {
-      "pre-push": "npm run lint"
-    }
-  },
   "dependencies": {
     "@apollo/client": "^3.7.3",
     "@emotion/react": "^11.11.1",

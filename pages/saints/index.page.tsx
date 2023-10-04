@@ -17,16 +17,14 @@ import Page from '../../components/page/Page/Page'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
 import { fetchAPIQuery } from '../../queries/fetchApiQuery'
-import { SiteContext } from '../../context/SiteContext'
 import Hero from '../../components/home/Hero/Hero'
 
 const Saints = (props) => {
   const router = useRouter()
+  const church = router.query.church || 'all'
   const saintFilter = router.query.filter || 'none'
   const saintPreset = router.query.preset || 'none'
   const sort = router.query.sort || 'chronological-asc'
-  const { selectedChurch = 'all' } = useContext(SiteContext)
-  const church = selectedChurch
   const { filters = {} } = props
 
   const { data, isError, isLoading } = useQuery(
@@ -79,35 +77,30 @@ const Saints = (props) => {
     return 5
   }
 
-  const handleSetSaintFilter = (filter) => {
-    const newQuery = {
-      ...router.query,
-      filter: filter.toLowerCase(),
-    }
-    router.push(
-      {
-        pathname: router.pathname,
-        query: newQuery,
-      },
-      undefined,
-      { shallow: true },
-    )
-  }
+  useEffect(() => {
+    const cookie = Cookies.get('findasaint.com')
 
-  const handleSetSaintPreset = (preset) => {
-    const newQuery = {
-      ...router.query,
-      preset: preset.toLowerCase(),
+    if (cookie) {
+      try {
+        const data = JSON.parse(cookie)
+
+        const newQuery = {
+          ...router.query,
+          church: data.church,
+        }
+        router.push(
+          {
+            pathname: router.pathname,
+            query: newQuery,
+          },
+          undefined,
+          { shallow: true },
+        )
+      } catch (err) {
+        console.error(err)
+      }
     }
-    router.push(
-      {
-        pathname: router.pathname,
-        query: newQuery,
-      },
-      undefined,
-      { shallow: true },
-    )
-  }
+  }, [router])
 
   return (
     <>
@@ -129,10 +122,6 @@ const Saints = (props) => {
       </Head>
       <Page searchData={searchData}>
         <Hero
-          handleSetSaintFilter={handleSetSaintFilter}
-          saintFilter={saintFilter}
-          handleSetSaintPreset={handleSetSaintPreset}
-          saintPreset={saintPreset}
           church={church}
           filters={filters}
         />

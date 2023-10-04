@@ -1,21 +1,14 @@
-import {
-  useState,
-  useRef,
-  useEffect,
-  useContext,
-} from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
-import { SiteContext } from '../../../context/SiteContext'
 import CatholicCross from '../../global/Icons/CatholicCross/CatholicCross'
 import OrthodoxCross from '../../global/Icons/OrthodoxCross/OrthodoxCross'
 import styles from './styles.module.scss'
 
 const ChurchToggle = () => {
   const router = useRouter()
-  const { selectedChurch = 'all', setSelectedChurch } =
-    useContext(SiteContext)
-
+  const [selectedChurch, setSelectedChurch] =
+    useState('all')
   const [buttonDimensions, setButtonDimensions] = useState({
     offsetLeft: 211,
     width: 43,
@@ -44,6 +37,8 @@ const ChurchToggle = () => {
   }
 
   const updateCookieAndToggle = (e, church) => {
+    setSelectedChurch(church)
+
     // Updates toggle
     const liElement = e.target.closest('li')
     setButtonDimensions({
@@ -82,14 +77,17 @@ const ChurchToggle = () => {
   useEffect(() => {
     const cookie = Cookies.get('findasaint.com')
 
-    try {
-      const data = JSON.parse(cookie)
-      setSelectedChurch(data.church)
-      updateToggle(data.church)
-    } catch (err) {
-      console.error(err)
+    if (cookie) {
+      try {
+        const data = JSON.parse(cookie)
+        console.log(data.church)
+        setSelectedChurch(data.church)
+        updateToggle(data.church)
+      } catch (err) {
+        console.error(err)
+      }
     }
-  }, [setSelectedChurch])
+  }, [])
 
   return (
     <div className={styles.churchToggle}>

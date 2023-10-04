@@ -3,14 +3,7 @@ import Filter from './../Filter/Filter'
 import { properties } from '../../../properties'
 import styles from './styles.module.scss'
 
-const Hero = ({
-  handleSetSaintFilter,
-  saintFilter,
-  handleSetSaintPreset,
-  saintPreset,
-  church,
-  filters,
-}) => {
+const Hero = ({ church, filters }) => {
   return (
     <div className={styles.hero}>
       <div className={styles.contentContainer}>
@@ -40,14 +33,6 @@ const Hero = ({
           </span>
         </h1>
         <Filter
-          setSaintFilter={(saintFilter) =>
-            handleSetSaintFilter(saintFilter)
-          }
-          setSaintPreset={(saintPreset) =>
-            handleSetSaintPreset(saintPreset)
-          }
-          selectedFilter={saintFilter}
-          selectedPreset={saintPreset}
           filters={filters}
           title={
             properties[
