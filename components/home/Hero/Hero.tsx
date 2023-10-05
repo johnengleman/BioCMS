@@ -3,7 +3,7 @@ import Filter from './../Filter/Filter'
 import { properties } from '../../../properties'
 import styles from './styles.module.scss'
 
-const Hero = ({ church, filters }) => {
+const Hero = ({ filters }) => {
   return (
     <div className={styles.hero}>
       <div className={styles.contentContainer}>
@@ -32,14 +32,7 @@ const Hero = ({ church, filters }) => {
             />
           </span>
         </h1>
-        <Filter
-          filters={filters}
-          title={
-            properties[
-              !Array.isArray(church) ? church : 'all'
-            ]?.filterTitle
-          }
-        />
+        <Filter filters={filters} />
       </div>
     </div>
   )

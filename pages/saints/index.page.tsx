@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from 'react'
+import { useEffect } from 'react'
 import Cookies from 'js-cookie'
 import {
-  dehydrate,
   QueryClient,
   useQuery,
+  dehydrate,
 } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import styles from './styles.module.scss'
@@ -19,13 +19,12 @@ import useBreakpoints from '../../hooks/useBreakPoints'
 import { fetchAPIQuery } from '../../queries/fetchApiQuery'
 import Hero from '../../components/home/Hero/Hero'
 
-const Saints = (props) => {
+const Saints = () => {
   const router = useRouter()
   const church = router.query.church || 'all'
   const saintFilter = router.query.filter || 'none'
   const saintPreset = router.query.preset || 'none'
   const sort = router.query.sort || 'chronological-asc'
-  const { filters = {} } = props
 
   const { data, isError, isLoading } = useQuery(
     ['saints', church, saintFilter, saintPreset, sort],
@@ -43,6 +42,11 @@ const Saints = (props) => {
     {
       enabled: !!saintFilter || !!church || !!saintPreset, // This ensures the query is run only when the category is available
     },
+  )
+
+  const { data: filters } = useQuery(
+    ['filters', church],
+    () => fetchAPIQuery(`getFilters?church=${church}`),
   )
 
   const { data: searchData } = useQuery(
@@ -122,10 +126,7 @@ const Saints = (props) => {
         />
       </Head>
       <Page searchData={searchData}>
-        <Hero
-          church={church}
-          filters={filters}
-        />
+        <Hero filters={filters} />
         {isLoading && (
           <p className="error">Fetching Saints</p>
         )}
@@ -164,35 +165,42 @@ const Saints = (props) => {
   )
 }
 
-export async function getStaticProps({ query }) {
-  let filters
-  try {
-    filters = await fetchAPIQuery('getFilters')
-  } catch (error) {
-    filters = []
+export async function getServerSideProps(context) {
+  // Get the cookie from the request headers
+  const cookie = context.req.headers.cookie
+  let church = 'all'
+
+  if (cookie) {
+    const parsedCookie = cookie
+      .split('; ')
+      .find((row) => row.startsWith('findasaint.com='))
+      ?.split('=')[1]
+
+    if (parsedCookie) {
+      const data = JSON.parse(
+        decodeURIComponent(parsedCookie),
+      )
+      church = data.church
+    }
   }
 
-  const church = query?.church || 'all'
-  const category = query?.filter || 'none'
-  const saintPreset = query?.preset || 'none'
-  const sort = query?.sort || 'chronological-asc'
-
+  // Now use the church value to make the initial data request
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery(
-    ['saints', church, category, saintPreset, sort],
-    () => getSaints(church, category, saintPreset, sort),
-  )
 
+  await queryClient.prefetchQuery(['saints', church], () =>
+    getSaints(church),
+  )
   await queryClient.prefetchQuery(['search', church], () =>
     getSearchData(church),
+  )
+  await queryClient.prefetchQuery(['filters', church], () =>
+    fetchAPIQuery(`getFilters?church=${church}`),
   )
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      filters,
     },
-    revalidate: 600,
   }
 }
 

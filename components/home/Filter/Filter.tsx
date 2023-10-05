@@ -14,7 +14,7 @@ import styles from './styles.module.scss'
 
 type presetTypes = ['none', 'patron', '20th-century-saints']
 
-const Filter = ({ title, filters = {} }) => {
+const Filter = ({ filters = {} }) => {
   const router = useRouter()
   const selectedFilter = router.query.filter || 'none'
   const selectedPreset =
@@ -76,7 +76,7 @@ const Filter = ({ title, filters = {} }) => {
     <div className={styles.filter}>
       <p className={styles.instructions}>Use a preset?</p>
       <div className={styles.presetContainer}>
-        <button
+        {/* <button
           className={`${styles.preset} ${
             selectedPreset === 'patron' ? styles.active : ''
           }`}
@@ -111,7 +111,7 @@ const Filter = ({ title, filters = {} }) => {
               '--fa-secondary-color': '#ccad00',
             }}
           />
-        </button>
+        </button> */}
         {/* <div className="bento">
           <h3>Top 100 Most Popular</h3>
           <FontAwesomeIcon

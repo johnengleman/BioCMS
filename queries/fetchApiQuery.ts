@@ -6,9 +6,7 @@ const fetchAPIQuery = async (
   query: string,
 ): Promise<APIResponse | null> => {
   try {
-    const response = await axios.get(
-      `${process.env.API_URL}/api/${query}`,
-    )
+    const response = await axios.get(`/api/${query}`)
     return response.data
   } catch (error) {
     return []

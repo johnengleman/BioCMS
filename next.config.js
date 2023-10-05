@@ -2,12 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  compiler: {
-    styledComponents: true,
-  },
-  images: {
-    NEXT_PUBLIC_DOMAINs: ['saints-cms.onrender.com'],
-  },
   images: {
     unoptimized: true,
   },

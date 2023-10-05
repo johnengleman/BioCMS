@@ -102,14 +102,16 @@ const getNumberOfSaints = async ({
 }
 
 export default async function handler(req, res) {
+  const church = req.query.church || 'all'
+
   try {
     const filters = {
-      all: {
+      [church]: {
         none: await Promise.all(
           saintFilters.map(async (filter) => ({
             name: filter,
             count: await getNumberOfSaints({
-              church: 'all',
+              church: church,
               category: filter,
               saintPreset: 'all',
             }),
@@ -119,7 +121,7 @@ export default async function handler(req, res) {
           saintFilters.map(async (filter) => ({
             name: filter,
             count: await getNumberOfSaints({
-              church: 'all',
+              church: church,
               category: filter,
               saintPreset: 'patron',
             }),
@@ -129,71 +131,7 @@ export default async function handler(req, res) {
           saintFilters.map(async (filter) => ({
             name: filter,
             count: await getNumberOfSaints({
-              church: 'all',
-              category: filter,
-              saintPreset: '20th-century-saints',
-            }),
-          })),
-        ),
-      },
-      catholic: {
-        none: await Promise.all(
-          saintFilters.map(async (filter) => ({
-            name: filter,
-            count: await getNumberOfSaints({
-              church: 'all',
-              category: filter,
-              saintPreset: 'all',
-            }),
-          })),
-        ),
-        patron: await Promise.all(
-          saintFilters.map(async (filter) => ({
-            name: filter,
-            count: await getNumberOfSaints({
-              church: 'all',
-              category: filter,
-              saintPreset: 'patron',
-            }),
-          })),
-        ),
-        '20th-century-saints': await Promise.all(
-          saintFilters.map(async (filter) => ({
-            name: filter,
-            count: await getNumberOfSaints({
-              church: 'all',
-              category: filter,
-              saintPreset: '20th-century-saints',
-            }),
-          })),
-        ),
-      },
-      orthodox: {
-        none: await Promise.all(
-          saintFilters.map(async (filter) => ({
-            name: filter,
-            count: await getNumberOfSaints({
-              church: 'all',
-              category: filter,
-              saintPreset: 'all',
-            }),
-          })),
-        ),
-        patron: await Promise.all(
-          saintFilters.map(async (filter) => ({
-            name: filter,
-            count: await getNumberOfSaints({
-              church: 'all',
-              category: filter,
-              saintPreset: 'patron',
-            }),
-          })),
-        ),
-        '20th-century-saints': await Promise.all(
-          saintFilters.map(async (filter) => ({
-            name: filter,
-            count: await getNumberOfSaints({
-              church: 'all',
+              church: church,
               category: filter,
               saintPreset: '20th-century-saints',
             }),

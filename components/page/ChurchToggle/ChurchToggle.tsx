@@ -80,7 +80,6 @@ const ChurchToggle = () => {
     if (cookie) {
       try {
         const data = JSON.parse(cookie)
-        console.log(data.church)
         setSelectedChurch(data.church)
         updateToggle(data.church)
       } catch (err) {
