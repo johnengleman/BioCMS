@@ -77,7 +77,6 @@ const Saints = (props) => {
     return 5
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const cookie = Cookies.get('findasaint.com')
 
@@ -101,6 +100,7 @@ const Saints = (props) => {
         console.error(err)
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
