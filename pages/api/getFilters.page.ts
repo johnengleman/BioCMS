@@ -1,64 +1,36 @@
 import { request } from 'graphql-request'
+import { properties } from '../../properties'
 
-const saintFilters = [
-  'None',
-  'Ascetics',
-  'Bishops',
-  'Confessors',
-  'Converts',
-  'Fathers of the Church',
-  'Fools for Christ',
-  'Hermits',
-  'Holy Women',
-  'Married',
-  'Martyrs',
-  'Miracle Workers',
-  'Missionaries',
-  'Monastics',
-  'Mothers',
-  'Nuns',
-  'Warriors',
-]
-
-const presets = ['all', 'patron', '20th-century-saints']
+const getFilterList = (filter) =>
+  `{ categories: { _icontains: "${filter}" } }`
 
 type Response = {
   saints_aggregated
 }
 
-function numberOfSaintsQuery(
-  church,
-  category,
-  saintPreset,
-) {
+function numberOfSaintsQuery(church, saintPreset) {
   // Variables declaration
   let variablesList: string[] = []
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
-  if (category !== 'none') {
-    variablesList.push('$category: String!')
-  }
 
   // Filter construction
-  let filterList: string[] = []
+  let presetList: string[] = []
   let churchList: string[] = []
 
   if (church !== 'all') {
     churchList.push('venerated_in: { _icontains: $church }')
   }
-  if (category !== 'none') {
-    filterList.push(
-      '{ categories: { _icontains: $category } }',
-    )
-  }
+
   if (saintPreset === 'patron') {
-    filterList.push(
+    presetList.push(
       '{ categories: { _icontains: "Patron Saints" } }',
     )
   }
+
   if (saintPreset === '20th-century-saints') {
-    filterList.push('{ death_year: { _gte: 1900 } }')
+    presetList.push('{ death_year: { _gte: 1900 } }')
   }
   // if(saintPreset === 'saints-by-months') {
   //   filterList.push('{ death_year: { _gte: 1900 } }')
@@ -71,18 +43,22 @@ function numberOfSaintsQuery(
         ? `(${variablesList.join(', ')})`
         : ''
     } {
-      saints_aggregated(
+      ${properties.filters.map(
+        (filter) => `${filter}: saints_aggregated(
         filter: {
           ${churchList}
           _and: [
-            ${filterList.join(', ')}
+            ${presetList.join(', ')},${getFilterList(
+          filter,
+        )}
           ]
         }
       ) {
         count {
           id
         }
-      }
+      }`,
+      )}
     }
   `
   return baseQuery
@@ -90,15 +66,14 @@ function numberOfSaintsQuery(
 
 const getNumberOfSaints = async ({
   church = 'all',
-  category = 'none',
   saintPreset = 'none',
 }) => {
-  const { saints_aggregated } = await request<Response>(
+  const data = await request<Response>(
     `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-    numberOfSaintsQuery(church, category, saintPreset),
-    { category, church, saintPreset },
+    numberOfSaintsQuery(church, saintPreset),
+    { church, saintPreset },
   )
-  return saints_aggregated[0].count.id
+  return data
 }
 
 export default async function handler(req, res) {
@@ -107,36 +82,18 @@ export default async function handler(req, res) {
   try {
     const filters = {
       [church]: {
-        none: await Promise.all(
-          saintFilters.map(async (filter) => ({
-            name: filter,
-            count: await getNumberOfSaints({
-              church: church,
-              category: filter,
-              saintPreset: 'all',
-            }),
+        none: {
+          ...(await getNumberOfSaints({
+            church,
+            saintPreset: 'all',
           })),
-        ),
-        patron: await Promise.all(
-          saintFilters.map(async (filter) => ({
-            name: filter,
-            count: await getNumberOfSaints({
-              church: church,
-              category: filter,
-              saintPreset: 'patron',
-            }),
+        },
+        '20th-century-saints': {
+          ...(await getNumberOfSaints({
+            church,
+            saintPreset: '20th-century-saints',
           })),
-        ),
-        '20th-century-saints': await Promise.all(
-          saintFilters.map(async (filter) => ({
-            name: filter,
-            count: await getNumberOfSaints({
-              church: church,
-              category: filter,
-              saintPreset: '20th-century-saints',
-            }),
-          })),
-        ),
+        },
       },
     }
 

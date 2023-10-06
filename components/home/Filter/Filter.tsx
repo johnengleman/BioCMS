@@ -11,10 +11,11 @@ import {
   faFamily,
 } from '@fortawesome/pro-duotone-svg-icons'
 import styles from './styles.module.scss'
+import { properties } from '../../../properties'
 
 type presetTypes = ['none', 'patron', '20th-century-saints']
 
-const Filter = ({ filters = {} }) => {
+const Filter = ({ filtersCount = {} }) => {
   const router = useRouter()
   const selectedFilter = router.query.filter || 'none'
   const selectedPreset =
@@ -201,57 +202,56 @@ const Filter = ({ filters = {} }) => {
           />
         </button> */}
       </div>
+
       <p className={styles.instructions}>Add a filter?</p>
       <div className={styles.slideContainer}>
-        {filters[selectedChurch]?.[selectedPreset]?.map(
-          (filter, i) => {
-            const selectedF =
-              filter?.name.toLowerCase() === selectedFilter
-            return (
-              <button
-                key={i}
-                className={`${styles.slide} ${
-                  selectedF ? styles.selected : ''
-                } ${
-                  filter?.count === 0 &&
-                  filter?.name !== 'None'
-                    ? styles.disabled
-                    : ''
-                }`}
-                onClick={() => {
-                  if (canUseTransition.current) {
-                    ;(document as any)?.startViewTransition(
-                      () => {
-                        flushSync(() => {
-                          setSaintFilter(
-                            !selectedF
-                              ? filter?.name
-                              : 'none',
-                          )
-                        })
-                      },
-                    )
-                  } else {
-                    setSaintFilter(
-                      !selectedF ? filter?.name : 'none',
-                    )
-                  }
-                }}
-              >
-                <span className={styles.name}>
-                  {filter?.name !== 'None'
-                    ? filter?.name.replace(/-/g, ' ')
-                    : 'All'}
-                </span>
-                {filter?.count !== 0 && (
-                  <div className={styles.count}>
-                    {filter?.count}
-                  </div>
-                )}
-              </button>
-            )
-          },
-        )}
+        {properties.filters?.map((filter, i) => {
+          const selectedF =
+            filter?.toLowerCase() === selectedFilter
+          const count =
+            filtersCount[selectedChurch]?.[
+              selectedPreset
+            ]?.[filter]?.[0].count.id
+
+          return (
+            <button
+              key={i}
+              className={`${styles.slide} ${
+                selectedF ? styles.selected : ''
+              } ${
+                count === 0 && filter !== 'None'
+                  ? styles.disabled
+                  : ''
+              }`}
+              onClick={() => {
+                if (canUseTransition.current) {
+                  ;(document as any)?.startViewTransition(
+                    () => {
+                      flushSync(() => {
+                        setSaintFilter(
+                          !selectedF ? filter : 'none',
+                        )
+                      })
+                    },
+                  )
+                } else {
+                  setSaintFilter(
+                    !selectedF ? filter : 'none',
+                  )
+                }
+              }}
+            >
+              <span className={styles.name}>
+                {filter !== 'None'
+                  ? filter.replace(/_/g, ' ')
+                  : 'All'}
+              </span>
+              {count !== 0 && (
+                <div className={styles.count}>{count}</div>
+              )}
+            </button>
+          )
+        })}
       </div>
       <Toggle />
     </div>

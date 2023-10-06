@@ -8,4 +8,23 @@ export const properties = {
   catholic: {
     filterTitle: 'All Catholic Saints',
   },
+  filters: [
+    'None',
+    'Ascetics',
+    'Bishops',
+    'Confessors',
+    'Converts',
+    'Fathers_of_the_Church',
+    'Fools_for_Christ',
+    'Hermits',
+    'Holy_Women',
+    'Married',
+    'Martyrs',
+    'Miracle_Workers',
+    'Missionaries',
+    'Monastics',
+    'Mothers',
+    'Nuns',
+    'Warriors',
+  ],
 }

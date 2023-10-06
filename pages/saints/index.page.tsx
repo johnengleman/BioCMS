@@ -44,7 +44,7 @@ const Saints = () => {
     },
   )
 
-  const { data: filters } = useQuery(
+  const { data: filtersCount } = useQuery(
     ['filters', church],
     () => fetchAPIQuery(`getFilters?church=${church}`),
   )
@@ -126,7 +126,7 @@ const Saints = () => {
         />
       </Head>
       <Page searchData={searchData}>
-        <Hero filters={filters} />
+        <Hero filtersCount={filtersCount} />
         {isLoading && (
           <p className="error">Fetching Saints</p>
         )}

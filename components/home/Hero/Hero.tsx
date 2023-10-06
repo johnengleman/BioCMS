@@ -1,9 +1,8 @@
 import Typewriter from 'typewriter-effect'
 import Filter from './../Filter/Filter'
-import { properties } from '../../../properties'
 import styles from './styles.module.scss'
 
-const Hero = ({ filters }) => {
+const Hero = ({ filtersCount }) => {
   return (
     <div className={styles.hero}>
       <div className={styles.contentContainer}>
@@ -32,7 +31,7 @@ const Hero = ({ filters }) => {
             />
           </span>
         </h1>
-        <Filter filters={filters} />
+        <Filter filtersCount={filtersCount} />
       </div>
     </div>
   )
