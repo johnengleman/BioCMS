@@ -12,31 +12,37 @@ import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
 import Head from 'next/head'
 import { getSaints } from '../../queries/getSaints'
 import { getSearchData } from '../../queries/getSearchData'
+import { getFilters } from '../../queries/getFilters'
 import SaintSummary from '../../components/home/summary/SaintSummary'
 import Page from '../../components/page/Page/Page'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
-import { fetchAPIQuery } from '../../queries/fetchApiQuery'
 import Hero from '../../components/home/Hero/Hero'
+
+export const config = {
+  runtime: 'edge',
+}
 
 const Saints = () => {
   const router = useRouter()
-  const church = router.query.church || 'all'
-  const saintFilter = router.query.filter || 'none'
-  const saintPreset = router.query.preset || 'none'
+  const church = ((router.query.church?.[0] ||
+    router.query.church) ??
+    'all') as string
+  const saintFilter = ((router.query.filter?.[0] ||
+    router?.query?.filter) ??
+    'none') as string
+  const saintPreset = ((router.query.preset?.[0] ||
+    router.query.preset) ??
+    'none') as string
   const sort = router.query.sort || 'chronological-asc'
 
   const { data, isError, isLoading } = useQuery(
     ['saints', church, saintFilter, saintPreset, sort],
     () =>
       getSaints(
-        Array.isArray(church) ? church[0] : church,
-        Array.isArray(saintFilter)
-          ? saintFilter[0]
-          : saintFilter,
-        Array.isArray(saintPreset)
-          ? saintPreset[0]
-          : saintPreset,
+        church,
+        saintFilter,
+        saintPreset,
         Array.isArray(sort) ? sort[0] : sort,
       ),
     {
@@ -46,15 +52,12 @@ const Saints = () => {
 
   const { data: filtersCount } = useQuery(
     ['filters', church],
-    () => fetchAPIQuery(`getFilters?church=${church}`),
+    () => getFilters(church),
   )
 
   const { data: searchData } = useQuery(
     ['search', church],
-    () =>
-      getSearchData(
-        Array.isArray(church) ? church[0] : church,
-      ),
+    () => getSearchData(church),
   )
 
   const {
@@ -194,7 +197,7 @@ export async function getServerSideProps(context) {
     getSearchData(church),
   )
   await queryClient.prefetchQuery(['filters', church], () =>
-    fetchAPIQuery(`getFilters?church=${church}`),
+    getFilters(church),
   )
 
   return {

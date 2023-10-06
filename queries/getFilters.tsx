@@ -1,5 +1,9 @@
 import { request } from 'graphql-request'
-import { properties } from '../../properties'
+import { properties } from '../properties'
+
+export const config = {
+  runtime: 'edge',
+}
 
 const getFilterList = (filter) =>
   `{ categories: { _icontains: "${filter}" } }`
@@ -76,33 +80,24 @@ const getNumberOfSaints = async ({
   return data
 }
 
-export default async function handler(req, res) {
-  const church = req.query.church || 'all'
-
-  try {
-    const filters = {
-      [church]: {
-        none: {
-          ...(await getNumberOfSaints({
-            church,
-            saintPreset: 'all',
-          })),
-        },
-        '20th-century-saints': {
-          ...(await getNumberOfSaints({
-            church,
-            saintPreset: '20th-century-saints',
-          })),
-        },
+export const getFilters = async (
+  church: string = 'all',
+) => {
+  const filters = {
+    [church]: {
+      none: {
+        ...(await getNumberOfSaints({
+          church,
+          saintPreset: 'all',
+        })),
       },
-    }
-
-    res.setHeader(
-      'Cache-Control',
-      'public, max-age=86400, stale-while-revalidate=86400',
-    )
-    res.status(200).json(filters || [])
-  } catch (error) {
-    res.status(500).json({ error: 'failed to load data' })
+      '20th-century-saints': {
+        ...(await getNumberOfSaints({
+          church,
+          saintPreset: '20th-century-saints',
+        })),
+      },
+    },
   }
+  return filters
 }

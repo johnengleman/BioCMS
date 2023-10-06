@@ -51,7 +51,7 @@ const query = gql`
   }
 `
 
-export const getSaint = async (slug?: String) => {
+export const getSaint = async (slug?: string) => {
   const { saints } = await request<Response>(
     `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
     query,
