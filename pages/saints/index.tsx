@@ -20,7 +20,7 @@ import useBreakpoints from '../../hooks/useBreakPoints'
 import Hero from '../../components/home/Hero/Hero'
 
 export const config = {
-  runtime: 'edge',
+  runtime: 'experimental-edge',
 }
 
 const Saints = () => {
@@ -46,7 +46,7 @@ const Saints = () => {
         Array.isArray(sort) ? sort[0] : sort,
       ),
     {
-      enabled: !!saintFilter || !!church || !!saintPreset, // This ensures the query is run only when the category is available
+      enabled: !!saintFilter || !!church || !!saintPreset,
     },
   )
 

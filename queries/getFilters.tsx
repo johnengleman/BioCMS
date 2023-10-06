@@ -1,10 +1,6 @@
 import { request } from 'graphql-request'
 import { properties } from '../properties'
 
-export const config = {
-  runtime: 'edge',
-}
-
 const getFilterList = (filter) =>
   `{ categories: { _icontains: "${filter}" } }`
 
