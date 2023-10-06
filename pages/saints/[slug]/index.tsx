@@ -187,7 +187,6 @@ const SaintBio = (props) => {
 }
 
 export const getStaticProps = async ({ params }) => {
-  let relatedSaints: APIResponse = []
   const church = params?.church || 'all'
 
   const slug = Array.isArray(params?.slug)
