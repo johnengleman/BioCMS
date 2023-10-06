@@ -1,4 +1,5 @@
-import { request, gql } from 'graphql-request'
+import { gql } from 'graphql-request'
+import fetchHelper from './fetchHelper'
 
 type Saying = {
   id: string
@@ -27,9 +28,6 @@ const query = gql`
 `
 
 export const getSayings = async () => {
-  const { sayings } = await request<Response>(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-    query,
-  )
-  return sayings
+  const res = await fetchHelper({ query })
+  return res.data
 }

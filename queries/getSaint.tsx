@@ -1,5 +1,6 @@
-import { request, gql } from 'graphql-request'
+import { gql } from 'graphql-request'
 import { Saint } from '../types/types'
+import fetchHelper from './fetchHelper'
 
 type Response = {
   saints: Saint[]
@@ -52,10 +53,10 @@ const query = gql`
 `
 
 export const getSaint = async (slug?: string) => {
-  const { saints } = await request<Response>(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
+  const res = await fetchHelper({
     query,
-    { slug },
-  )
-  return saints[0]
+    variables: { slug },
+  })
+
+  return res.data[0]
 }

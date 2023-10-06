@@ -1,4 +1,5 @@
-import { request, gql } from 'graphql-request'
+import { gql } from 'graphql-request'
+import fetchHelper from './fetchHelper'
 
 export type Book = {
   id: string
@@ -12,10 +13,6 @@ export type Book = {
   amazon_book_cover: string
   genre: string
   topics: JSON
-}
-
-type Response = {
-  books: Book[]
 }
 
 const query = gql`
@@ -36,9 +33,6 @@ const query = gql`
 `
 
 export const getBooks = async () => {
-  const { books } = await request<Response>(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-    query,
-  )
-  return books
+  const res = await fetchHelper({ query })
+  return res.data
 }

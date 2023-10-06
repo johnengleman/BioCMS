@@ -1,4 +1,4 @@
-const fetchHelper = async ({ query, variables }) => {
+const fetchHelper = async ({ query, variables = {} }) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
     {
