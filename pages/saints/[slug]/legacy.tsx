@@ -18,10 +18,6 @@ import NameTag from '../../../components/saint/NameTag/NameTag'
 import TableOfContents from '../../../components/saint/TableOfContentsText/TableOfContentsText'
 import { Saint } from '../../../types/types'
 import formatDate from '../../../utils/dates'
-import {
-  fetchAPIQuery,
-  APIResponse,
-} from '../../../queries/fetchApiQuery'
 
 const SaintBio = (props) => {
   const router = useRouter()
@@ -130,7 +126,6 @@ const SaintBio = (props) => {
 }
 
 export const getStaticProps = async ({ params }) => {
-  let relatedSaints: APIResponse = []
   const church = params?.church || 'all'
 
   const slug = Array.isArray(params?.slug)
@@ -150,22 +145,22 @@ export const getStaticProps = async ({ params }) => {
     getSearchData(church),
   )
 
-  try {
-    const saintsResponse = await fetchAPIQuery(
-      `getRelatedSaints?categories=${saintData?.categories.join()}`,
-    )
-    relatedSaints = saintsResponse || []
-  } catch (error) {
-    console.error(error)
-  }
+  // try {
+  //   const saintsResponse = await fetchAPIQuery(
+  //     `getRelatedSaints?categories=${saintData?.categories.join()}`,
+  //   )
+  //   relatedSaints = saintsResponse || []
+  // } catch (error) {
+  //   console.error(error)
+  // }
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      relatedSaints: relatedSaints
-        ?.filter((saint) => saint.slug !== slug)
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 4),
+      // relatedSaints: relatedSaints
+      //   ?.filter((saint) => saint.slug !== slug)
+      //   .sort(() => Math.random() - 0.5)
+      //   .slice(0, 4),
     },
     revalidate: 60,
   }

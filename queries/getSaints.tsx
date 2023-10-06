@@ -1,9 +1,4 @@
-import { request } from 'graphql-request'
-import { Saint } from '../types/types'
-
-type Response = {
-  saints: Saint[]
-}
+import fetchHelper from './fetchHelper'
 
 function getSaintsQuery(
   church,
@@ -108,15 +103,15 @@ export const getSaints = async (
   saintPreset = 'none',
   sort = 'chronological-asc',
 ) => {
-  const { saints } = await request<Response>(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-    getSaintsQuery(
-      church,
-      category,
-      saintPreset,
-      parseSort(sort),
-    ),
-    { category, church, saintPreset },
+  const query = getSaintsQuery(
+    church,
+    category,
+    saintPreset,
+    parseSort(sort),
   )
-  return saints
+  const variables = { category, church, saintPreset }
+
+  const response = await fetchHelper({ variables, query })
+
+  return response.data.saints
 }

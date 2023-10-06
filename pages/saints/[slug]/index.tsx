@@ -20,10 +20,6 @@ import Summary from '../../../components/saint/Summary/Summary'
 import TableOfContentFeatures from '../../../components/saint/TableOfContentsFeatures/TableOfContentsFeatures'
 import BentoSection from '../../../components/saint/BentoSection/BentoSection'
 import SectionTitle from '../../../components/saint/SectionTitle/SectionTitle'
-import {
-  fetchAPIQuery,
-  APIResponse,
-} from '../../../queries/fetchApiQuery'
 
 const SaintBio = (props) => {
   const router = useRouter()
@@ -211,22 +207,22 @@ export const getStaticProps = async ({ params }) => {
     getSearchData(church),
   )
 
-  try {
-    const saintsResponse = await fetchAPIQuery(
-      `getRelatedSaints?categories=${saintData?.categories.join()}`,
-    )
-    relatedSaints = saintsResponse || []
-  } catch (error) {
-    console.error(error)
-  }
+  // try {
+  //   const saintsResponse = await fetchAPIQuery(
+  //     `getRelatedSaints?categories=${saintData?.categories.join()}`,
+  //   )
+  //   relatedSaints = saintsResponse || []
+  // } catch (error) {
+  //   console.error(error)
+  // }
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      relatedSaints: relatedSaints
-        ?.filter((saint) => saint.slug !== slug)
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 4),
+      // relatedSaints: relatedSaints
+      //   ?.filter((saint) => saint.slug !== slug)
+      //   .sort(() => Math.random() - 0.5)
+      //   .slice(0, 4),
     },
     revalidate: 60,
   }

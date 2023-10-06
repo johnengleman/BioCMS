@@ -1,12 +1,8 @@
-import { request } from 'graphql-request'
+import fetchHelper from './fetchHelper'
 import { properties } from '../properties'
 
 const getFilterList = (filter) =>
   `{ categories: { _icontains: "${filter}" } }`
-
-type Response = {
-  saints_aggregated
-}
 
 function numberOfSaintsQuery(church, saintPreset) {
   // Variables declaration
@@ -68,12 +64,11 @@ const getNumberOfSaints = async ({
   church = 'all',
   saintPreset = 'none',
 }) => {
-  const data = await request<Response>(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-    numberOfSaintsQuery(church, saintPreset),
-    { church, saintPreset },
-  )
-  return data
+  const res = await fetchHelper({
+    query: numberOfSaintsQuery(church, saintPreset),
+    variables: { church, saintPreset },
+  })
+  return res.data
 }
 
 export const getFilters = async (

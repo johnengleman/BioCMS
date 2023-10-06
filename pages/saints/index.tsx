@@ -18,6 +18,7 @@ import Page from '../../components/page/Page/Page'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
 import Hero from '../../components/home/Hero/Hero'
+import { filter } from 'cheerio/lib/api/traversing'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -37,7 +38,7 @@ const Saints = () => {
   const sort = router.query.sort || 'chronological-asc'
 
   const { data, isError, isLoading } = useQuery(
-    ['saints', church, saintFilter, saintPreset, sort],
+    ['saints', church],
     () =>
       getSaints(
         church,

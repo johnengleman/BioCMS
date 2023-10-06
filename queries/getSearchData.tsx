@@ -1,4 +1,4 @@
-import { request } from 'graphql-request'
+import fetchHelper from './fetchHelper'
 import { Saint } from '../types/types'
 
 type Response = {
@@ -47,15 +47,10 @@ function getSaintsQuery(church) {
   return baseQuery
 }
 
-export const getSearchData = async (
-  church = 'all',
-) => {
-  const { saints } = await request<Response>(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-    getSaintsQuery(church),
-    {
-      church,
-    },
-  )
-  return saints
+export const getSearchData = async (church = 'all') => {
+  const res = await fetchHelper({
+    query: getSaintsQuery(church),
+    variables: { church },
+  })
+  return res.data.saints
 }

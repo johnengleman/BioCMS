@@ -8,7 +8,6 @@ import { useState } from 'react'
 import { Book, getBooks } from '../../queries/getBooks'
 import BookSummary from '../../components/books/BookSummary/BookSummary'
 import Page from '../../components/page/Page/Page'
-import { fetchAPIQuery } from '../../queries/fetchApiQuery'
 import RecentlyUpdated from '../../components/books/recentlyUpdated/RecentlyUpdated'
 import Slide from '../../components/books/Slide/Slide'
 import Filter from '../../components/books/Filter/Filter'
@@ -101,27 +100,27 @@ export async function getStaticProps() {
   const queryClient = new QueryClient()
   await queryClient.prefetchQuery(['books'], getBooks)
 
-  try {
-    mostRecentlyCreatedBooks = await fetchAPIQuery(
-      'getMostRecentlyCreatedBooks',
-    )
-  } catch (error) {
-    mostRecentlyCreatedBooks = []
-  }
+  // try {
+  //   mostRecentlyCreatedBooks = await fetchAPIQuery(
+  //     'getMostRecentlyCreatedBooks',
+  //   )
+  // } catch (error) {
+  //   mostRecentlyCreatedBooks = []
+  // }
 
-  try {
-    topAuthors = await fetchAPIQuery(
-      `getTopAuthors?limit=books`,
-    )
-  } catch (error) {
-    topAuthors = []
-  }
+  // try {
+  //   topAuthors = await fetchAPIQuery(
+  //     `getTopAuthors?limit=books`,
+  //   )
+  // } catch (error) {
+  //   topAuthors = []
+  // }
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      mostRecentlyCreatedBooks,
-      topAuthors,
+      // mostRecentlyCreatedBooks,
+      // topAuthors,
     },
     revalidate: 60,
   }
