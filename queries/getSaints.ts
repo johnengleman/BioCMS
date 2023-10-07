@@ -97,12 +97,12 @@ const parseSort = (sort) => {
   }
 }
 
-export const getSaints = async (
+export const getSaints = async ({
   church = 'all',
   category = 'none',
   saintPreset = 'none',
   sort = 'chronological-asc',
-) => {
+}) => {
   const query = getSaintsQuery(
     church,
     category,
@@ -113,5 +113,5 @@ export const getSaints = async (
 
   const response = await fetchHelper({ variables, query })
 
-  return response.data.saints
+  return response?.data?.saints
 }

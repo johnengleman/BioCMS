@@ -52,5 +52,5 @@ export const getSearchData = async (church = 'all') => {
     query: getSaintsQuery(church),
     variables: { church },
   })
-  return res.data.saints
+  return res?.data?.saints || null
 }

@@ -90,5 +90,5 @@ export const getFilters = async (
       },
     },
   }
-  return filters
+  return filters || null
 }

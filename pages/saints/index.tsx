@@ -18,7 +18,6 @@ import Page from '../../components/page/Page/Page'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
 import Hero from '../../components/home/Hero/Hero'
-import { filter } from 'cheerio/lib/api/traversing'
 
 // export const config = {
 //   runtime: 'experimental-edge',
@@ -26,29 +25,19 @@ import { filter } from 'cheerio/lib/api/traversing'
 
 const Saints = () => {
   const router = useRouter()
-  const church = ((router.query.church?.[0] ||
-    router.query.church) ??
-    'all') as string
-  const saintFilter = ((router.query.filter?.[0] ||
-    router?.query?.filter) ??
-    'none') as string
-  const saintPreset = ((router.query.preset?.[0] ||
-    router.query.preset) ??
-    'none') as string
+  const church = router.query.church || 'all'
+  const category = router.query.filter || 'none'
+  const saintPreset = router.query.preset || 'none'
   const sort = router.query.sort || 'chronological-asc'
 
+  console.log('church', church)
+  console.log('category', category)
+  console.log('saintPreset', saintPreset)
+  console.log('sort', sort)
   const { data, isError, isLoading } = useQuery(
-    ['saints', church],
+    ['saints', church, category, saintPreset, sort],
     () =>
-      getSaints(
-        church,
-        saintFilter,
-        saintPreset,
-        Array.isArray(sort) ? sort[0] : sort,
-      ),
-    {
-      enabled: !!saintFilter || !!church || !!saintPreset,
-    },
+      getSaints({ church, category, saintPreset, sort }),
   )
 
   const { data: filtersCount } = useQuery(
@@ -172,6 +161,9 @@ const Saints = () => {
 export async function getServerSideProps(context) {
   // Get the cookie from the request headers
   const cookie = context.req.headers.cookie
+  const category = context.query.filter || 'none'
+  const saintPreset = context.query.preset || 'none'
+  const sort = context.query.sort || 'chronological-asc'
   let church = 'all'
 
   if (cookie) {
@@ -191,8 +183,10 @@ export async function getServerSideProps(context) {
   // Now use the church value to make the initial data request
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery(['saints', church], () =>
-    getSaints(church),
+  await queryClient.prefetchQuery(
+    ['saints', church, category, saintPreset, sort],
+    () =>
+      getSaints({ church, category, saintPreset, sort }),
   )
   await queryClient.prefetchQuery(['search', church], () =>
     getSearchData(church),
