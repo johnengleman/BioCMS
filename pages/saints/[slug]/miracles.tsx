@@ -19,6 +19,10 @@ import TableOfContents from '../../../components/saint/TableOfContentsText/Table
 import formatDate from '../../../utils/dates'
 import { Saint } from '../../../types/types'
 
+export const config = {
+  runtime: 'experimental-edge',
+}
+
 const SaintBio = (props) => {
   const router = useRouter()
   const refElement = useRef(null)
