@@ -20,9 +20,9 @@ import useBreakpoints from '../../hooks/useBreakPoints'
 import Hero from '../../components/home/Hero/Hero'
 import { filter } from 'cheerio/lib/api/traversing'
 
-export const config = {
-  runtime: 'experimental-edge',
-}
+// export const config = {
+//   runtime: 'experimental-edge',
+// }
 
 const Saints = () => {
   const router = useRouter()
