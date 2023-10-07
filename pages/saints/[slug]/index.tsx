@@ -21,10 +21,6 @@ import TableOfContentFeatures from '../../../components/saint/TableOfContentsFea
 import BentoSection from '../../../components/saint/BentoSection/BentoSection'
 import SectionTitle from '../../../components/saint/SectionTitle/SectionTitle'
 
-// export const config = {
-//   runtime: 'experimental-edge',
-// }
-
 const SaintBio = (props) => {
   const router = useRouter()
   const church = router.query.church || 'all'

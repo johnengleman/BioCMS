@@ -20,6 +20,7 @@ const Filter = ({ filtersCount = {} }) => {
   const selectedFilter = router.query.filter || 'none'
   const selectedPreset =
     router.query.preset || ('none' as any)
+  const church = router.query.church || 'all'
   const canUseTransition = useRef<boolean>(false)
   const [selectedChurch, setSelectedChurch] =
     useState('all')
@@ -41,7 +42,7 @@ const Filter = ({ filtersCount = {} }) => {
         console.error(err)
       }
     }
-  }, [])
+  }, [church])
 
   const setSaintFilter = (filter) => {
     const newQuery = {
@@ -54,7 +55,6 @@ const Filter = ({ filtersCount = {} }) => {
         query: newQuery,
       },
       undefined,
-      { shallow: true },
     )
   }
 
@@ -69,7 +69,6 @@ const Filter = ({ filtersCount = {} }) => {
         query: newQuery,
       },
       undefined,
-      { shallow: true },
     )
   }
 

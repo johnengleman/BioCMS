@@ -19,9 +19,9 @@ import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
 import Hero from '../../components/home/Hero/Hero'
 
-// export const config = {
-//   runtime: 'experimental-edge',
-// }
+export const config = {
+  runtime: 'experimental-edge',
+}
 
 const Saints = () => {
   const router = useRouter()
@@ -32,10 +32,6 @@ const Saints = () => {
   const sort = (router.query.sort ||
     'chronological-asc') as string
 
-  console.log('church', church)
-  console.log('category', category)
-  console.log('saintPreset', saintPreset)
-  console.log('sort', sort)
   const { data, isError, isLoading } = useQuery(
     ['saints', church, category, saintPreset, sort],
     () =>
@@ -183,7 +179,14 @@ export async function getServerSideProps(context) {
   }
 
   // Now use the church value to make the initial data request
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 60 * 60 * 1000, // 1 hour in milliseconds
+        cacheTime: 60 * 60 * 1000, // 1 hour in milliseconds
+      },
+    },
+  })
 
   await queryClient.prefetchQuery(
     ['saints', church, category, saintPreset, sort],

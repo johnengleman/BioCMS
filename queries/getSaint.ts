@@ -2,10 +2,6 @@ import { gql } from 'graphql-request'
 import { Saint } from '../types/types'
 import fetchHelper from './fetchHelper'
 
-type Response = {
-  saints: Saint[]
-}
-
 const query = gql`
   query getSaint($slug: String!) {
     saints(filter: { slug: { _eq: $slug } }) {
@@ -58,5 +54,5 @@ export const getSaint = async (slug?: string) => {
     variables: { slug },
   })
 
-  return res.data[0]
+  return res.data.saints[0]
 }

@@ -69,7 +69,6 @@ const ChurchToggle = () => {
           query: newQuery,
         },
         undefined,
-        { shallow: true },
       )
     }
   }
