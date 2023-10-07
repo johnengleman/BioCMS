@@ -25,10 +25,12 @@ import Hero from '../../components/home/Hero/Hero'
 
 const Saints = () => {
   const router = useRouter()
-  const church = router.query.church || 'all'
-  const category = router.query.filter || 'none'
-  const saintPreset = router.query.preset || 'none'
-  const sort = router.query.sort || 'chronological-asc'
+  const church = (router.query.church || 'all') as string
+  const category = (router.query.filter || 'none') as string
+  const saintPreset = (router.query.preset ||
+    'none') as string
+  const sort = (router.query.sort ||
+    'chronological-asc') as string
 
   console.log('church', church)
   console.log('category', category)
