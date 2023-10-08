@@ -2,13 +2,13 @@ import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import styles from './styles.module.scss'
 
 const MiniImages = ({ images, name }) => {
-  if (!images[1]) {
+  if (!images?.[1]) {
     return null
   }
 
   return (
     <div className={styles.MiniImages}>
-      {images.map((image, i) => {
+      {images?.map((image, i) => {
         if (0 < i) {
           return (
             <div
