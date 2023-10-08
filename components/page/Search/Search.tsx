@@ -75,7 +75,7 @@ const Search = ({ searchData }) => {
           >
             <div className={styles.profile}>
               <ImageGlobal
-                src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${option.images[0]?.directus_files_id.id}?key=search`}
+                src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${option.images[0]?.directus_files_id.id}?key=search`}
                 fill={false}
                 width={35}
                 height={35}

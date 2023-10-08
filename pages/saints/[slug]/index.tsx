@@ -24,9 +24,9 @@ import BentoSection from '../../../components/saint/BentoSection/BentoSection'
 import SectionTitle from '../../../components/saint/SectionTitle/SectionTitle'
 import MiniImages from '../../../components/saint/MiniImages/MiniImages'
 
-// export const config = {
-//   runtime: 'experimental-edge',
-// }
+export const config = {
+  runtime: 'experimental-edge',
+}
 
 const SaintBio = () => {
   const router = useRouter()

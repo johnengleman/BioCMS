@@ -15,7 +15,7 @@ const Tomb = ({ imageId, location, church }: TombProps) => {
         <Title>Relics</Title>
         <div className={styles.tomb}>
           <Image
-            src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${imageId}?fit=cover&height=150&width=350`}
+            src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${imageId}?fit=cover&height=150&width=350`}
             height="150"
             width="350"
             alt=""

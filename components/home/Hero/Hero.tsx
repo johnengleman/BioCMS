@@ -1,5 +1,5 @@
-import Typewriter from 'typewriter-effect'
 import Filter from './../Filter/Filter'
+import { Typewriter } from 'react-simple-typewriter'
 import styles from './styles.module.scss'
 
 const Hero = ({ filtersCount }) => {
@@ -10,24 +10,17 @@ const Hero = ({ filtersCount }) => {
           Find a Saint, find a
           <span className={styles.metaphor}>
             <Typewriter
-              options={
-                {
-                  strings: [
-                    'Light in the Darkness.',
-                    'Pillar of Faith.',
-                    'Soldier for Christ.',
-                    'Temple of the Holy Spirit.',
-                    'Light to the World.',
-                    'Friend.',
-                  ],
-                  cursor: '',
-                  deleteSpeed: 20,
-                  delay: 80,
-                  pauseFor: 3000,
-                  autoStart: true,
-                  loop: true,
-                } as any
-              }
+              words={[
+                'Light in the Darkness.',
+                'Pillar of Faith.',
+                'Soldier for Christ.',
+                'Temple of the Holy Spirit.',
+                'Light to the World.',
+                'Friend.',
+              ]}
+              deleteSpeed={20}
+              delaySpeed={3000}
+              loop
             />
           </span>
         </h1>

@@ -46,7 +46,7 @@ export default function SaintSummary(props) {
             images[0]?.directus_files_id?.description ||
             `Image of ${name}, the eastern orthodox saint`
           }
-          src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${images[0]?.directus_files_id.id}?key=summary`}
+          src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${images[0]?.directus_files_id.id}?key=summary`}
           fill={true}
           priority={priority}
         />

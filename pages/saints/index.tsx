@@ -19,9 +19,9 @@ import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
 import Hero from '../../components/home/Hero/Hero'
 
-// export const config = {
-//   runtime: 'experimental-edge',
-// }
+export const config = {
+  runtime: 'experimental-edge',
+}
 
 const Saints = () => {
   const router = useRouter()

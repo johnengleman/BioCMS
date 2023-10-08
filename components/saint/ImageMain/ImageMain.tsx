@@ -24,7 +24,7 @@ const ImageMain = ({ images, name, limit = 1 }) => {
                 image?.directus_files_id?.description ||
                 `Image of the orthodox and catholic saint ${name}`
               }
-              src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${image?.directus_files_id.id}?key=profile`}
+              src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${image?.directus_files_id.id}?key=profile`}
             />
           )
         }
