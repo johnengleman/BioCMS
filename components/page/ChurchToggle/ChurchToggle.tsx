@@ -26,8 +26,6 @@ const ChurchToggle = () => {
         `[data-church="${church}"]`,
       )
 
-      console.log('el', el)
-
       if (el && el instanceof HTMLElement) {
         setButtonDimensions({
           offsetLeft: el.offsetLeft - 3,

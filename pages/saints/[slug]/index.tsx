@@ -12,6 +12,7 @@ import { getSearchData } from '../../../queries/getSearchData'
 import { getRelatedSaints } from '../../../queries/getRelatedSaints'
 import Page from '../../../components/page/Page/Page'
 import ImageMain from '../../../components/saint/ImageMain/ImageMain'
+import ImageGlobal from '../../../components/global/ImageGlobal/ImageGlobal'
 import Books from '../../../components/saint/Books/Books'
 import RelatedPeople from '../../../components/saint/SimilarSaints/SimilarSaints'
 import Tomb from '../../../components/saint/Tomb/Tomb'
@@ -21,6 +22,7 @@ import Summary from '../../../components/saint/Summary/Summary'
 import TableOfContentFeatures from '../../../components/saint/TableOfContentsFeatures/TableOfContentsFeatures'
 import BentoSection from '../../../components/saint/BentoSection/BentoSection'
 import SectionTitle from '../../../components/saint/SectionTitle/SectionTitle'
+import MiniImages from '../../../components/saint/MiniImages/MiniImages'
 
 // export const config = {
 //   runtime: 'experimental-edge',
@@ -55,8 +57,6 @@ const SaintBio = () => {
         slug,
       }),
   )
-
-  console.log(relatedSaints)
 
   if (!router.isFallback && !data) {
     return <ErrorPage statusCode={404} />
@@ -119,7 +119,15 @@ const SaintBio = () => {
 
           <div className={styles.content}>
             <div className={styles.leftRail}>
-              <TableOfContentFeatures />
+              <div className={styles.stickyContainer}>
+                <div className={styles.sticky}>
+                  <TableOfContentFeatures />
+                  <MiniImages
+                    images={data?.images}
+                    name={data?.name}
+                  />
+                </div>
+              </div>
             </div>
             <div className={styles.main}>
               <div>
@@ -133,7 +141,7 @@ const SaintBio = () => {
                 <BentoSection
                   data={data?.biography}
                   link={`/saints/${slug}/biography`}
-                  image={data?.images[1]}
+                  title="bio"
                 />
               </div>
               {data?.teachings[0]?.teachings && (
@@ -148,7 +156,7 @@ const SaintBio = () => {
                   <BentoSection
                     data={data?.teachings[0]?.teachings}
                     link={`/saints/${slug}/teachings`}
-                    image={data?.images[2]}
+                    title="teachings"
                   />
                 </div>
               )}
@@ -164,7 +172,7 @@ const SaintBio = () => {
                   <BentoSection
                     data={data.miracles}
                     link={`/saints/${slug}/miracles`}
-                    image={data?.images[3]}
+                    title="miracles"
                   />
                 </div>
               )}
@@ -181,6 +189,7 @@ const SaintBio = () => {
                   <BentoSection
                     data={data.legacy_influence}
                     link={`/saints/${slug}/legacy`}
+                    title="legacy"
                   />
                 </div>
               )}

@@ -6,6 +6,7 @@ import {
   faBrightness,
   faStarChristmas,
   faBookOpenReader,
+  faPersonPraying,
 } from '@fortawesome/pro-duotone-svg-icons'
 import { load } from 'cheerio'
 import styles from './styles.module.scss'
@@ -22,46 +23,73 @@ function extractH2s(htmlString: string): string[] {
 }
 
 const getIcon = (title) => {
-  if (title === 'My Life') {
+  if (title === 'bio') {
     return (
       <FontAwesomeIcon
         icon={faBrightness}
         style={{
           color: `var(--gold)`,
-          fontSize: '16px',
+          fontSize: '35px',
         }}
       />
     )
   }
-  if (title === 'My Miracles') {
+  if (title === 'teachings') {
+    return (
+      <FontAwesomeIcon
+        icon={faPersonPraying}
+        style={{
+          color: `var(--gold)`,
+          fontSize: '35px',
+        }}
+      />
+    )
+  }
+  if (title === 'legacy') {
+    return (
+      <FontAwesomeIcon
+        icon={faBookOpenReader}
+        style={{
+          color: `var(--gold)`,
+          fontSize: '35px',
+        }}
+      />
+    )
+  }
+  if (title === 'miracles') {
     return (
       <FontAwesomeIcon
         icon={faStarChristmas}
         style={{
           color: `var(--gold)`,
-          fontSize: '16px',
+          fontSize: '35px',
         }}
       />
     )
   }
-}
-
-type Image = {
-  directus_files_id: {
-    id: string
+  if (title === 'miracles') {
+    return (
+      <FontAwesomeIcon
+        icon={faStarChristmas}
+        style={{
+          color: `var(--gold)`,
+          fontSize: '35px',
+        }}
+      />
+    )
   }
 }
 
 interface BentoSectionProps {
   data?: string
   link?: string
-  image?: Image
+  title: string
 }
 
 const BentoSection: React.FC<BentoSectionProps> = ({
   data,
   link,
-  image,
+  title,
 }) => {
   if (!data) {
     return null
@@ -91,16 +119,7 @@ const BentoSection: React.FC<BentoSectionProps> = ({
                 </div>
               ))}
             </div>
-            {image && (
-              <div className={styles.image}>
-                <ImageGlobal
-                  src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${image?.directus_files_id.id}?key=profile`}
-                  fill={false}
-                  width={200}
-                  height={250}
-                />
-              </div>
-            )}
+            {getIcon(title)}
           </div>
         </div>
       )}

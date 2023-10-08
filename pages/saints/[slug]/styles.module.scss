@@ -46,7 +46,7 @@
     margin: 0 auto;
     max-width: 1450px;
     width: 90%;
-    gap: 30px;
+    gap: 45px;
 
     .leftRail {
       width: 300px;
@@ -55,6 +55,16 @@
 
       @include breakpoint(laptop) {
         display: block;
+      }
+
+      .stickyContainer {
+        position: relative;
+        height: calc(100% - 200px);
+
+        .sticky {
+          position: sticky;
+          top: 100px;
+        }
       }
     }
 
