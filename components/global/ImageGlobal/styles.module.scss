@@ -7,7 +7,7 @@
     min-width: 100%;
     object-fit: cover;
     border-radius: 5px;
-    z-index: 2;
+    z-index: 0;
   }
 
   &.whiteBorder {
@@ -16,6 +16,8 @@
 
     img {
       border-radius: 10px;
+      position: relative;
+      z-index: 1;
     }
 
     &::after {

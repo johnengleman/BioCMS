@@ -7,9 +7,9 @@ const Hero = ({ filtersCount }) => {
     <div className={styles.hero}>
       <div className={styles.contentContainer}>
         <h1>
-          Find a Saint
+          Find a Saint, find a
           <span className={styles.metaphor}>
-            {/* <Typewriter
+            <Typewriter
               options={
                 {
                   strings: [
@@ -28,7 +28,7 @@ const Hero = ({ filtersCount }) => {
                   loop: true,
                 } as any
               }
-            /> */}
+            />
           </span>
         </h1>
         <Filter filtersCount={filtersCount} />

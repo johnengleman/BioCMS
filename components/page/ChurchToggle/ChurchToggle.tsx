@@ -26,6 +26,8 @@ const ChurchToggle = () => {
         `[data-church="${church}"]`,
       )
 
+      console.log('el', el)
+
       if (el && el instanceof HTMLElement) {
         setButtonDimensions({
           offsetLeft: el.offsetLeft - 3,
@@ -84,6 +86,8 @@ const ChurchToggle = () => {
       } catch (err) {
         console.error(err)
       }
+    } else {
+      updateToggle('all')
     }
   }, [])
 
@@ -103,7 +107,7 @@ const ChurchToggle = () => {
         ></div>
         <li
           data-church="catholic"
-          className={`${styles.option} ${
+          className={`${
             selectedChurch === 'catholic'
               ? styles.active
               : ''
@@ -118,7 +122,7 @@ const ChurchToggle = () => {
         </li>
         <li
           data-church="orthodox"
-          className={`${styles.option} ${
+          className={`${
             selectedChurch === 'orthodox'
               ? styles.active
               : ''
@@ -132,7 +136,7 @@ const ChurchToggle = () => {
         </li>
         <li
           data-church="all"
-          className={`${styles.option} ${
+          className={`${
             selectedChurch === 'all' ? styles.active : ''
           }`}
           onClick={(e) => {
