@@ -1,6 +1,6 @@
 async function getSlugs() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
+    `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}/graphql`,
     {
       method: 'POST',
       headers: {

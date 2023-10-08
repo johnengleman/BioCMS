@@ -41,7 +41,7 @@
 
 // export const getTopAuthors = async (limit) => {
 //   const { saints } = await request<Response>(
-//     `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
+//     `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}/graphql`,
 //     getAuthorsWithAtLeastTwoBooks,
 //   )
 //   return saints
