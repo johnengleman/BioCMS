@@ -19,6 +19,7 @@ const ImageMain = ({ images, name, limit = 1 }) => {
               fill={false}
               width={isTablet ? 200 : 300}
               height={isTablet ? 264 : 400}
+              whiteBorder={true}
               alt={
                 image?.directus_files_id?.description ||
                 `Image of the orthodox and catholic saint ${name}`

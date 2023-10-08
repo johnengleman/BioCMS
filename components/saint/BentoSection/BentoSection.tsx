@@ -1,13 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import {
   faBrightness,
   faStarChristmas,
   faBookOpenReader,
 } from '@fortawesome/pro-duotone-svg-icons'
 import { load } from 'cheerio'
-import count from 'word-count'
 import styles from './styles.module.scss'
 
 function extractH2s(htmlString: string): string[] {
@@ -46,21 +46,27 @@ const getIcon = (title) => {
   }
 }
 
+type Image = {
+  directus_files_id: {
+    id: string
+  }
+}
+
 interface BentoSectionProps {
   data?: string
   link?: string
+  image?: Image
 }
 
 const BentoSection: React.FC<BentoSectionProps> = ({
   data,
   link,
+  image,
 }) => {
   if (!data) {
     return null
   }
 
-  const wordCount =
-    typeof data === 'string' ? count(data) : ''
   const h2s = extractH2s(data)
 
   return (
@@ -69,22 +75,32 @@ const BentoSection: React.FC<BentoSectionProps> = ({
         <div className={styles.toc}>
           <div className={styles.header}>
             Chapters
-            <span className={styles.wordCount}>
-              ({wordCount} words)
-            </span>
+            <span className={styles.wordCount}></span>
           </div>
-          <div className={styles.list}>
-            {h2s.map((h2, i) => (
-              <div
-                key={i}
-                className={styles.item}
-              >
-                <span className={styles.dash}>
-                  {i + 1}.
-                </span>
-                <span className={styles.h2}>{h2}</span>
+          <div className={styles.content}>
+            <div className={styles.list}>
+              {h2s.map((h2, i) => (
+                <div
+                  key={i}
+                  className={styles.item}
+                >
+                  <span className={styles.dash}>
+                    {i + 1}.
+                  </span>
+                  <span className={styles.h2}>{h2}</span>
+                </div>
+              ))}
+            </div>
+            {image && (
+              <div className={styles.image}>
+                <ImageGlobal
+                  src={`${process.env.NEXT_PUBLIC_DOMAIN}/assets/${image?.directus_files_id.id}?key=profile`}
+                  fill={false}
+                  width={200}
+                  height={250}
+                />
               </div>
-            ))}
+            )}
           </div>
         </div>
       )}
@@ -94,13 +110,7 @@ const BentoSection: React.FC<BentoSectionProps> = ({
         }`}
       >
         <div className={styles.header}>
-          {h2s.length ? (
-            h2s[0]
-          ) : (
-            <span className={styles.wordCount}>
-              ({wordCount} words)
-            </span>
-          )}
+          {h2s.length && h2s[0]}
         </div>
         <div className={styles.previewContainer}>
           <div

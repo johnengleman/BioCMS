@@ -22,7 +22,7 @@
       width: 90%;
       display: flex;
       margin-top: 30px;
-      gap: 20px;
+      gap: 30px;
       padding-bottom: 20px;
       border-bottom: 1px solid #ccad004d;
       flex-direction: column;
@@ -61,9 +61,9 @@
     .main {
       width: 100%;
 
-      @include breakpoint(tablet) {
-        width: calc(100% - 300px);
-      }
+      // @include breakpoint(tablet) {
+      //   width: calc(100% - 300px);
+      // }
     }
   }
 }

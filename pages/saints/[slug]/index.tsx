@@ -9,6 +9,7 @@ import { Saint } from '../../../types/types'
 import styles from './styles.module.scss'
 import { getSaint } from '../../../queries/getSaint'
 import { getSearchData } from '../../../queries/getSearchData'
+import { getRelatedSaints } from '../../../queries/getRelatedSaints'
 import Page from '../../../components/page/Page/Page'
 import ImageMain from '../../../components/saint/ImageMain/ImageMain'
 import Books from '../../../components/saint/Books/Books'
@@ -25,7 +26,7 @@ export const config = {
   runtime: 'experimental-edge',
 }
 
-const SaintBio = (props) => {
+const SaintBio = () => {
   const router = useRouter()
   const church = router.query.church || 'all'
 
@@ -45,11 +46,21 @@ const SaintBio = (props) => {
       ),
   )
 
+  const { data: relatedSaints } = useQuery(
+    ['relatedSaints', church, slug],
+    () =>
+      getRelatedSaints({
+        categories: data?.categories.join(),
+        church,
+        slug,
+      }),
+  )
+
+  console.log(relatedSaints)
+
   if (!router.isFallback && !data) {
     return <ErrorPage statusCode={404} />
   }
-
-  const { relatedSaints = null } = props
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -122,6 +133,7 @@ const SaintBio = (props) => {
                 <BentoSection
                   data={data?.biography}
                   link={`/saints/${slug}/biography`}
+                  image={data?.images[1]}
                 />
               </div>
               {data?.teachings[0]?.teachings && (
@@ -136,6 +148,7 @@ const SaintBio = (props) => {
                   <BentoSection
                     data={data?.teachings[0]?.teachings}
                     link={`/saints/${slug}/teachings`}
+                    image={data?.images[2]}
                   />
                 </div>
               )}
@@ -151,6 +164,7 @@ const SaintBio = (props) => {
                   <BentoSection
                     data={data.miracles}
                     link={`/saints/${slug}/miracles`}
+                    image={data?.images[3]}
                   />
                 </div>
               )}
@@ -201,6 +215,7 @@ export const getStaticProps = async ({ params }) => {
   await queryClient.prefetchQuery(['saints', slug], () =>
     getSaint(slug),
   )
+
   const saintData: Saint = queryClient.getQueryData([
     'saints',
     slug,
@@ -210,22 +225,19 @@ export const getStaticProps = async ({ params }) => {
     getSearchData(church),
   )
 
-  // try {
-  //   const saintsResponse = await fetchAPIQuery(
-  //     `getRelatedSaints?categories=${saintData?.categories.join()}`,
-  //   )
-  //   relatedSaints = saintsResponse || []
-  // } catch (error) {
-  //   console.error(error)
-  // }
+  await queryClient.prefetchQuery(
+    ['relatedSaints', church, slug],
+    () =>
+      getRelatedSaints({
+        categories: saintData?.categories.join(),
+        church,
+        slug,
+      }),
+  )
 
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      // relatedSaints: relatedSaints
-      //   ?.filter((saint) => saint.slug !== slug)
-      //   .sort(() => Math.random() - 0.5)
-      //   .slice(0, 4),
     },
     revalidate: 60,
   }

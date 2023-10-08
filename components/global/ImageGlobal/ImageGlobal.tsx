@@ -11,6 +11,7 @@ const ImageGlobal = ({
   fill,
   alt = '',
   priority = false,
+  whiteBorder = false,
 }: {
   src: string
   height?: number
@@ -18,12 +19,15 @@ const ImageGlobal = ({
   fill: boolean
   alt?: string
   priority?: boolean
+  whiteBorder?: boolean
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
 
   return (
     <div
-      className={styles.imageGlobal}
+      className={`${styles.imageGlobal} ${
+        whiteBorder ? styles.whiteBorder : ''
+      }`}
       style={{
         position: 'relative',
         height: fill ? '100%' : `${height}px`,

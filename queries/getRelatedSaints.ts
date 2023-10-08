@@ -1,79 +1,92 @@
-// import { request, gql } from 'graphql-request'
+import fetchHelper from './fetchHelper'
+interface Image {
+  directus_files_id: {
+    id: number
+  }
+}
 
-// interface Image {
-//   directus_files_id: {
-//     id: number
-//   }
-// }
+interface Saint {
+  id: number
+  slug: string
+  name: string
+  birth_year?: number
+  death_year?: number
+  categories: string[]
+  images: Image[]
+}
 
-// interface Saint {
-//   id: number
-//   slug: string
-//   name: string
-//   birth_year?: number
-//   death_year?: number
-//   categories: string[]
-//   images: Image[]
-// }
+function getSaintsQuery(church) {
+  // Variables declaration
+  let variablesList: string[] = []
+  if (church !== 'all') {
+    variablesList.push('$church: String!')
+  }
 
-// interface Response {
-//   saints: Saint[]
-// }
+  // Filter construction
+  let churchList: string[] = []
+  if (church !== 'all') {
+    churchList.push('venerated_in: { _icontains: $church }')
+  }
 
-// const relatedSaints = gql`
-//   query {
-//     saints {
-//       id
-//       slug
-//       name
-//       birth_year
-//       death_year
-//       categories
-//       summary
-//       images {
-//         directus_files_id {
-//           id
-//         }
-//       }
-//     }
-//   }
-// `
+  // Building the query
+  let baseQuery = `
+    query getSaints${
+      variablesList.length > 0
+        ? `(${variablesList.join(', ')})`
+        : ''
+    } {
+      saints(
+        filter: {
+          ${churchList}
+        }
+      ) {
+        id
+        slug
+        name
+        birth_year
+        death_year
+        categories
+        summary
+        images {
+          directus_files_id {
+            id
+          }
+        }
+      }
+    }
+  `
 
-// export const getRelatedSaints = async () => {
-//   const { saints } = await request<Response>(
-//     `${process.env.NEXT_PUBLIC_DOMAIN}/graphql`,
-//     relatedSaints,
-//   )
-//   return saints
-// }
+  return baseQuery
+}
 
-// export default async function handler(req, res) {
-//   const categories =
-//     req.query.categories.split(',') ?? undefined
+export const getSaints = async (church) => {
+  const query = getSaintsQuery(church)
+  const res = await fetchHelper({
+    query,
+    variables: { church },
+  })
 
-//   try {
-//     const allSaints = await getRelatedSaints()
+  return res.data.saints
+}
 
-//     const relatedSaints = allSaints.filter((saint) =>
-//       saint.categories.some((category) =>
-//         categories.includes(category),
-//       ),
-//     )
+export const getRelatedSaints = async ({
+  categories,
+  church,
+  slug,
+}) => {
+  const cats = categories.split(',') ?? undefined
+  const allSaints = await getSaints(church)
 
-//     try {
-//       JSON.stringify(relatedSaints)
-//     } catch (e) {
-//       console.error(
-//         'relatedSaints cannot be serialized:',
-//         e,
-//       )
-//       return res
-//         .status(500)
-//         .json({ error: 'Data serialization error' })
-//     }
+  const relatedSaints = allSaints.filter((saint) =>
+    saint.categories.some((category) =>
+      cats.includes(category),
+    ),
+  )
 
-//     res.status(200).json(relatedSaints || [])
-//   } catch (error) {
-//     res.status(500).json({ error: 'failed to load data' })
-//   }
-// }
+  const filteredRelatedSaints = relatedSaints
+    .filter((saint) => saint.slug !== slug)
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 4)
+
+  return filteredRelatedSaints
+}
