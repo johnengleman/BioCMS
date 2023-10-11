@@ -1,5 +1,7 @@
 @import './../../../styles/breakpoints.scss';
 
+$color: rgb(49, 45, 76);
+
 .hero {
   width: 100vw;
   min-width: 100vw;
@@ -22,7 +24,7 @@
         rgba(0, 0, 0, 0),
         rgba(0, 0, 0, 0.5)
       ),
-      url('/footer.webp');
+      url('/bg-light.webp');
     background-size: cover; /* This will cover the entire viewport */
     background-repeat: no-repeat; /* Important if the image is smaller than the footer */
     background-position: center 45%; /* This will center the image */
@@ -37,7 +39,8 @@
     position: relative;
 
     h1 {
-      color: #fff;
+      color: rgb(233, 230, 253);
+      text-shadow: -1px 0 $color, 0 1px $color, 1px 0 $color, 0 -1px $color;
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
       display: flex;

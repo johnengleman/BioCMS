@@ -1,11 +1,15 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useRouter } from 'next/router'
+import { useOnClickOutside } from 'usehooks-ts'
 import styles from './styles.module.scss';
 
 const Toggle = () => {
   const router = useRouter()
-  const sort = router?.query?.sort || 'chronological-asc'
+  const ref = useRef(null)
+  const sort = router?.query?.sort || 'date-asc'
   const [showMenu, setShowMenu] = useState(false)
+
+  useOnClickOutside(ref, () => setShowMenu(false))
 
   const handleSetShowMenu = (sort) => {
     setShowMenu(false)
@@ -24,12 +28,12 @@ const Toggle = () => {
   }
 
   return (
-    <div className={styles.sortToggle}>
+    <div className={styles.sortToggle} ref={ref}>
       <span
         className={styles.selected}
         onClick={() => setShowMenu(!showMenu)}
       >
-        sort by <span className="direction">{sort}</span>
+        sorted by <span className="direction">{sort}</span>
       </span>
       <div
         className={`${styles.dropdown} ${showMenu ? styles.visible : ''}`}
@@ -51,17 +55,17 @@ const Toggle = () => {
           </li> */}
           <li
             onClick={() =>
-              handleSetShowMenu('Chronological - Asc')
+              handleSetShowMenu('Date - Asc')
             }
           >
-            Chronological - Asc
+            Date - Asc
           </li>
           <li
             onClick={() =>
-              handleSetShowMenu('Chronological - Desc')
+              handleSetShowMenu('Date - Desc')
             }
           >
-            Chronological - Desc
+            Date - Desc
           </li>
         </ul>
       </div>

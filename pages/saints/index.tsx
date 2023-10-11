@@ -30,7 +30,7 @@ const Saints = () => {
   const saintPreset = (router.query.preset ||
     'none') as string
   const sort = (router.query.sort ||
-    'chronological-asc') as string
+    'date-asc') as string
 
   const { data, isError, isLoading } = useQuery(
     ['saints', church, category, saintPreset, sort],
@@ -109,7 +109,7 @@ const Saints = () => {
         <meta
           key="description"
           name="description"
-          content="Explore the lives and legacies of Catholic saints. From teachings to miracles, delve into their spiritual journeys."
+          content="Explore the lives and legacies of Roman Catholic and Eastern Orthodox saints. From teachings to miracles, delve into their spiritual journeys."
         />
         <meta
           name="keywords"
@@ -161,7 +161,7 @@ export async function getServerSideProps(context) {
   const cookie = context.req.headers.cookie
   const category = context.query.filter || 'none'
   const saintPreset = context.query.preset || 'none'
-  const sort = context.query.sort || 'chronological-asc'
+  const sort = context.query.sort || 'date-asc'
   let church = 'all'
 
   if (cookie) {

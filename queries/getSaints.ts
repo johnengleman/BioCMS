@@ -89,10 +89,10 @@ const parseSort = (sort) => {
   if (sort === 'newest-desc') {
     return '-date_created'
   }
-  if (sort === 'chronological-asc') {
+  if (sort === 'date-asc') {
     return 'death_year'
   }
-  if (sort === 'chronological-desc') {
+  if (sort === 'date-desc') {
     return '-death_year'
   }
 }
@@ -101,7 +101,7 @@ export const getSaints = async ({
   church = 'all',
   category = 'none',
   saintPreset = 'none',
-  sort = 'chronological-asc',
+  sort = 'date-asc',
 }) => {
   const query = getSaintsQuery(
     church,

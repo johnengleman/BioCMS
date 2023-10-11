@@ -87,7 +87,7 @@ const SaintBio = () => {
         <meta
           key="description"
           name="description"
-          content={`Discover ${data?.name}'s spiritual journey in the Eastern Orthodox tradition. Explore their sayings, images, and related books.`}
+          content={`Discover ${data?.name}'s spiritual journey. Explore their sayings, images, and related books.`}
         />
         <script
           type="application/ld+json"
