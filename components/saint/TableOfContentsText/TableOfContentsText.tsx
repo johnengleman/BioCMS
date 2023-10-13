@@ -55,7 +55,7 @@ const TableOfContentsText: React.FC<{
             key={i}
             className={
               activeHeading === `heading-${i}`
-                ? 'active'
+                ? styles.active
                 : ''
             }
           >

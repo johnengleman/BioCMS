@@ -1,6 +1,8 @@
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { useOnClickOutside } from 'usehooks-ts'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretUp } from '@fortawesome/pro-duotone-svg-icons'
 import styles from './styles.module.scss';
 
 const Toggle = () => {
@@ -33,7 +35,7 @@ const Toggle = () => {
         className={styles.selected}
         onClick={() => setShowMenu(!showMenu)}
       >
-        sorted by <span className="direction">{sort}</span>
+        sorted by <span className="direction">{sort}</span> <FontAwesomeIcon icon={faCaretUp} rotation={showMenu ? 180 : 90} size='lg'/>
       </span>
       <div
         className={`${styles.dropdown} ${showMenu ? styles.visible : ''}`}

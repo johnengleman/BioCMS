@@ -18,6 +18,9 @@ import ErrorPage from 'next/error'
 import NameTag from '../../../components/saint/NameTag/NameTag'
 import TableOfContents from '../../../components/saint/TableOfContentsText/TableOfContentsText'
 import formatDate from '../../../utils/dates'
+import ReadMoreLinks from '../../../components/saint/ReadMoreLinks/ReadMoreLinks'
+import useBreakpoints from '../../../hooks/useBreakPoints'
+import NextSection from '../../../components/saint/NextSection/NextSection'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -26,6 +29,7 @@ export const config = {
 const SaintBio = (props) => {
   const router = useRouter()
   const refElement = useRef(null)
+  const { isLaptopMinus } = useBreakpoints()
   const church = router.query.church || 'all'
 
   const slug = Array.isArray(router?.query?.slug)
@@ -101,6 +105,7 @@ const SaintBio = (props) => {
                 tags={data?.categories}
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
+                feastDay={data?.feast_day}
               />
               <div className={styles.updated}>
                 Updated on {formatDate(data?.date_updated)}
@@ -110,6 +115,17 @@ const SaintBio = (props) => {
                 dangerouslySetInnerHTML={{
                   __html: data?.biography || '',
                 }}
+              />
+              <NextSection data={data} />
+              {data?.books && isLaptopMinus && (
+                <Books
+                  books={data?.books}
+                  inRightRail={false}
+                />
+              )}
+
+              <ReadMoreLinks
+                links={data?.read_more_links}
               />
             </div>
             <div className={styles.rightRail}>

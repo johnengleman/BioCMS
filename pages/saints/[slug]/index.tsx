@@ -12,7 +12,6 @@ import { getSearchData } from '../../../queries/getSearchData'
 import { getRelatedSaints } from '../../../queries/getRelatedSaints'
 import Page from '../../../components/page/Page/Page'
 import ImageMain from '../../../components/saint/ImageMain/ImageMain'
-import ImageGlobal from '../../../components/global/ImageGlobal/ImageGlobal'
 import Books from '../../../components/saint/Books/Books'
 import RelatedPeople from '../../../components/saint/SimilarSaints/SimilarSaints'
 import Tomb from '../../../components/saint/Tomb/Tomb'
@@ -111,6 +110,7 @@ const SaintBio = () => {
                   tags={data?.categories}
                   birthYear={data?.birth_year}
                   deathYear={data?.death_year}
+                  feastDay={data?.feast_day}
                 />
                 <Summary summary={data?.summary} />
               </div>

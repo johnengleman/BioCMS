@@ -1,6 +1,6 @@
 @import './../../../styles/breakpoints.scss';
 
-$color: rgb(49, 45, 76);
+$color: rgb(127, 123, 152);
 
 .hero {
   width: 100vw;
@@ -22,7 +22,7 @@ $color: rgb(49, 45, 76);
     background-image: linear-gradient(
         to right,
         rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.5)
+        rgba(0, 0, 0, 0.3)
       ),
       url('/bg-light.webp');
     background-size: cover; /* This will cover the entire viewport */
@@ -40,7 +40,8 @@ $color: rgb(49, 45, 76);
 
     h1 {
       color: rgb(233, 230, 253);
-      text-shadow: -1px 0 $color, 0 1px $color, 1px 0 $color, 0 -1px $color;
+      text-shadow: -1px 0 $color, 0 1px $color, 1px 0 $color,
+        0 -1px $color;
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
       display: flex;

@@ -1,7 +1,3 @@
-// import styled from 'styled-components'
-// import { colors } from '../../../styles/colors'
-// import { device } from '../../../styles/devices'
-
 .tableOfContents {
   position: relative;
   height: calc(100% - 700px);
@@ -23,14 +19,14 @@
       &:hover {
         a {
           color: #222;
-          //  border-bottom: 1px solid ${colors.gold};
+          border-bottom: 1px solid var(--gold);
         }
       }
 
       &.active {
         a {
           color: #222;
-          //   border-bottom: 1px solid ${colors.gold};
+          border-bottom: 1px solid var(--gold);
         }
       }
 

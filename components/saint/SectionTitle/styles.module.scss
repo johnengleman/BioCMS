@@ -1,3 +1,5 @@
+@import './../../../styles/breakpoints.scss';
+
 .sectionTitle {
   margin-bottom: 10px;
   display: flex;
@@ -17,6 +19,6 @@
 
   &.inRightRail .title,
   &.inRightRail svg {
-    font-size: 20px;
+    font-size: 18px;
   }
 }

@@ -18,6 +18,7 @@ import NameTag from '../../../components/saint/NameTag/NameTag'
 import TableOfContents from '../../../components/saint/TableOfContentsText/TableOfContentsText'
 import formatDate from '../../../utils/dates'
 import { Saint } from '../../../types/types'
+import NextSection from '../../../components/saint/NextSection/NextSection'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -101,6 +102,7 @@ const SaintBio = (props) => {
                 tags={data?.categories}
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
+                feastDay={data?.feast_day}
               />
               <div className={styles.updated}>
                 Updated on {formatDate(data?.date_updated)}
@@ -111,7 +113,9 @@ const SaintBio = (props) => {
                   __html: data?.miracles || '',
                 }}
               />
+              <NextSection data={data} />
             </div>
+
             <div className={styles.rightRail}>
               {data?.books && (
                 <Books

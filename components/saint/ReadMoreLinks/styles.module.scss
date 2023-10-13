@@ -1,0 +1,25 @@
+.readMoreLinks {
+  margin-top: 50px;
+
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--violet);
+  }
+
+  .links {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border-radius: 5px;
+    background-color: aliceblue;
+    padding: 15px 30px;
+  }
+
+  .link {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    color: var(--violet);
+    font-weight: 600;
+    line-height: 0.9;
+  }
+}

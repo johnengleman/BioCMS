@@ -1,10 +1,6 @@
-import { useState } from 'react'
-import ReadMore from '../ReadMore/ReadMore'
 import styles from './styles.module.scss'
 
 const TextSection = ({ title, text }) => {
-  const [readMore, setReadMore] = useState(false)
-
   if (!text) {
     return null
   }
@@ -18,12 +14,6 @@ const TextSection = ({ title, text }) => {
           __html: text,
         }}
       ></div>
-      <div className="footer">
-        <ReadMore
-          onClick={() => setReadMore(!readMore)}
-          readMore={readMore}
-        />
-      </div>
     </div>
   )
 }

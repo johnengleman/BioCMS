@@ -16,6 +16,8 @@ const query = gql`
       birth_location
       death_location
       date_updated
+      feast_day
+      read_more_links
       categories
       images {
         directus_files_id {
