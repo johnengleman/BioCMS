@@ -10,6 +10,7 @@ import styles from './styles.module.scss'
 import { getSaint } from '../../../queries/getSaint'
 import { getSearchData } from '../../../queries/getSearchData'
 import { getRelatedSaints } from '../../../queries/getRelatedSaints'
+import { getNav } from '../../../queries/getNav'
 import Page from '../../../components/page/Page/Page'
 import ImageMain from '../../../components/saint/ImageMain/ImageMain'
 import Books from '../../../components/saint/Books/Books'
@@ -19,9 +20,8 @@ import ErrorPage from 'next/error'
 import NameTag from '../../../components/saint/NameTag/NameTag'
 import Summary from '../../../components/saint/Summary/Summary'
 import TableOfContentFeatures from '../../../components/saint/TableOfContentsFeatures/TableOfContentsFeatures'
-import BentoSection from '../../../components/saint/BentoSection/BentoSection'
+import BentoSection from '../../../components/global/BentoSection/BentoSection'
 import SectionTitle from '../../../components/saint/SectionTitle/SectionTitle'
-import MiniImages from '../../../components/saint/MiniImages/MiniImages'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -29,7 +29,9 @@ export const config = {
 
 const SaintBio = () => {
   const router = useRouter()
-  const church = router.query.church || 'all'
+  const church = Array.isArray(router.query.church)
+    ? router.query.church[0]
+    : router.query.church || 'all'
 
   const slug = Array.isArray(router?.query?.slug)
     ? router?.query?.slug[0]
@@ -45,6 +47,10 @@ const SaintBio = () => {
       getSearchData(
         Array.isArray(church) ? church[0] : church,
       ),
+  )
+
+  const { data: navData } = useQuery(['nav', church], () =>
+    getNav({ church }),
   )
 
   const { data: relatedSaints } = useQuery(
@@ -95,7 +101,10 @@ const SaintBio = () => {
           }}
         />
       </Head>
-      <Page searchData={searchData}>
+      <Page
+        searchData={searchData}
+        navData={navData}
+      >
         <div className={styles.SaintSingle}>
           <div className={styles.hero}>
             <div className={styles.heroContent}>
@@ -111,6 +120,7 @@ const SaintBio = () => {
                   birthYear={data?.birth_year}
                   deathYear={data?.death_year}
                   feastDay={data?.feast_day}
+                  type="bio"
                 />
                 <Summary summary={data?.summary} />
               </div>
@@ -122,10 +132,6 @@ const SaintBio = () => {
               <div className={styles.stickyContainer}>
                 <div className={styles.sticky}>
                   <TableOfContentFeatures />
-                  <MiniImages
-                    images={data?.images}
-                    name={data?.name}
-                  />
                 </div>
               </div>
             </div>
@@ -141,7 +147,6 @@ const SaintBio = () => {
                 <BentoSection
                   data={data?.biography}
                   link={`/saints/${slug}/biography`}
-                  title="bio"
                 />
               </div>
               {data?.teachings[0]?.teachings && (
@@ -156,7 +161,6 @@ const SaintBio = () => {
                   <BentoSection
                     data={data?.teachings[0]?.teachings}
                     link={`/saints/${slug}/teachings`}
-                    title="teachings"
                   />
                 </div>
               )}
@@ -172,7 +176,6 @@ const SaintBio = () => {
                   <BentoSection
                     data={data.miracles}
                     link={`/saints/${slug}/miracles`}
-                    title="miracles"
                   />
                 </div>
               )}
@@ -189,7 +192,6 @@ const SaintBio = () => {
                   <BentoSection
                     data={data.legacy_influence}
                     link={`/saints/${slug}/legacy`}
-                    title="legacy"
                   />
                 </div>
               )}
@@ -214,17 +216,16 @@ const SaintBio = () => {
 }
 
 export const getStaticProps = async ({ params }) => {
+  const queryClient = new QueryClient()
   const church = params?.church || 'all'
 
   const slug = Array.isArray(params?.slug)
     ? params?.slug[0]
     : params?.slug
 
-  const queryClient = new QueryClient()
   await queryClient.prefetchQuery(['saints', slug], () =>
     getSaint(slug),
   )
-
   const saintData: Saint = queryClient.getQueryData([
     'saints',
     slug,
@@ -232,6 +233,10 @@ export const getStaticProps = async ({ params }) => {
 
   await queryClient.prefetchQuery(['search', church], () =>
     getSearchData(church),
+  )
+
+  await queryClient.prefetchQuery(['nav', church], () =>
+    getNav({ church }),
   )
 
   await queryClient.prefetchQuery(

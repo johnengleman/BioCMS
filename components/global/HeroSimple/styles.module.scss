@@ -1,0 +1,44 @@
+.hero {
+  width: 100vw;
+  min-width: 100vw;
+  border: 1px solid var(--gold);
+  position: relative;
+  background-image: linear-gradient(
+      to left,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.5)
+    ),
+    url('/catholic_church_mountain.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center 55%;
+  padding: 50px 0;
+
+  .heroContent {
+    width: 90%;
+    max-width: 1450px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 30px;
+    margin: 0 auto;
+  }
+
+  .titleBox {
+    background-color: var(--violet);
+    padding: 10px 40px;
+    border-radius: 5px;
+    width: min-content;
+  }
+
+  h1 {
+    font-size: 40px;
+    background-image: linear-gradient(
+      90deg,
+      var(--gold),
+      var(--gold)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}

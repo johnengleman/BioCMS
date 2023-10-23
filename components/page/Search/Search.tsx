@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/pro-duotone-svg-icons'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import Fuse from 'fuse.js'
-import { Saint } from '../../home/summary/interfaces'
+import { Saint } from '../../saint/SaintSummary/interfaces'
 import { useOnClickOutside } from 'usehooks-ts'
 import styles from './styles.module.scss'
 

@@ -1,0 +1,27 @@
+.pageButton {
+  border: none;
+  background: none;
+  width: 100%;
+  min-width: 175px;
+
+  &.active {
+    background-color: #3187e3;
+    border-radius: 5px;
+    color: #fff;
+  }
+
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px;
+  color: #333;
+
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+
+  .icon {
+    border-radius: 5px;
+    padding: 3px 8px;
+  }
+}

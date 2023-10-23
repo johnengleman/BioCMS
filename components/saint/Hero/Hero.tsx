@@ -1,4 +1,4 @@
-import Filter from './../Filter/Filter'
+import Filter from '../Filter/Filter'
 import { Typewriter } from 'react-simple-typewriter'
 import styles from './styles.module.scss'
 

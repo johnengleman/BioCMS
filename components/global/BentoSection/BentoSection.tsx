@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import {
   faBrightness,
   faStarChristmas,
@@ -29,7 +28,7 @@ const getIcon = (title) => {
         icon={faBrightness}
         style={{
           color: `var(--gold)`,
-          fontSize: '35px',
+          fontSize: '25px',
         }}
       />
     )
@@ -40,7 +39,7 @@ const getIcon = (title) => {
         icon={faPersonPraying}
         style={{
           color: `var(--gold)`,
-          fontSize: '35px',
+          fontSize: '25px',
         }}
       />
     )
@@ -51,7 +50,7 @@ const getIcon = (title) => {
         icon={faBookOpenReader}
         style={{
           color: `var(--gold)`,
-          fontSize: '35px',
+          fontSize: '25px',
         }}
       />
     )
@@ -62,7 +61,7 @@ const getIcon = (title) => {
         icon={faStarChristmas}
         style={{
           color: `var(--gold)`,
-          fontSize: '35px',
+          fontSize: '25px',
         }}
       />
     )
@@ -83,13 +82,11 @@ const getIcon = (title) => {
 interface BentoSectionProps {
   data?: string
   link?: string
-  title: string
 }
 
 const BentoSection: React.FC<BentoSectionProps> = ({
   data,
   link,
-  title,
 }) => {
   if (!data) {
     return null
@@ -99,38 +96,20 @@ const BentoSection: React.FC<BentoSectionProps> = ({
 
   return (
     <div className={styles.bentoSection}>
-      {!!h2s.length && (
-        <div className={styles.toc}>
-          <div className={styles.header}>
-            Chapters
-            <span className={styles.wordCount}></span>
-          </div>
-          <div className={styles.content}>
-            <div className={styles.list}>
-              {h2s.map((h2, i) => (
-                <div
-                  key={i}
-                  className={styles.item}
-                >
-                  <span className={styles.dash}>
-                    {i + 1}.
-                  </span>
-                  <span className={styles.h2}>{h2}</span>
-                </div>
-              ))}
-            </div>
-            {getIcon(title)}
-          </div>
+      <div className={styles.header}>
+        <div className={styles.chapters}>
+          {h2s.map((h2, i) => (
+            <span
+              key={i}
+              className={styles.chapter}
+            >
+              {h2}
+            </span>
+          ))}
+          d
         </div>
-      )}
-      <div
-        className={`${styles.text} ${
-          !h2s.length ? styles.full : ''
-        }`}
-      >
-        <div className={styles.header}>
-          {h2s.length && h2s[0]}
-        </div>
+      </div>
+      <div className={styles.content}>
         <div className={styles.previewContainer}>
           <div
             className={styles.preview}
@@ -139,21 +118,20 @@ const BentoSection: React.FC<BentoSectionProps> = ({
             }}
           ></div>
         </div>
-
-        <div className={styles.footer}>
-          <Link href={link || ''}>
-            <button>
-              <FontAwesomeIcon
-                icon={faBookOpenReader}
-                style={{
-                  color: `var(--violet)`,
-                  fontSize: '14px',
-                }}
-              />
-              Continue Reading
-            </button>
-          </Link>
-        </div>
+      </div>
+      <div className={styles.footer}>
+        <Link href={link || ''}>
+          <button>
+            <FontAwesomeIcon
+              icon={faBookOpenReader}
+              style={{
+                color: `var(--violet)`,
+                fontSize: '14px',
+              }}
+            />
+            Continue Reading
+          </button>
+        </Link>
       </div>
     </div>
   )

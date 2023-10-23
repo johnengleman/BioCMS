@@ -9,6 +9,7 @@ import {
 import styles from './styles.module.scss'
 import { Saint } from '../../../types/types'
 import { getSaint } from '../../../queries/getSaint'
+import { getNav } from '../../../queries/getNav'
 import Page from '../../../components/page/Page/Page'
 import ImageMain from '../../../components/saint/ImageMain/ImageMain'
 import Books from '../../../components/saint/Books/Books'
@@ -20,7 +21,7 @@ import TableOfContents from '../../../components/saint/TableOfContentsText/Table
 import formatDate from '../../../utils/dates'
 import ReadMoreLinks from '../../../components/saint/ReadMoreLinks/ReadMoreLinks'
 import useBreakpoints from '../../../hooks/useBreakPoints'
-import NextSection from '../../../components/saint/NextSection/NextSection'
+import NextPage from '../../../components/saint/NextPage/NextPage'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -30,7 +31,9 @@ const SaintBio = (props) => {
   const router = useRouter()
   const refElement = useRef(null)
   const { isLaptopMinus } = useBreakpoints()
-  const church = router.query.church || 'all'
+  const church = Array.isArray(router.query.church)
+    ? router.query.church[0]
+    : router.query.church || 'all'
 
   const slug = Array.isArray(router?.query?.slug)
     ? router?.query?.slug[0]
@@ -46,6 +49,10 @@ const SaintBio = (props) => {
       getSearchData(
         Array.isArray(church) ? church[0] : church,
       ),
+  )
+
+  const { data: navData } = useQuery(['nav', church], () =>
+    getNav({ church }),
   )
 
   if (!router.isFallback && !data) {
@@ -85,7 +92,10 @@ const SaintBio = (props) => {
           }}
         />
       </Head>
-      <Page searchData={searchData}>
+      <Page
+        searchData={searchData}
+        navData={navData}
+      >
         <div className={styles.SaintBio}>
           <div className={styles.content}>
             <div className={styles.leftRail}>
@@ -106,6 +116,7 @@ const SaintBio = (props) => {
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
                 feastDay={data?.feast_day}
+                type="bio"
               />
               <div className={styles.updated}>
                 Updated on {formatDate(data?.date_updated)}
@@ -116,14 +127,13 @@ const SaintBio = (props) => {
                   __html: data?.biography || '',
                 }}
               />
-              <NextSection data={data} />
               {data?.books && isLaptopMinus && (
                 <Books
                   books={data?.books}
                   inRightRail={false}
                 />
               )}
-
+              <NextPage data={data} />
               <ReadMoreLinks
                 links={data?.read_more_links}
               />
@@ -162,6 +172,10 @@ export const getStaticProps = async ({ params }) => {
 
   await queryClient.prefetchQuery(['search', church], () =>
     getSearchData(church),
+  )
+
+  await queryClient.prefetchQuery(['nav', church], () =>
+    getNav({ church }),
   )
 
   // try {

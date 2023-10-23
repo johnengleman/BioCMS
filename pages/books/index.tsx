@@ -6,6 +6,7 @@ import {
 } from '@tanstack/react-query'
 import { useState } from 'react'
 import { Book, getBooks } from '../../queries/getBooks'
+import { getNav } from '../../queries/getNav'
 import BookSummary from '../../components/books/BookSummary/BookSummary'
 import Page from '../../components/page/Page/Page'
 import RecentlyUpdated from '../../components/books/recentlyUpdated/RecentlyUpdated'
@@ -95,9 +96,8 @@ const Home = (props) => {
 }
 
 export async function getStaticProps() {
-  let mostRecentlyCreatedBooks, topAuthors
-
   const queryClient = new QueryClient()
+
   await queryClient.prefetchQuery(['books'], getBooks)
 
   // try {
@@ -119,8 +119,6 @@ export async function getStaticProps() {
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      // mostRecentlyCreatedBooks,
-      // topAuthors,
     },
     revalidate: 60,
   }

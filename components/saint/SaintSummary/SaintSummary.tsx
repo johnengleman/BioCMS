@@ -10,7 +10,7 @@ import {
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import styles from './styles.module.scss'
 
-export default function SaintSummary(props) {
+const SaintSummary = (props) => {
   const {
     name,
     birth_year,
@@ -37,8 +37,8 @@ export default function SaintSummary(props) {
       style={{ viewTransitionName: transitionName }}
     >
       <div className={styles.death}>
+        {birth_year}-{death_year}
         <FontAwesomeIcon icon={faCross} />
-        {death_year}
       </div>
       <div className={styles.image}>
         <ImageGlobal
@@ -102,3 +102,5 @@ export default function SaintSummary(props) {
     </Link>
   )
 }
+
+export default SaintSummary

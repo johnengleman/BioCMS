@@ -1,6 +1,6 @@
 @import './../../../styles/breakpoints.scss';
 
-$color: rgb(127, 123, 152);
+$color: #ccad004e;
 
 .hero {
   width: 100vw;
@@ -39,9 +39,9 @@ $color: rgb(127, 123, 152);
     position: relative;
 
     h1 {
-      color: rgb(233, 230, 253);
-      text-shadow: -1px 0 $color, 0 1px $color, 1px 0 $color,
-        0 -1px $color;
+      color: #521613;
+      text-shadow: -2px 0 $color, 0 2px $color, 2px 0 $color,
+        0 -2px $color;
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
       display: flex;

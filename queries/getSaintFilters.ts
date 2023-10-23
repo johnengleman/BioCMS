@@ -1,5 +1,5 @@
 import fetchHelper from './fetchHelper'
-import { properties } from '../properties'
+import { properties } from '../components/saint/Filter/properties'
 
 const getFilterList = (filter) =>
   `{ categories: { _icontains: "${filter}" } }`
@@ -71,7 +71,7 @@ const getNumberOfSaints = async ({
   return res.data
 }
 
-export const getFilters = async (
+export const getSaintFilters = async (
   church: string = 'all',
 ) => {
   const filters = {

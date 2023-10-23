@@ -10,14 +10,15 @@ import styles from './styles.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
 import Head from 'next/head'
+import { getNav } from '../../queries/getNav'
 import { getSaints } from '../../queries/getSaints'
 import { getSearchData } from '../../queries/getSearchData'
-import { getFilters } from '../../queries/getFilters'
-import SaintSummary from '../../components/home/summary/SaintSummary'
+import { getSaintFilters } from '../../queries/getSaintFilters'
+import SaintSummary from '../../components/saint/SaintSummary/SaintSummary'
 import Page from '../../components/page/Page/Page'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
-import Hero from '../../components/home/Hero/Hero'
+import Hero from '../../components/saint/Hero/Hero'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -25,12 +26,16 @@ export const config = {
 
 const Saints = () => {
   const router = useRouter()
-  const church = (router.query.church || 'all') as string
-  const category = (router.query.filter || 'none') as string
-  const saintPreset = (router.query.preset ||
-    'none') as string
-  const sort = (router.query.sort ||
-    'date-asc') as string
+  const church = Array.isArray(router.query.church)
+    ? router.query.church[0]
+    : router.query.church || 'all'
+  const category = Array.isArray(router.query.filter)
+    ? router.query.filter[0]
+    : router.query.filter || 'none'
+  const saintPreset = Array.isArray(router.query.preset)
+    ? router.query.preset[0]
+    : router.query.preset || 'none'
+  const sort = (router.query.sort || 'date-asc') as string
 
   const { data, isError, isLoading } = useQuery(
     ['saints', church, category, saintPreset, sort],
@@ -40,12 +45,16 @@ const Saints = () => {
 
   const { data: filtersCount } = useQuery(
     ['filters', church],
-    () => getFilters(church),
+    () => getSaintFilters(church),
   )
 
   const { data: searchData } = useQuery(
     ['search', church],
     () => getSearchData(church),
+  )
+
+  const { data: navData } = useQuery(['nav', church], () =>
+    getNav({ church }),
   )
 
   const {
@@ -116,7 +125,10 @@ const Saints = () => {
           content="Roman Catholic, Eastern Orthodox saints, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
         />
       </Head>
-      <Page searchData={searchData}>
+      <Page
+        searchData={searchData}
+        navData={navData}
+      >
         <Hero filtersCount={filtersCount} />
         {isLoading && (
           <p className="error">Fetching Saints</p>
@@ -197,7 +209,10 @@ export async function getServerSideProps(context) {
     getSearchData(church),
   )
   await queryClient.prefetchQuery(['filters', church], () =>
-    getFilters(church),
+    getSaintFilters(church),
+  )
+  await queryClient.prefetchQuery(['nav', church], () =>
+    getNav({ church }),
   )
 
   return {

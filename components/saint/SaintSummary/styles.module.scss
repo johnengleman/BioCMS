@@ -3,10 +3,9 @@
 .saintSummary {
   display: inline-block;
   height: fit-content;
-  border: 1px solid lavender;
   border-radius: 20px;
   position: relative;
-  box-shadow: -6px 6px 16px #e6e6e6, 6px -6px 16px #ffffff;
+  // box-shadow: -6px 6px 16px #e6e6e6, 6px -6px 16px #ffffff;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
@@ -43,13 +42,14 @@
     width: 100%;
     position: absolute;
     height: 375px;
+    overflow: hidden;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
 
     img {
       transition: transform 0.5s ease;
       object-fit: cover;
       object-position: 50% 10%;
-      border-top-right-radius: 20px;
-      border-top-left-radius: 20px;
     }
   }
 
@@ -61,6 +61,7 @@
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     margin-top: 300px;
+    overflow: hidden;
 
     background: linear-gradient(
       180deg,

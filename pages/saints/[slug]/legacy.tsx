@@ -14,11 +14,12 @@ import Books from '../../../components/saint/Books/Books'
 import RelatedPeople from '../../../components/saint/SimilarSaints/SimilarSaints'
 import ErrorPage from 'next/error'
 import { getSearchData } from '../../../queries/getSearchData'
+import { getNav } from '../../../queries/getNav'
 import NameTag from '../../../components/saint/NameTag/NameTag'
 import TableOfContents from '../../../components/saint/TableOfContentsText/TableOfContentsText'
 import { Saint } from '../../../types/types'
 import formatDate from '../../../utils/dates'
-import NextSection from '../../../components/saint/NextSection/NextSection'
+import NextSection from '../../../components/saint/NextPage/NextPage'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -27,7 +28,9 @@ export const config = {
 const SaintBio = (props) => {
   const router = useRouter()
   const refElement = useRef(null)
-  const church = router.query.church || 'all'
+  const church = Array.isArray(router.query.church)
+    ? router.query.church[0]
+    : router.query.church || 'all'
 
   const slug = Array.isArray(router?.query?.slug)
     ? router?.query?.slug[0]
@@ -43,6 +46,10 @@ const SaintBio = (props) => {
       getSearchData(
         Array.isArray(church) ? church[0] : church,
       ),
+  )
+
+  const { data: navData } = useQuery(['nav', church], () =>
+    getNav({ church }),
   )
 
   if (!router.isFallback && !data) {
@@ -82,7 +89,10 @@ const SaintBio = (props) => {
           }}
         />
       </Head>
-      <Page searchData={searchData}>
+      <Page
+        searchData={searchData}
+        navData={navData}
+      >
         <div className={styles.SaintBio}>
           <div className={styles.content}>
             <div className={styles.leftRail}>
@@ -103,6 +113,7 @@ const SaintBio = (props) => {
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
                 feastDay={data?.feast_day}
+                type="legacy"
               />
               <div className={styles.updated}>
                 Updated on {formatDate(data?.date_updated)}
@@ -150,6 +161,10 @@ export const getStaticProps = async ({ params }) => {
 
   await queryClient.prefetchQuery(['search', church], () =>
     getSearchData(church),
+  )
+
+  await queryClient.prefetchQuery(['nav', church], () =>
+    getNav({ church }),
   )
 
   // try {

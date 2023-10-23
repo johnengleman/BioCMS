@@ -1,9 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faCross,
-  faDove,
-  faCalendarDays,
-} from '@fortawesome/pro-duotone-svg-icons'
+import { faCross } from '@fortawesome/pro-duotone-svg-icons'
 import styles from './styles.module.scss'
 
 const NameTag = ({
@@ -12,6 +8,7 @@ const NameTag = ({
   birthYear,
   deathYear,
   feastDay,
+  type,
 }) => {
   const monthNames = [
     'Jan',
@@ -28,6 +25,13 @@ const NameTag = ({
     'Dec',
   ]
 
+  const header = {
+    bio: 'Who was ',
+    teachings: 'What were the teachings of ',
+    miracles: 'What were the miracles of',
+    legacy: 'What was the legacy of',
+  }
+
   const date = new Date(feastDay)
   const month = date.getMonth()
   const day = date.getDate()
@@ -35,7 +39,9 @@ const NameTag = ({
   return (
     <div className={styles.nameTag}>
       <div>
-        <h1 className={styles.name}>Who was {name}?</h1>
+        <h1 className={styles.name}>
+          {header[type]} {name}?
+        </h1>
         <div className={styles.info}>
           <FontAwesomeIcon icon={faCross} />
           <span className={styles.date}>
