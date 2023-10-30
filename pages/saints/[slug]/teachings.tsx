@@ -20,6 +20,7 @@ import TableOfContents from '../../../components/saint/TableOfContentsText/Table
 import formatDate from '../../../utils/dates'
 import { Saint } from '../../../types/types'
 import NextSection from '../../../components/saint/NextPage/NextPage'
+import About from '../../../components/global/About/About'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -126,6 +127,7 @@ const SaintBio = (props) => {
                 }}
               />
               <NextSection data={data} />
+              <About showImage={false} />
             </div>
             <div className={styles.rightRail}>
               {data?.books && (

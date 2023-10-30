@@ -1,64 +1,85 @@
 import Link from 'next/link'
-import useBreakpoints from '../../../hooks/useBreakPoints'
+import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import styles from './styles.module.scss'
 
-export default function BookSummary(props) {
+export default function BookSummary({
+  data,
+  showDescription,
+}) {
   const {
-    id,
     store_link,
     title,
     pages,
-    author,
     date_created,
-    description_part_1,
-    description_part_2,
+    description,
     amazon_book_cover,
     genre,
-    topics,
-  } = props
+    saint,
+  } = data
 
-  const { isTablet } = useBreakpoints()
+  const date = new Date(date_created)
+  const formattedDate = `${date.toLocaleString('default', {
+    month: 'long',
+  })} ${date.getDate()}, ${date.getFullYear()}`
 
   return (
     <div className={styles.bookSummary}>
-      <div className={styles.content}>
-        <div className={styles.dots}>
-          <div className={styles.dot}></div>
-          <div className={styles.dot}></div>
-          <div className={styles.dot}></div>
+      <div className={styles.bookCover}>
+        <div
+          className={styles.image}
+          dangerouslySetInnerHTML={{
+            __html: amazon_book_cover,
+          }}
+        ></div>
+      </div>
+      <div className={styles.bookInfo}>
+        <div>
+          <div className={styles.titleContainer}>
+            <div className={styles.genre}>
+              {genre
+                .replace(/and/g, '&')
+                .replace(/_/g, ' ')}
+            </div>
+            <h2 className={styles.title}>{title}</h2>
+          </div>
+
+          {showDescription && (
+            <div className={styles.authorContainer}>
+              <div className={styles.profile}>
+                <ImageGlobal
+                  src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${saint.images[0]?.directus_files_id.id}?key=search`}
+                  fill={false}
+                  width={35}
+                  height={35}
+                />
+              </div>
+              <h3 className={styles.author}>
+                {saint?.name}
+              </h3>
+            </div>
+          )}
+          {showDescription && (
+            <div className={styles.descriptionContainer}>
+              <p className={styles.description}>
+                {description}
+              </p>
+            </div>
+          )}
         </div>
-        <div className="col col-1">
-          <div
-            className="image"
-            dangerouslySetInnerHTML={{
-              __html: amazon_book_cover,
-            }}
-          ></div>
+        <div>
+          {showDescription && (
+            <p className={styles.updated}>
+              Pages: {pages || '?'}
+            </p>
+          )}
+          <p className={styles.updated}>
+            Updated: {formattedDate}
+          </p>
           <Link href={store_link || ''}>
-            <button className="book-link">
-              Check Current Price
+            <button className={styles.bookLink}>
+              Read More
             </button>
           </Link>
-        </div>
-
-        <div className="info">
-          <h2 className="title">{title}</h2>
-          <h3 className="author">by {author}</h3>
-          {/* <StarRating rating={rating} /> */}
-          <div
-            className="description"
-            dangerouslySetInnerHTML={{
-              __html: description_part_1,
-            }}
-          />
-          {!isTablet && (
-            <div
-              className="description"
-              dangerouslySetInnerHTML={{
-                __html: description_part_2,
-              }}
-            />
-          )}
         </div>
       </div>
     </div>

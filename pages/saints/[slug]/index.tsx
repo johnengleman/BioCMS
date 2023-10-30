@@ -76,14 +76,13 @@ const SaintBio = () => {
     birthPlace: data?.birth_location,
     deathPlace: data?.death_location,
     description: data?.summary,
-    affiliation: 'Eastern Orthodox Church',
   }
 
   return (
     <>
       <Head>
         <title>
-          {`${data?.name}: Life, Legacy, and Teachings`}
+          {`${data?.name}: Life, Legacy, Miracles and Teachings`}
         </title>
         <link
           rel="canonical"

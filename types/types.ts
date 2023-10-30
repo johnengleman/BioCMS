@@ -16,7 +16,7 @@ type Book = {
   author: string
   store_link: string
   pages?: number
-  description_part_1: string
+  description: string
   description_part_2: string
   amazon_book_cover: string
 }

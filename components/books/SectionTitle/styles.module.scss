@@ -1,0 +1,39 @@
+@import './../../../styles/breakpoints.scss';
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+.line {
+  flex-grow: 1;
+  height: 2px;
+  background-color: var(--gold);
+
+  &.line1 {
+    flex-grow: 1;
+
+    @include breakpoint(tablet) {
+      flex-grow: 0.2;
+    }
+  }
+
+  &.line2 {
+    flex-grow: 1;
+  }
+}
+
+.title {
+  padding: 5px 20px;
+  white-space: nowrap;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--violet);
+  background-color: var(--gold);
+  letter-spacing: 0.5px;
+  border-radius: 3px;
+  text-transform: capitalize;
+}

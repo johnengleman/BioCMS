@@ -6,7 +6,7 @@ type BookProps = {
   author: string
   store_link: string
   pages?: number
-  description_part_1: string
+  description: string
   description_part_2: string
   amazon_book_cover: string
 }
@@ -17,7 +17,7 @@ const Book = ({
   store_link,
   pages,
   amazon_book_cover,
-  description_part_1,
+  description,
 }: BookProps) => {
   return (
     <div className={styles.book}>
@@ -33,7 +33,7 @@ const Book = ({
         <div
           className={styles.bookDescription}
           dangerouslySetInnerHTML={{
-            __html: description_part_1,
+            __html: description,
           }}
         />
         <button className={styles.ctaBtn}>

@@ -11,9 +11,9 @@ import { getNav } from '../../queries/getNav'
 import Page from '../../components/page/Page/Page'
 import ErrorPage from 'next/error'
 import SaintDetail from '../../components/global/SaintDetail/SaintDetail'
-import styles from './styles.module.scss'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
 import { getTeachingFilters } from '../../queries/getTeachingFilters'
+import styles from './styles.module.scss'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -66,23 +66,12 @@ const Teachings = () => {
     return <ErrorPage statusCode={404} />
   }
 
-  // const structuredData = {
-  //   '@context': 'https://schema.org',
-  //   '@type': 'Person',
-  //   name: data?.name,
-  //   birthDate: data?.birth_year,
-  //   deathDate: data?.death_year,
-  //   birthPlace: data?.birth_location,
-  //   deathPlace: data?.death_location,
-  //   description: data?.summary,
-  //   affiliation: 'Eastern Orthodox Church',
-  // }
-
   return (
     <>
       <Head>
         <title>
-          Teachings of the most influential Catholic Saints
+          Teachings of the most influential Roman Catholic
+          Saints
         </title>
         <link
           rel="canonical"
@@ -91,14 +80,8 @@ const Teachings = () => {
         <meta
           key="description"
           name="description"
-          content={`Discover the teachings of the most influential Catholic Saints`}
+          content="Discover the most famous teachings of Roman Catholic Saints"
         />
-        {/* <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData),
-          }}
-        /> */}
       </Head>
       <Page
         searchData={searchData}

@@ -1,12 +1,12 @@
 import fetchHelper from './fetchHelper'
 
-function getAuthorsQuery({ church, preset }) {
+function getNewestBooksQuery({ church, preset }) {
   // Variables declaration
   let variablesList: string[] = []
-  let bookFilter: string[] = []
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
+
   if (preset !== 'none') {
     variablesList.push('$preset: String!')
   }
@@ -15,67 +15,64 @@ function getAuthorsQuery({ church, preset }) {
   let filterList: string[] = []
   let churchList: string[] = []
   if (church !== 'all') {
-    churchList.push('venerated_in: { _icontains: $church }')
+    churchList.push(
+      '{ saint: { venerated_in: { _icontains: $church }}}',
+    )
   }
   if (preset !== 'none') {
-    filterList.push(
-      '{ books: { genre: { _icontains: $preset } } }',
-    )
-    bookFilter.push(
-      '(filter: { genre: { _icontains: $preset } })',
-    )
+    filterList.push('{ genre: { _icontains: $preset } }')
   }
 
   // Building the query
   let baseQuery = `
-    query getSaints${
+    query getBooks${
       variablesList.length > 0
         ? `(${variablesList.join(', ')})`
         : ''
     } {
-      saints(
+      books(
+        sort: "date_created"
+        limit: 7,
         filter: {
-          books_func: {
-            count: {
-              _gt: 1
-            }
-          }
-          ${churchList}
           _and: [
             ${filterList.join(', ')}
+            ${churchList}
           ]
         }
       ) {
         id
-        name
-        images(limit: 1) {
-          directus_files_id {
-            id
-            width
-            height
-            description
+        store_link
+        title
+        pages
+        author
+        date_created
+        description
+        amazon_book_cover
+        genre
+        saint {
+            name
+            venerated_in
+            images {
+              directus_files_id {
+                id
+              }
+            }
           }
         }
-       books
-        ${bookFilter}
-         {
-        title
-       }
-      }
     }
   `
   return baseQuery
 }
 
-export const getTopAuthors = async ({
+export const getNewestBooks = async ({
   church = 'all',
   preset = 'none',
 }) => {
-  const query = getAuthorsQuery({ church, preset })
+  const query = getNewestBooksQuery({ church, preset })
 
   const res = await fetchHelper({
     query,
     variables: { church, preset },
   })
-  return res.data.saints
+  return res.data.books
 }

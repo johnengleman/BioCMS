@@ -26,7 +26,7 @@ function getSaintsQuery(
       '{ categories: { _icontains: $category } }',
     )
   }
-  if (saintPreset === 'patron') {
+  if (saintPreset === 'patron-saints') {
     filterList.push(
       '{ categories: { _icontains: "Patron Saints" } }',
     )

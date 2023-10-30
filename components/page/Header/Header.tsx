@@ -15,6 +15,8 @@ const Header = ({ searchData, navData }) => {
     navData?.miracles_aggregated?.[0]?.count?.id
   const teachingsCount =
     navData?.teachings_aggregated?.[0]?.count?.id
+  const booksCount =
+    navData?.books_aggregated?.[0]?.count?.id
 
   return (
     <div
@@ -35,7 +37,6 @@ const Header = ({ searchData, navData }) => {
                 )}
                 Saints
               </Link>
-              {/* <Link href="/books">Books</Link> */}
               <Link href="/teachings">
                 {teachingsCount && (
                   <span className={styles.count}>
@@ -51,6 +52,14 @@ const Header = ({ searchData, navData }) => {
                   </span>
                 )}
                 Miracles
+              </Link>
+              <Link href="/books">
+                {booksCount && (
+                  <span className={styles.count}>
+                    {booksCount}
+                  </span>
+                )}
+                Books
               </Link>
             </div>
           </div>

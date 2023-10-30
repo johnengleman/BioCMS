@@ -112,17 +112,17 @@ const Saints = () => {
       <Head>
         <title>
           Browse and discover all the Catholic Saints:
-          Spiritual Biographies, Teachings, Sayings,
-          Miracles Books, and Quotes
+          Spiritual Biographies, Teachings, Prayers,
+          Miracles, Books, and Quotes
         </title>
         <meta
           key="description"
           name="description"
-          content="Explore the lives and legacies of Roman Catholic and Eastern Orthodox saints. From teachings to miracles, delve into their spiritual journeys."
+          content="Explore the lives and legacies of Roman Catholic saints. From teachings to miracles, delve into their spiritual journeys."
         />
         <meta
           name="keywords"
-          content="Roman Catholic, Eastern Orthodox saints, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
+          content="Roman Catholic, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
         />
       </Head>
       <Page

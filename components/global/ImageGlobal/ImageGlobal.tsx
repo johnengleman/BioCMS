@@ -50,7 +50,7 @@ const ImageGlobal = ({
           src={src}
           fill={true}
           alt={alt}
-          onLoadingComplete={() => setImageLoaded(true)}
+          onLoad={() => setImageLoaded(true)}
           priority={priority}
           style={{
             position: 'absolute',
@@ -68,7 +68,7 @@ const ImageGlobal = ({
           height={height}
           alt={alt}
           priority={priority}
-          onLoadingComplete={() => setImageLoaded(true)}
+          onLoad={() => setImageLoaded(true)}
           style={{
             position: 'absolute',
             top: 0,

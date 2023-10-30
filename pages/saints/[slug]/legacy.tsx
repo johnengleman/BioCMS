@@ -20,6 +20,7 @@ import TableOfContents from '../../../components/saint/TableOfContentsText/Table
 import { Saint } from '../../../types/types'
 import formatDate from '../../../utils/dates'
 import NextSection from '../../../components/saint/NextPage/NextPage'
+import About from '../../../components/global/About/About'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -72,7 +73,7 @@ const SaintBio = (props) => {
   return (
     <>
       <Head>
-        <title>{`${data?.name}: their Legacy`}</title>
+        <title>{`${data?.name}: their Legacy and Influence`}</title>
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/legacy`}
@@ -125,6 +126,7 @@ const SaintBio = (props) => {
                 }}
               />
               <NextSection data={data} />
+              <About showImage={false} />
             </div>
             <div className={styles.rightRail}>
               {data?.books && (
@@ -167,22 +169,9 @@ export const getStaticProps = async ({ params }) => {
     getNav({ church }),
   )
 
-  // try {
-  //   const saintsResponse = await fetchAPIQuery(
-  //     `getRelatedSaints?categories=${saintData?.categories.join()}`,
-  //   )
-  //   relatedSaints = saintsResponse || []
-  // } catch (error) {
-  //   console.error(error)
-  // }
-
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      // relatedSaints: relatedSaints
-      //   ?.filter((saint) => saint.slug !== slug)
-      //   .sort(() => Math.random() - 0.5)
-      //   .slice(0, 4),
     },
     revalidate: 60,
   }

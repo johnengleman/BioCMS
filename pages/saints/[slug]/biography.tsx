@@ -22,6 +22,7 @@ import formatDate from '../../../utils/dates'
 import ReadMoreLinks from '../../../components/saint/ReadMoreLinks/ReadMoreLinks'
 import useBreakpoints from '../../../hooks/useBreakPoints'
 import NextPage from '../../../components/saint/NextPage/NextPage'
+import About from '../../../components/global/About/About'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -75,7 +76,7 @@ const SaintBio = (props) => {
   return (
     <>
       <Head>
-        <title>{`${data?.name}: their Life`}</title>
+        <title>{`${data?.name}: their biography and life.`}</title>
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/biography`}
@@ -137,6 +138,7 @@ const SaintBio = (props) => {
               <ReadMoreLinks
                 links={data?.read_more_links}
               />
+              <About showImage={false} />
             </div>
             <div className={styles.rightRail}>
               {data?.books && (

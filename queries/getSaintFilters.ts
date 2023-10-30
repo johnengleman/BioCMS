@@ -1,8 +1,12 @@
 import fetchHelper from './fetchHelper'
 import { properties } from '../components/saint/Filter/properties'
 
-const getFilterList = (filter) =>
-  `{ categories: { _icontains: "${filter}" } }`
+const getFilterList = (filter) => {
+  if (filter !== 'None') {
+    return `, { categories: { _icontains: "${filter}" } }`
+  }
+  return ''
+}
 
 function numberOfSaintsQuery(church, saintPreset) {
   // Variables declaration
@@ -19,7 +23,7 @@ function numberOfSaintsQuery(church, saintPreset) {
     churchList.push('venerated_in: { _icontains: $church }')
   }
 
-  if (saintPreset === 'patron') {
+  if (saintPreset === 'patron-saints') {
     presetList.push(
       '{ categories: { _icontains: "Patron Saints" } }',
     )
@@ -28,9 +32,6 @@ function numberOfSaintsQuery(church, saintPreset) {
   if (saintPreset === '20th-century-saints') {
     presetList.push('{ death_year: { _gte: 1900 } }')
   }
-  // if(saintPreset === 'saints-by-months') {
-  //   filterList.push('{ death_year: { _gte: 1900 } }')
-  // }
 
   // Building the query
   let baseQuery = `
@@ -44,9 +45,7 @@ function numberOfSaintsQuery(church, saintPreset) {
         filter: {
           ${churchList}
           _and: [
-            ${presetList.join(', ')},${getFilterList(
-          filter,
-        )}
+            ${presetList.join(', ')}${getFilterList(filter)}
           ]
         }
       ) {
@@ -68,6 +67,7 @@ const getNumberOfSaints = async ({
     query: numberOfSaintsQuery(church, saintPreset),
     variables: { church, saintPreset },
   })
+
   return res.data
 }
 
@@ -86,6 +86,12 @@ export const getSaintFilters = async (
         ...(await getNumberOfSaints({
           church,
           saintPreset: '20th-century-saints',
+        })),
+      },
+      'patron-saints': {
+        ...(await getNumberOfSaints({
+          church,
+          saintPreset: 'patron-saints',
         })),
       },
     },

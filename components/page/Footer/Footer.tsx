@@ -63,7 +63,7 @@ const Footer = () => {
           className={`${styles.row} ${styles.center}`}
         ></div>
         <div className={`${styles.row} ${styles.right}`}>
-          {/* <ChurchToggle /> */}
+          <ChurchToggle />
         </div>
       </div>
     </div>

@@ -1,13 +1,5 @@
 export const properties = {
-  all: {
-    filterTitle: 'All Catholic and Orthodox Saints',
-  },
-  orthodox: {
-    filterTitle: 'All Orthodox Saints',
-  },
-  catholic: {
-    filterTitle: 'All Catholic Saints',
-  },
+  presets: ['20th-century-saints', 'patron-saints'],
   filters: [
     'None',
     'Ascetics',

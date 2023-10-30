@@ -47,6 +47,15 @@ function getNavQuery(church) {
           id
         }
       }
+       books_aggregated(
+        filter: {
+          ${churchList}
+        }
+      ) {
+        count {
+          id
+        }
+      }
     }
   `
 

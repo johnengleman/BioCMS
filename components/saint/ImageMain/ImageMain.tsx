@@ -22,7 +22,7 @@ const ImageMain = ({ images, name, limit = 1 }) => {
               whiteBorder={true}
               alt={
                 image?.directus_files_id?.description ||
-                `Image of the orthodox and catholic saint ${name}`
+                `Image of the roman catholic saint ${name}`
               }
               src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${image?.directus_files_id.id}?key=profile`}
             />

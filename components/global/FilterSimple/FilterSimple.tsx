@@ -1,14 +1,13 @@
 import { useRef, useEffect, useState } from 'react'
 import Cookies from 'js-cookie'
-import { flushSync } from 'react-dom'
 import { useRouter } from 'next/router'
 import Toggle from '../Toggle/Toggle'
 import styles from './styles.module.scss'
+import ButtonFilter from '../ButtonFilter/ButtonFilter'
 import { properties } from './properties'
 
 const FilterSimple = ({ filtersCount = {}, sort }) => {
   const router = useRouter()
-  const selectedFilter = router.query.filter || 'none'
   const selectedPreset =
     router.query.preset || ('none' as any)
   const church = router.query.church || 'all'
@@ -35,20 +34,6 @@ const FilterSimple = ({ filtersCount = {}, sort }) => {
     }
   }, [church])
 
-  const setSaintFilter = (filter) => {
-    const newQuery = {
-      ...router.query,
-      filter: filter.toLowerCase(),
-    }
-    router.push(
-      {
-        pathname: router.pathname,
-        query: newQuery,
-      },
-      undefined,
-    )
-  }
-
   return (
     <div className={styles.filter}>
       <p className={styles.instructions}>
@@ -56,50 +41,17 @@ const FilterSimple = ({ filtersCount = {}, sort }) => {
       </p>
       <div className={styles.slideContainer}>
         {properties.filters?.map((filter, i) => {
-          const selectedF =
-            filter?.toLowerCase() === selectedFilter
           const count =
             filtersCount[selectedChurch]?.[
               selectedPreset
             ]?.[filter]?.[0].count.id
 
           return (
-            <button
+            <ButtonFilter
               key={i}
-              className={`${styles.slide} ${
-                selectedF ? styles.selected : ''
-              } ${
-                count === 0 && filter !== 'None'
-                  ? styles.disabled
-                  : ''
-              }`}
-              onClick={() => {
-                if (canUseTransition.current) {
-                  ;(document as any)?.startViewTransition(
-                    () => {
-                      flushSync(() => {
-                        setSaintFilter(
-                          !selectedF ? filter : 'none',
-                        )
-                      })
-                    },
-                  )
-                } else {
-                  setSaintFilter(
-                    !selectedF ? filter : 'none',
-                  )
-                }
-              }}
-            >
-              <span className={styles.name}>
-                {filter !== 'None'
-                  ? filter.replace(/_/g, ' ')
-                  : 'All'}
-              </span>
-              {count !== 0 && (
-                <div className={styles.count}>{count}</div>
-              )}
-            </button>
+              count={count}
+              filter={filter}
+            />
           )
         })}
       </div>

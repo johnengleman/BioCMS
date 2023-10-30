@@ -53,9 +53,10 @@ const ChurchToggle = () => {
       JSON.stringify({ church: church }),
     )
 
-    // Only add query to url if on saint homepage
+    // Only add query to url if on saints or books page
     const onSaintHomepage =
       router.pathname === '/saints' ||
+      router.pathname === '/books' ||
       router.pathname === '/'
 
     if (onSaintHomepage) {

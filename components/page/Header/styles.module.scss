@@ -90,5 +90,9 @@
 
   a {
     color: #fff;
+
+    .count {
+      color: var(--violet);
+    }
   }
 }

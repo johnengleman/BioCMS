@@ -31,7 +31,7 @@ const query = gql`
         title
         store_link
         pages
-        description_part_1
+        description
         amazon_book_cover
       }
       sayings {

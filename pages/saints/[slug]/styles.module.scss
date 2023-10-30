@@ -131,6 +131,7 @@
 
       .text {
         margin-top: 20px;
+        margin-bottom: 30px;
 
         @include breakpoint(tablet) {
           padding-left: 30px;

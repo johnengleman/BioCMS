@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useOnClickOutside } from 'usehooks-ts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp } from '@fortawesome/pro-duotone-svg-icons'
-import styles from './styles.module.scss';
+import styles from './styles.module.scss'
 
 const Toggle = () => {
   const router = useRouter()
@@ -30,15 +30,25 @@ const Toggle = () => {
   }
 
   return (
-    <div className={styles.sortToggle} ref={ref}>
+    <div
+      className={styles.sortToggle}
+      ref={ref}
+    >
       <span
         className={styles.selected}
         onClick={() => setShowMenu(!showMenu)}
       >
-        sorted by <span className="direction">{sort}</span> <FontAwesomeIcon icon={faCaretUp} rotation={showMenu ? 180 : 90} size='lg'/>
+        sorted by <span className="direction">{sort}</span>{' '}
+        <FontAwesomeIcon
+          icon={faCaretUp}
+          rotation={showMenu ? 180 : 90}
+          size="lg"
+        />
       </span>
       <div
-        className={`${styles.dropdown} ${showMenu ? styles.visible : ''}`}
+        className={`${styles.dropdown} ${
+          showMenu ? styles.visible : ''
+        }`}
       >
         <ul>
           {/* <li
@@ -56,22 +66,18 @@ const Toggle = () => {
             Newest - Desc
           </li> */}
           <li
-            onClick={() =>
-              handleSetShowMenu('Date - Asc')
-            }
+            onClick={() => handleSetShowMenu('Date - Asc')}
           >
-            Date - Asc
+            Date Died - Asc
           </li>
           <li
-            onClick={() =>
-              handleSetShowMenu('Date - Desc')
-            }
+            onClick={() => handleSetShowMenu('Date - Desc')}
           >
-            Date - Desc
+            Date Died - Desc
           </li>
         </ul>
       </div>
-      </div>
+    </div>
   )
 }
 

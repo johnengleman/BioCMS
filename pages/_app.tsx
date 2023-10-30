@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { useLocalStorage } from 'usehooks-ts'
-import { defaultTheme } from '../themes/defaultTheme'
 import NextNProgress from 'nextjs-progressbar'
 import { SiteProvider } from '../context/SiteContext'
 import { Analytics } from '@vercel/analytics/react'
@@ -16,7 +14,6 @@ import Head from 'next/head'
 import { config } from '@fortawesome/fontawesome-svg-core'
 config.autoAddCss = false
 import '@fortawesome/fontawesome-svg-core/styles.css'
-
 import '../styles/variables.css'
 import '../styles/globals.css'
 
