@@ -69,8 +69,7 @@ const Teachings = () => {
     <>
       <Head>
         <title>
-          Teachings of the most influential Roman Catholic
-          Saints
+          Teachings and Legacy of Roman Catholic Saints
         </title>
         <link
           rel="canonical"
@@ -79,7 +78,7 @@ const Teachings = () => {
         <meta
           key="description"
           name="description"
-          content="Discover the most famous teachings of Roman Catholic Saints"
+          content="Discover the teachings and legacy of Roman Catholic Saints"
         />
       </Head>
       <Page

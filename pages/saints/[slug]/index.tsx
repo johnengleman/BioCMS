@@ -91,7 +91,7 @@ const SaintBio = () => {
         <meta
           key="description"
           name="description"
-          content={`Discover ${data?.name}'s spiritual journey. Explore their sayings, images, and related books.`}
+          content={`Discover ${data?.name}'s spiritual journey: their life, legacy, miracles and teachings.`}
         />
         <script
           type="application/ld+json"
@@ -175,22 +175,6 @@ const SaintBio = () => {
                   <BentoSection
                     data={data?.miracles[0]?.miracles}
                     link={`/saints/${slug}/miracles`}
-                  />
-                </div>
-              )}
-
-              {data?.legacy_influence && (
-                <div>
-                  <SectionTitle
-                    inRightRail={false}
-                    id="section-legacy"
-                    dataSection="legacy"
-                  >
-                    Legacy
-                  </SectionTitle>
-                  <BentoSection
-                    data={data.legacy_influence}
-                    link={`/saints/${slug}/legacy`}
                   />
                 </div>
               )}
