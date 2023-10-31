@@ -118,7 +118,7 @@ const Saints = () => {
         </title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints}`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints`}
         />
         <meta
           key="description"

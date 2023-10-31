@@ -70,7 +70,7 @@ const Feedback = () => {
         />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/feedback}`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/feedback`}
         />
         <meta
           name="keywords"

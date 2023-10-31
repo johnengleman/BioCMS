@@ -73,7 +73,7 @@ const Teachings = () => {
         </title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/teachings}`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/teachings`}
         />
         <meta
           key="description"

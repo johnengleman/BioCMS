@@ -102,7 +102,7 @@ const Books = () => {
         <title>Books about Roman Catholic Saints</title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/books}`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/books`}
         />
         <meta
           key="description"

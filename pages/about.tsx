@@ -67,7 +67,7 @@ const About = () => {
         </title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/about}`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/about`}
         />
         <meta
           key="description"
