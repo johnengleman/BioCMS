@@ -82,5 +82,9 @@
     @include breakpoint(laptop) {
       min-width: 500px;
     }
+
+    &:empty {
+      display: none;
+    }
   }
 }
