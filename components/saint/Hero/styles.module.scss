@@ -42,15 +42,17 @@ $color: #ccad004e;
       color: #521613;
       text-shadow: -2px 0 $color, 0 2px $color, 2px 0 $color,
         0 -2px $color;
-      font-size: 1.8rem;
+      font-size: 1.75rem;
       margin-bottom: 1.5rem;
       display: flex;
       flex-direction: column;
       position: relative;
+      min-height: 100px;
 
       @include breakpoint(laptop) {
         flex-direction: row;
         font-size: 2.5rem;
+        min-height: unset;
       }
     }
 

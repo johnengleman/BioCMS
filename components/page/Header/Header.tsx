@@ -67,9 +67,6 @@ const Header = ({ searchData, navData }) => {
               </Link>
             </div>
           </div>
-          <div
-            className={`${styles.col} ${styles.center}`}
-          ></div>
           <div className={`${styles.col} ${styles.right}`}>
             <Search searchData={searchData} />
             <SMButtons transparent={isSaintsPage} />

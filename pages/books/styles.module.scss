@@ -16,7 +16,15 @@
   );
   height: 500px;
   overflow: hidden;
-  gap: 30px;
+  gap: 10px;
+
+  @include breakpoint(tablet) {
+    gap: 30px;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(175px, 1fr)
+    );
+  }
 }
 
 .allBooks {
@@ -25,9 +33,10 @@
     auto-fit,
     minmax(160px, 1fr)
   );
-  gap: 30px;
+  gap: 10px;
 
-  @include breakpoint(laptop) {
+  @include breakpoint(tablet) {
+    gap: 30px;
     grid-template-columns: repeat(
       auto-fill,
       minmax(175px, 1fr)

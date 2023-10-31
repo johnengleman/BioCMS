@@ -8,17 +8,18 @@
     object-fit: cover;
     border-radius: 5px;
     z-index: 0;
-    //  border: 1px solid var(--gold);
   }
 
   &.whiteBorder {
     position: relative;
     box-shadow: none;
+    margin: 0 auto;
 
     img {
       border-radius: 10px;
       position: relative;
       z-index: 1;
+      border: 1px solid var(--gold);
     }
 
     &::after {

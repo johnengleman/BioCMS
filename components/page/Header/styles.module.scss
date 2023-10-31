@@ -1,7 +1,10 @@
+@import '../../../styles/breakpoints.scss';
+
 .header {
   display: flex;
   flex-direction: column;
   box-shadow: 0px 5px 20px -3px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
 
   .content {
     width: 90%;
@@ -15,7 +18,10 @@
   .row {
     display: flex;
     align-items: center;
-    height: 60px;
+
+    @include breakpoint(laptop) {
+      height: 60px;
+    }
   }
 
   .col {
@@ -24,26 +30,35 @@
     align-items: center;
   }
 
-  .center {
-    justify-content: center;
-  }
-
   .left {
     justify-content: flex-start;
   }
 
   .right {
     justify-content: flex-end;
+    display: none;
+
+    @include breakpoint(laptop) {
+      display: flex;
+    }
   }
 }
 
 .navigation {
-  gap: 20px;
+  gap: 0;
   display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  @include breakpoint(laptop) {
+    justify-content: unset;
+    gap: 20px;
+    width: unset;
+  }
 
   a {
     color: #000;
-    font-size: 18px;
+    font-size: 16px;
     padding: 4px 10px;
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -51,14 +66,28 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
     line-height: 1;
-    width: max-content;
+    width: min-content;
+    justify-content: center;
+
+    @include breakpoint(tablet) {
+      flex-direction: row;
+      width: max-content;
+      font-size: 18px;
+      gap: 8px;
+    }
 
     .count {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 700;
       color: var(--gold);
+      display: none;
+
+      @include breakpoint(tablet) {
+        font-size: 24px;
+        display: block;
+      }
     }
 
     &:hover {
@@ -85,7 +114,7 @@
       url('/bg-light.webp');
     background-size: cover; /* This will cover the entire viewport */
     background-repeat: no-repeat; /* Important if the image is smaller than the footer */
-    background-position: center 40%; /* This will center the image */
+    background-position: center 55%; /* This will center the image */
     transform: scaleX(-1);
     z-index: 0;
   }
@@ -94,7 +123,7 @@
     color: #fff;
 
     .count {
-      color: var(--violet);
+      color: #fff;
     }
   }
 }

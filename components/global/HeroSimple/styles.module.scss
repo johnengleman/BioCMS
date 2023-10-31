@@ -1,3 +1,5 @@
+@import './../../../styles/breakpoints.scss';
+
 .hero {
   width: 100vw;
   min-width: 100vw;
@@ -12,7 +14,11 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center 55%;
-  padding: 50px 0;
+  padding: 30px 0;
+
+  @include breakpoint(tablet) {
+    padding: 50px 0;
+  }
 
   .heroContent {
     width: 90%;
@@ -26,13 +32,17 @@
 
   .titleBox {
     background-color: var(--violet);
-    padding: 20px 40px;
+    padding: 15px 30px;
     border-radius: 5px;
     width: min-content;
+
+    @include breakpoint(tablet) {
+      padding: 20px 40px;
+    }
   }
 
   h1 {
-    font-size: 40px;
+    font-size: 30px;
     line-height: 1.2;
     background-image: linear-gradient(
       90deg,
@@ -41,5 +51,9 @@
     );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+
+    @include breakpoint(tablet) {
+      font-size: 40px;
+    }
   }
 }

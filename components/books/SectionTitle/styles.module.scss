@@ -15,10 +15,6 @@
 
   &.line1 {
     flex-grow: 1;
-
-    @include breakpoint(tablet) {
-      flex-grow: 0.2;
-    }
   }
 
   &.line2 {
