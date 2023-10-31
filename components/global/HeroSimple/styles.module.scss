@@ -26,13 +26,14 @@
 
   .titleBox {
     background-color: var(--violet);
-    padding: 10px 40px;
+    padding: 20px 40px;
     border-radius: 5px;
     width: min-content;
   }
 
   h1 {
     font-size: 40px;
+    line-height: 1.2;
     background-image: linear-gradient(
       90deg,
       var(--gold),

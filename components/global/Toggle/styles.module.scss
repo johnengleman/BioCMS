@@ -2,7 +2,7 @@
 
 .sortToggle {
   position: absolute;
-  bottom: -60px;
+  bottom: -57px;
   left: calc((100% - 215px) / 2);
   cursor: pointer;
 
@@ -10,29 +10,31 @@
     font-size: 14px;
     font-weight: 600;
     background-color: #2f4f3a;
-    padding: 10px 30px;
+    padding: 5px 30px;
     color: #dadada;
     transition: all 0.2s ease-in-out;
-    border-radius: 5px;
+    border-radius: 3px;
     font-weight: 300;
-    border: 1px solid #676767;
+    border: 1px solid #7e7e7e;
     cursor: pointer;
-    gap: 10px;
+    gap: 8px;
     display: flex;
     align-items: center;
+  }
 
-    .direction {
-      text-decoration: underline;
-    }
+  .direction {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: capitalize;
   }
 
   .dropdown {
     position: absolute;
     top: 50px;
     right: 0;
-    width:  215px;
-    background-color: lavender;
-    border-radius: 5px;
+    width: 100%;
+    background-color: #bcbcbc;
+    border-radius: 3px;
     opacity: 0;
     box-sizing: border-box;
     pointer-events: none;
@@ -57,6 +59,7 @@
         width: max-content;
         margin: 0;
         width: 100%;
+        font-size: 15px;
         color: #333;
 
         &:hover {

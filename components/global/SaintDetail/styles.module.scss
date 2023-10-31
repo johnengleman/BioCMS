@@ -1,5 +1,12 @@
+@import './../../../styles/breakpoints.scss';
+
 .saintDetail {
   display: flex;
+  flex-direction: column;
+
+  @include breakpoint(tablet) {
+    flex-direction: row;
+  }
 
   .summary {
     width: 300px;

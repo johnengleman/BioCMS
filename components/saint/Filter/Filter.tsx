@@ -42,7 +42,7 @@ const Filter = ({ filtersCount = {} }) => {
     <div className={styles.filter}>
       <p className={styles.instructions}>Use a preset?</p>
       <div className={styles.presetContainer}>
-        {properties.presets.map((preset, i) => (
+        {properties.presets?.map((preset, i) => (
           <ButtonPreset
             key={i}
             icon={faCameraRetro}
@@ -63,7 +63,7 @@ const Filter = ({ filtersCount = {} }) => {
             count={
               filtersCount[church][selectedPreset]?.[
                 filter
-              ][0].count.id
+              ]?.[0].count.id
             }
           />
         ))}

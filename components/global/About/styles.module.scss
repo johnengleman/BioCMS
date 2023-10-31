@@ -5,18 +5,23 @@
   width: 100%;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 30px;
   flex: 1;
   box-shadow: -5px 0px 20px 3px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 30px;
   border-radius: 5px;
+  gap: 50px;
 
-  @include breakpoint(tablet) {
+  @include breakpoint(laptop) {
     flex-direction: row;
     margin: 0;
+    padding: 50px;
+    max-width: 1200px;
+    border-radius: 10px;
   }
 
-  .col {
+  .text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -70,6 +75,12 @@
 
     &::marker {
       color: var(--gold);
+    }
+  }
+
+  .image {
+    @include breakpoint(laptop) {
+      min-width: 500px;
     }
   }
 }

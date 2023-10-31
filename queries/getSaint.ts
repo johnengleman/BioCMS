@@ -9,8 +9,6 @@ const query = gql`
       name
       summary
       biography
-      miracles
-      legacy_influence
       birth_year
       death_year
       birth_location
@@ -36,6 +34,9 @@ const query = gql`
       }
       sayings {
         text
+      }
+      miracles {
+        miracles
       }
       teachings {
         teachings

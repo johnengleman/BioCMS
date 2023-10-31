@@ -155,7 +155,7 @@ const SaintBio = () => {
                     id="section-teachings"
                     dataSection="teachings"
                   >
-                    Teachings
+                    Teachings & Legacy
                   </SectionTitle>
                   <BentoSection
                     data={data?.teachings[0]?.teachings}
@@ -163,7 +163,7 @@ const SaintBio = () => {
                   />
                 </div>
               )}
-              {data?.miracles && (
+              {data?.miracles[0]?.miracles && (
                 <div>
                   <SectionTitle
                     inRightRail={false}
@@ -173,7 +173,7 @@ const SaintBio = () => {
                     Miracles
                   </SectionTitle>
                   <BentoSection
-                    data={data.miracles}
+                    data={data?.miracles[0]?.miracles}
                     link={`/saints/${slug}/miracles`}
                   />
                 </div>

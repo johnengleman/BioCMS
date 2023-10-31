@@ -1,9 +1,7 @@
 import { useEffect } from 'react'
+import { useForm, ValidationError } from '@formspree/react'
 import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
-import Page from '../components/page/Page/Page'
-import AboutComponent from '../components/global/About/About'
 import {
   QueryClient,
   useQuery,
@@ -11,8 +9,12 @@ import {
 } from '@tanstack/react-query'
 import { getNav } from '../queries/getNav'
 import { getSearchData } from '../queries/getSearchData'
+import Head from 'next/head'
+import Page from '../components/page/Page/Page'
+import styles from './styles.module.scss'
 
-const About = () => {
+const Feedback = () => {
+  const [state, handleSubmit] = useForm('maygvrkn')
   const router = useRouter()
   const church = Array.isArray(router.query.church)
     ? router.query.church[0]
@@ -56,11 +58,7 @@ const About = () => {
   return (
     <>
       <Head>
-        <title>
-          Browse and discover all the Catholic Saints:
-          Spiritual Biographies, Teachings, Sayings,
-          Miracles Books, and Quotes
-        </title>
+        <title>Feedback</title>
         <meta
           key="description"
           name="description"
@@ -76,7 +74,45 @@ const About = () => {
         searchData={searchData}
         navData={navData}
       >
-        <AboutComponent showImage={true} />
+        <div className={styles.feedback}>
+          {state.succeeded && (
+            <p className={styles.thankYou}>Thank You!</p>
+          )}
+          {!state.succeeded && (
+            <>
+              <p>
+                Have feedback or a suggestion? Send me a
+                message!
+              </p>
+              <form onSubmit={handleSubmit}>
+                <input
+                  name="subject"
+                  placeholder="Subject"
+                />
+                <ValidationError
+                  prefix="Email"
+                  field="email"
+                  errors={state.errors}
+                />
+                <textarea
+                  name="message"
+                  placeholder="Message"
+                />
+                <ValidationError
+                  prefix="Message"
+                  field="message"
+                  errors={state.errors}
+                />
+                <button
+                  type="submit"
+                  disabled={state.submitting}
+                >
+                  Submit
+                </button>
+              </form>
+            </>
+          )}
+        </div>
       </Page>
     </>
   )
@@ -125,4 +161,4 @@ export async function getServerSideProps(context) {
   }
 }
 
-export default About
+export default Feedback

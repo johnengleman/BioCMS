@@ -4,7 +4,7 @@ import styles from './styles.module.scss'
 
 const About = ({ showImage }) => (
   <div className={styles.about}>
-    <div className={styles.col}>
+    <div className={styles.text}>
       <p className={styles.heading}>
         Hi, Welcome to FindASaint.com
       </p>
@@ -35,7 +35,7 @@ const About = ({ showImage }) => (
         </li>
       </ul>
     </div>
-    <div className={styles.col}>
+    <div className={styles.image}>
       {showImage && (
         <Image
           src={catholicChurch}

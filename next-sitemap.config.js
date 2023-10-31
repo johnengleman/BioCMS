@@ -1,56 +1,83 @@
 async function getSlugs() {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}/graphql`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}/graphql`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          query: `
+            query {
+              saints {
+                slug
+                date_updated
+                miracles {
+                  date_updated
+                }
+                miracles_func {
+                  count
+                }
+                teachings {
+                  date_updated
+                }
+                teachings_func {
+                  count
+                }
+               }
+             }
+          `,
+        }),
       },
-      body: JSON.stringify({
-        query: `
-          query {
-            saints {
-              slug
-            }
-          }
-        `,
-      }),
-    },
-  )
+    )
 
-  if (res.ok) {
-    const json = await res.json()
-    return json.data
-  } else {
+    if (res.ok) {
+      const json = await res.json()
+      return json.data
+    } else {
+      console.error(
+        'Failed to fetch saints:',
+        await res.text(),
+      )
+      return []
+    }
+  } catch (error) {
+    console.error('Error fetching saints:', error)
     return []
   }
 }
 
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
-  generateRobotsTxt: true, // (optional)
+  generateRobotsTxt: true,
   async additionalPaths(config) {
     const data = await getSlugs()
-    const dynamicPaths = data.saints.map((saint) => ({
-      loc: `${config.siteUrl}/saints/${saint.slug}`,
-      lastmod: new Date().toISOString(),
-    }))
+    const dynamicPaths = data.saints.flatMap((saint) => {
+      const baseLoc = `${config.siteUrl}/saints/${saint.slug}`
+      const paths = [
+        {
+          loc: baseLoc,
+          lastmod: saint.date_updated,
+        },
+        {
+          loc: `${baseLoc}/biography`,
+          lastmod: saint.date_updated,
+        },
+      ];
 
-    const staticPaths = [
-      // {
-      //   loc: `${config.siteUrl}/quotes`,
-      //   lastmod: new Date().toISOString(),
-      // },
-      // {
-      //   loc: `${config.siteUrl}/books`,
-      //   lastmod: new Date().toISOString(),
-      // },
-      {
-        loc: `${config.siteUrl}/about`,
-        lastmod: new Date().toISOString(),
-      },
-    ]
+      ['teachings', 'miracles'].forEach((key) => {
+        if (saint[`${key}_func`].count) {
+          paths.push({
+            loc: `${baseLoc}/${key}`,
+            lastmod: saint[key][0].date_updated,
+          })
+        }
+      })
 
-    return [...staticPaths, ...dynamicPaths]
+      return paths
+    })
+
+    return [...dynamicPaths]
   },
 }

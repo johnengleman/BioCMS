@@ -51,7 +51,9 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 8px;
+    line-height: 1;
+    width: max-content;
 
     .count {
       font-size: 24px;

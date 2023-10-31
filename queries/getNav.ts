@@ -8,9 +8,18 @@ function getNavQuery(church) {
   }
 
   // Filter construction
+  let saintsChurchList: string[] = []
+  if (church !== 'all') {
+    saintsChurchList.push(
+      'venerated_in: { _icontains: $church }',
+    )
+  }
+
   let churchList: string[] = []
   if (church !== 'all') {
-    churchList.push('venerated_in: { _icontains: $church }')
+    churchList.push(
+      'saint: { venerated_in: { _icontains: $church } }',
+    )
   }
 
   // Building the query
@@ -22,7 +31,7 @@ function getNavQuery(church) {
    }  {
       saints_aggregated(
         filter: {
-          ${churchList}
+          ${saintsChurchList}
         }
       ) {
         count {
@@ -58,7 +67,6 @@ function getNavQuery(church) {
       }
     }
   `
-
   return baseQuery
 }
 

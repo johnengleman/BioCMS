@@ -30,7 +30,6 @@ const Teachings = () => {
   const teachingPreset = Array.isArray(router.query.preset)
     ? router.query.preset[0]
     : router.query.preset || 'none'
-  const sort = router.query.sort || 'date-asc'
 
   const { data: searchData } = useQuery(
     ['search', church],
@@ -53,7 +52,7 @@ const Teachings = () => {
   )
 
   const { data: teachingsData } = useQuery(
-    ['teachings', church, category, teachingPreset, sort],
+    ['teachings', church, category, teachingPreset],
     () =>
       getTeachings({
         church,
@@ -88,7 +87,7 @@ const Teachings = () => {
         navData={navData}
       >
         <HeroSimple
-          title="Teachings"
+          title="Teachings & Legacy"
           filtersCount={filtersCount}
         />
         <div className={styles.teachings}>

@@ -122,7 +122,7 @@ const SaintBio = (props) => {
               <div
                 className={styles.text}
                 dangerouslySetInnerHTML={{
-                  __html: data?.miracles || '',
+                  __html: data.miracles[0]?.miracles || '',
                 }}
               />
               <NextSection data={data} />

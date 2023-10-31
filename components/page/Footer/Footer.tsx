@@ -3,7 +3,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import ChurchToggle from '../ChurchToggle/ChurchToggle'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleQuestion } from '@fortawesome/pro-regular-svg-icons'
+import {
+  faCircleQuestion,
+  faMessageQuestion,
+} from '@fortawesome/pro-regular-svg-icons'
 import styles from './styles.module.scss'
 
 const Footer = () => {
@@ -50,6 +53,13 @@ const Footer = () => {
               size="lg"
             />
             About
+          </Link>
+          <Link href="/feedback">
+            <FontAwesomeIcon
+              icon={faMessageQuestion}
+              size="lg"
+            />
+            Feedback
           </Link>
           {/* <Link href="/">
           <FontAwesomeIcon

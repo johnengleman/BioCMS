@@ -37,22 +37,26 @@ const Header = ({ searchData, navData }) => {
                 )}
                 Saints
               </Link>
-              <Link href="/teachings">
-                {teachingsCount && (
+              {teachingsCount ? (
+                <Link href="/teachings">
                   <span className={styles.count}>
                     {teachingsCount}
                   </span>
-                )}
-                Teachings
-              </Link>
-              <Link href="/miracles">
-                {miraclesCount && (
+                  Teachings & Legacy
+                </Link>
+              ) : (
+                ''
+              )}
+              {miraclesCount ? (
+                <Link href="/miracles">
                   <span className={styles.count}>
                     {miraclesCount}
                   </span>
-                )}
-                Miracles
-              </Link>
+                  Miracles
+                </Link>
+              ) : (
+                ''
+              )}
               <Link href="/books">
                 {booksCount && (
                   <span className={styles.count}>

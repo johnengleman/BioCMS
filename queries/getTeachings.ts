@@ -68,20 +68,19 @@ function getTeachingsQuery(
 }
 
 const parseSort = (sort) => {
-  if (sort === 'newest-asc') {
+  if (sort === 'created-asc') {
     return 'date_created'
   }
-  if (sort === 'newest-desc') {
+  if (sort === 'created-desc') {
     return '-date_created'
   }
-  if (sort === 'date-asc') {
+  if (sort === 'died-asc') {
     return 'death_year'
   }
-  if (sort === 'date-desc') {
+  if (sort === 'died-desc') {
     return '-death_year'
   }
 }
-
 export const getTeachings = async ({
   church = 'all',
   category = 'none',

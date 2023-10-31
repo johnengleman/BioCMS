@@ -1,3 +1,57 @@
+@import './../styles/breakpoints.scss';
 
+.feedback {
+  box-shadow: -5px 0px 20px 3px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 10px;
 
+  @include breakpoint(tablet) {
+    width: 80%;
+    max-width: 600px;
+    padding: 40px;
+  }
 
+  .thankYou {
+    font-size: 24px;
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+
+    input {
+      border: 1px solid var(--violet);
+      border-radius: 5px;
+      padding-left: 20px;
+      height: 40px;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 200px;
+      border-radius: 5px;
+      border: 1px solid var(--violet);
+      padding: 20px;
+      resize: none;
+      outline: none;
+    }
+
+    button {
+      height: 40px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: 2px solid rgb(152, 152, 152);
+      transition: all 0.2s ease-in-out;
+      color: rgb(49, 49, 49);
+      font-weight: 700;
+      color: var(--violet);
+
+      &:hover {
+        border: 2px solid var(--gold);
+      }
+    }
+  }
+}

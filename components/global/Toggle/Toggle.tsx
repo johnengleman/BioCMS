@@ -8,7 +8,7 @@ import styles from './styles.module.scss'
 const Toggle = () => {
   const router = useRouter()
   const ref = useRef(null)
-  const sort = router?.query?.sort || 'date-asc'
+  const sort = router?.query?.sort || 'created-asc'
   const [showMenu, setShowMenu] = useState(false)
 
   useOnClickOutside(ref, () => setShowMenu(false))
@@ -17,7 +17,7 @@ const Toggle = () => {
     setShowMenu(false)
     const newQuery = {
       ...router.query,
-      sort: sort.replace(/ /g, '').toLowerCase(),
+      sort: sort.replace(/ /g, '-').toLowerCase(),
     }
     router.push(
       {
@@ -38,7 +38,7 @@ const Toggle = () => {
         className={styles.selected}
         onClick={() => setShowMenu(!showMenu)}
       >
-        sorted by <span className="direction">{sort}</span>{' '}
+        sort by <span className={styles.direction}>{sort}</span>
         <FontAwesomeIcon
           icon={faCaretUp}
           rotation={showMenu ? 180 : 90}
@@ -51,29 +51,29 @@ const Toggle = () => {
         }`}
       >
         <ul>
-          {/* <li
+          <li
             onClick={() =>
-              handleSetShowMenu('Newest - Asc')
+              handleSetShowMenu('died-asc')
             }
           >
-            Newest - Asc
+            Died - Asc
           </li>
           <li
             onClick={() =>
-              handleSetShowMenu('Newest - Desc')
+              handleSetShowMenu('died-desc')
             }
           >
-            Newest - Desc
-          </li> */}
-          <li
-            onClick={() => handleSetShowMenu('Date - Asc')}
-          >
-            Date Died - Asc
+            Died - Desc
           </li>
           <li
-            onClick={() => handleSetShowMenu('Date - Desc')}
+            onClick={() => handleSetShowMenu('created-asc')}
           >
-            Date Died - Desc
+            Created - Asc
+          </li>
+          <li
+            onClick={() => handleSetShowMenu('created-desc')}
+          >
+            Created - Desc
           </li>
         </ul>
       </div>

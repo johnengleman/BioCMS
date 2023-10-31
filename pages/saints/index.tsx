@@ -35,7 +35,7 @@ const Saints = () => {
   const saintPreset = Array.isArray(router.query.preset)
     ? router.query.preset[0]
     : router.query.preset || 'none'
-  const sort = (router.query.sort || 'date-asc') as string
+  const sort = (router.query.sort || 'created-asc') as string
 
   const { data, isError, isLoading } = useQuery(
     ['saints', church, category, saintPreset, sort],
@@ -173,7 +173,7 @@ export async function getServerSideProps(context) {
   const cookie = context.req.headers.cookie
   const category = context.query.filter || 'none'
   const saintPreset = context.query.preset || 'none'
-  const sort = context.query.sort || 'date-asc'
+  const sort = context.query.sort || 'created-asc'
   let church = 'all'
 
   if (cookie) {
