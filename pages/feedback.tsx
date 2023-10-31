@@ -13,6 +13,10 @@ import Head from 'next/head'
 import Page from '../components/page/Page/Page'
 import styles from './styles.module.scss'
 
+export const config = {
+  runtime: 'experimental-edge',
+}
+
 const Feedback = () => {
   const [state, handleSubmit] = useForm('maygvrkn')
   const router = useRouter()

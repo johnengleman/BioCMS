@@ -12,6 +12,10 @@ import {
 import { getNav } from '../queries/getNav'
 import { getSearchData } from '../queries/getSearchData'
 
+export const config = {
+  runtime: 'experimental-edge',
+}
+
 const About = () => {
   const router = useRouter()
   const church = Array.isArray(router.query.church)
