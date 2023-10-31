@@ -35,7 +35,8 @@ const Saints = () => {
   const saintPreset = Array.isArray(router.query.preset)
     ? router.query.preset[0]
     : router.query.preset || 'none'
-  const sort = (router.query.sort || 'created-asc') as string
+  const sort = (router.query.sort ||
+    'created-asc') as string
 
   const { data, isError, isLoading } = useQuery(
     ['saints', church, category, saintPreset, sort],
@@ -115,6 +116,10 @@ const Saints = () => {
           Spiritual Biographies, Teachings, Prayers,
           Miracles, Books, and Quotes
         </title>
+        <link
+          rel="canonical"
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints}`}
+        />
         <meta
           key="description"
           name="description"

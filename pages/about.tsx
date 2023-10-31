@@ -65,6 +65,10 @@ const About = () => {
           Spiritual Biographies, Teachings, Sayings,
           Miracles Books, and Quotes
         </title>
+        <link
+          rel="canonical"
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/about}`}
+        />
         <meta
           key="description"
           name="description"

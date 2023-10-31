@@ -68,6 +68,10 @@ const Feedback = () => {
           name="description"
           content="Explore the lives and legacies of Catholic saints. From teachings to miracles, delve into their spiritual journeys."
         />
+        <link
+          rel="canonical"
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/feedback}`}
+        />
         <meta
           name="keywords"
           content="Roman Catholic, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
