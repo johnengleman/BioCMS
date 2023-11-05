@@ -10,40 +10,38 @@ const NextPage = ({ data }) => {
 
   return (
     <div className={styles.nextPage}>
-      {data?.biography && !route.includes('biography') && (
+      {data?.biography && !route.includes('biography') ? (
         <Link href={`/saints/${slug}/biography`}>
           <PageButton
             type="biography"
-            active={true}
+            bio={true}
           />
         </Link>
+      ) : (
+        ''
       )}
-      {data?.miracles && !route.includes('miracles') && (
+      {data?.miracles?.length &&
+      !route.includes('miracles') ? (
         <Link href={`/saints/${slug}/miracles`}>
           <PageButton
             type="miracles"
-            active={true}
+            bio={true}
           />
         </Link>
+      ) : (
+        ''
       )}
       {data?.teachings?.length > 0 &&
-        !route.includes('teachings') && (
-          <Link href={`/saints/${slug}/teachings`}>
-            <PageButton
-              type="teachings"
-              active={true}
-            />
-          </Link>
-        )}
-      {data?.legacy_influence?.length > 0 &&
-        !route.includes('legacy') && (
-          <Link href={`/saints/${slug}/legacy`}>
-            <PageButton
-              type="legacy"
-              active={true}
-            />
-          </Link>
-        )}
+      !route.includes('teachings') ? (
+        <Link href={`/saints/${slug}/teachings`}>
+          <PageButton
+            type="teachings"
+            bio={true}
+          />
+        </Link>
+      ) : (
+        ''
+      )}
     </div>
   )
 }

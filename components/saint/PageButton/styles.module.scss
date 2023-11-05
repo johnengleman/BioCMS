@@ -10,6 +10,17 @@
     color: #fff;
   }
 
+  &:hover {
+    background-color: #3187e3;
+    border-radius: 10px;
+    color: #fff;
+  }
+
+  &.bio {
+    border: 1px solid var(--gold);
+    border-radius: 10px;
+  }
+
   font-size: 16px;
   display: flex;
   align-items: center;

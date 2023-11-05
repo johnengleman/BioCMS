@@ -42,12 +42,20 @@ const tocConfig = {
   },
 }
 
-const PageButton = ({ type, active }) => {
+const PageButton = ({
+  type,
+  bio,
+  active,
+}: {
+  type: string
+  bio: boolean
+  active?: boolean
+}) => {
   return (
     <button
-      className={`${styles.pageButton}  ${
-        active ? styles.active : ''
-      }`}
+      className={`${styles.pageButton} ${
+        bio ? styles.bio : ''
+      } ${active ? styles.active : ''}`}
     >
       <div
         className={styles.icon}

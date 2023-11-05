@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import PageButton from '../PageButton/PageButton'
 import styles from './styles.module.scss'
+import { faLacrosseStickBall } from '@fortawesome/pro-regular-svg-icons'
 
 const TableOfContentFeatures = () => {
   const [elements, setElements] = useState<HTMLElement[]>(
@@ -51,6 +52,7 @@ const TableOfContentFeatures = () => {
                 <a href={`#${element.id}`}>
                   <PageButton
                     type={section}
+                    bio={false}
                     active={
                       activeHeading === `${element.id}`
                     }

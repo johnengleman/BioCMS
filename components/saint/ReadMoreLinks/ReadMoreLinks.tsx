@@ -7,15 +7,19 @@ const ReadMoreLinks = ({ links }) => {
       <div className={styles.readMoreLinks}>
         <div className={styles.title}>Read More</div>
         <div className={styles.links}>
-          {links?.map((link, i) => (
-            <Link
-              key={i}
-              href={link.link}
-              className={styles.link}
-            >
-              {link.link}
-            </Link>
-          ))}
+          {links?.map((link, i) => {
+            return link.link ? (
+              <Link
+                key={i}
+                href={link.link}
+                className={styles.link}
+              >
+                {link.text}
+              </Link>
+            ) : (
+              <p key={i}>{link.text}</p>
+            )
+          })}
         </div>
       </div>
     )
