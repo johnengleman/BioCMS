@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import NextNProgress from 'nextjs-progressbar'
 import { SiteProvider } from '../context/SiteContext'
-import { Analytics } from '@vercel/analytics/react'
 import {
   Hydrate,
   QueryClient,
@@ -43,7 +42,6 @@ function MyApp({ Component, pageProps }: AppProps) {
           <NextNProgress />
           <main className={inter.className}>
             <Component {...pageProps} />
-            <Analytics />
           </main>
         </Hydrate>
       </QueryClientProvider>
