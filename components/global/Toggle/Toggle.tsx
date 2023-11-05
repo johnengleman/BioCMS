@@ -8,7 +8,7 @@ import styles from './styles.module.scss'
 const Toggle = () => {
   const router = useRouter()
   const ref = useRef(null)
-  const sort = router?.query?.sort || 'created-asc'
+  const sort = router?.query?.sort || 'created-newest'
   const [showMenu, setShowMenu] = useState(false)
 
   useOnClickOutside(ref, () => setShowMenu(false))
@@ -38,7 +38,8 @@ const Toggle = () => {
         className={styles.selected}
         onClick={() => setShowMenu(!showMenu)}
       >
-        sort by <span className={styles.direction}>{sort}</span>
+        sort by{' '}
+        <span className={styles.direction}>{sort}</span>
         <FontAwesomeIcon
           icon={faCaretUp}
           rotation={showMenu ? 180 : 90}
@@ -52,28 +53,28 @@ const Toggle = () => {
       >
         <ul>
           <li
-            onClick={() =>
-              handleSetShowMenu('died-asc')
-            }
+            onClick={() => handleSetShowMenu('died-oldest')}
           >
-            Died - Asc
+            Died - Oldest
+          </li>
+          <li
+            onClick={() => handleSetShowMenu('died-newest')}
+          >
+            Died - Newest
           </li>
           <li
             onClick={() =>
-              handleSetShowMenu('died-desc')
+              handleSetShowMenu('created-oldest')
             }
           >
-            Died - Desc
+            Created - Oldest
           </li>
           <li
-            onClick={() => handleSetShowMenu('created-asc')}
+            onClick={() =>
+              handleSetShowMenu('created-newest')
+            }
           >
-            Created - Asc
-          </li>
-          <li
-            onClick={() => handleSetShowMenu('created-desc')}
-          >
-            Created - Desc
+            Created - Newest
           </li>
         </ul>
       </div>

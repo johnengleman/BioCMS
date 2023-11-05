@@ -1,5 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
-import Cookies from 'js-cookie'
+import { useRef } from 'react'
 import { useRouter } from 'next/router'
 import Toggle from '../../global/Toggle/Toggle'
 import ButtonFilter from '../../global/ButtonFilter/ButtonFilter'
@@ -16,27 +15,12 @@ const Filter = ({ filtersCount = {} }) => {
     ? router.query.church[0]
     : router.query.church || 'all'
   const canUseTransition = useRef<boolean>(false)
-  const [selectedChurch, setSelectedChurch] =
-    useState('all')
 
   if (typeof window !== 'undefined') {
     canUseTransition.current =
       typeof (document as any)?.startViewTransition ===
       'function'
   }
-
-  useEffect(() => {
-    const cookie = Cookies.get('findasaint.com')
-
-    if (cookie) {
-      try {
-        const data = JSON.parse(cookie)
-        setSelectedChurch(data.church)
-      } catch (err) {
-        console.error(err)
-      }
-    }
-  }, [church])
 
   return (
     <div className={styles.filter}>

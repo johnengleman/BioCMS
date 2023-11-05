@@ -5,6 +5,8 @@ import {
   QueryClient,
   useQuery,
 } from '@tanstack/react-query'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
 import { getTeachings } from '../../queries/getTeachings'
 import { getSearchData } from '../../queries/getSearchData'
 import { getNav } from '../../queries/getNav'
@@ -13,6 +15,7 @@ import ErrorPage from 'next/error'
 import SaintDetail from '../../components/global/SaintDetail/SaintDetail'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
 import { getTeachingFilters } from '../../queries/getTeachingFilters'
+import useCookie from '../../hooks/useCookie'
 import styles from './styles.module.scss'
 
 export const config = {
@@ -20,6 +23,7 @@ export const config = {
 }
 
 const Teachings = () => {
+  useCookie()
   const router = useRouter()
   const church = Array.isArray(router.query.church)
     ? router.query.church[0]
@@ -37,16 +41,17 @@ const Teachings = () => {
       getSearchData(
         Array.isArray(church) ? church[0] : church,
       ),
-      {
-        initialData: [],
-      }
+    {
+      initialData: [],
+    },
   )
 
-  const { data: navData } = useQuery(['nav', church], () =>
-    getNav({ church }),
+  const { data: navData } = useQuery(
+    ['nav', church],
+    () => getNav({ church }),
     {
       initialData: {},
-    }
+    },
   )
 
   const { data: filtersCount } = useQuery(
@@ -55,12 +60,16 @@ const Teachings = () => {
       getTeachingFilters(
         Array.isArray(church) ? church[0] : church,
       ),
-      {
-        initialData: {},
-      }
+    {
+      initialData: {},
+    },
   )
 
-  const { data: teachingsData } = useQuery(
+  const {
+    data: teachingsData,
+    isFetching,
+    isError,
+  } = useQuery(
     ['teachings', church, category, teachingPreset],
     () =>
       getTeachings({
@@ -68,9 +77,9 @@ const Teachings = () => {
         category,
         teachingPreset,
       }),
-      {
-        initialData: [],
-      }
+    {
+      initialData: [],
+    },
   )
 
   if (!router.isFallback && !teachingsData) {
@@ -102,14 +111,28 @@ const Teachings = () => {
           filtersCount={filtersCount}
         />
         <div className={styles.teachings}>
-          {teachingsData.map((teaching, i) => (
-            <SaintDetail
-              key={i}
-              saint={teaching.saint}
-              data={teaching.teachings}
-              link={`/saints/${teaching.saint.slug}/teachings`}
-            />
-          ))}
+          {isFetching ? (
+            <p className="status">Fetching teachings...</p>
+          ) : isError ? (
+            <p className="status">
+              Error.{' '}
+              <FontAwesomeIcon icon={faFaceFrownSlight} />
+            </p>
+          ) : !isFetching && teachingsData?.length ? (
+            teachingsData.map((teaching, i) => (
+              <SaintDetail
+                key={i}
+                saint={teaching.saint}
+                data={teaching.teachings}
+                link={`/saints/${teaching.saint.slug}/teachings`}
+              />
+            ))
+          ) : (
+            <p className="status">
+              No teachings found.{' '}
+              <FontAwesomeIcon icon={faFaceFrownSlight} />
+            </p>
+          )}
         </div>
       </Page>
     </>

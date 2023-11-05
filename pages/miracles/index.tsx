@@ -5,6 +5,8 @@ import {
   QueryClient,
   useQuery,
 } from '@tanstack/react-query'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
 import { getMiracles } from '../../queries/getMiracles'
 import { getMiraclesFilters } from '../../queries/getMiraclesFilters'
 import { getSearchData } from '../../queries/getSearchData'
@@ -13,6 +15,7 @@ import Page from '../../components/page/Page/Page'
 import ErrorPage from 'next/error'
 import SaintDetail from '../../components/global/SaintDetail/SaintDetail'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
+import useCookie from '../../hooks/useCookie'
 import styles from './styles.module.scss'
 
 export const config = {
@@ -20,6 +23,7 @@ export const config = {
 }
 
 const Teachings = () => {
+  useCookie()
   const router = useRouter()
   const church = Array.isArray(router.query.church)
     ? router.query.church[0]
@@ -36,14 +40,15 @@ const Teachings = () => {
     () => getSearchData(church),
     {
       initialData: [],
-    }
+    },
   )
 
-  const { data: navData } = useQuery(['nav', church], () =>
-    getNav({ church }),
+  const { data: navData } = useQuery(
+    ['nav', church],
+    () => getNav({ church }),
     {
       initialData: {},
-    }
+    },
   )
 
   const { data: filtersCount } = useQuery(
@@ -52,12 +57,16 @@ const Teachings = () => {
       getMiraclesFilters(
         Array.isArray(church) ? church[0] : church,
       ),
-     {
+    {
       initialData: {},
-     }
+    },
   )
 
-  const { data: miraclesData } = useQuery(
+  const {
+    data: miraclesData,
+    isError,
+    isFetching,
+  } = useQuery(
     ['miracles', church, category, miraclesPreset],
     () =>
       getMiracles({
@@ -65,9 +74,9 @@ const Teachings = () => {
         category,
         miraclesPreset,
       }),
-      {
-        initialData: []
-      }
+    {
+      initialData: [],
+    },
   )
 
   if (!router.isFallback && !miraclesData) {
@@ -99,14 +108,28 @@ const Teachings = () => {
           filtersCount={filtersCount}
         />
         <div className={styles.miracles}>
-          {miraclesData.map((miracle, i) => (
-            <SaintDetail
-              key={i}
-              saint={miracle.saint}
-              data={miracle.miracles}
-              link={`/saints/${miracle.saint.slug}/miracles`}
-            />
-          ))}
+          {isFetching ? (
+            <p className="status">Fetching miracles...</p>
+          ) : isError ? (
+            <p className="status">
+              Error.{' '}
+              <FontAwesomeIcon icon={faFaceFrownSlight} />
+            </p>
+          ) : !isFetching && miraclesData?.length ? (
+            miraclesData.map((miracle, i) => (
+              <SaintDetail
+                key={i}
+                saint={miracle.saint}
+                data={miracle.miracles}
+                link={`/saints/${miracle.saint.slug}/miracles`}
+              />
+            ))
+          ) : (
+            <p className="status">
+              No miracles found.{' '}
+              <FontAwesomeIcon icon={faFaceFrownSlight} />
+            </p>
+          )}
         </div>
       </Page>
     </>

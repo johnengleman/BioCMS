@@ -17,8 +17,11 @@ function getMiraclesQuery(
   // Filter construction
   let filterList: string[] = []
   let churchList: string[] = []
+
   if (church !== 'all') {
-    churchList.push('venerated_in: { _icontains: $church }')
+    churchList.push(
+      '{ saint: { venerated_in: { _icontains: $church }}}',
+    )
   }
   if (category !== 'none') {
     filterList.push(
@@ -40,9 +43,9 @@ function getMiraclesQuery(
     } {
       miracles(
         filter: {
-          ${churchList}
           _and: [
             ${filterList.join(', ')}
+            ${churchList}
           ]
         }
       ) {

@@ -91,12 +91,13 @@ h6 {
   isolation: isolate;
 }
 
-.error {
+.status {
   font-size: 25px;
   font-weight: 700;
   margin: 0 auto;
   height: 400px;
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 

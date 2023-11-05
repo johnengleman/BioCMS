@@ -15,7 +15,9 @@ function numberOfTeachingsQuery(church) {
   let churchList: string[] = []
 
   if (church !== 'all') {
-    churchList.push('venerated_in: { _icontains: $church }')
+    churchList.push(
+      '{ saint: { venerated_in: { _icontains: $church }}}',
+    )
   }
 
   // Building the query
@@ -28,9 +30,9 @@ function numberOfTeachingsQuery(church) {
       ${properties.filters.map(
         (filter) => `${filter}: teachings_aggregated(
         filter: {
-          ${churchList}
           _and: [
             ${getFilterList(filter)}
+            ${churchList}
           ]
         }
       ) {
@@ -41,7 +43,6 @@ function numberOfTeachingsQuery(church) {
       )}
     }
   `
-
   return baseQuery
 }
 

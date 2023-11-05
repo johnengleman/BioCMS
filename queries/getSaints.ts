@@ -83,16 +83,16 @@ function getSaintsQuery(
 }
 
 const parseSort = (sort) => {
-  if (sort === 'created-asc') {
+  if (sort === 'created-oldest') {
     return 'date_created'
   }
-  if (sort === 'created-desc') {
+  if (sort === 'created-newest') {
     return '-date_created'
   }
-  if (sort === 'died-asc') {
+  if (sort === 'died-oldest') {
     return 'death_year'
   }
-  if (sort === 'died-desc') {
+  if (sort === 'died-newest') {
     return '-death_year'
   }
 }
@@ -101,7 +101,7 @@ export const getSaints = async ({
   church = 'all',
   category = 'none',
   saintPreset = 'none',
-  sort = 'created-asc',
+  sort = 'created-newest',
 }) => {
   const query = getSaintsQuery(
     church,

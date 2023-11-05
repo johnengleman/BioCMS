@@ -53,13 +53,6 @@ const ChurchToggle = () => {
       JSON.stringify({ church: church }),
     )
 
-    // Only add query to url if on saints or books page
-    const onSaintHomepage =
-      router.pathname === '/saints' ||
-      router.pathname === '/books' ||
-      router.pathname === '/'
-
-    if (onSaintHomepage) {
       const newQuery = {
         ...router.query,
         church: church,
@@ -72,7 +65,6 @@ const ChurchToggle = () => {
         undefined,
       )
     }
-  }
 
   useEffect(() => {
     const cookie = Cookies.get('findasaint.com')

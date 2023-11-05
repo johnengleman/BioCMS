@@ -15,7 +15,9 @@ function numberOfPresetsQuery(church) {
   let churchList: string[] = []
 
   if (church !== 'all') {
-    churchList.push('venerated_in: { _icontains: $church }')
+    churchList.push(
+      '{ saint: { venerated_in: { _icontains: $church }}}',
+    )
   }
 
   // Building the query
@@ -28,9 +30,9 @@ function numberOfPresetsQuery(church) {
       ${properties.presets.map(
         (preset) => `${preset}: books(
         filter: {
-          ${churchList}
           _and: [
             ${getPresetList(preset)}
+            ${churchList}
           ]
         }
       ) {
@@ -39,7 +41,6 @@ function numberOfPresetsQuery(church) {
       )}
     }
   `
-
   return baseQuery
 }
 

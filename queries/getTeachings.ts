@@ -18,8 +18,11 @@ function getTeachingsQuery(
   let filterList: string[] = []
   let churchList: string[] = []
   if (church !== 'all') {
-    churchList.push('venerated_in: { _icontains: $church }')
+    churchList.push(
+      '{ saint: { venerated_in: { _icontains: $church }}}',
+    )
   }
+
   if (category !== 'none') {
     filterList.push(
       '{ time_period: { _icontains: $category } }',
@@ -40,9 +43,9 @@ function getTeachingsQuery(
     } {
       teachings(
         filter: {
-          ${churchList}
           _and: [
             ${filterList.join(', ')}
+            ${churchList}
           ]
         }
       ) {
@@ -68,16 +71,16 @@ function getTeachingsQuery(
 }
 
 const parseSort = (sort) => {
-  if (sort === 'created-asc') {
+  if (sort === 'created-oldest') {
     return 'date_created'
   }
-  if (sort === 'created-desc') {
+  if (sort === 'created-newest') {
     return '-date_created'
   }
-  if (sort === 'died-asc') {
+  if (sort === 'died-oldest') {
     return 'death_year'
   }
-  if (sort === 'died-desc') {
+  if (sort === 'died-newest') {
     return '-death_year'
   }
 }

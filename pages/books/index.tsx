@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-import Cookies from 'js-cookie'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import {
@@ -7,6 +5,8 @@ import {
   QueryClient,
   useQuery,
 } from '@tanstack/react-query'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
 import Hero from '../../components/books/Hero/Hero'
 import { getSearchData } from '../../queries/getSearchData'
 import { getNav } from '../../queries/getNav'
@@ -18,12 +18,14 @@ import Page from '../../components/page/Page/Page'
 import BookSummary from '../../components/books/BookSummary/BookSummary'
 import styles from './styles.module.scss'
 import SectionTitle from '../../components/books/SectionTitle/SectionTitle'
+import useCookie from '../../hooks/useCookie'
 
 export const config = {
   runtime: 'experimental-edge',
 }
 
 const Books = () => {
+  useCookie()
   const router = useRouter()
   const church = Array.isArray(router.query.church)
     ? router.query.church[0]
@@ -46,30 +48,39 @@ const Books = () => {
     () => getSearchData(church),
     {
       initialData: [],
-    }
+    },
   )
 
-  const { data: navData } = useQuery(['nav', church], () =>
-    getNav({ church }),
+  const { data: navData } = useQuery(
+    ['nav', church],
+    () => getNav({ church }),
     {
       initialData: {},
-    }
+    },
   )
 
-  const { data: newestBookData } = useQuery(
+  const {
+    data: newestBookData,
+    isFetching: isFetchingNew,
+    isError: isErrorNew,
+  } = useQuery(
     ['newestBooks', church, preset],
     () => getNewestBooks({ church, preset }),
     {
       initialData: [],
-    }
+    },
   )
 
-  const { data: bookData } = useQuery(
+  const {
+    data: bookData,
+    isFetching: isFetchingAll,
+    isError: isErrorAll,
+  } = useQuery(
     ['books', church, preset, filter],
     () => getBooks({ church, preset, filter }),
     {
       initialData: [],
-    }
+    },
   )
 
   const { data: authorData } = useQuery(
@@ -77,7 +88,7 @@ const Books = () => {
     () => getTopAuthors({ church, preset }),
     {
       initialData: [],
-    }
+    },
   )
 
   const { data: genreData } = useQuery(
@@ -85,34 +96,8 @@ const Books = () => {
     () => getTopGenres(church),
     {
       initialData: [],
-    }
+    },
   )
-
-  useEffect(() => {
-    const cookie = Cookies.get('findasaint.com')
-
-    if (cookie) {
-      try {
-        const data = JSON.parse(cookie)
-
-        const newQuery = {
-          ...router.query,
-          church: data.church,
-        }
-        router.push(
-          {
-            pathname: router.pathname,
-            query: newQuery,
-          },
-          undefined,
-          { shallow: true },
-        )
-      } catch (err) {
-        console.error(err)
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <>
@@ -142,30 +127,60 @@ const Books = () => {
               Newest {bookCategory}
             </SectionTitle>
           )}
-          {!bookFilter && (
-            <div className={styles.newest}>
-              {newestBookData?.map((book, i) => (
-                <BookSummary
-                  key={i}
-                  data={book}
-                  showDescription={false}
-                />
-              ))}
-            </div>
-          )}
+          {!bookFilter &&
+            (isFetchingNew ? (
+              <p className="status">
+                Fetching newest books...
+              </p>
+            ) : isErrorNew ? (
+              <p className="status">
+                Error.{' '}
+                <FontAwesomeIcon icon={faFaceFrownSlight} />
+              </p>
+            ) : !isFetchingNew && newestBookData?.length ? (
+              <div className={styles.newest}>
+                {newestBookData?.map((book, i) => (
+                  <BookSummary
+                    key={i}
+                    data={book}
+                    showDescription={false}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="status">
+                No new books found.{' '}
+                <FontAwesomeIcon icon={faFaceFrownSlight} />
+              </p>
+            ))}
 
           <SectionTitle>
             All {bookFilter || bookCategory}
           </SectionTitle>
-          <div className={styles.allBooks}>
-            {bookData?.map((book, i) => (
-              <BookSummary
-                key={i}
-                data={book}
-                showDescription={true}
-              />
-            ))}
-          </div>
+
+          {isFetchingAll ? (
+            <p className="status">Fetching all books...</p>
+          ) : isErrorAll ? (
+            <p className="status">
+              Error.{' '}
+              <FontAwesomeIcon icon={faFaceFrownSlight} />
+            </p>
+          ) : !isFetchingAll && bookData?.length ? (
+            <div className={styles.allBooks}>
+              {bookData?.map((book, i) => (
+                <BookSummary
+                  key={i}
+                  data={book}
+                  showDescription={true}
+                />
+              ))}
+            </div>
+          ) : (
+            <p className="status">
+              No books found.{' '}
+              <FontAwesomeIcon icon={faFaceFrownSlight} />
+            </p>
+          )}
         </div>
       </Page>
     </>

@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-import Cookies from 'js-cookie'
 import {
   QueryClient,
   useQuery,
@@ -19,12 +17,14 @@ import Page from '../../components/page/Page/Page'
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
 import Hero from '../../components/saint/Hero/Hero'
+import useCookie from '../../hooks/useCookie'
 
 export const config = {
   runtime: 'experimental-edge',
 }
 
 const Saints = () => {
+  useCookie()
   const router = useRouter()
   const church = Array.isArray(router.query.church)
     ? router.query.church[0]
@@ -36,15 +36,15 @@ const Saints = () => {
     ? router.query.preset[0]
     : router.query.preset || 'none'
   const sort = (router.query.sort ||
-    'created-asc') as string
+    'created-newest') as string
 
-  const { data, isError, isLoading } = useQuery(
+  const { data, isError, isFetching } = useQuery(
     ['saints', church, category, saintPreset, sort],
     () =>
       getSaints({ church, category, saintPreset, sort }),
-      {
-        initialData: [],
-      }
+    {
+      initialData: [],
+    },
   )
 
   const { data: filtersCount } = useQuery(
@@ -52,7 +52,7 @@ const Saints = () => {
     () => getSaintFilters(church),
     {
       initialData: {},
-    }
+    },
   )
 
   const { data: searchData } = useQuery(
@@ -60,14 +60,15 @@ const Saints = () => {
     () => getSearchData(church),
     {
       initialData: [],
-    }
+    },
   )
 
-  const { data: navData } = useQuery(['nav', church], () =>
-    getNav({ church }),
+  const { data: navData } = useQuery(
+    ['nav', church],
+    () => getNav({ church }),
     {
       initialData: {},
-    }
+    },
   )
 
   const {
@@ -94,37 +95,11 @@ const Saints = () => {
     return 5
   }
 
-  useEffect(() => {
-    const cookie = Cookies.get('findasaint.com')
-
-    if (cookie) {
-      try {
-        const data = JSON.parse(cookie)
-
-        const newQuery = {
-          ...router.query,
-          church: data.church,
-        }
-        router.push(
-          {
-            pathname: router.pathname,
-            query: newQuery,
-          },
-          undefined,
-          { shallow: true },
-        )
-      } catch (err) {
-        console.error(err)
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   return (
     <>
       <Head>
         <title>
-          Browse and discover all the Catholic Saints:
+          Browse and discover every Catholic Saint:
           Spiritual Biographies, Teachings, Prayers,
           Miracles, Books, and Quotes
         </title>
@@ -147,39 +122,39 @@ const Saints = () => {
         navData={navData}
       >
         <Hero filtersCount={filtersCount} />
-        {isLoading && (
-          <p className="error">Fetching Saints</p>
-        )}
-        {!isLoading && !data?.length && (
-          <p className="error">
+
+        {isFetching ? (
+          <p className="status">Fetching Saints...</p>
+        ) : isError ? (
+          <p className="status">
+            Error.{' '}
+            <FontAwesomeIcon icon={faFaceFrownSlight} />
+          </p>
+        ) : !isFetching && data?.length ? (
+          <div className={styles.saintHome}>
+            {data && (
+              <Masonry
+                breakpointCols={getColumnsToRender()}
+                className="my-masonry-grid"
+                columnClassName="my-masonry-grid_column"
+              >
+                {data?.map((saint, i: number) => (
+                  <SaintSummary
+                    {...saint}
+                    key={i}
+                    transitionName={`saint-${i}`}
+                    priority={i < 8 ? true : false}
+                  />
+                ))}
+              </Masonry>
+            )}
+          </div>
+        ) : (
+          <p className="status">
             No saints found.{' '}
             <FontAwesomeIcon icon={faFaceFrownSlight} />
           </p>
         )}
-        {isError && (
-          <p className="error">
-            Error.{' '}
-            <FontAwesomeIcon icon={faFaceFrownSlight} />
-          </p>
-        )}
-        <div className={styles.saintHome}>
-          {data && (
-            <Masonry
-              breakpointCols={getColumnsToRender()}
-              className="my-masonry-grid"
-              columnClassName="my-masonry-grid_column"
-            >
-              {data?.map((saint, i: number) => (
-                <SaintSummary
-                  {...saint}
-                  key={i}
-                  transitionName={`saint-${i}`}
-                  priority={i < 8 ? true : false}
-                />
-              ))}
-            </Masonry>
-          )}
-        </div>
       </Page>
     </>
   )
@@ -190,7 +165,7 @@ export async function getServerSideProps(context) {
   const cookie = context.req.headers.cookie
   const category = context.query.filter || 'none'
   const saintPreset = context.query.preset || 'none'
-  const sort = context.query.sort || 'created-asc'
+  const sort = context.query.sort || 'created-newest'
   let church = 'all'
 
   if (cookie) {

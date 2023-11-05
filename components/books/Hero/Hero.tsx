@@ -1,6 +1,3 @@
-import { useEffect, useState } from 'react'
-import Cookies from 'js-cookie'
-import { useRouter } from 'next/router'
 import {
   faChurch,
   faPenLine,
@@ -12,24 +9,6 @@ import ButtonFilter from '../../global/ButtonFilter/ButtonFilter'
 import styles from './styles.module.scss'
 
 const Filter = ({ authorData, genreData }) => {
-  const router = useRouter()
-  const church = router.query.church || 'all'
-
-  const [selectedChurch, setSelectedChurch] =
-    useState('all')
-
-  useEffect(() => {
-    const cookie = Cookies.get('findasaint.com')
-
-    if (cookie) {
-      try {
-        const data = JSON.parse(cookie)
-        setSelectedChurch(data.church)
-      } catch (err) {
-        console.error(err)
-      }
-    }
-  }, [church])
 
   const getIcon = (genre) => {
     if (genre === 'theology_and_dogma') {

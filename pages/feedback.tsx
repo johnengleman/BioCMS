@@ -1,6 +1,4 @@
-import { useEffect } from 'react'
 import { useForm, ValidationError } from '@formspree/react'
-import Cookies from 'js-cookie'
 import { useRouter } from 'next/router'
 import {
   QueryClient,
@@ -11,6 +9,7 @@ import { getNav } from '../queries/getNav'
 import { getSearchData } from '../queries/getSearchData'
 import Head from 'next/head'
 import Page from '../components/page/Page/Page'
+import useCookie from '../hooks/useCookie'
 import styles from './styles.module.scss'
 
 export const config = {
@@ -18,6 +17,7 @@ export const config = {
 }
 
 const Feedback = () => {
+  useCookie();
   const [state, handleSubmit] = useForm('maygvrkn')
   const router = useRouter()
   const church = Array.isArray(router.query.church)
@@ -38,32 +38,6 @@ const Feedback = () => {
       initialData: {},
     }
   )
-
-  useEffect(() => {
-    const cookie = Cookies.get('findasaint.com')
-
-    if (cookie) {
-      try {
-        const data = JSON.parse(cookie)
-
-        const newQuery = {
-          ...router.query,
-          church: data.church,
-        }
-        router.push(
-          {
-            pathname: router.pathname,
-            query: newQuery,
-          },
-          undefined,
-          { shallow: true },
-        )
-      } catch (err) {
-        console.error(err)
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   return (
     <>
