@@ -30,7 +30,6 @@
     overflow: hidden;
 
     @include breakpoint(tablet) {
-      max-height: 120px;
       padding: 0 30px;
     }
 

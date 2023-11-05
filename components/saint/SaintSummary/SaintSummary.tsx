@@ -66,7 +66,7 @@ const SaintSummary = (props) => {
         <div
           className={styles.summary}
           dangerouslySetInnerHTML={{
-            __html: summary.concat('<span>..</span>'),
+            __html: summary,
           }}
         ></div>
         <div className={styles.footer}>
