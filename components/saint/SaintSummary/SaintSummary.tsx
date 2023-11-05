@@ -44,7 +44,7 @@ const SaintSummary = (props) => {
         <ImageGlobal
           alt={
             images[0]?.directus_files_id?.description ||
-            `Image of ${name}, the eastern orthodox saint`
+            `Image the catholic saint ${name}`
           }
           src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${images[0]?.directus_files_id.id}?key=summary`}
           fill={true}
