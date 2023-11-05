@@ -48,7 +48,7 @@ const Filter = ({ filtersCount = {} }) => {
             icon={faCameraRetro}
             value={preset}
             count={
-              filtersCount[church][preset]?.None[0].count.id
+              filtersCount[church]?.[preset]?.None[0].count.id
             }
           />
         ))}
@@ -61,7 +61,7 @@ const Filter = ({ filtersCount = {} }) => {
             key={i}
             filter={filter}
             count={
-              filtersCount[church][selectedPreset]?.[
+              filtersCount[church]?.[selectedPreset]?.[
                 filter
               ]?.[0].count.id
             }

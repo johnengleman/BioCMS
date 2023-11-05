@@ -44,30 +44,48 @@ const Books = () => {
   const { data: searchData } = useQuery(
     ['search', church],
     () => getSearchData(church),
+    {
+      initialData: [],
+    }
   )
 
   const { data: navData } = useQuery(['nav', church], () =>
     getNav({ church }),
+    {
+      initialData: {},
+    }
   )
 
   const { data: newestBookData } = useQuery(
     ['newestBooks', church, preset],
     () => getNewestBooks({ church, preset }),
+    {
+      initialData: [],
+    }
   )
 
   const { data: bookData } = useQuery(
     ['books', church, preset, filter],
     () => getBooks({ church, preset, filter }),
+    {
+      initialData: [],
+    }
   )
 
   const { data: authorData } = useQuery(
     ['authors', church, preset],
     () => getTopAuthors({ church, preset }),
+    {
+      initialData: [],
+    }
   )
 
   const { data: genreData } = useQuery(
     ['genres', church],
     () => getTopGenres(church),
+    {
+      initialData: [],
+    }
   )
 
   useEffect(() => {

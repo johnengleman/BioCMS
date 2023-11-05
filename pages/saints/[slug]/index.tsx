@@ -39,6 +39,9 @@ const SaintBio = () => {
 
   const { data = null } = useQuery(['saints', slug], () =>
     getSaint(slug),
+    {
+      initialData: [],
+    }
   )
 
   const { data: searchData } = useQuery(
@@ -47,10 +50,16 @@ const SaintBio = () => {
       getSearchData(
         Array.isArray(church) ? church[0] : church,
       ),
+      {
+        initialData: [],
+      }
   )
 
   const { data: navData } = useQuery(['nav', church], () =>
     getNav({ church }),
+    {
+      initialData: {},
+    }
   )
 
   const { data: relatedSaints } = useQuery(
@@ -61,6 +70,9 @@ const SaintBio = () => {
         church,
         slug,
       }),
+      {
+        initialData: [],
+      }
   )
 
   if (!router.isFallback && !data) {

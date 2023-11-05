@@ -37,10 +37,16 @@ const Teachings = () => {
       getSearchData(
         Array.isArray(church) ? church[0] : church,
       ),
+      {
+        initialData: [],
+      }
   )
 
   const { data: navData } = useQuery(['nav', church], () =>
     getNav({ church }),
+    {
+      initialData: {},
+    }
   )
 
   const { data: filtersCount } = useQuery(
@@ -49,6 +55,9 @@ const Teachings = () => {
       getTeachingFilters(
         Array.isArray(church) ? church[0] : church,
       ),
+      {
+        initialData: {},
+      }
   )
 
   const { data: teachingsData } = useQuery(
@@ -59,6 +68,9 @@ const Teachings = () => {
         category,
         teachingPreset,
       }),
+      {
+        initialData: [],
+      }
   )
 
   if (!router.isFallback && !teachingsData) {

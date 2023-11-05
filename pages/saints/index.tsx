@@ -42,20 +42,32 @@ const Saints = () => {
     ['saints', church, category, saintPreset, sort],
     () =>
       getSaints({ church, category, saintPreset, sort }),
+      {
+        initialData: [],
+      }
   )
 
   const { data: filtersCount } = useQuery(
     ['filters', church],
     () => getSaintFilters(church),
+    {
+      initialData: {},
+    }
   )
 
   const { data: searchData } = useQuery(
     ['search', church],
     () => getSearchData(church),
+    {
+      initialData: [],
+    }
   )
 
   const { data: navData } = useQuery(['nav', church], () =>
     getNav({ church }),
+    {
+      initialData: {},
+    }
   )
 
   const {

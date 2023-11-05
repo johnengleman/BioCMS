@@ -27,10 +27,16 @@ const Feedback = () => {
   const { data: searchData } = useQuery(
     ['search', church],
     () => getSearchData(church),
+    {
+      initialData: [],
+    }
   )
 
   const { data: navData } = useQuery(['nav', church], () =>
     getNav({ church }),
+    {
+      initialData: {},
+    }
   )
 
   useEffect(() => {
