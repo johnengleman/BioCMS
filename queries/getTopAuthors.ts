@@ -48,13 +48,11 @@ function getAuthorsQuery({ church, preset }) {
       ) {
         id
         name
-        images(limit: 1) {
-          directus_files_id {
-            id
-            width
-            height
-            description
-          }
+        profile_image(limit: 1) {
+          id
+          width
+          height
+          description
         }
        books
         ${bookFilter}

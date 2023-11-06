@@ -5,7 +5,6 @@ import {
   faBooks,
   faCommentQuote,
   faStarChristmas,
-  faPersonPraying,
 } from '@fortawesome/sharp-solid-svg-icons'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import styles from './styles.module.scss'
@@ -15,7 +14,7 @@ const SaintSummary = (props) => {
     name,
     birth_year,
     death_year,
-    images,
+    profile_image,
     categories,
     summary,
     sayings,
@@ -43,10 +42,10 @@ const SaintSummary = (props) => {
       <div className={styles.image}>
         <ImageGlobal
           alt={
-            images[0]?.directus_files_id?.description ||
+            profile_image?.description ||
             `Image the catholic saint ${name}`
           }
-          src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${images[0]?.directus_files_id.id}?key=summary`}
+          src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${profile_image.id}?key=summary`}
           fill={true}
           priority={priority}
         />

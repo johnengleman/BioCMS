@@ -7,7 +7,6 @@ import {
   useQuery,
 } from '@tanstack/react-query'
 import styles from './styles.module.scss'
-import { Saint } from '../../../types/types'
 import { getSaint } from '../../../queries/getSaint'
 import { getNav } from '../../../queries/getNav'
 import Page from '../../../components/page/Page/Page'
@@ -40,11 +39,12 @@ const SaintBio = (props) => {
     ? router?.query?.slug[0]
     : router?.query?.slug
 
-  const { data = null } = useQuery(['saints', slug], () =>
-    getSaint(slug),
+  const { data = null } = useQuery(
+    ['saints', slug],
+    () => getSaint(slug),
     {
       initialData: [],
-    }
+    },
   )
 
   const { data: searchData } = useQuery(
@@ -53,16 +53,17 @@ const SaintBio = (props) => {
       getSearchData(
         Array.isArray(church) ? church[0] : church,
       ),
-      {
-        initialData: [],
-      }
+    {
+      initialData: [],
+    },
   )
 
-  const { data: navData } = useQuery(['nav', church], () =>
-    getNav({ church }),
+  const { data: navData } = useQuery(
+    ['nav', church],
+    () => getNav({ church }),
     {
       initialData: {},
-    }
+    },
   )
 
   if (!router.isFallback && !data) {
@@ -110,9 +111,8 @@ const SaintBio = (props) => {
           <div className={styles.content}>
             <div className={styles.leftRail}>
               <ImageMain
-                images={data?.images}
+                image={data?.profile_image}
                 name={data?.name}
-                limit={1}
               />
               <TableOfContents mainRef={refElement} />
             </div>
@@ -176,10 +176,6 @@ export const getStaticProps = async ({ params }) => {
   await queryClient.prefetchQuery(['saints', slug], () =>
     getSaint(slug),
   )
-  const saintData: Saint = queryClient.getQueryData([
-    'saints',
-    slug,
-  ]) as Saint
 
   await queryClient.prefetchQuery(['search', church], () =>
     getSearchData(church),
@@ -189,22 +185,9 @@ export const getStaticProps = async ({ params }) => {
     getNav({ church }),
   )
 
-  // try {
-  //   const saintsResponse = await fetchAPIQuery(
-  //     `getRelatedSaints?categories=${saintData?.categories.join()}`,
-  //   )
-  //   relatedSaints = saintsResponse || []
-  // } catch (error) {
-  //   console.error(error)
-  // }
-
   return {
     props: {
       dehydratedState: dehydrate(queryClient),
-      // relatedSaints: relatedSaints
-      //   ?.filter((saint) => saint.slug !== slug)
-      //   .sort(() => Math.random() - 0.5)
-      //   .slice(0, 4),
     },
     revalidate: 60,
   }

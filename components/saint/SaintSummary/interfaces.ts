@@ -15,9 +15,7 @@ export interface Saint {
     text: string
   }[]
   tags: string[]
-  images: {
-    directus_files_id: {
-      id: string
-    }
-  }[]
+  profile_image: {
+    id: string
+  }
 }

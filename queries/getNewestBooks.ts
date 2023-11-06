@@ -52,10 +52,8 @@ function getNewestBooksQuery({ church, preset }) {
         saint {
             name
             venerated_in
-            images {
-              directus_files_id {
+            profile_image {
                 id
-              }
             }
           }
         }

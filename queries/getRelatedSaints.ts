@@ -12,7 +12,7 @@ interface Saint {
   birth_year?: number
   death_year?: number
   categories: string[]
-  images: Image[]
+  image: Image
 }
 
 function getSaintsQuery(church) {
@@ -47,10 +47,8 @@ function getSaintsQuery(church) {
         death_year
         categories
         summary
-        images {
-          directus_files_id {
-            id
-          }
+        profile_image {
+          id
         }
       }
     }

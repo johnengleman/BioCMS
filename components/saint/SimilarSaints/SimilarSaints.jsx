@@ -7,7 +7,7 @@ const SimilarSaint = ({
   name,
   birth_year,
   death_year,
-  images,
+  profile_image,
   slug,
   categories,
   summary,
@@ -16,12 +16,12 @@ const SimilarSaint = ({
     <div className={styles.similarSaint}>
       <Link href={slug}>
         <ImageGlobal
-          src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${images[0].directus_files_id.id}?fit=cover&height=225&width=150`}
+          src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${profile_image.id}?fit=cover&height=225&width=150`}
           height="225"
           width="150"
           fill={false}
           alt={
-            images[0]?.directus_files_id?.description ||
+            profile_image.description ||
             `Image of the orthodox and catholic saint ${name}`
           }
         />

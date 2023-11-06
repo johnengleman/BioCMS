@@ -9,7 +9,6 @@ import ButtonFilter from '../../global/ButtonFilter/ButtonFilter'
 import styles from './styles.module.scss'
 
 const Filter = ({ authorData, genreData }) => {
-
   const getIcon = (genre) => {
     if (genre === 'theology_and_dogma') {
       return faChurch
@@ -54,8 +53,6 @@ const Filter = ({ authorData, genreData }) => {
         {authorData
           ?.sort((a, b) => b.books.length - a.books.length)
           ?.map((author, i) => {
-            // const selectedF =
-            //   author?.toLowerCase() === selectedFilter
             const count = author.books.length
             if (count) {
               return (

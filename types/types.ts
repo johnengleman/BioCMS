@@ -1,10 +1,8 @@
 type Image = {
-  directus_files_id: {
-    id: string
-    width: number
-    height: number
-    description: string
-  }
+  id: string
+  width: number
+  height: number
+  description: string
 }
 
 type Tomb = {
@@ -52,7 +50,7 @@ export type Saint = {
   death_location: string
   update_updated: string
   tags: string[]
-  images: Image[]
+  profile_image: Image
   books: Book[]
   tomb: Tomb
   categories: string[]

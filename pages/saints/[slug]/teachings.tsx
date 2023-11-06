@@ -37,11 +37,12 @@ const SaintBio = (props) => {
     ? router?.query?.slug[0]
     : router?.query?.slug
 
-  const { data = null } = useQuery(['saints', slug], () =>
-    getSaint(slug),
+  const { data = null } = useQuery(
+    ['saints', slug],
+    () => getSaint(slug),
     {
       initialData: [],
-    }
+    },
   )
 
   const { data: searchData } = useQuery(
@@ -50,16 +51,17 @@ const SaintBio = (props) => {
       getSearchData(
         Array.isArray(church) ? church[0] : church,
       ),
-      {
-        initialData: [],
-      }
+    {
+      initialData: [],
+    },
   )
 
-  const { data: navData } = useQuery(['nav', church], () =>
-    getNav({ church }),
+  const { data: navData } = useQuery(
+    ['nav', church],
+    () => getNav({ church }),
     {
       initialData: {},
-    }
+    },
   )
 
   if (!router.isFallback && !data) {
@@ -107,9 +109,8 @@ const SaintBio = (props) => {
           <div className={styles.content}>
             <div className={styles.leftRail}>
               <ImageMain
-                images={data?.images}
+                image={data?.profile_image}
                 name={data?.name}
-                limit={1}
               />
               <TableOfContents mainRef={refElement} />
             </div>

@@ -61,10 +61,8 @@ function getBooksQuery({ church, preset, filter }) {
         saint {
             name
             venerated_in
-            images {
-              directus_files_id {
-                id
-              }
+            profile_image {
+              id
             }
           }
         }

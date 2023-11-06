@@ -57,10 +57,8 @@ function getTeachingsQuery(
         summary
         birth_year
         death_year
-        images {
-            directus_files_id {
-              id
-            }
+        profile_image {
+            id
           }
         }
       }
@@ -84,6 +82,7 @@ const parseSort = (sort) => {
     return '-death_year'
   }
 }
+
 export const getTeachings = async ({
   church = 'all',
   category = 'none',

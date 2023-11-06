@@ -35,10 +35,8 @@ function getSaintsQuery(church) {
         categories
         birth_year
         death_year
-        images {
-          directus_files_id {
-            id
-          }
+        profile_image
+          id
         }
       }
     }

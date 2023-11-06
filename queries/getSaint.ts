@@ -17,12 +17,11 @@ const query = gql`
       feast_day
       read_more_links
       categories
-      images {
-        directus_files_id {
-          id
-          width
-          height
-        }
+      profile_image {
+        id
+        width
+        height
+        description
       }
       books {
         author

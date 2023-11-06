@@ -70,10 +70,8 @@ function getSaintsQuery(
         sayings {
           text
         }
-        images {
-          directus_files_id {
-            id
-          }
+        profile_image {
+          id
         }
       }
     }

@@ -57,10 +57,8 @@ function getMiraclesQuery(
         summary
         birth_year
         death_year
-        images {
-            directus_files_id {
-              id
-            }
+        profile_image {
+            id
           }
         }
       }
@@ -71,16 +69,16 @@ function getMiraclesQuery(
 }
 
 const parseSort = (sort) => {
-  if (sort === 'newest-asc') {
+  if (sort === 'created-oldest') {
     return 'date_created'
   }
-  if (sort === 'newest-desc') {
+  if (sort === 'created-newest') {
     return '-date_created'
   }
-  if (sort === 'date-asc') {
+  if (sort === 'died-oldest') {
     return 'death_year'
   }
-  if (sort === 'date-desc') {
+  if (sort === 'died-newest') {
     return '-death_year'
   }
 }
