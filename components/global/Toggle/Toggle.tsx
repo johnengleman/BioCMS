@@ -30,53 +30,59 @@ const Toggle = () => {
   }
 
   return (
-    <div
-      className={styles.sortToggle}
-      ref={ref}
-    >
-      <span
-        className={styles.selected}
-        onClick={() => setShowMenu(!showMenu)}
-      >
-        sort by{' '}
-        <span className={styles.direction}>{sort}</span>
-        <FontAwesomeIcon
-          icon={faCaretUp}
-          rotation={showMenu ? 180 : 90}
-          size="lg"
-        />
-      </span>
+    <div className={styles.sortToggleContainer}>
       <div
-        className={`${styles.dropdown} ${
-          showMenu ? styles.visible : ''
-        }`}
+        className={styles.sortToggle}
+        ref={ref}
       >
-        <ul>
-          <li
-            onClick={() => handleSetShowMenu('died-oldest')}
-          >
-            Died - Oldest
-          </li>
-          <li
-            onClick={() => handleSetShowMenu('died-newest')}
-          >
-            Died - Newest
-          </li>
-          <li
-            onClick={() =>
-              handleSetShowMenu('created-oldest')
-            }
-          >
-            Created - Oldest
-          </li>
-          <li
-            onClick={() =>
-              handleSetShowMenu('created-newest')
-            }
-          >
-            Created - Newest
-          </li>
-        </ul>
+        <span
+          className={styles.selected}
+          onClick={() => setShowMenu(!showMenu)}
+        >
+          sort by{' '}
+          <span className={styles.direction}>{sort}</span>
+          <FontAwesomeIcon
+            icon={faCaretUp}
+            rotation={showMenu ? 180 : 90}
+            size="lg"
+          />
+        </span>
+        <div
+          className={`${styles.dropdown} ${
+            showMenu ? styles.visible : ''
+          }`}
+        >
+          <ul>
+            <li
+              onClick={() =>
+                handleSetShowMenu('died-oldest')
+              }
+            >
+              Died - Oldest
+            </li>
+            <li
+              onClick={() =>
+                handleSetShowMenu('died-newest')
+              }
+            >
+              Died - Newest
+            </li>
+            <li
+              onClick={() =>
+                handleSetShowMenu('created-oldest')
+              }
+            >
+              Created - Oldest
+            </li>
+            <li
+              onClick={() =>
+                handleSetShowMenu('created-newest')
+              }
+            >
+              Created - Newest
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   )

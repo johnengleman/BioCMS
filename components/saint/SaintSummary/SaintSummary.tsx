@@ -36,7 +36,9 @@ const SaintSummary = (props) => {
       style={{ viewTransitionName: transitionName }}
     >
       <div className={styles.death}>
-        {birth_year}-{death_year}
+        {birth_year &&
+          death_year &&
+          `${birth_year}-${death_year}`}
         <FontAwesomeIcon icon={faCross} />
       </div>
       <div className={styles.image}>

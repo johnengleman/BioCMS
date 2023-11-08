@@ -2,12 +2,14 @@
 
 .footer {
   background-color: #343434;
-  height: 120px;
+  height: 90px;
   color: #fff;
   width: 100%;
   display: flex;
   transition: bottom 0.3s ease-out;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  position: relative;
 
   @include breakpoint(laptop) {
     height: 60px;
@@ -33,10 +35,11 @@
     .left {
       justify-content: flex-start;
       flex-direction: column;
-      gap: 15px;
+      gap: 10px;
 
       @include breakpoint(tablet) {
         flex-direction: row;
+        gap: 15px;
       }
     }
 
