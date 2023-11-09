@@ -51,6 +51,7 @@ async function getSlugs() {
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
   generateRobotsTxt: true,
+  generateIndexSitemap: false,
   async additionalPaths(config) {
     const data = await getSlugs()
     const dynamicPaths = data.saints.flatMap((saint) => {
@@ -64,9 +65,9 @@ module.exports = {
           loc: `${baseLoc}/biography`,
           lastmod: saint.date_updated,
         },
-      ];
+      ]
 
-      ['teachings', 'miracles'].forEach((key) => {
+      ;['teachings', 'miracles'].forEach((key) => {
         if (saint[`${key}_func`].count) {
           paths.push({
             loc: `${baseLoc}/${key}`,
