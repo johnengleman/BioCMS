@@ -1,17 +1,34 @@
 import React from 'react'
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faBrightness,
-  faStarChristmas,
-  faBookOpenReader,
-  faPersonPraying,
-} from '@fortawesome/pro-duotone-svg-icons'
-import { load } from 'cheerio'
+import { faBookOpenReader } from '@fortawesome/pro-duotone-svg-icons'
+import * as cheerio from 'cheerio'
 import styles from './styles.module.scss'
 
+const getFirstWords = (htmlString: string) => {
+  const $ = cheerio.load(htmlString)
+  let htmlParts: string[] = []
+  let paragraphCount = 0
+
+  $('body')
+    .contents()
+    .each(function processNode(this: cheerio.Element) {
+      if (this.type === 'tag' && this.tagName === 'p') {
+        paragraphCount++
+      }
+
+      if (paragraphCount > 3) {
+        return false
+      }
+
+      htmlParts.push($.html(this))
+    })
+
+  return htmlParts.join('')
+}
+
 function extractH2s(htmlString: string): string[] {
-  const $ = load(htmlString)
+  const $ = cheerio.load(htmlString)
   const h2s: string[] = []
 
   $('h2').each((index, element) => {
@@ -19,64 +36,6 @@ function extractH2s(htmlString: string): string[] {
   })
 
   return h2s
-}
-
-const getIcon = (title) => {
-  if (title === 'bio') {
-    return (
-      <FontAwesomeIcon
-        icon={faBrightness}
-        style={{
-          color: `var(--gold)`,
-          fontSize: '25px',
-        }}
-      />
-    )
-  }
-  if (title === 'teachings') {
-    return (
-      <FontAwesomeIcon
-        icon={faPersonPraying}
-        style={{
-          color: `var(--gold)`,
-          fontSize: '25px',
-        }}
-      />
-    )
-  }
-  if (title === 'legacy') {
-    return (
-      <FontAwesomeIcon
-        icon={faBookOpenReader}
-        style={{
-          color: `var(--gold)`,
-          fontSize: '25px',
-        }}
-      />
-    )
-  }
-  if (title === 'miracles') {
-    return (
-      <FontAwesomeIcon
-        icon={faStarChristmas}
-        style={{
-          color: `var(--gold)`,
-          fontSize: '25px',
-        }}
-      />
-    )
-  }
-  if (title === 'miracles') {
-    return (
-      <FontAwesomeIcon
-        icon={faStarChristmas}
-        style={{
-          color: `var(--gold)`,
-          fontSize: '35px',
-        }}
-      />
-    )
-  }
 }
 
 interface BentoSectionProps {
@@ -92,6 +51,7 @@ const BentoSection: React.FC<BentoSectionProps> = ({
     return null
   }
 
+  const firstWords = getFirstWords(data)
   const h2s = extractH2s(data)
 
   return (
@@ -114,7 +74,7 @@ const BentoSection: React.FC<BentoSectionProps> = ({
           <div
             className={styles.preview}
             dangerouslySetInnerHTML={{
-              __html: data,
+              __html: firstWords,
             }}
           ></div>
         </div>

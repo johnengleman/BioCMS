@@ -1,9 +1,4 @@
 import fetchHelper from './fetchHelper'
-import { Saint } from '../types/types'
-
-type Response = {
-  saints: Saint[]
-}
 
 function getSaintsQuery(church) {
   // Variables declaration
@@ -35,13 +30,12 @@ function getSaintsQuery(church) {
         categories
         birth_year
         death_year
-        profile_image
+        profile_image {
           id
         }
       }
     }
   `
-
   return baseQuery
 }
 

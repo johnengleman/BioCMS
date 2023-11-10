@@ -30,8 +30,9 @@ const SaintSummary = (props) => {
   }
 
   return (
-    <div
+    <Link
       className={styles.saintSummary}
+      href={`/saints/${slug}`}
       style={{ viewTransitionName: transitionName }}
     >
       <div className={styles.death}>
@@ -69,12 +70,6 @@ const SaintSummary = (props) => {
             __html: summary,
           }}
         ></div>
-        <Link
-          href={`/saints/${slug}`}
-          className={styles.link}
-        >
-          Go to Saint
-        </Link>
         <div className={styles.footer}>
           <div className={styles.count}>
             <FontAwesomeIcon
@@ -105,7 +100,7 @@ const SaintSummary = (props) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
