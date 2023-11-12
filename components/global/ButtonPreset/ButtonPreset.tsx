@@ -65,12 +65,10 @@ const ButtonPreset = ({ icon, value, count }) => {
           '--fa-secondary-color': '#ccad00',
         }}
       />
-      <h3>
         {value
           .replace(/and/g, '&')
           .replace(/_/g, ' ')
           .replace(/-/g, ' ')}
-      </h3>
       <div className={styles.count}>{count}</div>
     </button>
   )

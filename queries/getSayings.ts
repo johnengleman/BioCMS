@@ -1,10 +1,23 @@
 import { gql } from 'graphql-request'
 import fetchHelper from './fetchHelper'
 
+type Saying = {
+  id: string
+  text: string
+  topics: JSON
+  author: {
+    name: string
+  }
+  source: string
+}
+
+type Response = {
+  sayings: Saying[]
+}
 
 const query = gql`
   query {
-    quotes {
+    sayings {
       id
       text
       author {

@@ -15,11 +15,30 @@
     box-shadow: none;
     margin: 0 auto;
 
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      border-radius: 12px;
+      background: linear-gradient(
+        to right,
+        red,
+        var(--gold)
+      );
+      transform: scale(1.025, 1.015);
+      opacity: 1;
+      transition: all 0.3s ease-in-out;
+    }
+
     img {
       border-radius: 10px;
       position: relative;
       z-index: 1;
-      border: 1px solid var(--gold);
     }
 
     &::after {

@@ -29,18 +29,19 @@ const Saints = () => {
   const church = Array.isArray(router.query.church)
     ? router.query.church[0]
     : router.query.church || 'all'
-  const category = Array.isArray(router.query.filter)
+  const filter = Array.isArray(router.query.filter)
     ? router.query.filter[0]
     : router.query.filter || 'none'
   const saintPreset = Array.isArray(router.query.preset)
     ? router.query.preset[0]
     : router.query.preset || 'none'
-  const sort = 'created-newest'
+  const sort = Array.isArray(router.query.sort)
+    ? router.query.sort[0]
+    : router.query.sort || 'created-newest'
 
   const { data, isError, isFetching } = useQuery(
-    ['saints', church, category, saintPreset, sort],
-    () =>
-      getSaints({ church, category, saintPreset, sort }),
+    ['saints', church, filter, saintPreset, sort],
+    () => getSaints({ church, filter, saintPreset, sort }),
     {
       initialData: [],
     },
@@ -162,7 +163,7 @@ const Saints = () => {
 export async function getServerSideProps(context) {
   // Get the cookie from the request headers
   const cookie = context.req.headers.cookie
-  const category = context.query.filter || 'none'
+  const filter = context.query.filter || 'none'
   const saintPreset = context.query.preset || 'none'
   const sort = context.query?.sort || 'created-newest'
   let church = 'all'
@@ -192,9 +193,8 @@ export async function getServerSideProps(context) {
   })
 
   await queryClient.prefetchQuery(
-    ['saints', church, category, saintPreset, sort],
-    () =>
-      getSaints({ church, category, saintPreset, sort }),
+    ['saints', church, filter, saintPreset, sort],
+    () => getSaints({ church, filter, saintPreset, sort }),
   )
   await queryClient.prefetchQuery(['search', church], () =>
     getSearchData(church),

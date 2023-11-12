@@ -1,0 +1,26 @@
+@import '../../../styles/breakpoints.scss';
+
+.btnOrganize {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  border-radius: 7px;
+  cursor: pointer;
+  gap: 20px;
+  position: relative;
+  transition: all 0.1s ease-in-out;
+  background-color: #521613;
+  border: 1px solid #3f3e3e;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.25px;
+  color: var(--gold);
+  line-height: 1.1;
+  text-transform: capitalize;
+
+  &.selected {
+    border: 1px solid #fff;
+  }
+}

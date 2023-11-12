@@ -3,8 +3,7 @@ export const formatDate = (dateStr: string = '') => {
   const formattedDate = dateObj.toLocaleDateString(
     'en-US',
     {
-      year: 'numeric',
-      month: 'long',
+      month: 'short',
       day: 'numeric',
     },
   )
@@ -13,3 +12,21 @@ export const formatDate = (dateStr: string = '') => {
 }
 
 export default formatDate
+
+export const getMonthNumber = (monthName) => {
+  const months = [
+    'january',
+    'february',
+    'march',
+    'april',
+    'may',
+    'june',
+    'july',
+    'august',
+    'september',
+    'october',
+    'november',
+    'december',
+  ]
+  return months.indexOf(monthName.toLowerCase()) + 1
+}

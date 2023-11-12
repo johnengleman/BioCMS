@@ -28,7 +28,7 @@ const Teachings = () => {
   const church = Array.isArray(router.query.church)
     ? router.query.church[0]
     : router.query.church || 'all'
-  const category = Array.isArray(router.query.filter)
+  const filter = Array.isArray(router.query.filter)
     ? router.query.filter[0]
     : router.query.filter || 'none'
   const miraclesPreset = Array.isArray(router.query.preset)
@@ -67,11 +67,11 @@ const Teachings = () => {
     isError,
     isFetching,
   } = useQuery(
-    ['miracles', church, category, miraclesPreset],
+    ['miracles', church, filter, miraclesPreset],
     () =>
       getMiracles({
         church,
-        category,
+        filter,
         miraclesPreset,
       }),
     {
@@ -138,7 +138,7 @@ const Teachings = () => {
 
 export const getServerSideProps = async (context) => {
   const queryClient = new QueryClient()
-  const category = context.query.filter || 'none'
+  const filter = context.query.filter || 'none'
   const miraclesPreset = context.query.preset || 'none'
   const cookie = context.req.headers.cookie
   let church = 'all'
@@ -162,11 +162,11 @@ export const getServerSideProps = async (context) => {
   )
 
   await queryClient.prefetchQuery(
-    ['miracles', church, category, miraclesPreset],
+    ['miracles', church, filter, miraclesPreset],
     () =>
       getMiracles({
         church,
-        category,
+        filter,
         miraclesPreset,
       }),
   )

@@ -3,17 +3,36 @@
 .saintSummary {
   display: inline-block;
   height: fit-content;
-  border-radius: 20px;
   position: relative;
   // box-shadow: -6px 6px 16px #e6e6e6, 6px -6px 16px #ffffff;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   margin-bottom: 20px;
+  color: #fff;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    border-radius: 20px;
+    background: linear-gradient(to right, red, var(--gold));
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+  }
 
   &:hover {
+    &:before {
+      transform: scale(1.03, 1.01);
+    }
+
     .bioContainer .summary {
-      color: #e4e4e4;
+      color: #fff;
     }
   }
 
@@ -21,7 +40,7 @@
     position: absolute;
     top: -10px;
     right: -8px;
-    padding: 8px 12px;
+    padding: 5px 15px;
     z-index: 5;
     background: var(--violet);
     color: #d8d8d8;
@@ -30,11 +49,12 @@
     align-items: center;
     border-radius: 15px;
     font-size: 13px;
+    font-weight: 600;
     box-shadow: -2px 4px 10px 0px #121023;
     gap: 3px;
 
     svg {
-      margin-bottom: 2px;
+      margin-right: 5px;
     }
   }
 
@@ -118,10 +138,24 @@
       background-color: #393650ab;
       font-size: 10px;
       letter-spacing: 0.5px;
-      border-radius: 4px;
+      border-radius: 5px;
       color: #ccad00;
       min-width: fit-content;
       font-size: 13px;
+    }
+  }
+
+  .feastDay {
+    color: #bcbcbc;
+    margin-bottom: 1.25rem;
+    font-size: 14px;
+    background-color: var(--violet);
+    border-radius: 5px;
+    padding: 3px 15px;
+    width: fit-content;
+
+    svg {
+      margin-right: 10px;
     }
   }
 

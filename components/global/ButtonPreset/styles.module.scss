@@ -17,6 +17,15 @@
     rgba(36, 30, 78, 1) 0%,
     rgba(49, 45, 76, 1) 100%
   );
+  font-weight: 600;
+  font-size: 16px;
+  color: rgb(233, 230, 253);
+  line-height: 1.1;
+  text-transform: capitalize;
+
+  @include breakpoint(tablet) {
+    font-size: 18px;
+  }
 
   .count {
     border-radius: 50%;
@@ -24,7 +33,10 @@
     width: 18px;
     font-size: 13px;
     font-weight: 800;
-    vertical-align: bottom;
+    line-height: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgb(233, 230, 253);
     color: var(--violet);
   }
@@ -42,18 +54,6 @@
 
     h3 {
       color: #ffecec;
-    }
-  }
-
-  h3 {
-    font-weight: 600;
-    font-size: 16px;
-    color: rgb(233, 230, 253);
-    line-height: 1.1;
-    text-transform: capitalize;
-
-    @include breakpoint(tablet) {
-      font-size: 18px;
     }
   }
 }

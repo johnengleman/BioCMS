@@ -2,7 +2,7 @@ import fetchHelper from './fetchHelper'
 
 function getMiraclesQuery(
   church,
-  category,
+  filter,
   miraclesPreset,
 ) {
   // Variables declaration
@@ -10,8 +10,8 @@ function getMiraclesQuery(
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
-  if (category !== 'none') {
-    variablesList.push('$category: String!')
+  if (filter !== 'none') {
+    variablesList.push('$filter: String!')
   }
 
   // Filter construction
@@ -23,9 +23,9 @@ function getMiraclesQuery(
       '{ saint: { venerated_in: { _icontains: $church }}}',
     )
   }
-  if (category !== 'none') {
+  if (filter !== 'none') {
     filterList.push(
-      '{ time_period: { _icontains: $category } }',
+      '{ time_period: { _icontains: $filter } }',
     )
   }
   // if (saintPreset === 'patron') {
@@ -85,16 +85,16 @@ const parseSort = (sort) => {
 
 export const getMiracles = async ({
   church = 'all',
-  category = 'none',
+  filter = 'none',
   miraclesPreset = 'none',
   // sort = 'date-asc',
 }) => {
   const query = getMiraclesQuery(
     church,
-    category,
+    filter,
     miraclesPreset,
   )
-  const variables = { category, church, miraclesPreset }
+  const variables = { filter, church, miraclesPreset }
 
   const response = await fetchHelper({ variables, query })
 

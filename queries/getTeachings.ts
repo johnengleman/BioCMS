@@ -2,7 +2,7 @@ import fetchHelper from './fetchHelper'
 
 function getTeachingsQuery(
   church,
-  category,
+  filter,
   teachingPreset,
 ) {
   // Variables declaration
@@ -10,8 +10,8 @@ function getTeachingsQuery(
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
-  if (category !== 'none') {
-    variablesList.push('$category: String!')
+  if (filter !== 'none') {
+    variablesList.push('$filter: String!')
   }
 
   // Filter construction
@@ -23,9 +23,9 @@ function getTeachingsQuery(
     )
   }
 
-  if (category !== 'none') {
+  if (filter !== 'none') {
     filterList.push(
-      '{ time_period: { _icontains: $category } }',
+      '{ time_period: { _icontains: $filter } }',
     )
   }
   // if (saintPreset === 'patron') {
@@ -85,16 +85,16 @@ const parseSort = (sort) => {
 
 export const getTeachings = async ({
   church = 'all',
-  category = 'none',
+  filter = 'none',
   teachingPreset = 'none',
   // sort = 'date-asc',
 }) => {
   const query = getTeachingsQuery(
     church,
-    category,
+    filter,
     teachingPreset,
   )
-  const variables = { category, church, teachingPreset }
+  const variables = { filter, church, teachingPreset }
 
   const response = await fetchHelper({ variables, query })
 

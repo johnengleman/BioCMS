@@ -1,12 +1,21 @@
 import fetchHelper from './fetchHelper'
 import { properties } from '../components/saint/Filter/properties'
+import { getMonthNumber } from '../utils/dates'
 
-const getFilterList = (filter) => {
+const getCategoryFilterList = (filter) => {
   if (filter !== 'None') {
     return `, { categories: { _icontains: "${filter}" } }`
   }
   return ''
 }
+
+const getMonthFilterList = (filter) => {
+  if (filter !== 'None') {
+    return `, { feast_day_func: { month: { _eq: "${getMonthNumber(filter)}" } } }`
+  }
+  return ''
+}
+
 
 function numberOfSaintsQuery(church, saintPreset) {
   // Variables declaration
@@ -40,12 +49,26 @@ function numberOfSaintsQuery(church, saintPreset) {
         ? `(${variablesList.join(', ')})`
         : ''
     } {
-      ${properties.filters.map(
+      ${properties.organize.category.map(
         (filter) => `${filter}: saints_aggregated(
         filter: {
           ${churchList}
           _and: [
-            ${presetList.join(', ')}${getFilterList(filter)}
+            ${presetList.join(', ')}${getCategoryFilterList(filter)}
+          ]
+        }
+      ) {
+        count {
+          id
+        }
+      }`,
+      )}
+      ${properties.organize.month.map(
+        (filter) => `${filter}: saints_aggregated(
+        filter: {
+          ${churchList}
+          _and: [
+            ${presetList.join(', ')}${getMonthFilterList(filter)}
           ]
         }
       ) {
@@ -56,6 +79,7 @@ function numberOfSaintsQuery(church, saintPreset) {
       )}
     }
   `
+
   return baseQuery
 }
 

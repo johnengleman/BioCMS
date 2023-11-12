@@ -1,11 +1,10 @@
 import Link from 'next/link'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCross } from '@fortawesome/pro-duotone-svg-icons'
 import {
-  faBooks,
-  faCommentQuote,
-  faStarChristmas,
-} from '@fortawesome/sharp-solid-svg-icons'
+  faCross,
+  faCalendarDays,
+} from '@fortawesome/pro-duotone-svg-icons'
+import { formatDate } from '../../../utils/dates'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import styles from './styles.module.scss'
 
@@ -17,8 +16,7 @@ const SaintSummary = (props) => {
     profile_image,
     categories,
     summary,
-    sayings,
-    books,
+    feast_day,
     slug,
     priority,
     transitionName,
@@ -36,10 +34,8 @@ const SaintSummary = (props) => {
       style={{ viewTransitionName: transitionName }}
     >
       <div className={styles.death}>
-        {birth_year &&
-          death_year &&
-          `${birth_year}-${death_year}`}
         <FontAwesomeIcon icon={faCross} />
+        {birth_year || '?'}-{death_year || '?'}
       </div>
       <div className={styles.image}>
         <ImageGlobal
@@ -70,35 +66,15 @@ const SaintSummary = (props) => {
             __html: summary,
           }}
         ></div>
-        <div className={styles.footer}>
-          <div className={styles.count}>
+        {feast_day && (
+          <div className={styles.feastDay}>
             <FontAwesomeIcon
-              icon={faBooks}
-              style={{ color: '#555555' }}
+              icon={faCalendarDays}
+              fontSize="xs"
             />
-            <span className={styles.number}>
-              {books?.length}
-            </span>
+            {formatDate(feast_day)}
           </div>
-          <div className={styles.count}>
-            <FontAwesomeIcon
-              icon={faStarChristmas}
-              style={{ color: '#555555' }}
-            />
-            <span className={styles.number}>
-              {books?.length}
-            </span>
-          </div>
-          <div className={styles.count}>
-            <FontAwesomeIcon
-              icon={faCommentQuote}
-              style={{ color: '#555555' }}
-            />
-            <span className={styles.number}>
-              {sayings?.length}
-            </span>
-          </div>
-        </div>
+        )}
       </div>
     </Link>
   )

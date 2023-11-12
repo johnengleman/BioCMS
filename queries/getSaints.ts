@@ -1,42 +1,47 @@
 import fetchHelper from './fetchHelper'
+import { getMonthNumber } from '../utils/dates'
 
-function getSaintsQuery(
-  church,
-  category,
-  saintPreset,
-  sort,
-) {
+function getSaintsQuery(church, filter, saintPreset, sort) {
   // Variables declaration
   let variablesList: string[] = []
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
-  if (category !== 'none') {
-    variablesList.push('$category: String!')
+  if (filter !== 'none' && !getMonthNumber(filter)) {
+    variablesList.push('$filter: String!')
   }
 
   // Filter construction
   let filterList: string[] = []
   let churchList: string[] = []
+
   if (church !== 'all') {
     churchList.push('venerated_in: { _icontains: $church }')
   }
-  if (category !== 'none') {
-    filterList.push(
-      '{ categories: { _icontains: $category } }',
-    )
+
+  if (filter !== 'none') {
+    if (!getMonthNumber(filter)) {
+      filterList.push(
+        '{ categories: { _icontains: $filter } }',
+      )
+    } else {
+      filterList.push(
+        `{ feast_day_func: { month: { _eq: ${getMonthNumber(
+          filter,
+        )} } } }`,
+      )
+    }
   }
+
   if (saintPreset === 'patron-saints') {
     filterList.push(
       '{ categories: { _icontains: "Patron Saints" } }',
     )
   }
+
   if (saintPreset === '20th-century-saints') {
     filterList.push('{ death_year: { _gte: 1900 } }')
   }
-  // if(saintPreset === 'saints-by-months') {
-  //   filterList.push('{ death_year: { _gte: 1900 } }')
-  // }
 
   // Building the query
   let baseQuery = `
@@ -64,6 +69,7 @@ function getSaintsQuery(
         death_year
         birth_location
         death_location
+        feast_day
         books {
           title
         }
@@ -97,17 +103,17 @@ const parseSort = (sort) => {
 
 export const getSaints = async ({
   church = 'all',
-  category = 'none',
+  filter = 'none',
   saintPreset = 'none',
   sort = 'created-newest',
 }) => {
   const query = getSaintsQuery(
     church,
-    category,
+    filter,
     saintPreset,
     parseSort(sort),
   )
-  const variables = { category, church, saintPreset }
+  const variables = { filter, church, saintPreset }
 
   const response = await fetchHelper({ variables, query })
 
