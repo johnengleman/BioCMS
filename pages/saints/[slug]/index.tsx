@@ -22,6 +22,7 @@ import Summary from '../../../components/saint/Summary/Summary'
 import TableOfContentFeatures from '../../../components/saint/TableOfContentsFeatures/TableOfContentsFeatures'
 import BentoSection from '../../../components/global/BentoSection/BentoSection'
 import SectionTitle from '../../../components/saint/SectionTitle/SectionTitle'
+import ExtraInfo from '../../../components/saint/ExtraInfo/ExtraInfo'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -126,15 +127,21 @@ const SaintBio = () => {
                 name={data?.name}
               />
               <div className={styles.heroText}>
-                <NameTag
-                  name={data?.name}
-                  tags={data?.categories}
-                  birthYear={data?.birth_year}
-                  deathYear={data?.death_year}
+                <div className={styles.row1}>
+                  <NameTag
+                    name={data?.name}
+                    tags={data?.categories}
+                    birthYear={data?.birth_year}
+                    deathYear={data?.death_year}
+                    type="bio"
+                  />
+                  <Summary summary={data?.summary} />
+                </div>
+
+                <ExtraInfo
                   feastDay={data?.feast_day}
-                  type="bio"
+                  patron={data?.patron}
                 />
-                <Summary summary={data?.summary} />
               </div>
             </div>
           </div>

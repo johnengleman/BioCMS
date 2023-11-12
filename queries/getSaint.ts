@@ -17,6 +17,7 @@ const query = gql`
       feast_day
       read_more_links
       categories
+      patron
       profile_image {
         id
         width

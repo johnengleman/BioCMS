@@ -1,0 +1,30 @@
+@import '../../../styles/breakpoints.scss';
+
+.extraInfo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #ccebd9;
+  border-radius: 5px;
+  padding: 20px;
+  gap: 20px;
+  height: fit-content;
+
+  @include breakpoint(laptopM) {
+    width: 300px;
+  }
+
+  .row {
+    display: flex;
+
+    svg {
+      margin-right: 15px;
+    }
+
+    .data {
+      color: var(--violet);
+      font-size: 15px;
+      font-weight: 600;
+    }
+  }
+}

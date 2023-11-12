@@ -72,6 +72,11 @@ $color: rgb(70, 63, 113);
     }
   }
 
+  .organizeContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
   .slideContainer {
     display: flex;
     flex-wrap: wrap;

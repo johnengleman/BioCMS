@@ -7,34 +7,14 @@ const NameTag = ({
   tags,
   birthYear,
   deathYear,
-  feastDay,
   type,
 }) => {
-  const monthNames = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ]
-
   const header = {
     bio: 'Who was ',
     teachings: 'What were the teachings of ',
     miracles: 'What were the miracles of',
     legacy: 'What was the legacy of',
   }
-
-  const date = new Date(feastDay)
-  const month = date.getMonth()
-  const day = date.getDate()
 
   return (
     <div className={styles.nameTag}>
@@ -45,7 +25,7 @@ const NameTag = ({
         <div className={styles.info}>
           <FontAwesomeIcon icon={faCross} />
           <span className={styles.date}>
-            {birthYear}-{deathYear}
+            {birthYear || '?'}-{deathYear || '?'}
           </span>
           {tags?.map((tag, i) => (
             <div
@@ -57,18 +37,6 @@ const NameTag = ({
           ))}
         </div>
       </div>
-
-      {day && month && (
-        <div className={styles.feastDay}>
-          <div className={styles.row}>
-            <div className={styles.day}>{day}</div>
-          </div>
-          <div className={styles.month}>
-            {monthNames[month]}
-          </div>
-          {/* <FontAwesomeIcon icon={faCalendarDays} size='sm' /> */}
-        </div>
-      )}
     </div>
   )
 }

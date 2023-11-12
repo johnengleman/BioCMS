@@ -30,6 +30,10 @@
     gap: 5px;
     margin-bottom: 15px;
 
+    &:empty {
+      display: none;
+    }
+
     @include breakpoint(tablet) {
       margin-bottom: 0;
     }
@@ -47,47 +51,12 @@
     .tag {
       padding: 2px 12px;
       background-color: #ccebd9;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 500;
       border-radius: 5px;
       color: #54846d;
       font-weight: 600;
       min-width: fit-content;
-    }
-  }
-
-  .feastDay {
-    background-color: red;
-    color: yellow;
-    height: 80px;
-    width: 80px;
-    min-width: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    gap: 3px;
-    flex-direction: column;
-    // padding-left: 17px;
-
-    .row {
-      display: flex;
-      align-items: center;
-      gap: 3px;
-    }
-
-    .day {
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .month {
-      font-size: 20px;
-      font-weight: 700;
-      line-height: 1;
-      text-transform: uppercase;
-      margin-bottom: 5px;
     }
   }
 }

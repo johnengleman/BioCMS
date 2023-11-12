@@ -125,7 +125,6 @@ const SaintBio = (props) => {
                 tags={data?.categories}
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
-                feastDay={data?.feast_day}
                 type="bio"
               />
               <div className={styles.updated}>

@@ -5,6 +5,7 @@ $breakpoint: (
   mobileL: '425px',
   tablet: '768px',
   laptop: '1024px',
+  laptopM: '1230px',
   laptopL: '1440px',
   desktop: '2560px',
 ) !default;
@@ -48,6 +49,14 @@ $is-amp: false !default;
   @if $point == laptop {
     /* stylelint-disable-next-line */
     @media only screen and (min-width: map-get($breakpoint, laptop)) {
+      @content;
+    }
+  }
+
+  /* Equal or greater than 1230px */
+  @if $point == laptopM {
+    /* stylelint-disable-next-line */
+    @media only screen and (min-width: map-get($breakpoint, laptopM)) {
       @content;
     }
   }

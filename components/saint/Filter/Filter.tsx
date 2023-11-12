@@ -4,12 +4,16 @@ import Toggle from '../../global/Toggle/Toggle'
 import ButtonFilter from '../../global/ButtonFilter/ButtonFilter'
 import ButtonPreset from '../../global/ButtonPreset/ButtonPreset'
 import ButtonOrganize from '../../global/ButttonOrganize/ButtonOrganize'
-import { faCameraRetro } from '@fortawesome/pro-duotone-svg-icons'
+import {
+  faCameraRetro,
+  faFamily,
+} from '@fortawesome/pro-duotone-svg-icons'
 import styles from './styles.module.scss'
 import { properties } from './properties'
 
 const Filter = ({ filtersCount = {} }) => {
-  const [organization, setOrganization] = useState('category');
+  const [organization, setOrganization] =
+    useState('category')
   const router = useRouter()
   const selectedPreset =
     router.query.preset || ('none' as any)
@@ -24,6 +28,15 @@ const Filter = ({ filtersCount = {} }) => {
       'function'
   }
 
+  const getIcon = (preset) => {
+    if (preset === '20th-century-saints') {
+      return faCameraRetro
+    }
+    if (preset === 'patron-saints') {
+      return faFamily
+    }
+  }
+
   return (
     <div className={styles.filter}>
       <p className={styles.instructions}>Use a preset?</p>
@@ -31,10 +44,11 @@ const Filter = ({ filtersCount = {} }) => {
         {properties.presets?.map((preset, i) => (
           <ButtonPreset
             key={i}
-            icon={faCameraRetro}
+            icon={getIcon(preset)}
             value={preset}
             count={
-              filtersCount[church]?.[preset]?.None[0].count.id
+              filtersCount[church]?.[preset]?.None[0].count
+                .id
             }
           />
         ))}
@@ -52,19 +66,23 @@ const Filter = ({ filtersCount = {} }) => {
         ))}
       </div>
 
-      <p className={styles.instructions}>Add a {organization} filter?</p>
+      <p className={styles.instructions}>
+        Add a {organization} filter?
+      </p>
       <div className={styles.slideContainer}>
-        {properties.organize?.[organization]?.map((filter, i) => (
-          <ButtonFilter
-            key={i}
-            filter={filter}
-            count={
-              filtersCount[church]?.[selectedPreset]?.[
-                filter
-              ]?.[0].count.id
-            }
-          />
-        ))}
+        {properties.organize?.[organization]?.map(
+          (filter, i) => (
+            <ButtonFilter
+              key={i}
+              filter={filter}
+              count={
+                filtersCount[church]?.[selectedPreset]?.[
+                  filter
+                ]?.[0].count.id
+              }
+            />
+          ),
+        )}
       </div>
       <Toggle />
     </div>
