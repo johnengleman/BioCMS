@@ -6,6 +6,12 @@
   align-items: center;
   gap: 10px;
 
+  &.border {
+    border-top: 1px solid #ccad004d;
+    padding-top: 2rem;
+    margin-top: 3rem;
+  }
+
   .title {
     font-size: 20px;
     background-image: linear-gradient(

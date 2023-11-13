@@ -1,10 +1,6 @@
 import fetchHelper from './fetchHelper'
 
-function getTeachingsQuery(
-  church,
-  filter,
-  teachingPreset,
-) {
+function getTeachingsQuery(church, filter) {
   // Variables declaration
   let variablesList: string[] = []
   if (church !== 'all') {
@@ -28,11 +24,6 @@ function getTeachingsQuery(
       '{ time_period: { _icontains: $filter } }',
     )
   }
-  // if (saintPreset === 'patron') {
-  //   filterList.push(
-  //     '{ categories: { _icontains: "Patron Saints" } }',
-  //   )
-  // }
 
   // Building the query
   let baseQuery = `
@@ -86,15 +77,10 @@ const parseSort = (sort) => {
 export const getTeachings = async ({
   church = 'all',
   filter = 'none',
-  teachingPreset = 'none',
   // sort = 'date-asc',
 }) => {
-  const query = getTeachingsQuery(
-    church,
-    filter,
-    teachingPreset,
-  )
-  const variables = { filter, church, teachingPreset }
+  const query = getTeachingsQuery(church, filter)
+  const variables = { filter, church }
 
   const response = await fetchHelper({ variables, query })
 

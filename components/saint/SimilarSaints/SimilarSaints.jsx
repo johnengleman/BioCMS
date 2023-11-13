@@ -59,6 +59,7 @@ const SimilarSaints = ({ data }) => {
         <SectionTitle
           id="section-similar-saints"
           dataSection="similarSaints"
+          border={true}
         >
           Similar Saints
         </SectionTitle>

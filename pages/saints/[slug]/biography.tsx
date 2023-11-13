@@ -94,7 +94,7 @@ const SaintBio = (props) => {
         <meta
           key="description"
           name="description"
-          content={`Discover ${data?.name}'s spiritual journey. Explore their sayings, teachings, miracles, legacy, and related books.`}
+          content={`Discover ${data?.name}'s spiritual journey. Explore their quotes, teachings, miracles, legacy, and related books.`}
         />
         <script
           type="application/ld+json"

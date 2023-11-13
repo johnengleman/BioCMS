@@ -100,6 +100,7 @@ $color: rgb(70, 63, 113);
       border-radius: 7px;
       letter-spacing: 0.25px;
       border: 1px solid #3f3e3e;
+      text-transform: capitalize;
       gap: 10px;
 
       &.disabled {
@@ -109,6 +110,7 @@ $color: rgb(70, 63, 113);
 
       .name {
         font-weight: 600;
+        text-transform: capitalize;
       }
 
       .count {

@@ -11,11 +11,12 @@ const getCategoryFilterList = (filter) => {
 
 const getMonthFilterList = (filter) => {
   if (filter !== 'None') {
-    return `, { feast_day_func: { month: { _eq: "${getMonthNumber(filter)}" } } }`
+    return `, { feast_day_func: { month: { _eq: "${getMonthNumber(
+      filter,
+    )}" } } }`
   }
   return ''
 }
-
 
 function numberOfSaintsQuery(church, saintPreset) {
   // Variables declaration
@@ -54,7 +55,9 @@ function numberOfSaintsQuery(church, saintPreset) {
         filter: {
           ${churchList}
           _and: [
-            ${presetList.join(', ')}${getCategoryFilterList(filter)}
+            ${presetList.join(', ')}${getCategoryFilterList(
+          filter,
+        )}
           ]
         }
       ) {
@@ -68,7 +71,9 @@ function numberOfSaintsQuery(church, saintPreset) {
         filter: {
           ${churchList}
           _and: [
-            ${presetList.join(', ')}${getMonthFilterList(filter)}
+            ${presetList.join(', ')}${getMonthFilterList(
+          filter,
+        )}
           ]
         }
       ) {

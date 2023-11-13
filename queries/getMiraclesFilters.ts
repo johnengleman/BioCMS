@@ -27,7 +27,7 @@ function numberOfMiraclesQuery(church) {
         ? `(${variablesList.join(', ')})`
         : ''
     } {
-      ${properties.filters.map(
+      ${properties.filters.miracles.map(
         (filter) => `${filter}: miracles_aggregated(
         filter: {
           _and: [

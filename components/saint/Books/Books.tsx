@@ -61,6 +61,7 @@ const Books = ({ books, inRightRail }: BooksProps) => {
           inRightRail={inRightRail}
           id="section-books"
           dataSection="books"
+          border={true}
         >
           Related Books
         </SectionTitle>

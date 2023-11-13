@@ -92,7 +92,7 @@ const SaintBio = (props) => {
         <meta
           key="description"
           name="description"
-          content={`Discover the miracles of ${data?.name} and their sayings, teachings, legacy, and related books.`}
+          content={`Discover the miracles of ${data?.name} and their quotes, teachings, legacy, and related books.`}
         />
         <script
           type="application/ld+json"
@@ -123,7 +123,6 @@ const SaintBio = (props) => {
                 tags={data?.categories}
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
-                feastDay={data?.feast_day}
                 type="miracles"
               />
               <div className={styles.updated}>

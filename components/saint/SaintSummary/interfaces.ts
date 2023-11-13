@@ -11,7 +11,7 @@ export interface Saint {
   books: {
     title: string
   }[]
-  sayings: {
+  quotes: {
     text: string
   }[]
   tags: string[]

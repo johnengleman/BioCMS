@@ -17,7 +17,7 @@ export const config = {
 }
 
 const Feedback = () => {
-  useCookie();
+  useCookie()
   const [state, handleSubmit] = useForm('maygvrkn')
   const router = useRouter()
   const church = Array.isArray(router.query.church)
@@ -29,14 +29,15 @@ const Feedback = () => {
     () => getSearchData(church),
     {
       initialData: [],
-    }
+    },
   )
 
-  const { data: navData } = useQuery(['nav', church], () =>
-    getNav({ church }),
+  const { data: navData } = useQuery(
+    ['nav', church],
+    () => getNav({ church }),
     {
       initialData: {},
-    }
+    },
   )
 
   return (
@@ -54,7 +55,7 @@ const Feedback = () => {
         />
         <meta
           name="keywords"
-          content="Roman Catholic, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
+          content="Roman Catholic, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious quotes, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
         />
       </Head>
       <Page

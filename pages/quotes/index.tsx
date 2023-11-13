@@ -7,14 +7,14 @@ import {
 } from '@tanstack/react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
-import { getTeachings } from '../../queries/getTeachings'
+import { getQuotes } from '../../queries/getQuotes'
 import { getSearchData } from '../../queries/getSearchData'
 import { getNav } from '../../queries/getNav'
 import Page from '../../components/page/Page/Page'
 import ErrorPage from 'next/error'
-import SaintDetail from '../../components/global/SaintDetail/SaintDetail'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
-import { getTeachingFilters } from '../../queries/getTeachingFilters'
+import { getQuotesFilters } from '../../queries/getQuoteFilters'
+import Quotes from '../../components/saint/Quotes/Quotes'
 import useCookie from '../../hooks/useCookie'
 import styles from './styles.module.scss'
 
@@ -22,7 +22,7 @@ export const config = {
   runtime: 'experimental-edge',
 }
 
-const Teachings = () => {
+const QuotesPage = () => {
   useCookie()
   const router = useRouter()
   const church = Array.isArray(router.query.church)
@@ -54,7 +54,7 @@ const Teachings = () => {
   const { data: filtersCount } = useQuery(
     ['filters', church],
     () =>
-      getTeachingFilters(
+      getQuotesFilters(
         Array.isArray(church) ? church[0] : church,
       ),
     {
@@ -63,13 +63,13 @@ const Teachings = () => {
   )
 
   const {
-    data: teachingsData,
+    data: quoteData,
     isFetching,
     isError,
   } = useQuery(
-    ['teachings', church, filter],
+    ['quote', church, filter],
     () =>
-      getTeachings({
+      getQuotes({
         church,
         filter,
       }),
@@ -78,24 +78,22 @@ const Teachings = () => {
     },
   )
 
-  if (!router.isFallback && !teachingsData) {
+  if (!router.isFallback && !quoteData) {
     return <ErrorPage statusCode={404} />
   }
 
   return (
     <>
       <Head>
-        <title>
-          Teachings and Legacy of Roman Catholic Saints
-        </title>
+        <title>Quotes of Roman Catholic Saints</title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/teachings`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/quotes`}
         />
         <meta
           key="description"
           name="description"
-          content="Discover the teachings and legacy of Roman Catholic Saints"
+          content="Discover the quotes of Roman Catholic Saints"
         />
       </Head>
       <Page
@@ -103,30 +101,26 @@ const Teachings = () => {
         navData={navData}
       >
         <HeroSimple
-          title="Teachings & Legacy"
+          title="Quotes"
+          type="quotes"
           filtersCount={filtersCount}
-          type="teachings"
         />
-        <div className={styles.teachings}>
+        <div className={styles.quotes}>
           {isFetching ? (
-            <p className="status">Fetching teachings...</p>
+            <p className="status">Fetching quotes...</p>
           ) : isError ? (
             <p className="status">
               Error.{' '}
               <FontAwesomeIcon icon={faFaceFrownSlight} />
             </p>
-          ) : !isFetching && teachingsData?.length ? (
-            teachingsData.map((teaching, i) => (
-              <SaintDetail
-                key={i}
-                saint={teaching.saint}
-                data={teaching.teachings}
-                link={`/saints/${teaching.saint.slug}/teachings`}
-              />
-            ))
+          ) : !isFetching && quoteData?.length ? (
+            <Quotes
+              quotes={quoteData}
+              showAuthor={true}
+            />
           ) : (
             <p className="status">
-              No teachings found.{' '}
+              No quotes found.{' '}
               <FontAwesomeIcon icon={faFaceFrownSlight} />
             </p>
           )}
@@ -139,7 +133,6 @@ const Teachings = () => {
 export const getServerSideProps = async (context) => {
   const queryClient = new QueryClient()
   const filter = context.query.filter || 'none'
-  const teachingPreset = context.query.preset || 'none'
   const cookie = context.req.headers.cookie
   let church = 'all'
 
@@ -164,14 +157,14 @@ export const getServerSideProps = async (context) => {
   await queryClient.prefetchQuery(
     ['teachings', church, filter],
     () =>
-      getTeachings({
+      getQuotes({
         church,
         filter,
       }),
   )
 
   await queryClient.prefetchQuery(['filters', church], () =>
-    getTeachingFilters(church),
+    getQuotesFilters(church),
   )
 
   await queryClient.prefetchQuery(['nav', church], () =>
@@ -185,4 +178,4 @@ export const getServerSideProps = async (context) => {
   }
 }
 
-export default Teachings
+export default QuotesPage

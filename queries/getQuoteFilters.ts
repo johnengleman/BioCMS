@@ -2,9 +2,9 @@ import fetchHelper from './fetchHelper'
 import { properties } from '../components/global/FilterSimple/properties'
 
 const getFilterList = (filter) =>
-  `{ time_period: { _icontains: "${filter}" } }`
+  `{ topics: { _icontains: "${filter}" } }`
 
-function numberOfTeachingsQuery(church) {
+function numberOfQuotesQuery(church) {
   // Variables declaration
   let variablesList: string[] = []
   if (church !== 'all') {
@@ -22,13 +22,13 @@ function numberOfTeachingsQuery(church) {
 
   // Building the query
   let baseQuery = `
-    query getTeachings${
+    query getQuotes${
       variablesList.length > 0
         ? `(${variablesList.join(', ')})`
         : ''
     } {
-      ${properties.filters.teachings.map(
-        (filter) => `${filter}: teachings_aggregated(
+      ${properties.filters.quotes.map(
+        (filter) => `${filter}: quotes_aggregated(
         filter: {
           _and: [
             ${getFilterList(filter)}
@@ -46,21 +46,21 @@ function numberOfTeachingsQuery(church) {
   return baseQuery
 }
 
-const getNumberOfTeaching = async ({ church = 'all' }) => {
+const getNumberOfQuotes = async ({ church = 'all' }) => {
   const res = await fetchHelper({
-    query: numberOfTeachingsQuery(church),
+    query: numberOfQuotesQuery(church),
     variables: { church },
   })
   return res.data
 }
 
-export const getTeachingFilters = async (
+export const getQuotesFilters = async (
   church: string = 'all',
 ) => {
   const filters = {
     [church]: {
       none: {
-        ...(await getNumberOfTeaching({
+        ...(await getNumberOfQuotes({
           church,
         })),
       },

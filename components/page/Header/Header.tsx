@@ -17,6 +17,8 @@ const Header = ({ searchData, navData }) => {
     navData?.teachings_aggregated?.[0]?.count?.id
   const booksCount =
     navData?.books_aggregated?.[0]?.count?.id
+  const quotesCount =
+    navData?.quotes_aggregated?.[0]?.count?.id
 
   return (
     <div
@@ -53,6 +55,16 @@ const Header = ({ searchData, navData }) => {
                     {miraclesCount}
                   </span>
                   Miracles
+                </Link>
+              ) : (
+                ''
+              )}
+              {quotesCount ? (
+                <Link href="/quotes">
+                  <span className={styles.count}>
+                    {quotesCount}
+                  </span>
+                  Quotes
                 </Link>
               ) : (
                 ''

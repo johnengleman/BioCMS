@@ -53,9 +53,9 @@ export default function BookSummary({
                   height={35}
                 />
               </div>
-              <h3 className={styles.author}>
+              <div className={styles.author}>
                 {saint?.name}
-              </h3>
+              </div>
             </div>
           )}
           {showDescription && (

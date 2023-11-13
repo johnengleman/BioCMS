@@ -106,6 +106,7 @@ const Teachings = () => {
         <HeroSimple
           title="Miracles"
           filtersCount={filtersCount}
+          type="teachings"
         />
         <div className={styles.miracles}>
           {isFetching ? (

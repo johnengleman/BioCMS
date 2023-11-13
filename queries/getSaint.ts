@@ -4,7 +4,7 @@ import fetchHelper from './fetchHelper'
 
 const query = gql`
   query getSaint($slug: String!) {
-    saints(filter: { slug: { _eq: $slug } }) {
+    saints(filter: { slug: { _icontains: $slug } }) {
       id
       name
       summary
@@ -32,8 +32,9 @@ const query = gql`
         description
         amazon_book_cover
       }
-      sayings {
+      quotes {
         text
+        topics
       }
       miracles {
         miracles

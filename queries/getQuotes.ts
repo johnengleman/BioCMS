@@ -1,20 +1,68 @@
-import { gql } from 'graphql-request'
 import fetchHelper from './fetchHelper'
 
-
-const query = gql`
-  query {
-    quotes {
-      id
-      text
-      author {
-        name
-      }
-    }
+function getQuotesQuery({ church, filter }) {
+  // Variables declaration
+  let variablesList: string[] = []
+  if (church !== 'all') {
+    variablesList.push('$church: String!')
   }
-`
 
-export const getSayings = async () => {
-  const res = await fetchHelper({ query })
-  return res.data
+  if (filter !== 'none') {
+    variablesList.push('$filter: String!')
+  }
+
+  // Filter construction
+  let filterList: string[] = []
+  let churchList: string[] = []
+  if (church !== 'all') {
+    churchList.push(
+      '{ saint: { venerated_in: { _icontains: $church }}}',
+    )
+  }
+
+  if (filter !== 'none') {
+    filterList.push('{ topics: { _icontains: $filter } }')
+  }
+
+  // Building the query
+  let baseQuery = `
+    query getQuotes${
+      variablesList.length > 0
+        ? `(${variablesList.join(', ')})`
+        : ''
+    } {
+      quotes(
+        filter: {
+          _and: [
+            ${filterList.join(', ')}
+            ${churchList}
+          ]
+        }
+      ) {
+       text
+       topics
+       saint {
+         name
+         profile_image {
+          id
+          description
+           }
+         }
+       }
+    }
+  `
+  return baseQuery
+}
+
+export const getQuotes = async ({
+  church = 'all',
+  filter = 'none',
+}) => {
+  const query = getQuotesQuery({ church, filter })
+
+  const res = await fetchHelper({
+    query,
+    variables: { church, filter },
+  })
+  return res.data.quotes
 }

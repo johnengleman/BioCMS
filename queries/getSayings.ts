@@ -12,12 +12,12 @@ type Saying = {
 }
 
 type Response = {
-  sayings: Saying[]
+  quotes: Saying[]
 }
 
 const query = gql`
   query {
-    sayings {
+    quotes {
       id
       text
       author {

@@ -43,7 +43,7 @@ export type Saint = {
   legacy_influence: string
   teachings: Teachings[]
   prayers: Prayer[]
-  sayings: Saying[]
+  quotes: Saying[]
   birth_year: number
   death_year: number
   birth_location: string

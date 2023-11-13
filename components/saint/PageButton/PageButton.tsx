@@ -6,6 +6,7 @@ import {
   faFeather,
   faWind,
   faFlowerTulip,
+  faQuotes,
 } from '@fortawesome/pro-regular-svg-icons'
 import styles from './styles.module.scss'
 
@@ -39,6 +40,11 @@ const tocConfig = {
     backgroundColor: '#3e6f2b',
     icon: faBooks,
     name: 'Books',
+  },
+  quotes: {
+    backgroundColor: '#323c2e',
+    icon: faQuotes,
+    name: 'Quotes',
   },
 }
 

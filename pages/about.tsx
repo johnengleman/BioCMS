@@ -16,7 +16,7 @@ export const config = {
 }
 
 const About = () => {
-  useCookie();
+  useCookie()
   const router = useRouter()
   const church = Array.isArray(router.query.church)
     ? router.query.church[0]
@@ -27,14 +27,15 @@ const About = () => {
     () => getSearchData(church),
     {
       initialData: [],
-    }
+    },
   )
 
-  const { data: navData } = useQuery(['nav', church], () =>
-    getNav({ church }),
+  const { data: navData } = useQuery(
+    ['nav', church],
+    () => getNav({ church }),
     {
       initialData: {},
-    }
+    },
   )
 
   return (
@@ -42,8 +43,8 @@ const About = () => {
       <Head>
         <title>
           Browse and discover all the Catholic Saints:
-          Spiritual Biographies, Teachings, Sayings,
-          Miracles Books, and Quotes
+          Spiritual Biographies, Teachings, quotes, Miracles
+          Books, and Quotes
         </title>
         <link
           rel="canonical"
@@ -56,7 +57,7 @@ const About = () => {
         />
         <meta
           name="keywords"
-          content="Roman Catholic, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious sayings, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
+          content="Roman Catholic, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious quotes, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
         />
       </Head>
       <Page

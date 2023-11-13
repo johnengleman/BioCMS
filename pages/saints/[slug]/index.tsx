@@ -18,6 +18,7 @@ import RelatedPeople from '../../../components/saint/SimilarSaints/SimilarSaints
 import Tomb from '../../../components/saint/Tomb/Tomb'
 import ErrorPage from 'next/error'
 import NameTag from '../../../components/saint/NameTag/NameTag'
+import Quotes from '../../../components/saint/Quotes/Quotes'
 import Summary from '../../../components/saint/Summary/Summary'
 import TableOfContentFeatures from '../../../components/saint/TableOfContentsFeatures/TableOfContentsFeatures'
 import BentoSection from '../../../components/global/BentoSection/BentoSection'
@@ -157,7 +158,6 @@ const SaintBio = () => {
             <div className={styles.main}>
               <div>
                 <SectionTitle
-                  inRightRail={false}
                   id="section-bio"
                   dataSection="biography"
                 >
@@ -168,10 +168,9 @@ const SaintBio = () => {
                   link={`/saints/${slug}/biography`}
                 />
               </div>
-              {data?.teachings[0]?.teachings && (
+              {data?.teachings[0]?.teachings ? (
                 <div>
                   <SectionTitle
-                    inRightRail={false}
                     id="section-teachings"
                     dataSection="teachings"
                   >
@@ -182,11 +181,12 @@ const SaintBio = () => {
                     link={`/saints/${slug}/teachings`}
                   />
                 </div>
+              ) : (
+                ''
               )}
-              {data?.miracles[0]?.miracles && (
+              {data?.miracles[0]?.miracles ? (
                 <div>
                   <SectionTitle
-                    inRightRail={false}
                     id="section-miracles"
                     dataSection="miracles"
                   >
@@ -197,12 +197,30 @@ const SaintBio = () => {
                     link={`/saints/${slug}/miracles`}
                   />
                 </div>
+              ) : (
+                ''
               )}
-              {data?.books && (
+              {data?.quotes.length ? (
+                <div>
+                  <SectionTitle
+                    id="section-quotes"
+                    dataSection="quotes"
+                    border={true}
+                  >
+                    Quotes
+                  </SectionTitle>
+                  <Quotes quotes={data.quotes} />
+                </div>
+              ) : (
+                ''
+              )}
+              {data?.books ? (
                 <Books
                   inRightRail={false}
                   books={data?.books}
                 />
+              ) : (
+                ''
               )}
               {/* <Tomb
                 imageId={data?.tomb?.id}
