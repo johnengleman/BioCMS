@@ -121,7 +121,7 @@ const SaintBio = (props) => {
                 tags={data?.categories}
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
-                header={`Wat were the teachings of ${data?.name}?`}
+                header={`What were the teachings of ${data?.name}?`}
               />
               <div className={styles.updated}>
                 Updated on {formatDate(data?.date_updated)}

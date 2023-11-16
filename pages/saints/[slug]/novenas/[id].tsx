@@ -224,12 +224,15 @@ export const getStaticPaths = async () => {
       },
       body: JSON.stringify({
         query: `
-          query {
-            saints {
-              slug
+        query {
+          saints {
+            slug
+            prayers {
+              prayer_slug
             }
           }
-        `,
+        }
+      `,
       }),
     },
   )
@@ -237,17 +240,25 @@ export const getStaticPaths = async () => {
   if (res.ok) {
     const resData = await res.json()
 
-    const paths = resData.data.saints.map((saint) => ({
-      params: { slug: saint.slug },
-    }))
+    // Generate paths for each prayer of each saint
+    const paths = resData.data.saints.flatMap((saint) =>
+      saint.prayers.map((prayer) => ({
+        params: {
+          slug: saint.slug,
+          id: prayer.prayer_slug,
+        },
+      })),
+    )
 
     return {
       paths,
       fallback: true,
     }
   }
+
   const error = await res.text()
   console.log(error)
+  throw new Error(error)
 }
 
 export default SaintNovena
