@@ -86,10 +86,6 @@
 
     .main {
       width: 100%;
-
-      // @include breakpoint(tablet) {
-      //   width: calc(100% - 300px);
-      // }
     }
   }
 }
@@ -140,7 +136,7 @@
         font-weight: 400;
         font-size: 14px;
         color: #888;
-        margin-top: 15px;
+        margin: 15px 0;
       }
 
       .text {

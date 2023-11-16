@@ -107,7 +107,7 @@ const Teachings = () => {
           filtersCount={filtersCount}
           type="teachings"
         />
-        <div className={styles.teachings}>
+        <div className={styles.page}>
           {isFetching ? (
             <p className="status">Fetching teachings...</p>
           ) : isError ? (

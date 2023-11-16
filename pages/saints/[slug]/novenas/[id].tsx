@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, Fragment } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import {
@@ -6,28 +6,42 @@ import {
   QueryClient,
   useQuery,
 } from '@tanstack/react-query'
-import styles from './styles.module.scss'
-import { getSaint } from '../../../queries/getSaint'
-import { getNav } from '../../../queries/getNav'
-import Page from '../../../components/page/Page/Page'
-import ImageMain from '../../../components/saint/ImageMain/ImageMain'
-import Books from '../../../components/saint/Books/Books'
-import RelatedPeople from '../../../components/saint/SimilarSaints/SimilarSaints'
 import ErrorPage from 'next/error'
-import { getSearchData } from '../../../queries/getSearchData'
-import NameTag from '../../../components/saint/NameTag/NameTag'
-import TableOfContents from '../../../components/saint/TableOfContentsText/TableOfContentsText'
-import formatDate from '../../../utils/dates'
-import NextSection from '../../../components/saint/NextPage/NextPage'
-import About from '../../../components/global/About/About'
+import { getSaint } from '../../../../queries/getSaint'
+import { getNav } from '../../../../queries/getNav'
+import Page from '../../../../components/page/Page/Page'
+import ImageMain from '../../../../components/saint/ImageMain/ImageMain'
+import Books from '../../../../components/saint/Books/Books'
+import RelatedPeople from '../../../../components/saint/SimilarSaints/SimilarSaints'
+import { getSearchData } from '../../../../queries/getSearchData'
+import NameTag from '../../../../components/saint/NameTag/NameTag'
+import TableOfContents from '../../../../components/saint/TableOfContentsText/TableOfContentsText'
+import formatDate from '../../../../utils/dates'
+import ReadMoreLinks from '../../../../components/saint/ReadMoreLinks/ReadMoreLinks'
+import useBreakpoints from '../../../../hooks/useBreakPoints'
+import NextPage from '../../../../components/saint/NextPage/NextPage'
+import About from '../../../../components/global/About/About'
+import styles from '../styles.module.scss'
 
 export const config = {
   runtime: 'experimental-edge',
 }
 
-const SaintBio = (props) => {
+const SaintNovena = (props) => {
   const router = useRouter()
   const refElement = useRef(null)
+  const { isLaptopMinus } = useBreakpoints()
+  const days = [
+    'One',
+    'Two',
+    'Three',
+    'Four',
+    'Five',
+    'Six',
+    'Seven',
+    'Eight',
+    'Nine',
+  ]
   const church = Array.isArray(router.query.church)
     ? router.query.church[0]
     : router.query.church || 'all'
@@ -42,6 +56,10 @@ const SaintBio = (props) => {
     {
       initialData: [],
     },
+  )
+
+  const novena = data.prayers.find(
+    (prayer) => prayer.prayer_slug === router.query.id,
   )
 
   const { data: searchData } = useQuery(
@@ -83,15 +101,15 @@ const SaintBio = (props) => {
   return (
     <>
       <Head>
-        <title>{`${data?.name}: their Teachings`}</title>
+        <title>{`${data?.name}: their biography and life.`}</title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/teachings`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/biography`}
         />
         <meta
           key="description"
           name="description"
-          content={`Discover the teachings of ${data?.name} and their quotes, legacy, miracles, teachings and related books.`}
+          content={`Discover ${data?.name}'s spiritual journey. Explore their quotes, teachings, miracles, legacy, and related books.`}
         />
         <script
           type="application/ld+json"
@@ -121,19 +139,35 @@ const SaintBio = (props) => {
                 tags={data?.categories}
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
-                header={`Wat were the teachings of ${data?.name}?`}
+                header={`${data.name}: ${novena.prayer_title}`}
               />
               <div className={styles.updated}>
                 Updated on {formatDate(data?.date_updated)}
               </div>
-              <div
-                className={styles.text}
-                dangerouslySetInnerHTML={{
-                  __html:
-                    data?.teachings[0]?.teachings || '',
-                }}
+              {data?.prayers[0].prayers.map((prayer, i) => (
+                <Fragment key={i}>
+                  <h2 id={`heading-${i + 1}`}>
+                    Day {days[i]}
+                  </h2>
+                  <div
+                    className={styles.text}
+                    dangerouslySetInnerHTML={{
+                      __html: prayer.prayer_section || '',
+                    }}
+                  />
+                </Fragment>
+              ))}
+
+              {data?.books && isLaptopMinus && (
+                <Books
+                  books={data?.books}
+                  inRightRail={false}
+                />
+              )}
+              <NextPage data={data} />
+              <ReadMoreLinks
+                links={data?.read_more_links}
               />
-              <NextSection data={data} />
               <About showImage={false} />
             </div>
             <div className={styles.rightRail}>
@@ -145,7 +179,6 @@ const SaintBio = (props) => {
               )}
             </div>
           </div>
-
           <RelatedPeople data={relatedSaints} />
         </div>
       </Page>
@@ -217,4 +250,4 @@ export const getStaticPaths = async () => {
   console.log(error)
 }
 
-export default SaintBio
+export default SaintNovena

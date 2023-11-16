@@ -1,5 +1,4 @@
 import { gql } from 'graphql-request'
-import { Saint } from '../types/types'
 import fetchHelper from './fetchHelper'
 
 const query = gql`
@@ -42,12 +41,22 @@ const query = gql`
       teachings {
         teachings
       }
-      # prayers
-      # tomb {
-      #   id
-      # }
-      # tomb_church_name
-      # tomb_location
+      prayers {
+        prayer_title
+        prayer_slug
+        prayer_image {
+          id
+        }
+        prayers
+      }
+      relic_description
+      relic_location
+      relic_image {
+        width
+        height
+        description
+        id
+      }
     }
   }
 `

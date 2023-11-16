@@ -7,6 +7,8 @@ import {
   faWind,
   faFlowerTulip,
   faQuotes,
+  faTombstone,
+  faPersonPraying
 } from '@fortawesome/pro-regular-svg-icons'
 import styles from './styles.module.scss'
 
@@ -45,6 +47,16 @@ const tocConfig = {
     backgroundColor: '#323c2e',
     icon: faQuotes,
     name: 'Quotes',
+  },
+  relics: {
+    backgroundColor: '#73182e',
+    icon: faTombstone,
+    name: 'Relics',
+  },
+  novenas: {
+    backgroundColor: '#71855a',
+    icon: faPersonPraying,
+    name: 'Novenas',
   },
 }
 

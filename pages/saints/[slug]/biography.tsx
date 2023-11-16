@@ -121,11 +121,10 @@ const SaintBio = (props) => {
               ref={refElement}
             >
               <NameTag
-                name={data?.name}
                 tags={data?.categories}
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
-                type="bio"
+                header={`Who was ${data?.name}?`}
               />
               <div className={styles.updated}>
                 Updated on {formatDate(data?.date_updated)}

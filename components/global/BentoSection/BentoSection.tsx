@@ -66,7 +66,6 @@ const BentoSection: React.FC<BentoSectionProps> = ({
               {h2}
             </span>
           ))}
-          d
         </div>
       </div>
       <div className={styles.content}>

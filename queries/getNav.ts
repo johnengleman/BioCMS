@@ -65,6 +65,15 @@ function getNavQuery(church) {
           id
         }
       }
+      prayers_aggregated(
+        filter: {
+          ${churchList}
+        }
+      ) {
+        count {
+          id
+        }
+      }
        books_aggregated(
         filter: {
           ${churchList}

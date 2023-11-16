@@ -26,9 +26,7 @@ const FilterSimple = ({
 
   return (
     <div className={styles.filter}>
-      <p className={styles.instructions}>
-        Filter by Time Period?
-      </p>
+      <p className={styles.instructions}>Filter by?</p>
       <div className={styles.slideContainer}>
         {properties.filters?.[type]?.map((filter, i) => {
           const count =

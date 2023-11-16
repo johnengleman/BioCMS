@@ -61,19 +61,12 @@ const Footer = () => {
             />
             Feedback
           </Link>
-          {/* <Link href="/">
-          <FontAwesomeIcon
-            icon={faCircleQuestion}
-            size="lg"
-          />
-          About
-        </Link> */}
         </div>
         <div
           className={`${styles.row} ${styles.center}`}
         ></div>
         <div className={`${styles.row} ${styles.right}`}>
-          <ChurchToggle />
+          {/* <ChurchToggle /> */}
         </div>
       </div>
     </div>

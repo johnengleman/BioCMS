@@ -26,7 +26,7 @@ function getSaintsQuery(church, filter, saintPreset, sort) {
       )
     } else {
       filterList.push(
-        `{ feast_day_func: { month: { _icontains: ${getMonthNumber(
+        `{ feast_day_func: { month: { _eq: ${getMonthNumber(
           filter,
         )} } } }`,
       )

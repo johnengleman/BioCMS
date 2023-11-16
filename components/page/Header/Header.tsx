@@ -19,6 +19,8 @@ const Header = ({ searchData, navData }) => {
     navData?.books_aggregated?.[0]?.count?.id
   const quotesCount =
     navData?.quotes_aggregated?.[0]?.count?.id
+    const prayersCount =
+    navData?.prayers_aggregated?.[0]?.count?.id
 
   return (
     <div
@@ -65,6 +67,16 @@ const Header = ({ searchData, navData }) => {
                     {quotesCount}
                   </span>
                   Quotes
+                </Link>
+              ) : (
+                ''
+              )}
+                {prayersCount ? (
+                <Link href="/novenas">
+                  <span className={styles.count}>
+                    {prayersCount}
+                  </span>
+                  Novenas
                 </Link>
               ) : (
                 ''

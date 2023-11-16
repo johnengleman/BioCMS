@@ -18,7 +18,6 @@ import { getSearchData } from '../../../queries/getSearchData'
 import NameTag from '../../../components/saint/NameTag/NameTag'
 import TableOfContents from '../../../components/saint/TableOfContentsText/TableOfContentsText'
 import formatDate from '../../../utils/dates'
-import { Saint } from '../../../types/types'
 import NextSection from '../../../components/saint/NextPage/NextPage'
 import About from '../../../components/global/About/About'
 
@@ -119,11 +118,10 @@ const SaintBio = (props) => {
               ref={refElement}
             >
               <NameTag
-                name={data?.name}
                 tags={data?.categories}
                 birthYear={data?.birth_year}
                 deathYear={data?.death_year}
-                type="miracles"
+                header={`What where the miracles of ${data?.name}?`}
               />
               <div className={styles.updated}>
                 Updated on {formatDate(data?.date_updated)}
@@ -166,10 +164,6 @@ export const getStaticProps = async ({ params }) => {
   await queryClient.prefetchQuery(['saints', slug], () =>
     getSaint(slug),
   )
-  const saintData: Saint = queryClient.getQueryData([
-    'saints',
-    slug,
-  ]) as Saint
 
   await queryClient.prefetchQuery(['search', church], () =>
     getSearchData(church),

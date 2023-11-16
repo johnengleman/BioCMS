@@ -7,14 +7,14 @@ import {
 } from '@tanstack/react-query'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
-import { getQuotes } from '../../queries/getQuotes'
+import { getPrayers } from '../../queries/getPrayers'
+import { getPrayersFilters } from '../../queries/getPrayersFilters'
 import { getSearchData } from '../../queries/getSearchData'
 import { getNav } from '../../queries/getNav'
 import Page from '../../components/page/Page/Page'
+import NovenaDetail from '../../components/novenas/NovenaDetail/NovenaDetail'
 import ErrorPage from 'next/error'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
-import { getQuotesFilters } from '../../queries/getQuoteFilters'
-import Quotes from '../../components/saint/Quotes/Quotes'
 import useCookie from '../../hooks/useCookie'
 import styles from './styles.module.scss'
 
@@ -22,7 +22,7 @@ export const config = {
   runtime: 'experimental-edge',
 }
 
-const QuotesPage = () => {
+const NovenasPage = () => {
   useCookie()
   const router = useRouter()
   const church = Array.isArray(router.query.church)
@@ -54,7 +54,7 @@ const QuotesPage = () => {
   const { data: filtersCount } = useQuery(
     ['filters', church],
     () =>
-      getQuotesFilters(
+      getPrayersFilters(
         Array.isArray(church) ? church[0] : church,
       ),
     {
@@ -63,13 +63,13 @@ const QuotesPage = () => {
   )
 
   const {
-    data: quoteData,
+    data: prayersData,
     isFetching,
     isError,
   } = useQuery(
-    ['quotes', church, filter],
+    ['novenas', church, filter],
     () =>
-      getQuotes({
+      getPrayers({
         church,
         filter,
       }),
@@ -78,22 +78,22 @@ const QuotesPage = () => {
     },
   )
 
-  if (!router.isFallback && !quoteData) {
+  if (!router.isFallback && !prayersData) {
     return <ErrorPage statusCode={404} />
   }
 
   return (
     <>
       <Head>
-        <title>Quotes of Roman Catholic Saints</title>
+        <title>Roman Catholic Novenas</title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/quotes`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/novenas`}
         />
         <meta
           key="description"
           name="description"
-          content="Discover the quotes of Roman Catholic Saints"
+          content="Roman Catholic Novenas"
         />
       </Head>
       <Page
@@ -101,26 +101,28 @@ const QuotesPage = () => {
         navData={navData}
       >
         <HeroSimple
-          title="Quotes"
-          type="quotes"
+          title="Novenas"
+          type="prayers"
           filtersCount={filtersCount}
         />
-        <div className={styles.quotes}>
+        <div className={styles.page}>
           {isFetching ? (
-            <p className="status">Fetching quotes...</p>
+            <p className="status">Fetching novenas...</p>
           ) : isError ? (
             <p className="status">
               Error.{' '}
               <FontAwesomeIcon icon={faFaceFrownSlight} />
             </p>
-          ) : !isFetching && quoteData?.length ? (
-            <Quotes
-              quotes={quoteData}
-              showAuthor={true}
-            />
+          ) : !isFetching && prayersData?.length ? (
+            prayersData.map((prayer, i) => (
+              <NovenaDetail
+                key={i}
+                {...prayer}
+              />
+            ))
           ) : (
             <p className="status">
-              No quotes found.{' '}
+              No novenas found.{' '}
               <FontAwesomeIcon icon={faFaceFrownSlight} />
             </p>
           )}
@@ -155,16 +157,16 @@ export const getServerSideProps = async (context) => {
   )
 
   await queryClient.prefetchQuery(
-    ['quotes', church, filter],
+    ['prayers', church, filter],
     () =>
-      getQuotes({
+      getPrayers({
         church,
         filter,
       }),
   )
 
   await queryClient.prefetchQuery(['filters', church], () =>
-    getQuotesFilters(church),
+    getPrayersFilters(church),
   )
 
   await queryClient.prefetchQuery(['nav', church], () =>
@@ -178,4 +180,4 @@ export const getServerSideProps = async (context) => {
   }
 }
 
-export default QuotesPage
+export default NovenasPage

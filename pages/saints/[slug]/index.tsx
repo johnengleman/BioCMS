@@ -15,13 +15,14 @@ import Page from '../../../components/page/Page/Page'
 import ImageMain from '../../../components/saint/ImageMain/ImageMain'
 import Books from '../../../components/saint/Books/Books'
 import RelatedPeople from '../../../components/saint/SimilarSaints/SimilarSaints'
-import Tomb from '../../../components/saint/Tomb/Tomb'
+import Relics from '../../../components/saint/Relics/Relics'
 import ErrorPage from 'next/error'
 import NameTag from '../../../components/saint/NameTag/NameTag'
 import Quotes from '../../../components/saint/Quotes/Quotes'
 import Summary from '../../../components/saint/Summary/Summary'
 import TableOfContentFeatures from '../../../components/saint/TableOfContentsFeatures/TableOfContentsFeatures'
 import BentoSection from '../../../components/global/BentoSection/BentoSection'
+import Prayers from '../../../components/saint/Prayers/Prayers'
 import SectionTitle from '../../../components/saint/SectionTitle/SectionTitle'
 import ExtraInfo from '../../../components/saint/ExtraInfo/ExtraInfo'
 
@@ -130,11 +131,10 @@ const SaintBio = () => {
               <div className={styles.heroText}>
                 <div className={styles.row1}>
                   <NameTag
-                    name={data?.name}
                     tags={data?.categories}
                     birthYear={data?.birth_year}
                     deathYear={data?.death_year}
-                    type="bio"
+                    header={`Who was ${data?.name}?`}
                   />
                   <Summary summary={data?.summary} />
                 </div>
@@ -200,6 +200,41 @@ const SaintBio = () => {
               ) : (
                 ''
               )}
+              {data?.relic_image ? (
+                <div>
+                  <SectionTitle
+                    id="section-relics"
+                    dataSection="relics"
+                    border={true}
+                  >
+                    Relics
+                  </SectionTitle>
+                  <Relics
+                    image={data?.relic_image}
+                    description={data?.relic_description}
+                    location={data?.relic_location}
+                  />
+                </div>
+              ) : (
+                ''
+              )}
+              {data?.prayers.length ? (
+                <div>
+                  <SectionTitle
+                    id="section-novenas"
+                    dataSection="novenas"
+                    border={true}
+                  >
+                    Novenas
+                  </SectionTitle>
+                  <Prayers
+                    allPrayers={data?.prayers}
+                    saint={slug}
+                  />
+                </div>
+              ) : (
+                ''
+              )}
               {data?.quotes.length ? (
                 <div>
                   <SectionTitle
@@ -209,7 +244,7 @@ const SaintBio = () => {
                   >
                     Quotes
                   </SectionTitle>
-                  <Quotes quotes={data.quotes} />
+                  <Quotes quotes={data?.quotes} />
                 </div>
               ) : (
                 ''
@@ -222,11 +257,6 @@ const SaintBio = () => {
               ) : (
                 ''
               )}
-              {/* <Tomb
-                imageId={data?.tomb?.id}
-                location={data?.tomb_location}
-                church={data?.tomb_church_name}
-              /> */}
               <RelatedPeople data={relatedSaints} />
             </div>
           </div>

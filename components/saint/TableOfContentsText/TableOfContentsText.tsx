@@ -20,7 +20,7 @@ const TableOfContentsText: React.FC<{
     setElements(elementsArray)
 
     nodeList?.forEach((h2, index) => {
-      h2.id = `heading-${index}`
+      h2.id = `heading-${index + 1}`
     })
   }, [mainRef])
 
@@ -54,12 +54,12 @@ const TableOfContentsText: React.FC<{
           <li
             key={i}
             className={
-              activeHeading === `heading-${i}`
+              activeHeading === `heading-${i + 1}`
                 ? styles.active
                 : ''
             }
           >
-            <a href={`#heading-${i}`}>
+            <a href={`#heading-${i + 1}`}>
               {i + 1}. {element.innerText}
             </a>
           </li>
