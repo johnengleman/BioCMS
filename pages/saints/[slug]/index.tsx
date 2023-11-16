@@ -22,7 +22,7 @@ import Quotes from '../../../components/saint/Quotes/Quotes'
 import Summary from '../../../components/saint/Summary/Summary'
 import TableOfContentFeatures from '../../../components/saint/TableOfContentsFeatures/TableOfContentsFeatures'
 import BentoSection from '../../../components/global/BentoSection/BentoSection'
-import Prayers from '../../../components/saint/Prayers/Prayers'
+import PrayersC from '../../../components/saint/Prayers/Prayers'
 import SectionTitle from '../../../components/saint/SectionTitle/SectionTitle'
 import ExtraInfo from '../../../components/saint/ExtraInfo/ExtraInfo'
 
@@ -227,7 +227,7 @@ const SaintBio = () => {
                   >
                     Novenas
                   </SectionTitle>
-                  <Prayers
+                  <PrayersC
                     allPrayers={data?.prayers}
                     saint={slug}
                   />

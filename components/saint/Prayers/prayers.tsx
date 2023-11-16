@@ -2,7 +2,7 @@ import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import Link from 'next/link'
 import styles from './styles.module.scss'
 
-const Prayers = ({ allPrayers, saint }) => {
+const PrayersC = ({ allPrayers, saint }) => {
   return (
     <div className={styles.prayers}>
       {allPrayers.map((prayer, i) => (
@@ -37,4 +37,4 @@ const Prayers = ({ allPrayers, saint }) => {
   )
 }
 
-export default Prayers
+export default PrayersC
