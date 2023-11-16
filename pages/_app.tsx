@@ -1,5 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Router from 'next/router'
 import NextNProgress from 'nextjs-progressbar'
+import { initGA4 } from '../utils/g4a'
+import ReactGA from 'react-ga4'
 import { SiteProvider } from '../context/SiteContext'
 import {
   Hydrate,
@@ -24,6 +27,23 @@ const inter = Inter({
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(() => new QueryClient())
+
+  useEffect(() => {
+    initGA4() // Initialize GA4
+    const handleRouteChange = (url) => {
+      ReactGA.send({ hitType: 'pageview', page: url })
+    }
+    Router.events.on(
+      'routeChangeComplete',
+      handleRouteChange,
+    )
+    return () => {
+      Router.events.off(
+        'routeChangeComplete',
+        handleRouteChange,
+      )
+    }
+  }, [])
 
   return (
     <SiteProvider>
