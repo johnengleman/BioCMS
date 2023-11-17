@@ -84,7 +84,7 @@ const Saints = () => {
       return 1
     }
     if (isMobileL) {
-      return 2
+      return 1
     }
     if (isTablet) {
       return 3

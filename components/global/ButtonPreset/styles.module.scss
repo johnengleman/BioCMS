@@ -10,7 +10,7 @@
   cursor: pointer;
   gap: 20px;
   position: relative;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   transition: all 0.1s ease-in-out;
   background: linear-gradient(
     90deg,
@@ -42,7 +42,7 @@
   }
 
   &:hover {
-    border: 2px solid #dadada;
+    border: 1px solid #cacaca;
 
     h3 {
       color: #ffecec;
@@ -50,7 +50,7 @@
   }
 
   &.active {
-    border: 2px solid #ffffff;
+    border: 1px solid #cacaca;
 
     h3 {
       color: #ffecec;

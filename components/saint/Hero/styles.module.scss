@@ -7,7 +7,7 @@ $color: #ccad004e;
   min-width: 100vw;
   height: min-content;
   border: 1px solid #dfdfdf;
-  padding: 40px 0;
+  padding: 20px 0 50px;
   position: relative;
   margin-bottom: 30px;
   position: relative;
@@ -20,9 +20,9 @@ $color: #ccad004e;
     right: 0;
     bottom: 0;
     background-image: linear-gradient(
-        to right,
+        to bottom,
         rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0.3)
+        rgba(0, 0, 0, 0.5)
       ),
       url('/bg-light.webp');
     background-size: cover; /* This will cover the entire viewport */
@@ -30,6 +30,15 @@ $color: #ccad004e;
     background-position: center 45%; /* This will center the image */
     transform: scaleX(-1);
     z-index: 0;
+
+    @include breakpoint(laptop) {
+      background-image: linear-gradient(
+          to right,
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0.3)
+        ),
+        url('/bg-light.webp');
+    }
   }
 
   .contentContainer {
@@ -43,23 +52,27 @@ $color: #ccad004e;
       text-shadow: -2px 0 $color, 0 2px $color, 2px 0 $color,
         0 -2px $color;
       font-size: 1.75rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 0.75rem;
       display: flex;
       flex-direction: column;
       position: relative;
       min-height: 100px;
 
+      @include breakpoint(tablet) {
+        flex-direction: row;
+        min-height: unset;
+      }
+
       @include breakpoint(laptop) {
         flex-direction: row;
         font-size: 2.5rem;
-        min-height: unset;
       }
     }
 
     .metaphor {
       text-decoration: underline;
 
-      @include breakpoint(laptop) {
+      @include breakpoint(tablet) {
         margin-left: 10px;
       }
     }

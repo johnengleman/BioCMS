@@ -2,6 +2,22 @@
 $color: rgb(70, 63, 113);
 
 .filter {
+  .row {
+    display: flex;
+    gap: 0;
+    flex-direction: column;
+
+    @include breakpoint(tablet) {
+      flex-direction: row;
+      gap: 30px;
+    }
+  }
+
+  .col {
+    display: flex;
+    flex-direction: column;
+  }
+
   .instructions {
     color: rgb(233, 230, 253);
     text-shadow: -1px 0 $color, 0 1px $color, 1px 0 $color,
@@ -16,12 +32,16 @@ $color: rgb(70, 63, 113);
   .presetContainer {
     display: flex;
     gap: 0.5rem;
-    margin: 0.5rem 0 1.5rem 0;
     justify-content: flex-start;
     flex-direction: column;
     flex-wrap: wrap;
+    margin-bottom: 20px;
 
     @include breakpoint(tablet) {
+      flex-direction: row;
+    }
+
+    &.organizeContainer {
       flex-direction: row;
     }
 
@@ -85,11 +105,11 @@ $color: rgb(70, 63, 113);
     justify-content: flex-start;
 
     @include breakpoint(tablet) {
-      width: 75%;
+      width: 100%;
     }
 
     @include breakpoint(laptop) {
-      width: 50%;
+      width: 65%;
     }
 
     .slide {

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCircleQuestion,
   faMessageQuestion,
+  faSparkles
 } from '@fortawesome/pro-regular-svg-icons'
 import styles from './styles.module.scss'
 
@@ -61,12 +62,19 @@ const Footer = () => {
             />
             Feedback
           </Link>
+          <Link href="/updates">
+            <FontAwesomeIcon
+              icon={faSparkles}
+              size="lg"
+            />
+            Recent Updates
+          </Link>
         </div>
         <div
           className={`${styles.row} ${styles.center}`}
         ></div>
         <div className={`${styles.row} ${styles.right}`}>
-          {/* <ChurchToggle /> */}
+          <ChurchToggle />
         </div>
       </div>
     </div>

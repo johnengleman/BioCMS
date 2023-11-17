@@ -35,7 +35,7 @@ $color: #ccad004e;
     justify-content: flex-start;
 
     @include breakpoint(tablet) {
-      width: 75%;
+      width: 85%;
     }
 
     @include breakpoint(laptop) {

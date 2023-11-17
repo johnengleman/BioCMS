@@ -1,6 +1,6 @@
 .sortToggleContainer {
   position: absolute;
-  bottom: -57px;
+  bottom: -67px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -12,7 +12,6 @@
 
   .selected {
     font-size: 14px;
-    font-weight: 600;
     background-color: #2f4f3a;
     padding: 5px 30px;
     color: #dadada;
@@ -27,9 +26,8 @@
   }
 
   .direction {
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: 600;
   }
 
   .dropdown {
@@ -63,7 +61,7 @@
         width: max-content;
         margin: 0;
         width: 100%;
-        font-size: 15px;
+        font-size: 14px;
         color: #333;
 
         &:hover {

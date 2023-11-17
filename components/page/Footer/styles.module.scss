@@ -2,7 +2,7 @@
 
 .footer {
   background-color: #343434;
-  height: 90px;
+  height: 120px;
   color: #fff;
   width: 100%;
   display: flex;
@@ -10,6 +10,10 @@
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
   z-index: 10;
   position: relative;
+
+  @include breakpoint(tablet) {
+    height: 90px;
+  }
 
   @include breakpoint(laptop) {
     height: 60px;
@@ -31,15 +35,23 @@
     margin: 20px auto;
     display: flex;
     align-items: center;
+    flex-direction: column;
+
+    @include breakpoint(tablet) {
+      flex-direction: row;
+    }
 
     .left {
-      justify-content: flex-start;
-      flex-direction: column;
-      gap: 10px;
+      justify-content: space-between;
+      width: 100%;
 
       @include breakpoint(tablet) {
-        flex-direction: row;
-        gap: 15px;
+        gap: 30px;
+      }
+
+      @include breakpoint(desktop-sm) {
+        justify-content: flex-start;
+        gap: 60px;
       }
     }
 
@@ -53,13 +65,14 @@
 
     .row {
       display: flex;
+      flex-direction: row;
       flex: 1;
     }
 
     a {
       color: #fff;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 14px;
       transition: all 0.1s ease-in-out;
       font-weight: 700;
       display: flex;
@@ -67,7 +80,8 @@
       gap: 10px;
 
       @include breakpoint(tablet) {
-        margin: 0 20px;
+        width: max-content;
+        font-size: 16px;
       }
 
       &:hover {
