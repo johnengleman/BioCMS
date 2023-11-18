@@ -71,6 +71,11 @@
     .bold {
       font-weight: 700;
       color: var(--violet);
+      margin-right: 5px;
+    }
+
+    .underline {
+      text-decoration: underline;
     }
 
     &::marker {

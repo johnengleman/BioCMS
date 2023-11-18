@@ -21,6 +21,7 @@ function useMediaQuery(query) {
 }
 
 export default function useBreakpoints() {
+  const isMobile = useMediaQuery('(max-width: 768px)')
   const isMobileS = useMediaQuery('(max-width: 375px)')
   const isMobileM = useMediaQuery(
     '(min-width: 376px) and (max-width: 425px)',
@@ -42,25 +43,8 @@ export default function useBreakpoints() {
   const isDesktop = useMediaQuery('(min-width: 1441px)')
 
   const breakpoints = useMemo(() => {
-    let active = 'mobile'
-
-    if (isMobileS) {
-      active = 'mobileS'
-    } else if (isMobileM) {
-      active = 'mobileM'
-    } else if (isMobileL) {
-      active = 'mobileL'
-    } else if (isTablet) {
-      active = 'tablet'
-    } else if (isLaptop) {
-      active = 'laptop'
-    } else if (isLaptopL) {
-      active = 'laptopL'
-    } else if (isDesktop) {
-      active = 'desktop'
-    }
-
     return {
+      isMobile,
       isMobileS,
       isMobileM,
       isMobileL,
@@ -70,9 +54,9 @@ export default function useBreakpoints() {
       isLaptop,
       isLaptopL,
       isDesktop,
-      active,
     }
   }, [
+    isMobile,
     isMobileS,
     isMobileM,
     isMobileL,

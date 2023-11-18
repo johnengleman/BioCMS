@@ -1,10 +1,19 @@
+import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faBars,
+  faXmark,
+} from '@fortawesome/pro-duotone-svg-icons'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Search from '../Search/Search'
 import SMButtons from '../SMButtons/SMButtons'
+import useBreakpoints from '../../../hooks/useBreakPoints'
 import styles from './styles.module.scss'
 
 const Header = ({ searchData, navData }) => {
+  const [mobileMenuIsOpen, setMobileMenuOpen] =
+    useState(false)
   const router = useRouter()
   const isSaintsPage =
     router.pathname.startsWith('/saints/')
@@ -22,6 +31,24 @@ const Header = ({ searchData, navData }) => {
   const prayersCount =
     navData?.prayers_aggregated?.[0]?.count?.id
 
+  const { isMobile } = useBreakpoints()
+
+  const handleToggleMenu = (open) => {
+    if (open) {
+      setMobileMenuOpen(true)
+      const body = document.querySelector('body')
+      if (body) {
+        body.style.overflow = 'hidden'
+      }
+    } else {
+      setMobileMenuOpen(false)
+      const body = document.querySelector('body')
+      if (body) {
+        body.style.overflow = 'unset'
+      }
+    }
+  }
+
   return (
     <div
       className={`${styles.header} ${
@@ -31,8 +58,30 @@ const Header = ({ searchData, navData }) => {
     >
       <div className={styles.row}>
         <div className={styles.content}>
-          <div className={`${styles.col} ${styles.left}`}>
-            <div className={styles.navigation}>
+          <div className={styles.colLeft}>
+            <div className={styles.hamburger}>
+              {isMobile && (
+                <FontAwesomeIcon
+                  icon={faBars}
+                  size="2xl"
+                  style={{ color: '#ccad00' }}
+                  onClick={() => handleToggleMenu(true)}
+                />
+              )}
+            </div>
+            <div
+              className={`${styles.navigation} ${
+                mobileMenuIsOpen
+                  ? styles.mobileMenuOpen
+                  : ''
+              }`}
+            >
+              <FontAwesomeIcon
+                icon={faXmark}
+                size="2xl"
+                style={{ color: '#dbdfe6' }}
+                onClick={() => handleToggleMenu(false)}
+              />
               <Link href="/saints">
                 {saintsCount && (
                   <span className={styles.count}>
@@ -91,7 +140,8 @@ const Header = ({ searchData, navData }) => {
               </Link>
             </div>
           </div>
-          <div className={`${styles.col} ${styles.right}`}>
+
+          <div className={styles.colRight}>
             <Search searchData={searchData} />
             <SMButtons transparent={isSaintsPage} />
           </div>

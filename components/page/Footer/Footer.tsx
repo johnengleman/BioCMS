@@ -5,8 +5,8 @@ import ChurchToggle from '../ChurchToggle/ChurchToggle'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faCircleQuestion,
-  faMessageQuestion,
-  faSparkles
+  faSparkles,
+  faMessagePen,
 } from '@fortawesome/pro-regular-svg-icons'
 import styles from './styles.module.scss'
 
@@ -19,7 +19,7 @@ const Footer = () => {
   useEffect(() => {
     if (animateFooter) {
       const handleScroll = () => {
-        if (window.scrollY > 0 && window.scrollY < 1500) {
+        if (window.scrollY > 0 && window.scrollY < 2000) {
           setInView(true)
         } else if (
           window.scrollY + window.innerHeight >=
@@ -47,7 +47,7 @@ const Footer = () => {
       } ${inView ? styles.inView : ''}`}
     >
       <div className={styles.content}>
-        <div className={`${styles.row} ${styles.left}`}>
+        <div className={styles.left}>
           <Link href="/about">
             <FontAwesomeIcon
               icon={faCircleQuestion}
@@ -57,7 +57,7 @@ const Footer = () => {
           </Link>
           <Link href="/feedback">
             <FontAwesomeIcon
-              icon={faMessageQuestion}
+              icon={faMessagePen}
               size="lg"
             />
             Feedback
@@ -70,10 +70,7 @@ const Footer = () => {
             Recent Updates
           </Link>
         </div>
-        <div
-          className={`${styles.row} ${styles.center}`}
-        ></div>
-        <div className={`${styles.row} ${styles.right}`}>
+        <div className={styles.right}>
           <ChurchToggle />
         </div>
       </div>

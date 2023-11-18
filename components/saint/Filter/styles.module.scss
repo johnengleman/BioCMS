@@ -43,6 +43,10 @@ $color: rgb(70, 63, 113);
 
     &.organizeContainer {
       flex-direction: row;
+
+      @include breakpoint(tablet) {
+        flex-direction: column;
+      }
     }
 
     .preset {
