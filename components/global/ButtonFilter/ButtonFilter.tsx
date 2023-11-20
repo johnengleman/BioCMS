@@ -7,7 +7,7 @@ const ButtonFilter = ({ count, filter }) => {
   const router = useRouter()
   const selectedFilter = Array.isArray(router.query.filter)
     ? router.query.filter[0]
-    : router.query.filter || 'none'
+    : router.query.filter || 'all'
 
   const isSelected = selectedFilter === filter.toLowerCase()
 
@@ -25,7 +25,7 @@ const ButtonFilter = ({ count, filter }) => {
       filter: filter.toLowerCase(),
     }
 
-    if (filter === 'none') {
+    if (filter === 'all') {
       delete newQuery.filter
     }
 
@@ -43,7 +43,7 @@ const ButtonFilter = ({ count, filter }) => {
       className={`${styles.slide} ${
         isSelected ? styles.selected : ''
       } ${
-        count === 0 && filter !== 'None'
+        count === 0 && filter !== 'All'
           ? styles.disabled
           : ''
       }`}
@@ -51,20 +51,20 @@ const ButtonFilter = ({ count, filter }) => {
         if (canUseTransition.current) {
           ;(document as any)?.startViewTransition(() => {
             flushSync(() => {
-              setSaintFilter(!isSelected ? filter : 'none')
+              setSaintFilter(!isSelected ? filter : 'all')
             })
           })
         } else {
-          setSaintFilter(!isSelected ? filter : 'none')
+          setSaintFilter(!isSelected ? filter : 'all')
         }
       }}
     >
       <span className={styles.name}>
-        {filter !== 'None'
+        {filter !== 'All'
           ? filter.replace(/_/g, ' ').replace(/and/gi, '&')
           : 'All'}
       </span>
-      {count !== 0 && filter !== 'None' && (
+      {count !== 0 && filter !== 'All' && (
         <div className={styles.count}>{count}</div>
       )}
     </button>

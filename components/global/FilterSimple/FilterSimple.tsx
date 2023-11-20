@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Toggle from '../Toggle/Toggle'
 import styles from './styles.module.scss'
 import ButtonFilter from '../ButtonFilter/ButtonFilter'
-import { properties } from './properties'
+import { properties } from '../../../utils/properties'
 
 const FilterSimple = ({
   filtersCount = {},
@@ -28,7 +28,7 @@ const FilterSimple = ({
     <div className={styles.filter}>
       <p className={styles.instructions}>Filter by?</p>
       <div className={styles.slideContainer}>
-        {properties.filters?.[type]?.map((filter, i) => {
+        {properties?.[type]?.filters.map((filter, i) => {
           const count =
             filtersCount[church]?.[selectedPreset]?.[
               filter

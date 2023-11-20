@@ -83,7 +83,7 @@ const SaintBio = (props) => {
   return (
     <>
       <Head>
-        <title>{`${data?.name}: their Teachings`}</title>
+        <title>{`Teachings and Legacy of ${data.name}: Spiritual Insights and Influence`}</title>
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/teachings`}
@@ -91,7 +91,11 @@ const SaintBio = (props) => {
         <meta
           key="description"
           name="description"
-          content={`Discover the teachings of ${data?.name} and their quotes, legacy, miracles, teachings and related books.`}
+          content={`Immerse yourself in the profound teachings and enduring legacy of ${data.name}. Explore an in-depth look at their spiritual insights, theological contributions, and the significant impact they made on the Christian faith. Discover how ${data.name}'s teachings continue to inspire and guide believers worldwide.`}
+        />
+        <meta
+          name="keywords"
+          content={`${data.name} teachings, spiritual legacy, Christian teachings, religious influence, ${data.name} legacy, Catholic spirituality, Orthodox spirituality, theological insights, Christian faith impact, religious guidance, spiritual writings, saintly teachings, religious education`}
         />
         <script
           type="application/ld+json"

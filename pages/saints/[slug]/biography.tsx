@@ -86,7 +86,7 @@ const SaintBio = (props) => {
   return (
     <>
       <Head>
-        <title>{`${data?.name}: their biography and life.`}</title>
+        <title>{`The Inspiring Life of ${data.name}: A Detailed Biography`}</title>
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/biography`}
@@ -94,7 +94,11 @@ const SaintBio = (props) => {
         <meta
           key="description"
           name="description"
-          content={`Discover ${data?.name}'s spiritual journey. Explore their quotes, teachings, miracles, legacy, and related books.`}
+          content={`Delve into the captivating and detailed biography of ${data.name}. Discover the journey of her life, from her early years to her profound spiritual impact. Explore the milestones, challenges, and profound faith that defined ${data.name}, whose message of love continues to inspire believers around the world.`}
+        />
+        <meta
+          name="keywords"
+          content={`${data.name}, biography, Catholic saint, Orthodox Saint, detailed life story, spiritual journey, saintly life, religious inspiration, Christian faith, Thérèse of Lisieux biography, saint of simplicity, religious figures, historical biography, Christian spirituality`}
         />
         <script
           type="application/ld+json"

@@ -83,7 +83,7 @@ const SaintBio = (props) => {
   return (
     <>
       <Head>
-        <title>{`${data?.name}: their miracles`}</title>
+        <title>{`Miracles of ${data.name}: A Chronicle of Divine Wonders`}</title>
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/miracles`}
@@ -91,7 +91,11 @@ const SaintBio = (props) => {
         <meta
           key="description"
           name="description"
-          content={`Discover the miracles of ${data?.name} and their quotes, teachings, legacy, and related books.`}
+          content={`Explore the extraordinary miracles attributed to ${data.name}. Discover the detailed accounts of the divine wonders and miraculous events that have become synonymous with their legacy. From stories of healing to spiritual phenomena, delve into the mystical experiences that highlight ${data.name}'s enduring influence and saintly intercession.`}
+        />
+        <meta
+          name="keywords"
+          content={`${data.name} miracles, miraculous events, divine wonders, saintly intercession, Catholic miracles, Orthodox Miracles, spiritual phenomena, religious miracles, Christian faith miracles, healing miracles, supernatural events, religious inspiration`}
         />
         <script
           type="application/ld+json"

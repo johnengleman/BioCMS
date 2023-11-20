@@ -15,6 +15,7 @@ import ErrorPage from 'next/error'
 import SaintDetail from '../../components/global/SaintDetail/SaintDetail'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
 import { getTeachingFilters } from '../../queries/getTeachingFilters'
+import capitalize from '../../utils/capitalize'
 import useCookie from '../../hooks/useCookie'
 import styles from './styles.module.scss'
 
@@ -30,7 +31,7 @@ const Teachings = () => {
     : router.query.church || 'all'
   const filter = Array.isArray(router.query.filter)
     ? router.query.filter[0]
-    : router.query.filter || 'none'
+    : router.query.filter || 'all'
 
   const { data: searchData } = useQuery(
     ['search', church],
@@ -86,7 +87,13 @@ const Teachings = () => {
     <>
       <Head>
         <title>
-          Teachings and Legacy of Roman Catholic Saints
+          {`Journey through Christian History: Teachings &
+          Legacies of Catholic and Orthodox Saints ${
+            filter === 'all'
+              ? `from the
+          Apostolic to Modern Era`
+              : `in the ${capitalize(filter)}`
+          }`}
         </title>
         <link
           rel="canonical"
@@ -95,7 +102,15 @@ const Teachings = () => {
         <meta
           key="description"
           name="description"
-          content="Discover the teachings and legacy of Roman Catholic Saints"
+          content={`Embark on a spiritual exploration of Catholic and Orthodox saints ${
+            filter === 'all'
+              ? `from the Apostolic Era to the present`
+              : `in the ${capitalize(filter)}`
+          }. Our site delves into the Patristic Age, navigates the Medieval period, crosses the Late Medieval/Pre-Renaissance era, and embraces Modern and Contemporary insights. Discover the profound teachings and enduring legacies of revered saints across centuries. Uncover the rich tapestry of Christian wisdom and faith through history.`}
+        />
+        <meta
+          name="keywords"
+          content="Apostolic Era saints, Patristic Age, Medieval Christian saints, Late Medieval saints, Modern Christian saints, Orthodox teachings, Catholic legacies, Christian history, spiritual teachings, saint biographies, religious wisdom, faith through ages, Christian spirituality, historical saints"
         />
       </Head>
       <Page
@@ -138,7 +153,7 @@ const Teachings = () => {
 
 export const getServerSideProps = async (context) => {
   const queryClient = new QueryClient()
-  const filter = context.query.filter || 'none'
+  const filter = context.query.filter || 'all'
   const teachingPreset = context.query.preset || 'none'
   const cookie = context.req.headers.cookie
   let church = 'all'

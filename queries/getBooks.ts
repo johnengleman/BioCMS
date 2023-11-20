@@ -11,7 +11,7 @@ function getBooksQuery({ church, preset, filter }) {
     variablesList.push('$preset: String!')
   }
 
-  if (filter !== 'none') {
+  if (filter !== 'all') {
     variablesList.push('$filter: String!')
   }
 
@@ -27,7 +27,7 @@ function getBooksQuery({ church, preset, filter }) {
     filterList.push('{ genre: { _icontains: $preset } }')
   }
 
-  if (filter !== 'none') {
+  if (filter !== 'all') {
     filterList.push(
       '{ saint: { name: { _icontains: $filter } } }',
     )
@@ -74,7 +74,7 @@ function getBooksQuery({ church, preset, filter }) {
 export const getBooks = async ({
   church = 'all',
   preset = 'none',
-  filter = 'none',
+  filter = 'all',
 }) => {
   const query = getBooksQuery({ church, preset, filter })
 

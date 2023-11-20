@@ -15,6 +15,7 @@ import Page from '../../components/page/Page/Page'
 import ErrorPage from 'next/error'
 import SaintDetail from '../../components/global/SaintDetail/SaintDetail'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
+import capitalize from '../../utils/capitalize'
 import useCookie from '../../hooks/useCookie'
 import styles from './styles.module.scss'
 
@@ -30,7 +31,7 @@ const Teachings = () => {
     : router.query.church || 'all'
   const filter = Array.isArray(router.query.filter)
     ? router.query.filter[0]
-    : router.query.filter || 'none'
+    : router.query.filter || 'all'
   const miraclesPreset = Array.isArray(router.query.preset)
     ? router.query.preset[0]
     : router.query.preset || 'none'
@@ -87,7 +88,13 @@ const Teachings = () => {
     <>
       <Head>
         <title>
-          Miracles of the most influential Catholic Saints
+          {`Miraculous Moments in Christian History: Famous
+          Miracles of Catholic and Orthodox Saints ${
+            filter === 'all'
+              ? `from the
+          Apostolic to Modern Era`
+              : `in the ${capitalize(filter)}`
+          }`}
         </title>
         <link
           rel="canonical"
@@ -96,7 +103,15 @@ const Teachings = () => {
         <meta
           key="description"
           name="description"
-          content="Discover the most famous miracles of Roman Catholic Saints"
+          content={`Discover the awe-inspiring miracles of Catholic and Orthodox saints, ${
+            filter === 'all'
+              ? `spanning from the Apostolic Era to the present`
+              : `in the ${capitalize(filter)}`
+          }. Witness the wonders of the Patristic Age, the marvels of the Medieval period, the extraordinary occurrences of the Renaissance, and the miraculous events of the Modern era. Our collection brings to life the most famous miracles that have shaped faith and history. Filter by time period and experience the miraculous through the ages.`}
+        />
+        <meta
+          name="keywords"
+          content="Saint miracles, Apostolic Era wonders, Patristic Age miracles, Medieval period marvels, Renaissance miracles, Modern era wonders, Catholic miracles, Orthodox saints, Christian history miracles, miraculous events, spiritual miracles, historical saints, faith and miracles, religious phenomena"
         />
       </Head>
       <Page
@@ -139,7 +154,7 @@ const Teachings = () => {
 
 export const getServerSideProps = async (context) => {
   const queryClient = new QueryClient()
-  const filter = context.query.filter || 'none'
+  const filter = context.query.filter || 'all'
   const miraclesPreset = context.query.preset || 'none'
   const cookie = context.req.headers.cookie
   let church = 'all'

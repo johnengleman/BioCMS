@@ -11,14 +11,14 @@ import {
   faCalendar,
 } from '@fortawesome/pro-duotone-svg-icons'
 import styles from './styles.module.scss'
-import { properties } from './properties'
+import { properties } from '../../../utils/properties'
 
 const Filter = ({ filtersCount = {} }) => {
   const [organization, setOrganization] =
     useState('category')
   const router = useRouter()
   const selectedPreset =
-    router.query.preset || ('none' as any)
+    router.query.preset || ('None' as any)
   const church = Array.isArray(router.query.church)
     ? router.query.church[0]
     : router.query.church || 'all'
@@ -49,13 +49,13 @@ const Filter = ({ filtersCount = {} }) => {
     <div className={styles.filter}>
       <p className={styles.instructions}>Use a preset?</p>
       <div className={styles.presetContainer}>
-        {properties.presets?.map((preset, i) => (
+        {properties.saints.presets?.map((preset, i) => (
           <ButtonPreset
             key={i}
             icon={getIcon(preset)}
             value={preset}
             count={
-              filtersCount[church]?.[preset]?.None[0].count
+              filtersCount[church]?.[preset]?.All[0].count
                 .id
             }
           />
@@ -70,15 +70,17 @@ const Filter = ({ filtersCount = {} }) => {
           <div
             className={`${styles.presetContainer} ${styles.organizeContainer}`}
           >
-            {properties.organizeBy?.map((value, i) => (
-              <ButtonOrganize
-                key={i}
-                value={value}
-                selected={organization === value}
-                setOrganization={setOrganization}
-                icon={getIcon(value)}
-              />
-            ))}
+            {properties.saints.organizeBy?.map(
+              (value, i) => (
+                <ButtonOrganize
+                  key={i}
+                  value={value}
+                  selected={organization === value}
+                  setOrganization={setOrganization}
+                  icon={getIcon(value)}
+                />
+              ),
+            )}
           </div>
         </div>
 
@@ -87,7 +89,7 @@ const Filter = ({ filtersCount = {} }) => {
             2. Add a {organization} filter?
           </p>
           <div className={styles.slideContainer}>
-            {properties.organize?.[organization]?.map(
+            {properties.saints.filters?.[organization]?.map(
               (filter, i) => (
                 <ButtonFilter
                   key={i}

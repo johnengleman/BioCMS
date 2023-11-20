@@ -1,5 +1,5 @@
 import fetchHelper from './fetchHelper'
-import { properties } from '../components/books/Hero/properties'
+import { properties } from '../utils/properties'
 
 const getPresetList = (filter) =>
   `{ genre: { _icontains: "${filter}" } }`
@@ -27,7 +27,7 @@ function numberOfPresetsQuery(church) {
         ? `(${variablesList.join(', ')})`
         : ''
     } {
-      ${properties.presets.map(
+      ${properties.books.presets.map(
         (preset) => `${preset}: books(
         filter: {
           _and: [

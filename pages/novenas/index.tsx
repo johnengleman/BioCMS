@@ -16,6 +16,7 @@ import NovenaDetail from '../../components/novenas/NovenaDetail/NovenaDetail'
 import ErrorPage from 'next/error'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
 import useCookie from '../../hooks/useCookie'
+import { properties } from '../../utils/properties'
 import styles from './styles.module.scss'
 
 export const config = {
@@ -30,7 +31,7 @@ const NovenasPage = () => {
     : router.query.church || 'all'
   const filter = Array.isArray(router.query.filter)
     ? router.query.filter[0]
-    : router.query.filter || 'none'
+    : router.query.filter || 'all'
 
   const { data: searchData } = useQuery(
     ['search', church],
@@ -85,7 +86,14 @@ const NovenasPage = () => {
   return (
     <>
       <Head>
-        <title>Roman Catholic Novenas</title>
+        <title>
+          {`Comprehensive Collection of Novenas${
+            filter !== 'all'
+              ? ` for ${properties.saints.title[filter]}`
+              : ''
+          }: Prayers to
+          All Saints`}
+        </title>
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/novenas`}
@@ -93,7 +101,15 @@ const NovenasPage = () => {
         <meta
           key="description"
           name="description"
-          content="Roman Catholic Novenas"
+          content={`Explore our extensive collection of novenas${
+            filter !== 'all'
+              ? ` for ${properties.saints.title[filter]}`
+              : ''
+          }, offering powerful prayers to a diverse array of saints. Whether seeking intercession, guidance, or spiritual growth, find the perfect novena to deepen your faith journey. Our resource includes novenas for every occasion and saint, providing a rich tapestry of devotion and tradition in the Catholic and Orthodox faiths.`}
+        />
+        <meta
+          name="keywords"
+          content="novenas collection, saint prayers, catholic novenas, orthodox novenas, spiritual novenas, prayer intercession, saints devotion, novena prayers, religious novenas, comprehensive novena list, Christian prayers, faith journey, religious traditions, prayer guidance"
         />
       </Head>
       <Page
@@ -134,7 +150,7 @@ const NovenasPage = () => {
 
 export const getServerSideProps = async (context) => {
   const queryClient = new QueryClient()
-  const filter = context.query.filter || 'none'
+  const filter = context.query.filter || 'all'
   const cookie = context.req.headers.cookie
   let church = 'all'
 

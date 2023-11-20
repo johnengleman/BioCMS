@@ -47,8 +47,6 @@ const About = () => {
     },
   )
 
-  console.log(updateData)
-
   return (
     <>
       <Head>

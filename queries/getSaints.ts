@@ -7,7 +7,7 @@ function getSaintsQuery(church, filter, saintPreset, sort) {
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
-  if (filter !== 'none' && !getMonthNumber(filter)) {
+  if (filter !== 'all' && !getMonthNumber(filter)) {
     variablesList.push('$filter: String!')
   }
 
@@ -19,7 +19,7 @@ function getSaintsQuery(church, filter, saintPreset, sort) {
     churchList.push('venerated_in: { _icontains: $church }')
   }
 
-  if (filter !== 'none') {
+  if (filter !== 'all') {
     if (!getMonthNumber(filter)) {
       filterList.push(
         '{ categories: { _icontains: $filter } }',

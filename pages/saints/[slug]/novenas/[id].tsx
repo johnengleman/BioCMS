@@ -101,7 +101,7 @@ const SaintNovena = (props) => {
   return (
     <>
       <Head>
-        <title>{`${data?.name}: their biography and life.`}</title>
+        <title>{`${data.name} Novena: Full Text for Devotional Prayer`}</title>
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/biography`}
@@ -109,7 +109,11 @@ const SaintNovena = (props) => {
         <meta
           key="description"
           name="description"
-          content={`Discover ${data?.name}'s spiritual journey. Explore their quotes, teachings, miracles, legacy, and related books.`}
+          content={`Join in a spiritual journey with the full text of the Novana of ${data.name}. This page offers the complete novena prayers for those seeking guidance, inspiration, and a deeper connection with ${data.name}. Embrace this powerful nine-day prayer to draw closer to the teachings and intercession of ${data.name}, known for her profound simplicity and faith.`}
+        />
+        <meta
+          name="keywords"
+          content={`${data.name} Novena, Novena prayers, ${data.name} devotion, Catholic novenas, spiritual prayer texts, devotional practices, Christian prayers, prayer for guidance, nine-day prayer, religious devotion, saintly intercession, spiritual connection`}
         />
         <script
           type="application/ld+json"

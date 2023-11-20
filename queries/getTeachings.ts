@@ -6,7 +6,7 @@ function getTeachingsQuery(church, filter) {
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
-  if (filter !== 'none') {
+  if (filter !== 'all') {
     variablesList.push('$filter: String!')
   }
 
@@ -19,7 +19,7 @@ function getTeachingsQuery(church, filter) {
     )
   }
 
-  if (filter !== 'none') {
+  if (filter !== 'all') {
     filterList.push(
       '{ time_period: { _icontains: $filter } }',
     )
@@ -76,7 +76,7 @@ const parseSort = (sort) => {
 
 export const getTeachings = async ({
   church = 'all',
-  filter = 'none',
+  filter = 'all',
   // sort = 'date-asc',
 }) => {
   const query = getTeachingsQuery(church, filter)

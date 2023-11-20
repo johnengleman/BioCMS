@@ -1,8 +1,12 @@
 import fetchHelper from './fetchHelper'
-import { properties } from '../components/global/FilterSimple/properties'
+import { properties } from '../utils/properties'
 
-const getFilterList = (filter) =>
-  `{ time_period: { _icontains: "${filter}" } }`
+const getFilterList = (filter) => {
+  if (filter !== 'all') {
+    return `{ time_period: { _icontains: "${filter}" } }`
+  }
+  return ''
+}
 
 function numberOfMiraclesQuery(church) {
   // Variables declaration
@@ -27,7 +31,7 @@ function numberOfMiraclesQuery(church) {
         ? `(${variablesList.join(', ')})`
         : ''
     } {
-      ${properties.filters.miracles.map(
+      ${properties.miracles.filters.map(
         (filter) => `${filter}: miracles_aggregated(
         filter: {
           _and: [

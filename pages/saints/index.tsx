@@ -18,6 +18,7 @@ import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
 import Hero from '../../components/saint/Hero/Hero'
 import useCookie from '../../hooks/useCookie'
+import { properties } from '../../utils/properties'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -31,7 +32,7 @@ const Saints = () => {
     : router.query.church || 'all'
   const filter = Array.isArray(router.query.filter)
     ? router.query.filter[0]
-    : router.query.filter || 'none'
+    : router.query.filter || 'all'
   const saintPreset = Array.isArray(router.query.preset)
     ? router.query.preset[0]
     : router.query.preset || 'none'
@@ -99,9 +100,13 @@ const Saints = () => {
     <>
       <Head>
         <title>
-          Browse and discover every Catholic Saint:
-          Spiritual Biographies, Teachings, Prayers,
-          Miracles, Books, and Quotes
+          {`Explore the Lives and Wisdom of Catholic &
+          Orthodox ${
+            filter !== 'all'
+              ? `${properties.saints.title[filter]}`
+              : ''
+          } Saints: Insights, Miracles, Prayers, and
+          Inspirational Reads`}
         </title>
         <link
           rel="canonical"
@@ -110,11 +115,11 @@ const Saints = () => {
         <meta
           key="description"
           name="description"
-          content="Explore the lives and legacies of Roman Catholic saints. From teachings to miracles, delve into their spiritual journeys."
+          content={`Delve into the spiritual journey with our comprehensive resource on Catholic and Orthodox ${properties.saints.title[filter]} saints. Discover detailed biographies, profound teachings, miraculous events, and enriching prayers. Engage with timeless wisdom through curated novenas, inspirational quotes, and a selection of related books. Your portal to the lives and legacies of revered holy figures.`}
         />
         <meta
           name="keywords"
-          content="Roman Catholic, spiritual journeys, miracles, teachings, holy figures, books, Orthodox literature, religious quotes, saintly quotes, Orthodox teachings, church history, faith, spirituality, Christianity"
+          content={`${properties.saints.title[filter]} Saints, catholic saints, orthodox saints, saint biographies, religious teachings, saint miracles, spiritual prayers, novenas, saint quotes, religious books, spiritual wisdom, christian spirituality, saint legacies, religious education, faith resources`}
         />
       </Head>
       <Page
@@ -163,7 +168,7 @@ const Saints = () => {
 export async function getServerSideProps(context) {
   // Get the cookie from the request headers
   const cookie = context.req.headers.cookie
-  const filter = context.query.filter || 'none'
+  const filter = context.query.filter || 'all'
   const saintPreset = context.query.preset || 'none'
   const sort = context.query?.sort || 'created-newest'
   let church = 'all'

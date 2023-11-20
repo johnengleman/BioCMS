@@ -7,7 +7,7 @@ function getQuotesQuery({ church, filter }) {
     variablesList.push('$church: String!')
   }
 
-  if (filter !== 'none') {
+  if (filter !== 'all') {
     variablesList.push('$filter: String!')
   }
 
@@ -20,7 +20,7 @@ function getQuotesQuery({ church, filter }) {
     )
   }
 
-  if (filter !== 'none') {
+  if (filter !== 'all') {
     filterList.push('{ topics: { _icontains: $filter } }')
   }
 
@@ -56,7 +56,7 @@ function getQuotesQuery({ church, filter }) {
 
 export const getQuotes = async ({
   church = 'all',
-  filter = 'none',
+  filter = 'all',
 }) => {
   const query = getQuotesQuery({ church, filter })
 

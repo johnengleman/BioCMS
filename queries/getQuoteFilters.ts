@@ -1,8 +1,12 @@
 import fetchHelper from './fetchHelper'
-import { properties } from '../components/global/FilterSimple/properties'
+import { properties } from '../utils/properties'
 
-const getFilterList = (filter) =>
-  `{ topics: { _icontains: "${filter}" } }`
+const getFilterList = (filter) => {
+  if (filter !== 'all') {
+    return `{ topics: { _icontains: "${filter}" } }`
+  }
+  return ''
+}
 
 function numberOfQuotesQuery(church) {
   // Variables declaration
@@ -27,7 +31,7 @@ function numberOfQuotesQuery(church) {
         ? `(${variablesList.join(', ')})`
         : ''
     } {
-      ${properties.filters.quotes.map(
+      ${properties.quotes.filters.map(
         (filter) => `${filter}: quotes_aggregated(
         filter: {
           _and: [

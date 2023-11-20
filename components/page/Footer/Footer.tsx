@@ -19,7 +19,7 @@ const Footer = () => {
   useEffect(() => {
     if (animateFooter) {
       const handleScroll = () => {
-        if (window.scrollY > 0 && window.scrollY < 2000) {
+        if (window.scrollY > 0 && window.scrollY < 1500) {
           setInView(true)
         } else if (
           window.scrollY + window.innerHeight >=

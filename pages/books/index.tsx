@@ -18,6 +18,7 @@ import Page from '../../components/page/Page/Page'
 import BookSummary from '../../components/books/BookSummary/BookSummary'
 import styles from './styles.module.scss'
 import SectionTitle from '../../components/books/SectionTitle/SectionTitle'
+import capitalize from '../../utils/capitalize'
 import useCookie from '../../hooks/useCookie'
 
 export const config = {
@@ -35,13 +36,13 @@ const Books = () => {
     : router.query.preset || 'none'
   const filter = Array.isArray(router.query.filter)
     ? router.query.filter[0]
-    : router.query.filter || 'none'
+    : router.query.filter || 'all'
 
   const bookCategory =
     preset !== 'none'
       ? preset.replace(/and/g, '&').replace(/_/g, ' ')
       : ''
-  const bookFilter = filter !== 'none' ? `${filter}` : ''
+  const bookFilter = filter !== 'all' ? `${filter}` : ''
 
   const { data: searchData } = useQuery(
     ['search', church],
@@ -102,7 +103,11 @@ const Books = () => {
   return (
     <>
       <Head>
-        <title>Books about Roman Catholic Saints</title>
+        <title>
+          Exploring Sanctity Through Literature: Diverse
+          Books on Saints&#39; Lives, Teachings, and
+          Spiritual Journeys
+        </title>
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/books`}
@@ -110,7 +115,11 @@ const Books = () => {
         <meta
           key="description"
           name="description"
-          content="Discover the most famous miracles of Roman Catholic Saints"
+          content={`Dive into our extensive collection of books related to Catholic and Orthodox saints, encompassing theology and dogma, spiritual and ascetic writings, church history and biography, and prayer and devotionals. Whether authored by saints or about them, our library offers a treasure trove of wisdom, history, and spiritual guidance. Filter by genre to find the perfect read that enlightens and inspires your faith journey.`}
+        />
+        <meta
+          name="keywords"
+          content="saint books, theology and dogma, spiritual writings, ascetic literature, church history, saint biographies, prayer books, devotional literature, religious books, Christian saints, Catholic authors, Orthodox writers, spiritual reading, faith literature"
         />
       </Head>
       <Page
@@ -190,7 +199,7 @@ const Books = () => {
 export const getServerSideProps = async (context) => {
   const queryClient = new QueryClient()
   const preset = context.query.preset || 'none'
-  const filter = context.query.filter || 'none'
+  const filter = context.query.filter || 'all'
 
   const cookie = context.req.headers.cookie
   let church = 'all'

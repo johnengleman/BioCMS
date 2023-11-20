@@ -1,16 +1,16 @@
 import fetchHelper from './fetchHelper'
-import { properties } from '../components/saint/Filter/properties'
+import { properties } from '../utils/properties'
 import { getMonthNumber } from '../utils/dates'
 
 const getCategoryFilterList = (filter) => {
-  if (filter !== 'None') {
+  if (filter !== 'All') {
     return `, { categories: { _icontains: "${filter}" } }`
   }
   return ''
 }
 
 const getMonthFilterList = (filter) => {
-  if (filter !== 'None') {
+  if (filter !== 'All') {
     return `, { feast_day_func: { month: { _eq: "${getMonthNumber(
       filter,
     )}" } } }`
@@ -50,7 +50,7 @@ function numberOfSaintsQuery(church, saintPreset) {
         ? `(${variablesList.join(', ')})`
         : ''
     } {
-      ${properties.organize.category.map(
+      ${properties.saints.filters.category.map(
         (filter) => `${filter}: saints_aggregated(
         filter: {
           ${churchList}
@@ -66,7 +66,7 @@ function numberOfSaintsQuery(church, saintPreset) {
         }
       }`,
       )}
-      ${properties.organize.month.map(
+      ${properties.saints.filters.month.map(
         (filter) => `${filter}: saints_aggregated(
         filter: {
           ${churchList}
@@ -105,7 +105,7 @@ export const getSaintFilters = async (
 ) => {
   const filters = {
     [church]: {
-      none: {
+      None: {
         ...(await getNumberOfSaints({
           church,
           saintPreset: 'all',

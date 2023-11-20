@@ -16,6 +16,7 @@ import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
 import { getQuotesFilters } from '../../queries/getQuoteFilters'
 import Quotes from '../../components/saint/Quotes/Quotes'
 import useCookie from '../../hooks/useCookie'
+import capitalize from '../../utils/capitalize'
 import styles from './styles.module.scss'
 
 export const config = {
@@ -30,7 +31,7 @@ const QuotesPage = () => {
     : router.query.church || 'all'
   const filter = Array.isArray(router.query.filter)
     ? router.query.filter[0]
-    : router.query.filter || 'none'
+    : router.query.filter || 'all'
 
   const { data: searchData } = useQuery(
     ['search', church],
@@ -85,7 +86,14 @@ const QuotesPage = () => {
   return (
     <>
       <Head>
-        <title>Quotes of Roman Catholic Saints</title>
+        <title>
+          {`Inspirational Quotes ${
+            filter === 'all'
+              ? ''
+              : `about ${capitalize(filter)}`
+          } by Catholic and Orthodox
+          Saints: Wisdom on Faith, Love, Prayer, and More`}
+        </title>
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/quotes`}
@@ -93,7 +101,15 @@ const QuotesPage = () => {
         <meta
           key="description"
           name="description"
-          content="Discover the quotes of Roman Catholic Saints"
+          content={`Explore a curated collection of profound quotes ${
+            filter === 'all'
+              ? ''
+              : `about ${capitalize(filter)}`
+          } by Catholic and Orthodox saints, covering a spectrum of spiritual themes including faith, hope, love, prayer, charity, and more. Our resource allows you to filter quotes by topics like suffering, forgiveness, humility, joy, wisdom, and numerous others, helping you find the perfect words of wisdom for any moment in your spiritual journey. Dive into the depths of saintly insights and be inspired.`}
+        />
+        <meta
+          name="keywords"
+          content="saint quotes, spiritual wisdom, faith quotes, hope quotes, love quotes, prayer quotes, charity quotes, suffering wisdom, forgiveness insights, humility quotes, peace and joy, wisdom from saints, patience and courage, gratitude sayings, justice and truth, mercy in words, devotion and unity, passions and Mary, saints on sin, inspirational quotes, religious quotes, Christian wisdom"
         />
       </Head>
       <Page
@@ -132,7 +148,7 @@ const QuotesPage = () => {
 
 export const getServerSideProps = async (context) => {
   const queryClient = new QueryClient()
-  const filter = context.query.filter || 'none'
+  const filter = context.query.filter || 'all'
   const cookie = context.req.headers.cookie
   let church = 'all'
 
