@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import Search from '../Search/Search'
 import SMButtons from '../SMButtons/SMButtons'
 import useBreakpoints from '../../../hooks/useBreakPoints'
+import ChurchToggle from '../ChurchToggle/ChurchToggle'
 import styles from './styles.module.scss'
 
 const Header = ({ searchData, navData }) => {
@@ -57,31 +58,31 @@ const Header = ({ searchData, navData }) => {
 }`}
     >
       <div className={styles.row}>
-        <div className={styles.content}>
-          <div className={styles.colLeft}>
-            <div className={styles.hamburger}>
-              {isMobile && (
-                <FontAwesomeIcon
-                  icon={faBars}
-                  size="2xl"
-                  style={{ color: '#ccad00' }}
-                  onClick={() => handleToggleMenu(true)}
-                />
-              )}
-            </div>
-            <div
-              className={`${styles.navigation} ${
-                mobileMenuIsOpen
-                  ? styles.mobileMenuOpen
-                  : ''
-              }`}
-            >
+        <div
+          className={`${styles.content} ${
+            mobileMenuIsOpen ? styles.mobileMenuOpen : ''
+          }`}
+        >
+          {mobileMenuIsOpen && (
+            <div className={styles.close}>
               <FontAwesomeIcon
                 icon={faXmark}
                 size="2xl"
                 style={{ color: '#dbdfe6' }}
                 onClick={() => handleToggleMenu(false)}
               />
+            </div>
+          )}
+          <div className={styles.colLeft}>
+            {isMobile && (
+              <FontAwesomeIcon
+                icon={faBars}
+                size="2xl"
+                style={{ color: '#ccad00' }}
+                onClick={() => handleToggleMenu(true)}
+              />
+            )}
+            <div className={styles.navigation}>
               <Link href="/saints">
                 {saintsCount && (
                   <span className={styles.count}>
@@ -138,6 +139,11 @@ const Header = ({ searchData, navData }) => {
                 )}
                 Books
               </Link>
+            </div>
+            <div className={styles.misc}>
+              <Link href="/about">About</Link>
+              <Link href="/feedback">Feedback</Link>
+              <Link href="/updates">Recent Updates</Link>
             </div>
           </div>
 

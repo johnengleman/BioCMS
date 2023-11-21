@@ -8,13 +8,17 @@ import {
   faSparkles,
   faMessagePen,
 } from '@fortawesome/pro-regular-svg-icons'
+import useBreakpoints from '../../../hooks/useBreakPoints'
 import styles from './styles.module.scss'
 
 const Footer = () => {
   const [inView, setInView] = useState(false)
   const router = useRouter()
+  const { isMobile } = useBreakpoints()
   const animateFooter =
-    router.pathname === '/saints' || router.pathname === '/'
+    !isMobile &&
+    (router.pathname === '/saints' ||
+      router.pathname === '/')
 
   useEffect(() => {
     if (animateFooter) {

@@ -160,6 +160,16 @@
     }
   }
 
+  .readMore {
+    color: #bcbcbc;
+    margin-bottom: 1.25rem;
+    font-size: 14px;
+    background-color: var(--violet);
+    border-radius: 5px;
+    padding: 3px 15px;
+    width: fit-content;
+  }
+
   .footer {
     display: flex;
     justify-content: space-between;

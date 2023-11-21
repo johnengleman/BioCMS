@@ -16,19 +16,21 @@ const Page = ({
   searchData,
   navData,
   spaceBetween,
-}: Props) => (
-  <div
-    className={`${styles.page} ${
-      spaceBetween ? styles.spaceBetween : ''
-    }`}
-  >
-    <Header
-      searchData={searchData}
-      navData={navData}
-    />
-    <div className={styles.body}>{children}</div>
-    <Footer />
-  </div>
-)
+}: Props) => {
+  return (
+    <div
+      className={`${styles.page} ${
+        spaceBetween ? styles.spaceBetween : ''
+      }`}
+    >
+      <Header
+        searchData={searchData}
+        navData={navData}
+      />
+      <div className={styles.body}>{children}</div>
+      <Footer />
+    </div>
+  )
+}
 
 export default Page

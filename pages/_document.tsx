@@ -6,7 +6,6 @@ import Document, {
   DocumentContext,
 } from 'next/document'
 import Script from 'next/script'
-import Footer from '../components/page/Footer/Footer'
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
