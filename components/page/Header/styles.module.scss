@@ -65,7 +65,7 @@
       .colLeft {
         flex-direction: column;
         justify-content: space-between;
-        height: 95vh;
+        max-height: -webkit-fill-available;
 
         svg {
           display: none;

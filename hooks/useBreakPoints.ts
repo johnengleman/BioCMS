@@ -34,9 +34,7 @@ export default function useBreakpoints() {
   )
   const isTabletPlus = useMediaQuery('(min-width: 767px)')
   const isLaptopMinus = useMediaQuery('(max-width: 1025px)')
-  const isLaptop = useMediaQuery(
-    '(min-width: 1025px) and (max-width: 1260px)',
-  )
+  const isLaptop = useMediaQuery('(min-width: 1025px)')
   const isLaptopL = useMediaQuery(
     '(min-width: 1261px) and (max-width: 1440px)',
   )

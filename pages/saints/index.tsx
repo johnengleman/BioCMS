@@ -1,9 +1,10 @@
+import { useEffect } from 'react'
 import {
   QueryClient,
   useQuery,
   dehydrate,
 } from '@tanstack/react-query'
-import { useRouter } from 'next/router'
+import { useRouter, events } from 'next/router'
 import styles from './styles.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
@@ -44,10 +45,10 @@ const Saints = () => {
     ['saints', church, filter, saintPreset, sort],
     () => getSaints({ church, filter, saintPreset, sort }),
     {
-      onSuccess: () => {
-        const element = document.getElementById('toggle')
-        element?.scrollIntoView()
-      },
+      // onSuccess: () => {
+      //   const element = document.getElementById('toggle')
+      //   element?.scrollIntoView()
+      // },
       initialData: [],
     },
   )
@@ -99,6 +100,20 @@ const Saints = () => {
     }
     return 5
   }
+
+  const handleRouteChange = () => {
+    const body = document.querySelector('body')
+    if (body) {
+      body.style.overflow = 'unset'
+    }
+  }
+
+  useEffect(() => {
+    events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [])
 
   return (
     <>

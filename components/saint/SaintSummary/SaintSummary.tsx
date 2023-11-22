@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/pro-duotone-svg-icons'
 import { formatDate } from '../../../utils/dates'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
+import useBreakpoints from '../../../hooks/useBreakPoints'
 import styles from './styles.module.scss'
 
 const SaintSummary = (props) => {
@@ -21,6 +22,8 @@ const SaintSummary = (props) => {
     priority,
     transitionName,
   } = props
+
+  const { isLaptop } = useBreakpoints()
 
   const getYear = (date: string): number => {
     const newDate = new Date(date)
@@ -67,22 +70,48 @@ const SaintSummary = (props) => {
           }}
         ></div>
         <div className={styles.footer}>
-          <button className={styles.btn}>
-            <div className={styles.btnContent}>
-              {feast_day && (
-                <div className={styles.feastDay}>
-                  <FontAwesomeIcon
-                    icon={faCalendarDays}
-                    fontSize="xs"
-                  />
-                  {formatDate(feast_day)}
+          {isLaptop && (
+            <button className={styles.btn}>
+              <div className={styles.btnContent}>
+                {feast_day && (
+                  <div className={styles.feastDay}>
+                    <FontAwesomeIcon
+                      icon={faCalendarDays}
+                      fontSize="xs"
+                    />
+                    {formatDate(feast_day)}
+                  </div>
+                )}
+                <span className={styles.readMore}>
+                  Read More
+                </span>
+              </div>
+            </button>
+          )}
+          {!isLaptop && (
+            <>
+              <button className={styles.btn}>
+                <div className={styles.btnContent}>
+                  {feast_day && (
+                    <div className={styles.feastDay}>
+                      <FontAwesomeIcon
+                        icon={faCalendarDays}
+                        fontSize="xs"
+                      />
+                      {formatDate(feast_day)}
+                    </div>
+                  )}
                 </div>
-              )}
-              <span className={styles.readMore}>
-                Read More
-              </span>
-            </div>
-          </button>
+              </button>
+              <button className={styles.btn}>
+                <div className={styles.btnContent}>
+                  <span className={styles.readMore}>
+                    Read More
+                  </span>
+                </div>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </Link>
