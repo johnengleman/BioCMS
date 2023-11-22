@@ -81,8 +81,10 @@ const Books = () => {
     () => getBooks({ church, preset, filter }),
     {
       onSuccess: () => {
-        const element = document.getElementById('toggle')
-        element?.scrollIntoView()
+        if (filter !== 'all') {
+          const element = document.getElementById('toggle')
+          element?.scrollIntoView()
+        }
       },
       initialData: [],
     },

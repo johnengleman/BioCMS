@@ -50,6 +50,13 @@ const Header = ({ searchData, navData }) => {
     }
   }
 
+  const handleClick = () => {
+    const body = document.querySelector('body')
+    if (body) {
+      body.style.overflow = 'unset'
+    }
+  }
+
   return (
     <div
       className={`${styles.header} ${
@@ -83,7 +90,10 @@ const Header = ({ searchData, navData }) => {
               />
             )}
             <div className={styles.navigation}>
-              <Link href="/saints">
+              <Link
+                href="/saints"
+                onClick={() => handleClick()}
+              >
                 {saintsCount && (
                   <span className={styles.count}>
                     {saintsCount}
@@ -92,7 +102,10 @@ const Header = ({ searchData, navData }) => {
                 Saints
               </Link>
               {teachingsCount ? (
-                <Link href="/teachings">
+                <Link
+                  href="/teachings"
+                  onClick={() => handleClick()}
+                >
                   <span className={styles.count}>
                     {teachingsCount}
                   </span>
@@ -102,7 +115,10 @@ const Header = ({ searchData, navData }) => {
                 ''
               )}
               {miraclesCount ? (
-                <Link href="/miracles">
+                <Link
+                  href="/miracles"
+                  onClick={() => handleClick()}
+                >
                   <span className={styles.count}>
                     {miraclesCount}
                   </span>
@@ -112,7 +128,10 @@ const Header = ({ searchData, navData }) => {
                 ''
               )}
               {quotesCount ? (
-                <Link href="/quotes">
+                <Link
+                  href="/quotes"
+                  onClick={() => handleClick()}
+                >
                   <span className={styles.count}>
                     {quotesCount}
                   </span>
@@ -122,7 +141,10 @@ const Header = ({ searchData, navData }) => {
                 ''
               )}
               {prayersCount ? (
-                <Link href="/novenas">
+                <Link
+                  href="/novenas"
+                  onClick={() => handleClick()}
+                >
                   <span className={styles.count}>
                     {prayersCount}
                   </span>
@@ -131,7 +153,10 @@ const Header = ({ searchData, navData }) => {
               ) : (
                 ''
               )}
-              <Link href="/books">
+              <Link
+                href="/books"
+                onClick={() => handleClick()}
+              >
                 {booksCount && (
                   <span className={styles.count}>
                     {booksCount}
@@ -141,9 +166,24 @@ const Header = ({ searchData, navData }) => {
               </Link>
             </div>
             <div className={styles.misc}>
-              <Link href="/about">About</Link>
-              <Link href="/feedback">Feedback</Link>
-              <Link href="/updates">Recent Updates</Link>
+              <Link
+                href="/about"
+                onClick={() => handleClick()}
+              >
+                About
+              </Link>
+              <Link
+                href="/feedback"
+                onClick={() => handleClick()}
+              >
+                Feedback
+              </Link>
+              <Link
+                href="/updates"
+                onClick={() => handleClick()}
+              >
+                Recent Updates
+              </Link>
             </div>
           </div>
 

@@ -76,8 +76,10 @@ const QuotesPage = () => {
       }),
     {
       onSuccess: () => {
-        const element = document.getElementById('toggle')
-        element?.scrollIntoView()
+        if (filter !== 'all') {
+          const element = document.getElementById('toggle')
+          element?.scrollIntoView()
+        }
       },
       initialData: [],
     },

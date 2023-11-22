@@ -1,10 +1,9 @@
-import { useEffect } from 'react'
 import {
   QueryClient,
   useQuery,
   dehydrate,
 } from '@tanstack/react-query'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import styles from './styles.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
@@ -19,7 +18,6 @@ import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
 import Hero from '../../components/saint/Hero/Hero'
 import useCookie from '../../hooks/useCookie'
-import usePreviousQueryKey from '../../hooks/usePreviousQueryKey'
 import { properties } from '../../utils/properties'
 
 export const config = {
@@ -34,8 +32,6 @@ function arraysAreEqual(arr1, arr2) {
 }
 
 const Saints = () => {
-  const [prevQueryKey, updateQueryKey] =
-    usePreviousQueryKey()
   useCookie()
   const router = useRouter()
   const church = Array.isArray(router.query.church)
@@ -64,12 +60,9 @@ const Saints = () => {
     () => getSaints({ church, filter, saintPreset, sort }),
     {
       onSuccess: () => {
-        if (!arraysAreEqual(myQueryKey, prevQueryKey)) {
+        if (filter !== 'all') {
           const element = document.getElementById('toggle')
           element?.scrollIntoView()
-          if (updateQueryKey) {
-            updateQueryKey(myQueryKey)
-          }
         }
       },
       initialData: [],
@@ -123,26 +116,6 @@ const Saints = () => {
     }
     return 5
   }
-
-  const handleRouteChange = () => {
-    const body = document.querySelector('body')
-    if (body) {
-      body.style.overflow = 'unset'
-    }
-  }
-
-  useEffect(() => {
-    Router.events.on(
-      'routeChangeComplete',
-      handleRouteChange,
-    )
-    return () => {
-      Router.events.off(
-        'routeChangeComplete',
-        handleRouteChange,
-      )
-    }
-  }, [])
 
   return (
     <>
