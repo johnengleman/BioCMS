@@ -4,7 +4,7 @@ import {
   useQuery,
   dehydrate,
 } from '@tanstack/react-query'
-import { useRouter, events } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import styles from './styles.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
@@ -19,13 +19,23 @@ import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
 import Hero from '../../components/saint/Hero/Hero'
 import useCookie from '../../hooks/useCookie'
+import usePreviousQueryKey from '../../hooks/usePreviousQueryKey'
 import { properties } from '../../utils/properties'
 
 export const config = {
   runtime: 'experimental-edge',
 }
 
+function arraysAreEqual(arr1, arr2) {
+  return (
+    arr1?.length === arr2?.length &&
+    arr1.every((value, index) => value === arr2[index])
+  )
+}
+
 const Saints = () => {
+  const [prevQueryKey, updateQueryKey] =
+    usePreviousQueryKey()
   useCookie()
   const router = useRouter()
   const church = Array.isArray(router.query.church)
@@ -41,14 +51,27 @@ const Saints = () => {
     ? router.query.sort[0]
     : router.query.sort || 'created-newest'
 
+  const myQueryKey = [
+    'saints',
+    church,
+    filter,
+    saintPreset,
+    sort,
+  ]
+
   const { data, isError, isFetching } = useQuery(
-    ['saints', church, filter, saintPreset, sort],
+    [myQueryKey],
     () => getSaints({ church, filter, saintPreset, sort }),
     {
-      // onSuccess: () => {
-      //   const element = document.getElementById('toggle')
-      //   element?.scrollIntoView()
-      // },
+      onSuccess: () => {
+        if (!arraysAreEqual(myQueryKey, prevQueryKey)) {
+          const element = document.getElementById('toggle')
+          element?.scrollIntoView()
+          if (updateQueryKey) {
+            updateQueryKey(myQueryKey)
+          }
+        }
+      },
       initialData: [],
     },
   )
@@ -109,9 +132,15 @@ const Saints = () => {
   }
 
   useEffect(() => {
-    events.on('routeChangeComplete', handleRouteChange)
+    Router.events.on(
+      'routeChangeComplete',
+      handleRouteChange,
+    )
     return () => {
-      events.off('routeChangeComplete', handleRouteChange)
+      Router.events.off(
+        'routeChangeComplete',
+        handleRouteChange,
+      )
     }
   }, [])
 
