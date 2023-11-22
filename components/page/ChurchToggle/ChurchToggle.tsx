@@ -53,18 +53,18 @@ const ChurchToggle = () => {
       JSON.stringify({ church: church }),
     )
 
-      const newQuery = {
-        ...router.query,
-        church: church,
-      }
-      router.push(
-        {
-          pathname: router.pathname,
-          query: newQuery,
-        },
-        undefined,
-      )
+    const newQuery = {
+      ...router.query,
+      church: church,
     }
+    router.push(
+      {
+        pathname: router.pathname,
+        query: newQuery,
+      },
+      undefined,
+    )
+  }
 
   useEffect(() => {
     const cookie = Cookies.get('findasaint.com')

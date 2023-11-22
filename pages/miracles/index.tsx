@@ -76,6 +76,10 @@ const Teachings = () => {
         miraclesPreset,
       }),
     {
+      onSuccess: () => {
+        const element = document.getElementById('toggle')
+        element?.scrollIntoView()
+      },
       initialData: [],
     },
   )

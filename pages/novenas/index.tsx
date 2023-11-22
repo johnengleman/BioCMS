@@ -75,6 +75,10 @@ const NovenasPage = () => {
         filter,
       }),
     {
+      onSuccess: () => {
+        const element = document.getElementById('toggle')
+        element?.scrollIntoView()
+      },
       initialData: [],
     },
   )

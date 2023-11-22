@@ -30,7 +30,10 @@ const Toggle = () => {
   }
 
   return (
-    <div className={styles.sortToggleContainer}>
+    <div
+      className={styles.sortToggleContainer}
+      id="toggle"
+    >
       <div
         className={styles.sortToggle}
         ref={ref}

@@ -66,15 +66,24 @@ const SaintSummary = (props) => {
             __html: summary,
           }}
         ></div>
-        {feast_day && (
-          <div className={styles.feastDay}>
-            <FontAwesomeIcon
-              icon={faCalendarDays}
-              fontSize="xs"
-            />
-            {formatDate(feast_day)}
-          </div>
-        )}
+        <div className={styles.footer}>
+          <button className={styles.btn}>
+            <div className={styles.btnContent}>
+              {feast_day && (
+                <div className={styles.feastDay}>
+                  <FontAwesomeIcon
+                    icon={faCalendarDays}
+                    fontSize="xs"
+                  />
+                  {formatDate(feast_day)}
+                </div>
+              )}
+              <span className={styles.readMore}>
+                Read More
+              </span>
+            </div>
+          </button>
+        </div>
       </div>
     </Link>
   )

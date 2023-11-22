@@ -80,6 +80,10 @@ const Books = () => {
     ['books', church, preset, filter],
     () => getBooks({ church, preset, filter }),
     {
+      onSuccess: () => {
+        const element = document.getElementById('toggle')
+        element?.scrollIntoView()
+      },
       initialData: [],
     },
   )

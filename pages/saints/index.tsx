@@ -44,6 +44,10 @@ const Saints = () => {
     ['saints', church, filter, saintPreset, sort],
     () => getSaints({ church, filter, saintPreset, sort }),
     {
+      onSuccess: () => {
+        const element = document.getElementById('toggle')
+        element?.scrollIntoView()
+      },
       initialData: [],
     },
   )

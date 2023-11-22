@@ -31,6 +31,12 @@
       transform: scale(1.03, 1.01);
     }
 
+    &:hover {
+      .btnContent {
+        transform: translateY(-22px);
+      }
+    }
+
     .bioContainer .summary {
       color: #fff;
     }
@@ -146,55 +152,39 @@
     }
   }
 
-  .feastDay {
+  .btn {
     color: #bcbcbc;
     margin-bottom: 1.25rem;
     font-size: 14px;
     background-color: var(--violet);
     border-radius: 5px;
     padding: 3px 15px;
-    width: fit-content;
+    width: 100%;
+    border: 1px solid transparent;
+    height: 25px;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      border: 1px solid #3e3d46;
+    }
+
+    .btnContent {
+      transition: all 0.2s ease-in-out;
+    }
 
     svg {
       margin-right: 10px;
     }
   }
 
-  .readMore {
-    color: #bcbcbc;
-    margin-bottom: 1.25rem;
-    font-size: 14px;
-    background-color: var(--violet);
-    border-radius: 5px;
-    padding: 3px 15px;
-    width: fit-content;
-  }
-
   .footer {
-    display: flex;
-    justify-content: space-between;
-    gap: 5px;
-    padding-top: 0.5rem;
-    padding-bottom: 1.5rem;
+    height: 50px;
+    padding-bottom: 1rem;
     border-radius: 20px;
     width: 100%;
     bottom: 0;
     z-index: 2;
-
-    .count {
-      background: none;
-      border: none;
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      font-size: 13px;
-
-      .number {
-        color: #555555;
-        font-weight: 600;
-        line-height: 1;
-        font-size: 13px;
-      }
-    }
   }
 }
