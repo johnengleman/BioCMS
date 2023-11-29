@@ -13,7 +13,8 @@ const query = gql`
       birth_location
       death_location
       date_updated
-      feast_day
+      feast_day_orthodox
+      feast_day_catholic
       read_more_links
       categories
       patron

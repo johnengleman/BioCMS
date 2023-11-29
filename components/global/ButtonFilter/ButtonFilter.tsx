@@ -1,9 +1,17 @@
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import { useRouter } from 'next/router'
 import { flushSync } from 'react-dom'
 import styles from './styles.module.scss'
 
-const ButtonFilter = ({ count, filter }) => {
+type ButtonFilterProps = {
+  filter: string
+  count?: number
+}
+
+const ButtonFilter: React.FC<ButtonFilterProps> = ({
+  filter,
+  count,
+}) => {
   const router = useRouter()
   const selectedFilter = Array.isArray(router.query.filter)
     ? router.query.filter[0]
@@ -43,7 +51,7 @@ const ButtonFilter = ({ count, filter }) => {
       className={`${styles.slide} ${
         isSelected ? styles.selected : ''
       } ${
-        count === 0 && filter !== 'All'
+        count === 0 && filter !== 'all'
           ? styles.disabled
           : ''
       }`}
@@ -60,11 +68,11 @@ const ButtonFilter = ({ count, filter }) => {
       }}
     >
       <span className={styles.name}>
-        {filter !== 'All'
+        {filter !== 'all'
           ? filter.replace(/_/g, ' ').replace(/and/gi, '&')
-          : 'All'}
+          : 'all'}
       </span>
-      {count !== 0 && filter !== 'All' && (
+      {count !== 0 && filter !== 'all' && (
         <div className={styles.count}>{count}</div>
       )}
     </button>

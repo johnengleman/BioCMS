@@ -16,7 +16,9 @@ function getSaintsQuery(church, filter, saintPreset, sort) {
   let churchList: string[] = []
 
   if (church !== 'all') {
-    churchList.push('venerated_in: { _icontains: $church }')
+    churchList.push(
+      '{ venerated_in: { _icontains: $church } }',
+    )
   }
 
   if (filter !== 'all') {
@@ -24,22 +26,22 @@ function getSaintsQuery(church, filter, saintPreset, sort) {
       filterList.push(
         '{ categories: { _icontains: $filter } }',
       )
-    } else {
+    } else if (church !== 'all') {
       filterList.push(
-        `{ feast_day_func: { month: { _eq: ${getMonthNumber(
+        `{ feast_day_${church}_func: { month: { _eq: "${getMonthNumber(
           filter,
-        )} } } }`,
+        )}" } } }`,
       )
     }
   }
 
-  if (saintPreset === 'patron-saints') {
+  if (saintPreset === 'patron_saints') {
     filterList.push(
       '{ categories: { _icontains: "Patron Saints" } }',
     )
   }
 
-  if (saintPreset === '20th-century-saints') {
+  if (saintPreset === '20th_century_saints') {
     filterList.push('{ death_year: { _gte: 1900 } }')
   }
 
@@ -53,8 +55,19 @@ function getSaintsQuery(church, filter, saintPreset, sort) {
       saints(
         sort: "${sort}"
         filter: {
-          ${churchList}
+             _or: [
+             ${
+               church === 'all' && getMonthNumber(filter)
+                 ? `{ feast_day_orthodox_func: { month: { _eq: "${getMonthNumber(
+                     filter,
+                   )}" } } }, { feast_day_catholic_func: { month: { _eq: "${getMonthNumber(
+                     filter,
+                   )}" } } }`
+                 : ''
+             }
+          ]
           _and: [
+            ${churchList},
             ${filterList.join(', ')}
           ]
         }
@@ -66,7 +79,8 @@ function getSaintsQuery(church, filter, saintPreset, sort) {
         categories
         birth_year
         death_year
-        feast_day
+        feast_day_catholic
+        feast_day_orthodox
         profile_image {
           id
         }

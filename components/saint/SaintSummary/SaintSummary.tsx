@@ -17,7 +17,8 @@ const SaintSummary = (props) => {
     profile_image,
     categories,
     summary,
-    feast_day,
+    feast_day_catholic,
+    feast_day_orthodox,
     slug,
     priority,
     transitionName,
@@ -69,50 +70,23 @@ const SaintSummary = (props) => {
             __html: summary,
           }}
         ></div>
-        <div className={styles.footer}>
-          {isLaptop && (
-            <button className={styles.btn}>
-              <div className={styles.btnContent}>
-                {feast_day && (
-                  <div className={styles.feastDay}>
-                    <FontAwesomeIcon
-                      icon={faCalendarDays}
-                      fontSize="xs"
-                    />
-                    {formatDate(feast_day)}
-                  </div>
-                )}
-                <span className={styles.readMore}>
-                  Read More
-                </span>
-              </div>
-            </button>
+        <div className={styles.feastDays}>
+          {feast_day_catholic && (
+            <div className={styles.feastDay}>
+              <FontAwesomeIcon icon={faCalendarDays} />
+              Catholic: {formatDate(feast_day_catholic)}
+            </div>
           )}
-          {!isLaptop && (
-            <>
-              <button className={styles.btn}>
-                <div className={styles.btnContent}>
-                  {feast_day && (
-                    <div className={styles.feastDay}>
-                      <FontAwesomeIcon
-                        icon={faCalendarDays}
-                        fontSize="xs"
-                      />
-                      {formatDate(feast_day)}
-                    </div>
-                  )}
-                </div>
-              </button>
-              <button className={styles.btn}>
-                <div className={styles.btnContent}>
-                  <span className={styles.readMore}>
-                    Read More
-                  </span>
-                </div>
-              </button>
-            </>
+          {feast_day_orthodox && (
+            <div className={styles.feastDay}>
+              <FontAwesomeIcon icon={faCalendarDays} />
+              Orthodox: {formatDate(feast_day_orthodox)}
+            </div>
           )}
         </div>
+        <button className={styles.readMore}>
+          Read More
+        </button>
       </div>
     </Link>
   )

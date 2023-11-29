@@ -9,7 +9,7 @@ const properties = {
     filterTitle: 'All Catholic Saints',
   },
   saints: {
-    presets: ['20th-century-saints', 'patron-saints'],
+    presets: ['20th_century_saints', 'patron_saints'],
     organizeBy: ['category', 'month'],
     title: {
       ascetics: 'Ascetic',
@@ -56,7 +56,6 @@ const properties = {
     },
     filters: {
       category: [
-        'All',
         'Ascetics',
         'Bishops',
         'Confessors',
@@ -75,7 +74,6 @@ const properties = {
         'Warriors',
       ],
       month: [
-        'All',
         'January',
         'February',
         'March',

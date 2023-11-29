@@ -40,6 +40,11 @@
     .bioContainer .summary {
       color: #fff;
     }
+
+    .readMore {
+      background-color: #393650;
+      color: #ccad00;
+    }
   }
 
   .death {
@@ -152,47 +157,48 @@
     }
   }
 
-  .btn {
-    color: #bcbcbc;
-    margin-bottom: 1.25rem;
-    font-size: 14px;
-    background-color: var(--violet);
-    border-radius: 5px;
-    padding: 3px 15px;
-    width: 100%;
-    border: 1px solid transparent;
-    height: 30px;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
+  .feastDays {
+    display: flex;
+    font-size: 13px;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    border-top: 1px solid #646464;
+    padding-top: 10px;
+    flex-wrap: wrap;
 
-    &:hover {
-      border: 1px solid #3e3d46;
+    &:empty {
+      display: none;
     }
 
-    .btnContent {
-      transition: all 0.2s ease-in-out;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    svg {
-      margin-right: 10px;
+    .feastDay {
+      svg {
+        margin-right: 5px;
+      }
     }
   }
 
-  .footer {
-    height: 50px;
-    border-radius: 20px;
+  .readMore {
+    border: none;
+    border-radius: 10px;
     width: 100%;
-    bottom: 0;
-    z-index: 2;
-    display: flex;
-    gap: 10px;
+    height: 30px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+    background-color: #393650;
+    color: #ccad00;
 
-    @include breakpoint(tablet) {
-      display: block;
+    @include breakpoint(laptop) {
+      background-color: transparent;
+      color: #646464;
+    }
+
+    &:hover {
+      font-weight: 600;
+      border: 1px solid #646464;
     }
   }
 }

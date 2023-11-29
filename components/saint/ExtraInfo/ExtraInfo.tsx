@@ -5,44 +5,75 @@ import {
 } from '@fortawesome/pro-duotone-svg-icons'
 import styles from './styles.module.scss'
 
-const monthNames = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
-]
+const getDate = (dateTime) => {
+  const monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ]
 
-const ExtraInfo = ({ feastDay, patron }) => {
-  const date = new Date(feastDay)
+  const date = new Date(dateTime)
   const month = date.getMonth()
   const day = date.getDate()
 
+  return `${monthNames[month]} ${day}`
+}
+
+const ExtraInfo = ({
+  patron,
+  orthodoxFeastDay,
+  catholicFeastDay,
+}) => {
   return (
     <div className={styles.extraInfo}>
-      <div className={styles.row}>
-        <FontAwesomeIcon
-          icon={faCalendarDays}
-          style={{ fontSize: '20px' }}
-        />
-        <div className={styles.data}>
-          {monthNames[month]} {day}
+      {(catholicFeastDay || orthodoxFeastDay) && (
+        <div className={styles.row}>
+          <div className={styles.icon}>
+            <FontAwesomeIcon
+              icon={faCalendarDays}
+              style={{ fontSize: '20px' }}
+            />
+          </div>
+
+          <div className={styles.data}>
+            {catholicFeastDay && (
+              <p>
+                {orthodoxFeastDay
+                  ? `Catholic: ${getDate(catholicFeastDay)}`
+                  : `Feast: ${getDate(catholicFeastDay)}`}
+              </p>
+            )}
+            {orthodoxFeastDay && (
+              <p>
+                {catholicFeastDay
+                  ? `Orthodox: ${getDate(orthodoxFeastDay)}`
+                  : `Feast: ${getDate(orthodoxFeastDay)}`}
+              </p>
+            )}
+          </div>
         </div>
-      </div>
+      )}
+
       {patron && (
         <div className={styles.row}>
-          <FontAwesomeIcon
-            icon={faFamily}
-            style={{ fontSize: '20px' }}
-          />
-          <div className={styles.data}>{patron}</div>
+          <div className={styles.icon}>
+            <FontAwesomeIcon
+              icon={faFamily}
+              style={{ fontSize: '20px' }}
+            />
+          </div>
+          <div className={styles.data}>
+            <p>Patron: {patron}</p>
+          </div>
         </div>
       )}
     </div>

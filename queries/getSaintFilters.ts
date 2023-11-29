@@ -3,17 +3,8 @@ import { properties } from '../utils/properties'
 import { getMonthNumber } from '../utils/dates'
 
 const getCategoryFilterList = (filter) => {
-  if (filter !== 'All') {
-    return `, { categories: { _icontains: "${filter}" } }`
-  }
-  return ''
-}
-
-const getMonthFilterList = (filter) => {
-  if (filter !== 'All') {
-    return `, { feast_day_func: { month: { _eq: "${getMonthNumber(
-      filter,
-    )}" } } }`
+  if (filter !== 'all') {
+    return `{ categories: { _icontains: "${filter}" } }`
   }
   return ''
 }
@@ -30,16 +21,18 @@ function numberOfSaintsQuery(church, saintPreset) {
   let churchList: string[] = []
 
   if (church !== 'all') {
-    churchList.push('venerated_in: { _icontains: $church }')
+    churchList.push(
+      '{ venerated_in: { _icontains: $church } }',
+    )
   }
 
-  if (saintPreset === 'patron-saints') {
+  if (saintPreset === 'patron_saints') {
     presetList.push(
       '{ categories: { _icontains: "Patron Saints" } }',
     )
   }
 
-  if (saintPreset === '20th-century-saints') {
+  if (saintPreset === '20th_century_saints') {
     presetList.push('{ death_year: { _gte: 1900 } }')
   }
 
@@ -50,11 +43,23 @@ function numberOfSaintsQuery(church, saintPreset) {
         ? `(${variablesList.join(', ')})`
         : ''
     } {
+      all_${saintPreset}: saints_aggregated(
+        filter: {
+          _and: [
+            ${churchList}
+            ${presetList.join(', ')}
+          ]
+        }
+      ) {
+        count {
+          id
+        }
+      }
       ${properties.saints.filters.category.map(
         (filter) => `${filter}: saints_aggregated(
         filter: {
-          ${churchList}
           _and: [
+            ${churchList}
             ${presetList.join(', ')}${getCategoryFilterList(
           filter,
         )}
@@ -69,11 +74,23 @@ function numberOfSaintsQuery(church, saintPreset) {
       ${properties.saints.filters.month.map(
         (filter) => `${filter}: saints_aggregated(
         filter: {
-          ${churchList}
+          _or: [
+             ${
+               church === 'all'
+                 ? `{ feast_day_orthodox_func: { month: { _eq: "${getMonthNumber(
+                     filter,
+                   )}" } } }`
+                 : ''
+             }
+            ${`{ feast_day_${
+              church !== 'all' ? church : 'catholic'
+            }_func: { month: { _eq: "${getMonthNumber(
+              filter,
+            )}" } } }`}
+          ]
           _and: [
-            ${presetList.join(', ')}${getMonthFilterList(
-          filter,
-        )}
+            ${churchList},
+            ${presetList.join(', ')}
           ]
         }
       ) {
@@ -111,16 +128,16 @@ export const getSaintFilters = async (
           saintPreset: 'all',
         })),
       },
-      '20th-century-saints': {
+      '20th_century_saints': {
         ...(await getNumberOfSaints({
           church,
-          saintPreset: '20th-century-saints',
+          saintPreset: '20th_century_saints',
         })),
       },
-      'patron-saints': {
+      patron_saints: {
         ...(await getNumberOfSaints({
           church,
-          saintPreset: 'patron-saints',
+          saintPreset: 'patron_saints',
         })),
       },
     },

@@ -31,10 +31,10 @@ const Filter = ({ filtersCount = {} }) => {
   }
 
   const getIcon = (preset) => {
-    if (preset === '20th-century-saints') {
+    if (preset === '20th_century_saints') {
       return faCameraRetro
     }
-    if (preset === 'patron-saints') {
+    if (preset === 'patron_saints') {
       return faFamily
     }
     if (preset === 'category') {
@@ -55,8 +55,9 @@ const Filter = ({ filtersCount = {} }) => {
             icon={getIcon(preset)}
             value={preset}
             count={
-              filtersCount[church]?.[preset]?.All[0].count
-                .id
+              filtersCount[church]?.[preset]?.[
+                `all_${preset}`
+              ][0].count.id
             }
           />
         ))}
@@ -89,6 +90,7 @@ const Filter = ({ filtersCount = {} }) => {
             2. Add a {organization} filter?
           </p>
           <div className={styles.slideContainer}>
+            <ButtonFilter filter="all" />
             {properties.saints.filters?.[organization]?.map(
               (filter, i) => (
                 <ButtonFilter

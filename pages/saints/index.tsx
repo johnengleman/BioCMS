@@ -47,16 +47,8 @@ const Saints = () => {
     ? router.query.sort[0]
     : router.query.sort || 'created-newest'
 
-  const myQueryKey = [
-    'saints',
-    church,
-    filter,
-    saintPreset,
-    sort,
-  ]
-
   const { data, isError, isFetching } = useQuery(
-    [myQueryKey],
+    ['saints', church, filter, saintPreset, sort],
     () => getSaints({ church, filter, saintPreset, sort }),
     {
       onSuccess: () => {
@@ -106,7 +98,7 @@ const Saints = () => {
       return 1
     }
     if (isMobileL) {
-      return 1
+      return 2
     }
     if (isTablet) {
       return 3

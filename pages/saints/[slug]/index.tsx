@@ -144,7 +144,12 @@ const SaintBio = () => {
                 </div>
 
                 <ExtraInfo
-                  feastDay={data?.feast_day}
+                  orthodoxFeastDay={
+                    data?.feast_day_orthodox
+                  }
+                  catholicFeastDay={
+                    data?.feast_day_catholic
+                  }
                   patron={data?.patron}
                 />
               </div>
