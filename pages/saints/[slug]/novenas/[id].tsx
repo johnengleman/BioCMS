@@ -21,6 +21,7 @@ import ReadMoreLinks from '../../../../components/saint/ReadMoreLinks/ReadMoreLi
 import useBreakpoints from '../../../../hooks/useBreakPoints'
 import NextPage from '../../../../components/saint/NextPage/NextPage'
 import About from '../../../../components/global/About/About'
+import ScrollUp from '../../../../components/global/ScrollUp/ScrollUp'
 import styles from '../styles.module.scss'
 
 export const config = {
@@ -184,6 +185,7 @@ const SaintNovena = (props) => {
             </div>
           </div>
           <RelatedPeople data={relatedSaints} />
+          <ScrollUp />
         </div>
       </Page>
     </>

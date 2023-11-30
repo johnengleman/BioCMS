@@ -20,6 +20,7 @@ import TableOfContents from '../../../components/saint/TableOfContentsText/Table
 import formatDate from '../../../utils/dates'
 import NextSection from '../../../components/saint/NextPage/NextPage'
 import About from '../../../components/global/About/About'
+import ScrollUp from '../../../components/global/ScrollUp/ScrollUp'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -149,8 +150,8 @@ const SaintBio = (props) => {
               )}
             </div>
           </div>
-
           <RelatedPeople data={relatedSaints} />
+          <ScrollUp />
         </div>
       </Page>
     </>

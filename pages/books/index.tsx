@@ -19,6 +19,7 @@ import BookSummary from '../../components/books/BookSummary/BookSummary'
 import styles from './styles.module.scss'
 import SectionTitle from '../../components/books/SectionTitle/SectionTitle'
 import capitalize from '../../utils/capitalize'
+import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
 import useCookie from '../../hooks/useCookie'
 
 export const config = {
@@ -196,6 +197,7 @@ const Books = () => {
               <FontAwesomeIcon icon={faFaceFrownSlight} />
             </p>
           )}
+          <ScrollUp />
         </div>
       </Page>
     </>

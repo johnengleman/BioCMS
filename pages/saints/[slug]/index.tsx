@@ -25,6 +25,7 @@ import BentoSection from '../../../components/global/BentoSection/BentoSection'
 import PrayersC from '../../../components/saint/PrayersC/PrayersC'
 import SectionTitle from '../../../components/saint/SectionTitle/SectionTitle'
 import ExtraInfo from '../../../components/saint/ExtraInfo/ExtraInfo'
+import ScrollUp from '../../../components/global/ScrollUp/ScrollUp'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -267,6 +268,7 @@ const SaintBio = () => {
                 ''
               )}
               <RelatedPeople data={relatedSaints} />
+              <ScrollUp />
             </div>
           </div>
         </div>

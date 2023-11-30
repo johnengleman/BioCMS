@@ -17,6 +17,7 @@ import ErrorPage from 'next/error'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
 import useCookie from '../../hooks/useCookie'
 import { properties } from '../../utils/properties'
+import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
 import styles from './styles.module.scss'
 
 export const config = {
@@ -148,6 +149,7 @@ const NovenasPage = () => {
               <FontAwesomeIcon icon={faFaceFrownSlight} />
             </p>
           )}
+          <ScrollUp />
         </div>
       </Page>
     </>

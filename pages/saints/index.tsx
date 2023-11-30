@@ -18,6 +18,7 @@ import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../hooks/useBreakPoints'
 import Hero from '../../components/saint/Hero/Hero'
 import useCookie from '../../hooks/useCookie'
+import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
 import { properties } from '../../utils/properties'
 
 export const config = {
@@ -98,7 +99,7 @@ const Saints = () => {
       return 1
     }
     if (isMobileL) {
-      return 2
+      return 1
     }
     if (isTablet) {
       return 3
@@ -151,20 +152,23 @@ const Saints = () => {
         ) : !isFetching && data?.length ? (
           <div className={styles.saintHome}>
             {data && (
-              <Masonry
-                breakpointCols={getColumnsToRender()}
-                className="my-masonry-grid"
-                columnClassName="my-masonry-grid_column"
-              >
-                {data?.map((saint, i: number) => (
-                  <SaintSummary
-                    {...saint}
-                    key={i}
-                    transitionName={`saint-${i}`}
-                    priority={i < 8 ? true : false}
-                  />
-                ))}
-              </Masonry>
+              <>
+                <Masonry
+                  breakpointCols={getColumnsToRender()}
+                  className="my-masonry-grid"
+                  columnClassName="my-masonry-grid_column"
+                >
+                  {data?.map((saint, i: number) => (
+                    <SaintSummary
+                      {...saint}
+                      key={i}
+                      transitionName={`saint-${i}`}
+                      priority={i < 8 ? true : false}
+                    />
+                  ))}
+                </Masonry>
+                <ScrollUp />
+              </>
             )}
           </div>
         ) : (

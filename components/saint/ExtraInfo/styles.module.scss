@@ -10,6 +10,10 @@
   gap: 20px;
   height: fit-content;
 
+  &:empty {
+    display: none;
+  }
+
   @include breakpoint(laptopM) {
     width: 300px;
   }

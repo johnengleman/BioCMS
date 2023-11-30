@@ -17,6 +17,7 @@ import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
 import { getTeachingFilters } from '../../queries/getTeachingFilters'
 import capitalize from '../../utils/capitalize'
 import useCookie from '../../hooks/useCookie'
+import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
 import styles from './styles.module.scss'
 
 export const config = {
@@ -151,6 +152,7 @@ const Teachings = () => {
               <FontAwesomeIcon icon={faFaceFrownSlight} />
             </p>
           )}
+          <ScrollUp />
         </div>
       </Page>
     </>

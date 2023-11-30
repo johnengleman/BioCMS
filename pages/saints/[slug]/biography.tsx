@@ -22,6 +22,7 @@ import ReadMoreLinks from '../../../components/saint/ReadMoreLinks/ReadMoreLinks
 import useBreakpoints from '../../../hooks/useBreakPoints'
 import NextPage from '../../../components/saint/NextPage/NextPage'
 import About from '../../../components/global/About/About'
+import ScrollUp from '../../../components/global/ScrollUp/ScrollUp'
 
 export const config = {
   runtime: 'experimental-edge',
@@ -161,6 +162,7 @@ const SaintBio = (props) => {
             </div>
           </div>
           <RelatedPeople data={relatedSaints} />
+          <ScrollUp />
         </div>
       </Page>
     </>

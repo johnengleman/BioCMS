@@ -17,6 +17,7 @@ import { getQuotesFilters } from '../../queries/getQuoteFilters'
 import Quotes from '../../components/saint/Quotes/Quotes'
 import useCookie from '../../hooks/useCookie'
 import capitalize from '../../utils/capitalize'
+import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
 import styles from './styles.module.scss'
 
 export const config = {
@@ -136,10 +137,13 @@ const QuotesPage = () => {
               <FontAwesomeIcon icon={faFaceFrownSlight} />
             </p>
           ) : !isFetching && quoteData?.length ? (
-            <Quotes
-              quotes={quoteData}
-              showAuthor={true}
-            />
+            <>
+              <Quotes
+                quotes={quoteData}
+                showAuthor={true}
+              />
+              <ScrollUp />
+            </>
           ) : (
             <p className="status">
               No quotes found.{' '}
