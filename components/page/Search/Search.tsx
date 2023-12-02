@@ -77,8 +77,8 @@ const Search = ({ searchData }) => {
               <ImageGlobal
                 src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${option.profile_image.id}?key=search`}
                 fill={false}
-                width={35}
-                height={35}
+                width={50}
+                height={50}
               />
             </div>
             <div className={styles.info}>

@@ -1,4 +1,6 @@
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
+import Masonry from 'react-masonry-css'
+import useBreakpoints from '../../../hooks/useBreakPoints'
 import styles from './styles.module.scss'
 
 type QuotesProps = {
@@ -12,6 +14,8 @@ type QuotesData = {
   showAuthor?: boolean
   saint: {
     name: string
+    death_year: string
+    birth_year: string
     profile_image: {
       description: string
       id: string
@@ -31,13 +35,16 @@ const Quote = ({ text, topics, saint, showAuthor }) => {
                 <ImageGlobal
                   src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${saint?.profile_image.id}?key=search`}
                   fill={false}
-                  width={35}
-                  height={35}
+                  width={50}
+                  height={50}
                 />
               </div>
             )}
             <div className={styles.author}>
-              {saint?.name}
+              <p>{saint?.name}</p>
+              <p className={styles.dates}>
+                {saint?.birth_year}-{saint?.death_year}
+              </p>
             </div>
           </div>
         )}
@@ -57,17 +64,36 @@ const Quote = ({ text, topics, saint, showAuthor }) => {
 }
 
 const Quotes = ({ quotes, showAuthor }: QuotesProps) => {
+  const { isMobileS, isMobileM, isMobileL, isTablet } =
+    useBreakpoints()
+
+  const getColumnsToRender = () => {
+    if (isMobileS || isMobileM || isMobileL) {
+      return 1
+    }
+    if (isTablet) {
+      return 2
+    }
+    return 3
+  }
+
   return (
     <div className={styles.quotesContainer}>
-      {quotes?.map((quote: QuotesData, i) => (
-        <Quote
-          key={i}
-          text={quote.text}
-          topics={quote.topics}
-          saint={quote.saint}
-          showAuthor={showAuthor}
-        />
-      ))}
+      <Masonry
+        breakpointCols={getColumnsToRender()}
+        className="my-masonry-grid"
+        columnClassName="my-masonry-grid_column"
+      >
+        {quotes?.map((quote: QuotesData, i) => (
+          <Quote
+            key={i}
+            text={quote.text}
+            topics={quote.topics}
+            saint={quote.saint}
+            showAuthor={showAuthor}
+          />
+        ))}
+      </Masonry>
     </div>
   )
 }

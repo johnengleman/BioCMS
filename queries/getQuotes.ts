@@ -43,6 +43,8 @@ function getQuotesQuery({ church, filter }) {
        topics
        saint {
          name
+         birth_year
+         death_year
          profile_image {
           id
           description
