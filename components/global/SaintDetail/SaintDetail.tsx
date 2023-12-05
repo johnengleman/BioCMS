@@ -6,7 +6,10 @@ const SaintDetail = ({ saint, data, link }) => {
   return (
     <div className={styles.saintDetail}>
       <div className={styles.summary}>
-        <SaintSummary {...saint} />
+        <SaintSummary
+          {...saint}
+          mini={true}
+        />
       </div>
       <div className={styles.teachings}>
         <BentoSection

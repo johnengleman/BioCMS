@@ -23,13 +23,12 @@
       display: flex;
       margin-top: 30px;
       gap: 30px;
-      padding-bottom: 20px;
+      padding-bottom: 40px;
       border-bottom: 1px solid #ccad004d;
       flex-direction: column;
 
       @include breakpoint(tablet) {
         flex-direction: row;
-        padding-bottom: 40px;
         gap: 40px;
       }
 

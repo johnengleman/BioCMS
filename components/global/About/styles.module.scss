@@ -2,7 +2,7 @@
 
 .about {
   display: flex;
-  width: 100%;
+  width: 95%;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -14,6 +14,7 @@
   gap: 50px;
 
   @include breakpoint(laptop) {
+    width: 100%;
     flex-direction: row;
     margin: 0;
     padding: 50px;
@@ -34,7 +35,7 @@
   }
 
   .subheading {
-    font-size: 18px;
+    font-size: 16px;
   }
 
   .contactBtn {
@@ -63,10 +64,14 @@
   }
 
   li {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     color: #555;
     font-size: 16px;
     line-height: 1.4;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     .bold {
       font-weight: 700;

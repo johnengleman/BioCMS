@@ -10,21 +10,29 @@
 .quote {
   max-width: 100%;
   border-radius: 10px;
-  padding: 25px 35px;
+  padding: 25px 25px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
   width: 100%;
-  margin-bottom: 20px;
   position: relative;
+  margin-bottom: 20px;
+
+  @include breakpoint(tablet) {
+    padding: 25px 35px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 
   .text {
     color: #353535;
     font-size: 15px;
     line-height: 1.4;
     text-align: left;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
   }
 
   .footer {
@@ -37,7 +45,6 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 5px;
 
       .profile {
         height: 50px;

@@ -106,8 +106,8 @@ h6 {
   width: auto;
   margin-left: -15px;
   width: 100%;
-  min-height: 550px;
 }
+
 .my-masonry-grid_column {
   padding-left: 20px; /* gutter size */
   background-clip: padding-box;

@@ -22,6 +22,7 @@ const SaintSummary = (props) => {
     slug,
     priority,
     transitionName,
+    mini,
   } = props
 
   const { isLaptop } = useBreakpoints()
@@ -33,7 +34,9 @@ const SaintSummary = (props) => {
 
   return (
     <Link
-      className={styles.saintSummary}
+      className={`${styles.saintSummary} ${
+        mini ? styles.mini : ''
+      }`}
       href={`/saints/${slug}`}
       style={{ viewTransitionName: transitionName }}
     >

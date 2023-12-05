@@ -201,4 +201,11 @@
       border: 1px solid #646464;
     }
   }
+
+  &.mini .summary {
+    display: -webkit-box;
+    -webkit-line-clamp: 12;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }

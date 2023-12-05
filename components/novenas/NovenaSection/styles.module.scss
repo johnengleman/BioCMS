@@ -109,7 +109,7 @@
     .preview {
       width: 100%;
       display: -webkit-box;
-      -webkit-line-clamp: 16;
+      -webkit-line-clamp: 14;
       -webkit-box-orient: vertical;
       overflow: hidden;
       flex: 1;
@@ -148,9 +148,9 @@
 
   .footer {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    padding: 0 50px 30px 50px;
+    padding: 0 20px;
     background-color: #fff;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -158,6 +158,7 @@
     margin-top: -1px;
 
     @include breakpoint(tablet) {
+      padding: 0 50px 30px 50px;
       justify-content: flex-end;
       margin-top: 0;
     }
