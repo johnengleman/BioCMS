@@ -109,7 +109,7 @@ const Header = ({ searchData, navData }) => {
                   <span className={styles.count}>
                     {teachingsCount}
                   </span>
-                  Teachings & Legacy
+                  Teachings
                 </Link>
               ) : (
                 ''
