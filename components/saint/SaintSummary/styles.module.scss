@@ -21,7 +21,11 @@
     z-index: -1;
     width: 100%;
     border-radius: 20px;
-    background: linear-gradient(to right, red, var(--gold));
+    background: linear-gradient(
+      to top,
+      rgb(115, 24, 46),
+      #ccad00
+    );
     opacity: 1;
     transition: all 0.3s ease-in-out;
   }
