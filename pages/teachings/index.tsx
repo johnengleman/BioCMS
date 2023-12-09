@@ -94,26 +94,20 @@ const Teachings = () => {
     <>
       <Head>
         <title>
-          {`Journey through Christian History: Teachings &
-          Legacies of Catholic and Orthodox Saints ${
-            filter === 'all'
-              ? `from the
-          Apostolic to Modern Era`
-              : `in the ${capitalize(filter)}`
-          }`}
+         Christian Saints: Legacy & Teachings Explored
         </title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/teachings`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/teachings${
+            filter !== 'all'
+              ? `?filter=${filter}`
+              : ''
+          }`}
         />
         <meta
           key="description"
           name="description"
-          content={`Embark on a spiritual exploration of Catholic and Orthodox saints ${
-            filter === 'all'
-              ? `from the Apostolic Era to the present`
-              : `in the ${capitalize(filter)}`
-          }. Our site delves into the Patristic Age, navigates the Medieval period, crosses the Late Medieval/Pre-Renaissance era, and embraces Modern and Contemporary insights. Discover the profound teachings and enduring legacies of revered saints across centuries. Uncover the rich tapestry of Christian wisdom and faith through history.`}
+          content={`Explore teachings and legacies of Catholic and Orthodox saints from the Apostolic to Modern era. Delve into the evolution of Christian wisdom and faith through history.`}
         />
         <meta
           name="keywords"

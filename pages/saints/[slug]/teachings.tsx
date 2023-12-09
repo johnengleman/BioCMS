@@ -84,7 +84,7 @@ const SaintBio = (props) => {
   return (
     <>
       <Head>
-        <title>{`Teachings and Legacy of ${data.name}: Spiritual Insights and Influence`}</title>
+        <title>{`${data.name}: Profound Teachings & Lasting Legacy`}</title>
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/teachings`}
@@ -92,7 +92,7 @@ const SaintBio = (props) => {
         <meta
           key="description"
           name="description"
-          content={`Immerse yourself in the profound teachings and enduring legacy of ${data.name}. Explore an in-depth look at their spiritual insights, theological contributions, and the significant impact they made on the Christian faith. Discover how ${data.name}'s teachings continue to inspire and guide believers worldwide.`}
+          content={`Dive into ${data.name}'s teachings. Discover their theological contributions and how they continue to guide and inspire believers."`}
         />
         <meta
           name="keywords"

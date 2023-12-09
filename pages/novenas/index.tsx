@@ -94,25 +94,20 @@ const NovenasPage = () => {
     <>
       <Head>
         <title>
-          {`Comprehensive Collection of Novenas${
-            filter !== 'all'
-              ? ` for ${properties.saints.title[filter]}`
-              : ''
-          }: Prayers to
-          All Saints`}
+          Novenas for All Saints: Prayerful Guidance
         </title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/novenas`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/novenas${
+            filter !== 'all'
+              ? `?filter=${filter}`
+              : ''
+          }`}
         />
         <meta
           key="description"
           name="description"
-          content={`Explore our extensive collection of novenas${
-            filter !== 'all'
-              ? ` for ${properties.saints.title[filter]}`
-              : ''
-          }, offering powerful prayers to a diverse array of saints. Whether seeking intercession, guidance, or spiritual growth, find the perfect novena to deepen your faith journey. Our resource includes novenas for every occasion and saint, providing a rich tapestry of devotion and tradition in the Catholic and Orthodox faiths.`}
+          content={`Find solace and inspiration in our curated novenas. From personal growth to seeking intercession, connect with saints' enduring wisdom.`}
         />
         <meta
           name="keywords"

@@ -25,12 +25,6 @@ export const config = {
   runtime: 'experimental-edge',
 }
 
-function arraysAreEqual(arr1, arr2) {
-  return (
-    arr1?.length === arr2?.length &&
-    arr1.every((value, index) => value === arr2[index])
-  )
-}
 
 const Saints = () => {
   useCookie()
@@ -114,22 +108,20 @@ const Saints = () => {
     <>
       <Head>
         <title>
-          {`Explore the Lives and Wisdom of Catholic &
-          Orthodox ${
-            filter !== 'all'
-              ? `${properties.saints.title[filter]}`
-              : ''
-          } Saints: Insights, Miracles, Prayers, and
-          Inspirational Reads`}
+          Catholic & Orthodox Saints: Life, Miracles, Prayers
         </title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/${
+            filter !== 'all'
+              ? `saints?filter=${filter}`
+              : ''
+          }`}
         />
         <meta
           key="description"
           name="description"
-          content={`Delve into the spiritual journey with our comprehensive resource on Catholic and Orthodox ${properties.saints.title[filter]} saints. Discover detailed biographies, profound teachings, miraculous events, and enriching prayers. Engage with timeless wisdom through curated novenas, inspirational quotes, and a selection of related books. Your portal to the lives and legacies of revered holy figures.`}
+          content={`Explore the enriching lives of Catholic and Orthodox saints. Delve into their miraculous tales, teachings, and spiritual prayers with our extensive resources.`}
         />
         <meta
           name="keywords"

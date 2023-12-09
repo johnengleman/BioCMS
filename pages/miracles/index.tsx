@@ -93,26 +93,20 @@ const Teachings = () => {
     <>
       <Head>
         <title>
-          {`Miraculous Moments in Christian History: Famous
-          Miracles of Catholic and Orthodox Saints ${
-            filter === 'all'
-              ? `from the
-          Apostolic to Modern Era`
-              : `in the ${capitalize(filter)}`
-          }`}
+         Saints&apos; Miracles: From Apostolic to Modern Times
         </title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/miracles`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/miracles${
+            filter !== 'all'
+              ? `?filter=${filter}`
+              : ''
+          }`}
         />
         <meta
           key="description"
           name="description"
-          content={`Discover the awe-inspiring miracles of Catholic and Orthodox saints, ${
-            filter === 'all'
-              ? `spanning from the Apostolic Era to the present`
-              : `in the ${capitalize(filter)}`
-          }. Witness the wonders of the Patristic Age, the marvels of the Medieval period, the extraordinary occurrences of the Renaissance, and the miraculous events of the Modern era. Our collection brings to life the most famous miracles that have shaped faith and history. Filter by time period and experience the miraculous through the ages.`}
+          content={`"Explore miracles of Catholic & Orthodox saints through history. Witness wonders from the Patristic Age to the Modern era, shaping faith across time.`}
         />
         <meta
           name="keywords"

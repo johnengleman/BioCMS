@@ -100,7 +100,7 @@ const SaintBio = () => {
     <>
       <Head>
         <title>
-          {`${data?.name}: Life, Teachings, Miracles, Quotes, and More`}
+          {`${data?.name}: Their Life & Spiritual Legacy`}
         </title>
         <link
           rel="canonical"
@@ -109,7 +109,7 @@ const SaintBio = () => {
         <meta
           key="description"
           name="description"
-          content={`Explore the enriching journey of ${data.name}. Discover the detailed biography of her life, profound teachings, recorded miracles, inspirational quotes, treasured relics, meaningful novenas, and related books. Delve into the spiritual depth of ${data.name} and discover how their legacy continues to inspire faith and devotion in the hearts of many.`}
+          content={`Discover ${data.name}'s life, teachings, and miracles. Explore their inspirational quotes, prayers, and books that illuminate their spiritual journey.`}
         />
         <meta
           name="keywords"

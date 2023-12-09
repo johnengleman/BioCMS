@@ -102,15 +102,15 @@ const SaintNovena = (props) => {
   return (
     <>
       <Head>
-        <title>{`${data.name} Novena: Full Text for Devotional Prayer`}</title>
+        <title>{`${data.name}: ${novena.prayer_title}`}</title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/biography`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/novenas/${data.name}`}
         />
         <meta
           key="description"
           name="description"
-          content={`Join in a spiritual journey with the full text of the Novana of ${data.name}. This page offers the complete novena prayers for those seeking guidance, inspiration, and a deeper connection with ${data.name}. Embrace this powerful nine-day prayer to draw closer to the teachings and intercession of ${data.name}, known for her profound simplicity and faith.`}
+          content={`Discover the full Novena of ${data.name} for spiritual growth. Connect deeply with her teachings and faith through this powerful nine-day prayer`}
         />
         <meta
           name="keywords"

@@ -94,25 +94,20 @@ const QuotesPage = () => {
     <>
       <Head>
         <title>
-          {`Inspirational Quotes ${
-            filter === 'all'
-              ? ''
-              : `about ${capitalize(filter)}`
-          } by Catholic and Orthodox
-          Saints: Wisdom on Faith, Love, Prayer, and More`}
+          Saintly Wisdom: Quotes on Faith, Love, & Prayer
         </title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/quotes`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/quotes${
+            filter !== 'all'
+              ? `?filter=${filter}`
+              : ''
+          }`}
         />
         <meta
           key="description"
           name="description"
-          content={`Explore a curated collection of profound quotes ${
-            filter === 'all'
-              ? ''
-              : `about ${capitalize(filter)}`
-          } by Catholic and Orthodox saints, covering a spectrum of spiritual themes including faith, hope, love, prayer, charity, and more. Our resource allows you to filter quotes by topics like suffering, forgiveness, humility, joy, wisdom, and numerous others, helping you find the perfect words of wisdom for any moment in your spiritual journey. Dive into the depths of saintly insights and be inspired.`}
+          content={`Discover inspirational quotes from Catholic and Orthodox saints. Explore their wisdom on faith, love, and prayer, with a versatile range of spiritual themes.`}
         />
         <meta
           name="keywords"
