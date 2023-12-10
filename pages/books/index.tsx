@@ -111,9 +111,7 @@ const Books = () => {
     <>
       <Head>
         <title>
-          Exploring Sanctity Through Literature: Diverse
-          Books on Saints&#39; Lives, Teachings, and
-          Spiritual Journeys
+          Books on Saints: Lives, Teachings & Journeys
         </title>
         <link
           rel="canonical"
@@ -122,7 +120,7 @@ const Books = () => {
         <meta
           key="description"
           name="description"
-          content={`Dive into our extensive collection of books related to Catholic and Orthodox saints, encompassing theology and dogma, spiritual and ascetic writings, church history and biography, and prayer and devotionals. Whether authored by saints or about them, our library offers a treasure trove of wisdom, history, and spiritual guidance. Filter by genre to find the perfect read that enlightens and inspires your faith journey.`}
+          content={`Discover books on Catholic and Orthodox saints, spanning theology, spiritual writings, history, and devotions. Find enlightening reads for your faith journey.`}
         />
         <meta
           name="keywords"

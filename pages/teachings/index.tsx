@@ -107,7 +107,7 @@ const Teachings = () => {
         <meta
           key="description"
           name="description"
-          content={`Explore teachings and legacies of Catholic and Orthodox saints from the Apostolic to Modern era. Delve into the evolution of Christian wisdom and faith through history.`}
+          content={`Explore teachings and legacies of Catholic and Orthodox saints from the Apostolic to Modern era.`}
         />
         <meta
           name="keywords"

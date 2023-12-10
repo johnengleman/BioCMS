@@ -163,7 +163,7 @@ module.exports = {
         const baseLoc = `${config.siteUrl}`
 
         return {
-          loc: `${baseLoc}/?filter=${filter.toLowerCase()}`,
+          loc: `${baseLoc}/saints?filter=${filter.toLowerCase()}`,
           lastmod: new Date().toISOString(),
         }
       })
@@ -173,7 +173,7 @@ module.exports = {
         const baseLoc = `${config.siteUrl}`
 
         return {
-          loc: `${baseLoc}/?filter=${filter.toLowerCase()}`,
+          loc: `${baseLoc}/saints?filter=${filter.toLowerCase()}`,
           lastmod: new Date().toISOString(),
         }
       },
