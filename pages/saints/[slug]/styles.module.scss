@@ -137,13 +137,28 @@
         font-size: 14px;
         color: #888;
         margin: 15px 0;
+        font-style: italic;
+      }
+
+      h2 {
+        font-size: 22px;
+        margin-top: 30px;
+        color: var(--violet);
+        font-weight: 450;
+        margin-bottom: 8px;
+        line-height: 1.1;
+
+        &:first-child {
+          margin-top: 0;
+        }
       }
 
       .text {
-        margin-top: 20px;
+        margin-top:5px;
         margin-bottom: 30px;
 
         @include breakpoint(tablet) {
+          margin-top:40px;
           padding-left: 30px;
           border-left: 1px solid rgb(228, 227, 227);
         }
@@ -152,14 +167,8 @@
           margin: 30px 0 10px 0;
         }
 
-        h2 {
-          font-size: 20px;
-          margin-top: 20px;
-          color: #333;
-        }
-
         strong {
-          color: #888;
+          color: #000;
           font-weight: 600;
         }
 
@@ -172,12 +181,17 @@
         img {
           float: left;
           margin-right: 20px;
+          margin-bottom: 10px;
           max-width: 50%;
 
           @include breakpoint(laptop) {
             margin-right: 30px;
           }
         }
+      }
+
+      .text:has(.day-item) {
+        margin-top: 10px;
       }
     }
 

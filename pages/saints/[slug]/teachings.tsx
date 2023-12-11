@@ -128,9 +128,6 @@ const SaintBio = (props) => {
                 deathYear={data?.death_year}
                 header={`What were the teachings of ${data?.name}?`}
               />
-              <div className={styles.updated}>
-                Updated on {formatDate(data?.date_updated)}
-              </div>
               <div
                 className={styles.text}
                 dangerouslySetInnerHTML={{

@@ -112,9 +112,9 @@ const Saints = () => {
         </title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/${
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints${
             filter !== 'all'
-              ? `saints?filter=${filter}`
+              ? `?filter=${filter}`
               : ''
           }`}
         />

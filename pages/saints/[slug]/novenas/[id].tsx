@@ -146,9 +146,6 @@ const SaintNovena = (props) => {
                 deathYear={data?.death_year}
                 header={`${data.name}: ${novena.prayer_title}`}
               />
-              <div className={styles.updated}>
-                Updated on {formatDate(data?.date_updated)}
-              </div>
               {data?.prayers[0].prayers.map((prayer, i) => (
                 <Fragment key={i}>
                   <h2 id={`heading-${i + 1}`}>

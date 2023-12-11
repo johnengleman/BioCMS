@@ -16,10 +16,10 @@
     font-size: 24px;
     font-weight: 600;
     line-height: 1;
-    color: #000;
+    color: #222;
 
     @include breakpoint(tablet) {
-      font-size: 28px;
+      font-size: 30px;
     }
   }
 

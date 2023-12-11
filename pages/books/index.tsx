@@ -115,7 +115,11 @@ const Books = () => {
         </title>
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/books`}
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/books${
+            filter !== 'all'
+              ? `?filter=${filter}`
+              : ''
+          }`}
         />
         <meta
           key="description"

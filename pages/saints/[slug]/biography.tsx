@@ -131,9 +131,6 @@ const SaintBio = (props) => {
                 deathYear={data?.death_year}
                 header={`Who was ${data?.name}?`}
               />
-              <div className={styles.updated}>
-                Updated on {formatDate(data?.date_updated)}
-              </div>
               <div
                 className={styles.text}
                 dangerouslySetInnerHTML={{
@@ -146,6 +143,9 @@ const SaintBio = (props) => {
                   inRightRail={false}
                 />
               )}
+              {/* <div className={styles.updated}>
+                Updated on {formatDate(data?.date_updated)}
+              </div> */}
               <NextPage data={data} />
               <ReadMoreLinks
                 links={data?.read_more_links}

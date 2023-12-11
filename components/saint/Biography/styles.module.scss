@@ -35,13 +35,14 @@
 
     h3,
     h2 {
-      color: #222;
+      color: var(--violet);
       font-weight: 650;
       font-size: 1.2rem;
       margin-top: 2rem;
       padding-left: 1rem;
       padding-bottom: 0.5rem;
       border-left: 1px solid #ddd;
+      font-weight: 500;
 
       &:first-child {
         margin-top: 0;

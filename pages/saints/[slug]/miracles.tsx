@@ -84,7 +84,7 @@ const SaintBio = (props) => {
   return (
     <>
       <Head>
-        <title>{`${data.name}'s Miracles: Divine Events`}</title>
+        <title>{`${data.name}: Miracles and Unexplained Events`}</title>
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/miracles`}
@@ -128,9 +128,6 @@ const SaintBio = (props) => {
                 deathYear={data?.death_year}
                 header={`What where the miracles of ${data?.name}?`}
               />
-              <div className={styles.updated}>
-                Updated on {formatDate(data?.date_updated)}
-              </div>
               <div
                 className={styles.text}
                 dangerouslySetInnerHTML={{

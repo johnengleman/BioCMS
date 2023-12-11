@@ -116,77 +116,98 @@ module.exports = {
 
     const teachingsPaths = properties.teachings.filters.map(
       (filter) => {
-        const baseLoc = `${config.siteUrl}`
+        if(filter !== 'all') {
+          const baseLoc = `${config.siteUrl}`
 
-        return {
-          loc: `${baseLoc}/teachings?filter=${filter.toLowerCase()}`,
-          lastmod: new Date().toISOString(),
+          return {
+            loc: `${baseLoc}/teachings?filter=${filter.toLowerCase()}`,
+            lastmod: new Date().toISOString(),
+          }
         }
+        return null;
       },
     )
 
     const miraclesPaths = properties.miracles.filters.map(
       (filter) => {
-        const baseLoc = `${config.siteUrl}`
+        if(filter !== 'all') {
+          const baseLoc = `${config.siteUrl}`
 
-        return {
-          loc: `${baseLoc}/miracles?filter=${filter.toLowerCase()}`,
-          lastmod: new Date().toISOString(),
+          return {
+            loc: `${baseLoc}/miracles?filter=${filter.toLowerCase()}`,
+            lastmod: new Date().toISOString(),
+          }
         }
+        return null
       },
     )
 
     const prayersPaths = properties.prayers.filters.map(
       (filter) => {
-        const baseLoc = `${config.siteUrl}`
+        if(filter !== 'all') {
+          const baseLoc = `${config.siteUrl}`
 
-        return {
-          loc: `${baseLoc}/novenas?filter=${filter.toLowerCase()}`,
-          lastmod: new Date().toISOString(),
+          return {
+            loc: `${baseLoc}/novenas?filter=${filter.toLowerCase()}`,
+            lastmod: new Date().toISOString(),
+          }
         }
+        return null
       },
     )
 
     const quotesPaths = properties.quotes.filters.map(
       (filter) => {
-        const baseLoc = `${config.siteUrl}`
+        if(filter !== 'all') {
+          const baseLoc = `${config.siteUrl}`
 
-        return {
-          loc: `${baseLoc}/quotes?filter=${filter.toLowerCase()}`,
-          lastmod: new Date().toISOString(),
+          return {
+            loc: `${baseLoc}/quotes?filter=${filter.toLowerCase()}`,
+            lastmod: new Date().toISOString(),
+          }
         }
+        return null;
       },
     )
 
     const categoryPaths =
       properties.saints.filters.category.map((filter) => {
-        const baseLoc = `${config.siteUrl}`
+        if(filter !== 'all') {
+          const baseLoc = `${config.siteUrl}`
 
-        return {
-          loc: `${baseLoc}/saints?filter=${filter.toLowerCase()}`,
-          lastmod: new Date().toISOString(),
+          return {
+            loc: `${baseLoc}/saints?filter=${filter.toLowerCase()}`,
+            lastmod: new Date().toISOString(),
+          }
         }
+        return null
       })
 
     const monthPaths = properties.saints.filters.month.map(
       (filter) => {
-        const baseLoc = `${config.siteUrl}`
+        if(filter !== 'all') {
+          const baseLoc = `${config.siteUrl}`
 
-        return {
-          loc: `${baseLoc}/saints?filter=${filter.toLowerCase()}`,
-          lastmod: new Date().toISOString(),
+          return {
+            loc: `${baseLoc}/saints?filter=${filter.toLowerCase()}`,
+            lastmod: new Date().toISOString(),
+          }
         }
+        return null
       },
     )
 
     const booksPaths = properties.books.presets.map(
       (filter) => {
-        const baseLoc = `${config.siteUrl}`
+        if(filter !== 'null') {
+          const baseLoc = `${config.siteUrl}`
 
-        return {
-          loc: `${baseLoc}/books?filter=${filter.toLowerCase()}`,
-          lastmod: new Date().toISOString(),
+          return {
+            loc: `${baseLoc}/books?filter=${filter.toLowerCase()}`,
+            lastmod: new Date().toISOString(),
+          }
         }
+        return null;
       },
     )
 

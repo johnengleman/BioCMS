@@ -114,10 +114,14 @@
       }
 
       h2 {
-        font-size: 16px;
-        margin-bottom: 15px;
-        color: #454545;
-        font-weight: 700;
+        font-size: 18px;
+        color: var(--violet);
+        font-weight: 600;
+        margin-top: 20px;
+
+        &:first-child {
+          margin-top: 0;
+        }
       }
 
       p:has(img) {
@@ -134,12 +138,12 @@
       ol,
       ul {
         font-size: 16px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         color: #565656;
       }
 
       strong {
-        color: #888;
+        color: #000;
         font-weight: 600;
       }
     }
