@@ -107,6 +107,10 @@
 
         a {
           font-size: 18px;
+
+          &:first-child {
+            padding-left: 0;
+          }
         }
       }
     }
@@ -172,7 +176,7 @@
 
     .count {
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--gold);
       display: none;
 

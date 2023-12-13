@@ -6,7 +6,7 @@ $color: rgb(70, 63, 113);
     color: rgb(233, 230, 253);
     text-shadow: -1px 0 $color, 0 1px $color, 1px 0 $color,
       0 -1px $color;
-    font-weight: 600;
+    font-weight: 400;
     letter-spacing: 0.25px;
     font-size: 13px;
     text-align: left;
@@ -109,8 +109,9 @@ $color: rgb(70, 63, 113);
       }
 
       .name {
-        font-weight: 600;
+        font-weight: 400;
         text-transform: capitalize;
+        letter-spacing: 0.5px;
       }
 
       .count {
@@ -121,7 +122,7 @@ $color: rgb(70, 63, 113);
         justify-content: center;
         align-items: center;
         font-size: 9px;
-        font-weight: 700;
+        font-weight: 600;
         line-height: 15px;
         background-color: var(--gold);
         color: var(--violet);

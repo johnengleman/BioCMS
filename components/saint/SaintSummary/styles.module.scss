@@ -64,7 +64,7 @@
     align-items: center;
     border-radius: 15px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 500;
     box-shadow: -2px 4px 10px 0px #121023;
     gap: 3px;
 
@@ -109,7 +109,7 @@
 
     .name {
       color: #fff;
-      font-weight: 600;
+      font-weight: 400;
       margin-bottom: 1rem;
       padding-top: 50px;
       bottom: 0;
@@ -167,7 +167,6 @@
 
   .feastDays {
     display: flex;
-    font-size: 13px;
     justify-content: space-between;
     margin-bottom: 1rem;
     border-top: 1px solid #646464;
@@ -179,6 +178,9 @@
     }
 
     .feastDay {
+      color: #bcbcbc;
+      font-size: 13px;
+
       svg {
         margin-right: 5px;
       }

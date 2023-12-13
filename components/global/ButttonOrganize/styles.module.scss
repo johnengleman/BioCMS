@@ -3,16 +3,18 @@
 .btnOrganize {
   display: flex;
   justify-content: flex-start;
-  padding: 10px 20px;
+  align-items: center;
+  padding: 6px 20px;
   border-radius: 7px;
+  min-height: 35px;
   cursor: pointer;
   gap: 10px;
   position: relative;
   transition: all 0.1s ease-in-out;
   background-color: #521613;
   border: 2px solid #3f3e3e;
-  font-weight: 600;
-  font-size: 15px;
+  font-weight: 400;
+  font-size: 13px;
   letter-spacing: 0.25px;
   color: var(--gold);
   line-height: 1.1;

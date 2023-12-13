@@ -167,12 +167,16 @@
           margin: 30px 0 10px 0;
         }
 
+        h4 {
+          font-weight: 550;
+        }
+
         strong {
           color: #000;
           font-weight: 600;
         }
 
-        p {
+        p, ul, ol {
           font-size: 15px;
           line-height: 1.5;
           margin-bottom: 0.5rem;
