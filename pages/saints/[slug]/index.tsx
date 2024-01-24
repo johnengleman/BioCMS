@@ -259,14 +259,14 @@ const SaintBio = () => {
               ) : (
                 ''
               )}
-              {data?.books ? (
+              {/* {data?.books ? (
                 <Books
                   inRightRail={false}
                   books={data?.books}
                 />
               ) : (
                 ''
-              )}
+              )} */}
               <RelatedPeople data={relatedSaints} />
               <ScrollUp />
             </div>

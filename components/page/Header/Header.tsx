@@ -153,7 +153,7 @@ const Header = ({ searchData, navData }) => {
               ) : (
                 ''
               )}
-              <Link
+              {/* <Link
                 href="/books"
                 onClick={() => handleClick()}
               >
@@ -163,7 +163,7 @@ const Header = ({ searchData, navData }) => {
                   </span>
                 )}
                 Books
-              </Link>
+              </Link> */}
             </div>
             <div className={styles.misc}>
               <Link

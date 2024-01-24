@@ -137,12 +137,12 @@ const SaintBio = (props) => {
                   __html: data?.biography || '',
                 }}
               />
-              {data?.books && isLaptopMinus && (
+              {/* {data?.books && isLaptopMinus && (
                 <Books
                   books={data?.books}
                   inRightRail={false}
                 />
-              )}
+              )} */}
               {/* <div className={styles.updated}>
                 Updated on {formatDate(data?.date_updated)}
               </div> */}

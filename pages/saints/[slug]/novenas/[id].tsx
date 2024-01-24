@@ -160,12 +160,12 @@ const SaintNovena = (props) => {
                 </Fragment>
               ))}
 
-              {data?.books && isLaptopMinus && (
+              {/* {data?.books && isLaptopMinus && (
                 <Books
                   books={data?.books}
                   inRightRail={false}
                 />
-              )}
+              )} */}
               <NextPage data={data} />
               <ReadMoreLinks
                 links={data?.read_more_links}

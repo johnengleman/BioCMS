@@ -139,12 +139,12 @@ const SaintBio = (props) => {
             </div>
 
             <div className={styles.rightRail}>
-              {data?.books && (
+              {/* {data?.books && (
                 <Books
                   books={data?.books}
                   inRightRail={true}
                 />
-              )}
+              )} */}
             </div>
           </div>
           <RelatedPeople data={relatedSaints} />
