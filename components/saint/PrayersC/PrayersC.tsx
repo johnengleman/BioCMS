@@ -12,7 +12,7 @@ const PrayersC = ({ allPrayers, saint }) => {
         >
           <div className={styles.prayerImage}>
             <ImageGlobal
-              src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${prayer.prayer_image.id}`}
+              src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${prayer?.prayer_image?.id}`}
               fill={true}
             />
           </div>
