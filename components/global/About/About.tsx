@@ -33,21 +33,22 @@ const About = ({ showImage }) => (
           and engaging biographies available online in the
           english language, using sources hundreds of years
           old. My goal is to vividly bring to life the
-          remarkable lives of these saints, while providing
-          insightful context about the eras they lived in.
+          remarkable lives of these saints through rich and
+          warm storytelling, while providing insightful
+          context about the eras they lived in.
         </li>
         <li>
           <span className={styles.bold}>
             3. To Present a Holistic View of Each Saint:
           </span>
-          My third goal is to present a range of aspects
-          including their theological teachings, influence
-          within the church, authored works, documented
-          miracles, relics, and prayers. With this
-          multifaceted portrayal, I want to underscore their
-          historical significance and enduring presence,
-          that they were real individuals with lasting
-          impacts rather than legends, and that{' '}
+          Finally, my third goal is to present a range of
+          aspects including their theological teachings,
+          influence within the church, authored works,
+          documented miracles, relics, and prayers. With
+          this multifaceted portrayal, I want to underscore
+          their historical significance and enduring
+          presence, that they were real individuals with
+          lasting impacts rather than legends, and that{' '}
           <span className={styles.underline}>
             they still walk among us.
           </span>
