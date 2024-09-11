@@ -15,7 +15,7 @@
   }
 
   @include breakpoint(laptopM) {
-    width: 300px;
+    min-width: 300px;
   }
 
   .row {
