@@ -4,6 +4,7 @@ import NextNProgress from 'nextjs-progressbar'
 import { initGA4 } from '../utils/g4a'
 import ReactGA from 'react-ga4'
 import { SiteProvider } from '../context/SiteContext'
+import ErrorBoundary from '../components/global/ErrorBoundary/ErrorBoundary'
 import {
   Hydrate,
   QueryClient,
@@ -46,26 +47,28 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [])
 
   return (
-    <SiteProvider>
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <Head>
-            <meta
-              name="google-site-verification"
-              content="MpAUyfDuciR572ZaxGUSNT-lQwkUN_k2QAKMiMnO9RY"
-            />
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1.0"
-            />
-          </Head>
-          <NextNProgress />
-          <main className={inter.className}>
-            <Component {...pageProps} />
-          </main>
-        </Hydrate>
-      </QueryClientProvider>
-    </SiteProvider>
+    <ErrorBoundary>
+      <SiteProvider>
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <Head>
+              <meta
+                name="google-site-verification"
+                content="MpAUyfDuciR572ZaxGUSNT-lQwkUN_k2QAKMiMnO9RY"
+              />
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0"
+              />
+            </Head>
+            <NextNProgress />
+            <main className={inter.className}>
+              <Component {...pageProps} />
+            </main>
+          </Hydrate>
+        </QueryClientProvider>
+      </SiteProvider>
+    </ErrorBoundary>
   )
 }
 

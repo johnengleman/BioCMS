@@ -19,20 +19,18 @@ const Page = ({
   spaceBetween,
 }: Props) => {
   return (
-    <ErrorBoundary>
-      <div
-        className={`${styles.page} ${
-          spaceBetween ? styles.spaceBetween : ''
-        }`}
-      >
-        <Header
-          searchData={searchData}
-          navData={navData}
-        />
-        <div className={styles.body}>{children}</div>
-        <Footer />
-      </div>
-    </ErrorBoundary>
+    <div
+      className={`${styles.page} ${
+        spaceBetween ? styles.spaceBetween : ''
+      }`}
+    >
+      <Header
+        searchData={searchData}
+        navData={navData}
+      />
+      <div className={styles.body}>{children}</div>
+      <Footer />
+    </div>
   )
 }
 
