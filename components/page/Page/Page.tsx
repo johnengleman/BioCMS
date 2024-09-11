@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 import { Saint } from '../../saint/SaintSummary/interfaces'
+import ErrorBoundary from '../../global/ErrorBoundary/ErrorBoundary'
 import styles from './styles.module.scss'
 
 type Props = {
@@ -18,18 +19,20 @@ const Page = ({
   spaceBetween,
 }: Props) => {
   return (
-    <div
-      className={`${styles.page} ${
-        spaceBetween ? styles.spaceBetween : ''
-      }`}
-    >
-      <Header
-        searchData={searchData}
-        navData={navData}
-      />
-      <div className={styles.body}>{children}</div>
-      <Footer />
-    </div>
+    <ErrorBoundary>
+      <div
+        className={`${styles.page} ${
+          spaceBetween ? styles.spaceBetween : ''
+        }`}
+      >
+        <Header
+          searchData={searchData}
+          navData={navData}
+        />
+        <div className={styles.body}>{children}</div>
+        <Footer />
+      </div>
+    </ErrorBoundary>
   )
 }
 
