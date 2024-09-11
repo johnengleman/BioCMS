@@ -101,19 +101,6 @@ const Header = ({ searchData, navData }) => {
                 )}
                 Saints
               </Link>
-              {miraclesCount ? (
-                <Link
-                  href="/miracles"
-                  onClick={() => handleClick()}
-                >
-                  <span className={styles.count}>
-                    {miraclesCount}
-                  </span>
-                  Miracles
-                </Link>
-              ) : (
-                ''
-              )}
               {teachingsCount ? (
                 <Link
                   href="/teachings"
@@ -123,6 +110,19 @@ const Header = ({ searchData, navData }) => {
                     {teachingsCount}
                   </span>
                   Teachings
+                </Link>
+              ) : (
+                ''
+              )}
+              {miraclesCount ? (
+                <Link
+                  href="/miracles"
+                  onClick={() => handleClick()}
+                >
+                  <span className={styles.count}>
+                    {miraclesCount}
+                  </span>
+                  Miracles
                 </Link>
               ) : (
                 ''

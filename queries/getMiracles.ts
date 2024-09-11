@@ -46,7 +46,6 @@ function getMiraclesQuery(church, filter, miraclesPreset) {
         }
       ) {
        miracles
-       miracles_v2
        saint {
         name
         slug
