@@ -3,7 +3,7 @@ const { properties } = require('./utils/properties')
 async function getSlugs() {
   try {
     const res = await fetch(
-      `${process.env.GRAPHQL_ENDPOINT}/graphql`,
+      `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}/graphql`,
       {
         method: 'POST',
         headers: {
