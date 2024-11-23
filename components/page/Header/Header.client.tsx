@@ -173,12 +173,12 @@ const HeaderClient = ({ navData, searchComponent }) => {
               >
                 About
               </Link>
-              <Link
+              {/* <Link
                 href="/feedback"
                 onClick={() => handleClick()}
               >
                 Feedback
-              </Link>
+              </Link> */}
               <Link
                 href="/updates"
                 onClick={() => handleClick()}

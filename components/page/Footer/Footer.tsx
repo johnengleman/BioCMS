@@ -60,13 +60,13 @@ const Footer = () => {
             />
             About
           </Link>
-          <Link href="/feedback">
+          {/* <Link href="/feedback">
             <FontAwesomeIcon
               icon={faMessagePen}
               size="lg"
             />
             Feedback
-          </Link>
+          </Link> */}
           <Link href="/updates">
             <FontAwesomeIcon
               icon={faSparkles}
