@@ -3,7 +3,7 @@ const { properties } = require('./utils/properties')
 async function getSlugs() {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}/graphql`,
+      `${process.env.GRAPHQL_ENDPOINT}/graphql`,
       {
         method: 'POST',
         headers: {
@@ -116,7 +116,7 @@ module.exports = {
 
     const teachingsPaths = properties.teachings.filters.map(
       (filter) => {
-        if(filter !== 'all') {
+        if (filter !== 'all') {
           const baseLoc = `${config.siteUrl}`
 
           return {
@@ -124,13 +124,13 @@ module.exports = {
             lastmod: new Date().toISOString(),
           }
         }
-        return null;
+        return null
       },
     )
 
     const miraclesPaths = properties.miracles.filters.map(
       (filter) => {
-        if(filter !== 'all') {
+        if (filter !== 'all') {
           const baseLoc = `${config.siteUrl}`
 
           return {
@@ -144,7 +144,7 @@ module.exports = {
 
     const prayersPaths = properties.prayers.filters.map(
       (filter) => {
-        if(filter !== 'all') {
+        if (filter !== 'all') {
           const baseLoc = `${config.siteUrl}`
 
           return {
@@ -158,7 +158,7 @@ module.exports = {
 
     const quotesPaths = properties.quotes.filters.map(
       (filter) => {
-        if(filter !== 'all') {
+        if (filter !== 'all') {
           const baseLoc = `${config.siteUrl}`
 
           return {
@@ -166,13 +166,13 @@ module.exports = {
             lastmod: new Date().toISOString(),
           }
         }
-        return null;
+        return null
       },
     )
 
     const categoryPaths =
       properties.saints.filters.category.map((filter) => {
-        if(filter !== 'all') {
+        if (filter !== 'all') {
           const baseLoc = `${config.siteUrl}`
 
           return {
@@ -185,7 +185,7 @@ module.exports = {
 
     const monthPaths = properties.saints.filters.month.map(
       (filter) => {
-        if(filter !== 'all') {
+        if (filter !== 'all') {
           const baseLoc = `${config.siteUrl}`
 
           return {
@@ -199,7 +199,7 @@ module.exports = {
 
     const booksPaths = properties.books.presets.map(
       (filter) => {
-        if(filter !== 'null') {
+        if (filter !== 'null') {
           const baseLoc = `${config.siteUrl}`
 
           return {
@@ -207,7 +207,7 @@ module.exports = {
             lastmod: new Date().toISOString(),
           }
         }
-        return null;
+        return null
       },
     )
 

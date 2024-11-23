@@ -1,6 +1,12 @@
 import { gql } from 'graphql-request'
 import fetchHelper from './fetchHelper'
 
+interface SaintResponse {
+  data: {
+    saints: any // Replace `any` with the actual type if known
+  }
+}
+
 const query = gql`
   query getSaint($slug: String!) {
     saints(filter: { slug: { _icontains: $slug } }) {
@@ -63,7 +69,7 @@ const query = gql`
 `
 
 export const getSaint = async (slug?: string) => {
-  const res = await fetchHelper({
+  const res: SaintResponse = await fetchHelper({
     query,
     variables: { slug },
   })

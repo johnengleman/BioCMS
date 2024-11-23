@@ -1,4 +1,4 @@
-@import '../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .about {
   display: flex;
@@ -13,7 +13,7 @@
   border-radius: 5px;
   gap: 50px;
 
-  @include breakpoint(laptop) {
+  @include breakpoints.breakpoint(laptop) {
     width: 100%;
     flex-direction: row;
     margin: 0;
@@ -58,7 +58,7 @@
     list-style: square;
     padding-left: 10px;
 
-    @include breakpoint(tablet) {
+    @include breakpoints.breakpoint(tablet) {
       padding-left: 20px;
     }
   }
@@ -89,7 +89,7 @@
   }
 
   .image {
-    @include breakpoint(laptop) {
+    @include breakpoints.breakpoint(laptop) {
       min-width: 500px;
     }
 

@@ -1,4 +1,10 @@
-import { useRouter } from 'next/router'
+'use client'
+
+import {
+  useSearchParams,
+  useRouter,
+  usePathname,
+} from 'next/navigation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './styles.module.scss'
 
@@ -9,23 +15,19 @@ const ButtonOrganize = ({
   icon,
 }) => {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
 
   const handleSetOrganization = () => {
     setOrganization(value)
 
-    const newQuery = {
-      ...router.query,
-    }
-
-    delete newQuery.filter
-
-    router.push(
-      {
-        pathname: router.pathname,
-        query: newQuery,
-      },
-      undefined,
+    const newSearchParams = new URLSearchParams(
+      searchParams.toString(),
     )
+
+    newSearchParams.delete('filter')
+
+    router.push(`${pathname}/${newSearchParams.toString()}`)
   }
 
   return (

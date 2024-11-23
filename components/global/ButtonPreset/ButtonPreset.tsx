@@ -1,13 +1,20 @@
+'use client'
+
 import { useRef } from 'react'
 import { flushSync } from 'react-dom'
-import { useRouter } from 'next/router'
+import {
+  useSearchParams,
+  useRouter,
+  usePathname,
+} from 'next/navigation'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './styles.module.scss'
 
 const ButtonPreset = ({ icon, value, count }) => {
   const router = useRouter()
-  const selectedPreset =
-    router.query.preset || ('none' as any)
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const selectedPreset = searchParams.get('preset')
   const canUseTransition = useRef<boolean>(false)
 
   if (typeof window !== 'undefined') {
@@ -15,24 +22,26 @@ const ButtonPreset = ({ icon, value, count }) => {
       typeof (document as any)?.startViewTransition ===
       'function'
   }
+
   const setSaintPreset = (preset) => {
-    const newQuery = {
-      ...router.query,
-      filter: router.query?.filter,
-      preset: preset.toLowerCase(),
-    }
+    const newSearchParams = new URLSearchParams(
+      searchParams.toString(),
+    )
 
     if (preset === 'none') {
-      delete newQuery.filter
-      delete newQuery.preset
+      newSearchParams.delete('preset')
+      newSearchParams.delete('filter')
+    } else {
+      newSearchParams.set('preset', preset.toLowerCase())
     }
 
+    // Combine current path with search params if they exist
     router.push(
-      {
-        pathname: router.pathname,
-        query: newQuery,
-      },
-      undefined,
+      `${pathname}${
+        newSearchParams.toString()
+          ? `?${newSearchParams.toString()}`
+          : ''
+      }`,
     )
   }
 
@@ -65,10 +74,10 @@ const ButtonPreset = ({ icon, value, count }) => {
           '--fa-secondary-color': '#ccad00',
         }}
       />
-        {value
-          .replace(/and/g, '&')
-          .replace(/_/g, ' ')
-          .replace(/-/g, ' ')}
+      {value
+        .replace(/and/g, '&')
+        .replace(/_/g, ' ')
+        .replace(/-/g, ' ')}
       <div className={styles.count}>{count}</div>
     </button>
   )

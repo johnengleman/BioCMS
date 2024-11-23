@@ -1,4 +1,4 @@
-@import '../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .saintSummary {
   display: inline-block;
@@ -201,7 +201,7 @@
     background-color: #393650;
     color: #ccad00;
 
-    @include breakpoint(laptop) {
+    @include breakpoints.breakpoint(laptop) {
       background-color: transparent;
       color: #646464;
     }

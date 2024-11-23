@@ -1,5 +1,11 @@
 import fetchHelper from './fetchHelper'
 
+interface BooksResponse {
+  data: {
+    books: any // Replace `any` with the actual type if known
+  }
+}
+
 function getNewestBooksQuery({ church, preset }) {
   // Variables declaration
   let variablesList: string[] = []
@@ -68,7 +74,7 @@ export const getNewestBooks = async ({
 }) => {
   const query = getNewestBooksQuery({ church, preset })
 
-  const res = await fetchHelper({
+  const res: BooksResponse = await fetchHelper({
     query,
     variables: { church, preset },
   })

@@ -1,4 +1,4 @@
-@import '../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .quotesContainer {
   display: flex;
@@ -19,7 +19,7 @@
   position: relative;
   margin-bottom: 20px;
 
-  @include breakpoint(tablet) {
+  @include breakpoints.breakpoint(tablet) {
     padding: 25px 35px;
   }
 

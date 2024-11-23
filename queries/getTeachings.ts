@@ -1,5 +1,11 @@
 import fetchHelper from './fetchHelper'
 
+interface TeachingsResponse {
+  data: {
+    teachings: any // Replace `any` with the actual type if known
+  }
+}
+
 function getTeachingsQuery(church, filter) {
   // Variables declaration
   let variablesList: string[] = []
@@ -82,7 +88,10 @@ export const getTeachings = async ({
   const query = getTeachingsQuery(church, filter)
   const variables = { filter, church }
 
-  const response = await fetchHelper({ variables, query })
+  const response: TeachingsResponse = await fetchHelper({
+    variables,
+    query,
+  })
 
   return response?.data?.teachings
 }

@@ -1,6 +1,19 @@
-const fetchHelper = async ({ query, variables = {} }) => {
+interface FetchHelperArgs {
+  query: string
+  variables?: Record<string, any>
+}
+
+interface GraphQLResponse<T> {
+  data: T
+  errors: { message: string }[]
+}
+
+const fetchHelper = async <T>({
+  query,
+  variables = {},
+}): Promise<GraphQLResponse<T>> => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}/graphql`,
+    `${process.env.GRAPHQL_ENDPOINT}/graphql`,
     {
       method: 'POST',
       headers: {

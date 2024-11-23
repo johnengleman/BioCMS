@@ -1,4 +1,4 @@
-@import './../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .footer {
   background-color: #343434;
@@ -11,7 +11,7 @@
   z-index: 10;
   position: relative;
 
-  @include breakpoint(tablet) {
+  @include breakpoints.breakpoint(tablet) {
     height: 60px;
   }
 
@@ -33,7 +33,7 @@
     flex-direction: column;
     gap: 20px;
 
-    @include breakpoint(tablet) {
+    @include breakpoints.breakpoint(tablet) {
       width: 90%;
       margin: 20px auto;
       flex-direction: row;
@@ -48,13 +48,13 @@
       justify-content: space-between;
       gap: 10px;
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         gap: 30px;
         flex-direction: row;
         justify-content: flex-start;
       }
 
-      @include breakpoint(laptop) {
+      @include breakpoints.breakpoint(laptop) {
         gap: 60px;
       }
     }
@@ -66,7 +66,7 @@
       height: 100%;
       justify-content: flex-start;
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         justify-content: flex-end;
         align-items: center;
       }
@@ -82,7 +82,7 @@
       align-items: center;
       gap: 10px;
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         width: max-content;
         font-size: 16px;
       }

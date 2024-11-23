@@ -1,4 +1,4 @@
-@import './../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .book {
   display: flex;
@@ -10,7 +10,7 @@
   align-items: center;
   border-radius: 10px;
 
-  @include breakpoint(tablet) {
+  @include breakpoints.breakpoint(tablet) {
     min-width: 450px;
     width: calc(50% - 2rem);
     gap: 20px;
@@ -44,7 +44,7 @@
       width: 100%;
       color: #000;
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         font-size: 20px;
       }
     }
@@ -54,7 +54,7 @@
       color: #9b9b9b;
       margin-bottom: 10px;
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         font-size: 14px;
       }
     }
@@ -68,7 +68,7 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         font-size: 14px;
         -webkit-line-clamp: 5;
       }
@@ -93,7 +93,7 @@
       margin-top: 20px;
       width: fit-content;
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         font-size: 14px;
         border-radius: 15px;
       }

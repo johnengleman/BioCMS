@@ -1,4 +1,4 @@
-@import '../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .update {
   display: flex;
@@ -7,7 +7,7 @@
   width: 90%;
   margin: 0 auto;
 
-  @include breakpoint(laptop) {
+  @include breakpoints.breakpoint(laptop) {
     flex-direction: row;
   }
 
@@ -19,7 +19,7 @@
     margin-top: 35px;
     margin-bottom: 20px;
 
-    @include breakpoint(laptop) {
+    @include breakpoints.breakpoint(laptop) {
       margin-bottom: 0;
     }
   }
@@ -30,7 +30,7 @@
     border-radius: 10px;
     width: 100%;
 
-    @include breakpoint(laptop) {
+    @include breakpoints.breakpoint(laptop) {
       width: 800px;
     }
 

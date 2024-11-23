@@ -52,12 +52,16 @@ const getNumberOfPresets = async ({ church = 'all' }) => {
   return res.data
 }
 
-export const getTopGenres = async (
-  church: string = 'all',
-) => {
-  const presets = await getNumberOfPresets({
+type Presets = { [key: string]: unknown }
+
+export const getTopGenres = async ({
+  church,
+}: {
+  church: string
+}) => {
+  const presets: Presets = (await getNumberOfPresets({
     church,
-  })
+  })) as Presets
 
   return Object.entries(presets) || []
 }

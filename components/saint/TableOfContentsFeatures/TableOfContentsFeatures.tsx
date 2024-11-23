@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import PageButton from '../PageButton/PageButton'
 import styles from './styles.module.scss'

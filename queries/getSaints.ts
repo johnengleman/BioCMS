@@ -1,6 +1,12 @@
 import fetchHelper from './fetchHelper'
 import { getMonthNumber } from '../utils/dates'
 
+interface SaintsResponse {
+  data: {
+    saints: any // Replace `any` with the actual type if known
+  }
+}
+
 function getSaintsQuery(church, filter, saintPreset, sort) {
   // Variables declaration
   let variablesList: string[] = []
@@ -108,7 +114,7 @@ const parseSort = (sort) => {
 
 export const getSaints = async ({
   church = 'all',
-  filter = 'none',
+  filter = 'all',
   saintPreset = 'none',
   sort = 'created-newest',
 }) => {
@@ -120,7 +126,10 @@ export const getSaints = async ({
   )
   const variables = { filter, church, saintPreset }
 
-  const response = await fetchHelper({ variables, query })
+  const response: SaintsResponse = await fetchHelper({
+    variables,
+    query,
+  })
 
   return response?.data?.saints
 }

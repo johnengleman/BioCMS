@@ -1,4 +1,4 @@
-@import '../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .extraInfo {
   display: flex;
@@ -14,7 +14,7 @@
     display: none;
   }
 
-  @include breakpoint(laptopM) {
+  @include breakpoints.breakpoint(laptopM) {
     min-width: 300px;
   }
 

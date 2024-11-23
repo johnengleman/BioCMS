@@ -1,39 +1,30 @@
-import { useEffect } from "react"
-import Cookies from 'js-cookie'
-import { useRouter } from 'next/router'
+import { NextRequest, NextResponse } from 'next/server'
+import { cookies } from 'next/headers'
 
-const useCookie = () => {
-  const router = useRouter()
-  let cookie = '';
+export const useCookie = async (req: NextRequest) => {
+  const cookieStore = await cookies()
+  const cookie = cookieStore.get('findasaint')
 
-  useEffect(() => {
-    cookie = Cookies.get('findasaint.com')
+  if (cookie) {
+    try {
+      const data = JSON.parse(cookie.value)
 
-    if (cookie) {
-      try {
-        const data = JSON.parse(cookie)
-
-        const newQuery = {
-          ...router.query,
-          church: data.church,
-        }
-        router.push(
-          {
-            pathname: router.pathname,
-            query: newQuery,
-          },
-          undefined,
-          { shallow: true },
-        )
-      } catch (err) {
-        console.error(err)
+      const newQuery = {
+        ...req.nextUrl.searchParams,
+        church: data.church,
       }
+
+      const url = new URL(req.nextUrl.toString())
+      url.search = new URLSearchParams(newQuery).toString()
+
+      return NextResponse.redirect(url, { status: 302 })
+    } catch (err) {
+      console.error(err)
+      return NextResponse.error()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }
 
-
-  return [cookie];
+  return NextResponse.next()
 }
 
-export default useCookie;
+export default useCookie

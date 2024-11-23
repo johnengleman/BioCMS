@@ -20,7 +20,7 @@ const SiteContext = createContext<SiteContextType>(
   defaultContextValue,
 )
 
-const SiteProvider = ({
+const ChurchProvider = ({
   children,
 }: SiteProviderProps): React.JSX.Element => {
   const [selectedChurch, setSelectedChurch] =
@@ -35,4 +35,4 @@ const SiteProvider = ({
   )
 }
 
-export { SiteProvider, SiteContext }
+export { ChurchProvider, SiteContext }

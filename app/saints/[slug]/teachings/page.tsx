@@ -1,0 +1,97 @@
+import Head from 'next/head'
+import styles from '../styles.module.scss'
+import { getSaint } from '../../../../queries/getSaint'
+import Page from '../../../../components/page/Page/Page'
+import ImageMain from '../../../../components/saint/ImageMain/ImageMain'
+import RelatedPeople from '../../../../components/saint/SimilarSaints/SimilarSaints.server'
+import NameTag from '../../../../components/saint/NameTag/NameTag'
+import NextSection from '../../../../components/saint/NextPage/NextPage'
+import About from '../../../../components/global/About/About'
+import ScrollUp from '../../../../components/global/ScrollUp/ScrollUp'
+import Content from '../../../../components/saint/Content/Content.Client'
+
+export const runtime = 'edge'
+
+import { NextPageProps } from '../../../../types/nextjs'
+
+const SaintBio = async (props: NextPageProps) => {
+  const searchParams = await props.searchParams
+  const params = await props.params
+
+  const slug = searchParams.slug
+
+  const data = await getSaint(slug)
+
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: data?.name,
+    birthDate: data?.birth_year,
+    deathDate: data?.death_year,
+    birthPlace: data?.birth_location,
+    deathPlace: data?.death_location,
+    description: data?.summary,
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{`${data.name}: Profound Teachings & Lasting Legacy`}</title>
+        <link
+          rel="canonical"
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/teachings`}
+        />
+        <meta
+          key="description"
+          name="description"
+          content={`Dive into ${data.name}'s teachings. Discover their theological contributions and how they continue to guide and inspire believers."`}
+        />
+        <meta
+          name="keywords"
+          content={`${data.name} teachings, spiritual legacy, Christian teachings, religious influence, ${data.name} legacy, Catholic spirituality, Orthodox spirituality, theological insights, Christian faith impact, religious guidance, spiritual writings, saintly teachings, religious education`}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+      </Head>
+      <Page searchParams={searchParams}>
+        <div className={styles.SaintBio}>
+          <Content
+            leftRail={
+              <ImageMain
+                image={data?.profile_image}
+                name={data?.name}
+              />
+            }
+          >
+            <NameTag
+              tags={data?.categories}
+              birthYear={data?.birth_year}
+              deathYear={data?.death_year}
+              header={`What were the teachings of ${data?.name}?`}
+            />
+            <div
+              className={styles.text}
+              dangerouslySetInnerHTML={{
+                __html: data?.teachings[0]?.teachings || '',
+              }}
+            />
+            <NextSection data={data} />
+            <About showImage={false} />
+          </Content>
+          <RelatedPeople
+            searchParams={searchParams}
+            params={params}
+            categories={data.categories}
+          />
+          <ScrollUp />
+        </div>
+      </Page>
+    </>
+  )
+}
+
+export default SaintBio

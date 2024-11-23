@@ -1,3 +1,5 @@
+'use client'
+
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import useBreakpoints from '../../../hooks/useBreakPoints'
 import styles from './styles.module.scss'

@@ -1,5 +1,11 @@
 import fetchHelper from './fetchHelper'
 
+interface BooksResponse {
+  data: {
+    books: any // Replace `any` with the actual type if known
+  }
+}
+
 function getBooksQuery({ church, preset, filter }) {
   // Variables declaration
   let variablesList: string[] = []
@@ -78,9 +84,9 @@ export const getBooks = async ({
 }) => {
   const query = getBooksQuery({ church, preset, filter })
 
-  const res = await fetchHelper({
+  const response: BooksResponse = await fetchHelper({
     query,
     variables: { church, preset, filter },
   })
-  return res.data.books
+  return response.data.books
 }

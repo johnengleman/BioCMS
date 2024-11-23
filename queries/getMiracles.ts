@@ -1,5 +1,11 @@
 import fetchHelper from './fetchHelper'
 
+interface MiraclesResponse {
+  data: {
+    miracles: any // Replace `any` with the actual type if known
+  }
+}
+
 function getMiraclesQuery(church, filter, miraclesPreset) {
   // Variables declaration
   let variablesList: string[] = []
@@ -92,7 +98,10 @@ export const getMiracles = async ({
   )
   const variables = { filter, church, miraclesPreset }
 
-  const response = await fetchHelper({ variables, query })
+  const response: MiraclesResponse = await fetchHelper({
+    variables,
+    query,
+  })
 
   return response?.data?.miracles
 }

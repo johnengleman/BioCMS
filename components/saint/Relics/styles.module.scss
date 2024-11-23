@@ -1,4 +1,4 @@
-@import '../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .relics {
   box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
@@ -8,11 +8,11 @@
   gap: 20px;
   flex-direction: column;
 
-  @include breakpoint(tablet) {
+  @include breakpoints.breakpoint(tablet) {
     padding: 40px;
   }
 
-  @include breakpoint(laptopM) {
+  @include breakpoints.breakpoint(laptopM) {
     flex-direction: row;
     gap: 40px;
   }

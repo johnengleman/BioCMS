@@ -1,6 +1,8 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import ChurchToggle from '../ChurchToggle/ChurchToggle'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -13,12 +15,11 @@ import styles from './styles.module.scss'
 
 const Footer = () => {
   const [inView, setInView] = useState(false)
-  const router = useRouter()
+  const pathname = usePathname()
   const { isMobile } = useBreakpoints()
   const animateFooter =
     !isMobile &&
-    (router.pathname === '/saints' ||
-      router.pathname === '/')
+    (pathname === '/saints' || pathname === '/')
 
   useEffect(() => {
     if (animateFooter) {

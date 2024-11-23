@@ -1,18 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
+    locales: ['en'],
+    defaultLocale: 'en',
   },
   reactStrictMode: true,
-  swcMinify: true,
   images: {
     unoptimized: true,
+  },
+  sassOptions: {
+    silenceDeprecations: ['legacy-js-api'],
   },
 }
 
 module.exports = nextConfig
-
 
 // Injected content via Sentry wizard below
 

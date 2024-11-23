@@ -117,29 +117,25 @@ const getNumberOfSaints = async ({
   return res.data
 }
 
-export const getSaintFilters = async (
-  church: string = 'all',
-) => {
+export const getSaintFilters = async ({
+  church = 'all',
+}: {
+  church?: string
+}) => {
   const filters = {
     [church]: {
-      None: {
-        ...(await getNumberOfSaints({
-          church,
-          saintPreset: 'all',
-        })),
-      },
-      '20th_century_saints': {
-        ...(await getNumberOfSaints({
-          church,
-          saintPreset: '20th_century_saints',
-        })),
-      },
-      patron_saints: {
-        ...(await getNumberOfSaints({
-          church,
-          saintPreset: 'patron_saints',
-        })),
-      },
+      none: await getNumberOfSaints({
+        church,
+        saintPreset: 'all',
+      }),
+      '20th_century_saints': await getNumberOfSaints({
+        church,
+        saintPreset: '20th_century_saints',
+      }),
+      patron_saints: await getNumberOfSaints({
+        church,
+        saintPreset: 'patron_saints',
+      }),
     },
   }
   return filters || null

@@ -1,4 +1,4 @@
-@import './../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 $color: #ccad004e;
 
@@ -30,7 +30,7 @@ $color: #ccad004e;
     transform: scaleX(-1);
     z-index: 0;
 
-    @include breakpoint(laptop) {
+    @include breakpoints.breakpoint(laptop) {
       background-image: linear-gradient(
           to right,
           rgba(0, 0, 0, 0),
@@ -57,12 +57,12 @@ $color: #ccad004e;
       position: relative;
       min-height: 100px;
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         flex-direction: row;
         min-height: unset;
       }
 
-      @include breakpoint(laptop) {
+      @include breakpoints.breakpoint(laptop) {
         flex-direction: row;
         font-size: 2.5rem;
       }
@@ -71,7 +71,7 @@ $color: #ccad004e;
     .metaphor {
       text-decoration: underline;
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         margin-left: 10px;
       }
     }

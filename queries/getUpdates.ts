@@ -1,5 +1,11 @@
 import fetchHelper from './fetchHelper'
 
+interface UpdatesResponse {
+  data: {
+    updates: any // Replace `any` with the actual type if known
+  }
+}
+
 function getUpdatesQuery() {
   let baseQuery = `
     query getUpdates {
@@ -16,7 +22,7 @@ function getUpdatesQuery() {
 export const getUpdates = async () => {
   const query = getUpdatesQuery()
 
-  const res = await fetchHelper({
+  const res: UpdatesResponse = await fetchHelper({
     query,
   })
   return res.data.updates

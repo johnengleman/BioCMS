@@ -1,14 +1,14 @@
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
-import Masonry from 'react-masonry-css'
-import useBreakpoints from '../../../hooks/useBreakPoints'
+import MasonryClient from '../Masonry/Masonry'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
 import styles from './styles.module.scss'
 
 type QuotesProps = {
-  quotes: QuotesData[]
-  showAuthor?: boolean
+  quoteData: QuoteProps[]
 }
 
-type QuotesData = {
+type QuoteProps = {
   text: string
   topics: string[]
   showAuthor?: boolean
@@ -63,37 +63,27 @@ const Quote = ({ text, topics, saint, showAuthor }) => {
   )
 }
 
-const Quotes = ({ quotes, showAuthor }: QuotesProps) => {
-  const { isMobileS, isMobileM, isMobileL, isTablet } =
-    useBreakpoints()
-
-  const getColumnsToRender = () => {
-    if (isMobileS || isMobileM || isMobileL) {
-      return 1
-    }
-    if (isTablet) {
-      return 2
-    }
-    return 3
-  }
-
+const Quotes = async ({ quoteData }: QuotesProps) => {
   return (
     <div className={styles.quotesContainer}>
-      <Masonry
-        breakpointCols={getColumnsToRender()}
-        className="my-masonry-grid"
-        columnClassName="my-masonry-grid_column"
-      >
-        {quotes?.map((quote: QuotesData, i) => (
-          <Quote
-            key={i}
-            text={quote.text}
-            topics={quote.topics}
-            saint={quote.saint}
-            showAuthor={showAuthor}
-          />
-        ))}
-      </Masonry>
+      <MasonryClient>
+        {quoteData?.length ? (
+          quoteData?.map((quote: QuoteProps, i) => (
+            <Quote
+              key={i}
+              text={quote.text}
+              topics={quote.topics}
+              saint={quote.saint}
+              showAuthor={true}
+            />
+          ))
+        ) : (
+          <p className="status">
+            No quotes found.{' '}
+            <FontAwesomeIcon icon={faFaceFrownSlight} />
+          </p>
+        )}
+      </MasonryClient>
     </div>
   )
 }

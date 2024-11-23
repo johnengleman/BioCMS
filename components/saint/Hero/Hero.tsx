@@ -1,30 +1,18 @@
-import Filter from '../Filter/Filter'
-import { Typewriter } from 'react-simple-typewriter'
+import Filter from '../Filter/Filter.server'
+import TypeWriter from '../Typewriter/Typewriter'
 import styles from './styles.module.scss'
 
-const Hero = ({ filtersCount }) => {
+const Hero = ({ searchParams }) => {
   return (
     <div className={styles.hero}>
       <div className={styles.contentContainer}>
         <h1>
           Find a Saint, find a
           <span className={styles.metaphor}>
-            <Typewriter
-              words={[
-                'Light in the Darkness.',
-                'Pillar of Faith.',
-                'Soldier for Christ.',
-                'Temple of the Holy Spirit.',
-                'Light to the World.',
-                'Friend.',
-              ]}
-              deleteSpeed={20}
-              delaySpeed={3000}
-              loop
-            />
+            <TypeWriter />
           </span>
         </h1>
-        <Filter filtersCount={filtersCount} />
+        <Filter searchParams={searchParams} />
       </div>
     </div>
   )

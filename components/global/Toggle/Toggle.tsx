@@ -1,5 +1,7 @@
+'use client'
+
 import { useState, useRef } from 'react'
-import { useRouter } from 'next/router'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { useOnClickOutside } from 'usehooks-ts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp } from '@fortawesome/pro-duotone-svg-icons'
@@ -7,26 +9,27 @@ import styles from './styles.module.scss'
 
 const Toggle = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
+
   const ref = useRef(null)
-  const sort = router?.query?.sort || 'created-newest'
+  const sort = searchParams.get('sort') || 'created-newest'
   const [showMenu, setShowMenu] = useState(false)
 
   useOnClickOutside(ref, () => setShowMenu(false))
 
   const handleSetShowMenu = (sort) => {
     setShowMenu(false)
-    const newQuery = {
-      ...router.query,
-      sort: sort.replace(/ /g, '-').toLowerCase(),
-    }
-    router.push(
-      {
-        pathname: router.pathname,
-        query: newQuery,
-      },
-      undefined,
-      { shallow: true },
+
+    const newSearchParams = new URLSearchParams(
+      searchParams.toString(),
     )
+
+    newSearchParams.set(
+      'sort',
+      sort.replace(/ /g, '-').toLowerCase(),
+    )
+
+    router.push(`/${newSearchParams.toString()}`)
   }
 
   return (

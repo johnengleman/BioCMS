@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 /* Breakpoints: */
 $breakpoint: (
   mobileS: '320px',
@@ -16,7 +18,7 @@ $is-amp: false !default;
   /* Equal or greater than 400px */
   @if $point == mobileS {
     /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, mobileS)) {
+    @media only screen and (min-width: map.get($breakpoint, mobileS)) {
       @content;
     }
   }
@@ -24,7 +26,7 @@ $is-amp: false !default;
   /* Equal or greater than 420px */
   @if $point == mobileM {
     /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, mobileM)) {
+    @media only screen and (min-width: map.get($breakpoint, mobileM)) {
       @content;
     }
   }
@@ -32,7 +34,7 @@ $is-amp: false !default;
   /* Equal or greater than 500px */
   @if $point == mobileL {
     /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, mobileL)) {
+    @media only screen and (min-width: map.get($breakpoint, mobileL)) {
       @content;
     }
   }
@@ -40,7 +42,7 @@ $is-amp: false !default;
   /* Equal or greater than 500px */
   @if $point == tablet {
     /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, tablet)) {
+    @media only screen and (min-width: map.get($breakpoint, tablet)) {
       @content;
     }
   }
@@ -48,7 +50,7 @@ $is-amp: false !default;
   /* Equal or greater than 500px */
   @if $point == laptop {
     /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, laptop)) {
+    @media only screen and (min-width: map.get($breakpoint, laptop)) {
       @content;
     }
   }
@@ -56,7 +58,7 @@ $is-amp: false !default;
   /* Equal or greater than 1230px */
   @if $point == laptopM {
     /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, laptopM)) {
+    @media only screen and (min-width: map.get($breakpoint, laptopM)) {
       @content;
     }
   }
@@ -64,7 +66,7 @@ $is-amp: false !default;
   /* Equal or greater than 500px */
   @if $point == laptopL {
     /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, laptopL)) {
+    @media only screen and (min-width: map.get($breakpoint, laptopL)) {
       @content;
     }
   }
@@ -72,7 +74,7 @@ $is-amp: false !default;
   /* Equal or greater than 500px */
   @if $point == desktop {
     /* stylelint-disable-next-line */
-    @media only screen and (min-width: map-get($breakpoint, desktop)) {
+    @media only screen and (min-width: map.get($breakpoint, desktop)) {
       @content;
     }
   }
@@ -80,7 +82,7 @@ $is-amp: false !default;
 
 @mixin between-breakpoints($pointA, $pointB) {
   /* stylelint-disable-next-line */
-  @media only screen and (min-width: map-get($breakpoint, $pointA)) and (max-width: map-get($breakpoint, $pointB) - 1) {
+  @media only screen and (min-width: map.get($breakpoint, $pointA)) and (max-width: map.get($breakpoint, $pointB) - 1) {
     @content;
   }
 }

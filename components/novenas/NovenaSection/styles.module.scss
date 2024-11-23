@@ -1,5 +1,5 @@
 @use 'sass:color';
-@import './../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .bentoSection {
   display: flex;
@@ -29,11 +29,11 @@
     border-top-left-radius: 10px;
     overflow: hidden;
 
-    @include breakpoint(tablet) {
+    @include breakpoints.breakpoint(tablet) {
       padding: 0 30px;
     }
 
-    @include breakpoint(laptop) {
+    @include breakpoints.breakpoint(laptop) {
       padding: 0 40px;
     }
   }
@@ -66,7 +66,7 @@
       border-right: 2px solid #fff;
       padding-right: 10px;
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         font-size: 17px;
       }
 
@@ -98,11 +98,11 @@
     padding: 20px;
     float: left;
 
-    @include breakpoint(tablet) {
+    @include breakpoints.breakpoint(tablet) {
       padding: 20px 30px;
     }
 
-    @include breakpoint(laptop) {
+    @include breakpoints.breakpoint(laptop) {
       padding: 30px 40px;
     }
 
@@ -157,7 +157,7 @@
     overflow: hidden;
     margin-top: -1px;
 
-    @include breakpoint(tablet) {
+    @include breakpoints.breakpoint(tablet) {
       padding: 0 50px 30px 50px;
       justify-content: flex-end;
       margin-top: 0;

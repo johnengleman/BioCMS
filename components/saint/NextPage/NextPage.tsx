@@ -1,16 +1,19 @@
+'use client'
+
 import Link from 'next/link'
 import styles from './styles.module.scss'
-import { useRouter } from 'next/router'
+import { useParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import PageButton from '../PageButton/PageButton'
 
 const NextPage = ({ data }) => {
-  const router = useRouter()
-  const slug = router.query.slug
-  const route = router.pathname
+  const pathname = usePathname()
+  const { slug } = useParams()
 
   return (
     <div className={styles.nextPage}>
-      {data?.biography && !route.includes('biography') ? (
+      {data?.biography &&
+      !pathname.includes('biography') ? (
         <Link href={`/saints/${slug}/biography`}>
           <PageButton
             type="biography"
@@ -21,7 +24,7 @@ const NextPage = ({ data }) => {
         ''
       )}
       {data?.miracles?.length &&
-      !route.includes('miracles') ? (
+      !pathname.includes('miracles') ? (
         <Link href={`/saints/${slug}/miracles`}>
           <PageButton
             type="miracles"
@@ -32,7 +35,7 @@ const NextPage = ({ data }) => {
         ''
       )}
       {data?.teachings?.length > 0 &&
-      !route.includes('teachings') ? (
+      !pathname.includes('teachings') ? (
         <Link href={`/saints/${slug}/teachings`}>
           <PageButton
             type="teachings"

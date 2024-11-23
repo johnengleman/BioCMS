@@ -1,12 +1,15 @@
+'use client'
+
 import { useState, useRef, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import { useRouter } from 'next/router'
+import { useSearchParams, useRouter } from 'next/navigation'
 import CatholicCross from '../../global/Icons/CatholicCross/CatholicCross'
 import OrthodoxCross from '../../global/Icons/OrthodoxCross/OrthodoxCross'
 import styles from './styles.module.scss'
 
 const ChurchToggle = () => {
   const router = useRouter()
+  const searchParams = useSearchParams()
   const [selectedChurch, setSelectedChurch] =
     useState('all')
   const [buttonDimensions, setButtonDimensions] = useState({
@@ -47,23 +50,18 @@ const ChurchToggle = () => {
       height: liElement.clientHeight,
     })
 
-    // Updates toggle
+    // Updates cookie
     Cookies.set(
       'findasaint.com',
       JSON.stringify({ church: church }),
     )
 
-    const newQuery = {
-      ...router.query,
-      church: church,
-    }
-    router.push(
-      {
-        pathname: router.pathname,
-        query: newQuery,
-      },
-      undefined,
+    const newSearchParams = new URLSearchParams(
+      searchParams.toString(),
     )
+    newSearchParams.set('church', church)
+
+    router.replace(`/?${newSearchParams.toString()}`)
   }
 
   useEffect(() => {
@@ -130,9 +128,7 @@ const ChurchToggle = () => {
           className={`${
             selectedChurch === 'all' ? styles.active : ''
           }`}
-          onClick={(e) => {
-            updateCookieAndToggle(e, 'all')
-          }}
+          onClick={(e) => updateCookieAndToggle(e, 'all')}
         >
           All
         </li>

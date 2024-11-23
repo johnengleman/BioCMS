@@ -1,11 +1,11 @@
-@import './../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .imageContainer {
   margin-right: auto;
   padding-left: 15px;
   margin-bottom: 10px;
 
-  @include breakpoint(tablet) {
+  @include breakpoints.breakpoint(tablet) {
     margin: unset;
   }
 

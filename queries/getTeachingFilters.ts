@@ -63,11 +63,9 @@ export const getTeachingFilters = async (
 ) => {
   const filters = {
     [church]: {
-      none: {
-        ...(await getNumberOfTeaching({
-          church,
-        })),
-      },
+      none: await getNumberOfTeaching({
+        church,
+      }),
     },
   }
   return filters || null

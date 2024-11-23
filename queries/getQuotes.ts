@@ -1,5 +1,11 @@
 import fetchHelper from './fetchHelper'
 
+interface QuotesResponse {
+  data: {
+    quotes: any // Replace `any` with the actual type if known
+  }
+}
+
 function getQuotesQuery({ church, filter }) {
   // Variables declaration
   let variablesList: string[] = []
@@ -62,7 +68,7 @@ export const getQuotes = async ({
 }) => {
   const query = getQuotesQuery({ church, filter })
 
-  const res = await fetchHelper({
+  const res: QuotesResponse = await fetchHelper({
     query,
     variables: { church, filter },
   })

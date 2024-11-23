@@ -5,6 +5,12 @@ interface Image {
   }
 }
 
+interface SaintsResponse {
+  data: {
+    saints: any // Replace `any` with the actual type if known
+  }
+}
+
 interface Saint {
   id: number
   slug: string
@@ -59,7 +65,7 @@ function getSaintsQuery(church) {
 
 export const getSaints = async (church) => {
   const query = getSaintsQuery(church)
-  const res = await fetchHelper({
+  const res: SaintsResponse = await fetchHelper({
     query,
     variables: { church },
   })

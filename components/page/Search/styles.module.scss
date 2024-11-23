@@ -1,12 +1,12 @@
 // import styled from 'styled-components'
 // import { device } from '../../../styles/devices'
-@import './../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .search {
   position: relative;
   display: none;
 
-  @include breakpoint(laptop) {
+  @include breakpoints.breakpoint(laptop) {
     display: block;
   }
 

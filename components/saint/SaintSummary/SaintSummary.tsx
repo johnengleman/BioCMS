@@ -6,7 +6,6 @@ import {
 } from '@fortawesome/pro-duotone-svg-icons'
 import { formatDate } from '../../../utils/dates'
 import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
-import useBreakpoints from '../../../hooks/useBreakPoints'
 import styles from './styles.module.scss'
 
 const SaintSummary = (props) => {
@@ -24,8 +23,6 @@ const SaintSummary = (props) => {
     transitionName,
     mini,
   } = props
-
-  const { isLaptop } = useBreakpoints()
 
   const getYear = (date: string): number => {
     const newDate = new Date(date)

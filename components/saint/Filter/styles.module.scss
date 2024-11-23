@@ -1,4 +1,4 @@
-@import './../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 $color: rgb(70, 63, 113);
 
 .filter {
@@ -7,7 +7,7 @@ $color: rgb(70, 63, 113);
     gap: 0;
     flex-direction: column;
 
-    @include breakpoint(tablet) {
+    @include breakpoints.breakpoint(tablet) {
       flex-direction: row;
       gap: 30px;
     }
@@ -37,14 +37,14 @@ $color: rgb(70, 63, 113);
     flex-wrap: wrap;
     margin-bottom: 20px;
 
-    @include breakpoint(tablet) {
+    @include breakpoints.breakpoint(tablet) {
       flex-direction: row;
     }
 
     &.organizeContainer {
       flex-direction: row;
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         flex-direction: column;
       }
     }
@@ -67,7 +67,7 @@ $color: rgb(70, 63, 113);
         rgba(49, 45, 76, 1) 100%
       );
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         padding: 15px 25px;
       }
 
@@ -108,11 +108,11 @@ $color: rgb(70, 63, 113);
     gap: 0.5rem;
     justify-content: flex-start;
 
-    @include breakpoint(tablet) {
+    @include breakpoints.breakpoint(tablet) {
       width: 100%;
     }
 
-    @include breakpoint(laptop) {
+    @include breakpoints.breakpoint(laptop) {
       width: 65%;
     }
 

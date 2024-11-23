@@ -1,0 +1,45 @@
+@use '../../styles/breakpoints.scss' as breakpoints;
+
+.books {
+  width: 90%;
+  max-width: 1450px;
+  margin: 0 auto 10px auto;
+}
+
+.newest {
+  margin-bottom: 50px;
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(160px, 1fr)
+  );
+  height: 500px;
+  overflow: hidden;
+  gap: 10px;
+
+  @include breakpoints.breakpoint(tablet) {
+    gap: 30px;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(175px, 1fr)
+    );
+  }
+}
+
+.allBooks {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(160px, 1fr)
+  );
+  gap: 10px;
+
+  @include breakpoints.breakpoint(tablet) {
+    gap: 30px;
+    grid-template-columns: repeat(
+      auto-fill,
+      minmax(175px, 1fr)
+    );
+  }
+}

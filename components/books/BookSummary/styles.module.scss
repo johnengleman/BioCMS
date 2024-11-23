@@ -1,4 +1,4 @@
-@import './../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .bookSummary {
   display: flex;
@@ -12,7 +12,7 @@
   padding-bottom: 5px;
   min-width: 150px;
 
-  @include breakpoint(tablet) {
+  @include breakpoints.breakpoint(tablet) {
     min-width: 180px;
   }
 
@@ -22,7 +22,7 @@
     align-items: center;
     margin-bottom: 0.5rem;
 
-    @include breakpoint(tablet) {
+    @include breakpoints.breakpoint(tablet) {
       align-items: flex-start;
     }
 
@@ -34,12 +34,12 @@
       display: flex;
       justify-content: center;
 
-      @include breakpoint(tablet) {
+      @include breakpoints.breakpoint(tablet) {
         width: 100%;
         min-height: 325px;
       }
 
-      @include breakpoint(laptop) {
+      @include breakpoints.breakpoint(laptop) {
         min-height: 285px;
       }
 
@@ -65,7 +65,7 @@
     height: 135px;
     width: 100%;
 
-    @include breakpoint(tablet) {
+    @include breakpoints.breakpoint(tablet) {
       height: 120px;
     }
 
@@ -164,7 +164,7 @@
       background-color: var(--gold);
     }
 
-    @include breakpoint(tablet) {
+    @include breakpoints.breakpoint(tablet) {
       width: 175px;
     }
   }

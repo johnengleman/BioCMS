@@ -1,22 +1,19 @@
 import React from 'react'
-import Header from '../Header/Header'
+import Header from '../Header/Header.server'
 import Footer from '../Footer/Footer'
-import { Saint } from '../../saint/SaintSummary/interfaces'
-import ErrorBoundary from '../../global/ErrorBoundary/ErrorBoundary'
 import styles from './styles.module.scss'
 
 type Props = {
   children: React.ReactNode
-  searchData?: Saint[]
   navData?: {}
   spaceBetween?: boolean
+  searchParams
 }
 
 const Page = ({
   children,
-  searchData,
-  navData,
   spaceBetween,
+  searchParams,
 }: Props) => {
   return (
     <div
@@ -24,10 +21,7 @@ const Page = ({
         spaceBetween ? styles.spaceBetween : ''
       }`}
     >
-      <Header
-        searchData={searchData}
-        navData={navData}
-      />
+      <Header searchParams={searchParams} />
       <div className={styles.body}>{children}</div>
       <Footer />
     </div>

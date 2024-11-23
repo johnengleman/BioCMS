@@ -1,4 +1,4 @@
-@import '../../../styles/breakpoints.scss';
+@use './../../../styles/breakpoints.scss' as breakpoints;
 
 .body {
   display: flex;
@@ -8,11 +8,11 @@
   flex-direction: column;
   align-items: center;
 
-  @include breakpoint(tablet) {
+  @include breakpoints.breakpoint(tablet) {
     margin-bottom: 50px;
   }
 
-  @include breakpoint(laptop) {
+  @include breakpoints.breakpoint(laptop) {
     margin-bottom: 100px;
   }
 }

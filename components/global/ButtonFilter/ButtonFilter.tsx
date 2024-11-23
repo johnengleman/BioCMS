@@ -1,5 +1,11 @@
+'use client'
+
 import React, { useRef } from 'react'
-import { useRouter } from 'next/router'
+import {
+  useSearchParams,
+  useRouter,
+  usePathname,
+} from 'next/navigation'
 import { flushSync } from 'react-dom'
 import styles from './styles.module.scss'
 
@@ -13,9 +19,9 @@ const ButtonFilter: React.FC<ButtonFilterProps> = ({
   count,
 }) => {
   const router = useRouter()
-  const selectedFilter = Array.isArray(router.query.filter)
-    ? router.query.filter[0]
-    : router.query.filter || 'all'
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const selectedFilter = searchParams.get('filter') || 'all'
 
   const isSelected = selectedFilter === filter.toLowerCase()
 
@@ -28,22 +34,17 @@ const ButtonFilter: React.FC<ButtonFilterProps> = ({
   }
 
   const setSaintFilter = (filter) => {
-    const newQuery = {
-      ...router.query,
-      filter: filter.toLowerCase(),
-    }
+    const newSearchParams = new URLSearchParams(
+      searchParams.toString(),
+    )
 
     if (filter === 'all') {
-      delete newQuery.filter
+      newSearchParams.delete('filter')
+    } else {
+      newSearchParams.set('filter', filter.toLowerCase())
     }
 
-    router.push(
-      {
-        pathname: router.pathname,
-        query: newQuery,
-      },
-      undefined,
-    )
+    router.push(`${pathname}?${newSearchParams.toString()}`)
   }
 
   return (
