@@ -17,8 +17,9 @@ const inter = Inter({
 })
 
 export const metadata = {
-  title: 'Your Site Title',
-  description: 'Your site description',
+  title: 'Find A Saint',
+  description:
+    'Catholic & Orthodox Saints, their Lives, Miracles Teachings and Prayers',
   icons: {
     icon: [
       { url: '/favicons/favicon.ico' },

@@ -2,15 +2,16 @@
 
 import { useEffect, useState, useMemo } from 'react'
 
-function useMediaQuery(query) {
+function useMediaQuery(query: string) {
   const [matches, setMatches] = useState(false)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const mediaQuery = window.matchMedia(query)
-      const handler = (event) => setMatches(event.matches)
+      const handler = (event: MediaQueryListEvent) =>
+        setMatches(event.matches)
 
-      setMatches(mediaQuery.matches)
+      setMatches(mediaQuery.matches) // Initial match check
 
       mediaQuery.addEventListener('change', handler)
 
@@ -23,50 +24,50 @@ function useMediaQuery(query) {
 }
 
 export default function useBreakpoints() {
-  const isMobile = useMediaQuery('(max-width: 768px)')
-  const isMobileS = useMediaQuery('(max-width: 375px)')
+  const isMobileS = useMediaQuery('(max-width: 374px)') // Small mobile
   const isMobileM = useMediaQuery(
-    '(min-width: 376px) and (max-width: 425px)',
-  )
+    '(min-width: 375px) and (max-width: 424px)',
+  ) // Medium mobile
   const isMobileL = useMediaQuery(
-    '(min-width: 426px) and (max-width: 768px)',
-  )
+    '(min-width: 425px) and (max-width: 767px)',
+  ) // Large mobile
   const isTablet = useMediaQuery(
-    '(min-width: 767px) and (max-width: 1024px)',
-  )
-  const isTabletPlus = useMediaQuery('(min-width: 767px)')
-  const isLaptopMinus = useMediaQuery('(max-width: 1025px)')
-  const isLaptop = useMediaQuery('(min-width: 1025px)')
-  const isLaptopL = useMediaQuery(
-    '(min-width: 1261px) and (max-width: 1440px)',
-  )
-  const isDesktop = useMediaQuery('(min-width: 1441px)')
+    '(min-width: 768px) and (max-width: 1024px)',
+  ) // Tablet
+  const isLaptop = useMediaQuery(
+    '(min-width: 1025px) and (max-width: 1440px)',
+  ) // Laptop
+  const isDesktop = useMediaQuery('(min-width: 1441px)') // Desktop
 
-  const breakpoints = useMemo(() => {
-    return {
-      isMobile,
+  // Derived states for broader ranges
+  const isMobile = useMediaQuery('(max-width: 767px)') // All mobile sizes
+  const isTabletPlus = useMediaQuery('(min-width: 768px)') // Tablet and larger
+  const isLaptopMinus = useMediaQuery('(max-width: 1024px)') // Laptop and smaller
+
+  const breakpoints = useMemo(
+    () => ({
       isMobileS,
       isMobileM,
       isMobileL,
+      isMobile,
       isTablet,
       isTabletPlus,
       isLaptopMinus,
       isLaptop,
-      isLaptopL,
       isDesktop,
-    }
-  }, [
-    isMobile,
-    isMobileS,
-    isMobileM,
-    isMobileL,
-    isTablet,
-    isLaptopMinus,
-    isTabletPlus,
-    isLaptop,
-    isLaptopL,
-    isDesktop,
-  ])
+    }),
+    [
+      isMobileS,
+      isMobileM,
+      isMobileL,
+      isMobile,
+      isTablet,
+      isTabletPlus,
+      isLaptopMinus,
+      isLaptop,
+      isDesktop,
+    ],
+  )
 
   return breakpoints
 }

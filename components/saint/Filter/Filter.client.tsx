@@ -44,6 +44,9 @@ const Filter = ({
     }
   }
 
+  console.log('church', church)
+  // console.log('filtersCount', filtersCount)
+
   return (
     <div className={styles.filter}>
       <p className={styles.instructions}>Use a preset?</p>

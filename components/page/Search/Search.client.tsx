@@ -57,42 +57,44 @@ const SearchClient = ({ searchData }) => {
       ref={ref}
       className={styles.search}
     >
-      <div className={styles.inputWrapper}>
-        <input
-          type="text"
-          className={styles.input}
-          placeholder="Search For Saints"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-        />
-        <FontAwesomeIcon icon={faMagnifyingGlass} />
-      </div>
-      <div className={styles.dropdownContent}>
-        {searchOptions.map((option, i) => (
-          <Link
-            key={i}
-            className={styles.result}
-            href={`/saints/${option.slug}`}
-            onClick={() => setSearchInput('')}
-          >
-            <div className={styles.profile}>
-              <ImageGlobal
-                src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${option.profile_image.id}?key=search`}
-                fill={false}
-                width={50}
-                height={50}
-              />
-            </div>
-            <div className={styles.info}>
-              <div className={styles.name}>
-                {option.name}
+      <div className={styles.searchContainer}>
+        <div className={styles.inputWrapper}>
+          <input
+            type="text"
+            className={styles.input}
+            placeholder="Search For Saints"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </div>
+        <div className={styles.dropdownContent}>
+          {searchOptions.map((option, i) => (
+            <Link
+              key={i}
+              className={styles.result}
+              href={`/saints/${option.slug}`}
+              onClick={() => setSearchInput('')}
+            >
+              <div className={styles.profile}>
+                <ImageGlobal
+                  src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${option.profile_image.id}?key=search`}
+                  fill={false}
+                  width={50}
+                  height={50}
+                />
               </div>
-              <div className={styles.dates}>
-                {option.birth_year} - {option.death_year}
+              <div className={styles.info}>
+                <div className={styles.name}>
+                  {option.name}
+                </div>
+                <div className={styles.dates}>
+                  {option.birth_year} - {option.death_year}
+                </div>
               </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   )

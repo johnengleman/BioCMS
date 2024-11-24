@@ -84,9 +84,6 @@ const SaintSummary = (props) => {
             </div>
           )}
         </div>
-        <button className={styles.readMore}>
-          Read More
-        </button>
       </div>
     </Link>
   )

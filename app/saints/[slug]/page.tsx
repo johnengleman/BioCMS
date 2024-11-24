@@ -77,7 +77,7 @@ const SaintBio = async (props: NextPageProps) => {
                     tags={data?.categories}
                     birthYear={data?.birth_year}
                     deathYear={data?.death_year}
-                    header={`Who was ${data?.name}?`}
+                    header={`${data?.name}`}
                   />
                   <Summary summary={data?.summary} />
                 </div>

@@ -4,12 +4,14 @@
   display: inline-block;
   height: fit-content;
   position: relative;
-  // box-shadow: -6px 6px 16px #e6e6e6, 6px -6px 16px #ffffff;
+
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   margin-bottom: 20px;
   color: #fff;
+  //box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: all 0.5s ease-in-out;
 
   &:before {
     content: '';
@@ -21,24 +23,16 @@
     z-index: -1;
     width: 100%;
     border-radius: 20px;
-    background: linear-gradient(
-      to top,
-      rgb(115, 24, 46),
-      #ccad00
-    );
-    opacity: 1;
-    transition: all 0.3s ease-in-out;
+    box-shadow: -2px 4px 6px #121023;
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
   }
 
   &:not(.mini):hover {
-    &:before {
-      transform: scale(1.03, 1.01);
-    }
+    transform: scale(1.005);
 
-    &:hover {
-      .btnContent {
-        transform: translateY(-23px);
-      }
+    &:before {
+      opacity: 1;
     }
 
     .bioContainer .summary {
@@ -46,8 +40,7 @@
     }
 
     .readMore {
-      background-color: #393650;
-      color: #ccad00;
+      border: 1px solid var(--violet);
     }
   }
 
@@ -92,7 +85,7 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    padding: 0 1rem;
+    padding: 0 1.25rem;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
     margin-top: 300px;
@@ -102,7 +95,7 @@
     background: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 1) 10%,
+      rgba(0, 0, 0, 1) 12%,
       rgb(4, 2, 16) 15%,
       rgba(11, 7, 43, 1) 100%
     );
@@ -124,7 +117,7 @@
       overflow: hidden;
       font-size: 14px;
       transition: all 0.2s ease-in-out;
-      margin: 1rem 0;
+      margin: 1rem 0.25rem;
 
       span {
         margin-left: -4px;
@@ -172,6 +165,7 @@
     border-top: 1px solid #646464;
     padding-top: 10px;
     flex-wrap: wrap;
+    display: none;
 
     &:empty {
       display: none;
@@ -208,7 +202,9 @@
 
     &:hover {
       font-weight: 600;
-      border: 1px solid #646464;
+
+      background-color: #393650;
+      color: #ccad00;
     }
   }
 

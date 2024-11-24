@@ -17,15 +17,15 @@ const MasonryClient = ({ children }) => {
       return 1
     }
     if (isMobileL) {
-      return 1
+      return 2
     }
     if (isTablet) {
-      return 3
+      return 2
     }
     if (isLaptop) {
-      return 4
+      return 3
     }
-    return 5
+    return 4
   }
 
   return (

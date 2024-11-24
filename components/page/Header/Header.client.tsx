@@ -13,6 +13,7 @@ import SMButtons from '../SMButtons/SMButtons'
 import useBreakpoints from '../../../hooks/useBreakPoints'
 import ChurchToggle from '../ChurchToggle/ChurchToggle'
 import styles from './styles.module.scss'
+import { DirectiveLocation } from 'graphql'
 
 const HeaderClient = ({ navData, searchComponent }) => {
   const [mobileMenuIsOpen, setMobileMenuOpen] =
@@ -82,6 +83,8 @@ const HeaderClient = ({ navData, searchComponent }) => {
             </div>
           )}
           <div className={styles.colLeft}>
+            {searchComponent}
+            {/* <SMButtons transparent={isSaintsPage} /> */}
             {isMobile && (
               <FontAwesomeIcon
                 icon={faBars}
@@ -90,26 +93,33 @@ const HeaderClient = ({ navData, searchComponent }) => {
                 onClick={() => handleToggleMenu(true)}
               />
             )}
+          </div>
+
+          <div className={styles.colCenter}></div>
+
+          <div className={styles.colRight}>
             <div className={styles.navigation}>
               <Link
                 href="/saints"
+                className="nav-link"
                 onClick={() => handleClick()}
               >
-                {saintsCount && (
+                {/* {saintsCount && (
                   <span className={styles.count}>
                     {saintsCount}
                   </span>
-                )}
+                )} */}
                 Saints
               </Link>
               {teachingsCount ? (
                 <Link
                   href="/teachings"
+                  className="nav-link"
                   onClick={() => handleClick()}
                 >
-                  <span className={styles.count}>
+                  {/* <span className={styles.count}>
                     {teachingsCount}
-                  </span>
+                  </span> */}
                   Teachings
                 </Link>
               ) : (
@@ -118,11 +128,12 @@ const HeaderClient = ({ navData, searchComponent }) => {
               {miraclesCount ? (
                 <Link
                   href="/miracles"
+                  className="nav-link"
                   onClick={() => handleClick()}
                 >
-                  <span className={styles.count}>
+                  {/* <span className={styles.count}>
                     {miraclesCount}
-                  </span>
+                  </span> */}
                   Miracles
                 </Link>
               ) : (
@@ -131,11 +142,12 @@ const HeaderClient = ({ navData, searchComponent }) => {
               {quotesCount ? (
                 <Link
                   href="/quotes"
+                  className="nav-link"
                   onClick={() => handleClick()}
                 >
-                  <span className={styles.count}>
+                  {/* <span className={styles.count}>
                     {quotesCount}
-                  </span>
+                  </span> */}
                   Quotes
                 </Link>
               ) : (
@@ -144,11 +156,12 @@ const HeaderClient = ({ navData, searchComponent }) => {
               {prayersCount ? (
                 <Link
                   href="/novenas"
+                  className="nav-link"
                   onClick={() => handleClick()}
                 >
-                  <span className={styles.count}>
+                  {/* <span className={styles.count}>
                     {prayersCount}
-                  </span>
+                  </span> */}
                   Novenas
                 </Link>
               ) : (
@@ -186,11 +199,6 @@ const HeaderClient = ({ navData, searchComponent }) => {
                 Recent Updates
               </Link>
             </div>
-          </div>
-
-          <div className={styles.colRight}>
-            {searchComponent}
-            <SMButtons transparent={isSaintsPage} />
           </div>
         </div>
       </div>
