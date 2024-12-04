@@ -56,18 +56,6 @@ const BentoSection: React.FC<BentoSectionProps> = ({
 
   return (
     <div className={styles.bentoSection}>
-      <div className={styles.header}>
-        <div className={styles.chapters}>
-          {h2s.map((h2, i) => (
-            <span
-              key={i}
-              className={styles.chapter}
-            >
-              {h2}
-            </span>
-          ))}
-        </div>
-      </div>
       <div className={styles.content}>
         <div className={styles.previewContainer}>
           <div
@@ -77,7 +65,20 @@ const BentoSection: React.FC<BentoSectionProps> = ({
             }}
           ></div>
         </div>
+        <div className={styles.header}>
+          <div className={styles.chapters}>
+            {h2s.map((h2, i) => (
+              <h2
+                key={i}
+                className={styles.chapter}
+              >
+                {i + 1}. {h2}
+              </h2>
+            ))}
+          </div>
+        </div>
       </div>
+
       <div className={styles.footer}>
         <Link href={link || ''}>
           <button>
@@ -85,7 +86,7 @@ const BentoSection: React.FC<BentoSectionProps> = ({
               icon={faBookOpenReader}
               style={{
                 color: `var(--violet)`,
-                fontSize: '14px',
+                fontSize: '15px',
               }}
             />
             Continue Reading

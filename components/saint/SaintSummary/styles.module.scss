@@ -29,7 +29,7 @@
   }
 
   &:not(.mini):hover {
-    transform: scale(1.005);
+    transform: scale(1.01);
 
     &:before {
       opacity: 1;
@@ -115,7 +115,7 @@
       color: #bcbcbc;
       margin-top: 10px;
       overflow: hidden;
-      font-size: 14px;
+      font-size: 15px;
       transition: all 0.2s ease-in-out;
       margin: 1rem 0.25rem;
 
@@ -188,7 +188,7 @@
     height: 30px;
     margin-bottom: 0.75rem;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 15px;
     cursor: pointer;
     border: 1px solid transparent;
     transition: all 0.2s ease-in-out;

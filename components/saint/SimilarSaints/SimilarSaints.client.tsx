@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCross } from '@fortawesome/pro-duotone-svg-icons'
 import Link from 'next/link'
-import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
+import Image from 'next/image'
 import styles from './styles.module.scss'
 
 const SimilarSaint = ({
@@ -14,21 +16,29 @@ const SimilarSaint = ({
   return (
     <div className={styles.similarSaint}>
       <Link href={`/saints/${slug}`}>
-        <ImageGlobal
+        <Image
           src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${profile_image.id}?fit=cover&height=225&width=150`}
           height={225}
           width={150}
-          fill={false}
           alt={
             profile_image.description ||
             `Image of the orthodox and catholic saint ${name}`
           }
         />
         <div className={styles.personInfo}>
-          <div className={styles.name}>{name}</div>
           <div className={styles.dates}>
-            {birth_year || '?'}-{death_year || '?'}
+            <FontAwesomeIcon icon={faCross} />
+            <div className={styles.date}>
+              {birth_year || '?'}-{death_year || '?'}
+            </div>
           </div>
+          <p className={styles.name}>{name}</p>
+          <div
+            className={styles.summary}
+            dangerouslySetInnerHTML={{
+              __html: summary,
+            }}
+          ></div>
           <div className={styles.tags}>
             {categories.map((category, i) => (
               <div
@@ -39,12 +49,6 @@ const SimilarSaint = ({
               </div>
             ))}
           </div>
-          <div
-            className={styles.summary}
-            dangerouslySetInnerHTML={{
-              __html: summary,
-            }}
-          ></div>
         </div>
       </Link>
     </div>

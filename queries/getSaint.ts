@@ -30,6 +30,14 @@ const query = gql`
         height
         description
       }
+      other_images {
+        directus_files_id {
+          id
+          width
+          height
+          description
+        }
+      }
       books {
         author
         title

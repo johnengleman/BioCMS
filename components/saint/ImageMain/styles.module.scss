@@ -1,20 +1,71 @@
 @use './../../../styles/breakpoints.scss' as breakpoints;
 
 .imageContainer {
-  margin-right: auto;
-  padding-left: 15px;
   margin-bottom: 10px;
+  position: relative;
+  max-width: 100%;
 
-  @include breakpoints.breakpoint(tablet) {
+  @include breakpoints.breakpoint(laptop) {
     margin: unset;
+    display: flex;
+    margin-bottom: 50px;
   }
 
-  .image-global {
-    position: relative;
+  &:has(.image2) {
+    @include breakpoints.breakpoint(laptop) {
+      margin-right: 200px;
+    }
+  }
+
+  &:not(:has(.image2)) {
+    @include breakpoints.breakpoint(laptop) {
+      margin-right: 2vw;
+    }
+
+    @include breakpoints.breakpoint(laptopM) {
+      margin-right: 5vw;
+    }
+  }
+
+  img {
+    border-radius: 20px;
+    object-fit: cover;
+    max-height: 100%;
+    max-width: 100%;
+    box-shadow: -4px 4px 10px var(--violet);
+    border: 1px solid var(--gold);
+  }
+
+  .image1 {
+    width: 100%;
+    aspect-ratio: 0.8;
+  }
+
+  .image2,
+  .image3 {
+    position: absolute;
+    display: none;
+    aspect-ratio: 0.8;
+    max-height: 50%;
+
+    @include breakpoints.breakpoint(laptop) {
+      display: block;
+    }
 
     img {
-      object-fit: cover;
       border-radius: 10px;
     }
+  }
+
+  .image2 {
+    top: 15%;
+    right: -40%;
+    transform: rotate(5deg);
+  }
+
+  .image3 {
+    bottom: -35px;
+    right: -30%;
+    transform: rotate(-5deg);
   }
 }

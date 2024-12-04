@@ -3,7 +3,7 @@
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../../hooks/useBreakPoints'
 
-const MasonryClient = ({ children }) => {
+const MasonryClient = ({ children, hasLeftRail }) => {
   const {
     isMobileS,
     isMobileM,
@@ -13,19 +13,26 @@ const MasonryClient = ({ children }) => {
   } = useBreakpoints()
 
   const getColumnsToRender = () => {
-    if (isMobileS || isMobileM) {
-      return 1
-    }
-    if (isMobileL) {
-      return 2
-    }
-    if (isTablet) {
-      return 2
-    }
-    if (isLaptop) {
+    if (hasLeftRail) {
+      if (isMobileS || isMobileM || isMobileL) {
+        return 1
+      }
+      if (isTablet || isLaptop) {
+        return 2
+      }
       return 3
+    } else {
+      if (isMobileS || isMobileM) {
+        return 1
+      }
+      if (isMobileL || isTablet) {
+        return 2
+      }
+      if (isLaptop) {
+        return 3
+      }
+      return 4
     }
-    return 4
   }
 
   return (

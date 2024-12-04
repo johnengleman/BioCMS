@@ -4,18 +4,12 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: #ccebd9;
-  border-radius: 10px;
-  padding: 20px;
   gap: 10px;
   height: fit-content;
+  margin-bottom: 50px;
 
   &:empty {
     display: none;
-  }
-
-  @include breakpoints.breakpoint(laptopM) {
-    min-width: 300px;
   }
 
   .row {
@@ -29,9 +23,12 @@
     }
 
     .data {
-      color: var(--violet);
-      font-size: 14px;
-      font-weight: 600;
+      color: #333;
+      font-size: 15px;
+
+      .bold {
+        font-weight: 600;
+      }
     }
   }
 }

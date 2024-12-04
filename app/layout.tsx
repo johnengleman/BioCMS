@@ -1,6 +1,6 @@
 // /app/layout.tsx
 
-import { Inter } from 'next/font/google'
+import { Nunito } from 'next/font/google'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import '../styles/variables.css'
 import '../styles/globals.css'
@@ -10,7 +10,7 @@ import { ReactNode } from 'react'
 import Providers from './providers'
 import Script from 'next/script'
 
-const inter = Inter({
+const inter = Nunito({
   subsets: ['latin'],
   variable: '--font-Inter',
   display: 'swap',

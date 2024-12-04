@@ -3,7 +3,7 @@
 .header {
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 5px 20px -3px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0px 5px 20px -3px rgba(0, 0, 0, 0.1);
   padding: 10px 0;
   background: rgb(31 28 54);
 
@@ -155,7 +155,7 @@
 
   a {
     color: #464646;
-    font-size: 14px;
+    font-size: 15px;
     padding: 4px 10px;
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -207,26 +207,34 @@
     left: 0;
     right: 0;
     bottom: 0;
-    height: 200px;
+    height: 150px;
+    z-index: 0;
     background-image: linear-gradient(
-        to right,
+        to top,
         rgba(0, 0, 0, 0),
         rgba(0, 0, 0, 0.5)
       ),
       url('/bg-light.webp');
-    background-size: cover; /* This will cover the entire viewport */
-    background-repeat: no-repeat; /* Important if the image is smaller than the footer */
-    background-position: center 55%; /* This will center the image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 55%;
     transform: scaleX(-1);
-    z-index: 0;
   }
 
-  a {
-    color: #fff;
+  .navigation {
+    a {
+      color: #e4e4e4;
+      text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+      letter-spacing: 1.1;
 
-    .count {
-      color: #fff;
-      font-size: 20px;
+      &:hover {
+        color: #fff;
+      }
+
+      .count {
+        color: #fff;
+        font-size: 20px;
+      }
     }
   }
 }

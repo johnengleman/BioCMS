@@ -5,7 +5,7 @@ import {
   faCalendarDays,
 } from '@fortawesome/pro-duotone-svg-icons'
 import { formatDate } from '../../../utils/dates'
-import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
+import Image from 'next/image'
 import styles from './styles.module.scss'
 
 const SaintSummary = (props) => {
@@ -42,7 +42,7 @@ const SaintSummary = (props) => {
         {birth_year || '?'}-{death_year || '?'}
       </div>
       <div className={styles.image}>
-        <ImageGlobal
+        <Image
           alt={
             profile_image?.description ||
             `Image the catholic saint ${name}`

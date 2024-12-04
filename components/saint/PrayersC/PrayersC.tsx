@@ -1,4 +1,4 @@
-import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
+import Image from 'next/image'
 import Link from 'next/link'
 import styles from './styles.module.scss'
 
@@ -11,9 +11,10 @@ const PrayersC = ({ allPrayers, saint }) => {
           key={i}
         >
           <div className={styles.prayerImage}>
-            <ImageGlobal
+            <Image
               src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${prayer?.prayer_image?.id}`}
               fill={true}
+              alt=""
             />
           </div>
           <div className={styles.prayerTitle}>

@@ -8,25 +8,34 @@
 
   @include breakpoints.breakpoint(tablet) {
     flex-direction: row;
-    align-items: center;
-    margin-bottom: 15px;
+    justify-content: center;
   }
 
   .name {
-    font-size: 24px;
-    font-weight: 600;
+    font-size: 28px;
+    font-weight: 700;
     line-height: 1;
     color: #222;
+    text-align: center;
 
     @include breakpoints.breakpoint(tablet) {
+      font-size: 30px;
+    }
+
+    @include breakpoints.breakpoint(laptop) {
       font-size: 40px;
+    }
+
+    @include breakpoints.breakpoint(laptopM) {
+      font-size: 50px;
     }
   }
 
   .info {
     margin-top: 15px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 5px;
     margin-bottom: 15px;
@@ -41,24 +50,128 @@
     }
 
     p {
-      font-size: 14px;
+      font-size: 16px;
       font-weight: 600;
     }
 
     .date {
-      color: #9b9b9b;
-      font-size: 14px;
+      color: #999;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 500;
+
+      @include breakpoints.breakpoint(laptop) {
+        font-size: 15px;
+      }
+
+      @include breakpoints.breakpoint(laptopM) {
+        font-size: 16px;
+      }
+
+      svg {
+        margin-right: 3px;
+        font-size: 13px;
+
+        @include breakpoints.breakpoint(laptop) {
+          font-size: 15px;
+        }
+
+        @include breakpoints.breakpoint(laptopM) {
+          font-size: 15px;
+        }
+      }
     }
 
-    .tag {
-      padding: 2px 12px;
-      background-color: #ccebd9;
-      font-size: 12px;
-      font-weight: 500;
-      border-radius: 5px;
-      color: #54846d;
-      font-weight: 600;
-      min-width: fit-content;
+    .tags {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+
+      @include breakpoints.breakpoint(laptop) {
+        gap: 10px;
+      }
+
+      .tag {
+        padding: 2px 15px;
+        border: 1px solid var(--gold);
+        font-weight: 500;
+        border-radius: 5px;
+        color: var(--violet);
+        font-weight: 600;
+        min-width: fit-content;
+        font-size: 12px;
+
+        @include breakpoints.breakpoint(laptop) {
+          font-size: 13px;
+        }
+
+        @include breakpoints.breakpoint(laptopM) {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+
+  .summary {
+    position: relative;
+    text-wrap: pretty;
+    margin: 0 auto;
+
+    // @include breakpoints.breakpoint(tablet) {
+    //   width: 80%;
+    // }
+
+    p {
+      color: #333;
+      font-size: 17px;
+      line-height: 1.5;
+
+      @include breakpoints.breakpoint(tablet) {
+        font-size: 15px;
+      }
+
+      @include breakpoints.breakpoint(laptop) {
+        font-size: 16px;
+      }
+
+      @include breakpoints.breakpoint(laptopM) {
+        font-size: 17px;
+      }
+    }
+
+    ul {
+      list-style-type: square;
+      margin-left: -20px;
+
+      li {
+        margin-bottom: 10px;
+        padding-left: 5px;
+        margin-left: 0;
+        max-width: 800px;
+        font-weight: 450;
+
+        @include breakpoints.breakpoint(tablet) {
+          font-size: 16px;
+        }
+
+        @include breakpoints.breakpoint(laptop) {
+          font-size: 17px;
+        }
+
+        @include breakpoints.breakpoint(laptopM) {
+          font-size: 18px;
+        }
+
+        &::marker {
+          color: var(--gold);
+        }
+
+        strong {
+          color: #999;
+          font-weight: 500;
+          text-decoration: underline;
+        }
+      }
     }
   }
 }

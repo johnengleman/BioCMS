@@ -2,9 +2,9 @@
 
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/pro-duotone-svg-icons'
-import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
 import Fuse from 'fuse.js'
 import { Saint } from '../../saint/SaintSummary/interfaces'
 import { useOnClickOutside } from 'usehooks-ts'
@@ -77,11 +77,11 @@ const SearchClient = ({ searchData }) => {
               onClick={() => setSearchInput('')}
             >
               <div className={styles.profile}>
-                <ImageGlobal
+                <Image
                   src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${option.profile_image.id}?key=search`}
-                  fill={false}
                   width={50}
                   height={50}
+                  alt=""
                 />
               </div>
               <div className={styles.info}>

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
+import Image from 'next/image'
 import styles from './styles.module.scss'
 
 export default function BookSummary({
@@ -46,11 +46,11 @@ export default function BookSummary({
           {showDescription && (
             <div className={styles.authorContainer}>
               <div className={styles.profile}>
-                <ImageGlobal
+                <Image
                   src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${saint.profile_image.id}?key=search`}
-                  fill={false}
                   width={35}
                   height={35}
+                  alt=""
                 />
               </div>
               <div className={styles.author}>

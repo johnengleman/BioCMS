@@ -47,16 +47,40 @@ const ExtraInfo = ({
           <div className={styles.data}>
             {catholicFeastDay && (
               <p>
-                {orthodoxFeastDay
-                  ? `Catholic: ${getDate(catholicFeastDay)}`
-                  : `Feast: ${getDate(catholicFeastDay)}`}
+                {orthodoxFeastDay ? (
+                  <>
+                    <span className={styles.bold}>
+                      Catholic:
+                    </span>{' '}
+                    {getDate(catholicFeastDay)}
+                  </>
+                ) : (
+                  <>
+                    <span className={styles.bold}>
+                      Feast:
+                    </span>{' '}
+                    {getDate(catholicFeastDay)}
+                  </>
+                )}
               </p>
             )}
             {orthodoxFeastDay && (
               <p>
-                {catholicFeastDay
-                  ? `Orthodox: ${getDate(orthodoxFeastDay)}`
-                  : `Feast: ${getDate(orthodoxFeastDay)}`}
+                {catholicFeastDay ? (
+                  <>
+                    <span className={styles.bold}>
+                      Orthodox:
+                    </span>{' '}
+                    {getDate(orthodoxFeastDay)}
+                  </>
+                ) : (
+                  <>
+                    <span className={styles.bold}>
+                      Feast:
+                    </span>
+                    {getDate(orthodoxFeastDay)}
+                  </>
+                )}
               </p>
             )}
           </div>
@@ -72,7 +96,10 @@ const ExtraInfo = ({
             />
           </div>
           <div className={styles.data}>
-            <p>Patron: {patron}</p>
+            <p>
+              <span className={styles.bold}>Patron:</span>{' '}
+              {patron}
+            </p>
           </div>
         </div>
       )}

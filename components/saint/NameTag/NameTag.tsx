@@ -7,24 +7,33 @@ const NameTag = ({
   birthYear,
   deathYear,
   header,
+  summary,
 }) => {
   return (
     <div className={styles.nameTag}>
       <div>
-        <h1 className={styles.name}>{header}</h1>
         <div className={styles.info}>
-          <FontAwesomeIcon icon={faCross} />
-          <span className={styles.date}>
+          <div className={styles.date}>
+            <FontAwesomeIcon icon={faCross} />
             {birthYear || '?'}-{deathYear || '?'}
-          </span>
-          {tags?.map((tag, i) => (
-            <div
-              key={i}
-              className={styles.tag}
-            >
-              {tag.replace(/-/g, ' ')}
-            </div>
-          ))}
+          </div>
+          <h1 className={styles.name}>{header}</h1>
+          <div
+            className={styles.summary}
+            dangerouslySetInnerHTML={{
+              __html: summary,
+            }}
+          ></div>
+          <div className={styles.tags}>
+            {tags?.map((tag, i) => (
+              <div
+                key={i}
+                className={styles.tag}
+              >
+                {tag.replace(/-/g, ' ')}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

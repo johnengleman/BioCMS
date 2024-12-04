@@ -24,12 +24,6 @@ const SectionTitle = ({
     } ${border ? styles.border : ''}`}
   >
     <h2 className={styles.title}>{children}</h2>
-    <FontAwesomeIcon
-      icon={faAngleLeft}
-      rotation={180}
-      size="xl"
-      style={{ color: 'rgba(36, 30, 78, 1)' }}
-    />
   </div>
 )
 

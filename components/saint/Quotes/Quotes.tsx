@@ -1,4 +1,4 @@
-import ImageGlobal from '../../global/ImageGlobal/ImageGlobal'
+import Image from 'next/image'
 import MasonryClient from '../Masonry/Masonry'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
@@ -28,18 +28,16 @@ const Quote = ({ text, topics, saint, showAuthor }) => {
     <div className={styles.quote}>
       <p className={styles.text}>{text}</p>
       <div className={styles.footer}>
-        {showAuthor && (
+        {showAuthor && saint?.profile_image && (
           <div className={styles.authorContainer}>
-            {saint?.profile_image && (
-              <div className={styles.profile}>
-                <ImageGlobal
-                  src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${saint?.profile_image.id}?key=search`}
-                  fill={false}
-                  width={50}
-                  height={50}
-                />
-              </div>
-            )}
+            <div className={styles.profile}>
+              <Image
+                src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${saint?.profile_image.id}?key=search`}
+                width={50}
+                height={50}
+                alt=""
+              />
+            </div>
             <div className={styles.author}>
               <p>{saint?.name}</p>
               <p className={styles.dates}>
@@ -66,7 +64,7 @@ const Quote = ({ text, topics, saint, showAuthor }) => {
 const Quotes = async ({ quoteData }: QuotesProps) => {
   return (
     <div className={styles.quotesContainer}>
-      <MasonryClient>
+      <MasonryClient hasLeftRail={true}>
         {quoteData?.length ? (
           quoteData?.map((quote: QuoteProps, i) => (
             <Quote

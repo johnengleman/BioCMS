@@ -68,7 +68,9 @@ const SaintBio = async (props: NextPageProps) => {
           <div className={styles.hero}>
             <div className={styles.heroContent}>
               <ImageMain
-                image={data?.profile_image}
+                image1={data?.profile_image}
+                image2={data?.other_images[0]}
+                image3={data?.other_images[1]}
                 name={data?.name}
               />
               <div className={styles.heroText}>
@@ -78,25 +80,20 @@ const SaintBio = async (props: NextPageProps) => {
                     birthYear={data?.birth_year}
                     deathYear={data?.death_year}
                     header={`${data?.name}`}
+                    summary={data?.summary}
                   />
-                  <Summary summary={data?.summary} />
                 </div>
-
-                <ExtraInfo
-                  orthodoxFeastDay={
-                    data?.feast_day_orthodox
-                  }
-                  catholicFeastDay={
-                    data?.feast_day_catholic
-                  }
-                  patron={data?.patron}
-                />
               </div>
             </div>
           </div>
 
           <div className={styles.content}>
             <div className={styles.leftRail}>
+              <ExtraInfo
+                orthodoxFeastDay={data?.feast_day_orthodox}
+                catholicFeastDay={data?.feast_day_catholic}
+                patron={data?.patron}
+              />
               <div className={styles.stickyContainer}>
                 <div className={styles.sticky}>
                   <TableOfContentFeatures />

@@ -4,15 +4,54 @@
   margin-bottom: 25px;
   width: 100%;
   border-radius: 10px;
+  transition: all 0.5s ease-in-out;
+  border: 1px solid transparent;
 
   @include breakpoints.breakpoint(laptop) {
     width: calc(50% - 15px);
+    padding: 20px;
+  }
+
+  &:hover {
+    border: 1px solid #999;
+
+    img {
+      transform: scale(1.03);
+    }
+
+    .personInfo {
+      .name {
+        color: #333;
+      }
+
+      .summary {
+        color: #333;
+      }
+
+      .tags {
+        .tag {
+          color: var(--violet);
+          border: 1px solid var(--gold);
+        }
+      }
+    }
   }
 
   a {
     text-decoration: none;
     display: flex;
-    gap: 20px;
+    gap: 12px;
+
+    @include breakpoints.breakpoint(tablet) {
+      gap: 20px;
+    }
+  }
+
+  img {
+    transition: all 0.5s ease-in-out;
+    border-radius: 5px;
+    box-shadow: -4px 4px 10px var(--violet);
+    border: 1px solid var(--gold);
   }
 
   .personInfo {
@@ -23,25 +62,34 @@
     overflow: hidden;
 
     .name {
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 20px;
+      font-weight: 700;
       line-height: 1.1;
-      color: #2d2d2d;
+      color: #666;
+      margin-bottom: 6px;
+      transition: all 0.5s ease-in-out;
 
       @include breakpoints.breakpoint(tablet) {
-        font-size: 18px;
+        font-size: 20px;
       }
     }
 
     .dates {
       font-size: 13px;
-      color: #9b9b9b;
+      color: #999;
+      font-weight: 500;
       font-weight: 400;
-      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      margin-bottom: 3px;
 
       @include breakpoints.breakpoint(tablet) {
-        margin-bottom: 10px;
-        font-size: 14px;
+        font-size: 15px;
+      }
+
+      svg {
+        margin-right: 3px;
+        font-size: 15px;
       }
     }
 
@@ -50,38 +98,41 @@
       flex-wrap: wrap;
       gap: 4px;
 
+      @include breakpoints.breakpoint(tablet) {
+        gap: 6px;
+      }
+
       .tag {
-        padding: 0px 10px;
-        font-size: 10px;
+        padding: 1px 12px;
+        font-size: 12px;
         letter-spacing: 0.5px;
-        border-radius: 3px;
-        border: 1px solid #b6b6b6;
-        color: #737373;
+        border-radius: 5px;
+        border: 1px solid #666;
+        color: #666;
         min-width: fit-content;
+        transition: all 0.5s ease-in-out;
 
         @include breakpoints.breakpoint(tablet) {
-          padding: 2px 12px;
           font-size: 13px;
-          border-radius: 4px;
         }
       }
     }
 
     .summary {
-      color: #737373;
-      font-size: 13px;
+      color: #666;
+      font-size: 15px;
       line-height: 1.25;
-      margin-top: 10px;
       position: relative;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 8;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      margin-bottom: 8px;
+      transition: all 0.5s ease-in-out;
 
       @include breakpoints.breakpoint(tablet) {
-        font-size: 14px;
-        margin-top: 15px;
+        font-size: 15px;
         -webkit-line-clamp: 6;
       }
 
@@ -113,5 +164,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 10px;
   }
 }

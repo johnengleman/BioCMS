@@ -42,7 +42,7 @@ const NovenaSection = ({
               icon={faPersonPraying}
               style={{
                 color: `var(--violet)`,
-                fontSize: '14px',
+                fontSize: '15px',
               }}
             />
             Go To Next Day

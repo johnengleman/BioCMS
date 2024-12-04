@@ -26,10 +26,18 @@
       padding-bottom: 40px;
       border-bottom: 1px solid #ccad004d;
       flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
 
       @include breakpoints.breakpoint(tablet) {
         flex-direction: row;
-        gap: 40px;
+        gap: 75px;
+        align-items: flex-start;
+      }
+
+      @include breakpoints.breakpoint(laptop) {
+        gap: 2vw;
+        align-items: center;
       }
 
       .heroText {
@@ -39,18 +47,31 @@
         gap: 0;
         justify-content: space-between;
 
+        @include breakpoints.breakpoint(tablet) {
+          min-width: 40%;
+          margin-top: 100px;
+          max-width: 450px;
+        }
+
+        @include breakpoints.breakpoint(laptop) {
+          margin-top: 75px;
+          max-width: 50%;
+        }
+
         @include breakpoints.breakpoint(laptopM) {
           flex-direction: row;
           gap: 30px;
+          max-width: 600px;
+          margin-top: 50px;
+        }
+
+        @include breakpoints.breakpoint(laptopL) {
+          margin-top: 0px;
         }
 
         .row1 {
           display: flex;
           flex-direction: column;
-        }
-
-        @include breakpoints.breakpoint(tablet) {
-          margin-top: 150px;
         }
       }
     }
