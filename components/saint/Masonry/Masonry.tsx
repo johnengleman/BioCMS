@@ -3,7 +3,10 @@
 import Masonry from 'react-masonry-css'
 import useBreakpoints from '../../../hooks/useBreakPoints'
 
-const MasonryClient = ({ children, hasLeftRail }) => {
+const MasonryClient = ({
+  children,
+  hasLeftRail = false,
+}) => {
   const {
     isMobileS,
     isMobileM,

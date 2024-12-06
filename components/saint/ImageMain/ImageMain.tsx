@@ -1,12 +1,34 @@
-'use client'
-
 import Image from 'next/image'
-import useBreakpoints from '../../../hooks/useBreakPoints'
 import styles from './styles.module.scss'
 
-const ImageMain = ({ image1, image2, image3, name }) => {
-  const { isTablet } = useBreakpoints()
+interface ImageMainProps {
+  image1: {
+    id: string
+    description?: string
+  }
+  image2?: {
+    directus_files_id?: {
+      id: string
+      description?: string
+    }
+  }
+  image3?: {
+    directus_files_id?: {
+      id: string
+      description?: string
+    }
+  }
+  name: string
+  leftRail?: boolean
+}
 
+const ImageMain: React.FC<ImageMainProps> = ({
+  image1,
+  image2,
+  image3,
+  name,
+  leftRail,
+}) => {
   const id_2 = image2?.directus_files_id?.id || null
   const description_2 =
     image2?.directus_files_id?.description || null
@@ -15,7 +37,11 @@ const ImageMain = ({ image1, image2, image3, name }) => {
     image3?.directus_files_id?.description || null
 
   return (
-    <div className={styles.imageContainer}>
+    <div
+      className={`${styles.imageContainer} ${
+        leftRail ? styles.leftRail : ''
+      }`}
+    >
       <div className={styles.image1}>
         <Image
           width={400}
@@ -46,7 +72,7 @@ const ImageMain = ({ image1, image2, image3, name }) => {
             width={200}
             height={250}
             alt={
-              description_2 ||
+              description_3 ||
               `Image of the roman catholic saint ${name}`
             }
             src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${id_3}?key=other-images1`}

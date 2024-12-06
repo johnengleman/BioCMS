@@ -5,6 +5,9 @@
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: column;
+  margin-bottom: 50px;
+  max-width: 700px;
+  margin: 0 auto;
 
   @include breakpoints.breakpoint(tablet) {
     flex-direction: row;
@@ -29,6 +32,19 @@
     @include breakpoints.breakpoint(laptopM) {
       font-size: 50px;
     }
+  }
+
+  h2.subHeader {
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 1;
+    color: var(--gold);
+    text-align: center;
+    background-color: var(--violet);
+    margin: 10px auto 0;
+    padding: 8px 20px;
+    border-radius: 3px;
+    display: block;
   }
 
   .info {
@@ -115,7 +131,7 @@
   .summary {
     position: relative;
     text-wrap: pretty;
-    margin: 0 auto;
+    margin: 5px auto 10px;
 
     // @include breakpoints.breakpoint(tablet) {
     //   width: 80%;

@@ -83,6 +83,7 @@ const HeaderClient = ({ navData, searchComponent }) => {
             </div>
           )}
           <div className={styles.colLeft}>
+            {searchComponent}
             {/* <SMButtons transparent={isSaintsPage} /> */}
             {isMobile && (
               <FontAwesomeIcon
@@ -94,9 +95,7 @@ const HeaderClient = ({ navData, searchComponent }) => {
             )}
           </div>
 
-          <div className={styles.colCenter}>
-            {searchComponent}
-          </div>
+          <div className={styles.colCenter}></div>
 
           <div className={styles.colRight}>
             <div className={styles.navigation}>

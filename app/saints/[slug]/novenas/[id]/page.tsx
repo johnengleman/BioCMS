@@ -80,8 +80,9 @@ const SaintNovena = async (props: NextPageProps) => {
           <Content
             leftRail={
               <ImageMain
-                image={data?.profile_image}
+                image1={data?.profile_image}
                 name={data?.name}
+                leftRail={true}
               />
             }
           >
@@ -90,6 +91,7 @@ const SaintNovena = async (props: NextPageProps) => {
               birthYear={data?.birth_year}
               deathYear={data?.death_year}
               header={`${data.name}: ${novena.prayer_title}`}
+              summary={data?.summary}
             />
             {data?.prayers[0].prayers.map((prayer, i) => (
               <Fragment key={i}>
@@ -113,7 +115,6 @@ const SaintNovena = async (props: NextPageProps) => {
               )} */}
             <NextPage data={data} />
             <ReadMoreLinks links={data?.read_more_links} />
-            <About showImage={false} />
           </Content>
           <RelatedPeople
             searchParams={searchParams}

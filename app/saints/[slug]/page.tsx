@@ -7,7 +7,6 @@ import RelatedPeople from '../../../components/saint/SimilarSaints/SimilarSaints
 import Relics from '../../../components/saint/Relics/Relics'
 import NameTag from '../../../components/saint/NameTag/NameTag'
 import Quotes from '../../../components/saint/Quotes/Quotes'
-import Summary from '../../../components/saint/Summary/Summary'
 import TableOfContentFeatures from '../../../components/saint/TableOfContentsFeatures/TableOfContentsFeatures'
 import BentoSection from '../../../components/global/BentoSection/BentoSection'
 import PrayersC from '../../../components/saint/PrayersC/PrayersC'

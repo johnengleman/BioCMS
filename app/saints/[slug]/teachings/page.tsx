@@ -62,8 +62,9 @@ const SaintBio = async (props: NextPageProps) => {
           <Content
             leftRail={
               <ImageMain
-                image={data?.profile_image}
+                image1={data?.profile_image}
                 name={data?.name}
+                leftRail={true}
               />
             }
           >
@@ -71,7 +72,9 @@ const SaintBio = async (props: NextPageProps) => {
               tags={data?.categories}
               birthYear={data?.birth_year}
               deathYear={data?.death_year}
-              header={`What were the teachings of ${data?.name}?`}
+              header={data?.name}
+              subHeader="Teachings"
+              summary={data?.summary}
             />
             <div
               className={styles.text}
@@ -80,7 +83,6 @@ const SaintBio = async (props: NextPageProps) => {
               }}
             />
             <NextSection data={data} />
-            <About showImage={false} />
           </Content>
           <RelatedPeople
             searchParams={searchParams}

@@ -7,6 +7,7 @@ declare module 'react-masonry-css' {
     className?: string
     columnClassName?: string
     children?: React.ReactNode
+    hasLeftRail?: boolean
   }
 
   const Masonry: React.FC<MasonryProps>
