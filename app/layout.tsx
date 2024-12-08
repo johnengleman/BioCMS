@@ -1,6 +1,6 @@
 // /app/layout.tsx
 
-import { Nunito } from 'next/font/google'
+import { Nunito, Lora } from 'next/font/google'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import '../styles/variables.css'
 import '../styles/globals.css'
@@ -10,10 +10,17 @@ import { ReactNode } from 'react'
 import Providers from './providers'
 import Script from 'next/script'
 
-const inter = Nunito({
+const lora = Lora({
   subsets: ['latin'],
-  variable: '--font-Inter',
   display: 'swap',
+  variable: '--font-lora',
+  style: ['italic'],
+})
+
+const nunito = Nunito({
+  subsets: ['latin'],
+  display: 'swap',
+  style: ['normal'],
 })
 
 export const metadata = {
@@ -60,7 +67,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={inter.className}
+      className={`${nunito.className} ${lora.variable}`}
     >
       <body>
         <Providers>{children}</Providers>

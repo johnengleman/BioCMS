@@ -125,25 +125,31 @@
   }
 
   .text {
-    h2 {
-      font-size: 22px;
-      margin-top: 30px;
+    h2,
+    h3,
+    h4 {
       color: var(--violet);
       font-weight: 450;
-      margin-bottom: 8px;
-      line-height: 1.1;
+      line-height: 1;
 
       &:first-child {
         margin-top: 0;
       }
     }
 
+    h2 {
+      font-size: 22px;
+      margin: 20px 0;
+    }
+
     h3 {
-      margin: 30px 0 10px 0;
+      font-size: 18px;
+      margin: 18px 0;
     }
 
     h4 {
-      font-weight: 550;
+      font-size: 16px;
+      margin: 16px 0;
     }
 
     strong {
@@ -151,11 +157,26 @@
       font-weight: 600;
     }
 
+    blockquote {
+      margin: 40px auto;
+      color: var(--gold);
+      width: 75%;
+      max-width: 550px;
+      text-wrap: pretty;
+      font-family: var(--font-lora);
+
+      p,
+      span {
+        line-height: 1.75;
+        font-size: 18px;
+      }
+    }
+
     p,
     ul,
     ol {
-      font-size: 16px;
-      line-height: 1.5;
+      font-size: 16.5px;
+      line-height: 1.6;
       margin-bottom: 0.5rem;
     }
 

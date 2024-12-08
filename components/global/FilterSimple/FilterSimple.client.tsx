@@ -25,7 +25,6 @@ const FilterSimple = ({
 
   return (
     <div className={styles.filter}>
-      <p className={styles.instructions}>Filter by?</p>
       <div className={styles.slideContainer}>
         {properties?.[type]?.filters.map((filter, i) => {
           const count =

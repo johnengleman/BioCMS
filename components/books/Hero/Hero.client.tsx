@@ -28,9 +28,6 @@ const HeroClient = ({ authorData, genreData }) => {
 
   return (
     <div className={styles.filter}>
-      <p className={styles.instructions}>
-        Filter by genre?
-      </p>
       <div className={styles.presetContainer}>
         {genreData?.map((genre, i) => {
           const count = genre[1].length
@@ -47,10 +44,6 @@ const HeroClient = ({ authorData, genreData }) => {
           }
         })}
       </div>
-
-      <p className={styles.instructions}>
-        Filter by popular saint?
-      </p>
       <div className={styles.slideContainer}>
         {authorData
           ?.sort((a, b) => b.books.length - a.books.length)

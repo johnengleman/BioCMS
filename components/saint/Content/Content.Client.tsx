@@ -21,14 +21,9 @@ const Client = ({
     <div className={styles.content}>
       <div className={styles.leftRail}>
         {leftRail}
-        <TableOfContentsText mainRef={refElement} />
+        <TableOfContentsText />
       </div>
-      <div
-        className={styles.main}
-        ref={refElement}
-      >
-        {children}
-      </div>
+      <div className={styles.main}>{children}</div>
       <div className={styles.rightRail}>{rightRail}</div>
     </div>
   )

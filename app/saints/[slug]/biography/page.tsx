@@ -84,6 +84,7 @@ const SaintBio = async (props: NextPageProps) => {
             />
             <div
               className={styles.text}
+              id="text"
               dangerouslySetInnerHTML={{
                 __html: data?.biography || '',
               }}

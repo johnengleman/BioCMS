@@ -3,11 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './styles.module.scss'
 
-type MainRefType = React.RefObject<HTMLElement>
-
-const TableOfContentsText: React.FC<{
-  mainRef: MainRefType
-}> = ({ mainRef }) => {
+const TableOfContentsText: React.FC<{}> = () => {
   const [elements, setElements] = useState<HTMLElement[]>(
     [],
   )
@@ -15,16 +11,15 @@ const TableOfContentsText: React.FC<{
 
   useEffect(() => {
     const nodeList =
-      mainRef.current?.querySelectorAll<HTMLElement>(
-        'h2',
-      ) || []
+      document?.querySelectorAll<HTMLElement>('#text h2') ||
+      []
     const elementsArray = Array.from(nodeList)
     setElements(elementsArray)
 
     nodeList?.forEach((h2, index) => {
       h2.id = `heading-${index + 1}`
     })
-  }, [mainRef])
+  }, [])
 
   useEffect(() => {
     const options = {

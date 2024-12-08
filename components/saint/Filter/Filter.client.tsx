@@ -67,9 +67,7 @@ const Filter = ({
 
       <div className={styles.row}>
         <div className={styles.col}>
-          <p className={styles.instructions}>
-            1. Organize by...
-          </p>
+          <p className={styles.instructions}>Organize by</p>
           <div
             className={`${styles.presetContainer} ${styles.organizeContainer}`}
           >
@@ -89,7 +87,7 @@ const Filter = ({
 
         <div className={styles.col}>
           <p className={styles.instructions}>
-            2. Add a {organization} filter?
+            Add a {organization} filter
           </p>
           <div className={styles.slideContainer}>
             <ButtonFilter filter="all" />
