@@ -67,12 +67,6 @@ const SaintBio = async (props: NextPageProps) => {
                 leftRail={true}
               />
             }
-            rightRail={
-              <Books
-                books={data?.books}
-                inRightRail={true}
-              />
-            }
           >
             <NameTag
               tags={data?.categories}
@@ -99,7 +93,7 @@ const SaintBio = async (props: NextPageProps) => {
                 Updated on {formatDate(data?.date_updated)}
               </div> */}
             <NextPage data={data} />
-            <ReadMoreLinks links={data?.read_more_links} />
+            <ReadMoreLinks links={data?.books} />
             {/* <About showImage={false} /> */}
           </Content>
           <RelatedPeople

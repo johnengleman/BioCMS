@@ -21,7 +21,6 @@ const query = gql`
       date_updated
       feast_day_orthodox
       feast_day_catholic
-      read_more_links
       categories
       patron
       profile_image {
@@ -42,9 +41,10 @@ const query = gql`
         author
         title
         store_link
+        year
+        publisher
         pages
         description
-        amazon_book_cover
       }
       quotes {
         text

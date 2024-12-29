@@ -20,7 +20,7 @@ const lora = Lora({
 const nunito = Nunito({
   subsets: ['latin'],
   display: 'swap',
-  style: ['normal'],
+  style: ['normal', 'italic'],
 })
 
 export const metadata = {
