@@ -9,24 +9,30 @@ const ReadMoreLinks = ({ links }) => {
       <div className={styles.readMoreLinks}>
         <div className={styles.title}>Read More</div>
         <div className={styles.links}>
-          {links?.map((link, i) => {
-            return link.store_link ? (
-              <Link
-                key={i}
-                href={link.store_link}
-                className={styles.link}
-              >
-                {link.author} ({link.year}).{' '}
-                <span className={styles.italics}>
-                  {link.title}
-                </span>
-                . {link.publisher}
-                <FontAwesomeIcon icon={faBook} />
-              </Link>
-            ) : (
-              <p key={i}>{link.text}</p>
+          {links
+            ?.sort((a, b) =>
+              a.author.localeCompare(b.author, 'en', {
+                sensitivity: 'base',
+              }),
             )
-          })}
+            .map((link, i) => {
+              return link.store_link ? (
+                <Link
+                  key={i}
+                  href={link.store_link}
+                  className={styles.link}
+                >
+                  {link.author} ({link.year}).{' '}
+                  <span className={styles.italics}>
+                    {link.title}
+                  </span>
+                  . {link.publisher}
+                  <FontAwesomeIcon icon={faBook} />
+                </Link>
+              ) : (
+                <p key={i}>{link.text}</p>
+              )
+            })}
         </div>
       </div>
     )
