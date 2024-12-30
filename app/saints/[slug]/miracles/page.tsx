@@ -5,8 +5,9 @@ import Page from '../../../../components/page/Page/Page'
 import ImageMain from '../../../../components/saint/ImageMain/ImageMain'
 import RelatedPeople from '../../../../components/saint/SimilarSaints/SimilarSaints.server'
 import NameTag from '../../../../components/saint/NameTag/NameTag'
-import NextSection from '../../../../components/saint/NextPage/NextPage'
+import NextPage from '../../../../components/saint/NextPage/NextPage'
 import About from '../../../../components/global/About/About'
+import ReadMoreLinks from '../../../../components/saint/ReadMoreLinks/ReadMoreLinks'
 import ScrollUp from '../../../../components/global/ScrollUp/ScrollUp'
 import Content from '../../../../components/saint/Content/Content.Client'
 
@@ -77,11 +78,13 @@ const SaintBio = async (props: NextPageProps) => {
             />
             <div
               className={styles.text}
+              id="text"
               dangerouslySetInnerHTML={{
                 __html: data.miracles[0]?.miracles || '',
               }}
             />
-            <NextSection data={data} />
+            <NextPage data={data} />
+            <ReadMoreLinks links={data?.books} />
           </Content>
           <RelatedPeople
             searchParams={searchParams}
