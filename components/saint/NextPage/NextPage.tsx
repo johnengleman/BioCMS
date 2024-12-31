@@ -23,7 +23,7 @@ const NextPage = ({ data }) => {
       ) : (
         ''
       )}
-      {data?.miracles?.length &&
+      {/* {data?.miracles?.length &&
       !pathname.includes('miracles') ? (
         <Link href={`/saints/${slug}/miracles`}>
           <PageButton
@@ -33,7 +33,7 @@ const NextPage = ({ data }) => {
         </Link>
       ) : (
         ''
-      )}
+      )} */}
       {data?.teachings?.length > 0 &&
       !pathname.includes('teachings') ? (
         <Link href={`/saints/${slug}/teachings`}>

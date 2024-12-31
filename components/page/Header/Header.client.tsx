@@ -13,7 +13,6 @@ import SMButtons from '../SMButtons/SMButtons'
 import useBreakpoints from '../../../hooks/useBreakPoints'
 import ChurchToggle from '../ChurchToggle/ChurchToggle'
 import styles from './styles.module.scss'
-import { DirectiveLocation } from 'graphql'
 
 const HeaderClient = ({ navData, searchComponent }) => {
   const [mobileMenuIsOpen, setMobileMenuOpen] =
@@ -125,20 +124,16 @@ const HeaderClient = ({ navData, searchComponent }) => {
               ) : (
                 ''
               )}
-              {miraclesCount ? (
-                <Link
-                  href="/miracles"
-                  className="nav-link"
-                  onClick={() => handleClick()}
-                >
-                  {/* <span className={styles.count}>
+              {/* <Link
+                href="/miracles"
+                className="nav-link"
+                onClick={() => handleClick()}
+              >
+                <span className={styles.count}>
                     {miraclesCount}
-                  </span> */}
-                  Miracles
-                </Link>
-              ) : (
-                ''
-              )}
+                  </span>
+                Miracles
+              </Link> */}
               {quotesCount ? (
                 <Link
                   href="/quotes"

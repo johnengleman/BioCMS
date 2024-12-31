@@ -128,7 +128,7 @@ const SaintBio = async (props: NextPageProps) => {
               ) : (
                 ''
               )}
-              {data?.miracles[0]?.miracles ? (
+              {/* {data?.miracles[0]?.miracles ? (
                 <div>
                   <SectionTitle
                     id="section-miracles"
@@ -143,7 +143,7 @@ const SaintBio = async (props: NextPageProps) => {
                 </div>
               ) : (
                 ''
-              )}
+              )} */}
               {data?.relic_image ? (
                 <div>
                   <SectionTitle
