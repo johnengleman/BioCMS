@@ -45,6 +45,7 @@ const query = gql`
         publisher
         pages
         description
+        type
       }
       quotes {
         text

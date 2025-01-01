@@ -84,7 +84,10 @@ const SaintBio = async (props: NextPageProps) => {
               }}
             />
             <NextPage data={data} />
-            <ReadMoreLinks links={data?.books} />
+            <ReadMoreLinks
+              links={data?.books}
+              type="miracles"
+            />
           </Content>
           <RelatedPeople
             searchParams={searchParams}

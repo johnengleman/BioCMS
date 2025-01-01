@@ -51,6 +51,7 @@ function getNewestBooksQuery({ church, preset }) {
         title
         pages
         author
+        type
         date_created
         description
         amazon_book_cover

@@ -114,7 +114,6 @@ const SaintNovena = async (props: NextPageProps) => {
                 />
               )} */}
             <NextPage data={data} />
-            <ReadMoreLinks links={data?.read_more_links} />
           </Content>
           <RelatedPeople
             searchParams={searchParams}

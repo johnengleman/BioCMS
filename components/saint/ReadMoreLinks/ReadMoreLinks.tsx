@@ -3,14 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBook } from '@fortawesome/pro-regular-svg-icons'
 import styles from './styles.module.scss'
 
-const ReadMoreLinks = ({ links }) => {
-  if (links?.length) {
+const ReadMoreLinks = ({ links, type }) => {
+  const booksLinks = links?.filter((link) =>
+    link.type?.includes(type),
+  )
+
+  if (booksLinks?.length) {
     return (
       <div className={styles.readMoreLinks}>
         <div className={styles.title}>Read More</div>
         <div className={styles.links}>
-          {links
-            ?.sort((a, b) =>
+          {booksLinks
+            .sort((a, b) =>
               a.author.localeCompare(b.author, 'en', {
                 sensitivity: 'base',
               }),

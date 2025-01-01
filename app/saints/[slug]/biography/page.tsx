@@ -93,7 +93,10 @@ const SaintBio = async (props: NextPageProps) => {
                 Updated on {formatDate(data?.date_updated)}
               </div> */}
             <NextPage data={data} />
-            <ReadMoreLinks links={data?.books} />
+            <ReadMoreLinks
+              links={data?.books}
+              type="biography"
+            />
             {/* <About showImage={false} /> */}
           </Content>
           <RelatedPeople

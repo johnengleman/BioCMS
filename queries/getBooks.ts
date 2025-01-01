@@ -60,6 +60,7 @@ function getBooksQuery({ church, preset, filter }) {
         title
         pages
         author
+        type
         date_created
         description
         amazon_book_cover
