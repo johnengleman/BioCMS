@@ -93,19 +93,24 @@ const SaintNovena = async (props: NextPageProps) => {
               header={`${data.name}: ${novena.prayer_title}`}
               summary={data?.summary}
             />
-            {data?.prayers[0].prayers.map((prayer, i) => (
-              <Fragment key={i}>
-                <h2 id={`heading-${i + 1}`}>
-                  Day {days[i]}
-                </h2>
-                <div
-                  className={styles.text}
-                  dangerouslySetInnerHTML={{
-                    __html: prayer.prayer_section || '',
-                  }}
-                />
-              </Fragment>
-            ))}
+            <div id="text">
+              {data?.prayers[0].prayers.map((prayer, i) => (
+                <Fragment key={i}>
+                  <h2
+                    id={`heading-${i + 1}`}
+                    className={styles.novena_heading}
+                  >
+                    Day {days[i]}
+                  </h2>
+                  <div
+                    className={styles.text}
+                    dangerouslySetInnerHTML={{
+                      __html: prayer.prayer_section || '',
+                    }}
+                  />
+                </Fragment>
+              ))}
+            </div>
 
             {/* {data?.books && isLaptopMinus && (
                 <Books
