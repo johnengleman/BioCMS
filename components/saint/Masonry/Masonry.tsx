@@ -28,10 +28,10 @@ const MasonryClient = ({
       if (isMobileS || isMobileM) {
         return 1
       }
-      if (isMobileL || isTablet) {
+      if (isMobileL) {
         return 2
       }
-      if (isLaptop) {
+      if (isLaptop || isTablet) {
         return 3
       }
       return 4

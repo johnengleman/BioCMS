@@ -4,22 +4,20 @@
 .bentoSection {
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
   position: relative;
-
+  margin-bottom: 10px;
   cursor: pointer;
   flex: 1;
-  margin-bottom: 50px;
   box-shadow: rgba(0, 0, 0, 0.1) 4px 4px 50px;
   border: 1px solid rgba(0, 0, 0, 0.05);
-  padding: 30px 40px;
+  padding: 30px 25px;
   border-radius: 10px;
-  width: 100vw;
-  margin-left: -20px;
 
   @include breakpoints.breakpoint(tablet) {
     width: 100%;
     margin-left: unset;
+    margin-bottom: 30px;
+    padding-left: 30px;
   }
 
   @include breakpoints.breakpoint(laptop) {
@@ -33,15 +31,6 @@
     overflow: hidden;
     padding-right: 30px;
     display: none;
-
-    @include breakpoints.breakpoint(tablet) {
-      display: flex;
-      width: 33%;
-    }
-
-    @include breakpoints.breakpoint(laptop) {
-      display: none;
-    }
 
     @include breakpoints.breakpoint(laptopM) {
       display: flex;
@@ -91,7 +80,6 @@
 
   .content {
     display: flex;
-    background-color: #fff;
     gap: 75px;
     max-height: 500px;
 
@@ -117,11 +105,15 @@
 
       h2 {
         font-size: 18px;
-        color: var(--violet);
+        color: #fff;
         font-weight: 600;
         margin-top: 20px;
         text-decoration: underline;
         margin-bottom: 20px;
+
+        @include breakpoints.breakpoint(tablet) {
+          color: var(--violet);
+        }
 
         &:first-child {
           margin-top: 0;
@@ -143,7 +135,11 @@
       ul {
         font-size: 16px;
         margin-bottom: 10px;
-        color: #333;
+        color: #fff;
+
+        @include breakpoints.breakpoint(tablet) {
+          color: #333;
+        }
       }
 
       strong {
@@ -168,9 +164,17 @@
       height: 125px;
       background: linear-gradient(
         to top,
-        white 10%,
+        #0b072b 10%,
         transparent 100%
       );
+
+      @include breakpoints.breakpoint(tablet) {
+        background: linear-gradient(
+          to top,
+          white 10%,
+          transparent 100%
+        );
+      }
     }
   }
 
@@ -189,6 +193,11 @@
     align-items: center;
     gap: 10px;
     transition: all 0.2s ease-in-out;
+    margin-top: 20px;
+
+    @include breakpoints.breakpoint(tablet) {
+      margin-top: 0;
+    }
 
     &:hover {
       background-color: #3187e3;

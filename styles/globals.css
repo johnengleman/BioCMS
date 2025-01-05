@@ -102,13 +102,19 @@ h6 {
 .my-masonry-grid {
   display: flex;
   width: auto;
-  margin-left: -15px;
   width: 100%;
+
+  @media (min-width: 425px) {
+    margin-left: -10px;
+  }
 }
 
 .my-masonry-grid_column {
-  padding-left: 20px; /* gutter size */
   background-clip: padding-box;
+
+  @media (min-width: 425px) {
+    padding-left: 20px; /* gutter size */
+  }
 }
 
 /* Style your items */
@@ -122,4 +128,3 @@ h6 {
 .day-item {
   margin-bottom: 40px;
 }
-

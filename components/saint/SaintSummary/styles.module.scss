@@ -4,13 +4,13 @@
   display: inline-block;
   height: fit-content;
   position: relative;
+  width: 100%;
 
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   margin-bottom: 20px;
   color: #fff;
-  //box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transition: all 0.5s ease-in-out;
 
   &:before {
@@ -24,23 +24,19 @@
     width: 100%;
     border-radius: 20px;
     box-shadow: -2px 4px 6px #121023;
-    opacity: 0;
-    transition: all 0.5s ease-in-out;
+    opacity: 1;
+    transition: transform 0.5s ease-in-out;
   }
 
   &:not(.mini):hover {
-    transform: scale(1.01);
-
-    &:before {
-      opacity: 1;
-    }
-
-    .bioContainer .summary {
-      color: #fff;
-    }
-
-    .readMore {
-      border: 1px solid var(--violet);
+    .bioContainer {
+      .tag {
+        color: #ccad00;
+      }
+      .summary,
+      .name {
+        color: #fff;
+      }
     }
   }
 
@@ -85,30 +81,30 @@
     position: relative;
     z-index: 1;
     width: 100%;
-    padding: 0 1.25rem;
+    padding: 0 25px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
-    margin-top: 300px;
+    margin-top: 320px;
     overflow: hidden;
     padding-bottom: 5px;
-
     background: linear-gradient(
       180deg,
       rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 1) 12%,
-      rgb(4, 2, 16) 15%,
+      rgba(0, 0, 0, 0.55) 8%,
+      rgb(4, 2, 16) 12%,
       rgba(11, 7, 43, 1) 100%
     );
 
     .name {
-      color: #fff;
+      color: #bcbcbc;
       font-weight: 400;
-      margin-bottom: 1rem;
+      margin-bottom: 10px;
       padding-top: 50px;
       bottom: 0;
       width: 100%;
       line-height: 1.1;
       box-sizing: border-box;
+      transition: all 0.25s ease-in-out;
     }
 
     .summary {
@@ -116,8 +112,9 @@
       margin-top: 10px;
       overflow: hidden;
       font-size: 15px;
-      transition: all 0.2s ease-in-out;
+      transition: all 0.25s ease-in-out;
       margin: 1rem 0.25rem;
+      line-height: 1.5;
 
       span {
         margin-left: -4px;
@@ -152,9 +149,10 @@
       font-size: 10px;
       letter-spacing: 0.5px;
       border-radius: 5px;
-      color: #ccad00;
+      color: #9a8301;
       min-width: fit-content;
       font-size: 13px;
+      transition: all 0.25s ease-in-out;
     }
   }
 
@@ -209,11 +207,35 @@
   }
 
   &.mini {
+    .bioContainer {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.55) 20%,
+        rgb(5, 2, 23) 35%,
+        rgba(11, 7, 43) 100%
+      );
+
+      @include breakpoints.breakpoint(tablet) {
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0) 0%,
+          rgba(0, 0, 0, 0.55) 8%,
+          rgb(4, 2, 16) 12%,
+          rgba(11, 7, 43, 1) 100%
+        );
+      }
+    }
     .summary {
       display: -webkit-box;
       -webkit-line-clamp: 12;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      display: none;
+
+      @include breakpoints.breakpoint(tablet) {
+        display: block;
+      }
     }
 
     .readMore {

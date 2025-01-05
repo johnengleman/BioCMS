@@ -10,7 +10,7 @@ const NovenaSection = ({
   saintSlug,
 }) => {
   return (
-    <div className={styles.bentoSection}>
+    <div className={styles.novenaSection}>
       <div className={styles.header}>
         <div className={styles.chapters}>
           {prayers.map((prayer, i) => (

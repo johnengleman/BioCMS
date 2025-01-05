@@ -8,7 +8,10 @@ const NovenaDetail = (props) => {
   return (
     <div className={styles.novenaDetail}>
       <div className={styles.summary}>
-        <SaintSummary {...saint} />
+        <SaintSummary
+          {...saint}
+          mini={true}
+        />
       </div>
       <div className={styles.teachings}>
         <NovenaSection

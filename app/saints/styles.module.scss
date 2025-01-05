@@ -1,7 +1,17 @@
+@use './../../styles/breakpoints.scss' as breakpoints;
+
 .saintHome {
   width: 90%;
   max-width: 1450px;
   padding: 0 0 50px 0;
+
+  @include breakpoints.breakpoint(mobileL) {
+    width: 95%;
+  }
+
+  @include breakpoints.breakpoint(laptop) {
+    width: 90%;
+  }
 }
 
 .FilterCustomizeRow {
