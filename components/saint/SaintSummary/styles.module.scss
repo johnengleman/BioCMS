@@ -5,6 +5,7 @@
   height: fit-content;
   position: relative;
   width: 100%;
+  max-width: 350px;
 
   cursor: pointer;
   text-decoration: none;
@@ -69,11 +70,12 @@
     overflow: hidden;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
+    background-color: #000;
 
     img {
       transition: transform 0.5s ease;
       object-fit: cover;
-      object-position: 50% 10%;
+      object-position: top;
     }
   }
 

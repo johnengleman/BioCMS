@@ -32,9 +32,9 @@ const MasonryClient = ({
         return 2
       }
       if (isLaptop || isTablet) {
-        return 3
+        return 4
       }
-      return 4
+      return 5
     }
   }
 

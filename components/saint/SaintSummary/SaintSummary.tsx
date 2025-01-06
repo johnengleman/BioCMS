@@ -47,7 +47,7 @@ const SaintSummary = (props) => {
             profile_image?.description ||
             `Image the catholic saint ${name}`
           }
-          src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${profile_image.id}?key=summary`}
+          src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${profile_image?.id}?key=summary`}
           fill={true}
           priority={priority}
         />

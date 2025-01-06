@@ -78,7 +78,7 @@ const SearchClient = ({ searchData }) => {
             >
               <div className={styles.profile}>
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${option.profile_image.id}?key=search`}
+                  src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${option.profile_image?.id}?key=search`}
                   width={50}
                   height={50}
                   alt=""

@@ -47,7 +47,7 @@ export default function BookSummary({
             <div className={styles.authorContainer}>
               <div className={styles.profile}>
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${saint.profile_image.id}?key=search`}
+                  src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${saint.profile_image?.id}?key=search`}
                   width={35}
                   height={35}
                   alt=""

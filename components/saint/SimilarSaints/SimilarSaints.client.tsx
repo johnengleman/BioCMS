@@ -17,7 +17,7 @@ const SimilarSaint = ({
     <div className={styles.similarSaint}>
       <Link href={`/saints/${slug}`}>
         <Image
-          src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${profile_image.id}?fit=cover&height=225&width=150`}
+          src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${profile_image?.id}?fit=cover&height=225&width=150`}
           height={225}
           width={150}
           alt={
