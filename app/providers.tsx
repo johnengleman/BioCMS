@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect } from 'react'
-import NextNProgress from 'nextjs-progressbar'
+import { AppProgressBar as ProgressBar } from 'next-nprogress-bar'
 import { usePathname } from 'next/navigation'
 import { initGA4 } from '../utils/g4a'
 import ReactGA from 'react-ga4'
@@ -26,8 +26,18 @@ export default function Providers({
   return (
     <>
       <ChurchProvider>
-        <NextNProgress />
         {children}
+        <ProgressBar
+          height="3px"
+          color="#ccad00"
+          options={{
+            showSpinner: false, // Hide spinner for cleaner UI
+            speed: 400, // Animation speed for the progress bar
+            minimum: 0.2, // Minimum progress bar length
+          }}
+          shallowRouting={true}
+          delay={200} // Delay before showing the progress bar
+        />
       </ChurchProvider>
     </>
   )

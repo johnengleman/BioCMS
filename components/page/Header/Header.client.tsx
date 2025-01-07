@@ -61,16 +61,12 @@ const HeaderClient = ({ navData, searchComponent }) => {
   return (
     <div
       className={`${styles.header} ${
-        isSaintsPage ? styles.transparent : ''
-      }
+        mobileMenuIsOpen ? styles.mobileMenuOpen : ''
+      } ${isSaintsPage ? styles.transparent : ''}
 }`}
     >
       <div className={styles.row}>
-        <div
-          className={`${styles.content} ${
-            mobileMenuIsOpen ? styles.mobileMenuOpen : ''
-          }`}
-        >
+        <div className={`${styles.content}`}>
           {mobileMenuIsOpen && (
             <div className={styles.close}>
               <FontAwesomeIcon

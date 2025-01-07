@@ -2,7 +2,8 @@
 
 import { useState, useRef, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next-nprogress-bar'
 import CatholicCross from '../../global/Icons/CatholicCross/CatholicCross'
 import OrthodoxCross from '../../global/Icons/OrthodoxCross/OrthodoxCross'
 import styles from './styles.module.scss'
@@ -54,6 +55,12 @@ const ChurchToggle = () => {
     Cookies.set(
       'findasaint.com',
       JSON.stringify({ church: church }),
+      {
+        expires: 365,
+        path: '/',
+        secure: true,
+        sameSite: 'Lax',
+      },
     )
 
     const newSearchParams = new URLSearchParams(

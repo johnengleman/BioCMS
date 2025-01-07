@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useRef } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
+import { useRouter } from 'next-nprogress-bar'
 import { useOnClickOutside } from 'usehooks-ts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp } from '@fortawesome/pro-duotone-svg-icons'

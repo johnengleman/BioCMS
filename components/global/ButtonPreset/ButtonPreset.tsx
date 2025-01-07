@@ -4,9 +4,9 @@ import { useRef } from 'react'
 import { flushSync } from 'react-dom'
 import {
   useSearchParams,
-  useRouter,
   usePathname,
 } from 'next/navigation'
+import { useRouter } from 'next-nprogress-bar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './styles.module.scss'
 

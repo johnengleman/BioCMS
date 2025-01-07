@@ -21,7 +21,7 @@ const SimilarSaint = ({
           height={225}
           width={150}
           alt={
-            profile_image.description ||
+            profile_image?.description ||
             `Image of the orthodox and catholic saint ${name}`
           }
         />

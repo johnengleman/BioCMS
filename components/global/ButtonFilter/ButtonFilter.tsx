@@ -3,9 +3,9 @@
 import React, { useRef } from 'react'
 import {
   useSearchParams,
-  useRouter,
   usePathname,
 } from 'next/navigation'
+import { useRouter } from 'next-nprogress-bar'
 import { flushSync } from 'react-dom'
 import styles from './styles.module.scss'
 
