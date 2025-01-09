@@ -1,15 +1,11 @@
-import styles from './styles.module.scss'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
-import Head from 'next/head'
+// pages/saints/index.tsx (Server Component)
 import { getSaints } from '../../queries/getSaints'
-import SaintSummary from '../../components/saint/SaintSummary/SaintSummary'
-import Page from '../../components/page/Page/Page'
-import Hero from '../../components/saint/Hero/Hero'
-import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
-import MasonryClient from '../../components/saint/Masonry/Masonry'
+import SaintsListClient from '../../components/saint/SaintsList/SaintsListClient'
 import { getChurch } from '../../hooks/getChurch'
 import { properties } from '../../utils/properties'
+import Head from 'next/head'
+import Hero from '../../components/saint/Hero/Hero'
+import Page from '../../components/page/Page/Page'
 
 export const runtime = 'edge'
 
@@ -22,11 +18,13 @@ const Saints = async (props: NextPageProps) => {
   const saintPreset = searchParams.preset
   const sort = searchParams.sort
 
-  const data = await getSaints({
+  const initialSaints = await getSaints({
     church,
     filter,
     saintPreset,
     sort,
+    offset: 0,
+    limit: 4,
   })
 
   return (
@@ -47,37 +45,31 @@ const Saints = async (props: NextPageProps) => {
         <meta
           key="description"
           name="description"
-          content={`Explore the enriching lives of Catholic and Orthodox saints. Delve into their miraculous tales, teachings, and spiritual prayers with our extensive resources.`}
+          content={`Explore the enriching lives of Catholic and
+          Orthodox saints. Delve into their miraculous tales,
+          teachings, and spiritual prayers with our extensive
+          resources.`}
         />
         <meta
           name="keywords"
-          content={`${properties.saints.title[filter]} Saints, catholic saints, orthodox saints, saint biographies, religious teachings, saint miracles, spiritual prayers, novenas, saint quotes, religious books, spiritual wisdom, christian spirituality, saint legacies, religious education, faith resources`}
+          content={`${properties.saints.title[filter]} Saints,
+          catholic saints, orthodox saints, saint biographies,
+          religious teachings, saint miracles, spiritual prayers,
+          novenas, saint quotes, religious books, spiritual wisdom,
+          christian spirituality, saint legacies, religious
+          education, faith resources`}
         />
       </Head>
       <Page searchParams={searchParams}>
         <Hero searchParams={searchParams} />
-        {data?.length > 0 ? (
-          <div className={styles.saintHome}>
-            <>
-              <MasonryClient>
-                {data?.map((saint, i: number) => (
-                  <SaintSummary
-                    {...saint}
-                    key={i}
-                    transitionName={`saint-${i}`}
-                    priority={i < 8 ? true : false}
-                  />
-                ))}
-              </MasonryClient>
-              <ScrollUp />
-            </>
-          </div>
-        ) : (
-          <p className="status">
-            No saints found.{' '}
-            <FontAwesomeIcon icon={faFaceFrownSlight} />
-          </p>
-        )}
+        <SaintsListClient
+          key={JSON.stringify(initialSaints)}
+          initialSaints={initialSaints}
+          filter={filter}
+          sort={sort}
+          saintPreset={saintPreset}
+          church={church}
+        />
       </Page>
     </>
   )

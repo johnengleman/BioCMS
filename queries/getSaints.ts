@@ -10,6 +10,9 @@ interface SaintsResponse {
 function getSaintsQuery(church, filter, saintPreset, sort) {
   // Variables declaration
   let variablesList: string[] = []
+  variablesList.push('$limit: Int!')
+  variablesList.push('$offset: Int!')
+
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
@@ -59,6 +62,8 @@ function getSaintsQuery(church, filter, saintPreset, sort) {
         : ''
     } {
       saints(
+        limit: $limit
+        offset: $offset
         sort: "${sort}"
         filter: {
              _or: [
@@ -117,6 +122,8 @@ export const getSaints = async ({
   filter = 'all',
   saintPreset = 'none',
   sort = 'created-newest',
+  offset = 1,
+  limit = 10,
 }) => {
   const query = getSaintsQuery(
     church,
@@ -124,7 +131,13 @@ export const getSaints = async ({
     saintPreset,
     parseSort(sort),
   )
-  const variables = { filter, church, saintPreset }
+  const variables = {
+    filter,
+    church,
+    saintPreset,
+    offset,
+    limit,
+  }
 
   const response: SaintsResponse = await fetchHelper({
     variables,

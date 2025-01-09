@@ -8,7 +8,7 @@ import { formatDate } from '../../../utils/dates'
 import Image from 'next/image'
 import styles from './styles.module.scss'
 
-const SaintSummary = (props) => {
+const SaintSummary = ({ index, data, width }) => {
   const {
     name,
     birth_year,
@@ -20,9 +20,8 @@ const SaintSummary = (props) => {
     feast_day_orthodox,
     slug,
     priority,
-    transitionName,
     mini,
-  } = props
+  } = data
 
   const getYear = (date: string): number => {
     const newDate = new Date(date)
@@ -35,7 +34,6 @@ const SaintSummary = (props) => {
         mini ? styles.mini : ''
       }`}
       href={`/saints/${slug}`}
-      style={{ viewTransitionName: transitionName }}
     >
       <div className={styles.death}>
         <FontAwesomeIcon icon={faCross} />

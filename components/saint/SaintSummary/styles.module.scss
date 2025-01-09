@@ -6,13 +6,11 @@
   position: relative;
   width: 100%;
   max-width: 350px;
-
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   margin-bottom: 20px;
   color: #fff;
-  transition: all 0.5s ease-in-out;
 
   &:before {
     content: '';
@@ -21,7 +19,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: -1;
+    z-index: 0;
     width: 100%;
     border-radius: 20px;
     box-shadow: -2px 4px 6px #121023;

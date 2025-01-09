@@ -13,7 +13,7 @@ const fetchHelper = async <T>({
   variables = {},
 }): Promise<GraphQLResponse<T>> => {
   const response = await fetch(
-    `${process.env.GRAPHQL_ENDPOINT}/graphql`,
+    `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}/graphql`,
     {
       method: 'POST',
       headers: {
