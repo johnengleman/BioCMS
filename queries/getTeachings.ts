@@ -9,6 +9,9 @@ interface TeachingsResponse {
 function getTeachingsQuery(church, filter) {
   // Variables declaration
   let variablesList: string[] = []
+  variablesList.push('$limit: Int!')
+  variablesList.push('$offset: Int!')
+
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
@@ -39,6 +42,8 @@ function getTeachingsQuery(church, filter) {
         : ''
     } {
       teachings(
+       limit: $limit
+        offset: $offset
         filter: {
           _and: [
             ${filterList.join(', ')}
@@ -84,9 +89,11 @@ export const getTeachings = async ({
   church = 'all',
   filter = 'all',
   // sort = 'date-asc',
+  offset = 0,
+  limit = 10,
 }) => {
   const query = getTeachingsQuery(church, filter)
-  const variables = { filter, church }
+  const variables = { filter, church, offset, limit }
 
   const response: TeachingsResponse = await fetchHelper({
     variables,

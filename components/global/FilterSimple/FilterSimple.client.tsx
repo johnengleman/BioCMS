@@ -23,6 +23,8 @@ const FilterSimple = ({
       'function'
   }
 
+  console.log(filtersCount)
+
   return (
     <div className={styles.filter}>
       <div className={styles.slideContainer}>

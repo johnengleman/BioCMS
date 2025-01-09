@@ -2,7 +2,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { getSaints } from '../../../queries/getSaints'
 import SaintSummary from '../SaintSummary/SaintSummary'
 import ScrollUp from '../../global/ScrollUp/ScrollUp'
@@ -66,7 +66,7 @@ const SaintsListClient = ({
 
   return (
     <div className={styles.saintHome}>
-      {items?.length > 0 ? (
+      {items?.length ? (
         <>
           <Masonry
             items={items}

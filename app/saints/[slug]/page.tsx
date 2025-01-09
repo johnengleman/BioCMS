@@ -6,7 +6,7 @@ import ImageMain from '../../../components/saint/ImageMain/ImageMain'
 import RelatedPeople from '../../../components/saint/SimilarSaints/SimilarSaints.server'
 import Relics from '../../../components/saint/Relics/Relics'
 import NameTag from '../../../components/saint/NameTag/NameTag'
-import Quotes from '../../../components/saint/Quotes/Quotes'
+import Quotes from '../../../components/saint/Quotes/QuotesClient'
 import TableOfContentFeatures from '../../../components/saint/TableOfContentsFeatures/TableOfContentsFeatures'
 import BentoSection from '../../../components/global/BentoSection/BentoSection'
 import PrayersC from '../../../components/saint/PrayersC/PrayersC'
@@ -188,7 +188,7 @@ const SaintBio = async (props: NextPageProps) => {
                   >
                     Quotes
                   </SectionTitle>
-                  <Quotes quoteData={data?.quotes} />
+                  {/* <Quotes initialQuotes={data?.quotes} /> */}
                 </div>
               ) : (
                 ''

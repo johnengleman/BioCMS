@@ -1,12 +1,10 @@
 import Head from 'next/head'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
 import { getTeachings } from '../../queries/getTeachings'
 import Page from '../../components/page/Page/Page'
-import SaintDetail from '../../components/global/SaintDetail/SaintDetail'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
 import { getChurch } from '../../hooks/getChurch'
 import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
+import TeachingsClient from '../../components/teachings/teachings/TeachingsClient'
 import styles from './styles.module.scss'
 
 export const runtime = 'edge'
@@ -15,12 +13,14 @@ import { NextPageProps } from '../../types/nextjs'
 
 const Teachings = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter
+  const filter = searchParams.filter || ''
   const church = await getChurch(searchParams)
 
-  const teachingsData = await getTeachings({
+  const initialTeachings = await getTeachings({
     church,
     filter,
+    offset: 0,
+    limit: 4,
   })
 
   return (
@@ -54,21 +54,12 @@ const Teachings = async (props: NextPageProps) => {
           type="teachings"
         />
         <div className={styles.page}>
-          {teachingsData.length > 0 ? (
-            teachingsData.map((teaching, i) => (
-              <SaintDetail
-                key={i}
-                saint={teaching.saint}
-                data={teaching.teachings}
-                link={`/saints/${teaching.saint.slug}/teachings`}
-              />
-            ))
-          ) : (
-            <p className="status">
-              No teachings found.{' '}
-              <FontAwesomeIcon icon={faFaceFrownSlight} />
-            </p>
-          )}
+          <TeachingsClient
+            key={JSON.stringify(initialTeachings)}
+            initialTeachings={initialTeachings}
+            church={church}
+            filter={filter}
+          />
           <ScrollUp />
         </div>
       </Page>

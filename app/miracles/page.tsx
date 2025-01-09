@@ -8,6 +8,7 @@ import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
 import { getChurch } from '../../hooks/getChurch'
 import capitalize from '../../utils/capitalize'
 import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
+import MiraclesClient from '../../components/miracles/MiraclesClient/MiraclesClient'
 import styles from './styles.module.scss'
 
 import { NextPageProps } from '../../types/nextjs'
@@ -16,14 +17,16 @@ export const runtime = 'edge'
 
 const Teachings = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter
+  const filter = searchParams.filter || ''
   const miraclesPreset = searchParams.preset || ''
   const church = await getChurch(searchParams)
 
-  const miraclesData = await getMiracles({
+  const initialMiracles = await getMiracles({
     filter,
     church,
     miraclesPreset,
+    offset: 0,
+    limit: 10,
   })
 
   return (
@@ -58,15 +61,13 @@ const Teachings = async (props: NextPageProps) => {
           searchParams={searchParams}
         />
         <div className={styles.miracles}>
-          {miraclesData.length > 0 ? (
-            miraclesData.map((miracle, i) => (
-              <SaintDetail
-                key={i}
-                saint={miracle.saint}
-                data={miracle.miracles}
-                link={`/saints/${miracle.saint.slug}/miracles`}
-              />
-            ))
+          {initialMiracles.length ? (
+            <MiraclesClient
+              key={JSON.stringify(initialMiracles)}
+              initialMiracles={initialMiracles}
+              filter={filter}
+              church={church}
+            />
           ) : (
             <p className="status">
               No miracles found.{' '}

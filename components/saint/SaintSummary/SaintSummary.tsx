@@ -8,7 +8,7 @@ import { formatDate } from '../../../utils/dates'
 import Image from 'next/image'
 import styles from './styles.module.scss'
 
-const SaintSummary = ({ index, data, width }) => {
+const SaintSummary = ({ data }) => {
   const {
     name,
     birth_year,
@@ -21,7 +21,7 @@ const SaintSummary = ({ index, data, width }) => {
     slug,
     priority,
     mini,
-  } = data
+  } = data || {}
 
   const getYear = (date: string): number => {
     const newDate = new Date(date)
@@ -62,12 +62,14 @@ const SaintSummary = ({ index, data, width }) => {
             </div>
           ))}
         </div>
-        <div
-          className={styles.summary}
-          dangerouslySetInnerHTML={{
-            __html: summary,
-          }}
-        ></div>
+        {summary && (
+          <div
+            className={styles.summary}
+            dangerouslySetInnerHTML={{
+              __html: summary,
+            }}
+          ></div>
+        )}
         <div className={styles.feastDays}>
           {feast_day_catholic && (
             <div className={styles.feastDay}>

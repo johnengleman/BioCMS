@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Page from '../../components/page/Page/Page'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
-import Quotes from '../../components/saint/Quotes/Quotes'
+import Quotes from '../../components/saint/Quotes/QuotesClient'
 import { getChurch } from '../../hooks/getChurch'
 import { getQuotes } from '../../queries/getQuotes'
 import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
@@ -13,9 +13,14 @@ import { NextPageProps } from '../../types/nextjs'
 
 const QuotesPage = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter
+  const filter = searchParams.filter || '' || ''
   const church = await getChurch(searchParams)
-  const quoteData = await getQuotes({ church, filter })
+  const initialQuotes = await getQuotes({
+    church,
+    filter,
+    offset: 0,
+    limit: 40,
+  })
 
   return (
     <>
@@ -48,7 +53,12 @@ const QuotesPage = async (props: NextPageProps) => {
           type="quotes"
         />
         <div className={styles.quotes}>
-          <Quotes quoteData={quoteData} />
+          <Quotes
+            key={JSON.stringify(initialQuotes)}
+            initialQuotes={initialQuotes}
+            church={church}
+            filter={filter}
+          />
           <ScrollUp />
         </div>
       </Page>

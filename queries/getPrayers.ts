@@ -9,6 +9,9 @@ interface PrayersResponse {
 function getPrayersQuery(church, filter) {
   // Variables declaration
   let variablesList: string[] = []
+  variablesList.push('$limit: Int!')
+  variablesList.push('$offset: Int!')
+
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
@@ -37,6 +40,8 @@ function getPrayersQuery(church, filter) {
         : ''
     } {
       prayers(
+        limit: $limit
+        offset: $offset
         filter: {
           _and: [
             ${filterList.join(', ')}
@@ -83,9 +88,11 @@ export const getPrayers = async ({
   church = 'all',
   filter = 'all',
   // sort = 'date-asc',
+  offset = 0,
+  limit = 10,
 }) => {
   const query = getPrayersQuery(church, filter)
-  const variables = { filter, church }
+  const variables = { filter, church, offset, limit }
 
   const response: PrayersResponse = await fetchHelper({
     variables,

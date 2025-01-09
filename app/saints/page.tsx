@@ -14,7 +14,7 @@ import { NextPageProps } from '../../types/nextjs'
 const Saints = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
   const church = await getChurch(searchParams)
-  const filter = searchParams.filter
+  const filter = searchParams.filter || ''
   const saintPreset = searchParams.preset
   const sort = searchParams.sort
 
@@ -24,7 +24,7 @@ const Saints = async (props: NextPageProps) => {
     saintPreset,
     sort,
     offset: 0,
-    limit: 4,
+    limit: 50,
   })
 
   return (

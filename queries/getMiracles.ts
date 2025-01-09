@@ -9,6 +9,9 @@ interface MiraclesResponse {
 function getMiraclesQuery(church, filter, miraclesPreset) {
   // Variables declaration
   let variablesList: string[] = []
+  variablesList.push('$limit: Int!')
+  variablesList.push('$offset: Int!')
+
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
@@ -44,6 +47,8 @@ function getMiraclesQuery(church, filter, miraclesPreset) {
         : ''
     } {
       miracles(
+        limit: $limit
+        offset: $offset
         filter: {
           _and: [
             ${filterList.join(', ')}
@@ -90,13 +95,21 @@ export const getMiracles = async ({
   filter = 'all',
   miraclesPreset = 'none',
   // sort = 'date-asc',
+  offset,
+  limit,
 }) => {
   const query = getMiraclesQuery(
     church,
     filter,
     miraclesPreset,
   )
-  const variables = { filter, church, miraclesPreset }
+  const variables = {
+    filter,
+    church,
+    miraclesPreset,
+    offset,
+    limit,
+  }
 
   const response: MiraclesResponse = await fetchHelper({
     variables,

@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
 import { getPrayers } from '../../queries/getPrayers'
 import Page from '../../components/page/Page/Page'
-import NovenaDetail from '../../components/novenas/NovenaDetail/NovenaDetail'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
 import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
+import NovenaClient from '../../components/novenas/NovenaClient/NovenaClient'
 import { getChurch } from '../../hooks/getChurch'
 import styles from './styles.module.scss'
 
@@ -15,10 +15,15 @@ import { NextPageProps } from '../../types/nextjs'
 
 const NovenasPage = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter
+  const filter = searchParams.filter || ''
   const church = await getChurch(searchParams)
 
-  const prayersData = await getPrayers({ church, filter })
+  const initialPrayers = await getPrayers({
+    church,
+    filter,
+    offset: 0,
+    limit: 8,
+  })
 
   return (
     <>
@@ -51,13 +56,13 @@ const NovenasPage = async (props: NextPageProps) => {
           searchParams={searchParams}
         />
         <div className={styles.page}>
-          {prayersData?.length ? (
-            prayersData.map((prayer, i) => (
-              <NovenaDetail
-                key={i}
-                {...prayer}
-              />
-            ))
+          {initialPrayers?.length ? (
+            <NovenaClient
+              key={JSON.stringify(initialPrayers)}
+              initialPrayers={initialPrayers}
+              church={church}
+              filter={filter}
+            />
           ) : (
             <p className="status">
               No novenas found.{' '}

@@ -2,8 +2,8 @@ import SaintSummary from '../../saint/SaintSummary/SaintSummary'
 import NovenaSection from '../NovenaSection/NovenaSection'
 import styles from './styles.module.scss'
 
-const NovenaDetail = (props) => {
-  const { prayers, prayer_slug, saint } = props
+const NovenaDetail = ({ index, data, width }) => {
+  const { prayers, prayer_slug, saint } = data || {}
 
   return (
     <div className={styles.novenaDetail}>

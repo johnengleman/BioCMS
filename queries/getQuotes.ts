@@ -9,6 +9,9 @@ interface QuotesResponse {
 function getQuotesQuery({ church, filter }) {
   // Variables declaration
   let variablesList: string[] = []
+  variablesList.push('$limit: Int!')
+  variablesList.push('$offset: Int!')
+
   if (church !== 'all') {
     variablesList.push('$church: String!')
   }
@@ -38,6 +41,8 @@ function getQuotesQuery({ church, filter }) {
         : ''
     } {
       quotes(
+        limit: $limit
+        offset: $offset
         filter: {
           _and: [
             ${filterList.join(', ')}
@@ -65,12 +70,14 @@ function getQuotesQuery({ church, filter }) {
 export const getQuotes = async ({
   church = 'all',
   filter = 'all',
+  offset = 0,
+  limit = 10,
 }) => {
   const query = getQuotesQuery({ church, filter })
 
   const res: QuotesResponse = await fetchHelper({
     query,
-    variables: { church, filter },
+    variables: { church, filter, offset, limit },
   })
   return res.data.quotes
 }
