@@ -63,7 +63,7 @@ export const getPrayersFilters = async (
 ) => {
   const filters = {
     [church]: {
-      none: getNumberOfPrayers({
+      none: await getNumberOfPrayers({
         church,
       }),
     },

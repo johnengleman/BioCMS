@@ -18,7 +18,7 @@ export const runtime = 'edge'
 
 const Books = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter || ''
+  const filter = searchParams.filter || "all"
   const preset = searchParams.preset || ''
   const church = await getChurch(searchParams)
 

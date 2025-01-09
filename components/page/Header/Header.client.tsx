@@ -99,12 +99,12 @@ const HeaderClient = ({ navData, searchComponent }) => {
                 className="nav-link"
                 onClick={() => handleClick()}
               >
-                {/* {saintsCount && (
-                  <span className={styles.count}>
-                    {saintsCount}
-                  </span>
-                )} */}
                 Saints
+                {saintsCount && (
+                  <span className={styles.count}>
+                    ({saintsCount})
+                  </span>
+                )}
               </Link>
               {teachingsCount ? (
                 <Link
@@ -112,10 +112,11 @@ const HeaderClient = ({ navData, searchComponent }) => {
                   className="nav-link"
                   onClick={() => handleClick()}
                 >
-                  {/* <span className={styles.count}>
-                    {teachingsCount}
-                  </span> */}
+                 
                   Teachings
+                  <span className={styles.count}>
+                    ({teachingsCount})
+                  </span>
                 </Link>
               ) : (
                 ''
@@ -136,10 +137,11 @@ const HeaderClient = ({ navData, searchComponent }) => {
                   className="nav-link"
                   onClick={() => handleClick()}
                 >
-                  {/* <span className={styles.count}>
-                    {quotesCount}
-                  </span> */}
+                 
                   Quotes
+                  <span className={styles.count}>
+                    ({quotesCount})
+                  </span>
                 </Link>
               ) : (
                 ''
@@ -150,10 +152,10 @@ const HeaderClient = ({ navData, searchComponent }) => {
                   className="nav-link"
                   onClick={() => handleClick()}
                 >
-                  {/* <span className={styles.count}>
-                    {prayersCount}
-                  </span> */}
                   Novenas
+                  <span className={styles.count}>
+                    ({prayersCount})
+                  </span>
                 </Link>
               ) : (
                 ''

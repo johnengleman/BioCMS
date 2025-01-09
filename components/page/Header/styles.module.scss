@@ -163,9 +163,8 @@
 
     @include breakpoints.breakpoint(tablet) {
       display: flex;
-      flex-direction: column;
       width: min-content;
-      font-size: 16px;
+      font-size: 17px;
       gap: 6px;
     }
 
@@ -174,7 +173,7 @@
     }
 
     .count {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
       color: var(--gold);
       display: none;

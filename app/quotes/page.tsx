@@ -13,7 +13,7 @@ import { NextPageProps } from '../../types/nextjs'
 
 const QuotesPage = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter || '' || ''
+  const filter = searchParams.filter || "all" || ''
   const church = await getChurch(searchParams)
   const initialQuotes = await getQuotes({
     church,

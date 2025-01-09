@@ -63,7 +63,7 @@ export const getQuotesFilters = async (
 ) => {
   const filters = {
     [church]: {
-      none: getNumberOfQuotes({
+      none: await getNumberOfQuotes({
         church,
       }),
     },

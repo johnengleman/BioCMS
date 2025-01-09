@@ -13,7 +13,7 @@ import { NextPageProps } from '../../types/nextjs'
 
 const Teachings = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter || ''
+  const filter = searchParams.filter || "all"
   const church = await getChurch(searchParams)
 
   const initialTeachings = await getTeachings({
