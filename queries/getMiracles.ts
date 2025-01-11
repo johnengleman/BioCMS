@@ -116,5 +116,8 @@ export const getMiracles = async ({
     query,
   })
 
-  return response?.data?.miracles
+  return response?.data?.miracles.map((d) => ({
+    ...d,
+    link: `/saints/${d.saint.slug}/miracles`,
+  }))
 }

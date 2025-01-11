@@ -41,11 +41,13 @@ function extractH2s(htmlString: string): string[] {
 interface BentoSectionProps {
   data?: string
   link?: string
+  theme?: string
 }
 
 const BentoSection: React.FC<BentoSectionProps> = ({
   data,
   link,
+  theme,
 }) => {
   if (!data) {
     return null
@@ -55,7 +57,9 @@ const BentoSection: React.FC<BentoSectionProps> = ({
   const h2s = extractH2s(data)
 
   return (
-    <div className={styles.bentoSection}>
+    <div
+      className={`${styles.bentoSection} ${styles.theme}`}
+    >
       <div className={styles.content}>
         <div className={styles.previewContainer}>
           <div
@@ -85,7 +89,10 @@ const BentoSection: React.FC<BentoSectionProps> = ({
             <FontAwesomeIcon
               icon={faBookOpenReader}
               style={{
-                color: `var(--violet)`,
+                color:
+                  theme === 'dark'
+                    ? `var(--gold)`
+                    : `var(--violet)`,
                 fontSize: '15px',
               }}
             />

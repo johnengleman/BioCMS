@@ -100,5 +100,8 @@ export const getTeachings = async ({
     query,
   })
 
-  return response?.data?.teachings
+  return response?.data?.teachings.map((d) => ({
+    ...d,
+    link: `/saints/${d.saint.slug}/teachings`,
+  }))
 }

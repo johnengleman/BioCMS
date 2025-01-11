@@ -110,6 +110,7 @@ const SaintBio = async (props: NextPageProps) => {
                 <BentoSection
                   data={data?.biography}
                   link={`/saints/${slug}/biography`}
+                  theme="light"
                 />
               </div>
               {data?.teachings[0]?.teachings ? (
@@ -123,6 +124,7 @@ const SaintBio = async (props: NextPageProps) => {
                   <BentoSection
                     data={data?.teachings[0]?.teachings}
                     link={`/saints/${slug}/teachings`}
+                    theme="light"
                   />
                 </div>
               ) : (
@@ -139,6 +141,7 @@ const SaintBio = async (props: NextPageProps) => {
                   <BentoSection
                     data={data?.miracles[0]?.miracles}
                     link={`/saints/${slug}/miracles`}
+                     theme="light"
                   />
                 </div>
               ) : (
@@ -188,7 +191,10 @@ const SaintBio = async (props: NextPageProps) => {
                   >
                     Quotes
                   </SectionTitle>
-                  {/* <Quotes initialQuotes={data?.quotes} /> */}
+                  <Quotes
+                    initialQuotes={data?.quotes}
+                    renderOnlyInitial={true}
+                  />
                 </div>
               ) : (
                 ''

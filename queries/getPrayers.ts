@@ -99,5 +99,8 @@ export const getPrayers = async ({
     query,
   })
 
-  return response?.data?.prayers
+  return response?.data?.prayers.map((d) => ({
+    ...d,
+    link: `/saints/${d.saint.slug}/prayers`,
+  }))
 }

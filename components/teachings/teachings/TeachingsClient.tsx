@@ -56,7 +56,7 @@ const Teachings = ({
         <Masonry
           items={items}
           columnGutter={20}
-          rowGutter={5}
+          rowGutter={20}
           overscanBy={1.25}
           columnWidth={275}
           onRender={maybeLoadMore}

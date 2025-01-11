@@ -24,6 +24,25 @@
     padding: 40px 50px;
   }
 
+  &.light {
+    .previewContainer .preview {
+      h2,
+      p,
+      ul,
+      ol {
+        color: #000;
+      }
+    }
+
+    .footer:before {
+      background: linear-gradient(
+        to top,
+        #ffffff 10%,
+        transparent 100%
+      );
+    }
+  }
+
   .header {
     align-items: flex-start;
     justify-content: flex-end;
@@ -181,10 +200,10 @@
   button {
     background: transparent;
     border-radius: 7px;
-    color: #737373;
+    color: #b4b4b4;
     font-size: 13px;
     padding: 8px 30px;
-    border: 1px solid #dedede;
+    border: 1px solid #b4b4b4;
     cursor: pointer;
     font-weight: 400;
     letter-spacing: 0.5px;
@@ -197,12 +216,16 @@
 
     @include breakpoints.breakpoint(tablet) {
       margin-top: 0;
+      color: #737373;
+      border: 1px solid #dedede;
     }
 
     &:hover {
-      background-color: #3187e3;
-      border: 1px solid #3187e3;
-      color: #fff;
+      @include breakpoints.breakpoint(tablet) {
+        background-color: #3187e3;
+        border: 1px solid #3187e3;
+        color: #fff;
+      }
     }
   }
 }

@@ -18,8 +18,9 @@ const Masonry = dynamic(
 
 type QuotesProps = {
   initialQuotes: QuoteProps[]
-  church: string
-  filter: string
+  church?: string
+  filter?: string
+  renderOnlyInitial?: boolean
 }
 
 type QuoteProps = {
@@ -80,6 +81,7 @@ const Quotes = ({
   initialQuotes,
   church,
   filter,
+  renderOnlyInitial = false,
 }: QuotesProps) => {
   const [items, setItems] = useState(initialQuotes)
   const [hasMore, setHasMore] = useState(true)
@@ -120,7 +122,9 @@ const Quotes = ({
           rowGutter={5}
           overscanBy={1.25}
           columnWidth={275}
-          onRender={maybeLoadMore}
+          onRender={
+            !renderOnlyInitial ? maybeLoadMore : undefined
+          }
           render={Quote}
           maxColumnCount={5}
         />
