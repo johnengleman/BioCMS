@@ -47,7 +47,7 @@ interface BentoSectionProps {
 const BentoSection: React.FC<BentoSectionProps> = ({
   data,
   link,
-  theme,
+  theme = 'dark',
 }) => {
   if (!data) {
     return null
@@ -58,7 +58,7 @@ const BentoSection: React.FC<BentoSectionProps> = ({
 
   return (
     <div
-      className={`${styles.bentoSection} ${styles.theme}`}
+      className={`${styles.bentoSection} ${styles[theme]}`}
     >
       <div className={styles.content}>
         <div className={styles.previewContainer}>
@@ -90,7 +90,7 @@ const BentoSection: React.FC<BentoSectionProps> = ({
               icon={faBookOpenReader}
               style={{
                 color:
-                  theme === 'dark'
+                  theme === 'light'
                     ? `var(--gold)`
                     : `var(--violet)`,
                 fontSize: '15px',
