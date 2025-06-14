@@ -1,6 +1,6 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "saints",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "preinstall": "npm config set legacy-peer-deps true",
@@ -12,7 +12,7 @@
     "postbuild": "next-sitemap"
   },
   "engines": {
-    "node": "20.x"
+    "node": "22.x"
   },
   "overrides": {
     "@formspree/react": {
@@ -24,44 +24,44 @@
     "sass-loader": "^16.0.2"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-pro": "^6.6.0",
-    "@fortawesome/fontawesome-svg-core": "^6.6.0",
-    "@fortawesome/free-brands-svg-icons": "^6.6.0",
-    "@fortawesome/pro-duotone-svg-icons": "^6.6.0",
-    "@fortawesome/pro-regular-svg-icons": "^6.6.0",
+    "@fortawesome/fontawesome-pro": "^6.7.2",
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/pro-duotone-svg-icons": "^6.7.2",
+    "@fortawesome/pro-regular-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@fortawesome/sharp-solid-svg-icons": "^6.6.0",
-    "cheerio": "^1.0.0",
-    "fuse.js": "^7.0.0",
-    "graphql": "^16.9.0",
-    "graphql-request": "^7.1.2",
+    "@fortawesome/sharp-solid-svg-icons": "^6.7.2",
+    "cheerio": "^1.1.0",
+    "fuse.js": "^7.1.0",
+    "graphql": "^16.11.0",
+    "graphql-request": "^7.2.0",
     "js-cookie": "^3.0.5",
-    "masonic": "^4.0.1",
-    "next": "^15.0.3",
-    "next-nprogress-bar": "^2.4.3",
+    "masonic": "^4.1.0",
+    "next": "^15.3.3",
+    "next-nprogress-bar": "^2.4.7",
     "next-sitemap": "^4.2.3",
-    "react": "^19.0.0-rc.1",
-    "react-dom": "^19.0.0-rc.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-ga4": "^2.1.0",
-    "sass": "^1.80.4",
-    "sass-loader": "^16.0.2",
-    "usehooks-ts": "^3.1.0",
-    "zod": "^3.23.8"
+    "sass": "^1.89.2",
+    "sass-loader": "^16.0.5",
+    "usehooks-ts": "^3.1.1",
+    "zod": "^3.25.64"
   },
   "devDependencies": {
-    "@types/cheerio": "^0.22.35",
-    "@types/node": "22.7.7",
-    "@types/react": "18.3.11",
-    "@types/react-dom": "18.3.1",
+    "@types/cheerio": "^1.0.0",
+    "@types/node": "24.0.1",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
     "@types/styled-components": "^5.1.34",
-    "@typescript-eslint/eslint-plugin": "^8.10.0",
-    "@typescript-eslint/parser": "^8.10.0",
-    "autoprefixer": "^10.4.20",
-    "eslint": "^9.13.0",
-    "eslint-config-next": "^14.2.15",
+    "@typescript-eslint/eslint-plugin": "^8.34.0",
+    "@typescript-eslint/parser": "^8.34.0",
+    "autoprefixer": "^10.4.21",
+    "eslint": "^9.29.0",
+    "eslint-config-next": "^15.3.3",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-react": "^7.37.1",
-    "husky": "^9.1.6",
-    "typescript": "5.6.3"
+    "eslint-plugin-react": "^7.37.5",
+    "husky": "^9.1.7",
+    "typescript": "5.8.3"
   }
 }
