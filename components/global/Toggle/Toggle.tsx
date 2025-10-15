@@ -11,11 +11,11 @@ const Toggle = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const ref = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
   const sort = searchParams.get('sort') || 'created-newest'
   const [showMenu, setShowMenu] = useState(false)
 
-  useOnClickOutside(ref, () => setShowMenu(false))
+  useOnClickOutside(ref as any, () => setShowMenu(false))
 
   const handleSetShowMenu = (sort) => {
     setShowMenu(false)

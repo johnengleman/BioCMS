@@ -11,7 +11,7 @@ const getFirstWords = (htmlString: string) => {
 
   $('body')
     .contents()
-    .each(function processNode(this: cheerio.Element) {
+    .each(function processNode(this: any) {
       if (this.type === 'tag' && this.tagName === 'p') {
         paragraphCount++
       }

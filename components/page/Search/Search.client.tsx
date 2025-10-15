@@ -10,7 +10,7 @@ import { useOnClickOutside } from 'usehooks-ts'
 import styles from './styles.module.scss'
 
 const SearchClient = ({ searchData }) => {
-  const ref = useRef(null)
+  const ref = useRef<HTMLDivElement>(null)
   const [searchInput, setSearchInput] = useState('')
   const [searchOptions, setSearchOptions] = useState<
     Saint[]
@@ -45,7 +45,7 @@ const SearchClient = ({ searchData }) => {
     }
   }, [searchInput, searchData])
 
-  useOnClickOutside(ref, handleClickOutside)
+  useOnClickOutside(ref as any, handleClickOutside)
 
   if (!searchData) {
     return null
