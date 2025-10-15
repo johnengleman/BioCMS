@@ -6,8 +6,7 @@ import { useState } from 'react'
 import { getSaints } from '../../../queries/getSaints'
 import SaintSummary from '../SaintSummary/SaintSummary'
 import ScrollUp from '../../global/ScrollUp/ScrollUp'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
+import { FaRegFrownOpen } from 'react-icons/fa'
 import { useInfiniteLoader } from 'masonic'
 import styles from '../../../app/saints/styles.module.scss'
 
@@ -82,8 +81,7 @@ const SaintsListClient = ({
         </>
       ) : (
         <p className="status">
-          No saints found.{' '}
-          <FontAwesomeIcon icon={faFaceFrownSlight} />
+          No saints found. <FaRegFrownOpen />
         </p>
       )}
     </div>

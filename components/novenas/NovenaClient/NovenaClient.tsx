@@ -4,8 +4,7 @@ import { useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useInfiniteLoader } from 'masonic'
 import { getPrayers } from '../../../queries/getPrayers'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
+import { FaRegFrownOpen } from 'react-icons/fa'
 import NovenaDetail from '../NovenaDetail/NovenaDetail'
 
 const Masonry = dynamic(
@@ -66,7 +65,7 @@ const NovenaClient = ({
       ) : (
         <p className="status">
           No Novenas found.
-          <FontAwesomeIcon icon={faFaceFrownSlight} />
+          <FaRegFrownOpen />
         </p>
       )}
     </>

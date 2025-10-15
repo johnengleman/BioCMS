@@ -3,8 +3,7 @@
 import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass } from '@fortawesome/pro-duotone-svg-icons'
+import { FaSearch } from 'react-icons/fa'
 import Fuse from 'fuse.js'
 import { Saint } from '../../saint/SaintSummary/interfaces'
 import { useOnClickOutside } from 'usehooks-ts'
@@ -66,7 +65,7 @@ const SearchClient = ({ searchData }) => {
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
+          <FaSearch />
         </div>
         <div className={styles.dropdownContent}>
           {searchOptions.map((option, i) => (

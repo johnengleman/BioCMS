@@ -4,12 +4,11 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import ChurchToggle from '../ChurchToggle/ChurchToggle'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faCircleQuestion,
-  faSparkles,
-  faMessagePen,
-} from '@fortawesome/pro-regular-svg-icons'
+  FaQuestionCircle,
+  FaStar,
+  FaEdit,
+} from 'react-icons/fa'
 import useBreakpoints from '../../../hooks/useBreakPoints'
 import styles from './styles.module.scss'
 
@@ -54,24 +53,17 @@ const Footer = () => {
       <div className={styles.content}>
         <div className={styles.left}>
           <Link href="/about">
-            <FontAwesomeIcon
-              icon={faCircleQuestion}
-              size="lg"
-            />
+            <FaQuestionCircle size={20} />
             About
           </Link>
           {/* <Link href="/feedback">
-            <FontAwesomeIcon
-              icon={faMessagePen}
-              size="lg"
+            <FaEdit
+              size={20}
             />
             Feedback
           </Link> */}
           <Link href="/updates">
-            <FontAwesomeIcon
-              icon={faSparkles}
-              size="lg"
-            />
+            <FaStar size={20} />
             Recent Updates
           </Link>
         </div>

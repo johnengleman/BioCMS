@@ -1,5 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCross } from '@fortawesome/pro-duotone-svg-icons'
+import { FaCross } from 'react-icons/fa6'
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from './styles.module.scss'
@@ -27,7 +26,7 @@ const SimilarSaint = ({
         />
         <div className={styles.personInfo}>
           <div className={styles.dates}>
-            <FontAwesomeIcon icon={faCross} />
+            <FaCross />
             <div className={styles.date}>
               {birth_year || '?'}-{death_year || '?'}
             </div>

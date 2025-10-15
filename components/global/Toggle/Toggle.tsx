@@ -4,8 +4,7 @@ import { useState, useRef } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next-nprogress-bar'
 import { useOnClickOutside } from 'usehooks-ts'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretUp } from '@fortawesome/pro-duotone-svg-icons'
+import { FaCaretUp } from 'react-icons/fa'
 import styles from './styles.module.scss'
 
 const Toggle = () => {
@@ -48,10 +47,13 @@ const Toggle = () => {
         >
           sort by{' '}
           <span className={styles.direction}>{sort}</span>
-          <FontAwesomeIcon
-            icon={faCaretUp}
-            rotation={showMenu ? 180 : 90}
-            size="lg"
+          <FaCaretUp
+            style={{
+              transform: showMenu
+                ? 'rotate(180deg)'
+                : 'rotate(90deg)',
+            }}
+            size={20}
           />
         </span>
         <div

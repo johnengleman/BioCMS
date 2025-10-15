@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBook } from '@fortawesome/pro-regular-svg-icons'
+import { FaBook } from 'react-icons/fa'
 import styles from './styles.module.scss'
 
 const ReadMoreLinks = ({ links, type }) => {
@@ -31,7 +30,7 @@ const ReadMoreLinks = ({ links, type }) => {
                     {link.title}
                   </span>
                   . {link.publisher}
-                  <FontAwesomeIcon icon={faBook} />
+                  <FaBook />
                 </Link>
               ) : (
                 <p key={i}>{link.text}</p>

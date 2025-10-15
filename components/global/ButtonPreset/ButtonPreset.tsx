@@ -1,13 +1,12 @@
 'use client'
 
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 import { flushSync } from 'react-dom'
 import {
   useSearchParams,
   usePathname,
 } from 'next/navigation'
 import { useRouter } from 'next-nprogress-bar'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import styles from './styles.module.scss'
 
 const ButtonPreset = ({ icon, value, count }) => {
@@ -66,14 +65,13 @@ const ButtonPreset = ({ icon, value, count }) => {
         }
       }}
     >
-      <FontAwesomeIcon
-        icon={icon}
-        style={{
-          fontSize: '20px',
-          '--fa-primary-color': '#ccad00',
-          '--fa-secondary-color': '#ccad00',
-        }}
-      />
+      {icon &&
+        React.createElement(icon, {
+          size: 20,
+          style: {
+            color: '#ccad00',
+          },
+        })}
       {value
         .replace(/and/g, '&')
         .replace(/_/g, ' ')

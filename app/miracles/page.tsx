@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
+import { FaRegFrownOpen } from 'react-icons/fa'
 import { getMiracles } from '../../queries/getMiracles'
 import Page from '../../components/page/Page/Page'
 import SaintDetail from '../../components/global/SaintDetail/SaintDetail'
@@ -70,8 +69,7 @@ const Miracles = async (props: NextPageProps) => {
             />
           ) : (
             <p className="status">
-              No miracles found.{' '}
-              <FontAwesomeIcon icon={faFaceFrownSlight} />
+              No miracles found. <FaRegFrownOpen />
             </p>
           )}
           <ScrollUp />

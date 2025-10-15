@@ -1,11 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faBars,
-  faXmark,
-} from '@fortawesome/pro-duotone-svg-icons'
+import { FaBars, FaTimes } from 'react-icons/fa'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Search from '../Search/Search.server'
@@ -69,9 +65,8 @@ const HeaderClient = ({ navData, searchComponent }) => {
         <div className={`${styles.content}`}>
           {mobileMenuIsOpen && (
             <div className={styles.close}>
-              <FontAwesomeIcon
-                icon={faXmark}
-                size="2xl"
+              <FaTimes
+                size={32}
                 style={{ color: '#dbdfe6' }}
                 onClick={() => handleToggleMenu(false)}
               />
@@ -81,9 +76,8 @@ const HeaderClient = ({ navData, searchComponent }) => {
             {searchComponent}
             {/* <SMButtons transparent={isSaintsPage} /> */}
             {isMobile && (
-              <FontAwesomeIcon
-                icon={faBars}
-                size="2xl"
+              <FaBars
+                size={32}
                 style={{ color: '#ccad00' }}
                 onClick={() => handleToggleMenu(true)}
               />
@@ -112,7 +106,6 @@ const HeaderClient = ({ navData, searchComponent }) => {
                   className="nav-link"
                   onClick={() => handleClick()}
                 >
-                 
                   Teachings
                   <span className={styles.count}>
                     ({teachingsCount})
@@ -137,7 +130,6 @@ const HeaderClient = ({ navData, searchComponent }) => {
                   className="nav-link"
                   onClick={() => handleClick()}
                 >
-                 
                   Quotes
                   <span className={styles.count}>
                     ({quotesCount})

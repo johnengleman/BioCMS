@@ -1,8 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faCalendarDays,
-  faFamily,
-} from '@fortawesome/pro-duotone-svg-icons'
+import { FaCalendarDays, FaUsers } from 'react-icons/fa6'
 import styles from './styles.module.scss'
 
 const getDate = (dateTime) => {
@@ -38,10 +34,7 @@ const ExtraInfo = ({
       {(catholicFeastDay || orthodoxFeastDay) && (
         <div className={styles.row}>
           <div className={styles.icon}>
-            <FontAwesomeIcon
-              icon={faCalendarDays}
-              style={{ fontSize: '20px' }}
-            />
+            <FaCalendarDays style={{ fontSize: '20px' }} />
           </div>
 
           <div className={styles.data}>
@@ -90,10 +83,7 @@ const ExtraInfo = ({
       {patron && (
         <div className={styles.row}>
           <div className={styles.icon}>
-            <FontAwesomeIcon
-              icon={faFamily}
-              style={{ fontSize: '20px' }}
-            />
+            <FaUsers style={{ fontSize: '20px' }} />
           </div>
           <div className={styles.data}>
             <p>

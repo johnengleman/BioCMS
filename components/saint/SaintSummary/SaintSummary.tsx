@@ -1,9 +1,5 @@
 import Link from 'next/link'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faCross,
-  faCalendarDays,
-} from '@fortawesome/pro-duotone-svg-icons'
+import { FaCross, FaCalendarDays } from 'react-icons/fa6'
 import { formatDate } from '../../../utils/dates'
 import Image from 'next/image'
 import styles from './styles.module.scss'
@@ -36,7 +32,7 @@ const SaintSummary = ({ data }) => {
       href={`/saints/${slug}`}
     >
       <div className={styles.death}>
-        <FontAwesomeIcon icon={faCross} />
+        <FaCross />
         {birth_year || '?'}-{death_year || '?'}
       </div>
       <div className={styles.image}>
@@ -73,13 +69,13 @@ const SaintSummary = ({ data }) => {
         <div className={styles.feastDays}>
           {feast_day_catholic && (
             <div className={styles.feastDay}>
-              <FontAwesomeIcon icon={faCalendarDays} />
+              <FaCalendarDays />
               Catholic: {formatDate(feast_day_catholic)}
             </div>
           )}
           {feast_day_orthodox && (
             <div className={styles.feastDay}>
-              <FontAwesomeIcon icon={faCalendarDays} />
+              <FaCalendarDays />
               Orthodox: {formatDate(feast_day_orthodox)}
             </div>
           )}

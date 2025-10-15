@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
+import { FaRegFrownOpen } from 'react-icons/fa'
 import Hero from '../../components/saint/Hero/Hero'
 import { getNewestBooks } from '../../queries/getNewestBooks'
 import { getBooks } from '../../queries/getBooks'
@@ -18,7 +17,7 @@ export const runtime = 'edge'
 
 const Books = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter || "all"
+  const filter = searchParams.filter || 'all'
   const preset = searchParams.preset || ''
   const church = await getChurch(searchParams)
 
@@ -82,8 +81,7 @@ const Books = async (props: NextPageProps) => {
               </div>
             ) : (
               <p className="status">
-                No new books found.{' '}
-                <FontAwesomeIcon icon={faFaceFrownSlight} />
+                No new books found. <FaRegFrownOpen />
               </p>
             ))}
 
@@ -103,8 +101,7 @@ const Books = async (props: NextPageProps) => {
             </div>
           ) : (
             <p className="status">
-              No books found.{' '}
-              <FontAwesomeIcon icon={faFaceFrownSlight} />
+              No books found. <FaRegFrownOpen />
             </p>
           )}
           <ScrollUp />

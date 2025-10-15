@@ -1,6 +1,4 @@
 import { ReactNode } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleLeft } from '@fortawesome/sharp-solid-svg-icons'
 import styles from './styles.module.scss'
 
 const SectionTitle = ({

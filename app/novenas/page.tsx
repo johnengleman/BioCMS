@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
+import { FaRegFrownOpen } from 'react-icons/fa'
 import { getPrayers } from '../../queries/getPrayers'
 import Page from '../../components/page/Page/Page'
 import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
@@ -15,7 +14,7 @@ import { NextPageProps } from '../../types/nextjs'
 
 const NovenasPage = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter || "all"
+  const filter = searchParams.filter || 'all'
   const church = await getChurch(searchParams)
 
   const initialPrayers = await getPrayers({
@@ -65,8 +64,7 @@ const NovenasPage = async (props: NextPageProps) => {
             />
           ) : (
             <p className="status">
-              No novenas found.{' '}
-              <FontAwesomeIcon icon={faFaceFrownSlight} />
+              No novenas found. <FaRegFrownOpen />
             </p>
           )}
           <ScrollUp />

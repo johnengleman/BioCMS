@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBookOpenReader } from '@fortawesome/pro-duotone-svg-icons'
+import { FaBookOpen } from 'react-icons/fa'
 import * as cheerio from 'cheerio'
 import styles from './styles.module.scss'
 
@@ -86,8 +85,7 @@ const BentoSection: React.FC<BentoSectionProps> = ({
       <div className={styles.footer}>
         <Link href={link || ''}>
           <button>
-            <FontAwesomeIcon
-              icon={faBookOpenReader}
+            <FaBookOpen
               style={{
                 color:
                   theme === 'light'

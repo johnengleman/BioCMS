@@ -1,8 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowDownFromLine } from '@fortawesome/pro-duotone-svg-icons'
+import { FaArrowDown } from 'react-icons/fa'
 import styles from './styles.module.scss'
 
 const ScrollUp = () => {
@@ -31,13 +30,11 @@ const ScrollUp = () => {
         inView ? styles.inView : ''
       }`}
     >
-      <FontAwesomeIcon
-        icon={faArrowDownFromLine}
-        rotation={180}
+      <FaArrowDown
         style={{
+          transform: 'rotate(180deg)',
           fontSize: '30px',
-          '--fa-primary-color': '#ccad00',
-          '--fa-secondary-color': '#ccad00',
+          color: '#ccad00',
         }}
       />
     </button>

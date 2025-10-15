@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPersonPraying } from '@fortawesome/pro-duotone-svg-icons'
+import { FaPray } from 'react-icons/fa'
 import styles from './styles.module.scss'
 
 const NovenaSection = ({
@@ -38,8 +37,7 @@ const NovenaSection = ({
           href={`saints/${saintSlug}/novenas/${prayersSlug}`}
         >
           <button>
-            <FontAwesomeIcon
-              icon={faPersonPraying}
+            <FaPray
               style={{
                 color: `var(--violet)`,
                 fontSize: '15px',

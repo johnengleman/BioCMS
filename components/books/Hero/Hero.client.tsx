@@ -1,11 +1,11 @@
 'use client'
 
 import {
-  faChurch,
-  faPenLine,
-  faPersonPraying,
-  faEarthAmerica,
-} from '@fortawesome/pro-duotone-svg-icons'
+  FaChurch,
+  FaPen,
+  FaPray,
+  FaGlobeAmericas,
+} from 'react-icons/fa'
 import ButtonPreset from '../../global/ButtonPreset/ButtonPreset'
 import ButtonFilter from '../../global/ButtonFilter/ButtonFilter'
 import styles from './styles.module.scss'
@@ -13,16 +13,16 @@ import styles from './styles.module.scss'
 const HeroClient = ({ authorData, genreData }) => {
   const getIcon = (genre) => {
     if (genre === 'theology_and_dogma') {
-      return faChurch
+      return FaChurch
     }
     if (genre === 'spiritual_and_ascetic_writings') {
-      return faPenLine
+      return FaPen
     }
     if (genre === 'church_history_and_biography') {
-      return faEarthAmerica
+      return FaGlobeAmericas
     }
     if (genre === 'prayer_and_devotionals') {
-      return faPersonPraying
+      return FaPray
     }
   }
 

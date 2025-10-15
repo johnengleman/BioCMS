@@ -3,8 +3,7 @@
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFaceFrownSlight } from '@fortawesome/pro-duotone-svg-icons'
+import { FaRegFrownOpen } from 'react-icons/fa'
 import { useInfiniteLoader } from 'masonic'
 import { getQuotes } from '../../../queries/getQuotes'
 import styles from './styles.module.scss'
@@ -130,8 +129,7 @@ const Quotes = ({
         />
       ) : (
         <p className="status">
-          No quotes found.{' '}
-          <FontAwesomeIcon icon={faFaceFrownSlight} />
+          No quotes found. <FaRegFrownOpen />
         </p>
       )}
     </div>

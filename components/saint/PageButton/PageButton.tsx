@@ -1,61 +1,61 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import React from 'react'
 import {
-  faBooks,
-  faFamily,
-  faStarChristmas,
-  faFeather,
-  faWind,
-  faFlowerTulip,
-  faQuotes,
-  faTombstone,
-  faPersonPraying
-} from '@fortawesome/pro-regular-svg-icons'
+  FaBook,
+  FaUsers,
+  FaStar,
+  FaFeather,
+  FaWind,
+  FaSeedling,
+  FaQuoteRight,
+  FaCross,
+  FaPray,
+} from 'react-icons/fa'
 import styles from './styles.module.scss'
 
 const tocConfig = {
   biography: {
     backgroundColor: '#7d7b2e',
-    icon: faFlowerTulip,
+    icon: FaSeedling,
     name: 'Biography',
   },
   miracles: {
     backgroundColor: '#e61c18',
-    icon: faStarChristmas,
+    icon: FaStar,
     name: 'Miracles',
   },
   teachings: {
     backgroundColor: '#2b335d',
-    icon: faFeather,
+    icon: FaFeather,
     name: 'Teachings',
   },
   legacy: {
     backgroundColor: '#2b5d51',
-    icon: faWind,
+    icon: FaWind,
     name: 'Legacy',
   },
   similarSaints: {
     backgroundColor: '#92a729',
-    icon: faFamily,
+    icon: FaUsers,
     name: 'Similar Saints',
   },
   books: {
     backgroundColor: '#3e6f2b',
-    icon: faBooks,
+    icon: FaBook,
     name: 'Books',
   },
   quotes: {
     backgroundColor: '#323c2e',
-    icon: faQuotes,
+    icon: FaQuoteRight,
     name: 'Quotes',
   },
   relics: {
     backgroundColor: '#73182e',
-    icon: faTombstone,
+    icon: FaCross,
     name: 'Relics',
   },
   novenas: {
     backgroundColor: '#71855a',
-    icon: faPersonPraying,
+    icon: FaPray,
     name: 'Novenas',
   },
 }
@@ -81,13 +81,12 @@ const PageButton = ({
           backgroundColor: tocConfig[type]?.backgroundColor,
         }}
       >
-        <FontAwesomeIcon
-          icon={tocConfig[type]?.icon}
-          style={{
-            color: `#fff`,
+        {React.createElement(tocConfig[type]?.icon, {
+          style: {
+            color: '#fff',
             fontSize: '16px',
-          }}
-        />
+          },
+        })}
       </div>
       {tocConfig[type]?.name}
     </button>

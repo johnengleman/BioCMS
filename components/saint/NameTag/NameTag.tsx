@@ -1,5 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCross } from '@fortawesome/pro-duotone-svg-icons'
+import { FaCross } from 'react-icons/fa6'
 import styles from './styles.module.scss'
 
 interface NameTagProps {
@@ -23,7 +22,7 @@ const NameTag: React.FC<NameTagProps> = ({
     <div className={styles.nameTag}>
       <div className={styles.info}>
         <div className={styles.date}>
-          <FontAwesomeIcon icon={faCross} />
+          <FaCross />
           {birthYear || '?'}-{deathYear || '?'}
         </div>
         <h1 className={styles.name}>{header}</h1>

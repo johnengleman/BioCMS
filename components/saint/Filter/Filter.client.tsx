@@ -6,11 +6,11 @@ import ButtonFilter from '../../global/ButtonFilter/ButtonFilter'
 import ButtonPreset from '../../global/ButtonPreset/ButtonPreset'
 import ButtonOrganize from '../../global/ButttonOrganize/ButtonOrganize'
 import {
-  faCameraRetro,
-  faFamily,
-  faGrid2,
-  faCalendar,
-} from '@fortawesome/pro-duotone-svg-icons'
+  FaCamera,
+  FaUsers,
+  FaTh,
+  FaCalendar,
+} from 'react-icons/fa'
 import styles from './styles.module.scss'
 import { properties } from '../../../utils/properties'
 
@@ -31,16 +31,16 @@ const Filter = ({
 
   const getIcon = (preset) => {
     if (preset === '20th_century_saints') {
-      return faCameraRetro
+      return FaCamera
     }
     if (preset === 'patron_saints') {
-      return faFamily
+      return FaUsers
     }
     if (preset === 'category') {
-      return faGrid2
+      return FaTh
     }
     if (preset === 'month') {
-      return faCalendar
+      return FaCalendar
     }
   }
 
