@@ -4,8 +4,8 @@ import { Nunito, Lora } from 'next/font/google'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import '../styles/variables.css'
 import '../styles/globals.css'
-import { config } from '@fortawesome/fontawesome-svg-core'
-config.autoAddCss = false
+// import { config } from '@fortawesome/fontawesome-svg-core'
+// config.autoAddCss = false
 import { ReactNode } from 'react'
 import Providers from './providers'
 import Script from 'next/script'

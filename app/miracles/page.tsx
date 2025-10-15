@@ -15,9 +15,9 @@ import { NextPageProps } from '../../types/nextjs'
 
 export const runtime = 'edge'
 
-const Teachings = async (props: NextPageProps) => {
+const Miracles = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter || "all"
+  const filter = searchParams.filter || 'all'
   const miraclesPreset = searchParams.preset || ''
   const church = await getChurch(searchParams)
 
@@ -81,4 +81,4 @@ const Teachings = async (props: NextPageProps) => {
   )
 }
 
-export default Teachings
+export default Miracles
