@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import Toggle from '../../global/Toggle/Toggle'
 import ButtonFilter from '../../global/ButtonFilter/ButtonFilter'
 import ButtonPreset from '../../global/ButtonPreset/ButtonPreset'
@@ -21,14 +21,6 @@ const Filter = ({
 }) => {
   const [organization, setOrganization] =
     useState('category')
-  const canUseTransition = useRef<boolean>(false)
-
-  if (typeof window !== 'undefined') {
-    canUseTransition.current =
-      typeof (document as any)?.startViewTransition ===
-      'function'
-  }
-
   const getIcon = (preset) => {
     if (preset === '20th_century_saints') {
       return FaCamera
@@ -43,9 +35,6 @@ const Filter = ({
       return FaCalendar
     }
   }
-
-  console.log('church', church)
-  // console.log('filtersCount', filtersCount)
 
   return (
     <div className={styles.filter}>

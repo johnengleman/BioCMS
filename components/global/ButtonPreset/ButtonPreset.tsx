@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef } from 'react'
+import React from 'react'
 import { flushSync } from 'react-dom'
 import {
   useSearchParams,
@@ -14,14 +14,6 @@ const ButtonPreset = ({ icon, value, count }) => {
   const searchParams = useSearchParams()
   const pathname = usePathname()
   const selectedPreset = searchParams.get('preset')
-  const canUseTransition = useRef<boolean>(false)
-
-  if (typeof window !== 'undefined') {
-    canUseTransition.current =
-      typeof (document as any)?.startViewTransition ===
-      'function'
-  }
-
   const setSaintPreset = (preset) => {
     const newSearchParams = new URLSearchParams(
       searchParams.toString(),
@@ -50,8 +42,8 @@ const ButtonPreset = ({ icon, value, count }) => {
         selectedPreset === value ? styles.active : ''
       }`}
       onClick={() => {
-        if (canUseTransition.current) {
-          ;(document as any)?.startViewTransition(() => {
+        if (typeof document.startViewTransition === 'function') {
+          document.startViewTransition(() => {
             flushSync(() => {
               setSaintPreset(
                 selectedPreset !== value ? value : 'none',

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useRef } from 'react'
+import { useMemo, useState, useRef } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { FaSearch } from 'react-icons/fa'
@@ -12,38 +12,30 @@ import styles from './styles.module.scss'
 const SearchClient = ({ searchData }) => {
   const ref = useRef<HTMLDivElement>(null)
   const [searchInput, setSearchInput] = useState('')
-  const [searchOptions, setSearchOptions] = useState<
-    Saint[]
-  >([])
 
   const handleClickOutside = () => {
     setSearchInput('')
   }
 
-  useEffect(() => {
+  const fuse = useMemo(() => new Fuse<Saint>(searchData || [], {
+    keys: ['name'],
+    threshold: 0.3,
+    shouldSort: true,
+    location: 0,
+    distance: 100,
+  }), [searchData])
+
+  const searchOptions = useMemo(() => {
     const strippedSearch = searchInput
       .replace(/\b(st\.?|saint|elder)\b/gi, '')
       .replace(/[.,//]/g, '')
       .trim()
       .toLowerCase()
 
-    const fuse = new Fuse(searchData, {
-      keys: ['name'],
-      threshold: 0.3, // Increase threshold for more leniency
-      shouldSort: true,
-      location: 0, // Start at the beginning of the string
-      distance: 100, // Increase distance to cover more character
-    })
-
-    if (strippedSearch.length > 1) {
-      const results = fuse.search(strippedSearch)
-      setSearchOptions(
-        results.map((result) => result.item as Saint),
-      )
-    } else {
-      setSearchOptions([])
-    }
-  }, [searchInput, searchData])
+    return strippedSearch.length > 1
+      ? fuse.search(strippedSearch).map((result) => result.item)
+      : []
+  }, [searchInput, fuse])
 
   useOnClickOutside(ref as any, handleClickOutside)
 

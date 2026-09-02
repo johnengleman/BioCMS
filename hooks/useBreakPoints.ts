@@ -1,26 +1,15 @@
 'use client'
 
-import { useEffect, useState, useMemo } from 'react'
+import { useCallback, useSyncExternalStore, useMemo } from 'react'
 
 function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(false)
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const mediaQuery = window.matchMedia(query)
-      const handler = (event: MediaQueryListEvent) =>
-        setMatches(event.matches)
-
-      setMatches(mediaQuery.matches) // Initial match check
-
-      mediaQuery.addEventListener('change', handler)
-
-      return () =>
-        mediaQuery.removeEventListener('change', handler)
-    }
+  const subscribe = useCallback((onChange: () => void) => {
+    const mediaQuery = window.matchMedia(query)
+    mediaQuery.addEventListener('change', onChange)
+    return () => mediaQuery.removeEventListener('change', onChange)
   }, [query])
-
-  return matches
+  const getSnapshot = useCallback(() => window.matchMedia(query).matches, [query])
+  return useSyncExternalStore(subscribe, getSnapshot, () => false)
 }
 
 export default function useBreakpoints() {

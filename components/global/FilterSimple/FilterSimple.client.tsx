@@ -1,6 +1,5 @@
 'use client'
 
-import { useRef } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Toggle from '../Toggle/Toggle'
 import styles from './styles.module.scss'
@@ -15,16 +14,6 @@ const FilterSimple = ({
 }) => {
   const searchParams = useSearchParams()
   const preset = searchParams?.get('preset') || 'none'
-  const canUseTransition = useRef<boolean>(false)
-
-  if (typeof window !== 'undefined') {
-    canUseTransition.current =
-      typeof (document as any)?.startViewTransition ===
-      'function'
-  }
-
-  console.log(filtersCount)
-
   return (
     <div className={styles.filter}>
       <div className={styles.slideContainer}>

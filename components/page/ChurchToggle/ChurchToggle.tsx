@@ -77,6 +77,8 @@ const ChurchToggle = () => {
     if (cookie) {
       try {
         const data = JSON.parse(cookie)
+        // Hydrate the browser-only saved preference after the server render.
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setSelectedChurch(data.church)
         updateToggle(data.church)
       } catch (err) {

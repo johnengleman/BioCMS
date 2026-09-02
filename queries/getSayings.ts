@@ -20,7 +20,7 @@ const query = gql`
     quotes {
       id
       text
-      author {
+      author: saint {
         name
       }
     }

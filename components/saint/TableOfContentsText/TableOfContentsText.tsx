@@ -14,6 +14,8 @@ const TableOfContentsText: React.FC<{}> = () => {
       document?.querySelectorAll<HTMLElement>('#text h2') ||
       []
     const elementsArray = Array.from(nodeList)
+    // Rich-text headings are only available in the mounted DOM, not as React props.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setElements(elementsArray)
 
     nodeList?.forEach((h2, index) => {

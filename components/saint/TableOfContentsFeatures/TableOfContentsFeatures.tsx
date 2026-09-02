@@ -15,6 +15,8 @@ const TableOfContentFeatures = () => {
       '[id*="section"]',
     )
     const elementsArray = Array.from(nodeList)
+    // The table of contents synchronizes with headings rendered elsewhere in the DOM.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setElements(elementsArray)
   }, [])
 

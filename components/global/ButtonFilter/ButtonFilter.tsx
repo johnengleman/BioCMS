@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef } from 'react'
+import React from 'react'
 import {
   useSearchParams,
   usePathname,
@@ -24,14 +24,6 @@ const ButtonFilter: React.FC<ButtonFilterProps> = ({
   const selectedFilter = searchParams.get('filter') || 'all'
 
   const isSelected = selectedFilter === filter.toLowerCase()
-
-  const canUseTransition = useRef<boolean>(false)
-
-  if (typeof window !== 'undefined') {
-    canUseTransition.current =
-      typeof (document as any)?.startViewTransition ===
-      'function'
-  }
 
   const setSaintFilter = (filter) => {
     const newSearchParams = new URLSearchParams(
@@ -57,8 +49,8 @@ const ButtonFilter: React.FC<ButtonFilterProps> = ({
           : ''
       }`}
       onClick={() => {
-        if (canUseTransition.current) {
-          ;(document as any)?.startViewTransition(() => {
+        if (typeof document.startViewTransition === 'function') {
+          document.startViewTransition(() => {
             flushSync(() => {
               setSaintFilter(!isSelected ? filter : 'all')
             })
