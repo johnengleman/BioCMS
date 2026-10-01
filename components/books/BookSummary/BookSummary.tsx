@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import styles from './styles.module.scss'
+import parseList from '../../../utils/parseList'
 
 export default function BookSummary({
   data,
@@ -36,7 +37,8 @@ export default function BookSummary({
         <div>
           <div className={styles.titleContainer}>
             <div className={styles.genre}>
-              {genre
+              {parseList(genre)
+                .join(', ')
                 .replace(/and/g, '&')
                 .replace(/_/g, ' ')}
             </div>

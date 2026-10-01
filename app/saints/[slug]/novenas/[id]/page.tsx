@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import { Fragment } from 'react'
 import Head from 'next/head'
 import { getSaint } from '../../../../../queries/getSaint'
@@ -35,6 +36,8 @@ const SaintNovena = async (props: NextPageProps) => {
   const slug = searchParams.slug
 
   const data = await getSaint(slug)
+
+  if (!data) notFound()
 
   const novena = data.prayers.find(
     (prayer) => prayer.prayer_slug === id,

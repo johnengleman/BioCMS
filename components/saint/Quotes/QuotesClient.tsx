@@ -7,6 +7,7 @@ import { FaRegFrownOpen } from 'react-icons/fa'
 import { useInfiniteLoader } from 'masonic'
 import { getQuotes } from '../../../queries/getQuotes'
 import styles from './styles.module.scss'
+import parseList from '../../../utils/parseList'
 
 const Masonry = dynamic(
   () => import('masonic').then((mod) => mod.Masonry),
@@ -62,7 +63,7 @@ const Quote = ({ index, data, width }) => {
           </div>
         )}
         <div className={styles.topics}>
-          {topics?.map((topic, index) => (
+          {parseList(topics).map((topic, index) => (
             <div
               key={index}
               className={styles.topic}

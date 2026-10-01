@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import Head from 'next/head'
 import styles from '../styles.module.scss'
 import { getSaint } from '../../../../queries/getSaint'
@@ -22,6 +23,8 @@ const SaintBio = async (props: NextPageProps) => {
   const slug = searchParams.slug
 
   const data = await getSaint(slug)
+
+  if (!data) notFound()
 
   const structuredData = {
     '@context': 'https://schema.org',

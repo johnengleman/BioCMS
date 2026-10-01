@@ -1,4 +1,5 @@
 import fetchHelper from './fetchHelper'
+import { withParsedCategories } from '../utils/parseList'
 interface Image {
   directus_files_id: {
     id: number
@@ -70,7 +71,7 @@ export const getSaints = async (church) => {
     variables: { church },
   })
 
-  return res.data.saints
+  return res.data.saints.map(withParsedCategories)
 }
 
 export const getRelatedSaints = async ({
@@ -78,12 +79,13 @@ export const getRelatedSaints = async ({
   church,
   slug,
 }) => {
-  const cats = categories.split(',') ?? undefined
+  // Category values are not consistently cased in Directus ("monastics" vs "Monastics").
+  const cats = categories.split(',').map((category) => category.toLowerCase())
   const allSaints = await getSaints(church)
 
   const relatedSaints = allSaints.filter((saint) =>
     saint.categories.some((category) =>
-      cats.includes(category),
+      cats.includes(category.toLowerCase()),
     ),
   )
 

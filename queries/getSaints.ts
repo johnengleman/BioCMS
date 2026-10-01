@@ -1,4 +1,5 @@
 import fetchHelper from './fetchHelper'
+import { withParsedCategories } from '../utils/parseList'
 import { getMonthNumber } from '../utils/dates'
 
 interface SaintsResponse {
@@ -144,5 +145,5 @@ export const getSaints = async ({
     query,
   })
 
-  return response?.data?.saints
+  return response?.data?.saints?.map(withParsedCategories)
 }

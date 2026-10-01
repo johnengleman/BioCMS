@@ -1,5 +1,6 @@
 import { gql } from 'graphql-request'
 import fetchHelper from './fetchHelper'
+import { withParsedCategories } from '../utils/parseList'
 
 interface SaintResponse {
   data: {
@@ -9,7 +10,7 @@ interface SaintResponse {
 
 const query = gql`
   query getSaint($slug: String!) {
-    saints(filter: { slug: { _icontains: $slug } }) {
+    saints(filter: { slug: { _eq: $slug } }, limit: 1) {
       id
       name
       summary
@@ -83,5 +84,5 @@ export const getSaint = async (slug?: string) => {
     variables: { slug },
   })
 
-  return res.data.saints[0]
+  return withParsedCategories(res.data.saints[0])
 }

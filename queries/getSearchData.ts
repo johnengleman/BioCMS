@@ -1,4 +1,5 @@
 import fetchHelper from './fetchHelper'
+import { withParsedCategories } from '../utils/parseList'
 
 type Saint = {
   id: string
@@ -63,7 +64,7 @@ export const getSearchData = async (
       query: getSaintsQuery(church),
       variables: church !== 'all' ? { church } : {},
     })
-    return response?.data?.saints || null
+    return response?.data?.saints?.map(withParsedCategories) || null
   } catch (error) {
     console.error('Error fetching saint data: ', error)
     return null
