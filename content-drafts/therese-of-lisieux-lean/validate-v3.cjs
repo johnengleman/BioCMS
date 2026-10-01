@@ -1,0 +1,11 @@
+const v=require('../../scripts/directus-saint-drafts/validate.cjs');
+const e=require('./entry-v3.json');
+const delta={...e.saint,miracles:e.related.miracles,teachings:e.related.teachings,quotes:e.related.quotes};
+const body={action:'save',collection:'saints',entries:[{slug:e.saint.slug,version_id:'123e4567-e89b-42d3-a456-426614174000',expected_revision:null,delta}]};
+const r=v({$accountability:{admin:true,user:'u'},$trigger:{body}});
+console.log('validate.cjs OK',r.slugs);
+console.log('miracles chars',e.related.miracles[0].miracles.length,'teachings',e.related.teachings[0].teachings.length,'bio',e.saint.biography.length);
+console.log('quotes',e.related.quotes.length,'max source',Math.max(...e.related.quotes.map(q=>q.source.length)));
+const fs=require('fs');
+console.log('bio identical',e.saint.biography===fs.readFileSync('biography-v3.html','utf8'),'summary identical',e.saint.summary===fs.readFileSync('summary-v3.txt','utf8'));
+console.log('h3 count',(e.related.miracles[0].miracles.match(/<h3 /g)||[]).length);

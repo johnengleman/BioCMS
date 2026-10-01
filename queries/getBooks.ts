@@ -65,8 +65,11 @@ function getBooksQuery({ church, preset, filter }) {
         description
         amazon_book_cover
         genre
+        year
+        publisher
         saint {
             name
+            slug
             venerated_in
             profile_image {
               id

@@ -1,117 +1,179 @@
 import { notFound } from 'next/navigation'
-import Head from 'next/head'
-import styles from '../styles.module.scss'
+import { saintMetadata } from '../../../../utils/saintMetadata'
 import { getSaint } from '../../../../queries/getSaint'
-import Page from '../../../../components/page/Page/Page'
-import ImageMain from '../../../../components/saint/ImageMain/ImageMain'
-import Books from '../../../../components/saint/Books/Books'
-import RelatedPeople from '../../../../components/saint/SimilarSaints/SimilarSaints.server'
-import NameTag from '../../../../components/saint/NameTag/NameTag'
-import ReadMoreLinks from '../../../../components/saint/ReadMoreLinks/ReadMoreLinks'
-import NextPage from '../../../../components/saint/NextPage/NextPage'
-import About from '../../../../components/global/About/About'
-import ScrollUp from '../../../../components/global/ScrollUp/ScrollUp'
-import Content from '../../../../components/saint/Content/Content.Client'
+import {
+  countWords,
+  getBiography,
+  getChapters,
+  getMiracles,
+  getSources,
+  splitSaintName,
+} from '../../../../utils/saintContent'
+import SiteHeader from '../../../../components/candle/SiteHeader/SiteHeader'
+import SiteFooter from '../../../../components/candle/SiteFooter/SiteFooter'
+import ReadingProgress from '../../../../components/candle/ReadingProgress/ReadingProgress'
+import {
+  NextCards,
+  NotesCard,
+  ReadingHeader,
+  ReadingLayout,
+  plural,
+} from '../../../../components/candle/Reading/ReadingParts'
+import styles from '../../../../components/candle/Reading/reading.module.scss'
 
 export const runtime = 'edge'
+
 import { NextPageProps } from '../../../../types/nextjs'
 
-const SaintBio = async (props: NextPageProps) => {
+export const generateMetadata = async (
+  props: NextPageProps,
+) => {
+  const { slug } = await props.params
+  return saintMetadata(slug, 'biography')
+}
+
+const WORDS_PER_MINUTE = 230
+const LONG_NAME = 28
+
+const Biography = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const params = await props.params
-  const slug = searchParams.slug || ''
+  const { slug } = await props.params
 
   const data = await getSaint(slug)
-
   if (!data) notFound()
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: data?.name,
-    birthDate: data?.birth_year,
-    deathDate: data?.death_year,
-    birthPlace: data?.birth_location,
-    deathPlace: data?.death_location,
-    description: data?.summary,
-  }
+  const base = `/saints/${slug}`
+  const { intro, chapters, backMatter } = getBiography(
+    data.biography,
+  )
+  const sources = getSources(data.biography)
+  const minutes = Math.max(
+    1,
+    Math.round(
+      countWords(data.biography) / WORDS_PER_MINUTE,
+    ),
+  )
+  const miracles = getMiracles(data.miracles?.[0]?.miracles)
+  const teachings = getChapters(
+    data.teachings?.[0]?.teachings,
+  )
+
+  const parts = splitSaintName(data.name)
+  const title =
+    data.name.length > LONG_NAME ? parts.title : data.name
+
+  const meta = [
+    chapters.length
+      ? plural(chapters.length, 'chapter', 'chapters')
+      : '',
+    `${minutes} min read`,
+    sources.count ? `${sources.count} sources` : '',
+  ].filter(Boolean)
+
+  const contents = [
+    ...chapters
+      .filter((c) => c.id)
+      .map((c) => ({ id: c.id, title: c.title })),
+    ...(backMatter[0]?.id
+      ? [
+          {
+            id: backMatter[0].id,
+            title: 'Notes and sources',
+            numbered: false,
+          },
+        ]
+      : []),
+  ]
+
+  const next = [
+    miracles.length && {
+      href: `${base}/miracles`,
+      label: 'Miracles',
+      detail: plural(
+        miracles.length,
+        'account',
+        'accounts',
+      ),
+    },
+    teachings.length && {
+      href: `${base}/teachings`,
+      label: 'Teachings',
+      detail: plural(
+        teachings.length,
+        'section',
+        'sections',
+      ),
+    },
+    { href: base, label: 'Overview', detail: title },
+  ].filter(Boolean) as {
+    href: string
+    label: string
+    detail: string
+  }[]
 
   return (
-    <>
-      <Head>
-        <title>{`"Life of ${data.name}: A Complete Biography`}</title>
-        <link
-          rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/biography`}
+    <div className={styles.page}>
+      <SiteHeader
+        searchParams={searchParams}
+        active="/saints"
+      />
+      <ReadingProgress targetId="life-text" />
+      <main>
+        <ReadingHeader
+          eyebrow="The life of"
+          title={title}
+          meta={meta}
+          image={data.profile_image}
+          backHref={base}
         />
-        <meta
-          key="description"
-          name="description"
-          content={`Journey through the full biography of ${data.name}. Explore their life's milestones, challenges, and their profound impact on the world.`}
-        />
-        <meta
-          name="keywords"
-          content={`${data.name}, biography, Catholic saint, Orthodox Saint, detailed life story, spiritual journey, saintly life, religious inspiration, Christian faith, Thérèse of Lisieux biography, saint of simplicity, religious figures, historical biography, Christian spirituality`}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData),
-          }}
-        />
-      </Head>
-      <Page searchParams={searchParams}>
-        <div className={styles.SaintBio}>
-          <Content
-            leftRail={
-              <ImageMain
-                image1={data?.profile_image}
-                name={data?.name}
-                leftRail={true}
-              />
-            }
-          >
-            <NameTag
-              tags={data?.categories}
-              birthYear={data?.birth_year}
-              deathYear={data?.death_year}
-              header={`${data?.name}`}
-              subHeader="Biography"
-              summary={data?.summary}
-            />
+        <ReadingLayout
+          contents={contents}
+          articleId="life-text"
+        >
+          {intro && (
             <div
-              className={styles.text}
-              id="text"
-              dangerouslySetInnerHTML={{
-                __html: data?.biography || '',
-              }}
+              className={`${styles.prose} ${styles.opening}`}
+              dangerouslySetInnerHTML={{ __html: intro }}
             />
-            {/* {data?.books && isLaptopMinus && (
-                <Books
-                  books={data?.books}
-                  inRightRail={false}
-                />
-              )} */}
-            {/* <div className={styles.updated}>
-                Updated on {formatDate(data?.date_updated)}
-              </div> */}
-            <NextPage data={data} />
-            <ReadMoreLinks
-              links={data?.books}
-              type="biography"
-            />
-            {/* <About showImage={false} /> */}
-          </Content>
-          <RelatedPeople
-            searchParams={searchParams}
-            params={params}
-            categories={data.categories}
-          />
-          <ScrollUp />
-        </div>
-      </Page>
-    </>
+          )}
+
+          {chapters.map((chapter, i) => (
+            <section
+              key={chapter.id || i}
+              className={styles.chapter}
+            >
+              <p className={styles.chapterLabel}>
+                Chapter {i + 1}
+              </p>
+              <h2
+                id={chapter.id}
+                className={styles.chapterTitle}
+              >
+                {chapter.title}
+              </h2>
+              <div
+                className={styles.prose}
+                dangerouslySetInnerHTML={{
+                  __html: chapter.html,
+                }}
+              />
+            </section>
+          ))}
+
+          {chapters.length === 0 && !intro && (
+            <p className="emptyState">
+              The life of this saint has not been written
+              yet.
+            </p>
+          )}
+
+          <NotesCard sections={backMatter} />
+          <NextCards cards={next} />
+        </ReadingLayout>
+      </main>
+      <SiteFooter />
+    </div>
   )
 }
 
-export default SaintBio
+export default Biography

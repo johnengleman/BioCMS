@@ -1,0 +1,365 @@
+@use '../../../styles/candle.scss' as candle;
+
+// Shared reading layout (biography, miracles, teachings), Candlelight design.
+.page {
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-display);
+}
+
+// Compact header over the candlelight photo
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  padding-bottom: var(--space-4);
+
+  @media (min-width: 768px) {
+    gap: var(--space-8);
+  }
+}
+
+.thumb {
+  flex-shrink: 0;
+  width: 84px;
+  @include candle.focus-ring;
+
+  @media (min-width: 768px) {
+    width: 140px;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    @include candle.gilt-frame;
+  }
+}
+
+.eyebrow {
+  @include candle.eyebrow;
+  font-size: 13px;
+}
+
+.title {
+  margin-top: var(--space-2);
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5.5vw, 64px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.meta {
+  margin-top: var(--space-3);
+  font-size: clamp(16px, 1.8vw, 21px);
+  color: var(--taupe);
+}
+
+// Contents beside one reading column
+.layout {
+  @include candle.container;
+  display: grid;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+
+  @media (min-width: 1024px) {
+    grid-template-columns: 300px minmax(0, 700px);
+    gap: var(--space-16);
+    margin-top: var(--space-10);
+  }
+}
+
+.aside {
+  display: none;
+
+  @media (min-width: 1024px) {
+    display: block;
+  }
+}
+
+.contentsCard {
+  @include candle.card;
+  position: sticky;
+  top: 88px;
+  max-height: calc(100vh - 112px);
+  overflow-y: auto;
+  padding: var(--space-6) var(--space-5);
+}
+
+.article {
+  min-width: 0;
+}
+
+// Phones and tablets: contents as a panel that opens on tap
+.phoneContents {
+  @include candle.card;
+  margin-bottom: var(--space-8);
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 52px;
+    padding: 0 var(--space-5);
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: '+';
+      font-size: 24px;
+      color: var(--wine);
+    }
+  }
+
+  &[open] summary::after {
+    content: '−';
+  }
+
+  > nav {
+    padding: 0 var(--space-5) var(--space-4);
+
+    h2 {
+      display: none;
+    }
+  }
+}
+
+// Reading text: Apple Books-style book serif
+.prose {
+  font-family: var(--font-reading);
+  font-size: 19px;
+  line-height: 1.75;
+  color: var(--ink);
+
+  @media (min-width: 768px) {
+    font-size: 21px;
+  }
+
+  p,
+  ul,
+  ol {
+    margin: 0 0 1.1em;
+  }
+
+  ul,
+  ol {
+    padding-left: 1.3em;
+  }
+
+  a {
+    color: var(--wine);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    @include candle.focus-ring;
+  }
+
+  h3 {
+    margin: 1.6em 0 0.5em;
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  // Quotations: italic display serif with a wine bar.
+  blockquote {
+    margin: 1.6em 0;
+    padding-left: var(--space-6);
+    border-left: 3px solid var(--wine);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.15em;
+    line-height: 1.5;
+
+    p {
+      margin-bottom: 0.4em;
+    }
+
+    cite {
+      display: block;
+      margin-top: var(--space-2);
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-style: normal;
+      color: var(--taupe);
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+}
+
+// Drop capital on the very first paragraph.
+.opening > p:first-child::first-letter {
+  float: left;
+  margin: 0.06em 0.1em 0 0;
+  font-family: var(--font-display);
+  font-size: 4.4em;
+  font-weight: 600;
+  line-height: 0.82;
+  color: var(--ink);
+}
+
+.chapter {
+  margin-top: var(--space-16);
+}
+
+.chapterLabel {
+  @include candle.eyebrow;
+  font-size: 13px;
+}
+
+.chapterTitle {
+  margin: var(--space-2) 0 var(--space-6);
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.4vw, 48px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  scroll-margin-top: 96px;
+}
+
+// Sources, research notes and credits: smaller, in a card
+.notes {
+  @include candle.card;
+  margin-top: var(--space-16);
+  padding: var(--space-8) var(--space-6);
+
+  section + section {
+    margin-top: var(--space-6);
+  }
+
+  h2 {
+    margin-bottom: var(--space-2);
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+    scroll-margin-top: 96px;
+  }
+}
+
+.notesText {
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+
+  p,
+  ul {
+    margin: 0 0 0.8em;
+  }
+
+  ul {
+    padding-left: 1.2em;
+  }
+
+  a {
+    color: var(--wine);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    overflow-wrap: anywhere;
+  }
+}
+
+// Continue reading
+.next {
+  display: grid;
+  gap: var(--space-3);
+  margin: var(--space-12) 0 var(--space-4);
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(200px, 1fr)
+    );
+  }
+
+  a {
+    @include candle.card;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px var(--space-3);
+    padding: var(--space-5);
+    color: var(--ink);
+    @include candle.focus-ring;
+    @include candle.transition(transform, box-shadow);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lift);
+    }
+  }
+}
+
+.nextLabel {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.nextDetail {
+  grid-row: 2;
+  font-size: 15px;
+  color: var(--taupe);
+}
+
+.nextChevron {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-size: 26px;
+  color: var(--wine);
+}
+
+// Quotation cards ("In their own words")
+.quotes {
+  display: grid;
+  gap: var(--space-4);
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  blockquote {
+    @include candle.card;
+    margin: 0;
+    padding: var(--space-6);
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--ink);
+
+    &::before {
+      content: '“';
+      display: block;
+      height: 28px;
+      font-size: 56px;
+      line-height: 1;
+      color: var(--wine);
+    }
+  }
+}
+
+// Pages with no contents column (novenas): one centered column.
+.layout:not(:has(> .aside)) {
+  grid-template-columns: minmax(0, 760px);
+  justify-content: center;
+}

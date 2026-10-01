@@ -3,11 +3,12 @@
 
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
-import { getSaints } from '../../../queries/getSaints'
+// Loads through the server: the browser may not call Directus (CORS).
+import { loadMoreSaints } from '../../../app/saints/actions'
 import SaintSummary from '../SaintSummary/SaintSummary'
 import ScrollUp from '../../global/ScrollUp/ScrollUp'
-import { FaRegFrownOpen } from 'react-icons/fa'
 import { useInfiniteLoader } from 'masonic'
+import { useMediaQuery } from 'usehooks-ts'
 import styles from '../../../app/saints/styles.module.scss'
 
 const Masonry = dynamic(
@@ -34,6 +35,9 @@ const SaintsListClient = ({
 }: SaintsListClientProps) => {
   const [items, setItems] = useState(initialSaints)
   const [hasMore, setHasMore] = useState(true)
+  // Phones: tighter gaps, so two columns fit.
+  const isPhone = useMediaQuery('(max-width: 767px)')
+  const gutter = isPhone ? 12 : 24
 
   const fetchMoreItems = async (
     startIndex,
@@ -42,7 +46,7 @@ const SaintsListClient = ({
   ) => {
     if (!hasMore) return
 
-    const nextItems = await getSaints({
+    const nextItems = await loadMoreSaints({
       church,
       filter,
       saintPreset,
@@ -67,21 +71,23 @@ const SaintsListClient = ({
     <div className={styles.saintHome}>
       {items?.length ? (
         <>
+          {/* Two columns on phones, up to four on desktop. */}
           <Masonry
+            key={gutter}
             items={items}
-            columnGutter={20}
-            rowGutter={5}
+            columnGutter={gutter}
+            rowGutter={gutter}
             overscanBy={1.25}
-            columnWidth={275}
+            columnWidth={150}
             onRender={maybeLoadMore}
             render={SaintSummary}
-            maxColumnCount={6}
+            maxColumnCount={4}
           />
           <ScrollUp />
         </>
       ) : (
-        <p className="status">
-          No saints found. <FaRegFrownOpen />
+        <p className="emptyState">
+          No saints match these filters yet.
         </p>
       )}
     </div>

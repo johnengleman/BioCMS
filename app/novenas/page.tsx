@@ -1,77 +1,69 @@
-import Head from 'next/head'
-import { FaRegFrownOpen } from 'react-icons/fa'
+import type { Metadata } from 'next'
 import { getPrayers } from '../../queries/getPrayers'
-import Page from '../../components/page/Page/Page'
-import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
-import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
-import NovenaClient from '../../components/novenas/NovenaClient/NovenaClient'
 import { getChurch } from '../../hooks/getChurch'
-import styles from './styles.module.scss'
+import ListPage from '../../components/candle/ListPage/ListPage'
+import ContentList from '../../components/candle/ContentList/ContentList'
 
 export const runtime = 'edge'
 
 import { NextPageProps } from '../../types/nextjs'
 
-const NovenasPage = async (props: NextPageProps) => {
+const PAGE_SIZE = 12
+
+export const generateMetadata = async (
+  props: NextPageProps,
+): Promise<Metadata> => {
+  const searchParams = await props.searchParams
+  const filter = searchParams.filter || 'all'
+  return {
+    title: 'Novenas to the Saints: Nine Days of Prayer',
+    description:
+      'Pray novenas to the Catholic and Orthodox saints, one day at a time.',
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/novenas${
+        filter !== 'all' ? `?filter=${filter}` : ''
+      }`,
+    },
+  }
+}
+
+const Novenas = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
   const filter = searchParams.filter || 'all'
   const church = await getChurch(searchParams)
 
-  const initialPrayers = await getPrayers({
+  const items = await getPrayers({
     church,
     filter,
     offset: 0,
-    limit: 8,
+    limit: PAGE_SIZE,
   })
 
   return (
-    <>
-      <Head>
-        <title>
-          Novenas for All Saints: Prayerful Guidance
-        </title>
-        <link
-          rel="canonical"
-          href={`${
-            process.env.NEXT_PUBLIC_SITE_URL
-          }/novenas${
-            filter !== 'all' ? `?filter=${filter}` : ''
-          }`}
-        />
-        <meta
-          key="description"
-          name="description"
-          content={`Find solace and inspiration in our curated novenas. From personal growth to seeking intercession, connect with saints' enduring wisdom.`}
-        />
-        <meta
-          name="keywords"
-          content="novenas collection, saint prayers, catholic novenas, orthodox novenas, spiritual novenas, prayer intercession, saints devotion, novena prayers, religious novenas, comprehensive novena list, Christian prayers, faith journey, religious traditions, prayer guidance"
-        />
-      </Head>
-      <Page searchParams={searchParams}>
-        <HeroSimple
-          title="Novenas"
-          type="prayers"
-          searchParams={searchParams}
-        />
-        <div className={styles.page}>
-          {initialPrayers?.length ? (
-            <NovenaClient
-              key={JSON.stringify(initialPrayers)}
-              initialPrayers={initialPrayers}
-              church={church}
-              filter={filter}
-            />
-          ) : (
-            <p className="status">
-              No novenas found. <FaRegFrownOpen />
-            </p>
-          )}
-          <ScrollUp />
-        </div>
-      </Page>
-    </>
+    <ListPage
+      kind="prayers"
+      path="/novenas"
+      title="Novenas"
+      subtitle="Nine days of prayer, asking the saints for their help."
+      church={church}
+      filter={filter}
+      searchParams={searchParams}
+    >
+      <ContentList
+        key={`${church}-${filter}`}
+        kind="prayers"
+        initialItems={items || []}
+        church={church}
+        filter={filter}
+        pageSize={PAGE_SIZE}
+        emptyText={
+          filter === 'all'
+            ? 'No novenas yet. They will appear here as we add each saint.'
+            : 'No novenas match this filter yet. Choose another topic or tradition.'
+        }
+      />
+    </ListPage>
   )
 }
 
-export default NovenasPage
+export default Novenas

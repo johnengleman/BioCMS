@@ -1,0 +1,160 @@
+// Candlelight design: shared component styles. Values come from the
+// CSS variables in styles/variables.css. Rules: docs/design-system.md.
+
+@mixin container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+
+  @media (min-width: 768px) {
+    padding: 0 var(--space-8);
+  }
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--wine);
+    outline-offset: 2px;
+  }
+}
+
+@mixin transition($props...) {
+  transition-property: $props;
+  transition-duration: var(--duration);
+  transition-timing-function: var(--ease);
+}
+
+// Large page title ("Saints"), Apple large-title proportions.
+@mixin page-title {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 7vw, 76px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+// Small capitals label in wine ("OCTOBER 1", "THE LIFE OF").
+@mixin eyebrow {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--wine);
+}
+
+// A rounded pill: filters, segmented items, menu buttons.
+@mixin pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 40px;
+  padding: 0 var(--space-5);
+  border: 1px solid rgba(58, 42, 30, 0.12);
+  border-radius: var(--radius-pill);
+  background: var(--cream-card);
+  box-shadow: 0 1px 2px rgba(58, 42, 30, 0.05);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 16px;
+  white-space: nowrap;
+  cursor: pointer;
+  @include transition(background-color, border-color, color, box-shadow);
+  @include focus-ring;
+
+  &:hover {
+    border-color: rgba(126, 27, 36, 0.35);
+  }
+}
+
+@mixin pill-selected {
+  background: var(--wine);
+  border-color: var(--wine);
+  color: var(--on-dark);
+  box-shadow: 0 4px 12px -6px rgba(126, 27, 36, 0.6);
+}
+
+// Filled wine capsule ("Read her life").
+@mixin button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 var(--space-8);
+  border-radius: var(--radius-pill);
+  background: var(--wine);
+  color: var(--on-dark);
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 0 8px 20px -10px rgba(126, 27, 36, 0.7);
+  @include transition(background-color);
+  @include focus-ring;
+
+  &:hover {
+    background: var(--wine-700);
+  }
+}
+
+// Wine text link with a chevron ("See the miracles ›").
+@mixin link-chevron {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--wine);
+  font-family: var(--font-display);
+  font-size: 18px;
+  @include focus-ring;
+
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+// An ivory card with large soft corners.
+@mixin card {
+  background: var(--cream-card);
+  border: 1px solid rgba(58, 42, 30, 0.07);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+// A saint image in a slim gilded frame.
+@mixin gilt-frame {
+  border-radius: 12px;
+  box-shadow:
+    0 0 0 1px var(--gilt),
+    0 0 0 3px rgba(232, 211, 160, 0.45),
+    0 6px 16px -10px rgba(58, 42, 30, 0.6);
+}
+
+// A drop-down panel.
+@mixin menu-panel {
+  padding: var(--space-2);
+  border: 1px solid rgba(58, 42, 30, 0.08);
+  border-radius: var(--radius-lg);
+  background: var(--cream-card);
+  box-shadow: var(--shadow-lift);
+}
+
+@mixin menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: 40px;
+  padding: 0 var(--space-3);
+  border-radius: 10px;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 16px;
+  @include focus-ring;
+
+  &:hover {
+    background: var(--cream-deep);
+  }
+}

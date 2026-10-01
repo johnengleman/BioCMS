@@ -1,0 +1,110 @@
+@use '../../../styles/candle.scss' as candle;
+
+.book {
+  @include candle.card;
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: var(--space-5);
+  padding: var(--space-5);
+
+  @media (min-width: 768px) {
+    grid-template-columns: 120px minmax(0, 1fr);
+  }
+}
+
+.compact {
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  height: 100%;
+
+  .cover {
+    width: 120px;
+    margin: 0 auto;
+  }
+}
+
+// The store snippet holds one <img>; it gets the gilt frame.
+.cover {
+  align-self: start;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow:
+      0 0 0 1px var(--gilt),
+      var(--shadow-card);
+  }
+
+  a {
+    display: block;
+  }
+}
+
+.text {
+  min-width: 0;
+}
+
+.eyebrow {
+  @include candle.eyebrow;
+}
+
+.title {
+  margin-top: var(--space-1);
+  font-family: var(--font-display);
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.meta {
+  margin-top: var(--space-1);
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--taupe);
+}
+
+.description {
+  margin-top: var(--space-3);
+  font-family: var(--font-reading);
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.saint {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--ink);
+  @include candle.focus-ring;
+
+  &:hover {
+    color: var(--wine);
+  }
+
+  img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+    box-shadow: 0 0 0 1px var(--gilt);
+  }
+}
+
+.store {
+  @include candle.link-chevron;
+  display: flex;
+  margin-top: var(--space-4);
+  font-size: 16px;
+}

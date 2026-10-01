@@ -1,81 +1,73 @@
-import Head from 'next/head'
-import { FaRegFrownOpen } from 'react-icons/fa'
+import type { Metadata } from 'next'
 import { getMiracles } from '../../queries/getMiracles'
-import Page from '../../components/page/Page/Page'
-import SaintDetail from '../../components/global/SaintDetail/SaintDetail'
-import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
+import { withPreview } from '../../utils/listPreview'
 import { getChurch } from '../../hooks/getChurch'
-import capitalize from '../../utils/capitalize'
-import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
-import MiraclesClient from '../../components/miracles/MiraclesClient/MiraclesClient'
-import styles from './styles.module.scss'
+import ListPage from '../../components/candle/ListPage/ListPage'
+import ContentList from '../../components/candle/ContentList/ContentList'
+
+export const runtime = 'edge'
 
 import { NextPageProps } from '../../types/nextjs'
 
-export const runtime = 'edge'
+const PAGE_SIZE = 6
+
+export const generateMetadata = async (
+  props: NextPageProps,
+): Promise<Metadata> => {
+  const searchParams = await props.searchParams
+  const filter = searchParams.filter || 'all'
+  return {
+    title:
+      'Miracles of the Saints: Catholic & Orthodox Wonders',
+    description:
+      'Explore miracles of Catholic and Orthodox saints through history, from the Patristic Age to the Modern era.',
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/miracles${
+        filter !== 'all' ? `?filter=${filter}` : ''
+      }`,
+    },
+  }
+}
 
 const Miracles = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
   const filter = searchParams.filter || 'all'
-  const miraclesPreset = searchParams.preset || ''
   const church = await getChurch(searchParams)
 
-  const initialMiracles = await getMiracles({
-    filter,
-    church,
-    miraclesPreset,
-    offset: 0,
-    limit: 10,
-  })
+  const items = withPreview(
+    'miracles',
+    await getMiracles({
+      church,
+      filter,
+      offset: 0,
+      limit: PAGE_SIZE,
+    }),
+  )
 
   return (
-    <>
-      <Head>
-        <title>
-          Saints&apos; Miracles: From Apostolic to Modern
-          Times
-        </title>
-        <link
-          rel="canonical"
-          href={`${
-            process.env.NEXT_PUBLIC_SITE_URL
-          }/miracles${
-            filter !== 'all' ? `?filter=${filter}` : ''
-          }`}
-        />
-        <meta
-          key="description"
-          name="description"
-          content={`"Explore miracles of Catholic & Orthodox saints through history. Witness wonders from the Patristic Age to the Modern era, shaping faith across time.`}
-        />
-        <meta
-          name="keywords"
-          content="Saint miracles, Apostolic Era wonders, Patristic Age miracles, Medieval period marvels, Renaissance miracles, Modern era wonders, Catholic miracles, Orthodox saints, Christian history miracles, miraculous events, spiritual miracles, historical saints, faith and miracles, religious phenomena"
-        />
-      </Head>
-      <Page searchParams={searchParams}>
-        <HeroSimple
-          title="Miracles"
-          type="miracles"
-          searchParams={searchParams}
-        />
-        <div className={styles.miracles}>
-          {initialMiracles.length ? (
-            <MiraclesClient
-              key={JSON.stringify(initialMiracles)}
-              initialMiracles={initialMiracles}
-              filter={filter}
-              church={church}
-            />
-          ) : (
-            <p className="status">
-              No miracles found. <FaRegFrownOpen />
-            </p>
-          )}
-          <ScrollUp />
-        </div>
-      </Page>
-    </>
+    <ListPage
+      kind="miracles"
+      path="/miracles"
+      title="Miracles"
+      subtitle="Healings and wonders attributed to the saints, with their sources."
+      church={church}
+      filter={filter}
+      searchParams={searchParams}
+    >
+      <ContentList
+        key={`${church}-${filter}`}
+        kind="miracles"
+        initialItems={items || []}
+        church={church}
+        filter={filter}
+        pageSize={PAGE_SIZE}
+        emptyText={
+          filter === 'all'
+            ? 'No miracles yet. They will appear here as we add each saint.'
+            : 'No miracles match this filter yet. Choose another era or tradition.'
+        }
+      />
+    </ListPage>
   )
 }
 

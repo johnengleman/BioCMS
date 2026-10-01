@@ -1,108 +1,196 @@
 import { notFound } from 'next/navigation'
-import Head from 'next/head'
-import styles from '../styles.module.scss'
+import { saintMetadata } from '../../../../utils/saintMetadata'
 import { getSaint } from '../../../../queries/getSaint'
-import Page from '../../../../components/page/Page/Page'
-import ImageMain from '../../../../components/saint/ImageMain/ImageMain'
-import RelatedPeople from '../../../../components/saint/SimilarSaints/SimilarSaints.server'
-import NameTag from '../../../../components/saint/NameTag/NameTag'
-import NextPage from '../../../../components/saint/NextPage/NextPage'
-import ReadMoreLinks from '../../../../components/saint/ReadMoreLinks/ReadMoreLinks'
-import About from '../../../../components/global/About/About'
-import ScrollUp from '../../../../components/global/ScrollUp/ScrollUp'
-import Content from '../../../../components/saint/Content/Content.Client'
+import {
+  getBiography,
+  getChapters,
+  getMiracles,
+  splitSaintName,
+} from '../../../../utils/saintContent'
+import SiteHeader from '../../../../components/candle/SiteHeader/SiteHeader'
+import SiteFooter from '../../../../components/candle/SiteFooter/SiteFooter'
+import {
+  NextCards,
+  NotesCard,
+  ReadingHeader,
+  ReadingLayout,
+  plural,
+} from '../../../../components/candle/Reading/ReadingParts'
+import styles from '../../../../components/candle/Reading/reading.module.scss'
 
 export const runtime = 'edge'
 
 import { NextPageProps } from '../../../../types/nextjs'
 
-const SaintBio = async (props: NextPageProps) => {
-  const searchParams = await props.searchParams
-  const params = await props.params
+export const generateMetadata = async (
+  props: NextPageProps,
+) => {
+  const { slug } = await props.params
+  return saintMetadata(slug, 'teachings')
+}
 
-  const slug = searchParams.slug
+const LONG_NAME = 28
+const QUOTES_SHOWN = 6
+
+const SaintTeachings = async (props: NextPageProps) => {
+  const searchParams = await props.searchParams
+  const { slug } = await props.params
 
   const data = await getSaint(slug)
-
   if (!data) notFound()
 
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: data?.name,
-    birthDate: data?.birth_year,
-    deathDate: data?.death_year,
-    birthPlace: data?.birth_location,
-    deathPlace: data?.death_location,
-    description: data?.summary,
-  }
+  const base = `/saints/${slug}`
+  // Teachings use the same structure as a biography: an opening,
+  // one <h2> per teaching, then notes.
+  const { intro, chapters, backMatter } = getBiography(
+    data.teachings?.[0]?.teachings,
+  )
+  const quotes = (data.quotes || []).filter((q) => q.text)
+  const lifeChapters = getChapters(data.biography)
+  const miracles = getMiracles(data.miracles?.[0]?.miracles)
+
+  const parts = splitSaintName(data.name)
+  const title =
+    data.name.length > LONG_NAME ? parts.title : data.name
+
+  const meta = [
+    chapters.length
+      ? plural(chapters.length, 'teaching', 'teachings')
+      : '',
+    quotes.length
+      ? plural(quotes.length, 'quote', 'quotes')
+      : '',
+  ].filter(Boolean)
+
+  const contents = [
+    ...chapters
+      .filter((c) => c.id)
+      .map((c) => ({ id: c.id, title: c.title })),
+    ...(quotes.length
+      ? [
+          {
+            id: 'own-words',
+            title: 'In their own words',
+            numbered: false,
+          },
+        ]
+      : []),
+    ...(backMatter[0]?.id
+      ? [
+          {
+            id: backMatter[0].id,
+            title: 'Notes and sources',
+            numbered: false,
+          },
+        ]
+      : []),
+  ]
+
+  const next = [
+    lifeChapters.length && {
+      href: `${base}/biography`,
+      label: 'Life',
+      detail: plural(
+        lifeChapters.length,
+        'chapter',
+        'chapters',
+      ),
+    },
+    miracles.length && {
+      href: `${base}/miracles`,
+      label: 'Miracles',
+      detail: plural(
+        miracles.length,
+        'account',
+        'accounts',
+      ),
+    },
+    { href: base, label: 'Overview', detail: title },
+  ].filter(Boolean) as {
+    href: string
+    label: string
+    detail: string
+  }[]
 
   return (
-    <>
-      <Head>
-        <title>{`${data.name}: Profound Teachings & Lasting Legacy`}</title>
-        <link
-          rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}/teachings`}
+    <div className={styles.page}>
+      <SiteHeader
+        searchParams={searchParams}
+        active="/teachings"
+      />
+      <main>
+        <ReadingHeader
+          eyebrow="The teachings of"
+          title={title}
+          meta={meta}
+          image={data.profile_image}
+          backHref={base}
         />
-        <meta
-          key="description"
-          name="description"
-          content={`Dive into ${data.name}'s teachings. Discover their theological contributions and how they continue to guide and inspire believers."`}
-        />
-        <meta
-          name="keywords"
-          content={`${data.name} teachings, spiritual legacy, Christian teachings, religious influence, ${data.name} legacy, Catholic spirituality, Orthodox spirituality, theological insights, Christian faith impact, religious guidance, spiritual writings, saintly teachings, religious education`}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(structuredData),
-          }}
-        />
-      </Head>
-      <Page searchParams={searchParams}>
-        <div className={styles.SaintBio}>
-          <Content
-            leftRail={
-              <ImageMain
-                image1={data?.profile_image}
-                name={data?.name}
-                leftRail={true}
-              />
-            }
-          >
-            <NameTag
-              tags={data?.categories}
-              birthYear={data?.birth_year}
-              deathYear={data?.death_year}
-              header={data?.name}
-              subHeader="Teachings"
-              summary={data?.summary}
-            />
+        <ReadingLayout contents={contents}>
+          {intro && (
             <div
-              className={styles.text}
-              id="text"
-              dangerouslySetInnerHTML={{
-                __html: data?.teachings[0]?.teachings || '',
-              }}
+              className={`${styles.prose} ${styles.opening}`}
+              dangerouslySetInnerHTML={{ __html: intro }}
             />
-            <NextPage data={data} />
-            <ReadMoreLinks
-              links={data?.books}
-              type="teachings"
-            />
-          </Content>
-          <RelatedPeople
-            searchParams={searchParams}
-            params={params}
-            categories={data.categories}
-          />
-          <ScrollUp />
-        </div>
-      </Page>
-    </>
+          )}
+
+          {chapters.map((chapter, i) => (
+            <section
+              key={chapter.id || i}
+              className={styles.chapter}
+            >
+              <p className={styles.chapterLabel}>
+                Teaching {i + 1}
+              </p>
+              <h2
+                id={chapter.id}
+                className={styles.chapterTitle}
+              >
+                {chapter.title}
+              </h2>
+              <div
+                className={styles.prose}
+                dangerouslySetInnerHTML={{
+                  __html: chapter.html,
+                }}
+              />
+            </section>
+          ))}
+
+          {chapters.length === 0 && !intro && (
+            <p className="emptyState">
+              No teachings have been added for this saint
+              yet.
+            </p>
+          )}
+
+          {quotes.length > 0 && (
+            <section className={styles.chapter}>
+              <h2
+                id="own-words"
+                className={styles.chapterTitle}
+              >
+                In their own words
+              </h2>
+              <div className={styles.quotes}>
+                {quotes
+                  .slice(0, QUOTES_SHOWN)
+                  .map((q, i) => (
+                    <blockquote key={i}>
+                      {q.text}
+                    </blockquote>
+                  ))}
+              </div>
+            </section>
+          )}
+
+          <NotesCard sections={backMatter} />
+          <NextCards cards={next} />
+        </ReadingLayout>
+      </main>
+      <SiteFooter />
+    </div>
   )
 }
 
-export default SaintBio
+export default SaintTeachings

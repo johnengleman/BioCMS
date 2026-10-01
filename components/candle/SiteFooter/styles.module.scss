@@ -1,0 +1,50 @@
+@use '../../../styles/candle.scss' as candle;
+
+.footer {
+  margin-top: var(--space-16);
+  padding: var(--space-12) 0;
+  border-top: 1px solid rgba(58, 42, 30, 0.1);
+  background: var(--cream-deep);
+}
+
+.row {
+  @include candle.container;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ink);
+  @include candle.focus-ring;
+}
+
+.tagline {
+  margin-top: var(--space-2);
+  max-width: 320px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--taupe);
+}
+
+.links {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: var(--space-2) var(--space-10);
+  align-content: start;
+
+  a {
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--ink);
+    @include candle.focus-ring;
+
+    &:hover {
+      color: var(--wine);
+    }
+  }
+}

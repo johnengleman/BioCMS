@@ -1,113 +1,207 @@
-import Head from 'next/head'
-import { FaRegFrownOpen } from 'react-icons/fa'
-import Hero from '../../components/saint/Hero/Hero'
+import type { Metadata } from 'next'
 import { getNewestBooks } from '../../queries/getNewestBooks'
 import { getBooks } from '../../queries/getBooks'
-import Page from '../../components/page/Page/Page'
-import BookSummary from '../../components/books/BookSummary/BookSummary'
-import styles from './styles.module.scss'
-import SectionTitle from '../../components/books/SectionTitle/SectionTitle'
-import capitalize from '../../utils/capitalize'
-import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
+import { getTopGenres } from '../../queries/GetTopGenres'
+import { getTopAuthors } from '../../queries/getTopAuthors'
 import { getChurch } from '../../hooks/getChurch'
+import { properties } from '../../utils/properties'
+import SiteHeader from '../../components/candle/SiteHeader/SiteHeader'
+import SiteFooter from '../../components/candle/SiteFooter/SiteFooter'
+import PhotoHero from '../../components/candle/PhotoHero/PhotoHero'
+import TraditionControl from '../../components/candle/TraditionControl/TraditionControl'
+import FilterPills from '../../components/candle/FilterPills/FilterPills'
+import PillMenu from '../../components/candle/PillMenu/PillMenu'
+import Section from '../../components/candle/Section/Section'
+import BookCard, {
+  genreLabel,
+} from '../../components/candle/BookCard/BookCard'
+import styles from './candle.module.scss'
 
 import { NextPageProps } from '../../types/nextjs'
 
 export const runtime = 'edge'
 
+export const metadata: Metadata = {
+  title:
+    'Books on the Saints: Lives, Teachings & Devotions',
+  description:
+    'Discover books on Catholic and Orthodox saints: theology, spiritual writings, history and devotions.',
+}
+
+// preset = a genre, filter = a saint's name. 'none' and 'all' mean
+// no choice (an empty string fails in Directus).
+type Params = { preset: string; filter: string }
+
+const hrefWith = (
+  current: Params,
+  change: Partial<Params>,
+) => {
+  const next = { ...current, ...change }
+  const query = new URLSearchParams()
+  if (next.preset !== 'none')
+    query.set('preset', next.preset)
+  if (next.filter !== 'all')
+    query.set('filter', next.filter)
+  const text = query.toString()
+  return text ? `/books?${text}` : '/books'
+}
+
 const Books = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter || 'all'
-  const preset = searchParams.preset || 'none'
   const church = await getChurch(searchParams)
+  const current: Params = {
+    preset: searchParams.preset || 'none',
+    filter: searchParams.filter || 'all',
+  }
 
-  const bookCategory =
-    preset !== 'none'
-      ? preset.replace(/and/g, '&').replace(/_/g, ' ')
-      : ''
-  const bookFilter = filter !== 'all' ? `${filter}` : ''
+  const [newest, books, genres, authors] =
+    await Promise.all([
+      getNewestBooks({ church, preset: current.preset }),
+      getBooks({
+        church,
+        preset: current.preset,
+        filter: current.filter,
+      }),
+      getTopGenres({ church }),
+      getTopAuthors({ church, preset: current.preset }),
+    ])
 
-  const newestBookData = await getNewestBooks({
-    church,
-    preset,
-  })
+  const genreCount = Object.fromEntries(
+    (genres || []).map(([key, list]: [string, any]) => [
+      key,
+      list?.length || 0,
+    ]),
+  )
 
-  const bookData = await getBooks({
-    church,
-    preset,
-    filter,
-  })
+  const pills = [
+    {
+      key: 'none',
+      label: 'All',
+      href: hrefWith(current, { preset: 'none' }),
+      selected: current.preset === 'none',
+    },
+    ...properties.books.presets
+      .filter(
+        (p: string) =>
+          genreCount[p] > 0 || p === current.preset,
+      )
+      .map((p: string) => ({
+        key: p,
+        label: genreLabel(p),
+        href: hrefWith(current, { preset: p }),
+        selected: current.preset === p,
+      })),
+  ]
+
+  const saintOptions = [
+    {
+      key: 'all',
+      label: 'Any',
+      href: hrefWith(current, { filter: 'all' }),
+      selected: current.filter === 'all',
+    },
+    ...(authors || [])
+      .filter((a: any) => a.books?.length)
+      .sort(
+        (a: any, b: any) => b.books.length - a.books.length,
+      )
+      .map((a: any) => ({
+        key: a.name,
+        label: a.name,
+        href: hrefWith(current, { filter: a.name }),
+        selected: current.filter === a.name,
+      })),
+  ]
+
+  const showNewest =
+    current.filter === 'all' && (newest?.length || 0) > 0
+  const heading =
+    current.filter !== 'all'
+      ? `Books about ${current.filter}`
+      : current.preset !== 'none'
+        ? genreLabel(current.preset)
+        : 'All books'
 
   return (
-    <>
-      <Head>
-        <title>
-          Books on Saints: Lives, Teachings & Journeys
-        </title>
-        <link
-          rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/books${
-            filter !== 'all' ? `?filter=${filter}` : ''
-          }`}
-        />
-        <meta
-          key="description"
-          name="description"
-          content={`Discover books on Catholic and Orthodox saints, spanning theology, spiritual writings, history, and devotions. Find enlightening reads for your faith journey.`}
-        />
-        <meta
-          name="keywords"
-          content="saint books, theology and dogma, spiritual writings, ascetic literature, church history, saint biographies, prayer books, devotional literature, religious books, Christian saints, Catholic authors, Orthodox writers, spiritual reading, faith literature"
-        />
-      </Head>
-      <Page searchParams={searchParams}>
-        <Hero searchParams={searchParams} />
-        <div className={styles.books}>
-          {!bookFilter && (
-            <SectionTitle>
-              Newest {bookCategory}
-            </SectionTitle>
-          )}
-          {!bookFilter &&
-            (newestBookData?.length ? (
+    <div className={styles.page}>
+      <SiteHeader
+        searchParams={searchParams}
+        active="/books"
+      />
+      <main>
+        <PhotoHero>
+          <div className={styles.titleRow}>
+            <div>
+              <h1 className={styles.title}>Books</h1>
+              <p className={styles.subtitle}>
+                Lives, writings and devotions to read next,
+                chosen for each saint.
+              </p>
+            </div>
+            <div className={styles.tradition}>
+              <TraditionControl church={church} />
+            </div>
+          </div>
+          <div className={styles.toolbar}>
+            {pills.length > 1 && (
+              <FilterPills
+                label="Filter books by genre"
+                pills={pills}
+              />
+            )}
+            {saintOptions.length > 1 && (
+              <div className={styles.menus}>
+                <PillMenu
+                  label="Saint"
+                  options={saintOptions}
+                />
+              </div>
+            )}
+          </div>
+        </PhotoHero>
+
+        <div className={styles.content}>
+          {showNewest && (
+            <Section
+              id="newest"
+              title="Newest"
+            >
               <div className={styles.newest}>
-                {newestBookData?.map((book, i) => (
-                  <BookSummary
-                    key={i}
-                    data={book}
-                    showDescription={false}
+                {newest.map((book: any, i: number) => (
+                  <BookCard
+                    key={book.id || i}
+                    book={book}
+                    compact
+                  />
+                ))}
+              </div>
+            </Section>
+          )}
+
+          <Section
+            id="all-books"
+            title={heading}
+          >
+            {books?.length ? (
+              <div className={styles.grid}>
+                {books.map((book: any, i: number) => (
+                  <BookCard
+                    key={book.id || i}
+                    book={book}
                   />
                 ))}
               </div>
             ) : (
-              <p className="status">
-                No new books found. <FaRegFrownOpen />
+              <p className={styles.empty}>
+                No books yet. Each saint&apos;s reading list
+                grows as their entry is written.
               </p>
-            ))}
-
-          <SectionTitle>
-            All {bookFilter || bookCategory}
-          </SectionTitle>
-
-          {bookData?.length ? (
-            <div className={styles.allBooks}>
-              {bookData?.map((book, i) => (
-                <BookSummary
-                  key={i}
-                  data={book}
-                  showDescription={true}
-                />
-              ))}
-            </div>
-          ) : (
-            <p className="status">
-              No books found. <FaRegFrownOpen />
-            </p>
-          )}
-          <ScrollUp />
+            )}
+          </Section>
         </div>
-      </Page>
-    </>
+      </main>
+      <SiteFooter />
+    </div>
   )
 }
 

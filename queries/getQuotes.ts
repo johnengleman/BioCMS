@@ -54,6 +54,7 @@ function getQuotesQuery({ church, filter }) {
        topics
        saint {
          name
+         slug
          birth_year
          death_year
          profile_image {

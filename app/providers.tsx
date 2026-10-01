@@ -29,7 +29,7 @@ export default function Providers({
         {children}
         <ProgressBar
           height="3px"
-          color="#ccad00"
+          color="#7e1b24" // --wine
           options={{
             showSpinner: false, // Hide spinner for cleaner UI
             speed: 400, // Animation speed for the progress bar

@@ -1,69 +1,72 @@
-import Head from 'next/head'
+import type { Metadata } from 'next'
 import { getTeachings } from '../../queries/getTeachings'
-import Page from '../../components/page/Page/Page'
-import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
+import { withPreview } from '../../utils/listPreview'
 import { getChurch } from '../../hooks/getChurch'
-import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
-import TeachingsClient from '../../components/teachings/teachings/TeachingsClient'
-import styles from './styles.module.scss'
+import ListPage from '../../components/candle/ListPage/ListPage'
+import ContentList from '../../components/candle/ContentList/ContentList'
 
 export const runtime = 'edge'
 
 import { NextPageProps } from '../../types/nextjs'
 
+const PAGE_SIZE = 6
+
+export const generateMetadata = async (
+  props: NextPageProps,
+): Promise<Metadata> => {
+  const searchParams = await props.searchParams
+  const filter = searchParams.filter || 'all'
+  return {
+    title: 'Christian Saints: Legacy & Teachings Explored',
+    description:
+      'Explore teachings and legacies of Catholic and Orthodox saints from the Apostolic to Modern era.',
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/teachings${
+        filter !== 'all' ? `?filter=${filter}` : ''
+      }`,
+    },
+  }
+}
+
 const Teachings = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter || "all"
+  const filter = searchParams.filter || 'all'
   const church = await getChurch(searchParams)
 
-  const initialTeachings = await getTeachings({
-    church,
-    filter,
-    offset: 0,
-    limit: 4,
-  })
+  const items = withPreview(
+    'teachings',
+    await getTeachings({
+      church,
+      filter,
+      offset: 0,
+      limit: PAGE_SIZE,
+    }),
+  )
 
   return (
-    <>
-      <Head>
-        <title>
-          Christian Saints: Legacy & Teachings Explored
-        </title>
-        <link
-          rel="canonical"
-          href={`${
-            process.env.NEXT_PUBLIC_SITE_URL
-          }/teachings${
-            filter !== 'all' ? `?filter=${filter}` : ''
-          }`}
-        />
-        <meta
-          key="description"
-          name="description"
-          content={`Explore teachings and legacies of Catholic and Orthodox saints from the Apostolic to Modern era.`}
-        />
-        <meta
-          name="keywords"
-          content="Apostolic Era saints, Patristic Age, Medieval Christian saints, Late Medieval saints, Modern Christian saints, Orthodox teachings, Catholic legacies, Christian history, spiritual teachings, saint biographies, religious wisdom, faith through ages, Christian spirituality, historical saints"
-        />
-      </Head>
-      <Page searchParams={searchParams}>
-        <HeroSimple
-          searchParams={searchParams}
-          title="Teachings & Legacy"
-          type="teachings"
-        />
-        <div className={styles.page}>
-          <TeachingsClient
-            key={JSON.stringify(initialTeachings)}
-            initialTeachings={initialTeachings}
-            church={church}
-            filter={filter}
-          />
-          <ScrollUp />
-        </div>
-      </Page>
-    </>
+    <ListPage
+      kind="teachings"
+      path="/teachings"
+      title="Teachings"
+      subtitle="What the saints taught, in their own words and through their lives."
+      church={church}
+      filter={filter}
+      searchParams={searchParams}
+    >
+      <ContentList
+        key={`${church}-${filter}`}
+        kind="teachings"
+        initialItems={items || []}
+        church={church}
+        filter={filter}
+        pageSize={PAGE_SIZE}
+        emptyText={
+          filter === 'all'
+            ? 'No teachings yet. They will appear here as we add each saint.'
+            : 'No teachings match this filter yet. Choose another era or tradition.'
+        }
+      />
+    </ListPage>
   )
 }
 

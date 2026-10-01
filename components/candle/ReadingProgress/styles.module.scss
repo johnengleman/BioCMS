@@ -1,0 +1,15 @@
+// Sits just under the 64px sticky header.
+.track {
+  position: sticky;
+  top: 64px;
+  z-index: 40;
+  height: 3px;
+  background: rgba(58, 42, 30, 0.08);
+}
+
+.bar {
+  height: 100%;
+  background: var(--wine);
+  transform-origin: left center;
+  transition: transform 0.1s linear;
+}

@@ -1,6 +1,6 @@
 // /app/layout.tsx
 
-import { Nunito, Lora } from 'next/font/google'
+import { Lora, Newsreader } from 'next/font/google'
 import '../styles/variables.css'
 import '../styles/globals.css'
 import { ReactNode } from 'react'
@@ -10,13 +10,18 @@ const lora = Lora({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-lora',
-  style: ['italic'],
+  // The site font (regular) and its italic.
+  style: ['normal', 'italic'],
 })
 
-const nunito = Nunito({
+// Candlelight design: headline and interface serif. Variable, with an
+// optical-size axis, so titles and small labels both look right.
+const newsreader = Newsreader({
   subsets: ['latin'],
   display: 'swap',
   style: ['normal', 'italic'],
+  axes: ['opsz'],
+  variable: '--font-newsreader',
 })
 
 export const metadata = {
@@ -63,7 +68,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${nunito.className} ${lora.variable}`}
+      className={`${lora.className} ${lora.variable} ${newsreader.variable}`}
     >
       <body>
         <Providers>{children}</Providers>

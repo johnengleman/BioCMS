@@ -1,11 +1,101 @@
+/*
+ * Find a Saint design tokens (CSS custom properties).
+ * The full system and its rules: docs/design-system.md.
+ * SCSS mixins that use these: styles/tokens.scss.
+ */
 :root {
-  --gold: #ccad00;
+  /* Palette: "Parchment & Wine", taken from the gilded saint cards */
+  --parchment: #f7f4ee; /* page background: quiet ivory, only slightly warm */
+  --parchment-light: #fdfcf9; /* raised surfaces: chips, menus, fields */
+  --parchment-deep: #eee8de; /* hover fills, quiet bands */
+  --wine: #7e1b24; /* the one primary color */
+  --wine-700: #65151d; /* hover */
+  --wine-900: #4a0f16;
+  --gold: #c09a3e; /* accent only: counts, rings, rules, icons */
+  --gold-light: #e2c97f;
+  --wine-tint: rgba(126, 27, 36, 0.1); /* soft fills: counts, hovers */
+  --ink: #3a2a1e; /* text */
+  --ink-soft: #6b5546; /* secondary text */
+  --walnut: #2e1f16; /* footer, frames */
+  --line: #e6dfd3; /* hairlines on parchment */
+  --line-strong: rgba(58, 42, 30, 0.22); /* chip outlines */
+  --on-dark: #fbf3e6; /* text on wine and walnut */
+  --on-dark-soft: rgba(251, 243, 230, 0.72);
+
+  /* Older names, mapped onto the new palette */
+  --violet: #241e4e;
+  --violet-700: #2f2a58;
+  --violet-900: #17132f;
+  --maroon: var(--wine);
+  --maroon-700: var(--wine-700);
+  --paper: var(--parchment-light);
+  --paper-warm: var(--parchment-deep);
+
+  /* Surfaces over the hero painting */
+  --glass-violet: var(--wine);
+  --glass-violet-hover: var(--wine-700);
+  --glass-maroon: rgba(253, 252, 249, 0.92);
+  --glass-maroon-hover: #fffdf8;
+  --glass-border: var(--line-strong);
+  --glass-border-hover: rgba(126, 27, 36, 0.55);
+
+  /* Candlelight design (docs/design-system.md) */
+  --cream: #f7f2ea; /* page */
+  --cream-card: #fcf9f4; /* cards, controls */
+  --cream-deep: #efe7da; /* hover, quiet bands */
+  --taupe: #7a6656; /* secondary text */
+  --gilt: #c4a05a; /* image frames only */
+  --gilt-light: #e8d3a0;
+  --shadow-card: 0 1px 2px rgba(58, 42, 30, 0.06),
+    0 10px 28px -14px rgba(58, 42, 30, 0.28);
+  --shadow-lift: 0 2px 4px rgba(58, 42, 30, 0.08),
+    0 18px 38px -16px rgba(58, 42, 30, 0.36);
+  --radius-xl: 20px;
+  --font-display: var(--font-newsreader), 'Newsreader', Georgia, serif;
+  /* Apple's New York on Apple devices, then Newsreader. */
+  --font-reading: ui-serif, 'New York', var(--font-newsreader), Georgia,
+    serif;
+  --content-width: 1240px;
+
+  /* Space: a 4px scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Corners */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* Type sizes */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-md: 15px;
+  --text-lg: 17px;
+  --text-xl: 20px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 2px rgba(46, 31, 22, 0.12);
+  --shadow-md: 0 6px 16px -6px rgba(46, 31, 22, 0.32);
+  --shadow-lg: 0 18px 40px -14px rgba(46, 31, 22, 0.4);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --duration: 0.18s;
+
+  /* Older names, kept so existing styles keep working */
   --red: #4c4637;
   --lightGray: #b2ab99;
   --mediumGray: #00ceb1;
   --darkGray: #00957d;
-  --violet: #241e4e;
-
   --filterBackground: #e6e6e6;
   --headlineColor: #515151;
   --textColor: #333;

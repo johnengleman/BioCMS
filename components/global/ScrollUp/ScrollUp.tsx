@@ -25,6 +25,8 @@ const ScrollUp = () => {
 
   return (
     <button
+      type="button"
+      aria-label="Back to top"
       onClick={() => window.scrollTo(0, 0)}
       className={`${styles.btn} ${
         inView ? styles.inView : ''
@@ -33,9 +35,10 @@ const ScrollUp = () => {
       <FaArrowDown
         style={{
           transform: 'rotate(180deg)',
-          fontSize: '30px',
-          color: '#ccad00',
+          fontSize: '22px',
+          color: 'var(--wine)',
         }}
+        aria-hidden="true"
       />
     </button>
   )

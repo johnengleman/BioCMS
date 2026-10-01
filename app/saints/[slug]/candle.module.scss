@@ -1,0 +1,386 @@
+@use '../../../styles/candle.scss' as candle;
+
+// Saint page, Candlelight design (docs/design-system.md).
+.page {
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-display);
+  padding-bottom: var(--space-4);
+}
+
+// Top area
+.eyebrow {
+  @include candle.eyebrow;
+  font-size: 13px;
+}
+
+.title {
+  max-width: 900px;
+  margin: var(--space-3) auto 0;
+  font-family: var(--font-display);
+  font-size: clamp(42px, 7vw, 80px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.subtitle {
+  margin-top: var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2.4vw, 26px);
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+
+  @media (min-width: 560px) {
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--space-8);
+  }
+}
+
+.primary {
+  @include candle.button-primary;
+  width: 100%;
+
+  @media (min-width: 560px) {
+    width: auto;
+  }
+}
+
+.secondary {
+  @include candle.link-chevron;
+}
+
+.portrait {
+  width: min(380px, 78vw);
+  margin: var(--space-10) auto 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    @include candle.gilt-frame;
+    box-shadow:
+      0 0 0 1px var(--gilt),
+      0 0 0 4px rgba(232, 211, 160, 0.45),
+      0 30px 60px -26px rgba(58, 42, 30, 0.55);
+  }
+}
+
+.summary {
+  max-width: 640px;
+  margin: var(--space-10) auto 0;
+  font-family: var(--font-reading);
+  font-size: 19px;
+  line-height: 1.65;
+  color: var(--ink);
+  text-align: left;
+
+  @media (min-width: 768px) {
+    font-size: 21px;
+  }
+
+  p {
+    margin-bottom: 0.8em;
+  }
+}
+
+// At a glance: an Apple-style bento grid
+.bento {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+}
+
+.tile {
+  @include candle.card;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-1);
+  min-height: 112px;
+  padding: var(--space-5);
+  color: var(--ink);
+  @include candle.focus-ring;
+
+  &[href] {
+    @include candle.transition(transform, box-shadow);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lift);
+    }
+  }
+}
+
+.leadTile {
+  grid-column: span 2;
+  grid-row: span 2;
+  justify-content: flex-end;
+  min-height: 200px;
+  padding: var(--space-8);
+}
+
+.leadValue {
+  font-family: var(--font-display);
+  font-size: clamp(72px, 10vw, 120px);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--wine);
+  font-variant-numeric: lining-nums;
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--wine);
+  font-variant-numeric: lining-nums;
+}
+
+.tileLabel {
+  font-size: 17px;
+  color: var(--taupe);
+}
+
+// Feast, patron and place of death: their own row, sharing the width.
+.facts {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(240px, 1fr)
+  );
+  gap: inherit;
+}
+
+.factTile {
+  justify-content: flex-start;
+  min-height: 0;
+}
+
+.wideTile {
+  grid-column: span 2;
+}
+
+.factLabel {
+  @include candle.eyebrow;
+  display: block;
+}
+
+.factValue {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: 17px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+// The life: a row of chapter cards that scrolls sideways
+.chapters {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(240px, 1fr);
+  gap: var(--space-3);
+  margin: 0 calc(var(--space-4) * -1);
+  padding: 2px var(--space-4) var(--space-4);
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  // Snap cards to the page edge, not the scroller's edge.
+  scroll-padding-inline: var(--space-4);
+  scrollbar-width: none;
+
+  @media (min-width: 768px) {
+    grid-auto-columns: minmax(
+      260px,
+      calc((100% - 3 * var(--space-4)) / 4)
+    );
+    gap: var(--space-4);
+    margin: 0 calc(var(--space-8) * -1);
+    padding: 2px var(--space-8) var(--space-4);
+    scroll-padding-inline: var(--space-8);
+  }
+
+  li {
+    scroll-snap-align: start;
+  }
+
+  a {
+    @include candle.card;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-content: start;
+    gap: var(--space-1) var(--space-3);
+    height: 100%;
+    min-height: 120px;
+    padding: var(--space-5);
+    color: var(--ink);
+    @include candle.focus-ring;
+    @include candle.transition(transform, box-shadow);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lift);
+    }
+  }
+}
+
+.chapterNumber {
+  @include candle.eyebrow;
+  grid-column: 1;
+}
+
+.chapterTitle {
+  grid-column: 1;
+  font-family: var(--font-display);
+  font-size: 21px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.chevron {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-size: 24px;
+  color: var(--taupe);
+}
+
+// Numbered lists: miracles and teachings
+.list {
+  @include candle.card;
+  margin: 0;
+  padding: var(--space-2) 0;
+  list-style: none;
+
+  li + li {
+    border-top: 1px solid rgba(58, 42, 30, 0.08);
+  }
+
+  a {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-5);
+    color: var(--ink);
+    @include candle.focus-ring;
+
+    &:hover .listTitle {
+      color: var(--wine);
+    }
+  }
+}
+
+.listNumber {
+  flex-shrink: 0;
+  width: 32px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--wine);
+  text-align: right;
+  font-variant-numeric: lining-nums;
+}
+
+.listText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.listTitle {
+  font-size: 19px;
+  line-height: 1.35;
+  @include candle.transition(color);
+}
+
+.listMeta {
+  font-size: 15px;
+  color: var(--taupe);
+}
+
+// Quotes: a two-column flow of quotation cards
+.quotes {
+  columns: 1;
+  column-gap: var(--space-4);
+
+  @media (min-width: 768px) {
+    columns: 2;
+  }
+
+  @media (min-width: 1100px) {
+    columns: 3;
+  }
+
+  blockquote {
+    @include candle.card;
+    break-inside: avoid;
+    margin: 0 0 var(--space-4);
+    padding: var(--space-6);
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--ink);
+
+    &::before {
+      content: '“';
+      display: block;
+      height: 28px;
+      font-size: 56px;
+      line-height: 1;
+      color: var(--wine);
+    }
+  }
+}
+
+.prayers {
+  display: grid;
+  gap: var(--space-3);
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.relic {
+  max-width: 760px;
+  gap: var(--space-4);
+}
+
+.relicText {
+  font-family: var(--font-reading);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.related {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  align-items: start;
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-6);
+  }
+}

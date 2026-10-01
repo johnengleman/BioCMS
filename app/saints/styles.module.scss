@@ -1,17 +1,9 @@
 @use './../../styles/breakpoints.scss' as breakpoints;
 
 .saintHome {
-  width: 90%;
-  max-width: 1500px;
-  padding: 0 0 50px 0;
-
-  @include breakpoints.breakpoint(mobileL) {
-    width: 95%;
-  }
-
-  @include breakpoints.breakpoint(laptop) {
-    width: 90%;
-  }
+  // The page container sets the width (Candlelight design).
+  width: 100%;
+  padding: 0 0 var(--space-12);
 }
 
 .FilterCustomizeRow {

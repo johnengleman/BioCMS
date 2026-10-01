@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import { gql } from 'graphql-request'
 import fetchHelper from './fetchHelper'
 import { withParsedCategories } from '../utils/parseList'
@@ -23,6 +24,7 @@ const query = gql`
       feast_day_orthodox
       feast_day_catholic
       categories
+      venerated_in
       patron
       profile_image {
         id
@@ -78,11 +80,13 @@ const query = gql`
   }
 `
 
-export const getSaint = async (slug?: string) => {
+// cache(): a page and its generateMetadata share one request (the
+// POST to Directus is not deduped by Next.js).
+export const getSaint = cache(async (slug?: string) => {
   const res: SaintResponse = await fetchHelper({
     query,
     variables: { slug },
   })
 
   return withParsedCategories(res.data.saints[0])
-}
+})

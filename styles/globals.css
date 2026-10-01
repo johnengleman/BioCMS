@@ -128,3 +128,16 @@ h6 {
 .day-item {
   margin-bottom: 40px;
 }
+
+/* Calm message for an empty list (see docs/design-system.md). */
+.emptyState {
+  max-width: 520px;
+  margin: var(--space-10) auto;
+  padding: var(--space-6) var(--space-8);
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  color: var(--ink-soft);
+  font-size: var(--text-md);
+  line-height: 1.6;
+  text-align: center;
+}

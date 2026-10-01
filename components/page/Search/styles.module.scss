@@ -1,7 +1,7 @@
-// import styled from 'styled-components'
-// import { device } from '../../../styles/devices'
 @use './../../../styles/breakpoints.scss' as breakpoints;
+@use './../../../styles/tokens.scss' as tokens;
 
+// Header search: a rounded field and a drop-down panel below it.
 .search {
   position: relative;
   display: none;
@@ -11,119 +11,128 @@
   @include breakpoints.breakpoint(laptop) {
     display: block;
   }
+}
 
-  .searchContainer {
+.searchContainer {
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  background-color: var(--parchment-light);
+  @include tokens.transition(border-color, box-shadow);
+
+  &:has(input:focus) {
+    border-color: var(--wine);
+    box-shadow: 0 0 0 3px rgba(126, 27, 36, 0.12);
+  }
+}
+
+.inputWrapper {
+  position: relative;
+  height: 38px;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: var(--space-4);
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: var(--ink-soft);
+    pointer-events: none;
+  }
+}
+
+.input {
+  width: 100%;
+  height: 38px;
+  padding: 0 var(--space-4) 0 42px;
+  border: none;
+  border-radius: var(--radius-pill);
+  outline: none;
+  background: transparent;
+  color: var(--ink);
+  font-family: inherit;
+  font-size: var(--text-md);
+
+  &::placeholder {
+    color: var(--ink-soft);
+  }
+
+  // Hide the browser's own clear button; Escape clears instead.
+  &::-webkit-search-cancel-button {
+    display: none;
+  }
+}
+
+.dropdownContent {
+  @include tokens.menu-panel;
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  max-height: min(420px, 70vh);
+  overflow-y: auto;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  text-decoration: none;
+  @include tokens.transition(background-color);
+
+  &.active,
+  &:hover {
+    background: var(--parchment-deep);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 0;
+  }
+}
+
+.profile {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--parchment-deep);
+  box-shadow: inset 0 0 0 1px var(--line);
+
+  img {
     width: 100%;
-    border-radius: 22px;
-    border: 1px solid #dee2e6;
-    overflow: hidden;
-    transition: all 0.3s ease-in-out;
-    background-color: white;
-
-    &:has(input:focus) {
-      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    }
-
-    .inputWrapper {
-      position: relative;
-      height: 38px;
-
-      .input {
-        font-size: 16px;
-        outline: none;
-        padding-left: 45px;
-        font-weight: 400;
-        border: none;
-        height: 38px;
-        width: 100%;
-        border-radius: 22px;
-        overflow: hidden;
-      }
-
-      svg {
-        position: absolute;
-        top: 28%;
-        left: 15px;
-        font-size: 15px;
-      }
-    }
-
-    .dropdownContent {
-      display: block;
-      background-color: white;
-      width: 100%;
-      z-index: 1000;
-      margin-top: 10px;
-      //transition: opacity 0.25s ease-in-out;
-
-      &:empty {
-        opacity: 0;
-        border: none;
-        display: none;
-      }
-    }
-
-    .dropdownContent .result {
-      color: black;
-      text-decoration: none;
-      display: block;
-      cursor: pointer;
-      height: 65px;
-      display: flex;
-      align-items: center;
-      font-size: 15px;
-      width: fit-content;
-      width: 100%;
-      border-bottom: 1px solid #dee2e6;
-
-      &:first-child {
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-      }
-
-      &:last-child {
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-      }
-
-      &:hover {
-        background-color: #dee2e6;
-      }
-
-      &:last-child {
-        border-bottom: none;
-      }
-    }
-
-    .profile {
-      height: 50px;
-      width: 50px;
-      min-width: 50px;
-      border-radius: 50%;
-      margin: 0 15px;
-      overflow: hidden;
-    }
-
-    .info {
-      display: flex;
-      flex-direction: column;
-      margin-top: 3px;
-    }
-
-    .name {
-      font-weight: 600;
-      color: #333a3f;
-      line-height: 1.2;
-    }
-
-    .dates {
-      font-size: 13px;
-      color: #7f7f7f;
-    }
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
   }
+}
 
-  /* Show the dropdown menu on hover */
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.name {
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.dates {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+  font-variant-numeric: lining-nums;
+}
+
+.empty {
+  padding: var(--space-3);
+  font-size: var(--text-md);
+  color: var(--ink-soft);
 }

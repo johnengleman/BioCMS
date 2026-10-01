@@ -1,0 +1,137 @@
+@use '../../../styles/candle.scss' as candle;
+
+// The numbered miracle accounts, in their groups.
+.group {
+  margin-top: var(--space-12);
+}
+
+.groupHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-4);
+  margin-bottom: var(--space-4);
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.6vw, 38px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    scroll-margin-top: 140px;
+  }
+}
+
+.groupCount {
+  @include candle.eyebrow;
+}
+
+.groupIntro {
+  margin-bottom: var(--space-5);
+  font-family: var(--font-reading);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--taupe);
+
+  p {
+    margin-bottom: 0.8em;
+  }
+}
+
+.entries {
+  @include candle.card;
+  margin: 0;
+  padding: 0 var(--space-5);
+  list-style: none;
+
+  @media (min-width: 768px) {
+    padding: 0 var(--space-8);
+  }
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 0 var(--space-3);
+  padding: var(--space-6) 0;
+
+  & + & {
+    border-top: 1px solid rgba(58, 42, 30, 0.08);
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 0 var(--space-4);
+  }
+
+  h3 {
+    margin-bottom: var(--space-2);
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.25;
+    color: var(--ink);
+    scroll-margin-top: 140px;
+  }
+}
+
+.number {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--wine);
+  text-align: right;
+  font-variant-numeric: lining-nums;
+}
+
+.body {
+  font-family: var(--font-reading);
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--ink);
+
+  p {
+    margin-bottom: 0.8em;
+  }
+
+  a {
+    color: var(--wine);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.status {
+  display: inline-block;
+  margin-top: var(--space-1);
+  padding: 4px var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--cream-deep);
+  font-family: var(--font-display);
+  font-size: 14px;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.approved {
+  background: rgba(126, 27, 36, 0.1);
+  color: var(--wine);
+}
+
+.source {
+  margin-top: var(--space-2);
+  font-family: var(--font-display);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--taupe);
+
+  a {
+    color: var(--wine);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    overflow-wrap: anywhere;
+  }
+}

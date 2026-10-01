@@ -1,0 +1,104 @@
+@use '../../styles/candle.scss' as candle;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-display);
+
+  > main {
+    flex: 1;
+  }
+}
+
+.eyebrow {
+  @include candle.eyebrow;
+}
+
+.title {
+  @include candle.page-title;
+  margin-top: var(--space-2);
+}
+
+.subtitle {
+  margin-top: var(--space-3);
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.35;
+}
+
+.content {
+  @include candle.container;
+  margin-top: var(--space-8);
+  padding-bottom: var(--space-16);
+}
+
+.goals {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.goal {
+  @include candle.card;
+  padding: var(--space-6);
+
+  h2 {
+    margin-top: var(--space-4);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  p {
+    margin-top: var(--space-3);
+    font-family: var(--font-reading);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+}
+
+.number {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--gilt);
+  font-size: 20px;
+  color: var(--wine);
+  font-variant-numeric: lining-nums;
+}
+
+.closing {
+  margin-top: var(--space-12);
+  font-size: clamp(26px, 3.4vw, 36px);
+  font-style: italic;
+  text-align: center;
+  color: var(--wine);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.primary {
+  @include candle.button-primary;
+}
+
+.link {
+  @include candle.link-chevron;
+  font-size: 17px;
+}

@@ -1,0 +1,82 @@
+@use '../../styles/candle.scss' as candle;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-display);
+
+  > main {
+    flex: 1;
+  }
+}
+
+.titleRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+
+  @media (min-width: 900px) {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.title {
+  @include candle.page-title;
+}
+
+.subtitle {
+  margin-top: var(--space-3);
+  font-family: var(--font-display);
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.tradition {
+  flex-shrink: 0;
+
+  @media (min-width: 900px) {
+    width: 400px;
+  }
+}
+
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+
+  @media (min-width: 900px) {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-4);
+    margin-top: var(--space-8);
+  }
+}
+
+.menus {
+  display: flex;
+  gap: var(--space-2);
+
+  @media (min-width: 900px) {
+    margin-left: auto;
+  }
+}
+
+.list {
+  @include candle.container;
+  margin-top: var(--space-6);
+
+  @media (min-width: 768px) {
+    margin-top: var(--space-8);
+  }
+}
+
+.toolbar > nav {
+  flex: 1;
+}

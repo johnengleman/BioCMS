@@ -1,69 +1,70 @@
-import Head from 'next/head'
-import Page from '../../components/page/Page/Page'
-import HeroSimple from '../../components/global/HeroSimple/HeroSimple'
-import Quotes from '../../components/saint/Quotes/QuotesClient'
-import { getChurch } from '../../hooks/getChurch'
+import type { Metadata } from 'next'
 import { getQuotes } from '../../queries/getQuotes'
-import ScrollUp from '../../components/global/ScrollUp/ScrollUp'
-import styles from './styles.module.scss'
+import { getChurch } from '../../hooks/getChurch'
+import ListPage from '../../components/candle/ListPage/ListPage'
+import ContentList from '../../components/candle/ContentList/ContentList'
 
 export const runtime = 'edge'
 
 import { NextPageProps } from '../../types/nextjs'
 
-const QuotesPage = async (props: NextPageProps) => {
+const PAGE_SIZE = 30
+
+export const generateMetadata = async (
+  props: NextPageProps,
+): Promise<Metadata> => {
   const searchParams = await props.searchParams
-  const filter = searchParams.filter || "all" || ''
+  const filter = searchParams.filter || 'all'
+  return {
+    title:
+      'Quotes from the Saints: Wisdom on Faith, Love & Prayer',
+    description:
+      'Discover inspirational quotes from Catholic and Orthodox saints. Explore their wisdom on faith, love and prayer.',
+    alternates: {
+      canonical: `${process.env.NEXT_PUBLIC_SITE_URL}/quotes${
+        filter !== 'all' ? `?filter=${filter}` : ''
+      }`,
+    },
+  }
+}
+
+const Quotes = async (props: NextPageProps) => {
+  const searchParams = await props.searchParams
+  const filter = searchParams.filter || 'all'
   const church = await getChurch(searchParams)
-  const initialQuotes = await getQuotes({
+
+  const items = await getQuotes({
     church,
     filter,
     offset: 0,
-    limit: 40,
+    limit: PAGE_SIZE,
   })
 
   return (
-    <>
-      <Head>
-        <title>
-          Saintly Wisdom: Quotes on Faith, Love, & Prayer
-        </title>
-        <link
-          rel="canonical"
-          href={`${
-            process.env.NEXT_PUBLIC_SITE_URL
-          }/quotes${
-            filter !== 'all' ? `?filter=${filter}` : ''
-          }`}
-        />
-        <meta
-          key="description"
-          name="description"
-          content={`Discover inspirational quotes from Catholic and Orthodox saints. Explore their wisdom on faith, love, and prayer, with a versatile range of spiritual themes.`}
-        />
-        <meta
-          name="keywords"
-          content="saint quotes, spiritual wisdom, faith quotes, hope quotes, love quotes, prayer quotes, charity quotes, suffering wisdom, forgiveness insights, humility quotes, peace and joy, wisdom from saints, patience and courage, gratitude sayings, justice and truth, mercy in words, devotion and unity, passions and Mary, saints on sin, inspirational quotes, religious quotes, Christian wisdom"
-        />
-      </Head>
-      <Page searchParams={searchParams}>
-        <HeroSimple
-          searchParams={searchParams}
-          title="Quotes"
-          type="quotes"
-        />
-        <div className={styles.quotes}>
-          <Quotes
-            key={JSON.stringify(initialQuotes)}
-            initialQuotes={initialQuotes}
-            church={church}
-            filter={filter}
-          />
-          <ScrollUp />
-        </div>
-      </Page>
-    </>
+    <ListPage
+      kind="quotes"
+      path="/quotes"
+      title="Quotes"
+      subtitle="Words of the saints on faith, prayer, love and suffering."
+      church={church}
+      filter={filter}
+      searchParams={searchParams}
+    >
+      <ContentList
+        key={`${church}-${filter}`}
+        kind="quotes"
+        initialItems={items || []}
+        church={church}
+        filter={filter}
+        pageSize={PAGE_SIZE}
+        emptyText={
+          filter === 'all'
+            ? 'No quotes yet. They will appear here as we add each saint.'
+            : 'No quotes match this topic yet. Choose another topic or tradition.'
+        }
+      />
+    </ListPage>
   )
 }
 
-export default QuotesPage
+export default Quotes

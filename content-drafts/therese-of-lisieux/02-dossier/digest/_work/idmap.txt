@@ -1,0 +1,418 @@
+E-P6-001	1897-01-08	tsa-dream	TSA's dream of the black door: "Sister Thérèse is called"
+E-P6-002	1897-01-09	lt216-if-heaven	LT 216: "if there is a Heaven, it is for me"
+E-P6-003	1897-01-15	lt217-wandering-jew	LT 217: "the little trade of the shop" and the Wandering Jew's song
+E-P6-004	1897-01-21	pn45-ma-joie	PN 45 "My joy": "All my soul is there!"
+E-P6-005	1897-01-27	lt218-siméon	LT 218 to Frère Siméon in Rome: "my course here below will not be long"
+E-P6-006	1897-02-00	stanislas-play	The St Stanislas play as a vehicle for her hopes
+E-P6-007	1897-02-02	broken-pane	The broken hatch pane
+E-P6-008	1897-02-02	pn47-venard	PN 47 "To Théophane Vénard", on the anniversary of his death
+E-P6-009	1897-02-22	lt219-broken-nose	LT 219: Mère Agnès's "broken nose"
+E-P6-010	1897-02-24	lt220-belliere-feb	LT 220 to Bellière: the sacristan's job, the poems, "no more grilles"
+E-P6-011	1897-03-19	lt221-lobster	LT 221: the lobster that "was possessed"
+E-P6-012	1897-03-19	lt221-hanoi-purgatory	LT 221: "I will leave one day for the Carmel of Hanoi"; "stay in purgatory until the end of the world"
+E-P6-013	1897-03-19-b	lt222-little-arm	LT 222 and 223: "my little arm will be as if it were long"
+E-P6-014	1897-04-00	treatments-spring	Cautery, blisters and a folded blanket: the treatments of 1897
+E-P6-015	1897-04-00	listened-only-with-pauline	With Pauline she only listened
+E-P6-016	1897-04-03	fever-note-3apr	LT 222 bis: "it is the fever I have, every day at 3 o'clock, military time"
+E-P6-017	1897-04-06	yellow-notebook-begins	The Yellow Notebook begins; how reliable are the "last words"?
+E-P6-018	1897-04-07	dew-7apr	"God will draw you up like a little drop of dew"
+E-P6-019	1897-04-18	easter-faith-question	Easter: "Have you had temptations against faith?"
+E-P6-020	1897-04-18	humiliations-18apr	Humiliations from Sisters; the magpies; "I tell the whole truth"
+E-P6-021	1897-04-25	lt224-belliere-easter	LT 224 to Bellière: "dear little brother", Joan of Arc's voice, "he has done great things in me"
+E-P6-022	1897-05-00	painting-jealous-sister	The jealous Sister and the ugly paintings; Thérèse's last use of her brushes
+E-P6-023	1897-05-00	last-poem-mary	The last poem, "Why I love you, O Mary"
+E-P6-024	1897-05-01	roulland-secret	Relieved of all duties; the secret of Roulland
+E-P6-025	1897-05-02	lt225-saigon	LT 225 to Sr Anne du Sacré-Cœur at Saigon
+E-P6-026	1897-05-07	locomotive-7may	"I cough like a locomotive"
+E-P6-027	1897-05-09	lt-226-learned-book	"I close the learned book that splits my head"
+E-P6-028	1897-05-13	lt227-228-celine-notes	Notes to Céline: "prouder of your littleness than of millions of suns"; "Mr Clodion"
+E-P6-029	1897-05-15	hanoi-hope	If cured, she wanted the Carmel of Hanoi, to suffer alone
+E-P6-030	1897-05-15	heaven-surprise-15may	"If I'm not surprised enough in Heaven, I'll pretend"
+E-P6-031	1897-05-18	relieved-offices	Relieved of every office; she begs not to be excused the Offices of the Dead
+E-P6-032	1897-05-19	joy-in-pain	"Nothing gives me joy like pain"
+E-P6-033	1897-05-19	pn51-rose	PN 51 "A rose stripped of its petals"
+E-P6-034	1897-05-20	envelope-photo	Her photograph: "that's the envelope; when will we see the letter?"
+E-P6-035	1897-05-20	pn50-joan	PN 50 "To Joan of Arc"
+E-P6-036	1897-05-23	lt229-elevator-pauline	LT 229: Mère Agnès is "the elevator"
+E-P6-037	1897-05-24	coward-courage	"I'm a coward who wants to deserve the compliments"
+E-P6-038	1897-05-24	gospel-sent-21may	"The one God has sent says the same things as God"
+E-P6-039	1897-05-25	no-wreaths	No wreaths: ransom two slave children named Théophane and Marie-Thérèse
+E-P6-040	1897-05-25	cell-straw-mattress	Still in her cell on the straw mattress
+E-P6-041	1897-05-27	vénard-vs-aloysius	Théophane Vénard preferred to St Aloysius: he was cheerful
+E-P6-042	1897-05-27	lottery-ticket	The lottery ticket; "they want me!"
+E-P6-043	1897-05-28	painting-flushed	A feverish request to paint, and a flushed face
+E-P6-044	1897-05-30	good-friday-note	The note about the Good Friday 1896 haemoptysis
+E-P6-045	1897-06-00	saints-friends	Her chosen saints and friends
+E-P6-046	1897-06-00	quick-tempered	"She would have been very quick-tempered"
+E-P6-047	1897-06-00	fainting-before-mass	Near fainting before Mass, she stayed for communion
+E-P6-048	1897-06-00	smile-habit	The smile as a learned habit
+E-P6-049	1897-06-00	doctor-vivre-damour	Dr de Cornière reads "Vivre d'amour" and gives up hope
+E-P6-050	1897-06-00	novices-severe	"Your little lambs think me severe"
+E-P6-051	1897-06-00	priest-june-ordination	"If I could have been a priest, it would be this June ordination"
+E-P6-052	1897-06-02	ms-c-order	Pauline's midnight visit to Gonzague: the order to write Manuscript C
+E-P6-053	1897-06-02	marie-veiling-2june	Marie Guérin's veiling and Thérèse's note
+E-P6-054	1897-06-02	lt-june-notes	Three tiny notes to Mère Agnès: "too moving", "the dove", "baby is going to sleep"
+E-P6-055	1897-06-03	ms-c-notebook	The notebook "too beautiful"
+E-P6-056	1897-06-03	lt-mt-june	Notes to the novice Marie de la Trinité: "bear your trial alone", "stop wanting to eat earth"
+E-P6-057	1897-06-04	beautiful-death	A beautiful death, asked of the Virgin and not of God
+E-P6-058	1897-06-04	farewell-4june	Farewell to her sisters in her cell: "I am soon to die"
+E-P6-059	1897-06-04	ms-c-opening	Manuscript C opens: for Mère Marie de Gonzague
+E-P6-060	1897-06-05	stairs-half-hour	Half an hour to climb the stairs; MT raised the alarm
+E-P6-061	1897-06-05	novena-victories	The novena to Our Lady of Victories
+E-P6-062	1897-06-06	mt-removed-nursing	MT removed from nursing, novices barred
+E-P6-063	1897-06-06	host-particle-chaplain	Only a particle of the host; the chaplain calls her doubts "dangerous"
+E-P6-064	1897-06-06	snail-syrup	Snail syrup and raw eggs; the chaplain on her temptations
+E-P6-065	1897-06-06	slow-guide-6june	"I no longer count on sickness, it is too slow a guide; I count only on love"
+E-P6-066	1897-06-07	white-hen	The little white hen and her chicks
+E-P6-067	1897-06-07	lt243-last-place	LT 243 to Céline: "let us run to the last place"
+E-P6-068	1897-06-08	taken-in-dislike	"Even to be taken in dislike"
+E-P6-069	1897-06-09	shower-of-roses	"I too will make roses rain after my death"
+E-P6-070	1897-06-09	thief-9june	"God will come like a thief": the Thief
+E-P6-071	1897-06-09	lt244-belliere-farewell	LT 244 to Bellière: "a last little word of farewell"; "I am not dying, I am entering into life"
+E-P6-072	1897-06-10	ms-c-elevator	The little way: "an elevator"
+E-P6-073	1897-06-11	writing-fishing-line	"Writing my little life is like fishing with a line"
+E-P6-074	1897-06-12	nobody-believes-ill	"No one believes I'm ill"
+E-P6-075	1897-06-15	ms-c-garden	Writing Manuscript C in the garden, interrupted at every moment
+E-P6-076	1897-06-15	lt245-farewell-card	Her own "farewell card": "Do not weep for me, for I am in Heaven"
+E-P6-077	1897-06-19	superior-general-19june	"You are the Superior General of my heart"
+E-P6-078	1897-06-20	ms-c-rosary	"The rosary costs me more than an instrument of penance"
+E-P6-079	1897-06-20	lt241-marthe	LT 241 to Sr Marthe: "let us be so small that everyone can trample on us"
+E-P6-080	1897-06-21	lt247-pentecost	LT 247 to Bellière: Pentecost, "permission to become an apostle in Carmel", "love drove out all fear"
+E-P6-081	1897-06-22	cart-garden-infirmary	Pushed home in her little carriage
+E-P6-082	1897-06-23	doctor-verdicts	The doctor's changing verdicts and de Cornière's judgment
+E-P6-083	1897-06-30	shy-with-uncle	"How shy I was with my uncle! What contrasts in my character!"
+E-P6-084	1897-07-00	two-in-a-hundred	"What bad luck if I were one of the two in a hundred!"
+E-P6-085	1897-07-00	kitchen-remark	The obituary remark in the kitchen: "never done anything worth speaking about"
+E-P6-086	1897-07-00	walking-missionary	Walking for a missionary
+E-P6-087	1897-07-00	hymn-hermitage	Made to stand and sing though feverish
+E-P6-088	1897-07-00	blankets-deaf-infirmarian	Buried under blankets by the deaf old infirmarian
+E-P6-089	1897-07-00	soft-linen	Soft linen for the body, the same care for souls
+E-P6-090	1897-07-00	keeping-relics	Nail parings, lip skin, eyelashes and rose petals given to be kept
+E-P6-091	1897-07-00	tonsure	The tonsure
+E-P6-092	1897-07-00	barbara-stanislaus	St Barbara, St Stanislaus, and the priesthood in heaven
+E-P6-093	1897-07-00	cannibals-cemetery	Missionaries in cannibals' stomachs; the day of death as the greatest feast
+E-P6-094	1897-07-00	saint-jean-prayer	An older Sister's private prayer to Thérèse
+E-P6-095	1897-07-00	gonzague-painful-scenes	"Several very painful scenes" from Gonzague during the illness
+E-P6-096	1897-07-00	papa-bon-dieu	"A baby who is an old man"
+E-P6-097	1897-07-00	daily-communion-prediction	"I will make you change your mind": daily communion after her death
+E-P6-098	1897-07-00	cornflower-crowns	Cornflower crowns on her deathbed
+E-P6-099	1897-07-00	remedies-missionary	Useless remedies offered for a sick missionary
+E-P6-100	1897-07-00	heroic-act-purgatory	Prayers for the dead and the "heroic act"
+E-P6-101	1897-07-00	small-mortifications	Sticky spoon, foul remedy drop by drop, the painful dress
+E-P6-102	1897-07-00	baptism-box-clock	The baptism box and the chapel clock
+E-P6-103	1897-07-00	cold-enough-to-die	Cold "enough to die of"
+E-P6-104	1897-07-00	no-night-watchers	She refused night watchers
+E-P6-105	1897-07-00	no-costly-remedies	No costly remedies from her family
+E-P6-106	1897-07-00	manuscript-burn	"If our Mother burned the notebooks": what she said about the manuscript
+E-P6-107	1897-07-00	only-sisters-heard	Who heard her words about her future mission
+E-P6-108	1897-07-00	office-st-john-tears	Tears over St John: "you have an advocate"
+E-P6-109	1897-07-00	mt-rebuked	MT complains aloud and is sent away; LT 249
+E-P6-110	1897-07-00	mt-turned-away	MT turned away from the infirmary door
+E-P6-111	1897-07-00	funny-stories-refused	She refused a book of funny stories
+E-P6-112	1897-07-00	life-not-sad	"Life is not sad; exile is sad"
+E-P6-113	1897-07-00	reward-motive	"Not for the reward, but to please God"
+E-P6-114	1897-07-00	rose-petals	"Don't throw them away, they may make people happy": the fallen petals
+E-P6-115	1897-07-00	dr-la-neele	Dr La Néele called twice to her bedside
+E-P6-116	1897-07-00	persevering	"How persevering I am"
+E-P6-117	1897-07-00	never-refused-god	No refusal to God since age three
+E-P6-118	1897-07-00	holy-face-bed	The Holy Face picture on her bed curtains
+E-P6-119	1897-07-00	jesus-asleep	"No doubt he was asleep!"
+E-P6-120	1897-07-00	lili-toto	Lili and Toto: nicknames from a picture book
+E-P6-121	1897-07-00	frictions	Frictions were "a martyrdom", yet she asked for them
+E-P6-122	1897-07-00	almanac-joke	The almanac joke: "Che suis riche, drès riche"
+E-P6-123	1897-07-00	bobonne-plockhorst	"Bo-bonne", the Plockhorst picture and "how shabbily done up you are"
+E-P6-124	1897-07-00	chestnut-walk	The chestnut walk: "Even if I die of it, I want to console you"
+E-P6-125	1897-07-00	fill-my-hands	"Fill my hands with little sacrifices"
+E-P6-126	1897-07-00	die-at-eighty	"I want to die at eighty"
+E-P6-127	1897-07-00	lt-small-notes	Small notes: the blanket, "the branch that held the little bird", "I want to have her whole"
+E-P6-128	1897-07-02	last-oratory-2july	Her last visit to the Blessed Sacrament: nobody thought to support her
+E-P6-129	1897-07-03	parlour-last-visit-leonie	Léonie's last meeting at the parlour
+E-P6-130	1897-07-03	autopsy-remark	"What a pity I couldn't do the autopsy!"
+E-P6-131	1897-07-04	pichon-too-childlike	"Fr Pichon treated me too much like a child"
+E-P6-132	1897-07-06	lamp-blood-6july	Pauline's lamp before the Virgin: "So you are not glad I'm dying"
+E-P6-133	1897-07-06	courage-gethsemane	"True courage" is Gethsemane, not youthful zeal
+E-P6-134	1897-07-06	niece-madeleine	The little niece "Madeleine" and Thérèse's picture of meeting God
+E-P6-135	1897-07-07	edifying-words-doctor	She refuses to "say something edifying" to Dr de Cornière
+E-P6-136	1897-07-07	wound-of-love-7july	The wound of love after her Offering, told again
+E-P6-137	1897-07-08	yellow-notebook-origin	Céline sleeps next door; Agnès takes notes on loose sheets
+E-P6-138	1897-07-08	infirmary-move	New haemorrhages of 6 July and the move to the infirmary on 8 July
+E-P6-139	1897-07-08	eau-de-cologne	The eau-de-Cologne bottle: her examination of the senses before Extreme Unction
+E-P6-140	1897-07-08	spiritual-brotherhoods	Warning about "spiritual brotherhoods" with priests
+E-P6-141	1897-07-08	statue-8july	"Today it is the statue; back then it was not"
+E-P6-142	1897-07-08	novice-soldier	The exhausting novice: "a good soldier is not afraid of battle"
+E-P6-143	1897-07-08	body-wasting	Face unchanged while the body wasted: "It's turning into a skeleton, that's what pleases me"
+E-P6-144	1897-07-08	mde-letter-8july	Marie Guérin's letter: thin but joking; "When one loves, there can be no purgatory"
+E-P6-145	1897-07-08	too-bad-if-they-laugh	"Too bad if they laugh at me afterwards": some Sisters doubted she was dying
+E-P6-146	1897-07-08	mde-dream-angels	Marie Guérin's dream of Thérèse playing with little angels
+E-P6-147	1897-07-08	gennin-box	"A little Gennin box, not a bier"; "I'd rather be dust than preserved"
+E-P6-148	1897-07-09	dont-know-the-trade	"I don't know the trade": too cheerful to be anointed
+E-P6-149	1897-07-09	not-afraid-yet	"Not afraid of death, not yet... it's quite a passage"
+E-P6-150	1897-07-09	will-come-down	"No, I will come down"
+E-P6-151	1897-07-09	god-made-crown	"It is God who made my crown"
+E-P6-152	1897-07-09	contradiction-9july	"A little girl of contradiction"
+E-P6-153	1897-07-09	dates-mouse-9july	"Eat dates as much as you like"; the wounded mouse
+E-P6-154	1897-07-10	little-children-not-damned	"Little children are not damned"
+E-P6-155	1897-07-10	ms-c-ends	Manuscript C breaks off in pencil
+E-P6-156	1897-07-11	crimes-confidence-11july	"How little I have lived"; "if I had committed every possible crime"
+E-P6-157	1897-07-12	communion-verse-12july	A communion stanza composed in the night
+E-P6-158	1897-07-12	tsa-arms	"Oh, it's my Sr Thérèse de St Augustin!"
+E-P6-159	1897-07-12	bed-of-misfortune	"A bed of misfortune, one always misses the train"
+E-P6-160	1897-07-12	guerins-reaction	The Guérins on Thérèse's dying: "I will engrave all she says and does"
+E-P6-161	1897-07-12	fetch-you-12july	"I'll come and fetch you"; "Mademoiselle Lili"; the "Bon Sauveur"
+E-P6-162	1897-07-13	robin-blackbirds	The robin, the blackbirds and the strawberries
+E-P6-163	1897-07-13	heaven-plans	"I will go down there to help the missionaries"
+E-P6-164	1897-07-13	lt253-belliere-13july	LT 253 to Bellière: "I will do more than write... I will be very near him"
+E-P6-165	1897-07-13-b	edit-1911-belliere	The 1911 edition splits and redates her farewell letters to Bellière
+E-P6-166	1897-07-14	lt254-roulland-14july	LT 254 to Roulland: "for five or six weeks I live only on milk"; "I intend not to be idle in Heaven"
+E-P6-167	1897-07-15	way-for-little-souls	Her way is for "little souls", not for extraordinary ways
+E-P6-168	1897-07-15	haemorrhages-july	Haemorrhages two or three times a day; blood as martyrdom
+E-P6-169	1897-07-15	candle-lamp-communion	Marie Guérin's candle lit from the half-dead lamp
+E-P6-170	1897-07-15	no-ecstasy-carmel-feast	She refuses to die after Communion on Our Lady of Mount Carmel
+E-P6-171	1897-07-15	rarely-visited	The community rarely visited; she could not bear noise
+E-P6-172	1897-07-16	prayers-for-marthe	Prayers Thérèse composed for Marthe
+E-P6-173	1897-07-16	feasts-marking	The feasts that mark her last months
+E-P6-174	1897-07-16	communion-16july	The Communion of Our Lady of Mount Carmel and the farewell letter to the Guérins
+E-P6-175	1897-07-16	scratched-saying-16july	A saying scratched out by Mère Agnès
+E-P6-176	1897-07-16	dont-worry-16july	"Do not worry in advance": persecutions and massacres
+E-P6-177	1897-07-16	celine-entry-16july	Céline's entry as proof that "all my great desires will be granted"
+E-P6-178	1897-07-16	cedars-16july	"The saints of the last times will surpass the first as cedars surpass other trees"
+E-P6-179	1897-07-17	lt-257-last-letter	Her last letter to Léonie, in pencil
+E-P6-180	1897-07-17	heaven-doing-good	"I will spend my heaven in doing good upon earth"
+E-P6-181	1897-07-17	no-rest-souls	"I cannot rest as long as there are souls to be saved"
+E-P6-182	1897-07-18	mde-dated-sayings	Dated sayings recorded by Marie Guérin
+E-P6-183	1897-07-18	lt258-no-joy	LT 258 to Bellière: "the thought of heavenly happiness gives me no joy"
+E-P6-184	1897-07-18	lt258-two-children	The parable of the two children and the father (the one who asks to be punished with a kiss)
+E-P6-185	1897-07-18	lt258-photograph	The photograph "in view of my death" and Mère Agnès who "speaks of my death like a feast"
+E-P6-186	1897-07-18	only-inconveniences	"God would not give me this desire unless he meant to fulfil it"; "only inconveniences"
+E-P6-187	1897-07-19	curiosity-chaplain	She will not ask what the chaplain said about her
+E-P6-188	1897-07-19	little-seed	"I am a little seed; no one knows yet what will come out of it"
+E-P6-189	1897-07-20	last-look-gonzague	"My last look will be for Mother Marie de Gonzague"
+E-P6-190	1897-07-20	gonzague-arms	"Happy to die in Gonzague's arms": no "human side"
+E-P6-191	1897-07-20	joan-of-arc-questions	"They harass me with questions, like Joan of Arc before her judges"
+E-P6-192	1897-07-20	mde-letter-20july	"It is not an extraordinary sanctity; it is love"
+E-P6-193	1897-07-20	resigned-20july	Thérèse smiles at the doctor's forecast; the community becomes resigned
+E-P6-194	1897-07-20	suffering-capacity	A capacity for suffering, a small one for joy
+E-P6-195	1897-07-20	mortal-sin-trust	"Mortal sin would not take away my trust"
+E-P6-196	1897-07-21	scold-pilate	"If God scolds me a little I will not weep; if he does not scold at all, I will"; Pilate; the instrument
+E-P6-197	1897-07-22	love-not-heaven	"That is not what attracts me: it is love"
+E-P6-198	1897-07-22	lt259-just-strike-me	"Let the just man strike me": LT 259 to Céline
+E-P6-199	1897-07-22	flash-darkness	Her nursing as "a flash in my darkness"; "if the angels swept Heaven, the dust would be diamonds"
+E-P6-200	1897-07-23	singing-23july	"So near Heaven, all this seems sad"; "It is as if you were singing!"
+E-P6-201	1897-07-23	violent-desire-23july	"I feel I can still suffer more": Sr Marie des Anges remembers her as a postulant
+E-P6-202	1897-07-23	swetchine-23july	Mme Swetchine on "union and unity"; the prayer for her father's cure on the day of her profession
+E-P6-203	1897-07-24	fruits-holy-family	Fruit for the Holy Family; milk with rum for St Joseph
+E-P6-204	1897-07-24	guerin-letters-july	The last letter to the Guérins and Uncle Isidore's tears
+E-P6-205	1897-07-25	guerin-grapes	Uncle Guérin's grapes: "I don't like what comes from my family"
+E-P6-206	1897-07-25	golden-sunset	The golden sunset
+E-P6-207	1897-07-25	face-thief-25july	"It is the face I kiss"; "The Thief is in my heart"; the Virgin with her dead Jesus
+E-P6-208	1897-07-25	fat-thin-opinions	"Fat face" and "wasting away": two opposite opinions on the same novice
+E-P6-209	1897-07-25	directors-guards	On spiritual direction: "the guards took my cloak"
+E-P6-210	1897-07-26	lt261-onions	LT 261 to Bellière: "the onions of Egypt" and the hidden conversation in Heaven
+E-P6-211	1897-07-26	lt261-family	Her own account of her family to Bellière: four little angels, "three times up the mountain of Carmel"
+E-P6-212	1897-07-26	lt261-father	Her father's illness, told to Bellière: "he did not want his healing asked for"
+E-P6-213	1897-07-26	bazaar-dream-timeline	A dream of a bazaar with her father; the dated timeline of her charge of the novices
+E-P6-214	1897-07-27	cross-with-spikes	The small cross with spikes: "never launch on that road"
+E-P6-215	1897-07-27	break-web	"Break the web of this sweet encounter"
+E-P6-216	1897-07-27	laundry-drops	The doctor's drops, a dream between torches, and the laundry prayer
+E-P6-217	1897-07-27	telephone-27july	Baby talk with her sisters: "Little Mother is my telephone"
+E-P6-218	1897-07-27	sayings-27july	"I am not selfish"; the iron cross; "curried like a horse"; "from 9 June I was sure I would die soon"
+E-P6-219	1897-07-28	not-one-day-without-suffering	"I had a difficult nature... not one day without suffering"
+E-P6-220	1897-07-28	harm-arrange-little-business	"How badly one arranges one's little business on earth!"
+E-P6-221	1897-07-29	pampered-remark	"What can you say about someone who has been pampered?"
+E-P6-222	1897-07-29	imperfect-29july	The child's toy and the tearful apology: "How imperfect I am!"
+E-P6-223	1897-07-29	feast-picture-marthe	A feast-day picture on the eve of Extreme Unction
+E-P6-224	1897-07-29	historian-29july	Blood at 3 p.m.; "not die at night"; "the novices exhaust me like preachers"; "to be my historian, spare yourself"
+E-P6-225	1897-07-30	flies-enemies	The flies: "my only enemies"
+E-P6-226	1897-07-30	last-sacraments	Extreme Unction and Viaticum; "this time I'm going to see my Jesus soon"
+E-P6-227	1897-07-30	sacraments-crowd	After Viaticum the Sisters crowd in; the lip skin she swallowed
+E-P6-228	1897-07-30	paillasse-ready	Her straw mattress brought down: "ready for my corpse"
+E-P6-229	1897-07-30	body-bothered	"My body always bothered me"
+E-P6-230	1897-07-30	glass-medicine-liqueur	The glass of bad medicine that looked like liqueur
+E-P6-231	1897-07-30	image-for-doctor	A painted image as thanks for Dr de Cornière
+E-P6-232	1897-07-30	photos-negroes	The photographs of Bellière and Roulland: "I am nicer than they are"
+E-P6-233	1897-07-30	saigon-fan	The fan from Saigon: "I fan the saints in my place"
+E-P6-234	1897-07-31	meat-juice	The meat juice: "not even a good nun"
+E-P6-235	1897-07-31	puss-in-boots	"I have two boots but no sack yet": Puss in Boots
+E-P6-236	1897-07-31	little-thief	"I will be a little thief"; "The Thief will come... Alleluia!"
+E-P6-237	1897-07-31	spark-ashes	"I found happiness and joy on earth, but only in suffering": the spark under the ashes
+E-P6-238	1897-07-31	deceived-everybody	The doctor says "a month or more": "the good God has deceived everybody"
+E-P6-239	1897-08-00	you-still-have-desires	"Ah! you still have desires!"
+E-P6-240	1897-08-00	sheet-on-feet	"Perhaps it is not allowed": the sheet on her feet
+E-P6-241	1897-08-00	agnes-prediction-busy	"She will be so busy with me she won't manage it all"
+E-P6-242	1897-08-00	never-own-will	"I never did my own will on earth"
+E-P6-243	1897-08-00	little-skeleton	"You will find only a little skeleton"
+E-P6-244	1897-08-00	crucifix-unnailing	"I'm un-nailing Him"
+E-P6-245	1897-08-00	good-thief-ruse	"The good thief stole it": heaven by a ruse of love
+E-P6-246	1897-08-00	all-accomplished	"All is well, all is accomplished, only love counts"
+E-P6-247	1897-08-00	undeceive-novices	"I will come and undeceive you if my way is false"
+E-P6-248	1897-08-00	hide-pains-from-god	"I hide my pains from God; I tell Mary everything"
+E-P6-249	1897-08-00	mm-message-soup	The soup she did not want; a message for MM
+E-P6-250	1897-08-00	envy-martyrdom	"You may have the grace of martyrdom"
+E-P6-251	1897-08-00	no-let-him-act	"No, no, one must let Him act": refusing prayers for relief
+E-P6-252	1897-08-00	not-a-good-religious-tsa	Deathbed joy at being called "not even a good religious"
+E-P6-253	1897-08-00	moss-in-heaven	"A little blade of moss" in heaven
+E-P6-254	1897-08-00	no-flowers-to-creatures	Refusing to "throw flowers" at the community
+E-P6-255	1897-08-00	keep-objects	She foresaw pilgrimages and asked that her things be kept
+E-P6-256	1897-08-00	tsa-purgatory	"On earth I do not know you": Thérèse and TSA
+E-P6-257	1897-08-00	letterbox-joys	"Little joys at the letter-box, by the turn"
+E-P6-258	1897-08-00	weapons-in-hand	Correcting a novice while shaking with fever: "I must die weapons in hand"
+E-P6-259	1897-08-00	kiss-crucifix	How to kiss the crucifix
+E-P6-260	1897-08-00	die-in-arena	"I die in a bed! I wanted to die in an arena"
+E-P6-261	1897-08-00	illness-course	Intestinal tuberculosis, gangrene and bedsores
+E-P6-262	1897-08-00	office-martyrdom	The Divine Office: "my happiness and my martyrdom"
+E-P6-263	1897-08-00	virgin-did-suffer	She rejects a priest's claim that the Virgin did not suffer physically
+E-P6-264	1897-08-00	shoulder-pain-kept	"Leave me my little shoulder pain"
+E-P6-265	1897-08-02	dither-2aug	"You dither far too much, my little Mother"
+E-P6-266	1897-08-03	family-life-3aug	"Do not lead the family life" after I am gone
+E-P6-267	1897-08-03	note-3aug-psalm22	The note of 3 August and the September plea
+E-P6-268	1897-08-03	die-of-death	"I will die of death"
+E-P6-269	1897-08-04	not-a-saint	"No, I am not a saint"
+E-P6-270	1897-08-04	dream-prussians	The dream of war against the Prussians
+E-P6-271	1897-08-04	palm-wheat	A palm to be dropped "to scatter graces"; the ear of wheat
+E-P6-272	1897-08-04	hebrew-greek	Hebrew and Greek; Gospels bound to wear on her heart
+E-P6-273	1897-08-04	little-life-to-suffer	"My little life is to suffer, and that's it"
+E-P6-274	1897-08-04	sparrow-egg	The sparrow's egg: a "conjuring trick" for the saints
+E-P6-275	1897-08-05	prioress-no-troubles	A prioress should look as if she has no troubles
+E-P6-276	1897-08-05	no-visions	She wanted no visions and expected no signs after death
+E-P6-277	1897-08-05	holy-face-night	The Holy Face beside her bed and her worst temptation
+E-P6-278	1897-08-05	die-laughing	"I believe she will die laughing"
+E-P6-279	1897-08-05	grey-mouse	"A thread on my leg" and "the little grey mouse"
+E-P6-280	1897-08-05	holy-face-vivre	The Holy Face and how she wrote "Vivre d'amour"
+E-P6-281	1897-08-06	first-infirmarian-handling	The old infirmarian's handling that "could have had grave consequences"
+E-P6-282	1897-08-06	few-regularity	"How little regularity there is here!"
+E-P6-283	1897-08-06	hymns-sung	Hymns and verses she sang or recited when ill
+E-P6-284	1897-08-06	robinson-6aug	Waiting for death all night; "like a little Robinson on his island"
+E-P6-285	1897-08-06	little-child-definition	What "staying a little child" means, in her own words
+E-P6-286	1897-08-07	flower-root-7aug	The little white flower from her father, glued to a picture
+E-P6-287	1897-08-08	childhood-servants-eating	Childhood pity for servants; "one should hide to eat"
+E-P6-288	1897-08-08	sky-closed-8aug	Looking at the sky: "the other is more and more closed to me"
+E-P6-289	1897-08-09	ms-c-permission-edit	Pauline's "permission" to cut or add
+E-P6-290	1897-08-09	sword-9aug	"I will die with weapons in hand"; "something for every taste"
+E-P6-291	1897-08-10	prayers-not-relief	She asks God not to hear prayers for her relief
+E-P6-292	1897-08-10	brought-up-well	"If you had not brought me up well"
+E-P6-293	1897-08-10	venard-picture	Théophane Vénard's picture on her bed curtain
+E-P6-294	1897-08-10	lt263-passport	LT 263 to Bellière: "my passport for Heaven" (29 July) and extreme unction on the 30th
+E-P6-295	1897-08-10	lt263-inheritance	Bellière's "inheritance": a reliquary, a worn crucifix, and the last picture she painted
+E-P6-296	1897-08-10	lt263-merciful	The Blessed "are more merciful, not more strict"; "It was by choice that I became your sister"
+E-P6-297	1897-08-11	little-saint-nursing	"You know you are nursing a little saint"
+E-P6-298	1897-08-11	virgin-less-happy	"The Blessed Virgin is less happy than we are"
+E-P6-299	1897-08-12	mt-birthday-image	An image in a trembling hand for the novice's 23rd birthday
+E-P6-300	1897-08-12	temptation-greed	A sudden temptation of greed: "I feel I'm dying of hunger"
+E-P6-301	1897-08-12	confiteor-tears	Tears at the Confiteor before Communion
+E-P6-302	1897-08-12	resisted-spared	Why she resisted being spared community duties
+E-P6-303	1897-08-15	funeral-preparations	The box of lilies, the candle and holy water, laughing at her own funeral
+E-P6-304	1897-08-15	cough-virgin	She asks the Virgin to stop her cough so Céline can sleep
+E-P6-305	1897-08-15	celine-wakes	Céline woke by herself three times a night
+E-P6-306	1897-08-15	no-heaven-15aug	"He wants to make me believe there is no Heaven"
+E-P6-307	1897-08-16	devil-16aug	"The devil is around me"; suffering for Céline: right side and left side
+E-P6-308	1897-08-17	la-neele-refused	A month without a doctor: who refused Dr La Néele?
+E-P6-309	1897-08-17	la-neele-17aug	La Néele finds both lungs taken
+E-P6-310	1897-08-17	peace-not-enthusiasm	"I am at peace, that is why I am happy"
+E-P6-311	1897-08-17	remedies-hurt	"The remedies hurt me"; a little linen
+E-P6-312	1897-08-18	isidore-vichy	Isidore's letter from Vichy: the Casino against the Carmel
+E-P6-313	1897-08-18	merit-lost-18aug	"My merit is perhaps going to be lost, since you're writing it down"
+E-P6-314	1897-08-19	last-communion-19aug	The last communion: constant vomiting
+E-P6-315	1897-08-19	novices-sit-crooked	To the novices, still: "Don't sit crooked on chairs. It's written."
+E-P6-316	1897-08-19	dead-christ-19aug	"I'm afraid I'll lose my mind"; the dead Christ
+E-P6-317	1897-08-20	thirst-fire	Burning thirst: "like pouring fire on fire"
+E-P6-318	1897-08-20	neurasthenic-sister	"How happy I would have been if I had been asked": the difficult infirm Sister
+E-P6-319	1897-08-20	milk-trick	Pauline gets her to drink the milk
+E-P6-320	1897-08-20	holy-family-ordinary	The Holy Family as ordinary people; "no useless miracles"
+E-P6-321	1897-08-20	rhododendron	The rhododendron shoot she begged to spare
+E-P6-322	1897-08-20	anguish-20aug	A day of anguish behind the fly screen
+E-P6-323	1897-08-20	agne-cry	"Agne! Agne!" and "a cooking recipe"
+E-P6-324	1897-08-20	marie-provisor	"Sr Marie du Sacré-Cœur made me do many mortifications"
+E-P6-325	1897-08-21	sermons-mary	Most sermons on Mary left her cold
+E-P6-326	1897-08-21	so-much-the-better	"Each time I say 'I suffer', answer 'So much the better'"
+E-P6-327	1897-08-22	iron-spikes	Bowel pain: "sitting on iron spikes"
+E-P6-328	1897-08-22	marie-birthday-22aug	Thérèse cannot answer her uncle; "What a good man my Uncle is"
+E-P6-329	1897-08-23	seminarian-letter	A tempted seminarian's letter
+E-P6-330	1897-08-25	sister-laughing-foot-bed	A Sister stands at the foot of her bed every evening, laughing
+E-P6-331	1897-08-25	pray-dying-25aug	"How we must pray for the dying!"; a failed prayer to her father
+E-P6-332	1897-08-25	lt266-last-letter	Her last letter: "I cannot fear a God who made himself so small for me"
+E-P6-333	1897-08-27	rustle-paper	She cannot bear the rustle of paper
+E-P6-334	1897-08-27	iced-water	Iced water: "Oh, how I long for it!"
+E-P6-335	1897-08-27	bishop-visit	The bishop's visit dreaded; "if it were only St Nicholas"
+E-P6-336	1897-08-28	black-hole-chestnuts	The black hole by the chestnut trees
+E-P6-337	1897-08-29	nine-pears	Nine pears on the tree
+E-P6-338	1897-08-30	la-neele-telegram	Telegram to Dr La Néele at Caen
+E-P6-339	1897-08-30	memorare-promise	"Promise me a Memorare every day"
+E-P6-340	1897-08-30	balloon-top	The red balloon and the spinning top
+E-P6-341	1897-08-30	last-photograph-30aug	Wheeled to the choir door; the last photograph; the doctor's verdict
+E-P6-342	1897-08-31	poison-advice	"Don't leave poison near patients in such pain"
+E-P6-343	1897-08-31	invented-virgin	"Who could have invented the Blessed Virgin?"
+E-P6-344	1897-09-00	no-delirium	No delirium, ever
+E-P6-345	1897-09-00	hermance-corbinelli	Father Corbinelli and little Aloysius
+E-P6-346	1897-09-00	angelic-face-helping-bed	Helping change her bed: a look of thanks; an angelic face
+E-P6-347	1897-09-00	infirmarian-advice	Advice to prioresses: make the sick ask for what they need
+E-P6-348	1897-09-00	bell-mid-word	She stopped writing mid-word when the bell rang
+E-P6-349	1897-09-00	last-wash-day	The last wash day
+E-P6-350	1897-09-00	angels-not-as-happy	"The angels are not as happy as I am"
+E-P6-351	1897-09-02	trial-for-relative	The trial of faith offered for an unbelieving relative
+E-P6-352	1897-09-02	indochina-go-soon	"I'll go, I'll go soon" to Indochina
+E-P6-353	1897-09-02	marie-des-anges-trust	Opening her soul to the novice mistress; mortifications in the refectory; "Tom Thumb"
+E-P6-354	1897-09-03	tsar-visit	Not dazzled by the Tsar's visit to France
+E-P6-355	1897-09-04	angelus-loves	Her list of loves at the Angelus
+E-P6-356	1897-09-05	morphine-dispute	Morphine: injections refused, syrup given by stratagem
+E-P6-357	1897-09-05	eternal-life-perhaps	"There is one, perhaps... and even it's certain!"
+E-P6-358	1897-09-06	novena-venard	The novena to Théophane Vénard for Hanoi; his relic kissed
+E-P6-359	1897-09-08	last-lines-8sept	Her last written lines
+E-P6-360	1897-09-08	profession-anniversary	Seventh anniversary of profession: robin, Léonie's music box, wild flowers
+E-P6-361	1897-09-11	final-acts-11sept	Final acts: crucifix, holy water, relics, blessed candle
+E-P6-362	1897-09-11	kiss-noise-11sept	"A kiss that makes a noise"; fear of the separation of soul and body
+E-P6-363	1897-09-13	violets	Violets: she signed to ask if she could smell them
+E-P6-364	1897-09-15	chalice-reflection	Her face reflected in a chalice
+E-P6-365	1897-09-18	marie-no-hope-weep	"Do not weep like those who have no hope"
+E-P6-366	1897-09-20	say-nothing-love	"I say nothing to Him, I love Him"
+E-P6-367	1897-09-20	stitched-pleats	The stitched pleats of the habit
+E-P6-368	1897-09-20	doctor-lies	"The doctor lies": she denies being patient
+E-P6-369	1897-09-21	spittoon-21sept	The spittoon and the unspoken thought; eyelashes "for the earth"; Bellière
+E-P6-370	1897-09-22	faith-suicide-22sept	"If I had not had faith, I would have killed myself"
+E-P6-371	1897-09-23	raised-me-23sept	"It's you who raised me"; the bird of prey
+E-P6-372	1897-09-24	pain-relief-dispute	Who withheld pain relief? Dr de Cornière's "a soul not of this earth"
+E-P6-373	1897-09-24	intuitions	"Intuitions! If you knew how poor I am"
+E-P6-374	1897-09-24	chestnuts-seraphim-24sept	The chestnut trees pruned; Dr de Cornière: "an angel"; the seraphim's wings
+E-P6-375	1897-09-25	fine-words-suffering	"Writing fine things about suffering is nothing"
+E-P6-376	1897-09-25	harvest-of-young	"After me there will be a harvest of the young"
+E-P6-377	1897-09-26	dead-leaf	The dead leaf on a spider's thread
+E-P6-378	1897-09-27	atheists-suicide	"I am surprised there are not more atheists who take their own lives"
+E-P6-379	1897-09-28	devil-night	One night of the devil's assaults; the blessed candle
+E-P6-380	1897-09-29	faucon-angel	The confessor: "What an angel! She is confirmed in grace"
+E-P6-381	1897-09-29	robin-turtledove	The robin and the turtledove
+E-P6-382	1897-09-29	granger-prayer	A dying nun asked to pray for a church-building
+E-P6-383	1897-09-29-12	last-day-eve-29sept	The eve of death: "Mother, is this the agony? I'll never know how to die"
+E-P6-384	1897-09-29-21	last-night-29sept	The last night: watchers allowed, the little glass held
+E-P6-385	1897-09-30	godefroy-hearsay	The last words as Godefroy heard them
+E-P6-386	1897-09-30-08	death-morning-30sept	The last morning: "pure suffering, no consolation"
+E-P6-387	1897-09-30-15	death-3pm-cross	Three o'clock: arms outstretched like the crucified
+E-P6-388	1897-09-30-16	mt-visit-death-day	MT sees the agony and leaves
+E-P6-389	1897-09-30-17	death-agony-begins	The agony begins; the community gathers; the ice on her lips
+E-P6-390	1897-09-30-19	death-last-hour	"I would not want to suffer less": the community sent away and called back; the last words
+E-P6-391	1897-09-30-20	death-gaze	The last gaze: "for the space of a Credo"; the candle held to her eyes
+E-P6-392	1897-09-30-2100	death-after-laid-out	The face after death; laying out; the worn toque
+E-P6-393	1897-10-00	perfumes-nuns	Perfumes smelled by the nuns
+E-P6-394	1897-10-01	alpargates-burned	The patched rope sandals burned
+E-P6-395	1897-10-01	vincent-de-paul-cure	Sr Saint-Vincent de Paul asks pardon at the dead Thérèse's feet
+E-P6-396	1897-10-01	oblation-found	The Act of Oblation found in her Gospel book
+E-P6-397	1897-10-01	marie-soul-near	Marie feels Thérèse's soul come near
+E-P6-398	1897-10-01	body-at-grille	The body exposed at the choir grille; the crowd; what was and was not seen
+E-P6-399	1897-10-02	body-signs	Signs reported by the Sisters: perfumes, a palm, a light
+E-P6-400	1897-10-03	coffin-closing	Signs of decay and the coffin closed
+E-P6-401	1897-10-04	burial-4oct	The funeral and burial
+E-P6-402	1897-10-10	circular-notes-mention	Gonzague mentions the notes when the obituary circular is drafted
+E-P6-403	1897-10-15	deaths-1897	Three "premature" deaths in a year
+E-P6-404	1897-10-15	mt-notes-source	MT wrote most of "Conseils et Souvenirs"
+E-P6-405	1897-10-15	celine-flame	Céline's flame from heaven: "It is Thérèse"
+E-P6-406	1897-10-29	gonzague-letter-godefroy	Gonzague's secret plan to publish
+E-P6-407	1897-12-01	gonzague-portrait	Gonzague weeps before Thérèse's portrait: "all she reproached me for"
+E-P6-408	1897-12-02	afterlife-transformation	After her death: critics won over, the community "transformed"
+E-P6-409	1897-12-03	no-canonization-expected	Nobody, not even Pauline, expected a beatification
+E-P6-410	1897-12-04	missionaries-invoke	Missionaries adopt her early
+E-P6-411	1897-12-05	vincent-de-paul-devotee	Sr Saint-Vincent de Paul turns into a devotee
+E-P6-412	1897-12-06	collage-incarnation	Sr Marie de l'Incarnation's collage
+E-P6-413	1897-12-07	gonzague-register-note	Gonzague's note in the profession register
+E-P6-414	1897-12-10	after-death-marie-changed	After Thérèse's death: Marie feels changed; "a donkey loaded with relics"
+E-P6-415	1897-12-12	voice-humbly	The voice: "Very humbly!"
+E-P6-416	1898-03-07	publication-history	How the manuscript was approved and printed
+E-P6-417	1899-01-00	few-pilgrims	Few pilgrims in the first 18 months
+E-P6-418	1910-09-06	burial-grave	The 1910 exhumation, the grave and the wooden cross

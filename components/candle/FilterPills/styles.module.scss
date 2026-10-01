@@ -1,0 +1,35 @@
+@use '../../../styles/candle.scss' as candle;
+
+.pills {
+  display: flex;
+  gap: var(--space-2);
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  // Room for the pill shadows, and a fade where the row continues.
+  padding: 2px 2px 6px;
+  mask-image: linear-gradient(
+    to right,
+    #000 88%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 88%,
+    transparent
+  );
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  a {
+    @include candle.pill;
+    flex-shrink: 0;
+  }
+
+  .selected,
+  .selected:hover {
+    @include candle.pill-selected;
+  }
+}

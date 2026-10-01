@@ -1,0 +1,167 @@
+@use '../../../styles/candle.scss' as candle;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 64px;
+  background: rgba(247, 242, 234, 0.86);
+  backdrop-filter: saturate(160%) blur(18px);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
+  box-shadow: 0 1px 0 rgba(58, 42, 30, 0.08);
+}
+
+.row {
+  @include candle.container;
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: 100%;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+  @include candle.focus-ring;
+
+  @media (min-width: 768px) {
+    font-size: 26px;
+  }
+}
+
+.nav {
+  display: none;
+  flex: 1;
+  justify-content: center;
+  gap: var(--space-8);
+
+  @media (min-width: 1024px) {
+    display: flex;
+  }
+
+  a {
+    position: relative;
+    padding: var(--space-2) 0;
+    font-family: var(--font-display);
+    font-size: 17px;
+    color: var(--ink);
+    @include candle.focus-ring;
+
+    &:hover {
+      color: var(--wine);
+    }
+
+    &[aria-current='page'] {
+      color: var(--wine);
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -12px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--wine);
+      }
+    }
+  }
+}
+
+// The shared search box, restyled as a frosted capsule.
+.search {
+  display: none;
+  width: 280px;
+
+  @media (min-width: 1024px) {
+    display: block;
+  }
+
+  > div {
+    width: 100%;
+  }
+
+  [class*='searchContainer'] {
+    border-color: rgba(58, 42, 30, 0.12) !important;
+    background: rgba(252, 249, 244, 0.75) !important;
+  }
+
+  input {
+    font-family: var(--font-display) !important;
+  }
+}
+
+.phoneTools {
+  display: flex;
+  gap: var(--space-1);
+  margin-left: auto;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+
+.panel {
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+    @include candle.focus-ring;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+  }
+
+  &[open] summary {
+    background: var(--cream-deep);
+  }
+}
+
+.panelBody {
+  @include candle.menu-panel;
+  position: absolute;
+  top: 64px;
+  left: var(--space-4);
+  right: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-3);
+
+  hr {
+    margin: var(--space-2) var(--space-3);
+    border: 0;
+    border-top: 1px solid rgba(58, 42, 30, 0.1);
+  }
+}
+
+// The search component hides itself on small screens; show it here.
+.searchPanel > div {
+  display: block;
+  width: 100%;
+}
+
+.panelLink {
+  @include candle.menu-item;
+  min-height: 48px;
+  font-size: 22px;
+
+  &[aria-current='page'] {
+    color: var(--wine);
+  }
+}
+
+.panelLinkSmall {
+  @include candle.menu-item;
+  color: var(--taupe);
+}

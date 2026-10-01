@@ -37,7 +37,7 @@ function getNewestBooksQuery({ church, preset }) {
         : ''
     } {
       books(
-        sort: "date_created"
+        sort: "-date_created"
         limit: 7,
         filter: {
           _and: [
@@ -58,6 +58,7 @@ function getNewestBooksQuery({ church, preset }) {
         genre
         saint {
             name
+            slug
             venerated_in
             profile_image {
                 id

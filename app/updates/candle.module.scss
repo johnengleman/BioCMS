@@ -1,0 +1,99 @@
+@use '../../styles/candle.scss' as candle;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-display);
+
+  > main {
+    flex: 1;
+  }
+}
+
+.title {
+  @include candle.page-title;
+}
+
+.subtitle {
+  margin-top: var(--space-3);
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.35;
+}
+
+.content {
+  @include candle.container;
+  max-width: 880px;
+  margin-top: var(--space-6);
+  padding-bottom: var(--space-16);
+}
+
+.timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.update {
+  display: grid;
+  gap: var(--space-2);
+
+  & + & {
+    margin-top: var(--space-6);
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+.date {
+  @include candle.eyebrow;
+  padding-top: var(--space-6);
+
+  @media (max-width: 767px) {
+    padding-top: 0;
+  }
+}
+
+.card {
+  @include candle.card;
+  padding: var(--space-6);
+
+  h2 {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+}
+
+.description {
+  margin-top: var(--space-3);
+  font-family: var(--font-reading);
+  font-size: 17px;
+  line-height: 1.65;
+
+  p + p {
+    margin-top: 0.8em;
+  }
+
+  a {
+    color: var(--wine);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+}
+
+.empty {
+  @include candle.card;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6);
+  font-size: 19px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--taupe);
+}

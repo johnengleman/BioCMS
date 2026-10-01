@@ -1,0 +1,37 @@
+@use '../styles/candle.scss' as candle;
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-display);
+
+  > main {
+    flex: 1;
+  }
+}
+
+.eyebrow {
+  @include candle.eyebrow;
+}
+
+.title {
+  @include candle.page-title;
+  margin-top: var(--space-2);
+}
+
+.subtitle {
+  margin-top: var(--space-3);
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.35;
+}
+
+.actions {
+  margin-top: var(--space-8);
+}
+
+.primary {
+  @include candle.button-primary;
+}

@@ -1,0 +1,56 @@
+@use '../../../styles/candle.scss' as candle;
+
+.menu {
+  position: relative;
+  flex-shrink: 0;
+
+  summary {
+    @include candle.pill;
+    list-style: none;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    svg {
+      color: var(--taupe);
+      @include candle.transition(transform);
+    }
+  }
+
+  &[open] summary svg {
+    transform: rotate(180deg);
+  }
+
+  ul {
+    @include candle.menu-panel;
+    position: absolute;
+    top: calc(100% + var(--space-2));
+    right: 0;
+    z-index: 20;
+    min-width: 220px;
+    max-height: 60vh;
+    overflow-y: auto;
+    margin: 0;
+    list-style: none;
+  }
+
+  li a {
+    @include candle.menu-item;
+
+    &[aria-current='true'] {
+      color: var(--wine);
+      font-weight: 600;
+    }
+  }
+}
+
+.label {
+  color: var(--taupe);
+}
+
+// The first menu in a row opens to the right, so it stays on screen.
+.menu:first-child ul {
+  left: 0;
+  right: auto;
+}

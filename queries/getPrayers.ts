@@ -50,6 +50,7 @@ function getPrayersQuery(church, filter) {
         }
       ) {
        prayers
+       prayer_title
        prayer_slug
        saint {
         name
@@ -101,6 +102,6 @@ export const getPrayers = async ({
 
   return response?.data?.prayers.map((d) => ({
     ...d,
-    link: `/saints/${d.saint.slug}/prayers`,
+    link: `/saints/${d.saint.slug}/novenas/${d.prayer_slug}`,
   }))
 }
