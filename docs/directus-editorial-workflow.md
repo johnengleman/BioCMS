@@ -4,7 +4,7 @@
 
 Keep the schema recovery package in [johnengleman/saints-server](https://github.com/johnengleman/saints-server) (recovery commit `e879f0b`). Its bootstrap script and schema snapshot rebuild structure, not lost content. They are unchanged.
 
-The owner canceled visual editing and backups. No visual-editing package, frontend draft-preview credential, backup service, or MCP integration is included. Saint drafts are managed inside Directus; the frontend continues reading published content.
+The owner canceled visual editing and backups. No visual-editing package, frontend draft-preview credential, or backup service is included. Saint drafts can now be saved through Directus MCP; the frontend continues reading published content.
 
 ## Packages
 
@@ -29,4 +29,4 @@ In Settings → Data Model → Saints, enable Versioning. Drafts are edited and 
 
 Enable the Deployments module, connect Vercel using the owner-approved credential, and select only the `saints` project. No administrator or preview token belongs in the frontend environment.
 
-MCP and the URL-to-saint ingestion pipeline remain future work after the site is ready for content.
+Directus MCP is connected. The authenticated, draft-only [Saint drafts — MCP read and save](https://directus-production-2664.up.railway.app/admin/settings/flows/78272fa0-8ae9-46fe-8675-bc8085c47315) flow supports researched entries without a browser. See [the invocation and safeguards](../scripts/directus-saint-drafts/README.md). Full entries are uploaded with `scripts/directus-saint-drafts/upload.mjs`, which calls the same flow with an API token. St. John Maximovitch and St. Thérèse of Lisieux were drafted this way and later published by the owner through version promotion.
