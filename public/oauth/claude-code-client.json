@@ -1,0 +1,13 @@
+{
+  "client_id": "https://www.findasaint.com/oauth/claude-code-client.json",
+  "client_name": "Claude Code (Find a Saint)",
+  "client_uri": "https://www.findasaint.com",
+  "application_type": "native",
+  "redirect_uris": [
+    "http://localhost:8080/callback",
+    "http://127.0.0.1:8080/callback"
+  ],
+  "token_endpoint_auth_method": "none",
+  "grant_types": ["authorization_code", "refresh_token"],
+  "response_types": ["code"]
+}
