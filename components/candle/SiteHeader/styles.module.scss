@@ -1,147 +1,150 @@
 @use '../../../styles/candle.scss' as candle;
 
+// ---------- The frosted bar (default) ----------
 .header {
   position: sticky;
+  font-family: var(--font-ui);
   top: 0;
   z-index: 50;
-  height: 64px;
-  background: rgba(247, 242, 234, 0.86);
-  backdrop-filter: saturate(160%) blur(18px);
-  -webkit-backdrop-filter: saturate(160%) blur(18px);
-  box-shadow: 0 1px 0 rgba(58, 42, 30, 0.08);
+  height: var(--header-h);
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: saturate(140%) blur(16px);
+  -webkit-backdrop-filter: saturate(140%) blur(16px);
+  box-shadow: 0 1px 0 var(--hairline);
 }
 
 .row {
   @include candle.container;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
-  gap: var(--space-8);
+  gap: var(--space-6);
   height: 100%;
-}
 
-.wordmark {
-  font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--ink);
-  white-space: nowrap;
-  @include candle.focus-ring;
-
-  @media (min-width: 768px) {
-    font-size: 26px;
+  @media (min-width: 1100px) {
+    grid-template-columns: 1fr auto 1fr;
   }
 }
 
+.logoLight {
+  display: none;
+}
+
+// Pill navigation (desktop).
 .nav {
   display: none;
-  flex: 1;
-  justify-content: center;
-  gap: var(--space-8);
+  gap: 2px;
+  padding: 4px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pill);
+  background: var(--muted);
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1100px) {
     display: flex;
   }
 
   a {
-    position: relative;
-    padding: var(--space-2) 0;
-    font-family: var(--font-display);
-    font-size: 17px;
-    color: var(--ink);
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    color: var(--ink-2);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    @include candle.transition(color, background-color);
     @include candle.focus-ring;
 
     &:hover {
-      color: var(--wine);
+      color: var(--ink);
     }
 
     &[aria-current='page'] {
-      color: var(--wine);
-
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -12px;
-        height: 2px;
-        border-radius: 2px;
-        background: var(--wine);
-      }
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: var(--shadow-sm);
     }
   }
 }
 
-// The shared search box, restyled as a frosted capsule.
-.search {
-  display: none;
-  width: 280px;
-
-  @media (min-width: 1024px) {
-    display: block;
-  }
-
-  > div {
-    width: 100%;
-  }
-
-  [class*='searchContainer'] {
-    border-color: rgba(58, 42, 30, 0.12) !important;
-    background: rgba(252, 249, 244, 0.75) !important;
-  }
-
-  input {
-    font-family: var(--font-display) !important;
-  }
+.tools {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-2);
 }
 
-.phoneTools {
-  display: flex;
-  gap: var(--space-1);
-  margin-left: auto;
+.app {
+  @include candle.button-dark;
 
-  @media (min-width: 1024px) {
+  span {
     display: none;
+
+    @media (min-width: 640px) {
+      display: inline;
+    }
+  }
+
+  @media (max-width: 639px) {
+    width: 40px;
+    padding: 0;
   }
 }
 
 .panel {
   summary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
     color: var(--ink);
     cursor: pointer;
     list-style: none;
+    @include candle.transition(background-color, border-color, color);
     @include candle.focus-ring;
 
     &::-webkit-details-marker {
       display: none;
     }
+
+    &:hover {
+      border-color: var(--ink-3);
+    }
   }
 
   &[open] summary {
-    background: var(--cream-deep);
+    background: var(--muted);
+  }
+}
+
+// The menu button is for phones and tablets only.
+.menu {
+  @media (min-width: 1100px) {
+    display: none;
   }
 }
 
 .panelBody {
   @include candle.menu-panel;
   position: absolute;
-  top: 64px;
-  left: var(--space-4);
+  top: calc(var(--header-h) - 4px);
   right: var(--space-4);
+  left: var(--space-4);
   display: flex;
   flex-direction: column;
   padding: var(--space-3);
 
+  @media (min-width: 768px) {
+    left: auto;
+    right: var(--space-8);
+    width: 420px;
+  }
+
   hr {
     margin: var(--space-2) var(--space-3);
     border: 0;
-    border-top: 1px solid rgba(58, 42, 30, 0.1);
+    border-top: 1px solid var(--hairline);
   }
 }
 
@@ -154,7 +157,9 @@
 .panelLink {
   @include candle.menu-item;
   min-height: 48px;
+  font-family: var(--font-title);
   font-size: 22px;
+  font-weight: 600;
 
   &[aria-current='page'] {
     color: var(--wine);
@@ -163,5 +168,115 @@
 
 .panelLinkSmall {
   @include candle.menu-item;
-  color: var(--taupe);
+  color: var(--ink-2);
+}
+
+// ---------- Over a hero photo ----------
+// The header floats over the rounded hero (see HomeHero). Its row is
+// inset so that it lines up with the hero's content. Once the page
+// scrolls (<html data-scrolled>), it becomes the frosted bar.
+.overlay {
+  position: fixed;
+  right: 0;
+  left: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  @include candle.transition(background-color, box-shadow, top);
+
+  @media (min-width: 768px) {
+    top: 14px;
+
+    .row {
+      padding: 0 calc(var(--space-8) + var(--space-6));
+    }
+  }
+
+  .logoDark {
+    display: none;
+  }
+
+  .logoLight {
+    display: block;
+  }
+
+  .nav {
+    @include candle.glass;
+
+    a {
+      color: rgba(255, 246, 234, 0.82);
+
+      &:hover {
+        color: var(--on-dark);
+      }
+
+      &[aria-current='page'] {
+        background: var(--on-dark);
+        color: var(--ink);
+      }
+    }
+  }
+
+  .app {
+    background: var(--on-dark);
+    color: var(--ink);
+
+    &:hover {
+      background: #fff;
+    }
+  }
+
+  .panel summary {
+    @include candle.glass;
+  }
+
+  :global(html[data-scrolled]) & {
+    top: 0;
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: saturate(140%) blur(16px);
+    -webkit-backdrop-filter: saturate(140%) blur(16px);
+    box-shadow: 0 1px 0 var(--hairline);
+
+    .row {
+      @media (min-width: 768px) {
+        padding: 0 var(--space-8);
+      }
+    }
+
+    .logoDark {
+      display: block;
+    }
+
+    .logoLight {
+      display: none;
+    }
+
+    .nav {
+      border-color: var(--hairline);
+      background: var(--muted);
+      backdrop-filter: none;
+
+      a {
+        color: var(--ink-2);
+
+        &[aria-current='page'] {
+          background: var(--surface);
+          color: var(--ink);
+        }
+      }
+    }
+
+    .app {
+      background: var(--espresso);
+      color: var(--on-dark);
+    }
+
+    .panel summary {
+      border-color: var(--hairline);
+      background: var(--surface);
+      color: var(--ink);
+      backdrop-filter: none;
+    }
+  }
 }

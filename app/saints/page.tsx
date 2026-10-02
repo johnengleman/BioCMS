@@ -213,7 +213,7 @@ const Saints = async (props: NextPageProps) => {
             />
           </div>
         </main>
-        <SiteFooter />
+        <SiteFooter church={church} />
       </div>
     </>
   )

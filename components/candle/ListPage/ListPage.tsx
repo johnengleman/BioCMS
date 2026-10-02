@@ -41,7 +41,7 @@ const ListPage = ({
       />
       <div className={styles.list}>{children}</div>
     </main>
-    <SiteFooter />
+    <SiteFooter church={church} />
   </div>
 )
 

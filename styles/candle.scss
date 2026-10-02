@@ -1,5 +1,7 @@
-// Candlelight design: shared component styles. Values come from the
-// CSS variables in styles/variables.css. Rules: docs/design-system.md.
+// Shared component styles for the "Travel" design (v3). Values come
+// from the CSS variables in styles/variables.css. Rules:
+// docs/design-system.md. The file keeps its old name so that existing
+// `@use '…/candle.scss' as candle` lines keep working.
 
 @mixin container {
   width: 100%;
@@ -25,88 +27,155 @@
   transition-timing-function: var(--ease);
 }
 
-// Large page title ("Saints"), Apple large-title proportions.
-@mixin page-title {
-  font-family: var(--font-display);
-  font-size: clamp(44px, 7vw, 76px);
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.02em;
+// Cormorant Garamond uses old-style figures by default ("1" looks like
+// "I"). Use longhand font properties with it: the `font` shorthand
+// resets this setting.
+@mixin lining {
+  font-variant-numeric: lining-nums;
+  font-feature-settings: 'lnum' 1;
+}
+
+// Serif title. Size and weight are set by the caller.
+@mixin title($size: 40px, $weight: 500) {
+  font-family: var(--font-title);
+  font-size: $size;
+  font-weight: $weight;
+  line-height: 1.03;
+  letter-spacing: -0.015em;
   color: var(--ink);
+  text-wrap: balance;
+  @include lining;
 }
 
-// Small capitals label in wine ("OCTOBER 1", "THE LIFE OF").
+// Large page title ("Discover the saints").
+@mixin page-title {
+  @include title(clamp(44px, 6.4vw, 76px), 500);
+  letter-spacing: -0.02em;
+}
+
+// Long reading text.
+@mixin reading($size: 18px) {
+  font-family: var(--font-reading);
+  font-size: $size;
+  line-height: 1.72;
+  color: var(--reading-ink);
+  text-wrap: pretty;
+}
+
+// Small uppercase label ("THE MIRACLES OF", "FEAST").
 @mixin eyebrow {
-  font-family: var(--font-display);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-family: var(--font-ui);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--wine);
+  color: var(--ink-3);
 }
 
-// A rounded pill: filters, segmented items, menu buttons.
+// A rounded pill: filters, menu buttons, tabs.
 @mixin pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-2);
   min-height: 40px;
-  padding: 0 var(--space-5);
-  border: 1px solid rgba(58, 42, 30, 0.12);
+  padding: 0 var(--space-4);
+  border: 1px solid var(--hairline);
   border-radius: var(--radius-pill);
-  background: var(--cream-card);
-  box-shadow: 0 1px 2px rgba(58, 42, 30, 0.05);
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-size: 16px;
+  background: var(--surface);
+  color: var(--ink-2);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
   @include transition(background-color, border-color, color, box-shadow);
   @include focus-ring;
 
   &:hover {
-    border-color: rgba(126, 27, 36, 0.35);
+    border-color: var(--ink-3);
+    color: var(--ink);
   }
 }
 
 @mixin pill-selected {
-  background: var(--wine);
-  border-color: var(--wine);
+  background: var(--espresso);
+  border-color: var(--espresso);
   color: var(--on-dark);
-  box-shadow: 0 4px 12px -6px rgba(126, 27, 36, 0.6);
 }
 
-// Filled wine capsule ("Read her life").
+// A glass pill that sits on a photo.
+@mixin glass {
+  border: 1px solid rgba(255, 246, 234, 0.24);
+  background: rgba(255, 246, 234, 0.13);
+  color: var(--on-dark);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+// Filled wine capsule ("Read all 322 accounts").
 @mixin button-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 48px;
-  padding: 0 var(--space-8);
+  gap: var(--space-2);
+  min-height: 46px;
+  padding: 0 var(--space-6);
+  border: 0;
   border-radius: var(--radius-pill);
   background: var(--wine);
   color: var(--on-dark);
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 500;
-  box-shadow: 0 8px 20px -10px rgba(126, 27, 36, 0.7);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
   @include transition(background-color);
   @include focus-ring;
 
   &:hover {
-    background: var(--wine-700);
+    background: var(--wine-hover);
   }
 }
 
-// Wine text link with a chevron ("See the miracles ›").
+// Dark espresso capsule ("Get the app").
+@mixin button-dark {
+  @include button-primary;
+  min-height: 40px;
+  padding: 0 var(--space-4);
+  background: var(--espresso);
+  font-size: 13px;
+  font-weight: 650;
+
+  &:hover {
+    background: var(--espresso-2);
+  }
+}
+
+// Outline capsule ("Show all 52 miracles").
+@mixin button-outline {
+  @include button-primary;
+  min-height: 44px;
+  padding: 0 var(--space-5);
+  border: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-weight: 650;
+
+  &:hover {
+    background: var(--muted);
+  }
+}
+
+// Wine text link with a chevron ("Read the full biography ›").
 @mixin link-chevron {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
   color: var(--wine);
-  font-family: var(--font-display);
-  font-size: 18px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 700;
   @include focus-ring;
 
   &:hover {
@@ -115,30 +184,45 @@
   }
 }
 
-// An ivory card with large soft corners.
+// A light card with large soft corners and an inset hairline.
 @mixin card {
-  background: var(--cream-card);
-  border: 1px solid rgba(58, 42, 30, 0.07);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-card);
+  background: var(--surface);
+  border-radius: var(--radius-2xl);
+  box-shadow:
+    var(--shadow-card),
+    inset 0 0 0 1px var(--line-soft);
 }
 
-// A saint image in a slim gilded frame.
+@mixin card-hover {
+  @include transition(box-shadow, transform);
+
+  &:hover {
+    box-shadow:
+      var(--shadow-hover),
+      inset 0 0 0 1px var(--line-soft);
+    transform: translateY(-3px);
+  }
+}
+
+// A portrait shown whole, with a soft shadow (no gilt frame in v3).
+@mixin portrait {
+  border-radius: 8px;
+  box-shadow: var(--shadow-lg);
+}
+
+// Kept for older call sites; same as portrait.
 @mixin gilt-frame {
-  border-radius: 12px;
-  box-shadow:
-    0 0 0 1px var(--gilt),
-    0 0 0 3px rgba(232, 211, 160, 0.45),
-    0 6px 16px -10px rgba(58, 42, 30, 0.6);
+  @include portrait;
 }
 
 // A drop-down panel.
 @mixin menu-panel {
   padding: var(--space-2);
-  border: 1px solid rgba(58, 42, 30, 0.08);
   border-radius: var(--radius-lg);
-  background: var(--cream-card);
-  box-shadow: var(--shadow-lift);
+  background: var(--surface);
+  box-shadow:
+    var(--shadow-hover),
+    inset 0 0 0 1px var(--line-soft);
 }
 
 @mixin menu-item {
@@ -150,11 +234,12 @@
   padding: 0 var(--space-3);
   border-radius: 10px;
   color: var(--ink);
-  font-family: var(--font-display);
-  font-size: 16px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
   @include focus-ring;
 
   &:hover {
-    background: var(--cream-deep);
+    background: var(--muted);
   }
 }

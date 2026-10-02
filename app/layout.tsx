@@ -1,21 +1,33 @@
 // /app/layout.tsx
 
-import { Lora, Newsreader } from 'next/font/google'
+import {
+  Cormorant_Garamond,
+  Manrope,
+  Newsreader,
+} from 'next/font/google'
 import '../styles/variables.css'
 import '../styles/globals.css'
 import { ReactNode } from 'react'
 import Providers from './providers'
 
-const lora = Lora({
+// Titles and quotations.
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-lora',
-  // The site font (regular) and its italic.
+  weight: ['500', '600', '700'],
   style: ['normal', 'italic'],
+  variable: '--font-cormorant',
 })
 
-// Candlelight design: headline and interface serif. Variable, with an
-// optical-size axis, so titles and small labels both look right.
+// Interface text: menus, buttons, labels, numbers.
+const manrope = Manrope({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-manrope',
+})
+
+// Long reading text: stories, biographies, teachings, miracle accounts.
+// Variable, with an optical-size axis.
 const newsreader = Newsreader({
   subsets: ['latin'],
   display: 'swap',
@@ -68,7 +80,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${lora.className} ${lora.variable} ${newsreader.variable}`}
+      className={`${manrope.className} ${manrope.variable} ${cormorant.variable} ${newsreader.variable}`}
     >
       <body>
         <Providers>{children}</Providers>

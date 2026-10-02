@@ -565,7 +565,7 @@ const SaintPage = async (props: NextPageProps) => {
           </Section>
         )}
       </main>
-      <SiteFooter />
+      <SiteFooter church={church} />
     </div>
   )
 }

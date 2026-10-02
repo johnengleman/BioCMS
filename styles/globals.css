@@ -29,10 +29,28 @@ html:focus-within {
 /* Set core body defaults */
 html,
 body {
-  height: 100%;
-  text-rendering: optimizeSpeed;
+  min-height: 100%;
+  text-rendering: optimizeLegibility;
   line-height: 1.5;
   scroll-behavior: smooth;
+}
+
+/* v3 page defaults. Lining figures everywhere: Cormorant Garamond
+   uses old-style figures by default. Avoid the `font` shorthand in
+   component styles, because it resets font-feature-settings. */
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: 'lnum' 1;
+}
+
+::selection {
+  background: var(--wine-tint);
+  color: var(--ink);
 }
 
 /* A elements that don't have a class get default styles */

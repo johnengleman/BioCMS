@@ -1,61 +1,56 @@
 /*
  * Find a Saint design tokens (CSS custom properties).
  * The full system and its rules: docs/design-system.md.
- * SCSS mixins that use these: styles/tokens.scss.
+ * SCSS mixins that use these: styles/candle.scss.
+ *
+ * "Travel" design (v3): the prayer app palette, made warmer.
+ * Ink is for reading. Wine is for actions. Gold is for small details.
  */
 :root {
-  /* Palette: "Parchment & Wine", taken from the gilded saint cards */
-  --parchment: #f7f4ee; /* page background: quiet ivory, only slightly warm */
-  --parchment-light: #fdfcf9; /* raised surfaces: chips, menus, fields */
-  --parchment-deep: #eee8de; /* hover fills, quiet bands */
-  --wine: #7e1b24; /* the one primary color */
-  --wine-700: #65151d; /* hover */
-  --wine-900: #4a0f16;
-  --gold: #c09a3e; /* accent only: counts, rings, rules, icons */
-  --gold-light: #e2c97f;
-  --wine-tint: rgba(126, 27, 36, 0.1); /* soft fills: counts, hovers */
-  --ink: #3a2a1e; /* text */
-  --ink-soft: #6b5546; /* secondary text */
-  --walnut: #2e1f16; /* footer, frames */
-  --line: #e6dfd3; /* hairlines on parchment */
-  --line-strong: rgba(58, 42, 30, 0.22); /* chip outlines */
-  --on-dark: #fbf3e6; /* text on wine and walnut */
-  --on-dark-soft: rgba(251, 243, 230, 0.72);
+  /* Surfaces */
+  --bg: #f8f3eb; /* page: warm paper, never pure white */
+  --surface: #fffcf7; /* cards, search, side cards */
+  --panel: #efe6d8; /* beige panel behind a whole portrait */
+  --muted: #f3ece1; /* chips, hover fills, quiet bands */
+  --hairline: #e9dfcf;
+  --line-soft: rgba(47, 38, 34, 0.07); /* inset ring on cards */
 
-  /* Older names, mapped onto the new palette */
-  --violet: #241e4e;
-  --violet-700: #2f2a58;
-  --violet-900: #17132f;
-  --maroon: var(--wine);
-  --maroon-700: var(--wine-700);
-  --paper: var(--parchment-light);
-  --paper-warm: var(--parchment-deep);
+  /* Text */
+  --ink: #2f2622;
+  --ink-2: #6f6055; /* secondary text */
+  --ink-3: #a08f80; /* labels, captions */
+  --reading-ink: #3b312c; /* long reading text */
 
-  /* Surfaces over the hero painting */
-  --glass-violet: var(--wine);
-  --glass-violet-hover: var(--wine-700);
-  --glass-maroon: rgba(253, 252, 249, 0.92);
-  --glass-maroon-hover: #fffdf8;
-  --glass-border: var(--line-strong);
-  --glass-border-hover: rgba(126, 27, 36, 0.55);
+  /* Actions and details */
+  --wine: #8c3d47; /* the one action color */
+  --wine-hover: #74323b;
+  --wine-tint: #f6e5e1;
+  --gold: #a97e3e; /* small details only */
+  --gold-soft: #c9a66b;
+  --gold-tint: #f3e6cc;
+  --espresso: #2a2220; /* dark buttons, dark cards, footer */
+  --espresso-2: #3a302c;
+  --on-dark: #fff6ea; /* text on wine, espresso and photos */
+  --on-dark-2: #cdbeaf;
+  --on-dark-3: #9e8e80;
 
-  /* Candlelight design (docs/design-system.md) */
-  --cream: #f7f2ea; /* page */
-  --cream-card: #fcf9f4; /* cards, controls */
-  --cream-deep: #efe7da; /* hover, quiet bands */
-  --taupe: #7a6656; /* secondary text */
-  --gilt: #c4a05a; /* image frames only */
-  --gilt-light: #e8d3a0;
-  --shadow-card: 0 1px 2px rgba(58, 42, 30, 0.06),
-    0 10px 28px -14px rgba(58, 42, 30, 0.28);
-  --shadow-lift: 0 2px 4px rgba(58, 42, 30, 0.08),
-    0 18px 38px -16px rgba(58, 42, 30, 0.36);
-  --radius-xl: 20px;
-  --font-display: var(--font-newsreader), 'Newsreader', Georgia, serif;
-  /* Apple's New York on Apple devices, then Newsreader. */
-  --font-reading: ui-serif, 'New York', var(--font-newsreader), Georgia,
-    serif;
-  --content-width: 1240px;
+  /* Dark story cards */
+  --card-dark: #2b2321;
+  --card-dark-ink: #f4eadc;
+  --card-dark-ink-2: #d9cbbb;
+  --card-dark-ink-3: #b9a796;
+  --card-dark-line: rgba(255, 246, 234, 0.07);
+
+  /* Type */
+  --font-title: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --font-ui: var(--font-manrope), 'Manrope', system-ui, -apple-system,
+    sans-serif;
+  --font-reading: var(--font-newsreader), 'Newsreader', Georgia, serif;
+
+  /* Layout */
+  --content-width: 1400px;
+  --reading-width: 720px;
+  --header-h: 68px;
 
   /* Space: a 4px scale */
   --space-1: 4px;
@@ -70,36 +65,57 @@
   --space-16: 64px;
 
   /* Corners */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-3xl: 28px;
   --radius-pill: 999px;
 
-  /* Type sizes */
+  /* Type sizes (interface) */
   --text-xs: 11px;
   --text-sm: 13px;
   --text-md: 15px;
   --text-lg: 17px;
   --text-xl: 20px;
 
-  /* Elevation */
-  --shadow-sm: 0 1px 2px rgba(46, 31, 22, 0.12);
-  --shadow-md: 0 6px 16px -6px rgba(46, 31, 22, 0.32);
-  --shadow-lg: 0 18px 40px -14px rgba(46, 31, 22, 0.4);
+  /* Elevation: warm, soft, layered */
+  --shadow-card: 0 1px 1px hsla(28, 30%, 20%, 0.03),
+    0 2px 4px hsla(28, 30%, 20%, 0.03),
+    0 12px 32px -14px hsla(28, 35%, 20%, 0.16);
+  --shadow-hover: 0 2px 4px hsla(28, 30%, 20%, 0.04),
+    0 24px 48px -18px hsla(28, 35%, 20%, 0.26);
+  --shadow-md: 0 10px 30px -8px hsla(28, 30%, 20%, 0.16);
+  --shadow-lg: 0 24px 60px -16px hsla(28, 30%, 15%, 0.35);
+  --shadow-sm: 0 1px 3px hsla(28, 30%, 20%, 0.12);
 
   /* Motion */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
-  --duration: 0.18s;
+  --duration: 0.2s;
 
-  /* Older names, kept so existing styles keep working */
-  --red: #4c4637;
-  --lightGray: #b2ab99;
-  --mediumGray: #00ceb1;
-  --darkGray: #00957d;
-  --filterBackground: #e6e6e6;
-  --headlineColor: #515151;
-  --textColor: #333;
-  --slideBackground1: #eab5d2;
-  --slideBackground2: #faabae;
-  --slideBackground3: #95d6e3;
+  /*
+   * Older names. They point at the v3 palette so that pages not yet
+   * rebuilt still match. Remove them in phase 5 of docs/redesign-plan.md.
+   */
+  --cream: var(--bg);
+  --cream-card: var(--surface);
+  --cream-deep: var(--panel);
+  --taupe: var(--ink-2);
+  --ink-soft: var(--ink-2);
+  --gilt: var(--gold-soft);
+  --gilt-light: var(--gold-tint);
+  --shadow-lift: var(--shadow-hover);
+  --font-display: var(--font-title);
+  --parchment: var(--bg);
+  --parchment-light: var(--surface);
+  --parchment-deep: var(--panel);
+  --wine-700: var(--wine-hover);
+  --wine-900: #5e2832;
+  --gold-light: var(--gold-tint);
+  --walnut: var(--espresso);
+  --line: var(--hairline);
+  --line-strong: rgba(47, 38, 34, 0.22);
+  --on-dark-soft: rgba(255, 246, 234, 0.72);
+  --glass-border-hover: rgba(140, 61, 71, 0.55);
 }

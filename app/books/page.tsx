@@ -200,7 +200,7 @@ const Books = async (props: NextPageProps) => {
           </Section>
         </div>
       </main>
-      <SiteFooter />
+      <SiteFooter church={church} />
     </div>
   )
 }
