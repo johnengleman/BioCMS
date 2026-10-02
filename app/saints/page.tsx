@@ -16,8 +16,6 @@ import TodaysFeast from '../../components/candle/TodaysFeast/TodaysFeast'
 import { CHURCH_LABELS, asChurch } from '../../utils/site'
 import styles from './candle.module.scss'
 
-export const runtime = 'edge'
-
 export const metadata: Metadata = {
   title:
     'Catholic & Orthodox Saints: Lives, Miracles, Prayers',

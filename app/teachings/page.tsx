@@ -5,8 +5,6 @@ import { getChurch } from '../../hooks/getChurch'
 import ListPage from '../../components/candle/ListPage/ListPage'
 import ContentList from '../../components/candle/ContentList/ContentList'
 
-export const runtime = 'edge'
-
 import { NextPageProps } from '../../types/nextjs'
 
 const PAGE_SIZE = 6

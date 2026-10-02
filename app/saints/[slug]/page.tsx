@@ -41,8 +41,6 @@ import ImageCredit from '../../../components/candle/ImageCredit/ImageCredit'
 import StatusPill from '../../../components/candle/StatusPill/StatusPill'
 import styles from './candle.module.scss'
 
-export const runtime = 'edge'
-
 import { NextPageProps } from '../../../types/nextjs'
 
 export const generateMetadata = async (

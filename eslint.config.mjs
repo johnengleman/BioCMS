@@ -17,6 +17,10 @@ export default defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
+    // Content tooling, not site code. Its .cjs files fall outside the
+    // Next config's file globs, so the import plugin is not loaded.
+    'scripts/**',
+    'content-drafts/**',
     'next.config.js',
     'next-sitemap.config.js',
     'prettier.config.js',

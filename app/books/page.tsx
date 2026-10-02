@@ -19,8 +19,6 @@ import styles from './candle.module.scss'
 
 import { NextPageProps } from '../../types/nextjs'
 
-export const runtime = 'edge'
-
 export const metadata: Metadata = {
   title:
     'Books on the Saints: Lives, Teachings & Devotions',

@@ -18,8 +18,6 @@ import {
 } from '../../../../components/candle/Reading/ReadingParts'
 import styles from '../../../../components/candle/Reading/reading.module.scss'
 
-export const runtime = 'edge'
-
 import { NextPageProps } from '../../../../types/nextjs'
 
 export const generateMetadata = async (

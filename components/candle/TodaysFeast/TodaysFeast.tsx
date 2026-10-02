@@ -1,9 +1,20 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useMemo, useSyncExternalStore } from 'react'
 import Link from 'next/link'
 import { daysUntilFeast, feastFor } from '../../../utils/saintCard'
 import type { FeastSaint } from '../../../queries/getTodaysFeast'
+
+// False on the server and during hydration, true in the browser after.
+// "Today" depends on the visitor's own clock, so it can only be worked
+// out in the browser.
+const subscribe = () => () => {}
+const useMounted = () =>
+  useSyncExternalStore(
+    subscribe,
+    () => true,
+    () => false,
+  )
 
 // "Feast of St. Thérèse of Lisieux  Today": the saint whose feast is
 // on the visitor's own calendar day. Shows nothing on days without one.
@@ -16,15 +27,18 @@ const TodaysFeast = ({
   church: string
   className?: string
 }) => {
-  const [today, setToday] = useState<FeastSaint | null>(null)
+  const mounted = useMounted()
 
-  useEffect(() => {
-    setToday(
-      saints.find(
-        (saint) => daysUntilFeast(feastFor(saint, church)) === 0,
-      ) || null,
-    )
-  }, [saints, church])
+  const today = useMemo(
+    () =>
+      mounted
+        ? saints.find(
+            (saint) =>
+              daysUntilFeast(feastFor(saint, church)) === 0,
+          ) || null
+        : null,
+    [mounted, saints, church],
+  )
 
   if (!today) return null
   return (

@@ -23,8 +23,6 @@ import {
 import styles from '../../../../components/candle/Reading/reading.module.scss'
 import list from '../../../../components/candle/Reading/miracles.module.scss'
 
-export const runtime = 'edge'
-
 import { NextPageProps } from '../../../../types/nextjs'
 
 export const generateMetadata = async (

@@ -7,8 +7,6 @@ import styles from './candle.module.scss'
 
 import { NextPageProps } from '../../types/nextjs'
 
-export const runtime = 'edge'
-
 export const metadata: Metadata = {
   title: 'About Find a Saint',
   description:
