@@ -35,13 +35,24 @@
     list-style: none;
   }
 
-  li a {
+  li a,
+  li button {
     @include candle.menu-item;
 
     &[aria-current='true'] {
       color: var(--wine);
       font-weight: 600;
     }
+  }
+
+  // The button choices look like the link ones.
+  li button {
+    width: 100%;
+    border: 0;
+    background: none;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
   }
 }
 

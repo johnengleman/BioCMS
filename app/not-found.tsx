@@ -7,7 +7,7 @@ import styles from './not-found.module.scss'
 export default function NotFound() {
   return (
     <div className={styles.page}>
-      <SiteHeader searchParams={{}} />
+      <SiteHeader />
       <main>
         <PhotoHero align="center">
           <p className={styles.eyebrow}>Page not found</p>

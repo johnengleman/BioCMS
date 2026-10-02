@@ -68,3 +68,18 @@ export const HERO_PHOTOS: Record<
 
 export const asChurch = (value?: string): Church =>
   value === 'catholic' || value === 'orthodox' ? value : 'all'
+
+export const isChurch = (value?: string | null): value is Church =>
+  value === 'all' || value === 'catholic' || value === 'orthodox'
+
+// Is a saint venerated in the visitor's tradition? `venerated_in` is
+// text such as '["orthodox"]', or the parsed list ["roman-catholic"].
+// "all" matches every saint.
+export const inTradition = (
+  venerated_in: string | string[] | null | undefined,
+  church: string,
+) =>
+  church === 'all' ||
+  String(venerated_in || '')
+    .toLowerCase()
+    .includes(church)

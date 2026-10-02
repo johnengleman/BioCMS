@@ -5,8 +5,9 @@ import SiteFooter from '../../components/candle/SiteFooter/SiteFooter'
 import PhotoHero from '../../components/candle/PhotoHero/PhotoHero'
 import styles from './candle.module.scss'
 
-import { NextPageProps } from '../../types/nextjs'
-
+// Fail the build if anything here needs the request (cookies,
+// headers, searchParams): every page must be built ahead of time.
+export const dynamic = 'error'
 export const metadata: Metadata = {
   title: 'About Find a Saint',
   description:
@@ -52,14 +53,10 @@ const GOALS = [
   },
 ]
 
-const About = async (props: NextPageProps) => {
-  const searchParams = await props.searchParams
+const About = () => {
   return (
     <div className={styles.page}>
-      <SiteHeader
-        searchParams={searchParams}
-        active="/about"
-      />
+      <SiteHeader active="/about" />
       <main>
         <PhotoHero align="center">
           <p className={styles.eyebrow}>About</p>

@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { useTradition } from '../../../hooks/useTradition'
+import { HERO_PHOTOS, asChurch } from '../../../utils/site'
 import styles from './styles.module.scss'
 
 type Photo = {
@@ -10,9 +12,29 @@ type Photo = {
   position: string
 }
 
+// The photo of the visitor's tradition. The static HTML has the "Both
+// traditions" photo; the browser swaps it after it reads the choice.
+const usePhoto = () => HERO_PHOTOS[asChurch(useTradition().church)]
+
+// The credit line for the photo (CC BY and CC BY-SA need it).
+export const HeroCredit = ({ className }: { className?: string }) => {
+  const photo = usePhoto()
+  return (
+    <a
+      className={className}
+      href={photo.sourceUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {photo.place} · Photo: {photo.author}, {photo.license}
+    </a>
+  )
+}
+
 // The hero photo. When the tradition changes, the new photo fades in
 // over the old one instead of replacing it at once.
-const HeroPhoto = ({ photo }: { photo: Photo }) => {
+const HeroPhoto = () => {
+  const photo: Photo = usePhoto()
   const [shown, setShown] = useState(photo)
   const [previous, setPrevious] = useState<Photo | null>(null)
 

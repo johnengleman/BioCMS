@@ -1,9 +1,12 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useCallback, useMemo, useState } from 'react'
-// Loads through the server: the browser may not call Directus (CORS).
-import { loadMoreSaints } from '../../../app/saints/actions'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { fetchSaints } from '../../../utils/api'
+import {
+  WithSaintsView,
+  type SaintsView,
+} from '../../candle/SaintsFilters/SaintsFilters'
 import SaintSummary from '../SaintSummary/SaintSummary'
 import AppCard from '../AppCard/AppCard'
 import ScrollUp from '../../global/ScrollUp/ScrollUp'
@@ -21,69 +24,95 @@ const Masonry = dynamic(
 // The app card goes in as the seventh item (or last, for short lists).
 const APP_CARD_AT = 6
 const APP_CARD = { __app: true, id: 'app-card' }
+const FIRST_PAGE = 30
+const NEXT_PAGE = 12
 
-interface SaintsListClientProps {
-  initialSaints: any[]
-  saintPreset: any
-  church: any
-  filter: any
-  sort: any
-}
+const Card = ({ data }: { data: any }) =>
+  data?.__app ? <AppCard /> : <SaintSummary data={data} />
 
-const SaintsListClient = ({
+// One list for one view. It starts from the saints in the built page
+// when the view is the default one (both traditions, newest first).
+// For any other view it loads the first page from /api/saints, which
+// is cached. Keyed on the view, so a new view starts fresh.
+const SaintsList = ({
+  view,
   initialSaints,
-  saintPreset,
-  sort,
-  filter,
-  church,
-}: SaintsListClientProps) => {
-  const [saints, setSaints] = useState(initialSaints || [])
-  const [hasMore, setHasMore] = useState(true)
+}: {
+  view: SaintsView
+  initialSaints: any[]
+}) => {
+  const [saints, setSaints] = useState<any[] | null>(
+    view.isDefault ? initialSaints : null,
+  )
+  // A short first page means there is nothing more to load.
+  const [hasMore, setHasMore] = useState(
+    !view.isDefault || initialSaints.length >= FIRST_PAGE,
+  )
   const isPhone = useMediaQuery('(max-width: 767px)')
   const gutter = isPhone ? 14 : 22
 
+  const query = useMemo(
+    () => ({
+      church: view.church,
+      filter: view.filter,
+      preset: view.preset,
+      sort: view.sort,
+    }),
+    [view],
+  )
+
+  useEffect(() => {
+    if (saints) return
+    let current = true
+    fetchSaints({ ...query, offset: 0, limit: FIRST_PAGE })
+      .then((list) => {
+        if (!current) return
+        setSaints(list)
+        setHasMore(list.length >= FIRST_PAGE)
+      })
+      .catch(() => current && setSaints([]))
+    return () => {
+      current = false
+    }
+    // Runs once per view: the parent keys this component on the view.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const items = useMemo(() => {
-    const list = [...saints]
+    const list = [...(saints || [])]
     list.splice(Math.min(APP_CARD_AT, list.length), 0, APP_CARD)
     return list
   }, [saints])
 
   const fetchMoreItems = async () => {
-    if (!hasMore) return
-    const nextItems = await loadMoreSaints({
-      church,
-      filter,
-      saintPreset,
-      sort,
+    if (!hasMore || !saints) return
+    const next = await fetchSaints({
+      ...query,
       // The app card is not a saint, so count saints only.
       offset: saints.length,
-      limit: 12,
-    })
-    if (!nextItems.length) setHasMore(false)
-    else setSaints((current) => [...current, ...nextItems])
+      limit: NEXT_PAGE,
+    }).catch(() => [])
+    if (!next.length) setHasMore(false)
+    else setSaints((current) => [...(current || []), ...next])
   }
 
   const maybeLoadMore = useInfiniteLoader(fetchMoreItems, {
-    minimumBatchSize: 12,
+    minimumBatchSize: NEXT_PAGE,
     isItemLoaded: (index, list) => !!list[index] || !hasMore,
   })
 
-  const Card = useCallback(
-    ({ data }) =>
-      data?.__app ? (
-        <AppCard />
-      ) : (
-        <SaintSummary
-          data={data}
-          church={church}
-        />
-      ),
-    [church],
-  )
+  const render = useCallback(Card, [])
 
   return (
     <div className={styles.list}>
-      {saints.length ? (
+      {saints === null ? (
+        <p
+          className="emptyState"
+          role="status"
+        >
+          Loading saints…
+        </p>
+      ) : saints.length ? (
         <>
           {/* One column on phones, up to four on wide screens. */}
           <Masonry
@@ -95,7 +124,7 @@ const SaintsListClient = ({
             overscanBy={1.5}
             columnWidth={290}
             onRender={maybeLoadMore}
-            render={Card}
+            render={render}
             maxColumnCount={4}
           />
           <ScrollUp />
@@ -108,5 +137,24 @@ const SaintsListClient = ({
     </div>
   )
 }
+
+const SaintsListClient = ({
+  initialSaints,
+  category,
+}: {
+  initialSaints: any[]
+  category: string
+}) => (
+  <WithSaintsView
+    category={category}
+    render={(view) => (
+      <SaintsList
+        key={`${view.church}|${view.filter}|${view.preset}|${view.sort}`}
+        view={view}
+        initialSaints={initialSaints}
+      />
+    )}
+  />
+)
 
 export default SaintsListClient

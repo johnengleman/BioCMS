@@ -5,8 +5,6 @@ import SiteFooter from '../../components/candle/SiteFooter/SiteFooter'
 import PhotoHero from '../../components/candle/PhotoHero/PhotoHero'
 import styles from './candle.module.scss'
 
-import { NextPageProps } from '../../types/nextjs'
-
 export const metadata: Metadata = {
   title: 'Recent updates | Find a Saint',
   description:
@@ -40,8 +38,13 @@ const formatDate = (value = '') => {
     : ''
 }
 
-const Updates = async (props: NextPageProps) => {
-  const searchParams = await props.searchParams
+// Built ahead of time and refreshed every five minutes.
+export const revalidate = 300
+// Fail the build if anything here needs the request (cookies,
+// headers, searchParams): every page must be built ahead of time.
+export const dynamic = 'error'
+
+const Updates = async () => {
   const updates = (await getUpdates()) || []
   const sorted = [...updates].sort((a, b) =>
     String(b.date).localeCompare(String(a.date)),
@@ -49,10 +52,7 @@ const Updates = async (props: NextPageProps) => {
 
   return (
     <div className={styles.page}>
-      <SiteHeader
-        searchParams={searchParams}
-        active="/updates"
-      />
+      <SiteHeader active="/updates" />
       <main>
         <PhotoHero>
           <h1 className={styles.title}>Recent updates</h1>

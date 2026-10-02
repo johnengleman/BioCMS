@@ -2,7 +2,7 @@
 
 Goal: every page is pre-generated and cached at the edge. The site is cheap to run and fast. Then the site moves from Vercel to Cloudflare Workers.
 
-Status date: 2026-10-01. Nothing in this plan is deployed yet.
+Status: phases 0 to 3 are done on branch `static-cloudflare` (2026-10-01). Nothing is deployed yet. Production is still Vercel from `main`.
 
 ## What I found
 
@@ -129,3 +129,55 @@ Each phase is a separate branch and a separate review. Production stays on Verce
 - Lighthouse performance 95 or higher on saint pages.
 - Monthly hosting cost lower than today.
 - `npm run lint` and `tsc --noEmit` pass in CI.
+
+## Phase 3 result (done)
+
+`next build` now shows every page as static (`○` or `●`) and no dynamic
+page routes. Only the API routes are dynamic. `dynamic = 'error'` on
+every page keeps it that way: the build fails if a page starts to use
+`cookies()`, `headers()` or `searchParams` again.
+
+What changed:
+- **Tradition:** `hooks/useTradition.ts` keeps it in `localStorage`
+  (key `findasaint.tradition`). The old `findasaint.com` cookie is read
+  once for visitors who have it. `?church=` in an address still works on
+  load, but the site no longer writes it.
+- **Welcome card:** a panel at the bottom of list pages for first-time
+  visitors. It is not on saint pages.
+- **Lists:** `/api/saints`, `/api/list/[kind]`, `/api/related`,
+  `/api/books`, `/api/search-index`. They check every parameter against
+  allowed values and send cache headers (`s-maxage=300`). The old server
+  actions are deleted.
+- **Category URLs:** `/saints/category/<name>`, `/miracles/era/<era>`,
+  `/teachings/era/<era>`, `/quotes/topic/<topic>`,
+  `/novenas/topic/<topic>`, `/books/genre/<genre>`. Old `?filter=` and
+  `?preset=` links redirect to them (308). Redirects keep the old query
+  text on the new address. This is harmless.
+- **Browser-only options:** `?preset=`, `?month=`, `?sort=` on `/saints`.
+- **Sitemap:** `app/sitemap.ts` and `app/robots.ts` replace
+  `next-sitemap`. The old query returned only 100 saints; the new one
+  returns all.
+- **Saint pages:** the top 200 saints are built ahead of time. Others
+  are built on first visit.
+- **Removed:** `js-cookie`, `next-sitemap`, `hooks/getChurch.ts`,
+  `app/actions.ts`, `app/saints/actions.ts`.
+
+### Still to set up (needs you)
+
+1. **`REVALIDATE_SECRET`:** choose a long random value. Set it in the
+   host's environment (Vercel for now, Cloudflare later).
+2. **Directus flow:** on publish of a saint, miracle, teaching, quote,
+   prayer or book, send `POST https://findasaint.com/api/revalidate`
+   with the header `x-revalidate-secret: <the secret>`. An optional JSON
+   body `{"paths": ["/saints/<slug>"]}` refreshes only those pages. With
+   no body, every page refreshes.
+3. **Cloudflare cache for the API:** `s-maxage` headers help a CDN, but
+   a Worker does not cache by itself. Phase 4 must wrap the `/api/*`
+   responses in the Cache API (or add cache rules).
+
+### Known limits
+
+- Search ignores accents, so "ther" does not find "Thérèse". This was
+  true before.
+- The static list shows "Both traditions". A visitor with a saved
+  choice sees a short update after the page loads.

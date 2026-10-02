@@ -1,60 +1,60 @@
 import fetchHelper from './fetchHelper'
 import { withParsedCategories } from '../utils/parseList'
-interface Image {
-  directus_files_id: {
-    id: number
-  }
-}
 
 interface SaintsResponse {
   data: {
-    saints: any // Replace `any` with the actual type if known
+    saints: any
   }
 }
 
-interface Saint {
-  id: number
-  slug: string
-  name: string
-  birth_year?: number
-  death_year?: number
+const MAX_CATEGORIES = 6
+const POOL = 12
+
+// Saints who share a category with this one. Directus does the
+// matching ("monastics" and "Monastics" both match, _icontains).
+export const getRelatedSaints = async ({
+  categories,
+  church,
+  slug,
+}: {
   categories: string[]
-  image: Image
-}
+  church: string
+  slug: string
+}) => {
+  const list = categories
+    .map((category) => category.trim())
+    .filter(Boolean)
+    .slice(0, MAX_CATEGORIES)
+  if (!list.length) return []
 
-function getSaintsQuery(church) {
-  // Variables declaration
-  let variablesList: string[] = []
+  const variables: Record<string, string> = { slug }
+  const declarations = ['$slug: String!']
+  const any = list.map((category, i) => {
+    variables[`c${i}`] = category
+    declarations.push(`$c${i}: String!`)
+    return `{ categories: { _icontains: $c${i} } }`
+  })
+  const conditions = ['{ slug: { _neq: $slug } }', `{ _or: [${any.join(', ')}] }`]
   if (church !== 'all') {
-    variablesList.push('$church: String!')
+    variables.church = church
+    declarations.push('$church: String!')
+    conditions.push('{ venerated_in: { _icontains: $church } }')
   }
 
-  // Filter construction
-  let churchList: string[] = []
-  if (church !== 'all') {
-    churchList.push('venerated_in: { _icontains: $church }')
-  }
-
-  // Building the query
-  let baseQuery = `
-    query getSaints${
-      variablesList.length > 0
-        ? `(${variablesList.join(', ')})`
-        : ''
-    } {
+  const query = `
+    query getRelatedSaints(${declarations.join(', ')}) {
       saints(
-        filter: {
-          ${churchList}
-        }
+        limit: ${POOL}
+        filter: { _and: [${conditions.join(', ')}] }
       ) {
         id
         slug
         name
+        summary
+        categories
+        venerated_in
         birth_year
         death_year
-        categories
-        summary
-        venerated_in
         birth_location
         death_location
         feast_day_catholic
@@ -67,38 +67,9 @@ function getSaintsQuery(church) {
     }
   `
 
-  return baseQuery
-}
-
-export const getSaints = async (church) => {
-  const query = getSaintsQuery(church)
-  const res: SaintsResponse = await fetchHelper({
+  const response: SaintsResponse = await fetchHelper({
     query,
-    variables: { church },
+    variables,
   })
-
-  return res.data.saints.map(withParsedCategories)
-}
-
-export const getRelatedSaints = async ({
-  categories,
-  church,
-  slug,
-}) => {
-  // Category values are not consistently cased in Directus ("monastics" vs "Monastics").
-  const cats = categories.split(',').map((category) => category.toLowerCase())
-  const allSaints = await getSaints(church)
-
-  const relatedSaints = allSaints.filter((saint) =>
-    saint.categories.some((category) =>
-      cats.includes(category.toLowerCase()),
-    ),
-  )
-
-  const filteredRelatedSaints = relatedSaints
-    .filter((saint) => saint.slug !== slug)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 4)
-
-  return filteredRelatedSaints
+  return (response?.data?.saints || []).map(withParsedCategories)
 }

@@ -1,3 +1,4 @@
+import { getSaintSlugs } from '../../../../queries/getSaintSlugs'
 import { notFound } from 'next/navigation'
 import { saintMetadata } from '../../../../utils/saintMetadata'
 import { getSaint } from '../../../../queries/getSaint'
@@ -20,6 +21,16 @@ import styles from '../../../../components/candle/Reading/reading.module.scss'
 
 import { NextPageProps } from '../../../../types/nextjs'
 
+// Built ahead of time and refreshed every five minutes. Saints not
+// built yet are built on the first visit.
+export const revalidate = 300
+// Fail the build if anything here needs the request (cookies,
+// headers, searchParams): every page must be built ahead of time.
+export const dynamic = 'error'
+export const generateStaticParams = async () =>
+  (await getSaintSlugs()).map((slug) => ({ slug }))
+
+
 export const generateMetadata = async (
   props: NextPageProps,
 ) => {
@@ -31,7 +42,6 @@ const LONG_NAME = 28
 const QUOTES_SHOWN = 6
 
 const SaintTeachings = async (props: NextPageProps) => {
-  const searchParams = await props.searchParams
   const { slug } = await props.params
 
   const data = await getSaint(slug)
@@ -112,10 +122,7 @@ const SaintTeachings = async (props: NextPageProps) => {
 
   return (
     <div className={styles.page}>
-      <SiteHeader
-        searchParams={searchParams}
-        active="/teachings"
-      />
+      <SiteHeader active="/teachings" />
       <main>
         <ReadingHeader
           eyebrow="The teachings of"

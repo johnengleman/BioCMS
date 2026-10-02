@@ -1,0 +1,114 @@
+@use '../../../styles/candle.scss' as candle;
+
+// A panel at the bottom of the screen. Fixed, so it takes no room in
+// the page and nothing moves when it appears.
+.welcome {
+  position: fixed;
+  z-index: 60;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  left: var(--space-4);
+  max-width: 440px;
+  padding: var(--space-6) var(--space-6) var(--space-5);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg, 20px);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 18px 50px rgba(47, 38, 34, 0.22);
+  animation: rise 360ms ease-out both;
+
+  @media (min-width: 640px) {
+    right: auto;
+    bottom: var(--space-6);
+    left: var(--space-6);
+  }
+
+  h2 {
+    margin: 0 var(--space-8) var(--space-2) 0;
+    font-family: var(--font-title);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  p {
+    margin: 0 0 var(--space-4);
+    color: var(--ink-2);
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+.choices {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+
+  button {
+    min-height: 40px;
+    padding: 0 var(--space-4);
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: var(--wine);
+    color: var(--on-dark);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 650;
+    cursor: pointer;
+    @include candle.transition(background-color);
+    @include candle.focus-ring;
+
+    &:hover {
+      background: var(--wine-hover);
+    }
+  }
+
+  // "Both traditions" is the neutral choice.
+  .quiet {
+    border: 1px solid var(--hairline);
+    background: var(--muted);
+    color: var(--ink);
+
+    &:hover {
+      background: var(--panel);
+    }
+  }
+}
+
+.close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-2);
+  cursor: pointer;
+  @include candle.focus-ring;
+
+  &:hover {
+    background: var(--muted);
+    color: var(--ink);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .welcome {
+    animation: none;
+  }
+}

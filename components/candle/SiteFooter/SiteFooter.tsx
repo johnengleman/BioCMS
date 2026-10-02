@@ -1,8 +1,6 @@
-import { Suspense } from 'react'
 import Link from 'next/link'
 import Logo from '../Logo/Logo'
 import TraditionControl from '../TraditionControl/TraditionControl'
-import { getChurch } from '../../../hooks/getChurch'
 import { APP_URL } from '../../../utils/site'
 import styles from './styles.module.scss'
 
@@ -28,11 +26,8 @@ const COLUMNS = [
 ]
 
 // The site footer. It holds the Catholic / Orthodox choice for the
-// whole site. Pages that know the tradition pass `church`; otherwise
-// the footer reads the saved cookie.
-const SiteFooter = async ({ church }: { church?: string }) => {
-  const selected = church ?? (await getChurch({}))
-
+// whole site. The choice is read in the browser (TraditionControl).
+const SiteFooter = () => {
   return (
     <footer
       className={styles.footer}
@@ -47,12 +42,7 @@ const SiteFooter = async ({ church }: { church?: string }) => {
               any time.
             </p>
           </div>
-          <Suspense fallback={null}>
-            <TraditionControl
-              church={selected}
-              tone="dark"
-            />
-          </Suspense>
+          <TraditionControl tone="dark" />
         </div>
 
         <div className={styles.main}>

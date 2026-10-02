@@ -1,32 +1,25 @@
 'use client'
 
-import { useMemo, useSyncExternalStore } from 'react'
+import { useMemo } from 'react'
 import Link from 'next/link'
+import { useMounted } from '../../../hooks/useMounted'
+import { useTradition } from '../../../hooks/useTradition'
+import { inTradition } from '../../../utils/site'
 import { daysUntilFeast, feastFor } from '../../../utils/saintCard'
 import type { FeastSaint } from '../../../queries/getTodaysFeast'
-
-// False on the server and during hydration, true in the browser after.
-// "Today" depends on the visitor's own clock, so it can only be worked
-// out in the browser.
-const subscribe = () => () => {}
-const useMounted = () =>
-  useSyncExternalStore(
-    subscribe,
-    () => true,
-    () => false,
-  )
 
 // "Feast of St. Thérèse of Lisieux  Today": the saint whose feast is
 // on the visitor's own calendar day. Shows nothing on days without one.
 const TodaysFeast = ({
   saints,
-  church,
   className,
 }: {
   saints: FeastSaint[]
-  church: string
   className?: string
 }) => {
+  const { church } = useTradition()
+  // "Today" depends on the visitor's own clock, so it is worked out in
+  // the browser.
   const mounted = useMounted()
 
   const today = useMemo(
@@ -34,6 +27,7 @@ const TodaysFeast = ({
       mounted
         ? saints.find(
             (saint) =>
+              inTradition(saint.venerated_in, church) &&
               daysUntilFeast(feastFor(saint, church)) === 0,
           ) || null
         : null,

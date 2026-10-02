@@ -16,8 +16,7 @@ import {
   LuStar,
 } from 'react-icons/lu'
 import { getSaint } from '../../../queries/getSaint'
-import { getRelatedSaints } from '../../../queries/getRelatedSaints'
-import { getChurch } from '../../../hooks/getChurch'
+import { getSaintSlugs } from '../../../queries/getSaintSlugs'
 import parseList from '../../../utils/parseList'
 import {
   formatFeast,
@@ -36,12 +35,22 @@ import { APP_URL } from '../../../utils/site'
 import SiteHeader from '../../../components/candle/SiteHeader/SiteHeader'
 import SiteFooter from '../../../components/candle/SiteFooter/SiteFooter'
 import SaintHero from '../../../components/saint/SaintHero/SaintHero'
-import SaintSummary from '../../../components/saint/SaintSummary/SaintSummary'
+import FeastValue from '../../../components/saint/FeastValue/FeastValue'
+import RelatedSaints from '../../../components/saint/RelatedSaints/RelatedSaints'
 import ImageCredit from '../../../components/candle/ImageCredit/ImageCredit'
 import StatusPill from '../../../components/candle/StatusPill/StatusPill'
 import styles from './candle.module.scss'
 
 import { NextPageProps } from '../../../types/nextjs'
+
+// Built ahead of time and refreshed every five minutes. Saints not
+// built yet are built on the first visit.
+export const revalidate = 300
+// Fail the build if anything here needs the request (cookies,
+// headers, searchParams): every page must be built ahead of time.
+export const dynamic = 'error'
+export const generateStaticParams = async () =>
+  (await getSaintSlugs()).map((slug) => ({ slug }))
 
 export const generateMetadata = async (
   props: NextPageProps,
@@ -64,13 +73,11 @@ const plural = (n: number, one: string, many: string) =>
   `${n.toLocaleString('en-US')} ${n === 1 ? one : many}`
 
 const SaintPage = async (props: NextPageProps) => {
-  const searchParams = await props.searchParams
   const { slug } = await props.params
 
   const data = await getSaint(slug)
   if (!data) notFound()
 
-  const church = await getChurch(searchParams)
   const base = `/saints/${slug}`
   const categories = parseList(data.categories)
 
@@ -85,10 +92,15 @@ const SaintPage = async (props: NextPageProps) => {
 
   const catholicFeast = formatFeast(data.feast_day_catholic)
   const orthodoxFeast = formatFeast(data.feast_day_orthodox)
-  const feast =
-    church === 'orthodox'
-      ? orthodoxFeast || catholicFeast
-      : catholicFeast || orthodoxFeast
+  // The feast day follows the visitor's tradition, so it is chosen in
+  // the browser (FeastValue). The page only knows whether one exists.
+  const hasFeast = Boolean(catholicFeast || orthodoxFeast)
+  const feastValue = (
+    <FeastValue
+      catholic={catholicFeast}
+      orthodox={orthodoxFeast}
+    />
+  )
   const bothFeasts =
     catholicFeast && orthodoxFeast && catholicFeast !== orthodoxFeast
 
@@ -109,15 +121,6 @@ const SaintPage = async (props: NextPageProps) => {
       data.relic_image?.id,
   )
 
-  const related =
-    categories.length > 0
-      ? (await getRelatedSaints({
-          categories: categories.join(),
-          church,
-          slug,
-        })) || []
-      : []
-
   const image = data.profile_image
   const galleryImages = (data.other_images ?? [])
     .map((o) => o?.directus_files_id)
@@ -131,9 +134,9 @@ const SaintPage = async (props: NextPageProps) => {
 
   // The bar of figures over the bottom of the photo.
   const stats = [
-    feast && {
+    hasFeast && {
       icon: <LuCalendarHeart />,
-      value: feast,
+      value: feastValue,
       label: 'Feast day',
     },
     years && {
@@ -168,7 +171,7 @@ const SaintPage = async (props: NextPageProps) => {
       : null,
   ].filter(Boolean) as {
     icon: React.ReactNode
-    value: string | number
+    value: React.ReactNode
     label: string
     href?: string
   }[]
@@ -259,10 +262,7 @@ const SaintPage = async (props: NextPageProps) => {
           __html: JSON.stringify(structuredData),
         }}
       />
-      <SiteHeader
-        searchParams={searchParams}
-        active="/saints"
-      />
+      <SiteHeader active="/saints" />
       <main className={styles.main}>
         <nav
           className={styles.crumbs}
@@ -703,11 +703,11 @@ const SaintPage = async (props: NextPageProps) => {
 
           <aside className={styles.side}>
             <div className={styles.sideCard}>
-              {feast && (
+              {hasFeast && (
                 <div className={styles.sideTop}>
                   <div>
                     <p className={styles.eyebrow}>Feast day</p>
-                    <b>{feast}</b>
+                    <b>{feastValue}</b>
                     {bothFeasts && (
                       <small>
                         Catholic {catholicFeast} · Orthodox{' '}
@@ -772,10 +772,13 @@ const SaintPage = async (props: NextPageProps) => {
           </aside>
         </div>
 
-        {related.length > 0 && (
-          <section
+        {categories.length > 0 && (
+          <RelatedSaints
+            slug={slug}
+            categories={categories}
             className={styles.related}
-            aria-labelledby="related-title"
+            gridClassName={styles.relatedGrid}
+            labelledBy="related-title"
           >
             <div className={styles.blockHead}>
               <div>
@@ -790,22 +793,19 @@ const SaintPage = async (props: NextPageProps) => {
                 <LuArrowRight aria-hidden="true" />
               </Link>
             </div>
-            <div className={styles.relatedGrid}>
-              {related.slice(0, 3).map((saint) => (
-                <SaintSummary
-                  key={saint.slug}
-                  data={saint}
-                  church={church}
-                />
-              ))}
-            </div>
-          </section>
+          </RelatedSaints>
         )}
       </main>
 
       <div className={styles.mobileBar}>
         <div>
-          <b>{feast ? `Feast day ${feast}` : data.name}</b>
+          <b>
+            {hasFeast ? (
+              <>Feast day {feastValue}</>
+            ) : (
+              data.name
+            )}
+          </b>
           <span>{years}</span>
         </div>
         <a
@@ -816,7 +816,7 @@ const SaintPage = async (props: NextPageProps) => {
           Pray in the app
         </a>
       </div>
-      <SiteFooter church={church} />
+      <SiteFooter />
     </div>
   )
 }

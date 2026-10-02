@@ -1,24 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import {
-  loadMoreMiracles,
-  loadMorePrayers,
-  loadMoreQuotes,
-  loadMoreTeachings,
-} from '../../../app/actions'
+import { useTradition } from '../../../hooks/useTradition'
+import { fetchList } from '../../../utils/api'
 import { splitSaintName } from '../../../utils/saintNames'
 import styles from './styles.module.scss'
 
 type Kind = 'teachings' | 'miracles' | 'quotes' | 'prayers'
-
-const LOADERS = {
-  teachings: loadMoreTeachings,
-  miracles: loadMoreMiracles,
-  quotes: loadMoreQuotes,
-  prayers: loadMorePrayers,
-}
 
 const assets = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS
 const LONG_NAME = 28
@@ -184,8 +173,10 @@ const PrayerCard = ({ item }: { item: any }) => {
   )
 }
 
-// A list page's items with a "Show more" button.
-const ContentList = ({
+// One list for one tradition. It starts from the items in the built
+// page when the tradition is "Both"; for Catholic or Orthodox it loads
+// the first page from /api/list, which is cached.
+const List = ({
   kind,
   initialItems,
   church,
@@ -200,22 +191,47 @@ const ContentList = ({
   pageSize: number
   emptyText: string
 }) => {
-  const [items, setItems] = useState(initialItems || [])
+  const [items, setItems] = useState<any[] | null>(
+    church === 'all' ? initialItems || [] : null,
+  )
   const [hasMore, setHasMore] = useState(
-    (initialItems?.length || 0) >= pageSize,
+    church !== 'all' || (initialItems?.length || 0) >= pageSize,
   )
   const [loading, setLoading] = useState(false)
 
+  useEffect(() => {
+    if (items) return
+    let current = true
+    fetchList(kind, {
+      church,
+      filter,
+      offset: 0,
+      limit: pageSize,
+    })
+      .then((list) => {
+        if (!current) return
+        setItems(list)
+        setHasMore(list.length >= pageSize)
+      })
+      .catch(() => current && setItems([]))
+    return () => {
+      current = false
+    }
+    // Runs once per tradition: the parent keys this component on it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const loadMore = async () => {
+    if (!items) return
     setLoading(true)
     try {
-      const next = await LOADERS[kind]({
+      const next = await fetchList(kind, {
         church,
         filter,
         offset: items.length,
         limit: pageSize,
       })
-      setItems((current) => [...current, ...next])
+      setItems((current) => [...(current || []), ...next])
       setHasMore(next.length >= pageSize)
     } catch {
       setHasMore(false)
@@ -224,6 +240,15 @@ const ContentList = ({
     }
   }
 
+  if (!items)
+    return (
+      <p
+        className={styles.empty}
+        role="status"
+      >
+        Loading…
+      </p>
+    )
   if (!items.length)
     return <p className={styles.empty}>{emptyText}</p>
 
@@ -262,6 +287,24 @@ const ContentList = ({
         </div>
       )}
     </>
+  )
+}
+
+// A list page's items with a "Show more" button.
+const ContentList = (props: {
+  kind: Kind
+  initialItems: any[]
+  filter: string
+  pageSize: number
+  emptyText: string
+}) => {
+  const { church } = useTradition()
+  return (
+    <List
+      key={church}
+      church={church}
+      {...props}
+    />
   )
 }
 

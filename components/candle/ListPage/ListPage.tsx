@@ -2,7 +2,9 @@ import type { ReactNode } from 'react'
 import SiteHeader from '../SiteHeader/SiteHeader'
 import SiteFooter from '../SiteFooter/SiteFooter'
 import ListHero from '../ListHero/ListHero'
-import { CHURCH_LABELS, asChurch } from '../../../utils/site'
+import { TraditionShowing } from '../TraditionText/TraditionText'
+import TraditionWelcome from '../TraditionWelcome/TraditionWelcome'
+import type { ListKind } from '../../../utils/listParams'
 import styles from './styles.module.scss'
 
 // The frame of a site-wide list page (teachings, miracles, quotes,
@@ -12,42 +14,35 @@ const ListPage = ({
   path,
   title,
   subtitle,
-  church,
   filter,
-  searchParams,
   children,
 }: {
-  kind: 'teachings' | 'miracles' | 'quotes' | 'prayers'
+  kind: ListKind
   path: string
   title: string
   subtitle: string
-  church: string
   filter: string
-  searchParams: any
   children: ReactNode
 }) => (
   <div className={styles.page}>
     <SiteHeader
-      searchParams={searchParams}
       active={path}
       overlay
     />
     <main>
       <ListHero
         kind={kind}
-        path={path}
         title={title}
         subtitle={subtitle}
-        church={church}
         filter={filter}
       />
       <p className={styles.showing}>
-        Showing {CHURCH_LABELS[asChurch(church)]} ·{' '}
-        <a href="#site-footer">Change</a>
+        <TraditionShowing />
       </p>
       <div className={styles.list}>{children}</div>
     </main>
-    <SiteFooter church={church} />
+    <SiteFooter />
+    <TraditionWelcome />
   </div>
 )
 

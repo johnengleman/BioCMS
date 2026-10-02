@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import Search from '../../page/Search/Search.server'
+import Search from '../../page/Search/Search'
 import Logo from '../Logo/Logo'
 import ScrollState from './ScrollState'
 import { APP_URL } from '../../../utils/site'
@@ -66,11 +66,9 @@ const PhoneIcon = () => (
 // glass controls, and turns into the frosted bar once the visitor
 // scrolls (see ScrollState).
 const SiteHeader = ({
-  searchParams,
   active,
   overlay = false,
 }: {
-  searchParams: any
   active?: string
   overlay?: boolean
 }) => (
@@ -122,7 +120,7 @@ const SiteHeader = ({
             <div
               className={`${styles.panelBody} ${styles.searchPanel}`}
             >
-              <Search searchParams={searchParams} />
+              <Search />
             </div>
           </details>
 

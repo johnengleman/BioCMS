@@ -1,4 +1,8 @@
+'use client'
+
 import Link from 'next/link'
+import { useMounted } from '../../../hooks/useMounted'
+import { useTradition } from '../../../hooks/useTradition'
 import {
   churchLabel,
   daysUntilFeast,
@@ -25,8 +29,13 @@ const ArrowIcon = () => (
   </svg>
 )
 
-const badgeFor = (saint, feast: string | null | undefined) => {
-  const days = daysUntilFeast(feast)
+const badgeFor = (
+  saint,
+  feast: string | null | undefined,
+  mounted: boolean,
+) => {
+  // Feast badges depend on today's date, so they wait for the browser.
+  const days = mounted ? daysUntilFeast(feast) : null
   if (days === 0) return { label: 'Feast today', feast: true }
   if (days !== null && days <= 7)
     return { label: 'Feast this week', feast: false }
@@ -39,17 +48,13 @@ const badgeFor = (saint, feast: string | null | undefined) => {
 // 16:10 image at the top, so photographs and icons look like one set.
 // Below it: role and place, the name, the saint's summary, and three
 // facts. Also used for "Related saints".
-const SaintSummary = ({
-  data,
-  church,
-}: {
-  data: any
-  church?: string
-}) => {
+const SaintSummary = ({ data }: { data: any }) => {
+  const { church } = useTradition()
+  const mounted = useMounted()
   const saint = data || {}
   const { name, profile_image, summary, slug } = saint
   const feast = feastFor(saint, church)
-  const badge = badgeFor(saint, feast)
+  const badge = badgeFor(saint, feast, mounted)
   const kicker = [roleLabel(saint.categories), placeLabel(saint)]
     .filter(Boolean)
     .join(' · ')

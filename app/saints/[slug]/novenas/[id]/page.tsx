@@ -14,6 +14,15 @@ import styles from '../../../../../components/candle/Reading/reading.module.scss
 
 import { NextPageProps } from '../../../../../types/nextjs'
 
+// Built the first time someone opens the page, then refreshed every
+// five minutes.
+export const revalidate = 300
+// Fail the build if anything here needs the request (cookies,
+// headers, searchParams): every page must be built ahead of time.
+export const dynamic = 'error'
+export const generateStaticParams = async () => []
+
+
 export const generateMetadata = async (
   props: NextPageProps,
 ) => {
@@ -27,7 +36,6 @@ export const generateMetadata = async (
 const LONG_NAME = 28
 
 const SaintNovena = async (props: NextPageProps) => {
-  const searchParams = await props.searchParams
   // This route has an [id] segment as well as [slug].
   const { slug, id } = (await props.params) as {
     slug: string
@@ -70,7 +78,7 @@ const SaintNovena = async (props: NextPageProps) => {
 
   return (
     <div className={styles.page}>
-      <SiteHeader searchParams={searchParams} />
+      <SiteHeader />
       <main>
         <ReadingHeader
           eyebrow="Novena"
