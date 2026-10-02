@@ -1,100 +1,200 @@
 @use '../../../styles/candle.scss' as candle;
 
-// The numbered miracle accounts, in their groups.
+// A saint's miracle list (phase 3 of docs/redesign-plan.md).
+
+// "How to read this list"
+.note {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  margin-bottom: var(--space-6);
+  padding: 20px 22px;
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line-soft);
+  font-family: var(--font-reading);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+
+  b {
+    display: block;
+    margin-bottom: 2px;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  p + p {
+    margin-top: 0.6em;
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 18px;
+    font-size: 15px;
+
+    > div > div {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+    }
+  }
+}
+
+.noteIcon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--wine-tint);
+  color: var(--wine);
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+// The label key in the rail.
+.legend {
+  margin-top: 26px;
+  padding: 18px;
+  border-radius: 18px;
+  background: var(--muted);
+
+  > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: var(--ink-2);
+  }
+
+  > div + div {
+    margin-top: 12px;
+  }
+}
+
+.legendTitle {
+  @include candle.eyebrow;
+  margin-bottom: 12px;
+}
+
+// ---------- Groups ----------
 .group {
-  margin-top: var(--space-12);
+  padding-top: 46px;
+
+  &:first-child {
+    padding-top: 22px;
+  }
+
+  // Long groups show their first accounts until opened (GroupMore).
+  &:not([data-open]) .extra {
+    display: none;
+  }
+
+  // A search shows every match.
+  :global(#miracle-list[data-searching]) &:not([data-open]) .extra:not([hidden]) {
+    display: grid;
+  }
 }
 
 .groupHeader {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
   justify-content: space-between;
-  gap: var(--space-1) var(--space-4);
-  margin-bottom: var(--space-4);
+  align-items: flex-end;
+  gap: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--ink);
 
   h2 {
-    font-family: var(--font-display);
-    font-size: clamp(28px, 3.6vw, 38px);
-    font-weight: 600;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    scroll-margin-top: 140px;
+    margin-top: 6px;
+    @include candle.title(clamp(28px, 3.2vw, 38px), 500);
+    scroll-margin-top: calc(var(--header-h) + 70px);
   }
 }
 
-.groupCount {
+.groupEyebrow {
   @include candle.eyebrow;
 }
 
-.groupIntro {
-  margin-bottom: var(--space-5);
-  font-family: var(--font-reading);
-  font-size: 18px;
-  line-height: 1.6;
-  color: var(--taupe);
+.groupCount {
+  @include candle.title(34px, 600);
+  color: var(--ink-3);
+}
 
-  p {
-    margin-bottom: 0.8em;
+.groupIntro {
+  max-width: 720px;
+  margin: 14px 0 4px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--ink-2);
+
+  p + p {
+    margin-top: 0.6em;
   }
 }
 
+// ---------- Accounts ----------
 .entries {
-  @include candle.card;
   margin: 0;
-  padding: 0 var(--space-5);
+  padding: 0;
   list-style: none;
-
-  @media (min-width: 768px) {
-    padding: 0 var(--space-8);
-  }
 }
 
 .entry {
   display: grid;
-  grid-template-columns: 36px minmax(0, 1fr);
-  gap: 0 var(--space-3);
-  padding: var(--space-6) 0;
-
-  & + & {
-    border-top: 1px solid rgba(58, 42, 30, 0.08);
-  }
-
-  @media (min-width: 768px) {
-    grid-template-columns: 52px minmax(0, 1fr);
-    gap: 0 var(--space-4);
-  }
+  grid-template-columns: 54px minmax(0, 1fr);
+  gap: 6px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--hairline);
 
   h3 {
-    margin-bottom: var(--space-2);
-    font-family: var(--font-display);
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 1.25;
-    color: var(--ink);
-    scroll-margin-top: 140px;
+    @include candle.title(24px, 600);
+    line-height: 1.18;
+    scroll-margin-top: calc(var(--header-h) + 70px);
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: 38px minmax(0, 1fr);
+    padding: 22px 0;
+
+    h3 {
+      font-size: 21px;
+    }
   }
 }
 
 .number {
-  font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 600;
-  line-height: 1.1;
-  color: var(--wine);
-  text-align: right;
-  font-variant-numeric: lining-nums;
+  @include candle.title(26px, 500);
+  color: var(--ink-3);
+
+  .approvedEntry & {
+    color: var(--wine);
+  }
+
+  @media (max-width: 767px) {
+    font-size: 21px;
+  }
 }
 
 .body {
-  font-family: var(--font-reading);
-  font-size: 18px;
-  line-height: 1.65;
-  color: var(--ink);
+  max-width: 760px;
+  margin-top: 10px;
+  @include candle.reading(17px);
+  line-height: 1.68;
 
-  p {
-    margin-bottom: 0.8em;
+  p + p {
+    margin-top: 0.7em;
   }
 
   a {
@@ -102,36 +202,35 @@
     text-decoration: underline;
     text-underline-offset: 3px;
   }
+
+  @media (max-width: 767px) {
+    font-size: 16.5px;
+  }
 }
 
 .status {
-  display: inline-block;
-  margin-top: var(--space-1);
-  padding: 4px var(--space-3);
-  border-radius: var(--radius-pill);
-  background: var(--cream-deep);
-  font-family: var(--font-display);
-  font-size: 14px;
-  line-height: 1.35;
-  color: var(--ink);
-}
-
-.approved {
-  background: rgba(126, 27, 36, 0.1);
-  color: var(--wine);
+  margin-top: 14px;
 }
 
 .source {
-  margin-top: var(--space-2);
-  font-family: var(--font-display);
-  font-size: 14px;
+  display: flex;
+  gap: 8px;
+  max-width: 760px;
+  margin-top: 10px;
+  font-size: 12.5px;
   line-height: 1.5;
-  color: var(--taupe);
+  color: var(--ink-3);
+
+  svg {
+    flex: none;
+    width: 14px;
+    height: 14px;
+    margin-top: 2px;
+  }
 
   a {
-    color: var(--wine);
+    color: var(--ink-2);
     text-decoration: underline;
     text-underline-offset: 2px;
-    overflow-wrap: anywhere;
   }
 }

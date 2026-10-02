@@ -84,7 +84,7 @@ const SaintNovena = async (props: NextPageProps) => {
           image={data.profile_image}
           backHref={base}
         />
-        <div className={styles.layout}>
+        <div className={`${styles.layout} ${styles.single}`}>
           <article className={styles.article}>
             {days.length > 0 ? (
               <NovenaDays days={days} />

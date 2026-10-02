@@ -1,0 +1,11 @@
+@use '../../../styles/candle.scss' as candle;
+
+.more {
+  @include candle.button-outline;
+  margin-top: 22px;
+
+  // Hidden while a search is showing every match.
+  :global(#miracle-list[data-searching]) & {
+    display: none;
+  }
+}

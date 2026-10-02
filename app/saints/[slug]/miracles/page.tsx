@@ -4,8 +4,12 @@ import { getSaint } from '../../../../queries/getSaint'
 import {
   getChapters,
   getMiracleBook,
+  isApproved,
   splitSaintName,
 } from '../../../../utils/saintContent'
+import { LuBookMarked, LuInfo } from 'react-icons/lu'
+import StatusPill from '../../../../components/candle/StatusPill/StatusPill'
+import GroupMore from '../../../../components/candle/GroupMore/GroupMore'
 import SiteHeader from '../../../../components/candle/SiteHeader/SiteHeader'
 import SiteFooter from '../../../../components/candle/SiteFooter/SiteFooter'
 import MiracleSearch from '../../../../components/candle/MiracleSearch/MiracleSearch'
@@ -34,10 +38,8 @@ const LONG_NAME = 28
 // Short lists need no search box.
 const SEARCH_FROM = 10
 
-// Approvals for someone else (e.g. her parents) say "not attributed".
-const isApproved = (status?: string) =>
-  /^approved/i.test(status || '') &&
-  !/not attributed/i.test(status || '')
+// Long groups show this many accounts until opened.
+const GROUP_SHOWN = 6
 
 const SaintMiracles = async (props: NextPageProps) => {
   const searchParams = await props.searchParams
@@ -133,12 +135,50 @@ const SaintMiracles = async (props: NextPageProps) => {
         <ReadingLayout
           contents={contents}
           contentsTitle="In this list"
+          aside={
+            entries.some((e) => e.status) && (
+              <div className={list.legend}>
+                <p className={list.legendTitle}>
+                  What the labels mean
+                </p>
+                <div>
+                  <StatusPill
+                    status="approved"
+                    short
+                  />
+                  Examined and approved by the Church.
+                </div>
+                <div>
+                  <StatusPill
+                    status="sworn at a Church process"
+                    short
+                  />
+                  Given under oath at a Church process.
+                </div>
+                <div>
+                  <StatusPill
+                    status="reported"
+                    short
+                  />
+                  A report. The label says who made it.
+                </div>
+              </div>
+            )
+          }
         >
           {intro && (
-            <div
-              className={styles.prose}
-              dangerouslySetInnerHTML={{ __html: intro }}
-            />
+            <div className={list.note}>
+              <span
+                className={list.noteIcon}
+                aria-hidden="true"
+              >
+                <LuInfo />
+              </span>
+              <div>
+                <b>How to read this list</b>
+                <div dangerouslySetInnerHTML={{ __html: intro }} />
+              </div>
+            </div>
           )}
 
           {entries.length >= SEARCH_FROM && (
@@ -155,13 +195,23 @@ const SaintMiracles = async (props: NextPageProps) => {
                 >
                   {group.title && (
                     <div className={list.groupHeader}>
-                      <h2 id={group.id}>{group.title}</h2>
-                      <span className={list.groupCount}>
-                        {plural(
+                      <div>
+                        {titledGroups.length > 1 && (
+                          <p className={list.groupEyebrow}>
+                            Group {g + 1} of {groups.length}
+                          </p>
+                        )}
+                        <h2 id={group.id}>{group.title}</h2>
+                      </div>
+                      <span
+                        className={list.groupCount}
+                        aria-label={plural(
                           group.entries.length,
                           'account',
                           'accounts',
                         )}
+                      >
+                        {group.entries.length}
                       </span>
                     </div>
                   )}
@@ -174,10 +224,14 @@ const SaintMiracles = async (props: NextPageProps) => {
                     />
                   )}
                   <ol className={list.entries}>
-                    {group.entries.map((entry) => (
+                    {group.entries.map((entry, e) => (
                       <li
                         key={entry.id || entry.number}
-                        className={list.entry}
+                        className={`${list.entry} ${
+                          isApproved(entry.status)
+                            ? list.approvedEntry
+                            : ''
+                        } ${e >= GROUP_SHOWN ? list.extra : ''}`}
                         data-miracle
                       >
                         <span
@@ -197,28 +251,27 @@ const SaintMiracles = async (props: NextPageProps) => {
                             }}
                           />
                           {entry.status && (
-                            <span
-                              className={`${list.status} ${
-                                isApproved(entry.status)
-                                  ? list.approved
-                                  : ''
-                              }`}
-                            >
-                              {entry.status}
-                            </span>
+                            <div className={list.status}>
+                              <StatusPill status={entry.status} />
+                            </div>
                           )}
                           {entry.source && (
-                            <p
-                              className={list.source}
-                              dangerouslySetInnerHTML={{
-                                __html: `Source: ${entry.source}`,
-                              }}
-                            />
+                            <p className={list.source}>
+                              <LuBookMarked aria-hidden="true" />
+                              <span
+                                dangerouslySetInnerHTML={{
+                                  __html: `<span class="visually-hidden">Source: </span>${entry.source}`,
+                                }}
+                              />
+                            </p>
                           )}
                         </div>
                       </li>
                     ))}
                   </ol>
+                  {group.entries.length > GROUP_SHOWN && (
+                    <GroupMore total={group.entries.length} />
+                  )}
                 </section>
               ))}
             </div>

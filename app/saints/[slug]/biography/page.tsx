@@ -143,7 +143,7 @@ const Biography = async (props: NextPageProps) => {
               className={styles.chapter}
             >
               <p className={styles.chapterLabel}>
-                Chapter {i + 1}
+                {String(i + 1).padStart(2, '0')}
               </p>
               <h2
                 id={chapter.id}

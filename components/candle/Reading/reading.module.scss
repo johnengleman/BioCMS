@@ -1,157 +1,263 @@
 @use '../../../styles/candle.scss' as candle;
 
-// Shared reading layout (biography, miracles, teachings), Candlelight design.
+// Long reading pages, "Travel" design (docs/redesign-plan.md, phase 3).
+
 .page {
   min-height: 100vh;
-  background: var(--cream);
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-display);
 }
 
-// Compact header over the candlelight photo
-.header {
-  display: flex;
-  align-items: center;
-  gap: var(--space-5);
-  padding-bottom: var(--space-4);
+// ---------- Saint banner ----------
+.bannerShell {
+  @include candle.container;
+  padding-top: 18px;
 
-  @media (min-width: 768px) {
-    gap: var(--space-8);
+  @media (max-width: 767px) {
+    padding: 0;
   }
 }
 
-.thumb {
-  flex-shrink: 0;
-  width: 84px;
+.banner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 36px;
+  align-items: center;
+  padding: 30px 36px;
+  border-radius: var(--radius-3xl);
+  background: var(--panel);
+
+  @media (max-width: 1100px) {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  // Phones: portrait beside the title, figures below.
+  @media (max-width: 767px) {
+    grid-template-columns: 76px minmax(0, 1fr);
+    column-gap: 16px;
+    row-gap: 0;
+    align-items: end;
+    padding: 22px 20px 24px;
+    border-radius: 0 0 26px 26px;
+  }
+}
+
+.portrait {
+  display: block;
   @include candle.focus-ring;
 
-  @media (min-width: 768px) {
-    width: 140px;
+  img {
+    width: auto;
+    max-width: 150px;
+    height: 170px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
   }
 
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    @include candle.gilt-frame;
+  @media (max-width: 767px) {
+    grid-row: 1 / span 2;
+    align-self: center;
+
+    img {
+      max-width: 76px;
+      height: 104px;
+    }
+  }
+}
+
+.bannerCopy {
+  min-width: 0;
+
+  @media (max-width: 767px) {
+    display: contents;
   }
 }
 
 .eyebrow {
   @include candle.eyebrow;
-  font-size: 13px;
+
+  @media (max-width: 767px) {
+    grid-column: 2;
+    align-self: end;
+  }
 }
 
 .title {
-  margin-top: var(--space-2);
-  font-family: var(--font-display);
-  font-size: clamp(34px, 5.5vw, 64px);
-  font-weight: 600;
-  line-height: 1;
+  @include candle.title(clamp(30px, 4.2vw, 54px), 600);
+  margin: 8px 0 0;
   letter-spacing: -0.02em;
-  color: var(--ink);
+
+  @media (max-width: 767px) {
+    grid-column: 2;
+    margin-top: 4px;
+  }
 }
 
 .meta {
-  margin-top: var(--space-3);
-  font-size: clamp(16px, 1.8vw, 21px);
-  color: var(--taupe);
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--ink-2);
+
+  @media (max-width: 767px) {
+    grid-column: 2;
+  }
 }
 
-// Contents beside one reading column
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
+  margin-top: 18px;
+
+  div {
+    padding: 0 22px;
+    border-left: 1px solid rgba(47, 38, 34, 0.14);
+
+    &:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  b {
+    display: block;
+    @include candle.title(28px, 600);
+  }
+
+  span {
+    font-size: 12.5px;
+    color: var(--ink-2);
+  }
+
+  @media (max-width: 767px) {
+    grid-column: 1 / -1;
+    flex-wrap: nowrap;
+
+    div {
+      padding: 0 12px;
+    }
+
+    div:nth-child(n + 4) {
+      display: none;
+    }
+
+    b {
+      font-size: 21px;
+    }
+
+    span {
+      font-size: 11.5px;
+    }
+  }
+}
+
+.bannerActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: start;
+
+  @media (max-width: 1100px) {
+    display: none;
+  }
+}
+
+.bannerButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 42px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 650;
+  white-space: nowrap;
+  cursor: pointer;
+  @include candle.transition(background-color);
+  @include candle.focus-ring;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    background: #fff;
+  }
+}
+
+// ---------- Layout: contents rail and article ----------
 .layout {
   @include candle.container;
   display: grid;
-  gap: var(--space-8);
-  margin-top: var(--space-8);
+  grid-template-columns: minmax(0, 1fr);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-12);
 
-  @media (min-width: 1024px) {
-    grid-template-columns: 300px minmax(0, 700px);
-    gap: var(--space-16);
-    margin-top: var(--space-10);
+  @media (min-width: 1100px) {
+    grid-template-columns: 270px minmax(0, var(--reading-width));
+    gap: 64px;
+    padding-top: 34px;
+  }
+}
+
+.single {
+  @media (min-width: 1100px) {
+    grid-template-columns: minmax(0, var(--reading-width));
+    justify-content: center;
   }
 }
 
 .aside {
   display: none;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1100px) {
+    position: sticky;
+    top: calc(var(--header-h) + 24px);
     display: block;
+    align-self: start;
+    max-height: calc(100vh - var(--header-h) - 40px);
+    overflow: auto;
+    scrollbar-width: none;
   }
-}
-
-.contentsCard {
-  @include candle.card;
-  position: sticky;
-  top: 88px;
-  max-height: calc(100vh - 112px);
-  overflow-y: auto;
-  padding: var(--space-6) var(--space-5);
 }
 
 .article {
   min-width: 0;
 }
 
-// Phones and tablets: contents as a panel that opens on tap
+// Phones: the contents become a sticky row of chips.
 .phoneContents {
-  @include candle.card;
-  margin-bottom: var(--space-8);
+  position: sticky;
+  top: var(--header-h);
+  z-index: 15;
+  margin: calc(-1 * var(--space-6)) calc(-1 * var(--space-4)) var(--space-6);
+  border-bottom: 1px solid var(--hairline);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1100px) {
     display: none;
-  }
-
-  summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 52px;
-    padding: 0 var(--space-5);
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-    list-style: none;
-
-    &::-webkit-details-marker {
-      display: none;
-    }
-
-    &::after {
-      content: '+';
-      font-size: 24px;
-      color: var(--wine);
-    }
-  }
-
-  &[open] summary::after {
-    content: '−';
-  }
-
-  > nav {
-    padding: 0 var(--space-5) var(--space-4);
-
-    h2 {
-      display: none;
-    }
   }
 }
 
-// Reading text: Apple Books-style book serif
+// ---------- Reading text ----------
 .prose {
-  font-family: var(--font-reading);
-  font-size: 19px;
-  line-height: 1.75;
-  color: var(--ink);
+  @include candle.reading(19px);
 
-  @media (min-width: 768px) {
-    font-size: 21px;
+  @media (max-width: 767px) {
+    font-size: 18px;
   }
 
   p,
   ul,
   ol {
-    margin: 0 0 1.1em;
+    margin: 0 0 1.05em;
   }
 
   ul,
@@ -169,33 +275,72 @@
 
   h3 {
     margin: 1.6em 0 0.5em;
-    font-family: var(--font-display);
-    font-size: 26px;
-    font-weight: 600;
-    line-height: 1.2;
+    @include candle.title(26px, 600);
   }
 
-  // Quotations: italic display serif with a wine bar.
+  // Quotations: a cream card with a gold opening mark.
   blockquote {
+    position: relative;
     margin: 1.6em 0;
-    padding-left: var(--space-6);
-    border-left: 3px solid var(--wine);
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 1.15em;
-    line-height: 1.5;
+    padding: 28px 30px 24px 70px;
+    border-radius: 22px;
+    background: var(--surface);
+    box-shadow:
+      var(--shadow-card),
+      inset 0 0 0 1px var(--line-soft);
 
-    p {
-      margin-bottom: 0.4em;
+    &::before {
+      content: '\201C';
+      position: absolute;
+      top: 12px;
+      left: 22px;
+      font-family: var(--font-title);
+      font-size: 76px;
+      line-height: 1;
+      color: var(--gold-soft);
     }
 
-    cite {
+    p {
+      margin: 0;
+      font-family: var(--font-title);
+      font-size: 25px;
+      font-style: italic;
+      font-weight: 500;
+      line-height: 1.38;
+      color: var(--ink);
+    }
+
+    p + p {
+      margin-top: 12px;
+    }
+
+    // The citation line, whether in its own <p> or bare.
+    cite,
+    p:has(> cite) {
       display: block;
-      margin-top: var(--space-2);
-      font-family: var(--font-display);
-      font-size: 16px;
+      font-family: var(--font-ui);
+      font-size: 12.5px;
       font-style: normal;
-      color: var(--taupe);
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--ink-3);
+    }
+
+    // Phones: a simple gold rule, not a card.
+    @media (max-width: 767px) {
+      padding: 4px 0 4px 18px;
+      border-left: 2px solid var(--gold-soft);
+      border-radius: 0;
+      background: none;
+      box-shadow: none;
+
+      &::before {
+        display: none;
+      }
+
+      p {
+        font-size: 22px;
+      }
     }
   }
 
@@ -206,160 +351,176 @@
   }
 }
 
-// Drop capital on the very first paragraph.
+// A large first letter on the opening paragraph.
 .opening > p:first-child::first-letter {
   float: left;
-  margin: 0.06em 0.1em 0 0;
-  font-family: var(--font-display);
-  font-size: 4.4em;
+  margin: 0.08em 0.12em 0 0;
+  font-family: var(--font-title);
+  font-size: 4.6em;
   font-weight: 600;
-  line-height: 0.82;
-  color: var(--ink);
+  line-height: 0.8;
+  color: var(--wine);
 }
 
 .chapter {
-  margin-top: var(--space-16);
+  margin-top: var(--space-12);
+  scroll-margin-top: calc(var(--header-h) + 60px);
 }
 
+// "01" in gold, with a hairline to the right.
 .chapterLabel {
-  @include candle.eyebrow;
-  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-title);
+  font-size: 54px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--gold-soft);
+
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--hairline);
+  }
+
+  @media (max-width: 767px) {
+    font-size: 40px;
+  }
 }
 
 .chapterTitle {
-  margin: var(--space-2) 0 var(--space-6);
-  font-family: var(--font-display);
-  font-size: clamp(32px, 4.4vw, 48px);
-  font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.015em;
-  color: var(--ink);
-  scroll-margin-top: 96px;
+  margin: 6px 0 20px;
+  @include candle.title(clamp(34px, 4vw, 46px), 600);
+  letter-spacing: -0.02em;
+  scroll-margin-top: calc(var(--header-h) + 60px);
 }
 
-// Sources, research notes and credits: smaller, in a card
+// Sources, research notes and credits: smaller, in a card.
 .notes {
-  @include candle.card;
-  margin-top: var(--space-16);
-  padding: var(--space-8) var(--space-6);
+  margin-top: var(--space-12);
+  padding: var(--space-6);
+  border-radius: var(--radius-xl);
+  background: var(--muted);
 
   section + section {
     margin-top: var(--space-6);
   }
 
   h2 {
-    margin-bottom: var(--space-2);
-    font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 600;
-    scroll-margin-top: 96px;
+    @include candle.eyebrow;
+    margin-bottom: var(--space-3);
+    scroll-margin-top: calc(var(--header-h) + 60px);
   }
 }
 
 .notesText {
-  font-family: var(--font-display);
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.6;
-  color: var(--ink);
+  color: var(--ink-2);
 
-  p,
-  ul {
-    margin: 0 0 0.8em;
+  p + p {
+    margin-top: 0.6em;
   }
 
-  ul {
+  ul,
+  ol {
+    margin: 0;
     padding-left: 1.2em;
   }
 
+  li + li {
+    margin-top: 6px;
+  }
+
   a {
-    color: var(--wine);
+    color: var(--ink);
     text-decoration: underline;
-    text-underline-offset: 2px;
-    overflow-wrap: anywhere;
+    text-decoration-color: var(--ink-3);
+    text-underline-offset: 3px;
   }
 }
 
-// Continue reading
+// ---------- Next pages ----------
 .next {
   display: grid;
-  gap: var(--space-3);
-  margin: var(--space-12) 0 var(--space-4);
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: var(--space-12);
 
   @media (min-width: 640px) {
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(200px, 1fr)
-    );
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 
   a {
-    @include candle.card;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2px var(--space-3);
-    padding: var(--space-5);
-    color: var(--ink);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 18px 44px 18px 20px;
+    border-radius: var(--radius-xl);
+    background: var(--surface);
+    box-shadow:
+      var(--shadow-card),
+      inset 0 0 0 1px var(--line-soft);
+    @include candle.card-hover;
     @include candle.focus-ring;
-    @include candle.transition(transform, box-shadow);
 
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lift);
-    }
-  }
-}
-
-.nextLabel {
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.nextDetail {
-  grid-row: 2;
-  font-size: 15px;
-  color: var(--taupe);
-}
-
-.nextChevron {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  align-self: center;
-  font-size: 26px;
-  color: var(--wine);
-}
-
-// Quotation cards ("In their own words")
-.quotes {
-  display: grid;
-  gap: var(--space-4);
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  blockquote {
-    @include candle.card;
-    margin: 0;
-    padding: var(--space-6);
-    font-family: var(--font-display);
-    font-size: 21px;
-    font-style: italic;
-    line-height: 1.4;
-    color: var(--ink);
-
-    &::before {
-      content: '“';
-      display: block;
-      height: 28px;
-      font-size: 56px;
-      line-height: 1;
+    &:hover .nextChevron {
       color: var(--wine);
     }
   }
 }
 
-// Pages with no contents column (novenas): one centered column.
-.layout:not(:has(> .aside)) {
-  grid-template-columns: minmax(0, 760px);
-  justify-content: center;
+.nextLabel {
+  @include candle.title(22px, 600);
+}
+
+.nextDetail {
+  font-size: 13px;
+  color: var(--ink-2);
+}
+
+.nextChevron {
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: var(--ink-3);
+}
+
+// "In their own words" on the teachings page.
+.quotes {
+  display: grid;
+  gap: 14px;
+
+  blockquote {
+    position: relative;
+    margin: 0;
+    padding: 26px 26px 24px 64px;
+    border-radius: var(--radius-xl);
+    background: var(--surface);
+    box-shadow:
+      var(--shadow-card),
+      inset 0 0 0 1px var(--line-soft);
+    font-family: var(--font-title);
+    font-size: 23px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.4;
+
+    &::before {
+      content: '\201C';
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-family: var(--font-title);
+      font-size: 64px;
+      font-style: normal;
+      line-height: 1;
+      color: var(--gold-soft);
+    }
+  }
 }

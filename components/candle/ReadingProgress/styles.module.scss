@@ -1,10 +1,10 @@
-// Sits just under the 64px sticky header.
+// Sits just under the sticky header.
 .track {
   position: sticky;
-  top: 64px;
+  top: var(--header-h);
   z-index: 40;
   height: 3px;
-  background: rgba(58, 42, 30, 0.08);
+  background: var(--hairline);
 }
 
 .bar {

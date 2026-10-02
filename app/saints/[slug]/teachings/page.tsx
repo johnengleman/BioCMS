@@ -140,7 +140,7 @@ const SaintTeachings = async (props: NextPageProps) => {
               className={styles.chapter}
             >
               <p className={styles.chapterLabel}>
-                Teaching {i + 1}
+                {String(i + 1).padStart(2, '0')}
               </p>
               <h2
                 id={chapter.id}

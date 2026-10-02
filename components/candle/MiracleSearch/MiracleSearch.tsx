@@ -24,6 +24,10 @@ const MiracleSearch = ({ total }: { total: number }) => {
       .split(/\s+/)
       .filter(Boolean)
     let count = 0
+    // While searching, long groups show every match (see GroupMore).
+    document
+      .getElementById('miracle-list')
+      ?.toggleAttribute('data-searching', terms.length > 0)
     entries.current.forEach((entry) => {
       const text = entry.textContent?.toLowerCase() || ''
       const match = terms.every((term) =>
@@ -70,7 +74,7 @@ const MiracleSearch = ({ total }: { total: number }) => {
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder={`Search ${total} accounts by name, place, illness or year`}
+          placeholder={`Search ${total.toLocaleString('en-US')} accounts by name, place, illness, or year`}
         />
       </label>
       <p
