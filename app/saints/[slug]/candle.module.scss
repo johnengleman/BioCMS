@@ -1,407 +1,846 @@
 @use '../../../styles/candle.scss' as candle;
 
-// Saint page, Candlelight design (docs/design-system.md).
+// Saint page, "Travel" design (docs/redesign-plan.md, phase 2).
 .page {
   min-height: 100vh;
-  background: var(--cream);
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-display);
-  padding-bottom: var(--space-4);
 }
 
-// Top area
+.main {
+  @include candle.container;
+}
+
 .eyebrow {
   @include candle.eyebrow;
-  font-size: 13px;
 }
 
-.title {
-  max-width: 900px;
-  margin: var(--space-3) auto 0;
-  font-family: var(--font-display);
-  font-size: clamp(42px, 7vw, 80px);
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: -0.025em;
-  color: var(--ink);
-  text-wrap: balance;
-}
-
-.subtitle {
-  margin-top: var(--space-3);
-  font-family: var(--font-display);
-  font-size: clamp(19px, 2.4vw, 26px);
-  line-height: 1.3;
-  color: var(--ink);
-}
-
-.actions {
+.crumbs {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-4);
-  margin-top: var(--space-6);
+  gap: 8px;
+  padding: 20px 0 16px;
+  font-size: 13px;
+  color: var(--ink-2);
 
-  @media (min-width: 560px) {
-    flex-direction: row;
-    justify-content: center;
-    gap: var(--space-8);
+  svg {
+    width: 14px;
+    height: 14px;
+    color: var(--ink-3);
+  }
+
+  a:hover {
+    color: var(--ink);
+  }
+
+  [aria-current] {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  @media (max-width: 767px) {
+    display: none;
   }
 }
 
 .primary {
   @include candle.button-primary;
-  width: 100%;
-
-  @media (min-width: 560px) {
-    width: auto;
-  }
 }
 
 .secondary {
-  @include candle.link-chevron;
+  @include candle.button-outline;
+  min-height: 46px;
+  border-color: var(--ink-3);
 }
 
-.portrait {
-  width: min(380px, 78vw);
-  margin: var(--space-10) auto 0;
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    @include candle.gilt-frame;
-    box-shadow:
-      0 0 0 1px var(--gilt),
-      0 0 0 4px rgba(232, 211, 160, 0.45),
-      0 30px 60px -26px rgba(58, 42, 30, 0.55);
-  }
-}
-
-.summary {
-  max-width: 640px;
-  margin: var(--space-10) auto 0;
-  font-family: var(--font-reading);
-  font-size: 19px;
-  line-height: 1.65;
-  color: var(--ink);
-  text-align: left;
-
-  @media (min-width: 768px) {
-    font-size: 21px;
-  }
-
-  p {
-    margin-bottom: 0.8em;
-  }
-}
-
-// At a glance: an Apple-style bento grid
-.bento {
+// ---------- Stats bar over the bottom of the photo ----------
+.stats {
+  position: relative;
+  z-index: 3;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-3);
+  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+  margin: -46px 64px 0;
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 0 0 1px var(--line-soft);
 
-  @media (min-width: 900px) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-4);
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: -44px 24px 0;
+  }
+
+  // Phones: a plain row of figures under the photo, not boxes.
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--hairline);
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
   }
 }
 
-.tile {
-  @include candle.card;
+.stat {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: var(--space-1);
-  min-height: 112px;
-  padding: var(--space-5);
-  color: var(--ink);
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  color: inherit;
   @include candle.focus-ring;
 
-  &[href] {
-    @include candle.transition(transform, box-shadow);
+  & + & {
+    border-left: 1px solid var(--hairline);
+  }
 
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lift);
+  b {
+    display: block;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  small {
+    display: block;
+    font-size: 12.5px;
+    color: var(--ink-2);
+  }
+
+  @at-root a#{&}:hover b {
+    color: var(--wine);
+  }
+
+  @media (max-width: 1100px) {
+    &:nth-child(3) {
+      border-left: 0;
+    }
+
+    &:nth-child(n + 3) {
+      border-top: 1px solid var(--hairline);
+    }
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 0 12px;
+    border-top: 0 !important;
+
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &:nth-child(3) {
+      border-left: 1px solid var(--hairline);
+    }
+
+    &:nth-child(4) {
+      display: none;
+    }
+
+    b {
+      @include candle.title(21px, 600);
+    }
+
+    small {
+      font-size: 11.5px;
     }
   }
 }
 
-.leadTile {
-  grid-column: span 2;
-  grid-row: span 2;
-  justify-content: flex-end;
-  min-height: 200px;
-  padding: var(--space-8);
-}
-
-.leadValue {
-  font-family: var(--font-display);
-  font-size: clamp(72px, 10vw, 120px);
-  font-weight: 600;
-  line-height: 0.9;
-  letter-spacing: -0.03em;
-  color: var(--wine);
-  font-variant-numeric: lining-nums;
-}
-
-.value {
-  font-family: var(--font-display);
-  font-size: 44px;
-  font-weight: 600;
-  line-height: 1;
-  color: var(--wine);
-  font-variant-numeric: lining-nums;
-}
-
-.tileLabel {
-  font-size: 17px;
-  color: var(--taupe);
-}
-
-// Feast, patron and place of death: their own row, sharing the width.
-.facts {
-  grid-column: 1 / -1;
+.statIcon {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(240px, 1fr)
-  );
-  gap: inherit;
-}
-
-.factTile {
-  justify-content: flex-start;
-  min-height: 0;
-}
-
-.wideTile {
-  grid-column: span 2;
-}
-
-.factLabel {
-  @include candle.eyebrow;
-  display: block;
-}
-
-.factValue {
-  display: block;
-  margin-top: var(--space-1);
-  font-size: 17px;
-  line-height: 1.4;
-  color: var(--ink);
-}
-
-// The life: a row of chapter cards that scrolls sideways
-.chapters {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(240px, 1fr);
-  gap: var(--space-3);
-  margin: 0 calc(var(--space-4) * -1);
-  padding: 2px var(--space-4) var(--space-4);
-  list-style: none;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  // Snap cards to the page edge, not the scroller's edge.
-  scroll-padding-inline: var(--space-4);
-  scrollbar-width: none;
-
-  @media (min-width: 768px) {
-    grid-auto-columns: minmax(
-      260px,
-      calc((100% - 3 * var(--space-4)) / 4)
-    );
-    gap: var(--space-4);
-    margin: 0 calc(var(--space-8) * -1);
-    padding: 2px var(--space-8) var(--space-4);
-    scroll-padding-inline: var(--space-8);
-  }
-
-  li {
-    scroll-snap-align: start;
-  }
-
-  a {
-    @include candle.card;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-content: start;
-    gap: var(--space-1) var(--space-3);
-    height: 100%;
-    min-height: 120px;
-    padding: var(--space-5);
-    color: var(--ink);
-    @include candle.focus-ring;
-    @include candle.transition(transform, box-shadow);
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lift);
-    }
-  }
-}
-
-.chapterNumber {
-  @include candle.eyebrow;
-  grid-column: 1;
-}
-
-.chapterTitle {
-  grid-column: 1;
-  font-family: var(--font-display);
-  font-size: 21px;
-  line-height: 1.2;
-  color: var(--ink);
-}
-
-.chevron {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  align-self: center;
-  font-size: 24px;
-  color: var(--taupe);
-}
-
-// Numbered lists: miracles and teachings
-.list {
-  @include candle.card;
-  margin: 0;
-  padding: var(--space-2) 0;
-  list-style: none;
-
-  li + li {
-    border-top: 1px solid rgba(58, 42, 30, 0.08);
-  }
-
-  a {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-4);
-    padding: var(--space-4) var(--space-5);
-    color: var(--ink);
-    @include candle.focus-ring;
-
-    &:hover .listTitle {
-      color: var(--wine);
-    }
-  }
-}
-
-.listNumber {
-  flex-shrink: 0;
-  width: 32px;
-  font-size: 22px;
-  font-weight: 600;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  background: var(--muted);
   color: var(--wine);
-  text-align: right;
-  font-variant-numeric: lining-nums;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
 }
 
-.listText {
+// ---------- Tabs ----------
+.tabs {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 10;
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 28px 0 14px;
+  background: var(--bg);
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  a {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    gap: 6px;
+    height: 40px;
+    padding: 0 18px;
+    border-radius: var(--radius-pill);
+    color: var(--ink-2);
+    font-size: 13.5px;
+    font-weight: 600;
+    @include candle.transition(background-color, color);
+    @include candle.focus-ring;
+
+    &:hover {
+      background: var(--muted);
+      color: var(--ink);
+    }
+
+    em {
+      font-style: normal;
+      font-size: 12px;
+      color: var(--ink-3);
+    }
+  }
+
+  .tabOn {
+    background: var(--espresso);
+    color: var(--on-dark);
+
+    &:hover {
+      background: var(--espresso);
+      color: var(--on-dark);
+    }
+
+    em {
+      color: var(--on-dark-3);
+    }
+  }
+
+  // Phones: text tabs with an underline.
+  @media (max-width: 767px) {
+    margin: 0 calc(-1 * var(--space-4));
+    padding: 0 var(--space-4);
+    gap: 22px;
+    border-bottom: 1px solid var(--hairline);
+
+    a {
+      height: 48px;
+      padding: 0;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+
+      &:hover {
+        background: none;
+      }
+    }
+
+    .tabOn,
+    .tabOn:hover {
+      border-bottom-color: var(--ink);
+      background: none;
+      color: var(--ink);
+
+      em {
+        color: var(--ink-3);
+      }
+    }
+  }
+}
+
+// ---------- Two columns ----------
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  padding: 8px 0 40px;
+
+  @media (min-width: 1100px) {
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 72px;
+  }
+}
+
+.content {
   min-width: 0;
 }
 
-.listTitle {
-  font-size: 19px;
-  line-height: 1.35;
-  @include candle.transition(color);
-}
+.block {
+  padding: 34px 0;
+  border-top: 1px solid var(--hairline);
+  scroll-margin-top: calc(var(--header-h) + 70px);
 
-.listMeta {
-  font-size: 15px;
-  color: var(--taupe);
-}
-
-// Quotes: a two-column flow of quotation cards
-.quotes {
-  columns: 1;
-  column-gap: var(--space-4);
-
-  @media (min-width: 768px) {
-    columns: 2;
+  &:first-child {
+    padding-top: 14px;
+    border-top: 0;
   }
 
-  @media (min-width: 1100px) {
-    columns: 3;
-  }
+  @media (max-width: 767px) {
+    padding: 28px 0;
 
-  blockquote {
-    @include candle.card;
-    break-inside: avoid;
-    margin: 0 0 var(--space-4);
-    padding: var(--space-6);
-    font-family: var(--font-display);
-    font-size: 21px;
-    font-style: italic;
-    line-height: 1.4;
-    color: var(--ink);
-
-    &::before {
-      content: '“';
-      display: block;
-      height: 28px;
-      font-size: 56px;
-      line-height: 1;
-      color: var(--wine);
+    &:first-child {
+      padding-top: 22px;
     }
   }
 }
 
-.prayers {
+.blockHead {
   display: grid;
-  gap: var(--space-3);
+  grid-template-columns: 1fr;
+  gap: 8px;
+  align-items: end;
+  margin-bottom: 22px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  h2 {
+    @include candle.title(clamp(30px, 3.4vw, 40px), 500);
+    margin-top: 6px;
+  }
+
+  > p {
+    color: var(--ink-2);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+}
+
+.prose {
+  @include candle.reading(18.5px);
+
+  p + p {
+    margin-top: 0.8em;
+  }
+
+  a {
+    color: var(--wine);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 17.5px;
+  }
+}
+
+.more {
+  @include candle.link-chevron;
+  margin-top: 18px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.outline {
+  @include candle.button-outline;
+  margin-top: 24px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+// Facts as icon rows (no boxes).
+.highlights {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px 28px;
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-}
 
-.relic {
-  max-width: 760px;
-  gap: var(--space-4);
-}
+  > div {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+  }
 
-.relicText {
-  font-family: var(--font-reading);
-  font-size: 17px;
-  line-height: 1.6;
-}
+  b {
+    display: block;
+    font-size: 15px;
+  }
 
-.related {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-3);
-  align-items: start;
-
-  @media (min-width: 900px) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--space-6);
+  span {
+    font-size: 13.5px;
+    line-height: 1.45;
+    color: var(--ink-2);
   }
 }
 
-.photo {
-  margin: 0;
+.hlIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: var(--wine-tint);
+  color: var(--wine);
 
-  img {
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 767px) {
+    width: 36px;
+    height: 36px;
+    background: none;
+  }
+}
+
+// Numbered rows: chapters and teachings.
+.chapters {
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--hairline);
+
+  a {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--hairline);
+    @include candle.focus-ring;
+
+    svg {
+      width: 16px;
+      height: 16px;
+      color: var(--ink-3);
+    }
+
+    &:hover .chapterTitle {
+      color: var(--wine);
+    }
+  }
+}
+
+.chapterNo {
+  @include candle.title(22px, 500);
+  color: var(--gold-soft);
+}
+
+.chapterTitle {
+  @include candle.title(22px, 600);
+  @include candle.transition(color);
+}
+
+// Miracles: group figures, then the first accounts.
+.groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-radius: 18px;
+  background: var(--muted);
+  margin-bottom: 8px;
+
+  @media (min-width: 900px) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  a {
     display: block;
+    padding: 16px 18px;
+    @include candle.focus-ring;
+
+    &:hover b {
+      color: var(--wine);
+    }
+  }
+
+  a + a {
+    border-left: 1px solid var(--hairline);
+  }
+
+  small {
+    display: -webkit-box;
+    min-height: 2.6em;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink-2);
+  }
+
+  b {
+    display: block;
+    margin: 4px 0 10px;
+    @include candle.title(30px, 600);
+  }
+
+  @media (max-width: 899px) {
+    a:nth-child(3) {
+      border-left: 0;
+    }
+
+    a:nth-child(n + 3) {
+      border-top: 1px solid var(--hairline);
+    }
+  }
+}
+
+.bar {
+  display: block;
+  height: 3px;
+  border-radius: 9px;
+  background: #e2d5c3;
+
+  i {
+    display: block;
+    height: 100%;
+    border-radius: 9px;
+    background: var(--wine);
+  }
+}
+
+.miracles {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 6px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--hairline);
+    @include candle.focus-ring;
+
+    &:hover .miracleTitle {
+      color: var(--wine);
+    }
+
+    > span:last-child {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  }
+}
+
+.miracleNo {
+  @include candle.title(24px, 500);
+  color: var(--wine);
+}
+
+.miracleTitle {
+  @include candle.title(22px, 600);
+  line-height: 1.2;
+  @include candle.transition(color);
+}
+
+// Prayers: shown in the side card on wide screens, here otherwise.
+.prayersBlock {
+  @media (min-width: 1100px) {
+    display: none;
+  }
+}
+
+.prayerList,
+.sidePrayers {
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 14px;
+    font-size: 14px;
+    font-weight: 600;
+    @include candle.transition(background-color);
+    @include candle.focus-ring;
+
+    &:hover {
+      background: var(--muted);
+    }
+
+    > svg {
+      width: 16px;
+      height: 16px;
+      margin-left: auto;
+      color: var(--ink-3);
+    }
+  }
+
+  a + a {
+    border-top: 1px solid var(--hairline);
+  }
+}
+
+.prayerIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--wine-tint);
+  color: var(--wine);
+
+  svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+// Quotes as cream cards in the title serif.
+.quotes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  blockquote {
+    position: relative;
+    margin: 0;
+    padding: 26px 26px 24px 58px;
+    border-radius: var(--radius-xl);
+    background: var(--surface);
+    box-shadow:
+      var(--shadow-card),
+      inset 0 0 0 1px var(--line-soft);
+    font-family: var(--font-title);
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--ink);
+
+    &::before {
+      content: '\201C';
+      position: absolute;
+      top: 10px;
+      left: 18px;
+      font-family: var(--font-title);
+      font-size: 60px;
+      font-style: normal;
+      line-height: 1;
+      color: var(--gold-soft);
+    }
+  }
+}
+
+.relic {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 280px minmax(0, 1fr);
+  }
+
+  figure img {
     width: 100%;
-    height: auto;
-    border-radius: var(--radius-md, 8px);
+    border-radius: var(--radius-lg);
+  }
+}
+
+.relicPlace {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-weight: 650;
+
+  svg {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    color: var(--wine);
   }
 }
 
 .gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-6);
+  gap: 14px;
 
-  @media (max-width: 640px) {
-    grid-template-columns: minmax(0, 1fr);
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  figure {
+    margin: 0;
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    object-position: center 22%;
+    border-radius: var(--radius-lg);
+  }
+}
+
+.credit {
+  font-size: 12px;
+  color: var(--ink-3);
+}
+
+// ---------- Side card ----------
+.side {
+  display: none;
+
+  @media (min-width: 1100px) {
+    display: block;
+  }
+}
+
+.sideCard {
+  position: sticky;
+  top: calc(var(--header-h) + 82px);
+  padding: 24px;
+  border-radius: var(--radius-2xl);
+  background: var(--surface);
+  box-shadow:
+    var(--shadow-md),
+    inset 0 0 0 1px var(--line-soft);
+}
+
+.sideTop {
+  margin-bottom: 18px;
+
+  b {
+    display: block;
+    margin-top: 4px;
+    @include candle.title(32px, 600);
+  }
+
+  small {
+    display: block;
+    margin-top: 4px;
+    font-size: 12.5px;
+    color: var(--ink-2);
+  }
+}
+
+.appButton {
+  @include candle.button-primary;
+  width: 100%;
+  min-height: 50px;
+  margin-top: 16px;
+
+  svg {
+    width: 17px;
+    height: 17px;
+  }
+}
+
+.note {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+
+.rows {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--hairline);
+  font-size: 13.5px;
+
+  &:empty {
+    display: none;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  span:first-child {
+    flex: none;
+    color: var(--ink-2);
+  }
+
+  span:last-child {
+    font-weight: 600;
+    text-align: right;
+  }
+}
+
+// ---------- Related saints ----------
+.related {
+  padding: 40px 0 24px;
+  border-top: 1px solid var(--hairline);
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: start;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @media (min-width: 1100px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+// ---------- Phone bar ----------
+.mobileBar {
+  position: sticky;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--hairline);
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  b {
+    display: block;
+    font-size: 15px;
+  }
+
+  span {
+    font-size: 12.5px;
+    color: var(--ink-2);
+  }
+
+  .appButton {
+    width: auto;
+    min-height: 44px;
+    margin: 0;
+  }
+
+  @media (min-width: 1100px) {
+    display: none;
   }
 }

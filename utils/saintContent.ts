@@ -256,3 +256,22 @@ export const churchBackground = (traditions: string[]) =>
   !traditions.includes('roman-catholic')
     ? 'orthodox'
     : 'western'
+
+// The three kinds of miracle status, for the labels:
+// approved by the Church, sworn at a Church process, or a report.
+// Approvals for other people (e.g. her parents) say "not attributed".
+export type StatusKind = 'approved' | 'sworn' | 'reported'
+
+export const isApproved = (status?: string) =>
+  /^approved/i.test(status || '') && !/not attributed/i.test(status || '')
+
+export const statusKind = (status?: string): StatusKind => {
+  if (isApproved(status)) return 'approved'
+  if (/sworn|process|inquiry|articles of the cause/i.test(status || ''))
+    return 'sworn'
+  return 'reported'
+}
+
+// Plain text from a small HTML field, such as the summary.
+export const plainText = (html?: string) =>
+  html ? cheerio.load(html).text().replace(/\s+/g, ' ').trim() : ''

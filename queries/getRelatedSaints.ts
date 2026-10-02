@@ -54,8 +54,14 @@ function getSaintsQuery(church) {
         death_year
         categories
         summary
+        venerated_in
+        birth_location
+        death_location
+        feast_day_catholic
+        feast_day_orthodox
         profile_image {
           id
+          metadata
         }
       }
     }

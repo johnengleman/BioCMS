@@ -55,6 +55,7 @@ body {
 
 /* A elements that don't have a class get default styles */
 a {
+  color: inherit;
   text-decoration: none;
 }
 

@@ -1,0 +1,31 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.25;
+
+  svg {
+    flex: none;
+    width: 13px;
+    height: 13px;
+  }
+}
+
+.approved {
+  background: var(--wine);
+  color: var(--on-dark);
+}
+
+.sworn {
+  background: var(--gold-tint);
+  color: #7a5a26;
+}
+
+.reported {
+  background: var(--muted);
+  color: var(--ink-2);
+}

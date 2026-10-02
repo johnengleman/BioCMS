@@ -1,0 +1,277 @@
+@use '../../../styles/candle.scss' as candle;
+
+.hero {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  height: 480px;
+
+  @media (max-width: 767px) {
+    margin: 0 calc(-1 * var(--space-4));
+    height: 480px;
+  }
+}
+
+.n2 {
+  grid-template-columns: 2fr 1fr;
+}
+
+.n3 {
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  .main {
+    grid-row: span 2;
+  }
+}
+
+.n5 {
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  .main {
+    grid-row: span 2;
+  }
+}
+
+@media (max-width: 767px) {
+  .n2,
+  .n3,
+  .n5 {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .tile:not(.main) {
+    display: none;
+  }
+}
+
+.tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  background: var(--panel);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 22%;
+  }
+
+  @media (max-width: 767px) {
+    border-radius: 0;
+  }
+}
+
+.main::after {
+  content: '';
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(transparent, rgba(28, 18, 14, 0.8));
+  pointer-events: none;
+}
+
+.over {
+  position: absolute;
+  right: 32px;
+  bottom: 76px;
+  left: 32px;
+  z-index: 2;
+  color: var(--on-dark);
+
+  @media (max-width: 767px) {
+    right: 20px;
+    bottom: 32px;
+    left: 20px;
+  }
+}
+
+.place {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  opacity: 0.92;
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.title {
+  @include candle.title(clamp(38px, 4.4vw, 58px), 600);
+  margin-top: 8px;
+  color: var(--on-dark);
+  letter-spacing: -0.015em;
+}
+
+.count {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+  background: rgba(28, 18, 14, 0.45);
+  color: var(--on-dark);
+  font-size: 12px;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  @media (max-width: 767px) {
+    display: inline-flex;
+  }
+}
+
+.glass {
+  position: absolute;
+  top: 18px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.26);
+  border-radius: var(--radius-pill);
+  background: rgba(40, 28, 24, 0.28);
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  @include candle.focus-ring;
+
+  svg {
+    width: 19px;
+    height: 19px;
+  }
+}
+
+.back {
+  left: 18px;
+}
+
+.share {
+  right: 18px;
+}
+
+.more {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  background: rgba(28, 18, 14, 0.5);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+// ---------- One image: the whole portrait on a beige panel ----------
+.single {
+  height: auto;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 60px;
+  align-items: center;
+  padding: 48px 60px 92px;
+  overflow: hidden;
+  border-radius: var(--radius-3xl);
+  background: var(--panel);
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 22px;
+    height: auto;
+    padding: 26px 20px 30px;
+    border-radius: 0;
+    text-align: center;
+  }
+}
+
+.portrait {
+  height: 400px;
+
+  img {
+    width: auto;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  @media (max-width: 767px) {
+    height: 300px;
+  }
+}
+
+.copy {
+  max-width: 580px;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  @include candle.eyebrow;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  @media (max-width: 767px) {
+    justify-content: center;
+  }
+}
+
+.singleTitle {
+  @include candle.title(clamp(40px, 5vw, 60px), 600);
+  margin: 12px 0 16px;
+  letter-spacing: -0.02em;
+}
+
+.summary {
+  @include candle.reading(18px);
+  color: var(--ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  @media (max-width: 767px) {
+    font-size: 16.5px;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+
+  @media (max-width: 767px) {
+    justify-content: center;
+    margin-top: 18px;
+  }
+}
+
+.round {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--ink);
+  cursor: pointer;
+  @include candle.focus-ring;
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
