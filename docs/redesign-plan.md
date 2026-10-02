@@ -1,5 +1,7 @@
 # Redesign plan: "Travel" look (v3)
 
+**Status (2026-10-01): phases 0–5 are built on the branch `redesign-travel`. They wait for the user's review before the merge into `main`.**
+
 Goal: rebuild the site in the v3 mockup style. The style is calm and modern, like a top travel site, with the warm app palette.
 
 The mockups are in `design-mockups/airbnb/`. Start the `airbnb-mockup` server in `.claude/launch.json` to view them.

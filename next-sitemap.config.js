@@ -99,13 +99,11 @@ module.exports = {
       const baseLoc = `${config.siteUrl}/saints/${saint.slug}`
       const paths = []
 
+      // Every saint's prayers live under /novenas (there is no
+      // /prayers route).
       saint.prayers.forEach((prayer) => {
-        const useNovenas =
-          saint.venerated_in[0] === 'roman-catholic'
         paths.push({
-          loc: `${baseLoc}/${
-            useNovenas ? 'novenas' : 'prayers'
-          }/${prayer.prayer_slug}`,
+          loc: `${baseLoc}/novenas/${prayer.prayer_slug}`,
           lastmod:
             prayer.date_updated || prayer.date_created,
         })

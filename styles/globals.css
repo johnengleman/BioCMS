@@ -118,32 +118,6 @@ h6 {
   align-items: center;
 }
 
-.my-masonry-grid {
-  display: flex;
-  width: auto;
-  width: 100%;
-
-  @media (min-width: 425px) {
-    margin-left: -10px;
-  }
-}
-
-.my-masonry-grid_column {
-  background-clip: padding-box;
-
-  @media (min-width: 425px) {
-    padding-left: 20px; /* gutter size */
-  }
-}
-
-/* Style your items */
-.my-masonry-grid_column .saint-summary {
-  /* change div to reference your elements you put in <Masonry> */
-
-  margin-bottom: 20px;
-  border-radius: 20px;
-}
-
 .day-item {
   margin-bottom: 40px;
 }
@@ -153,9 +127,9 @@ h6 {
   max-width: 520px;
   margin: var(--space-10) auto;
   padding: var(--space-6) var(--space-8);
-  border: 1px dashed var(--line-strong);
+  border: 1px dashed var(--hairline);
   border-radius: var(--radius-lg);
-  color: var(--ink-soft);
+  color: var(--ink-2);
   font-size: var(--text-md);
   line-height: 1.6;
   text-align: center;

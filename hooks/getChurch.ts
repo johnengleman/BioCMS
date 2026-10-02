@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers'
+import { unstable_rethrow } from 'next/navigation'
 
 const CHURCHES = ['catholic', 'orthodox', 'all']
 
@@ -19,6 +20,8 @@ export async function getChurch(searchParams: {
       if (CHURCHES.includes(data.church)) return data.church
     }
   } catch (error) {
+    // Let Next.js see that the page reads cookies (dynamic rendering).
+    unstable_rethrow(error)
     console.error('Error retrieving or parsing church data:', error)
   }
 

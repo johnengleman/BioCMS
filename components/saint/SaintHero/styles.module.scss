@@ -275,3 +275,19 @@
     height: 18px;
   }
 }
+
+// Tablets: a tighter panel, so long names have room.
+@media (min-width: 768px) and (max-width: 1099px) {
+  .single {
+    gap: 32px;
+    padding: 36px 36px 84px;
+  }
+
+  .portrait {
+    height: 320px;
+  }
+
+  .singleTitle {
+    font-size: 40px;
+  }
+}

@@ -248,15 +248,6 @@ export const getMiracleBook = (html?: string) => {
   }
 }
 
-// Orthodox-only saints stand in the Orthodox church; all others in
-// the Western one. The photos in public/images/churches are
-// placeholders to replace with licensed photographs.
-export const churchBackground = (traditions: string[]) =>
-  traditions.includes('orthodox') &&
-  !traditions.includes('roman-catholic')
-    ? 'orthodox'
-    : 'western'
-
 // The three kinds of miracle status, for the labels:
 // approved by the Church, sworn at a Church process, or a report.
 // Approvals for other people (e.g. her parents) say "not attributed".

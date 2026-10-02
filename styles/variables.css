@@ -93,29 +93,4 @@
   /* Motion */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --duration: 0.2s;
-
-  /*
-   * Older names. They point at the v3 palette so that pages not yet
-   * rebuilt still match. Remove them in phase 5 of docs/redesign-plan.md.
-   */
-  --cream: var(--bg);
-  --cream-card: var(--surface);
-  --cream-deep: var(--panel);
-  --taupe: var(--ink-2);
-  --ink-soft: var(--ink-2);
-  --gilt: var(--gold-soft);
-  --gilt-light: var(--gold-tint);
-  --shadow-lift: var(--shadow-hover);
-  --font-display: var(--font-title);
-  --parchment: var(--bg);
-  --parchment-light: var(--surface);
-  --parchment-deep: var(--panel);
-  --wine-700: var(--wine-hover);
-  --wine-900: #5e2832;
-  --gold-light: var(--gold-tint);
-  --walnut: var(--espresso);
-  --line: var(--hairline);
-  --line-strong: rgba(47, 38, 34, 0.22);
-  --on-dark-soft: rgba(255, 246, 234, 0.72);
-  --glass-border-hover: rgba(140, 61, 71, 0.55);
 }
