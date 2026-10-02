@@ -49,6 +49,31 @@
   color: var(--ink-3);
 }
 
+// Pills flow onto more lines; nothing scrolls or fades out.
+.wrap {
+  flex-wrap: wrap;
+  overflow: visible;
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+// Narrow phones: smaller pills, and only selected pills keep their
+// icon (the ✕ on a chosen filter stays), so the row needs fewer lines.
+@media (max-width: 480px) {
+  .wrap {
+    gap: 6px;
+
+    a {
+      min-height: 36px;
+      padding: 0 var(--space-3);
+    }
+
+    a:not([aria-current]) .icon {
+      display: none;
+    }
+  }
+}
+
 // On a hero photo.
 .glass {
   a {

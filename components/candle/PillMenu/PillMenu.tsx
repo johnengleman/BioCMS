@@ -20,17 +20,21 @@ const PillMenu = ({
   label,
   options,
   icon,
+  variant = 'pill',
 }: {
   label: string
   options: Option[]
   icon?: ReactNode
+  // 'text': plain words with a chevron, for controls that are not
+  // filters (sort), so they do not look like the filter pills.
+  variant?: 'pill' | 'text'
 }) => {
   const current =
     options.find((o) => o.selected) || options[0]
   return (
     <details
       key={current.key}
-      className={styles.menu}
+      className={`${styles.menu} ${variant === 'text' ? styles.text : ''}`}
     >
       <summary aria-label={`${label}: ${current.label}`}>
         {icon && (

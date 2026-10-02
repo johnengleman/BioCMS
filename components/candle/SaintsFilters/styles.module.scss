@@ -1,0 +1,165 @@
+@use '../../../styles/candle.scss' as candle;
+
+.bar {
+  @include candle.container;
+  margin-top: var(--space-6);
+
+  @media (max-width: 767px) {
+    margin-top: var(--space-5);
+  }
+}
+
+// The pills on the left (they wrap), "Sort by" on the right.
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+
+  > nav {
+    min-width: 0;
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+}
+
+// "More filters": a pill that opens the panel, with a chevron.
+.more {
+  @include candle.pill;
+
+  svg {
+    width: 15px;
+    height: 15px;
+    @include candle.transition(transform);
+  }
+}
+
+@media (max-width: 480px) {
+  .more {
+    min-height: 36px;
+    padding: 0 var(--space-3);
+  }
+}
+
+.open {
+  border-color: var(--ink);
+  color: var(--ink);
+
+  svg {
+    transform: rotate(180deg);
+  }
+}
+
+// Every category and the twelve feast months, all in view at once.
+.panel {
+  margin-top: var(--space-3);
+  padding: var(--space-5) var(--space-6) var(--space-6);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+
+  h3 {
+    margin: 0 0 var(--space-3);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 767px) {
+    padding: var(--space-4);
+  }
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-1) var(--space-4);
+  padding-bottom: var(--space-5) !important;
+  margin-bottom: var(--space-5) !important;
+  border-bottom: 1px solid var(--hairline);
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: 7px var(--space-2);
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    color: var(--ink);
+    @include candle.focus-ring;
+
+    svg {
+      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
+      color: var(--ink-2);
+    }
+
+    em {
+      margin-left: auto;
+      font-style: normal;
+      font-size: 12px;
+      color: var(--ink-3);
+    }
+
+    &:hover {
+      background: var(--muted);
+    }
+
+    &[aria-current='true'] {
+      background: var(--muted);
+      font-weight: 650;
+    }
+  }
+
+  // No saints in this category yet.
+  .empty {
+    color: var(--ink-3);
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.months {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-2);
+
+  a {
+    display: block;
+    padding: 8px 0;
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--ink-2);
+    @include candle.focus-ring;
+
+    &:hover {
+      border-color: var(--ink-3);
+      color: var(--ink);
+    }
+
+    &[aria-current='true'] {
+      @include candle.pill-selected;
+    }
+  }
+
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}

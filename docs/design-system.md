@@ -79,8 +79,9 @@ Ink is for reading. Wine is for actions. Gold is for small details. Keep gold ra
   - `HeroPhoto` crossfades when the tradition changes.
   - The credit line is shown on the photo, at the bottom right.
   - `size="short"` is for the list pages.
-  - `size="split"` is the saints list: a 300 px photo band with the title and a one-line subtitle at the bottom left and a one-line search at the bottom right. The header has no search icon on that page. Below the photo there is ONE toolbar row (filter pills, then the Tradition, Feast and Sort menus), then the cards. Do not add bands; merge into that row instead.
+  - `size="split"` is the saints list: a 300 px photo band with the title and a one-line subtitle at the bottom left and a one-line search at the bottom right. The header has no search icon on that page. Below the photo there is ONE filter bar, then the cards. Do not add bands.
   - `size="short"` (list pages) is about 260 px.
+- **Saints filter bar (`SaintsFilterBar`):** quick pills (All, Feast today, 20th Century, Patron Saints), the chosen category or month as a dark pill with ✕ that clears it, and "More filters". That button opens one panel with every category (icon, name, count; empty ones muted) and twelve "Feast day in" month buttons. Pills wrap; nothing scrolls sideways or hides. "Sort by: Newest ⌄" is plain text on the right (`PillMenu variant="text"`) so it does not look like a filter. The tradition choice is only in the footer.
 - **Feast today:** a pill in the saints filter row (`?feast=today`) with the number of saints whose feast is today in the visitor's tradition. It shows those saints in the waterfall. Hidden on days with none.
 - **Copy:** keep UI text minimal. No helper text when a control explains itself (no label above the search, no "Showing … · Change" sentence).
 - **`PhotoHero`:** despite its name, a calm beige banner for the simple pages (about, updates, not found).

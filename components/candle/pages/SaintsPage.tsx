@@ -9,10 +9,7 @@ import HomeHero from '../HomeHero/HomeHero'
 import Search from '../../page/Search/Search'
 import TraditionText from '../TraditionText/TraditionText'
 import TraditionWelcome from '../TraditionWelcome/TraditionWelcome'
-import {
-  SaintsMenus,
-  SaintsPills,
-} from '../SaintsFilters/SaintsFilters'
+import { SaintsFilterBar } from '../SaintsFilters/SaintsFilters'
 import { DEFAULT_SAINT_SORT } from '../../../utils/listParams'
 import styles from '../../../app/saints/candle.module.scss'
 
@@ -76,20 +73,13 @@ const SaintsPage = async ({ category = '' }: { category?: string }) => {
           }
           search={<Search variant="hero" />}
         />
-        <div className={styles.toolbar}>
-          <SaintsPills
-            category={category}
-            counts={counts}
-            categories={CATEGORIES}
-            todays={todays}
-            builtOn={builtOn}
-            tone="light"
-          />
-          <SaintsMenus
-            category={category}
-            className={styles.menus}
-          />
-        </div>
+        <SaintsFilterBar
+          category={category}
+          counts={counts}
+          categories={CATEGORIES}
+          todays={todays}
+          builtOn={builtOn}
+        />
         <div className={styles.list}>
           <SaintsListClient
             initialSaints={initialSaints || []}

@@ -1,10 +1,8 @@
 'use client'
 
-import { Suspense, type ReactNode } from 'react'
-import {
-  LuArrowUpDown,
-  LuCalendarDays,
-} from 'react-icons/lu'
+import { Suspense, useId, useState, type ReactNode } from 'react'
+import Link from 'next/link'
+import { LuChevronDown, LuX } from 'react-icons/lu'
 import { useSearchParams } from 'next/navigation'
 import { useTradition } from '../../../hooks/useTradition'
 import { useToday } from '../../../hooks/useToday'
@@ -22,6 +20,7 @@ import type { SaintCounts } from '../../../queries/getSaintCounts'
 import FilterPills from '../FilterPills/FilterPills'
 import PillMenu from '../PillMenu/PillMenu'
 import CategoryIcon from '../CategoryIcon/CategoryIcon'
+import styles from './styles.module.scss'
 
 // What the saints list shows. The category is part of the address
 // (/saints/category/martyrs, built ahead of time). The tradition is
@@ -126,29 +125,50 @@ const PRESET_LABELS: Record<string, string> = {
   patron_saints: 'Patron Saints',
 }
 
-// The row of filter pills: All, Feast today, the presets, then every
-// category that has saints in the visitor's tradition.
-export const SaintsPills = ({
+const SORT_LABELS: Record<string, string> = {
+  'created-newest': 'Newest',
+  'created-oldest': 'Oldest added',
+  'died-oldest': 'Earliest saints',
+  'died-newest': 'Most recent saints',
+}
+
+const capital = (value: string) =>
+  value.charAt(0).toUpperCase() + value.slice(1)
+
+// The saints filters: a short row of quick pills (All, Feast today, the
+// presets), the chosen category or month as a pill you can clear, and
+// "More filters", which opens one panel with every category and the
+// twelve feast months. Nothing scrolls or hides off screen. Sort is
+// plain text on the right, so it does not look like a filter.
+export const SaintsFilterBar = ({
   category,
   counts,
   categories,
   todays,
   builtOn,
-  tone = 'glass',
 }: Props & {
   categories: { value: string; label: string }[]
   // Saints with a feast near today, and the day the page was built.
   todays: FeastSaint[]
   builtOn: Day
-  tone?: 'light' | 'glass'
 }) => {
   const today = useToday(builtOn)
+  const [open, setOpen] = useState(false)
+  const panelId = useId()
+
   return (
     <WithSaintsView
       category={category}
       render={(view) => {
         const count = counts[view.church]
         const feasts = feastsOn(todays, view.church, today).length
+        const chosen = view.category
+          ? categories.find((c) => c.value === view.category)?.label ||
+            view.category
+          : view.month
+            ? capital(view.month)
+            : ''
+
         const pills = [
           {
             key: 'all',
@@ -182,72 +202,21 @@ export const SaintsPills = ({
             href: saintsHref({ preset, sort: view.sort }),
             selected: view.preset === preset,
           })),
-          ...categories
-            .filter(
-              (c) =>
-                (count.filters[c.value] || 0) > 0 ||
-                c.value === view.category,
-            )
-            .map((c) => ({
-              key: c.value,
-              label: c.label,
-              count: count.filters[c.value] || 0,
-              icon: <CategoryIcon name={c.value} />,
-              href: saintsHref({
-                category: c.value,
-                sort: view.sort,
-              }),
-              selected: view.category === c.value,
-            })),
+          // The category or month chosen in the panel; selecting it
+          // again clears it.
+          ...(chosen
+            ? [
+                {
+                  key: 'chosen',
+                  label: chosen,
+                  icon: <LuX aria-label="Clear" />,
+                  href: saintsHref({ sort: view.sort }),
+                  selected: true,
+                },
+              ]
+            : []),
         ]
-        return (
-          <FilterPills
-            label="Filter saints"
-            pills={pills}
-            tone={tone}
-          />
-        )
-      }}
-    />
-  )
-}
 
-const SORT_LABELS: Record<string, string> = {
-  'created-newest': 'Newest',
-  'created-oldest': 'Oldest added',
-  'died-oldest': 'Earliest saints',
-  'died-newest': 'Most recent saints',
-}
-
-const capital = (value: string) =>
-  value.charAt(0).toUpperCase() + value.slice(1)
-
-// The feast month and sort menus.
-export const SaintsMenus = ({
-  category,
-  className,
-}: {
-  category: string
-  className?: string
-}) => {
-  return (
-    <WithSaintsView
-      category={category}
-      render={(view) => {
-        const monthOptions = [
-          {
-            key: 'any',
-            label: 'Any',
-            href: saintsHref({ sort: view.sort }),
-            selected: !view.month,
-          },
-          ...SAINT_MONTHS.map((m) => ({
-            key: m,
-            label: capital(m),
-            href: saintsHref({ month: m, sort: view.sort }),
-            selected: view.month === m,
-          })),
-        ]
         const sortOptions = SAINT_SORTS.map((value) => ({
           key: value,
           label: SORT_LABELS[value],
@@ -262,17 +231,83 @@ export const SaintsMenus = ({
         }))
 
         return (
-          <div className={className}>
-            <PillMenu
-              label="Feast"
-              icon={<LuCalendarDays />}
-              options={monthOptions}
-            />
-            <PillMenu
-              label="Sort"
-              icon={<LuArrowUpDown />}
-              options={sortOptions}
-            />
+          <div className={styles.bar}>
+            <div className={styles.top}>
+              <FilterPills
+                label="Filter saints"
+                pills={pills}
+                wrap
+                after={
+                  <button
+                    type="button"
+                    className={`${styles.more} ${open ? styles.open : ''}`}
+                    aria-expanded={open}
+                    aria-controls={panelId}
+                    onClick={() => setOpen(!open)}
+                  >
+                    More filters
+                    <LuChevronDown aria-hidden="true" />
+                  </button>
+                }
+              />
+              <PillMenu
+                label="Sort by"
+                variant="text"
+                options={sortOptions}
+              />
+            </div>
+
+            {open && (
+              <div
+                id={panelId}
+                className={styles.panel}
+              >
+                <h3>Category</h3>
+                <ul className={styles.categories}>
+                  {categories.map((c) => {
+                    const n = count.filters[c.value] || 0
+                    return (
+                      <li key={c.value}>
+                        <Link
+                          href={saintsHref({
+                            category: c.value,
+                            sort: view.sort,
+                          })}
+                          scroll={false}
+                          onClick={() => setOpen(false)}
+                          aria-current={
+                            view.category === c.value ? 'true' : undefined
+                          }
+                          className={n ? undefined : styles.empty}
+                        >
+                          <CategoryIcon name={c.value} />
+                          {c.label}
+                          {n > 0 && <em>{n.toLocaleString('en-US')}</em>}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+                <h3>Feast day in</h3>
+                <ul className={styles.months}>
+                  {SAINT_MONTHS.map((m) => (
+                    <li key={m}>
+                      <Link
+                        href={saintsHref({ month: m, sort: view.sort })}
+                        scroll={false}
+                        onClick={() => setOpen(false)}
+                        aria-current={
+                          view.month === m ? 'true' : undefined
+                        }
+                        aria-label={capital(m)}
+                      >
+                        {capital(m).slice(0, 3)}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         )
       }}

@@ -12,35 +12,6 @@
   }
 }
 
-// The filter pills, with the feast month and sort menus at the end.
-.toolbar {
-  @include candle.container;
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  margin-top: var(--space-6);
-
-  > nav {
-    flex: 1 1 auto;
-  }
-
-  @media (max-width: 767px) {
-    flex-wrap: wrap;
-    gap: var(--space-3);
-    margin-top: var(--space-5);
-
-    > nav {
-      flex-basis: 100%;
-    }
-  }
-}
-
-.menus {
-  display: flex;
-  flex-shrink: 0;
-  gap: var(--space-2);
-}
-
 .list {
   @include candle.container;
   margin-top: var(--space-5);

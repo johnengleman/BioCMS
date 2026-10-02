@@ -60,6 +60,21 @@
   color: var(--ink-2);
 }
 
+// Plain words: "Sort by: Newest ⌄".
+.text summary {
+  min-height: 40px;
+  padding: 0 var(--space-1);
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink);
+
+  &:hover {
+    border-color: transparent;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
 .icon {
   display: none;
   color: var(--ink-2);
@@ -78,6 +93,11 @@
 
   .label {
     display: none;
+  }
+
+  // The text menu has no icon, so it keeps its words.
+  .text .label {
+    display: inline;
   }
 }
 
