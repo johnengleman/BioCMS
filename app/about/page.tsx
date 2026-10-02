@@ -5,9 +5,9 @@ import SiteFooter from '../../components/candle/SiteFooter/SiteFooter'
 import PhotoHero from '../../components/candle/PhotoHero/PhotoHero'
 import styles from './candle.module.scss'
 
-// Fail the build if anything here needs the request (cookies,
-// headers, searchParams): every page must be built ahead of time.
-export const dynamic = 'error'
+// Static text. Rebuilt hourly so the page is cached like the others.
+export const revalidate = 3600
+
 export const metadata: Metadata = {
   title: 'About Find a Saint',
   description:

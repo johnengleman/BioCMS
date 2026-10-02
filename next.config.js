@@ -1,4 +1,4 @@
-const { properties } = require('./utils/properties')
+import { properties } from './utils/properties.js'
 
 // Old filter links (/miracles?filter=modern_era) moved to real pages
 // (/miracles/era/modern_era). Only known values are redirected.
@@ -67,4 +67,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+export default nextConfig

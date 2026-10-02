@@ -65,10 +65,10 @@
 
 .fadeIn {
   z-index: 1;
-  animation: fade-in 0.8s var(--ease) both;
+  animation: hero-photo-in 0.8s var(--ease) both;
 }
 
-@keyframes fade-in {
+@keyframes hero-photo-in {
   from {
     opacity: 0;
     transform: scale(1.03);

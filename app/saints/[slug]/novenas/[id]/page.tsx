@@ -17,11 +17,7 @@ import { NextPageProps } from '../../../../../types/nextjs'
 // Built the first time someone opens the page, then refreshed every
 // five minutes.
 export const revalidate = 300
-// Fail the build if anything here needs the request (cookies,
-// headers, searchParams): every page must be built ahead of time.
-export const dynamic = 'error'
 export const generateStaticParams = async () => []
-
 
 export const generateMetadata = async (
   props: NextPageProps,

@@ -164,4 +164,4 @@ const properties = {
   },
 }
 
-module.exports = { properties }
+export { properties }
