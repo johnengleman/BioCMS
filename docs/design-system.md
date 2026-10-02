@@ -77,8 +77,9 @@ Ink is for reading. Wine is for actions. Gold is for small details. Keep gold ra
 - **`HomeHero`:** the photo hero of the list pages, with the title, the search, and glass filter chips along the bottom.
   - The photo follows the tradition: Both is the Sea of Galilee, Catholic is Assisi, Orthodox is Meteora.
   - `HeroPhoto` crossfades when the tradition changes.
-  - The credit line is shown on the photo.
+  - The credit line is shown on the photo, at the bottom right.
   - `size="short"` is for the list pages.
+  - Heights (2026-10-02): about 340 px for the saints list (was 580 px) and about 260 px for the short hero (was 440 px). The hero must stay short so the first row of cards shows without scrolling. The subtitle stays on one line on desktop.
 - **`PhotoHero`:** despite its name, a calm beige banner for the simple pages (about, updates, not found).
 
 ### Saints

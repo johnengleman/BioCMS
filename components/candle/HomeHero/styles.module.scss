@@ -14,7 +14,7 @@
   isolation: isolate;
   display: flex;
   flex-direction: column;
-  min-height: 580px;
+  min-height: 340px;
   overflow: hidden;
   border-radius: var(--radius-3xl);
   color: var(--on-dark);
@@ -41,7 +41,7 @@
 }
 
 .short {
-  min-height: 440px;
+  min-height: 260px;
 }
 
 .photo {
@@ -81,8 +81,8 @@
 
 .credit {
   position: absolute;
-  top: 90px;
   right: 24px;
+  bottom: 5px;
   z-index: 1;
   font-size: 11px;
   color: rgba(255, 246, 234, 0.6);
@@ -93,7 +93,6 @@
   }
 
   @media (max-width: 767px) {
-    top: auto;
     bottom: 4px;
     right: 16px;
     font-size: 10px;
@@ -106,17 +105,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: calc(var(--header-h) + 36px) var(--space-6) var(--space-6);
+  padding: var(--header-h) var(--space-6) var(--space-3);
   text-align: center;
 
   @media (max-width: 767px) {
-    padding: calc(var(--header-h) + 12px) var(--space-4) var(--space-5);
+    padding: calc(var(--header-h) + 2px) var(--space-4) var(--space-3);
   }
 }
 
 .title {
-  @include candle.title(clamp(46px, 6.6vw, 80px), 500);
-  margin: 18px 0 12px;
+  @include candle.title(clamp(38px, 4.8vw, 58px), 500);
+  margin: 6px 0 6px;
   color: var(--on-dark);
   letter-spacing: -0.02em;
   line-height: 0.98;
@@ -124,14 +123,14 @@
 }
 
 .short .title {
-  font-size: clamp(44px, 5.6vw, 68px);
+  font-size: clamp(34px, 4.2vw, 50px);
 }
 
 .subtitle {
-  max-width: 580px;
+  max-width: 780px;
   color: rgba(255, 246, 234, 0.92);
-  font-size: 17px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.45;
   text-shadow: 0 1px 12px rgba(20, 10, 6, 0.4);
 
   @media (max-width: 767px) {
@@ -141,10 +140,10 @@
 
 .search {
   width: min(760px, 100%);
-  margin-top: 30px;
+  margin-top: 12px;
 
   @media (max-width: 767px) {
-    margin-top: 22px;
+    margin-top: 12px;
   }
 }
 
@@ -155,6 +154,6 @@
   padding: 0 22px 20px;
 
   @media (max-width: 767px) {
-    padding: 0 0 16px 16px;
+    padding: 0 0 18px 16px;
   }
 }
