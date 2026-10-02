@@ -4,7 +4,6 @@ import { Suspense, type ReactNode } from 'react'
 import {
   LuArrowUpDown,
   LuCalendarDays,
-  LuChurch,
 } from 'react-icons/lu'
 import { useSearchParams } from 'next/navigation'
 import { useTradition } from '../../../hooks/useTradition'
@@ -223,13 +222,7 @@ const SORT_LABELS: Record<string, string> = {
 const capital = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1)
 
-const TRADITIONS: { value: Church; label: string }[] = [
-  { value: 'all', label: 'Both' },
-  { value: 'catholic', label: 'Catholic' },
-  { value: 'orthodox', label: 'Orthodox' },
-]
-
-// The tradition, feast month and sort menus.
+// The feast month and sort menus.
 export const SaintsMenus = ({
   category,
   className,
@@ -237,17 +230,10 @@ export const SaintsMenus = ({
   category: string
   className?: string
 }) => {
-  const { setChurch } = useTradition()
   return (
     <WithSaintsView
       category={category}
       render={(view) => {
-        const traditionOptions = TRADITIONS.map((t) => ({
-          key: t.value,
-          label: t.label,
-          onSelect: () => setChurch(t.value),
-          selected: view.church === t.value,
-        }))
         const monthOptions = [
           {
             key: 'any',
@@ -277,11 +263,6 @@ export const SaintsMenus = ({
 
         return (
           <div className={className}>
-            <PillMenu
-              label="Tradition"
-              icon={<LuChurch />}
-              options={traditionOptions}
-            />
             <PillMenu
               label="Feast"
               icon={<LuCalendarDays />}
