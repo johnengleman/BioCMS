@@ -68,8 +68,11 @@ const PhoneIcon = () => (
 const SiteHeader = ({
   active,
   overlay = false,
+  search = true,
 }: {
   active?: string
+  // False on pages whose hero already has the search.
+  search?: boolean
   overlay?: boolean
 }) => (
   <>
@@ -113,16 +116,18 @@ const SiteHeader = ({
             <span>Get the app</span>
           </a>
 
-          <details className={styles.panel}>
-            <summary aria-label="Search saints">
-              <SearchIcon />
-            </summary>
-            <div
-              className={`${styles.panelBody} ${styles.searchPanel}`}
-            >
-              <Search />
-            </div>
-          </details>
+          {search && (
+            <details className={styles.panel}>
+              <summary aria-label="Search saints">
+                <SearchIcon />
+              </summary>
+              <div
+                className={`${styles.panelBody} ${styles.searchPanel}`}
+              >
+                <Search />
+              </div>
+            </details>
+          )}
 
           {/* Phones and tablets: the menu opens as a panel. */}
           <details className={`${styles.panel} ${styles.menu}`}>

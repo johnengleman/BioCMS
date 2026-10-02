@@ -79,7 +79,9 @@ Ink is for reading. Wine is for actions. Gold is for small details. Keep gold ra
   - `HeroPhoto` crossfades when the tradition changes.
   - The credit line is shown on the photo, at the bottom right.
   - `size="short"` is for the list pages.
-  - Heights (2026-10-02): about 340 px for the saints list (was 580 px) and about 260 px for the short hero (was 440 px). The hero must stay short so the first row of cards shows without scrolling. The subtitle stays on one line on desktop.
+  - `size="split"` is the saints list: a 300 px photo band with the title and subtitle at the bottom left and the search at the bottom right. The header has no search icon on that page. Below it, on the page background: Feasts today, then the filter pills with the Feast and Sort menus in one row, then the count line. Do not stack more into the photo; move things below it instead.
+  - `size="short"` (list pages) is about 260 px.
+- **`FeastsToday`:** every saint whose feast is today in the visitor's tradition, as small portrait links in one row that scrolls sideways. Many saints share a day, so none is singled out. Hidden on days with none.
 - **`PhotoHero`:** despite its name, a calm beige banner for the simple pages (about, updates, not found).
 
 ### Saints

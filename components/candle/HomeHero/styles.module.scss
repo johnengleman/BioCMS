@@ -157,3 +157,82 @@
     padding: 0 0 18px 16px;
   }
 }
+
+// The saints list: a photo band with the title at the bottom left and
+// the search at the bottom right.
+.split {
+  min-height: 300px;
+
+  // Dark at the top for the header, and at the bottom left for the
+  // title.
+  &::before {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(28, 18, 14, 0.5) 0%,
+        rgba(28, 18, 14, 0.05) 30%,
+        rgba(28, 18, 14, 0.15) 60%,
+        rgba(28, 18, 14, 0.62) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(28, 18, 14, 0.35) 0%,
+        rgba(28, 18, 14, 0) 55%
+      );
+  }
+
+  .credit {
+    top: calc(var(--header-h) + 10px);
+    bottom: auto;
+
+    @media (max-width: 767px) {
+      top: auto;
+      bottom: 4px;
+    }
+  }
+
+  .title {
+    margin: 0 0 var(--space-2);
+    font-size: clamp(40px, 4.4vw, 60px);
+    text-align: left;
+  }
+
+  .subtitle {
+    max-width: 500px;
+    margin: 0;
+    text-align: left;
+  }
+
+  @media (max-width: 767px) {
+    min-height: 0;
+  }
+}
+
+.splitBody {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding: calc(var(--header-h) + var(--space-6)) 36px 32px;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-5);
+    padding: calc(var(--header-h) + var(--space-5)) var(--space-4)
+      var(--space-6);
+  }
+}
+
+.splitText {
+  min-width: 0;
+}
+
+.splitSearch {
+  flex: 0 0 min(440px, 44%);
+
+  @media (max-width: 900px) {
+    flex-basis: auto;
+  }
+}

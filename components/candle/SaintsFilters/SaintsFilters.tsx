@@ -119,7 +119,11 @@ export const SaintsPills = ({
   category,
   counts,
   categories,
-}: Props & { categories: { value: string; label: string }[] }) => (
+  tone = 'glass',
+}: Props & {
+  categories: { value: string; label: string }[]
+  tone?: 'light' | 'glass'
+}) => (
   <WithSaintsView
     category={category}
     render={(view) => {
@@ -166,7 +170,7 @@ export const SaintsPills = ({
         <FilterPills
           label="Filter saints"
           pills={pills}
-          tone="glass"
+          tone={tone}
         />
       )
     }}
@@ -183,31 +187,26 @@ const SORT_LABELS: Record<string, string> = {
 const capital = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1)
 
-// "12 saints · Showing Catholic saints · Change", and the feast month
-// and sort menus.
-export const SaintsResultsBar = ({
+const viewTotal = (view: SaintsView, count: SaintCounts) =>
+  view.category
+    ? count.filters[view.category] || 0
+    : view.month
+      ? count.filters[view.month] || 0
+      : view.preset !== 'none'
+        ? count.presets[view.preset] || 0
+        : count.total
+
+// The feast month and sort menus.
+export const SaintsMenus = ({
   category,
-  counts,
   className,
-  countClassName,
-  menusClassName,
-}: Props & {
+}: {
+  category: string
   className?: string
-  countClassName?: string
-  menusClassName?: string
 }) => (
   <WithSaintsView
     category={category}
     render={(view) => {
-      const count = counts[view.church]
-      const total = view.category
-        ? count.filters[view.category] || 0
-        : view.month
-          ? count.filters[view.month] || 0
-          : view.preset !== 'none'
-            ? count.presets[view.preset] || 0
-            : count.total
-
       const monthOptions = [
         {
           key: 'any',
@@ -236,26 +235,38 @@ export const SaintsResultsBar = ({
 
       return (
         <div className={className}>
-          <div className={countClassName}>
-            <b>
-              {total.toLocaleString('en-US')}{' '}
-              {total === 1 ? 'saint' : 'saints'}
-            </b>
-            <span>
-              <TraditionShowing />
-            </span>
-          </div>
-          <div className={menusClassName}>
-            <PillMenu
-              label="Feast"
-              options={monthOptions}
-            />
-            <PillMenu
-              label="Sort"
-              options={sortOptions}
-            />
-          </div>
+          <PillMenu
+            label="Feast"
+            options={monthOptions}
+          />
+          <PillMenu
+            label="Sort"
+            options={sortOptions}
+          />
         </div>
+      )
+    }}
+  />
+)
+
+// "12 saints · Showing Catholic saints · Change"
+export const SaintsCount = ({
+  category,
+  counts,
+  className,
+}: Props & { className?: string }) => (
+  <WithSaintsView
+    category={category}
+    render={(view) => {
+      const total = viewTotal(view, counts[view.church])
+      return (
+        <p className={className}>
+          <b>
+            {total.toLocaleString('en-US')}{' '}
+            {total === 1 ? 'saint' : 'saints'}
+          </b>{' '}
+          · <TraditionShowing />
+        </p>
       )
     }}
   />

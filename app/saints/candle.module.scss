@@ -12,59 +12,46 @@
   }
 }
 
-// "Feast of St. Thérèse of Lisieux  [Today]" on the photo.
-.today {
-  @include candle.glass;
-  display: inline-flex;
+// The filter pills, with the feast month and sort menus at the end.
+.toolbar {
+  @include candle.container;
+  display: flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: 4px 5px 4px 12px;
-  border-radius: var(--radius-pill);
-  font-size: 12.5px;
-  font-weight: 600;
-  @include candle.focus-ring;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
 
-  b {
-    padding: 3px 10px;
-    border-radius: var(--radius-pill);
-    background: var(--on-dark);
-    color: var(--wine);
-    font-size: 12px;
-  }
-
-  &:hover {
-    background: rgba(255, 246, 234, 0.22);
+  > nav {
+    flex: 1 1 auto;
   }
 
   @media (max-width: 767px) {
-    font-size: 12px;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
+
+    > nav {
+      flex-basis: 100%;
+    }
   }
 }
 
-.results {
-  @include candle.container;
+.menus {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: var(--space-3) var(--space-4);
-  padding-top: var(--space-6);
-  padding-bottom: var(--space-5);
+  flex-shrink: 0;
+  gap: var(--space-2);
 }
 
+// "2 saints · Showing Catholic and Orthodox saints · Change"
 .count {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  column-gap: var(--space-3);
+  @include candle.container;
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-4);
+  font-size: 13px;
+  color: var(--ink-2);
 
   b {
-    @include candle.title(30px, 600);
-  }
-
-  span {
-    font-size: 13px;
-    color: var(--ink-2);
+    color: var(--ink);
+    font-weight: 650;
   }
 
   a {
@@ -73,19 +60,6 @@
     text-decoration: underline;
     text-underline-offset: 3px;
   }
-
-  @media (max-width: 767px) {
-    width: 100%;
-
-    b {
-      font-size: 24px;
-    }
-  }
-}
-
-.menus {
-  display: flex;
-  gap: var(--space-2);
 }
 
 .list {

@@ -4,6 +4,7 @@ export type FeastSaint = {
   name: string
   slug: string
   venerated_in?: string | null
+  profile_image?: { id: string; metadata?: any } | null
   feast_day_catholic?: string | null
   feast_day_orthodox?: string | null
 }
@@ -27,12 +28,16 @@ export const getTodaysFeast = async () => {
   const query = `
     query getTodaysFeast {
       saints(
-        limit: 24
+        limit: 100
         filter: { _or: [ ${conditions.join(', ')} ] }
       ) {
         name
         slug
         venerated_in
+        profile_image {
+          id
+          metadata
+        }
         feast_day_catholic
         feast_day_orthodox
       }

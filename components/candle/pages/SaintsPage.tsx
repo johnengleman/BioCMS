@@ -7,12 +7,13 @@ import SiteHeader from '../SiteHeader/SiteHeader'
 import SiteFooter from '../SiteFooter/SiteFooter'
 import HomeHero from '../HomeHero/HomeHero'
 import Search from '../../page/Search/Search'
-import TodaysFeast from '../TodaysFeast/TodaysFeast'
+import FeastsToday from '../FeastsToday/FeastsToday'
 import TraditionText from '../TraditionText/TraditionText'
 import TraditionWelcome from '../TraditionWelcome/TraditionWelcome'
 import {
+  SaintsCount,
+  SaintsMenus,
   SaintsPills,
-  SaintsResultsBar,
 } from '../SaintsFilters/SaintsFilters'
 import { DEFAULT_SAINT_SORT } from '../../../utils/listParams'
 import styles from '../../../app/saints/candle.module.scss'
@@ -52,15 +53,21 @@ const SaintsPage = async ({ category = '' }: { category?: string }) => {
     getSaintCounts(),
     getTodaysFeast(),
   ])
+  // The day the page was built; FeastsToday switches to the visitor's
+  // own date once it loads.
+  const now = new Date()
+  const builtOn = { month: now.getUTCMonth() + 1, day: now.getUTCDate() }
 
   return (
     <div className={styles.page}>
       <SiteHeader
         active="/saints"
         overlay
+        search={false}
       />
       <main>
         <HomeHero
+          size="split"
           title="Discover the saints"
           subtitle={
             <TraditionText
@@ -69,27 +76,28 @@ const SaintsPage = async ({ category = '' }: { category?: string }) => {
               orthodox={SUBTITLES.orthodox}
             />
           }
-          eyebrow={
-            <TodaysFeast
-              saints={todays}
-              className={styles.today}
-            />
-          }
           search={<Search variant="hero" />}
-          filters={
-            <SaintsPills
-              category={category}
-              counts={counts}
-              categories={CATEGORIES}
-            />
-          }
         />
-        <SaintsResultsBar
+        <FeastsToday
+          saints={todays}
+          builtOn={builtOn}
+        />
+        <div className={styles.toolbar}>
+          <SaintsPills
+            category={category}
+            counts={counts}
+            categories={CATEGORIES}
+            tone="light"
+          />
+          <SaintsMenus
+            category={category}
+            className={styles.menus}
+          />
+        </div>
+        <SaintsCount
           category={category}
           counts={counts}
-          className={styles.results}
-          countClassName={styles.count}
-          menusClassName={styles.menus}
+          className={styles.count}
         />
         <div className={styles.list}>
           <SaintsListClient
