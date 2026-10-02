@@ -33,8 +33,9 @@ const years = (s: any) =>
     ? `${s.birth_year || '?'}–${s.death_year || '?'}`
     : ''
 
-// A saint's teachings or miracles: portrait, name, first lines and
-// the first few titles.
+// A saint's teachings or miracles, as one wide card: the portrait shown
+// whole on a beige panel, then the count, the name, the first lines,
+// the first few titles, and a button.
 const FeatureCard = ({
   item,
   kind,
@@ -53,24 +54,25 @@ const FeatureCard = ({
 
   return (
     <article className={styles.feature}>
-      {image && (
-        <Link
-          href={item.link}
-          className={styles.portrait}
-          tabIndex={-1}
-          aria-hidden="true"
-        >
+      <Link
+        href={item.link}
+        className={styles.portrait}
+        tabIndex={-1}
+        aria-hidden="true"
+      >
+        {image && (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={`${assets}/assets/${image}?width=400&format=webp&quality=78`}
+            src={`${assets}/assets/${image}?width=480&format=webp&quality=78`}
             alt=""
             loading="lazy"
           />
-        </Link>
-      )}
+        )}
+      </Link>
       <div className={styles.featureText}>
         {count > 0 && (
           <p className={styles.eyebrow}>
-            {count} {unit}
+            {count.toLocaleString('en-US')} {unit}
           </p>
         )}
         <h2>
@@ -89,7 +91,10 @@ const FeatureCard = ({
             {titles
               .slice(0, 4)
               .map((title: string, i: number) => (
-                <li key={i}>{title}</li>
+                <li key={i}>
+                  <em>{i + 1}</em>
+                  <span>{title}</span>
+                </li>
               ))}
           </ol>
         )}
@@ -98,9 +103,11 @@ const FeatureCard = ({
           className={styles.read}
         >
           {kind === 'miracles'
-            ? 'Read every account'
+            ? count > 1
+              ? `Read all ${count.toLocaleString('en-US')} accounts`
+              : 'Read the account'
             : 'Read the teachings'}
-          <span aria-hidden="true"> ›</span>
+          <span aria-hidden="true">→</span>
         </Link>
       </div>
     </article>

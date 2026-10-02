@@ -1,10 +1,8 @@
 import { ReactNode } from 'react'
 import styles from './styles.module.scss'
 
-// The candlelight photo behind the top of a page. It starts under the
-// frosted header and fades into the cream page.
-// public/images/candlelight-church.webp is a PLACEHOLDER: replace it
-// with a licensed photograph of a church in candlelight.
+// A calm beige banner at the top of the simple pages (about, updates,
+// not found). Pages with lists use HomeHero, with a photo.
 const PhotoHero = ({
   children,
   align = 'left',
@@ -12,13 +10,11 @@ const PhotoHero = ({
   children: ReactNode
   align?: 'left' | 'center'
 }) => (
-  <section className={`${styles.hero} ${styles[align]}`}>
-    <div
-      className={styles.photo}
-      aria-hidden="true"
-    />
-    <div className={styles.inner}>{children}</div>
-  </section>
+  <div className={styles.shell}>
+    <section className={`${styles.hero} ${styles[align]}`}>
+      {children}
+    </section>
+  </div>
 )
 
 export default PhotoHero

@@ -4,9 +4,9 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--cream);
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-display);
+  font-family: var(--font-ui);
 
   > main {
     flex: 1;
@@ -23,9 +23,11 @@
 }
 
 .subtitle {
+  max-width: 620px;
   margin-top: var(--space-3);
-  font-size: clamp(17px, 2vw, 22px);
-  line-height: 1.35;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-2);
 }
 
 .content {
@@ -52,9 +54,7 @@
 
   h2 {
     margin-top: var(--space-4);
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 1.2;
+    @include candle.title(26px, 600);
   }
 
   p {
@@ -71,16 +71,19 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid var(--gilt);
-  font-size: 20px;
+  background: var(--wine-tint);
+  font-family: var(--font-title);
+  font-size: 21px;
+  font-weight: 600;
   color: var(--wine);
-  font-variant-numeric: lining-nums;
 }
 
 .closing {
   margin-top: var(--space-12);
-  font-size: clamp(26px, 3.4vw, 36px);
+  font-family: var(--font-title);
+  font-size: clamp(28px, 3.4vw, 38px);
   font-style: italic;
+  font-weight: 500;
   text-align: center;
   color: var(--wine);
 }
@@ -100,5 +103,24 @@
 
 .link {
   @include candle.link-chevron;
-  font-size: 17px;
+}
+
+// The prayer app ("Get the app" links point here).
+.app {
+  max-width: 640px;
+  margin: var(--space-16) auto 0;
+  padding: var(--space-8);
+  border-radius: var(--radius-2xl);
+  background: linear-gradient(160deg, #efe2cc 0%, #e6d4b8 100%);
+  text-align: center;
+  scroll-margin-top: calc(var(--header-h) + 24px);
+
+  h2 {
+    margin: 8px 0 10px;
+    @include candle.title(34px, 500);
+  }
+
+  p:last-child {
+    color: var(--ink-2);
+  }
 }

@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import SiteHeader from '../SiteHeader/SiteHeader'
 import SiteFooter from '../SiteFooter/SiteFooter'
 import ListHero from '../ListHero/ListHero'
+import { CHURCH_LABELS, asChurch } from '../../../utils/site'
 import styles from './styles.module.scss'
 
 // The frame of a site-wide list page (teachings, miracles, quotes,
@@ -29,6 +30,7 @@ const ListPage = ({
     <SiteHeader
       searchParams={searchParams}
       active={path}
+      overlay
     />
     <main>
       <ListHero
@@ -39,6 +41,10 @@ const ListPage = ({
         church={church}
         filter={filter}
       />
+      <p className={styles.showing}>
+        Showing {CHURCH_LABELS[asChurch(church)]} ·{' '}
+        <a href="#site-footer">Change</a>
+      </p>
       <div className={styles.list}>{children}</div>
     </main>
     <SiteFooter church={church} />

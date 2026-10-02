@@ -4,9 +4,9 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--cream);
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-display);
+  font-family: var(--font-ui);
 
   > main {
     flex: 1;
@@ -18,9 +18,11 @@
 }
 
 .subtitle {
+  max-width: 620px;
   margin-top: var(--space-3);
-  font-size: clamp(17px, 2vw, 22px);
-  line-height: 1.35;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-2);
 }
 
 .content {
@@ -64,9 +66,7 @@
   padding: var(--space-6);
 
   h2 {
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 1.2;
+    @include candle.title(26px, 600);
   }
 }
 
@@ -92,8 +92,8 @@
   max-width: 560px;
   margin: 0 auto;
   padding: var(--space-8) var(--space-6);
-  font-size: 19px;
-  line-height: 1.5;
+  font-size: 16px;
+  line-height: 1.55;
   text-align: center;
-  color: var(--taupe);
+  color: var(--ink-2);
 }

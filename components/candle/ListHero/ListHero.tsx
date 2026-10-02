@@ -3,10 +3,8 @@ import { getQuotesFilters } from '../../../queries/getQuoteFilters'
 import { getMiraclesFilters } from '../../../queries/getMiraclesFilters'
 import { getTeachingFilters } from '../../../queries/getTeachingFilters'
 import { getPrayersFilters } from '../../../queries/getPrayersFilters'
-import PhotoHero from '../PhotoHero/PhotoHero'
+import HomeHero from '../HomeHero/HomeHero'
 import FilterPills from '../FilterPills/FilterPills'
-import TraditionControl from '../TraditionControl/TraditionControl'
-import styles from './styles.module.scss'
 
 type Kind = 'teachings' | 'miracles' | 'quotes' | 'prayers'
 
@@ -23,9 +21,10 @@ const label = (value: string) => {
   return text.charAt(0).toUpperCase() + text.slice(1)
 }
 
-// The top of a list page: title over the candlelight photo, the
-// tradition control and one row of filter pills. Filters with no
-// items are left out.
+// The top of a list page: a short photo hero (the photo follows the
+// visitor's tradition), the title, and one row of glass filter pills
+// with counts. Filters with no items are left out. The tradition
+// choice itself is in the site footer.
 const ListHero = async ({
   kind,
   path,
@@ -56,28 +55,25 @@ const ListHero = async ({
       label: f === 'all' ? 'All' : label(f),
       href: f === 'all' ? path : `${path}?filter=${f}`,
       selected: filter === f,
+      count: f === 'all' ? undefined : countOf(f),
     }))
 
   return (
-    <PhotoHero>
-      <div className={styles.titleRow}>
-        <div>
-          <h1 className={styles.title}>{title}</h1>
-          <p className={styles.subtitle}>{subtitle}</p>
-        </div>
-        <div className={styles.tradition}>
-          <TraditionControl church={church} />
-        </div>
-      </div>
-      {pills.length > 1 && (
-        <div className={styles.pills}>
+    <HomeHero
+      church={church}
+      size="short"
+      title={title}
+      subtitle={subtitle}
+      filters={
+        pills.length > 1 && (
           <FilterPills
             label={`Filter ${title.toLowerCase()}`}
             pills={pills}
+            tone="glass"
           />
-        </div>
-      )}
-    </PhotoHero>
+        )
+      }
+    />
   )
 }
 

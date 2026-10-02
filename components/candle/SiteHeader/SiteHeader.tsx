@@ -8,7 +8,7 @@ import styles from './styles.module.scss'
 const LINKS = [
   { href: '/saints', label: 'Saints' },
   { href: '/miracles', label: 'Miracles' },
-  { href: '/novenas', label: 'Prayers' },
+  { href: '/novenas', label: 'Novenas' },
   { href: '/teachings', label: 'Teachings' },
   { href: '/quotes', label: 'Quotes' },
   { href: '/books', label: 'Books' },

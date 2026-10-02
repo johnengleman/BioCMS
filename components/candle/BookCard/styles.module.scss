@@ -23,7 +23,7 @@
   }
 }
 
-// The store snippet holds one <img>; it gets the gilt frame.
+// The store snippet holds one <img>; it gets a soft shadow.
 .cover {
   align-self: start;
 
@@ -32,9 +32,7 @@
     width: 100%;
     height: auto;
     border-radius: 6px;
-    box-shadow:
-      0 0 0 1px var(--gilt),
-      var(--shadow-card);
+    box-shadow: var(--shadow-md);
   }
 
   a {
@@ -52,26 +50,20 @@
 
 .title {
   margin-top: var(--space-1);
-  font-family: var(--font-display);
-  font-size: 21px;
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--ink);
+  @include candle.title(23px, 600);
+  line-height: 1.15;
 }
 
 .meta {
   margin-top: var(--space-1);
-  font-family: var(--font-display);
-  font-size: 15px;
-  color: var(--taupe);
+  font-size: 13.5px;
+  color: var(--ink-2);
 }
 
 .description {
   margin-top: var(--space-3);
-  font-family: var(--font-reading);
-  font-size: 16px;
+  @include candle.reading(16px);
   line-height: 1.55;
-  color: var(--ink);
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
@@ -83,8 +75,8 @@
   align-items: center;
   gap: var(--space-2);
   margin-top: var(--space-4);
-  font-family: var(--font-display);
-  font-size: 15px;
+  font-size: 13.5px;
+  font-weight: 650;
   color: var(--ink);
   @include candle.focus-ring;
 
@@ -98,7 +90,7 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: top;
-    box-shadow: 0 0 0 1px var(--gilt);
+    box-shadow: inset 0 0 0 1px var(--line-soft);
   }
 }
 
@@ -106,5 +98,4 @@
   @include candle.link-chevron;
   display: flex;
   margin-top: var(--space-4);
-  font-size: 16px;
 }

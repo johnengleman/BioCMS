@@ -110,6 +110,21 @@ const About = async (props: NextPageProps) => {
               <span aria-hidden="true"> ›</span>
             </Link>
           </div>
+
+          {/* "Get the app" buttons link here (utils/site.ts APP_URL)
+              until the store pages are public. */}
+          <section
+            id="app"
+            className={styles.app}
+            aria-labelledby="app-title"
+          >
+            <p className={styles.eyebrow}>The Find a Saint app</p>
+            <h2 id="app-title">Pray with the saints every day</h2>
+            <p>
+              Daily prayers, novenas, and a quiet reminder on each
+              feast day.
+            </p>
+          </section>
         </div>
       </main>
       <SiteFooter />

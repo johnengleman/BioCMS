@@ -4,9 +4,9 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--cream);
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-display);
+  font-family: var(--font-ui);
 
   > main {
     flex: 1;
@@ -23,9 +23,11 @@
 }
 
 .subtitle {
+  max-width: 620px;
   margin-top: var(--space-3);
-  font-size: clamp(17px, 2vw, 22px);
-  line-height: 1.35;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink-2);
 }
 
 .actions {

@@ -7,8 +7,8 @@ import { getChurch } from '../../hooks/getChurch'
 import { properties } from '../../utils/properties'
 import SiteHeader from '../../components/candle/SiteHeader/SiteHeader'
 import SiteFooter from '../../components/candle/SiteFooter/SiteFooter'
-import PhotoHero from '../../components/candle/PhotoHero/PhotoHero'
-import TraditionControl from '../../components/candle/TraditionControl/TraditionControl'
+import HomeHero from '../../components/candle/HomeHero/HomeHero'
+import { CHURCH_LABELS, asChurch } from '../../utils/site'
 import FilterPills from '../../components/candle/FilterPills/FilterPills'
 import PillMenu from '../../components/candle/PillMenu/PillMenu'
 import Section from '../../components/candle/Section/Section'
@@ -127,38 +127,36 @@ const Books = async (props: NextPageProps) => {
       <SiteHeader
         searchParams={searchParams}
         active="/books"
+        overlay
       />
       <main>
-        <PhotoHero>
-          <div className={styles.titleRow}>
-            <div>
-              <h1 className={styles.title}>Books</h1>
-              <p className={styles.subtitle}>
-                Lives, writings and devotions to read next,
-                chosen for each saint.
-              </p>
-            </div>
-            <div className={styles.tradition}>
-              <TraditionControl church={church} />
-            </div>
-          </div>
-          <div className={styles.toolbar}>
-            {pills.length > 1 && (
+        <HomeHero
+          church={church}
+          size="short"
+          title="Books"
+          subtitle="Lives, writings, and devotions to read next, chosen for each saint."
+          filters={
+            pills.length > 1 && (
               <FilterPills
                 label="Filter books by genre"
                 pills={pills}
+                tone="glass"
               />
-            )}
-            {saintOptions.length > 1 && (
-              <div className={styles.menus}>
-                <PillMenu
-                  label="Saint"
-                  options={saintOptions}
-                />
-              </div>
-            )}
-          </div>
-        </PhotoHero>
+            )
+          }
+        />
+        <div className={styles.results}>
+          <span>
+            Showing books for {CHURCH_LABELS[asChurch(church)]} ·{' '}
+            <a href="#site-footer">Change</a>
+          </span>
+          {saintOptions.length > 1 && (
+            <PillMenu
+              label="Saint"
+              options={saintOptions}
+            />
+          )}
+        </div>
 
         <div className={styles.content}>
           {showNewest && (
