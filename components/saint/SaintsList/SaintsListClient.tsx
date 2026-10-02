@@ -3,6 +3,9 @@
 import dynamic from 'next/dynamic'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { fetchSaints } from '../../../utils/api'
+import { useToday } from '../../../hooks/useToday'
+import { feastsOn, type Day } from '../../../utils/feasts'
+import type { FeastSaint } from '../../../queries/getTodaysFeast'
 import {
   WithSaintsView,
   type SaintsView,
@@ -37,16 +40,20 @@ const Card = ({ data }: { data: any }) =>
 const SaintsList = ({
   view,
   initialSaints,
+  fixed,
 }: {
   view: SaintsView
   initialSaints: any[]
+  // A complete list that needs no loading (Feast today).
+  fixed?: any[]
 }) => {
   const [saints, setSaints] = useState<any[] | null>(
-    view.isDefault ? initialSaints : null,
+    fixed || (view.isDefault ? initialSaints : null),
   )
   // A short first page means there is nothing more to load.
   const [hasMore, setHasMore] = useState(
-    !view.isDefault || initialSaints.length >= FIRST_PAGE,
+    !fixed &&
+      (!view.isDefault || initialSaints.length >= FIRST_PAGE),
   )
   const isPhone = useMediaQuery('(max-width: 767px)')
   const gutter = isPhone ? 14 : 22
@@ -141,20 +148,33 @@ const SaintsList = ({
 const SaintsListClient = ({
   initialSaints,
   category,
+  todays,
+  builtOn,
 }: {
   initialSaints: any[]
   category: string
-}) => (
-  <WithSaintsView
-    category={category}
-    render={(view) => (
-      <SaintsList
-        key={`${view.church}|${view.filter}|${view.preset}|${view.sort}`}
-        view={view}
-        initialSaints={initialSaints}
-      />
-    )}
-  />
-)
+  todays: FeastSaint[]
+  builtOn: Day
+}) => {
+  const today = useToday(builtOn)
+  return (
+    <WithSaintsView
+      category={category}
+      render={(view) => {
+        const fixed = view.feast
+          ? feastsOn(todays, view.church, today)
+          : undefined
+        return (
+          <SaintsList
+            key={`${view.church}|${view.filter}|${view.preset}|${view.sort}|${view.feast ? `feast-${today.month}-${today.day}` : ''}`}
+            view={view}
+            initialSaints={initialSaints}
+            fixed={fixed}
+          />
+        )
+      }}
+    />
+  )
+}
 
 export default SaintsListClient

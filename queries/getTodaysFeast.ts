@@ -1,6 +1,10 @@
 import fetchHelper from './fetchHelper'
+import { withParsedCategories } from '../utils/parseList'
 
+// Card fields too, so the saints list can show these saints directly.
 export type FeastSaint = {
+  [key: string]: any
+  categories?: any
   name: string
   slug: string
   venerated_in?: string | null
@@ -10,8 +14,8 @@ export type FeastSaint = {
 }
 
 // Saints of either tradition whose feast is yesterday, today or
-// tomorrow (UTC). The browser then picks the one for its own local
-// date and tradition (TodaysFeast), so the "Today" pill matches the
+// tomorrow (UTC). The browser then picks the ones for its own local
+// date and tradition (the "Feast today" filter), so it matches the
 // visitor's calendar day.
 export const getTodaysFeast = async () => {
   const now = Date.now()
@@ -31,11 +35,20 @@ export const getTodaysFeast = async () => {
         limit: 100
         filter: { _or: [ ${conditions.join(', ')} ] }
       ) {
+        id
         name
         slug
+        summary
+        categories
         venerated_in
+        birth_year
+        death_year
+        birth_location
+        death_location
         profile_image {
           id
+          width
+          height
           metadata
         }
         feast_day_catholic
@@ -47,7 +60,9 @@ export const getTodaysFeast = async () => {
     const response = await fetchHelper<{ saints: FeastSaint[] }>({
       query,
     })
-    return response?.data?.saints || []
+    return (response?.data?.saints || []).map(
+      withParsedCategories,
+    ) as FeastSaint[]
   } catch {
     return []
   }

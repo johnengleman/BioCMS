@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import Link from 'next/link'
 import styles from './styles.module.scss'
 
@@ -13,12 +14,16 @@ type Option = {
 // A pill that opens a small menu of links (sort, feast month). Built
 // on <details>, so it works without JavaScript. Keyed on the current
 // value, so it closes after a choice.
+// `icon` stands in for the label on narrow phones, so a row of menus
+// fits the screen.
 const PillMenu = ({
   label,
   options,
+  icon,
 }: {
   label: string
   options: Option[]
+  icon?: ReactNode
 }) => {
   const current =
     options.find((o) => o.selected) || options[0]
@@ -27,7 +32,15 @@ const PillMenu = ({
       key={current.key}
       className={styles.menu}
     >
-      <summary>
+      <summary aria-label={`${label}: ${current.label}`}>
+        {icon && (
+          <span
+            className={styles.icon}
+            aria-hidden="true"
+          >
+            {icon}
+          </span>
+        )}
         <span className={styles.label}>{label}:</span>
         {current.label}
         <svg

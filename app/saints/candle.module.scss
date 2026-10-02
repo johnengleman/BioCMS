@@ -41,27 +41,7 @@
   gap: var(--space-2);
 }
 
-// "2 saints · Showing Catholic and Orthodox saints · Change"
-.count {
-  @include candle.container;
-  margin-top: var(--space-4);
-  margin-bottom: var(--space-4);
-  font-size: 13px;
-  color: var(--ink-2);
-
-  b {
-    color: var(--ink);
-    font-weight: 650;
-  }
-
-  a {
-    color: var(--wine);
-    font-weight: 650;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-}
-
 .list {
   @include candle.container;
+  margin-top: var(--space-5);
 }

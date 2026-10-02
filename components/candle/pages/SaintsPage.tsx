@@ -7,11 +7,9 @@ import SiteHeader from '../SiteHeader/SiteHeader'
 import SiteFooter from '../SiteFooter/SiteFooter'
 import HomeHero from '../HomeHero/HomeHero'
 import Search from '../../page/Search/Search'
-import FeastsToday from '../FeastsToday/FeastsToday'
 import TraditionText from '../TraditionText/TraditionText'
 import TraditionWelcome from '../TraditionWelcome/TraditionWelcome'
 import {
-  SaintsCount,
   SaintsMenus,
   SaintsPills,
 } from '../SaintsFilters/SaintsFilters'
@@ -19,11 +17,11 @@ import { DEFAULT_SAINT_SORT } from '../../../utils/listParams'
 import styles from '../../../app/saints/candle.module.scss'
 
 const SUBTITLES = {
-  all: 'The lives, miracles, and prayers of the Catholic and Orthodox saints. Every fact has its source.',
+  all: 'The lives, miracles, and prayers of the Catholic and Orthodox saints.',
   catholic:
-    'The lives, miracles, and prayers of the saints of the Catholic Church. Every fact has its source.',
+    'The lives, miracles, and prayers of the saints of the Catholic Church.',
   orthodox:
-    'The lives, miracles, and prayers of the saints of the Orthodox Church. Every fact has its source.',
+    'The lives, miracles, and prayers of the saints of the Orthodox Church.',
 }
 
 // "Fathers_of_the_Church" -> "Fathers of the Church"
@@ -53,8 +51,8 @@ const SaintsPage = async ({ category = '' }: { category?: string }) => {
     getSaintCounts(),
     getTodaysFeast(),
   ])
-  // The day the page was built; FeastsToday switches to the visitor's
-  // own date once it loads.
+  // The day the page was built. The Feast today filter switches to the
+  // visitor's own date once the page loads.
   const now = new Date()
   const builtOn = { month: now.getUTCMonth() + 1, day: now.getUTCDate() }
 
@@ -78,15 +76,13 @@ const SaintsPage = async ({ category = '' }: { category?: string }) => {
           }
           search={<Search variant="hero" />}
         />
-        <FeastsToday
-          saints={todays}
-          builtOn={builtOn}
-        />
         <div className={styles.toolbar}>
           <SaintsPills
             category={category}
             counts={counts}
             categories={CATEGORIES}
+            todays={todays}
+            builtOn={builtOn}
             tone="light"
           />
           <SaintsMenus
@@ -94,15 +90,12 @@ const SaintsPage = async ({ category = '' }: { category?: string }) => {
             className={styles.menus}
           />
         </div>
-        <SaintsCount
-          category={category}
-          counts={counts}
-          className={styles.count}
-        />
         <div className={styles.list}>
           <SaintsListClient
             initialSaints={initialSaints || []}
             category={category}
+            todays={todays}
+            builtOn={builtOn}
           />
         </div>
       </main>

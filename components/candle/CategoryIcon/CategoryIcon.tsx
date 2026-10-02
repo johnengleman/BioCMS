@@ -1,4 +1,5 @@
 import {
+  LuCalendarHeart,
   LuBookOpen,
   LuCamera,
   LuChurch,
@@ -21,6 +22,7 @@ import {
 } from 'react-icons/lu'
 
 const ICONS = {
+  feast_today: LuCalendarHeart,
   all: LuLayoutGrid,
   '20th_century_saints': LuCamera,
   patron_saints: LuStar,

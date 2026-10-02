@@ -12,13 +12,13 @@
       display: none;
     }
 
-    svg {
+    > svg {
       color: var(--ink-2);
       @include candle.transition(transform);
     }
   }
 
-  &[open] summary svg {
+  &[open] summary > svg {
     transform: rotate(180deg);
   }
 
@@ -58,6 +58,27 @@
 
 .label {
   color: var(--ink-2);
+}
+
+.icon {
+  display: none;
+  color: var(--ink-2);
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+// Narrow phones: the icon replaces the word label.
+@media (max-width: 480px) {
+  .icon {
+    display: inline-flex;
+  }
+
+  .label {
+    display: none;
+  }
 }
 
 // The first menu in a row opens to the right, so it stays on screen.

@@ -110,16 +110,20 @@ export const saintsHref = ({
   category = '',
   preset = 'none',
   month = '',
+  feast = false,
   sort = DEFAULT_SAINT_SORT,
 }: {
   category?: string
   preset?: string
   month?: string
+  // Saints whose feast is today (?feast=today).
+  feast?: boolean
   sort?: string
 }) => {
   const query = new URLSearchParams()
-  if (!category && preset !== 'none') query.set('preset', preset)
-  if (!category && month) query.set('month', month)
+  if (!category && feast) query.set('feast', 'today')
+  else if (!category && preset !== 'none') query.set('preset', preset)
+  else if (!category && month) query.set('month', month)
   if (sort !== DEFAULT_SAINT_SORT) query.set('sort', sort)
   const path = category
     ? `/saints/category/${category}`

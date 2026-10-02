@@ -103,15 +103,12 @@ const SearchClient = ({
     >
       <div className={styles.searchContainer}>
         <div className={styles.inputWrapper}>
-          {variant === 'hero' && (
-            <span className={styles.heroLabel}>Find a saint</span>
-          )}
           <input
             type="search"
             className={styles.input}
             placeholder={
               variant === 'hero'
-                ? 'Search by name, such as Francis'
+                ? 'Search saints by name'
                 : 'Search for saints'
             }
             aria-label="Search for saints"
