@@ -9,9 +9,9 @@ import {
   type ListKind,
 } from '../utils/listParams'
 
-// Built ahead of time and refreshed every five minutes, so a saint
+// Built ahead of time and refreshed every four minutes, so a saint
 // published in Directus is listed without a new build.
-export const revalidate = 300
+export const revalidate = 240
 
 const site = process.env.NEXT_PUBLIC_SITE_URL
 

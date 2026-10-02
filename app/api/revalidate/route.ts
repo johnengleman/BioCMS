@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server'
-import { revalidatePath } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache'
+import { DATA_TAG } from '../../../queries/fetchHelper'
 
 // Called by a Directus flow when content is published, so the site
 // refreshes within seconds instead of waiting for the five-minute timer.
@@ -37,6 +38,10 @@ export async function POST(request: NextRequest) {
         )
         .slice(0, 50)
     : []
+
+  // Clear the cached Directus answers first, so the rebuilt pages read
+  // fresh data. { expire: 0 } makes the entries invalid at once.
+  revalidateTag(DATA_TAG, { expire: 0 })
 
   if (paths.length) {
     paths.forEach((path) => revalidatePath(path))

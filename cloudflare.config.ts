@@ -14,6 +14,8 @@ export default defineConfig({
     env: {
       ...cache.env,
       ASSETS: bindings.assets(),
+      // Cached Directus answers (queries/fetchHelper.ts).
+      VINEXT_KV_CACHE: bindings.kv(),
     },
   }),
 });

@@ -80,12 +80,13 @@ export const parseListQuery = (
   limit: Math.max(1, whole(params.get('limit'), 12, 50)),
 })
 
-// Directus changes only when the owner publishes, so a response may be
-// shared for five minutes and served stale for an hour while it
-// refreshes in the background.
+// Directus changes only when the owner publishes, and Directus answers
+// are already cached for a minute (queries/fetchHelper.ts), so a
+// response may be shared for a minute and served stale for an hour
+// while it refreshes in the background.
 export const CACHE_HEADERS = {
   'Cache-Control':
-    'public, max-age=60, s-maxage=300, stale-while-revalidate=3600',
+    'public, max-age=60, s-maxage=60, stale-while-revalidate=3600',
 }
 
 // Where each list lives, and the word in its category URLs:

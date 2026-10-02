@@ -15,8 +15,8 @@ import styles from '../../../../../components/candle/Reading/reading.module.scss
 import { NextPageProps } from '../../../../../types/nextjs'
 
 // Built the first time someone opens the page, then refreshed every
-// five minutes.
-export const revalidate = 300
+// four minutes.
+export const revalidate = 240
 export const generateStaticParams = async () => []
 
 export const generateMetadata = async (

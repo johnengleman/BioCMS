@@ -38,8 +38,8 @@ const formatDate = (value = '') => {
     : ''
 }
 
-// Built ahead of time and refreshed every five minutes.
-export const revalidate = 300
+// Built ahead of time and refreshed every four minutes.
+export const revalidate = 240
 
 const Updates = async () => {
   const updates = (await getUpdates()) || []

@@ -4,9 +4,9 @@ import SaintsPage from '../../../../components/candle/pages/SaintsPage'
 import { SAINT_CATEGORIES } from '../../../../utils/listParams'
 import { properties } from '../../../../utils/properties'
 
-// One page per category, built ahead of time and refreshed every five
+// One page per category, built ahead of time and refreshed every four
 // minutes. Any other name is a 404.
-export const revalidate = 300
+export const revalidate = 240
 export const dynamicParams = false
 export const generateStaticParams = () =>
   SAINT_CATEGORIES.map((category) => ({ category }))

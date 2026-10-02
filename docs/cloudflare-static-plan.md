@@ -2,7 +2,7 @@
 
 Goal: every page is pre-generated and cached at the edge. The site is cheap to run and fast. Then the site moves from Vercel to Cloudflare Workers.
 
-Status: phases 0 to 3 are done on branch `static-cloudflare` (2026-10-01). Nothing is deployed yet. Production is still Vercel from `main`.
+Status: phases 0 to 4 are done on branch `static-cloudflare` (2026-10-01). A preview Worker runs at `https://saints.nicholasengleman1.workers.dev`. Production is still Vercel from `main`. Cutover (phase 5) is not started.
 
 ## What I found
 
@@ -28,7 +28,7 @@ Decided by the owner on 2026-10-01:
 1. **First-time visitors are asked which tradition they want.** Design: a welcome card, not a blocking modal. See "Tradition prompt" below. Until the visitor chooses, the site shows "Both traditions". The static HTML for crawlers also shows "Both".
 2. **The browser applies the choice.** The static page shows the default view. The browser updates lists after load, using `localStorage`. URL prefixes such as `/orthodox/saints` are not used.
 3. **Category filters are real URLs**, for example `/saints/category/martyrs`. Sort and preset stay in the browser.
-4. **Freshness: 5 minutes at most.** `revalidate = 300` is the safety timer. A Directus flow calls `/api/revalidate` on publish, so most updates appear within seconds.
+4. **Freshness: 5 minutes at most.** `revalidate = 240` is the safety timer. A Directus flow calls `/api/revalidate` on publish, so most updates appear within seconds.
 
 ### Tradition prompt
 
@@ -40,7 +40,7 @@ Decided by the owner on 2026-10-01:
 
 ## Target design
 
-- **Saint pages** (`/saints/[slug]` and its sub-pages): pre-generated with `generateStaticParams`. Build only the top 100 to 200 saints. Other saints build on first visit and then stay cached (`dynamicParams` on). Each page has `revalidate = 300`, and the Directus webhook refreshes it sooner.
+- **Saint pages** (`/saints/[slug]` and its sub-pages): pre-generated with `generateStaticParams`. Build only the top 100 to 200 saints. Other saints build on first visit and then stay cached (`dynamicParams` on). Each page has `revalidate = 240`, and the Directus webhook refreshes it sooner.
 - **Church choice:** a small client provider. It reads `localStorage` instead of a cookie. No server code reads it. Feast-day labels, "Today's feast", and list filters use it in the browser.
 - **List pages** (`/saints`, `/miracles`, `/teachings`, `/quotes`, `/novenas`, `/books`): static HTML with the first 30 items of the default view. Filter, sort, and "load more" call a cached JSON route (`/api/list/...`) with `Cache-Control: public, s-maxage=300, stale-while-revalidate`. This replaces the server actions, which are POST requests that no cache can store.
 - **Search:** the header no longer fetches search data. The browser loads one cached JSON file the first time the visitor focuses the search box.
@@ -181,3 +181,53 @@ What changed:
   true before.
 - The static list shows "Both traditions". A visitor with a saved
   choice sees a short update after the page loads.
+
+## Phase 4 result (done: preview Worker)
+
+Preview: `https://saints.nicholasengleman1.workers.dev` (Cloudflare account
+`nicholasengleman1@gmail.com`). Deploy with
+`npx vinext-cloudflare deploy --preview`.
+
+What I measured on the deployed preview (from Denver):
+- Cached pages: first byte 110 to 190 ms. `x-vinext-cache: HIT`.
+- First request after a deploy or a refresh: about 1 to 2 s, while the
+  page is built and cached.
+- API routes after the first call: 110 to 160 ms (was 200 to 700 ms
+  before the KV cache).
+- Worker size: 2.5 MiB, 805 KiB compressed. Start-up 3 ms.
+- Fonts are self-hosted by vinext. No console errors.
+- `POST /api/revalidate`: wrong secret gives 401. A right secret makes
+  the next page request a `MISS`, then `HIT`.
+
+How caching works now:
+- **Pages:** Workers Cache (`ctx.cache`), refreshed every 4 minutes
+  (`revalidate = 240`), or at once through `/api/revalidate`.
+- **Directus data:** every GraphQL request goes through `unstable_cache`
+  (`queries/fetchHelper.ts`), stored in a KV namespace
+  (`saints-vinext-kv-cache`), for 60 seconds. `/api/revalidate` clears it
+  by the tag `directus`. Worst case without the webhook: about 5 minutes.
+- **API routes:** vinext does not edge-cache them (`BYPASS`), so they
+  depend on the KV data cache. They still run a Worker on each call.
+
+Changes for Cloudflare:
+- The project is ESM (`"type": "module"`).
+- `scripts/check-static.mjs` replaces `dynamic = 'error'`, because vinext
+  treats that setting as "never refresh". `npm run build` runs it.
+- `cf` and `@cloudflare/vite-plugin` are beta releases. Pin them
+  after cutover.
+
+### Before cutover (phase 5)
+
+1. **Account:** `findasaint.com` is in a different Cloudflare account
+   (name servers `andy.ns` and `lisa.ns`) than the preview. Deploy the
+   production Worker in the account that owns the zone, or move the zone.
+2. **Build variables:** `NEXT_PUBLIC_GRAPHQL_ENDPOINT`,
+   `NEXT_PUBLIC_DIRECTUS_ASSETS`, `NEXT_PUBLIC_SITE_URL` are fixed at
+   build time. They must exist wherever the build runs (your machine
+   reads `.env.local`).
+3. **Secret:** `REVALIDATE_SECRET` as a Worker secret (the preview has a
+   random test secret that nobody knows).
+4. **Warm the cache** on deploy with `--warm-cache`, so the first visitors
+   do not wait 1 to 2 s.
+5. **`.next` types:** `vite build` can leave stale files in `.next/types`.
+   Delete that folder if `tsc` complains.

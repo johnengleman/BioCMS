@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import vinext from "vinext";
 import { cloudflare } from "@cloudflare/vite-plugin";
 import { workersCacheCdnAdapter } from "@vinext/cloudflare/cache/workers-cache-cdn-adapter";
+import { kvDataAdapter } from "@vinext/cloudflare/cache/kv-data-adapter";
 import { createHash } from "node:crypto";
 import { patchCssModules } from "vite-css-modules";
 import path from "node:path";
@@ -10,7 +11,7 @@ export default defineConfig({
   plugins: [
     patchCssModules({ exportMode: "default" }),
     vinext({
-      cache: { cdn: workersCacheCdnAdapter() },
+      cache: { cdn: workersCacheCdnAdapter(), data: kvDataAdapter() },
     }),
     cloudflare({
       viteEnvironment: {

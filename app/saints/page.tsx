@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import SaintsPage from '../../components/candle/pages/SaintsPage'
 
-// Built ahead of time and refreshed every five minutes.
-export const revalidate = 300
+// Built ahead of time and refreshed every four minutes.
+export const revalidate = 240
 
 export const metadata: Metadata = {
   title:

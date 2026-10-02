@@ -4,9 +4,9 @@ import BooksPage from '../../../../components/candle/pages/BooksPage'
 import { genreLabel } from '../../../../components/candle/BookCard/BookCard'
 import { properties } from '../../../../utils/properties'
 
-// One page per genre, built ahead of time and refreshed every five
+// One page per genre, built ahead of time and refreshed every four
 // minutes. Any other value is a 404.
-export const revalidate = 300
+export const revalidate = 240
 export const dynamicParams = false
 export const generateStaticParams = () =>
   properties.books.presets.map((genre: string) => ({ genre }))

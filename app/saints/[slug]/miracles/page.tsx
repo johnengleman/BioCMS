@@ -26,9 +26,9 @@ import list from '../../../../components/candle/Reading/miracles.module.scss'
 
 import { NextPageProps } from '../../../../types/nextjs'
 
-// Built ahead of time and refreshed every five minutes. Saints not
+// Built ahead of time and refreshed every four minutes. Saints not
 // built yet are built on the first visit.
-export const revalidate = 300
+export const revalidate = 240
 export const generateStaticParams = async () =>
   (await getSaintSlugs()).map((slug) => ({ slug }))
 
