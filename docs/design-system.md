@@ -92,10 +92,7 @@ Ink is for reading. Wine is for actions. Gold is for small details. Keep gold ra
   - It has a fixed 16:10 image, so photographs and icons look like one set.
   - Below the image: the role and country, the name, the full `summary` (written when the entry is created), and Feast, Lived, and Church.
 - **`SaintsListClient`:** the masonic waterfall, with up to 4 columns and 22px gaps (14px on phones). It inserts `AppCard` as the seventh item.
-- **`SaintHero`:** the top of a saint page. Its layout follows the number of images:
-  - 1 image: the portrait is shown whole on a beige panel.
-  - 2 or 3 images: a large photo with the name on it.
-  - 4 or more: a large photo and four small ones.
+- **`SaintHero`:** the top of a saint page. Always one layout (decided 2026-10-02): the profile portrait shown whole on a beige panel, with the name, summary and actions beside it. Other images never change the top; they appear in the Images tab and section further down.
   - The line above the name is role · place · years. One button, "Read the life", plus share. No stats bar under the hero.
 - **Saint page body (2026-10-02):** tabs, then "The story" (chapter list) with the side card beside it. The side card is NOT sticky and ends with the story: feast day, novenas, "Pray in the app", then the facts (patron, born, died, venerated, relics). Each fact appears only here. The sections after the story (Miracles, Prayers, Teachings, Quotes, Relics, Images) use the full width, reading text capped at 760 px. Section titles are one short word matching the tab, with no small label above and no helper sentence. Below 1100 px the card comes before the story and drops the feast and app button, which are in the phone's bottom bar.
 - **`StatusPill`:** the miracle labels. The kind comes from `statusKind()` in `utils/saintContent.ts`:

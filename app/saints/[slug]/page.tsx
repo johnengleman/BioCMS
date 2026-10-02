@@ -188,8 +188,7 @@ const SaintPage = async (props: NextPageProps) => {
 
         <SaintHero
           name={data.name}
-          images={images}
-          place={place}
+          image={image}
           kicker={[role, place, years].filter(Boolean).join(' · ')}
           summary={summaryText}
           actions={
