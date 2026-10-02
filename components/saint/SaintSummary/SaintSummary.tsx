@@ -1,113 +1,119 @@
 import Link from 'next/link'
-import Image from 'next/image'
-import { splitSaintName } from '../../../utils/saintNames'
+import {
+  churchLabel,
+  daysUntilFeast,
+  feastFor,
+  feastShort,
+  placeLabel,
+  roleLabel,
+  yearsLabel,
+} from '../../../utils/saintCard'
 import styles from './styles.module.scss'
 
-const MONTHS = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-]
+const ArrowIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    aria-hidden="true"
+  >
+    <path d="M7 17L17 7M9 7h8v8" />
+  </svg>
+)
 
-// Reads "2000-07-02" as text, so the day never shifts with time zones.
-const formatFeast = (date?: string | null) => {
-  const match = date?.match(/^\d{4}-(\d{2})-(\d{2})/)
-  return match
-    ? `${MONTHS[Number(match[1]) - 1]} ${Number(match[2])}`
-    : ''
+const badgeFor = (saint, feast: string | null | undefined) => {
+  const days = daysUntilFeast(feast)
+  if (days === 0) return { label: 'Feast today', feast: true }
+  if (days !== null && days <= 7)
+    return { label: 'Feast this week', feast: false }
+  if (saint.death_year >= 1900)
+    return { label: '20th century', feast: false }
+  return null
 }
 
-// A saint in the waterfall (Candlelight design): the icon in a slim
-// gilded frame, then the feast date, name, years and a short summary.
-const SaintSummary = ({ data }) => {
-  const {
-    name,
-    birth_year,
-    death_year,
-    profile_image,
-    summary,
-    feast_day_catholic,
-    feast_day_orthodox,
-    slug,
-    priority,
-  } = data || {}
-
-  const feast =
-    formatFeast(feast_day_catholic) ||
-    formatFeast(feast_day_orthodox)
-  const years =
-    birth_year || death_year
-      ? `${birth_year || '?'}–${death_year || '?'}`
-      : ''
-  // Long names: "St. John Maximovitch" large, "of Shanghai and San
-  // Francisco" small. Short names ("St. Thérèse of Lisieux") stay whole.
-  const LONG_NAME = 28
-  const parts = splitSaintName(name)
-  const title =
-    name?.length > LONG_NAME ? parts.title : name
-  const place =
-    name?.length > LONG_NAME ? parts.subtitle : ''
-
-  // Keep each icon's own shape, within limits, so cards vary in height.
-  const ratio =
-    profile_image?.width && profile_image?.height
-      ? Math.min(
-          1.5,
-          Math.max(
-            0.9,
-            profile_image.height / profile_image.width,
-          ),
-        )
-      : 1.25
+// A saint in the waterfall ("Travel" design): a dark card with a fixed
+// 16:10 image at the top, so photographs and icons look like one set.
+// Below it: role and place, the name, the saint's summary, and three
+// facts. Also used for "Related saints".
+const SaintSummary = ({
+  data,
+  church,
+}: {
+  data: any
+  church?: string
+}) => {
+  const saint = data || {}
+  const { name, profile_image, summary, slug } = saint
+  const feast = feastFor(saint, church)
+  const badge = badgeFor(saint, feast)
+  const kicker = [roleLabel(saint.categories), placeLabel(saint)]
+    .filter(Boolean)
+    .join(' · ')
+  const facts = [
+    { label: 'Feast', value: feastShort(feast) },
+    {
+      label: 'Lived',
+      value: yearsLabel(saint.birth_year, saint.death_year),
+    },
+    { label: 'Church', value: churchLabel(saint.venerated_in) },
+  ].filter((fact) => fact.value)
+  const position =
+    profile_image?.metadata?.object_position || 'center 22%'
 
   return (
     <Link
-      className={styles.saintSummary}
+      className={styles.card}
       href={`/saints/${slug}`}
     >
-      {profile_image?.id && (
-        <div className={styles.frame}>
-          <Image
+      <div className={styles.photo}>
+        {profile_image?.id && (
+          // Directus resizes the image; next/image is unoptimized.
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${profile_image.id}?width=720&format=webp&quality=80`}
             alt={
+              profile_image?.metadata?.alt_text ||
               profile_image?.description ||
-              `Image of the saint ${name}`
+              `Image of ${name}`
             }
-            src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${profile_image?.id}?width=500&format=webp&quality=80`}
-            width={400}
-            height={Math.round(400 * ratio)}
-            style={{ aspectRatio: `1 / ${ratio}` }}
-            priority={priority}
+            width={720}
+            height={450}
+            loading="lazy"
+            style={{ objectPosition: position }}
           />
-        </div>
-      )}
-      <div className={styles.bioContainer}>
-        {feast && (
-          <div className={styles.feast}>{feast}</div>
         )}
-        <div className={styles.name}>{title}</div>
-        {place && (
-          <div className={styles.place}>{place}</div>
+        {badge && (
+          <span
+            className={`${styles.badge} ${badge.feast ? styles.feastBadge : ''}`}
+          >
+            {badge.label}
+          </span>
         )}
-        {years && (
-          <div className={styles.years}>{years}</div>
-        )}
+      </div>
+      <div className={styles.body}>
+        {kicker && <div className={styles.kicker}>{kicker}</div>}
+        <h3 className={styles.name}>{name}</h3>
         {summary && (
           <div
             className={styles.summary}
-            dangerouslySetInnerHTML={{
-              __html: summary,
-            }}
-          ></div>
+            dangerouslySetInnerHTML={{ __html: summary }}
+          />
         )}
+        <div className={styles.facts}>
+          {facts.map((fact) => (
+            <div key={fact.label}>
+              <small>{fact.label}</small>
+              <span>{fact.value}</span>
+            </div>
+          ))}
+          <span className={styles.go}>
+            <ArrowIcon />
+          </span>
+        </div>
       </div>
     </Link>
   )

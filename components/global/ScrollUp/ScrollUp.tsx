@@ -35,8 +35,7 @@ const ScrollUp = () => {
       <FaArrowDown
         style={{
           transform: 'rotate(180deg)',
-          fontSize: '22px',
-          color: 'var(--wine)',
+          fontSize: '15px',
         }}
         aria-hidden="true"
       />

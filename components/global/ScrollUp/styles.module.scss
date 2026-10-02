@@ -1,35 +1,44 @@
-@use './../../../styles/breakpoints.scss' as breakpoints;
-
+// "Back to top": a small round espresso button, bottom right.
 .btn {
   position: fixed;
-  right: 30px;
-  bottom: 30px;
-  border-radius: 7px;
-  padding: 10px 15px;
-  border: 1px solid var(--line);
-  background: var(--parchment-light);
+  right: 20px;
+  bottom: 20px;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--espresso);
+  color: var(--on-dark);
+  box-shadow: var(--shadow-lg);
   cursor: pointer;
   opacity: 0;
-  transition: all 0.2s ease-in-out;
-  z-index: 1000;
-  box-shadow: var(--shadow-md);
-
-  @include breakpoints.breakpoint(tablet) {
-    bottom: 100px;
-    right: 50px;
-    padding: 15px 20px;
-    border-radius: 10px;
-  }
+  pointer-events: none;
+  transform: translateY(8px);
+  transition:
+    opacity 0.2s var(--ease),
+    transform 0.2s var(--ease),
+    background-color 0.2s var(--ease);
 
   &:hover {
-    transform: scale(1.05);
+    background: var(--wine);
   }
 
-  &:active {
-    transform: scale(1.1);
+  &:focus-visible {
+    outline: 2px solid var(--wine);
+    outline-offset: 2px;
   }
 
   &.inView {
     opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  @media (min-width: 768px) {
+    right: 32px;
+    bottom: 32px;
   }
 }

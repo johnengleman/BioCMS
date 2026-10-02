@@ -1,0 +1,160 @@
+@use '../../../styles/candle.scss' as candle;
+
+.shell {
+  @include candle.container;
+  padding-top: 14px;
+
+  @media (max-width: 767px) {
+    padding: 0;
+  }
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 580px;
+  overflow: hidden;
+  border-radius: var(--radius-3xl);
+  color: var(--on-dark);
+
+  // Darker at the top (for the header) and the bottom (for filters).
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      180deg,
+      rgba(28, 18, 14, 0.52) 0%,
+      rgba(28, 18, 14, 0.08) 26%,
+      rgba(28, 18, 14, 0.1) 52%,
+      rgba(28, 18, 14, 0.7) 100%
+    );
+  }
+
+  @media (max-width: 767px) {
+    min-height: 0;
+    border-radius: 0 0 var(--radius-3xl) var(--radius-3xl);
+  }
+}
+
+.short {
+  min-height: 440px;
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--espresso);
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.previous {
+  z-index: 0;
+}
+
+.fadeIn {
+  z-index: 1;
+  animation: fade-in 0.8s var(--ease) both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.credit {
+  position: absolute;
+  top: 90px;
+  right: 24px;
+  z-index: 1;
+  font-size: 11px;
+  color: rgba(255, 246, 234, 0.6);
+
+  &:hover {
+    color: var(--on-dark);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 767px) {
+    top: auto;
+    bottom: 4px;
+    right: 16px;
+    font-size: 10px;
+  }
+}
+
+.middle {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--header-h) + 36px) var(--space-6) var(--space-6);
+  text-align: center;
+
+  @media (max-width: 767px) {
+    padding: calc(var(--header-h) + 12px) var(--space-4) var(--space-5);
+  }
+}
+
+.title {
+  @include candle.title(clamp(46px, 6.6vw, 80px), 500);
+  margin: 18px 0 12px;
+  color: var(--on-dark);
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+  text-shadow: 0 2px 30px rgba(20, 10, 6, 0.35);
+}
+
+.short .title {
+  font-size: clamp(44px, 5.6vw, 68px);
+}
+
+.subtitle {
+  max-width: 580px;
+  color: rgba(255, 246, 234, 0.92);
+  font-size: 17px;
+  line-height: 1.5;
+  text-shadow: 0 1px 12px rgba(20, 10, 6, 0.4);
+
+  @media (max-width: 767px) {
+    font-size: 14.5px;
+  }
+}
+
+.search {
+  width: min(760px, 100%);
+  margin-top: 30px;
+
+  @media (max-width: 767px) {
+    margin-top: 22px;
+  }
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 22px 20px;
+
+  @media (max-width: 767px) {
+    padding: 0 0 16px 16px;
+  }
+}

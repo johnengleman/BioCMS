@@ -89,14 +89,18 @@ function getSaintsQuery(church, filter, saintPreset, sort) {
         name
         summary
         categories
+        venerated_in
         birth_year
         death_year
+        birth_location
+        death_location
         feast_day_catholic
         feast_day_orthodox
         profile_image {
           id
           width
           height
+          metadata
         }
       }
     }

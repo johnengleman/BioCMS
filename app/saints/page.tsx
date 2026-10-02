@@ -6,10 +6,14 @@ import { properties } from '../../utils/properties'
 import SaintsListClient from '../../components/saint/SaintsList/SaintsListClient'
 import SiteHeader from '../../components/candle/SiteHeader/SiteHeader'
 import SiteFooter from '../../components/candle/SiteFooter/SiteFooter'
-import PhotoHero from '../../components/candle/PhotoHero/PhotoHero'
-import TraditionControl from '../../components/candle/TraditionControl/TraditionControl'
+import HomeHero from '../../components/candle/HomeHero/HomeHero'
 import FilterPills from '../../components/candle/FilterPills/FilterPills'
 import PillMenu from '../../components/candle/PillMenu/PillMenu'
+import CategoryIcon from '../../components/candle/CategoryIcon/CategoryIcon'
+import Search from '../../components/page/Search/Search.server'
+import { getTodaysFeast } from '../../queries/getTodaysFeast'
+import TodaysFeast from '../../components/candle/TodaysFeast/TodaysFeast'
+import { CHURCH_LABELS, asChurch } from '../../utils/site'
 import styles from './candle.module.scss'
 
 export const runtime = 'edge'
@@ -57,6 +61,14 @@ const PRESETS = [
   { value: 'patron_saints', label: 'Patron Saints' },
 ]
 
+const SUBTITLES = {
+  all: 'The lives, miracles, and prayers of the Catholic and Orthodox saints. Every fact has its source.',
+  catholic:
+    'The lives, miracles, and prayers of the saints of the Catholic Church. Every fact has its source.',
+  orthodox:
+    'The lives, miracles, and prayers of the saints of the Orthodox Church. Every fact has its source.',
+}
+
 const SORTS = [
   { value: 'created-newest', label: 'Newest' },
   { value: 'created-oldest', label: 'Oldest added' },
@@ -79,7 +91,7 @@ const Saints = async (props: NextPageProps) => {
     sort: searchParams.sort || 'created-newest',
   }
 
-  const [initialSaints, filterCounts] = await Promise.all([
+  const [initialSaints, filterCounts, todays] = await Promise.all([
     getSaints({
       church,
       filter: current.filter,
@@ -89,10 +101,14 @@ const Saints = async (props: NextPageProps) => {
       limit: 30,
     }),
     getSaintFilters({ church }),
+    getTodaysFeast(church),
   ])
-  const counts = filterCounts?.[church] || {}
+  const counts: any = filterCounts?.[church] || {}
   const countOf = (key: string) =>
     counts.none?.[key]?.[0]?.count?.id || 0
+  const total = counts.none?.all_all?.[0]?.count?.id || 0
+  const presetCount = (preset: string) =>
+    counts[preset]?.[`all_${preset}`]?.[0]?.count?.id || 0
 
   // One row: All, the presets, then every category that has saints.
   // A preset and a category are not combined; choosing one clears
@@ -105,6 +121,8 @@ const Saints = async (props: NextPageProps) => {
     {
       key: 'all',
       label: 'All',
+      count: total,
+      icon: <CategoryIcon name="all" />,
       href: hrefWith(current, {
         preset: 'none',
         filter: 'all',
@@ -113,9 +131,14 @@ const Saints = async (props: NextPageProps) => {
         current.preset === 'none' &&
         current.filter === 'all',
     },
-    ...PRESETS.map((p) => ({
+    ...PRESETS.filter(
+      (p) =>
+        presetCount(p.value) > 0 || current.preset === p.value,
+    ).map((p) => ({
       key: p.value,
       label: p.label,
+      count: presetCount(p.value),
+      icon: <CategoryIcon name={p.value} />,
       href: hrefWith(current, {
         preset: p.value,
         filter: 'all',
@@ -131,6 +154,8 @@ const Saints = async (props: NextPageProps) => {
       .map((c) => ({
         key: c.toLowerCase(),
         label: label(c),
+        count: countOf(c),
+        icon: <CategoryIcon name={c} />,
         href: hrefWith(current, {
           preset: 'none',
           filter: c.toLowerCase(),
@@ -164,58 +189,76 @@ const Saints = async (props: NextPageProps) => {
     selected: current.sort === s.value,
   }))
 
+  const tradition = asChurch(church)
+
   return (
-    <>
-      <div className={styles.page}>
-        <SiteHeader
-          searchParams={searchParams}
-          active="/saints"
-        />
-        <main>
-          <PhotoHero>
-            <div className={styles.titleRow}>
-              <div>
-                <h1 className={styles.title}>Saints</h1>
-                <p className={styles.subtitle}>
-                  Lives, miracles and prayers of the
-                  Catholic and Orthodox saints.
-                </p>
-              </div>
-              <div className={styles.tradition}>
-                <TraditionControl church={church} />
-              </div>
-            </div>
-            <div className={styles.toolbar}>
-              <FilterPills
-                label="Filter saints"
-                pills={pills}
-              />
-              <div className={styles.menus}>
-                <PillMenu
-                  label="Feast"
-                  options={monthOptions}
-                />
-                <PillMenu
-                  label="Sort"
-                  options={sortOptions}
-                />
-              </div>
-            </div>
-          </PhotoHero>
-          <div className={styles.list}>
-            <SaintsListClient
-              key={`${church}-${current.filter}-${current.preset}-${current.sort}`}
-              initialSaints={initialSaints}
-              filter={current.filter}
-              sort={current.sort}
-              saintPreset={current.preset}
+    <div className={styles.page}>
+      <SiteHeader
+        searchParams={searchParams}
+        active="/saints"
+        overlay
+      />
+      <main>
+        <HomeHero
+          church={church}
+          title="Discover the saints"
+          subtitle={SUBTITLES[tradition]}
+          eyebrow={
+            <TodaysFeast
+              saints={todays}
               church={church}
+              className={styles.today}
+            />
+          }
+          search={
+            <Search
+              searchParams={searchParams}
+              variant="hero"
+            />
+          }
+          filters={
+            <FilterPills
+              label="Filter saints"
+              pills={pills}
+              tone="glass"
+            />
+          }
+        />
+        <div className={styles.results}>
+          <div className={styles.count}>
+            <b>
+              {total.toLocaleString('en-US')}{' '}
+              {total === 1 ? 'saint' : 'saints'}
+            </b>
+            <span>
+              Showing {CHURCH_LABELS[tradition]} ·{' '}
+              <a href="#site-footer">Change</a>
+            </span>
+          </div>
+          <div className={styles.menus}>
+            <PillMenu
+              label="Feast"
+              options={monthOptions}
+            />
+            <PillMenu
+              label="Sort"
+              options={sortOptions}
             />
           </div>
-        </main>
-        <SiteFooter church={church} />
-      </div>
-    </>
+        </div>
+        <div className={styles.list}>
+          <SaintsListClient
+            key={`${church}-${current.filter}-${current.preset}-${current.sort}`}
+            initialSaints={initialSaints}
+            filter={current.filter}
+            sort={current.sort}
+            saintPreset={current.preset}
+            church={church}
+          />
+        </div>
+      </main>
+      <SiteFooter church={church} />
+    </div>
   )
 }
 

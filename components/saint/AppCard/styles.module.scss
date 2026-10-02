@@ -1,0 +1,81 @@
+@use '../../../styles/candle.scss' as candle;
+
+.card {
+  overflow: hidden;
+  padding: 28px 26px 0;
+  border-radius: var(--radius-2xl);
+  background: linear-gradient(160deg, #efe2cc 0%, #e6d4b8 100%);
+  box-shadow: var(--shadow-card);
+}
+
+.kicker {
+  @include candle.eyebrow;
+}
+
+.title {
+  @include candle.title(36px, 500);
+  margin: 10px 0 12px;
+}
+
+.text {
+  max-width: 280px;
+  color: var(--ink-2);
+  font-size: 14.5px;
+  line-height: 1.55;
+}
+
+.button {
+  @include candle.button-dark;
+  margin: 20px 0 24px;
+}
+
+.phone {
+  width: 78%;
+  margin: 0 auto;
+  padding: 20px 14px;
+  aspect-ratio: 9 / 9;
+  border: 7px solid #1e1715;
+  border-bottom: 0;
+  border-radius: 30px 30px 0 0;
+  background: var(--bg);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.18);
+}
+
+.phoneTitle {
+  @include candle.title(18px, 600);
+}
+
+.phoneSub {
+  margin-top: 3px;
+  font-size: 10px;
+  color: var(--ink-3);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 11px;
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+
+  i {
+    flex: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    background: var(--wine-tint);
+  }
+
+  b {
+    display: block;
+    font-size: 11px;
+  }
+
+  span {
+    font-size: 10px;
+    color: var(--ink-2);
+  }
+}

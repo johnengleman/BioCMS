@@ -9,9 +9,16 @@ import { Saint } from '../../saint/SaintSummary/interfaces'
 import { useOnClickOutside } from 'usehooks-ts'
 import styles from './styles.module.scss'
 
-// Saint search in the header: a field with a drop-down of results.
+// Saint search: a field with a drop-down of results. The header uses
+// the compact field; the home page photo uses `variant="hero"`.
 // Keyboard: arrows move, Enter opens, Escape clears.
-const SearchClient = ({ searchData }) => {
+const SearchClient = ({
+  searchData,
+  variant = 'compact',
+}: {
+  searchData: any
+  variant?: 'compact' | 'hero'
+}) => {
   const ref = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const listId = useId()
@@ -92,14 +99,21 @@ const SearchClient = ({ searchData }) => {
   return (
     <div
       ref={ref}
-      className={styles.search}
+      className={`${styles.search} ${variant === 'hero' ? styles.hero : ''}`}
     >
       <div className={styles.searchContainer}>
         <div className={styles.inputWrapper}>
+          {variant === 'hero' && (
+            <span className={styles.heroLabel}>Find a saint</span>
+          )}
           <input
             type="search"
             className={styles.input}
-            placeholder="Search for saints"
+            placeholder={
+              variant === 'hero'
+                ? 'Search by name, such as Francis'
+                : 'Search for saints'
+            }
             aria-label="Search for saints"
             role="combobox"
             aria-expanded={open}
@@ -118,6 +132,14 @@ const SearchClient = ({ searchData }) => {
             onKeyDown={onKeyDown}
           />
           <FaSearch aria-hidden="true" />
+          {variant === 'hero' && (
+            <span
+              className={styles.heroButton}
+              aria-hidden="true"
+            >
+              <FaSearch />
+            </span>
+          )}
         </div>
       </div>
       {open && (

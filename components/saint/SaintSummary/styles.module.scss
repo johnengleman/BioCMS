@@ -1,120 +1,159 @@
-@use './../../../styles/candle.scss' as candle;
+@use '../../../styles/candle.scss' as candle;
 
-// Saint card, Candlelight design (docs/design-system.md).
-.saintSummary {
-  @include candle.card;
-  @include candle.focus-ring;
+// The dark story card. The image is a fixed 16:10 crop, so every card
+// starts the same way; the text sets the card's height.
+.card {
+  position: relative;
   display: block;
-  width: 100%;
-  padding: 10px 10px var(--space-4);
-  color: var(--ink);
-  text-decoration: none;
-  @include candle.transition(transform, box-shadow);
-
-  @media (min-width: 768px) {
-    padding: 12px 12px var(--space-5);
-  }
+  padding: 10px;
+  border-radius: var(--radius-2xl);
+  background: var(--card-dark);
+  color: var(--card-dark-ink);
+  box-shadow:
+    0 2px 6px hsla(20, 30%, 10%, 0.08),
+    0 18px 40px -20px hsla(20, 35%, 10%, 0.45),
+    inset 0 0 0 1px var(--card-dark-line);
+  @include candle.transition(box-shadow, transform);
+  @include candle.focus-ring;
 
   &:hover {
     transform: translateY(-3px);
-    box-shadow: var(--shadow-lift);
+    box-shadow:
+      0 4px 10px hsla(20, 30%, 10%, 0.1),
+      0 28px 56px -22px hsla(20, 35%, 10%, 0.55),
+      inset 0 0 0 1px var(--card-dark-line);
 
-    .name {
-      color: var(--wine);
+    .photo img {
+      transform: scale(1.04);
+    }
+
+    .go {
+      background: var(--wine);
+      color: var(--on-dark);
     }
   }
 }
 
-.frame {
-  @include candle.gilt-frame;
+.photo {
+  position: relative;
+  aspect-ratio: 16 / 10;
   overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--espresso-2);
 
   img {
-    display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
-    object-position: top;
-    background: var(--cream-deep);
+    transition: transform 0.8s var(--ease);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    pointer-events: none;
   }
 }
 
-.bioContainer {
-  padding: var(--space-3) var(--space-1) 0;
-
-  @media (min-width: 768px) {
-    padding: var(--space-4) var(--space-2) 0;
-  }
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 11px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 250, 243, 0.86);
+  color: var(--ink);
+  font-size: 11.5px;
+  font-weight: 700;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.feast {
-  @include candle.eyebrow;
+.feastBadge {
+  background: var(--wine);
+  color: var(--on-dark);
+}
+
+.body {
+  padding: 18px 12px 6px;
+}
+
+.kicker {
   font-size: 11px;
-
-  @media (min-width: 768px) {
-    font-size: 12px;
-  }
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--card-dark-ink-3);
 }
 
 .name {
-  margin-top: var(--space-1);
-  font-family: var(--font-display);
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.2;
+  @include candle.title(28px, 600);
+  margin-top: 6px;
+  color: var(--card-dark-ink);
+  line-height: 1.04;
   letter-spacing: -0.01em;
-  color: var(--ink);
-  @include candle.transition(color);
 
-  @media (min-width: 768px) {
-    font-size: 23px;
-  }
-}
-
-.place {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-style: italic;
-  line-height: 1.3;
-  color: var(--taupe);
-
-  @media (min-width: 768px) {
-    font-size: 16px;
-  }
-}
-
-.years {
-  margin-top: 2px;
-  font-family: var(--font-display);
-  font-size: 14px;
-  color: var(--taupe);
-  font-variant-numeric: lining-nums;
-
-  @media (min-width: 768px) {
-    font-size: 16px;
+  @media (max-width: 767px) {
+    font-size: 26px;
   }
 }
 
 .summary {
-  margin-top: var(--space-2);
-  font-family: var(--font-display);
-  font-size: 14px;
-  line-height: 1.45;
-  color: var(--taupe);
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  @include candle.reading(15.5px);
+  margin-top: 12px;
+  line-height: 1.6;
+  color: var(--card-dark-ink-2);
 
-  @media (min-width: 768px) {
-    font-size: 16px;
+  p + p {
+    margin-top: 0.6em;
   }
 
-  p,
-  ul,
-  li {
-    display: inline;
-    margin: 0;
-    padding: 0;
+  // Phones show one column; keep long summaries short there.
+  @media (max-width: 639px) {
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
+}
+
+.facts {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--card-dark-line);
+
+  small {
+    display: block;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--card-dark-ink-3);
+  }
+
+  span {
+    display: block;
+    margin-top: 2px;
+    font-size: 13px;
+    font-weight: 650;
+    white-space: nowrap;
+  }
+}
+
+.go {
+  display: grid !important;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  margin: 0 0 0 auto !important;
+  flex: none;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 246, 234, 0.07);
+  @include candle.transition(background-color, color);
 }

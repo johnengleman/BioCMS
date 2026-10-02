@@ -6,13 +6,9 @@
   min-width: 0;
   overflow-x: auto;
   scrollbar-width: none;
-  // Room for the pill shadows, and a fade where the row continues.
-  padding: 2px 2px 6px;
-  mask-image: linear-gradient(
-    to right,
-    #000 88%,
-    transparent
-  );
+  padding: 2px;
+  // A fade where the row continues.
+  mask-image: linear-gradient(to right, #000 88%, transparent);
   -webkit-mask-image: linear-gradient(
     to right,
     #000 88%,
@@ -31,5 +27,52 @@
   .selected,
   .selected:hover {
     @include candle.pill-selected;
+
+    .count {
+      color: var(--on-dark-2);
+    }
+  }
+}
+
+.icon {
+  display: inline-flex;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.count {
+  font-style: normal;
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+// On a hero photo.
+.glass {
+  a {
+    @include candle.glass;
+
+    &:hover {
+      border-color: rgba(255, 246, 234, 0.4);
+      background: rgba(255, 246, 234, 0.22);
+      color: var(--on-dark);
+    }
+  }
+
+  .count {
+    color: rgba(255, 246, 234, 0.65);
+  }
+
+  .selected,
+  .selected:hover {
+    border-color: transparent;
+    background: var(--on-dark);
+    color: var(--ink);
+
+    .count {
+      color: var(--ink-3);
+    }
   }
 }

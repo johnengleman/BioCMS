@@ -4,79 +4,90 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: var(--cream);
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-display);
 
   > main {
     flex: 1;
   }
 }
 
-.titleRow {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-5);
+// "Feast of St. Thérèse of Lisieux  [Today]" on the photo.
+.today {
+  @include candle.glass;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 7px 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  @include candle.focus-ring;
 
-  @media (min-width: 900px) {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
+  b {
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--on-dark);
+    color: var(--wine);
+    font-size: 12px;
+  }
+
+  &:hover {
+    background: rgba(255, 246, 234, 0.22);
+  }
+
+  @media (max-width: 767px) {
+    font-size: 12px;
   }
 }
 
-.title {
-  @include candle.page-title;
-}
-
-.subtitle {
-  margin-top: var(--space-3);
-  font-family: var(--font-display);
-  font-size: clamp(17px, 2vw, 22px);
-  line-height: 1.35;
-  color: var(--ink);
-}
-
-.tradition {
-  flex-shrink: 0;
-
-  @media (min-width: 900px) {
-    width: 400px;
-  }
-}
-
-.toolbar {
+.results {
+  @include candle.container;
   display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  margin-top: var(--space-6);
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3) var(--space-4);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-5);
+}
 
-  @media (min-width: 900px) {
-    flex-direction: row;
-    align-items: center;
-    gap: var(--space-4);
-    margin-top: var(--space-8);
+.count {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-3);
+
+  b {
+    @include candle.title(30px, 600);
+  }
+
+  span {
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+
+  a {
+    color: var(--wine);
+    font-weight: 650;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  @media (max-width: 767px) {
+    width: 100%;
+
+    b {
+      font-size: 24px;
+    }
   }
 }
 
 .menus {
   display: flex;
   gap: var(--space-2);
-
-  @media (min-width: 900px) {
-    margin-left: auto;
-  }
 }
 
 .list {
   @include candle.container;
-  margin-top: var(--space-6);
-
-  @media (min-width: 768px) {
-    margin-top: var(--space-8);
-  }
-}
-
-.toolbar > nav {
-  flex: 1;
 }
