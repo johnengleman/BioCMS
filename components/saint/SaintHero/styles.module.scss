@@ -176,7 +176,7 @@
   grid-template-columns: auto minmax(0, 1fr);
   gap: 60px;
   align-items: center;
-  padding: 48px 60px 92px;
+  padding: 48px 60px;
   overflow: hidden;
   border-radius: var(--radius-3xl);
   background: var(--panel);
@@ -280,7 +280,7 @@
 @media (min-width: 768px) and (max-width: 1099px) {
   .single {
     gap: 32px;
-    padding: 36px 36px 84px;
+    padding: 36px;
   }
 
   .portrait {

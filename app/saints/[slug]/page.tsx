@@ -3,17 +3,10 @@ import { saintMetadata } from '../../../utils/saintMetadata'
 import Link from 'next/link'
 import {
   LuArrowRight,
-  LuBookOpen,
-  LuCalendarHeart,
   LuChevronRight,
-  LuGlobe,
   LuHandHeart,
-  LuHourglass,
-  LuLibrary,
   LuMapPin,
   LuSmartphone,
-  LuSparkles,
-  LuStar,
 } from 'react-icons/lu'
 import { getSaint } from '../../../queries/getSaint'
 import { getSaintSlugs } from '../../../queries/getSaintSlugs'
@@ -22,8 +15,6 @@ import {
   formatFeast,
   getChapters,
   getMiracleBook,
-  getSources,
-  isApproved,
   plainText,
 } from '../../../utils/saintContent'
 import {
@@ -66,9 +57,6 @@ const formatCategory = (value: string) =>
     .replace(/\b\w/g, (c) => c.toUpperCase())
     .replace(/\b(Of|The)\b/g, (w) => w.toLowerCase())
 
-const plural = (n: number, one: string, many: string) =>
-  `${n.toLocaleString('en-US')} ${n === 1 ? one : many}`
-
 const SaintPage = async (props: NextPageProps) => {
   const { slug } = await props.params
 
@@ -82,10 +70,6 @@ const SaintPage = async (props: NextPageProps) => {
     data.birth_year || data.death_year
       ? `${data.birth_year || '?'}–${data.death_year || '?'}`
       : ''
-  const lifespan =
-    data.birth_year && data.death_year
-      ? `Lived ${data.death_year - data.birth_year} years`
-      : 'Lifetime'
 
   const catholicFeast = formatFeast(data.feast_day_catholic)
   const orthodoxFeast = formatFeast(data.feast_day_orthodox)
@@ -102,10 +86,8 @@ const SaintPage = async (props: NextPageProps) => {
     catholicFeast && orthodoxFeast && catholicFeast !== orthodoxFeast
 
   const chapters = getChapters(data.biography)
-  const sources = getSources(data.biography)
   const miracleBook = getMiracleBook(data.miracles?.[0]?.miracles)
   const miracles = miracleBook.groups.flatMap((g) => g.entries)
-  const approved = miracles.filter((m) => isApproved(m.status)).length
   const groups = miracleBook.groups.filter(
     (g) => g.title && g.entries.length,
   )
@@ -129,51 +111,6 @@ const SaintPage = async (props: NextPageProps) => {
   const tradition = churchLabel(data.venerated_in)
   const summaryText = plainText(data.summary)
 
-  // The bar of figures over the bottom of the photo.
-  const stats = [
-    hasFeast && {
-      icon: <LuCalendarHeart />,
-      value: feastValue,
-      label: 'Feast day',
-    },
-    years && {
-      icon: <LuHourglass />,
-      value: years,
-      label: lifespan,
-    },
-    miracles.length
-      ? {
-          icon: <LuSparkles />,
-          value: miracles.length.toLocaleString('en-US'),
-          label: approved
-            ? `Miracle accounts · ${approved} approved`
-            : 'Miracle accounts',
-          href: `${base}/miracles`,
-        }
-      : chapters.length
-        ? {
-            icon: <LuBookOpen />,
-            value: chapters.length,
-            label: 'Chapters in the life',
-            href: `${base}/biography`,
-          }
-        : null,
-    sources.count
-      ? {
-          icon: <LuLibrary />,
-          value: sources.count,
-          label: 'Sources cited',
-          href: `${base}/biography#${sources.id}`,
-        }
-      : null,
-  ].filter(Boolean) as {
-    icon: React.ReactNode
-    value: React.ReactNode
-    label: string
-    href?: string
-  }[]
-
-  // Jump links to the sections below and the reading pages.
   const tabs = [
     { href: '#story', label: 'Life' },
     miracles.length && {
@@ -203,37 +140,6 @@ const SaintPage = async (props: NextPageProps) => {
       count: images.length,
     },
   ].filter(Boolean) as { href: string; label: string; count?: number }[]
-
-  // Facts as icon rows.
-  const highlights = [
-    data.patron && {
-      icon: <LuStar />,
-      title: 'Patron',
-      text: data.patron,
-    },
-    data.birth_location && {
-      icon: <LuMapPin />,
-      title: data.birth_year ? `Born ${data.birth_year}` : 'Born',
-      text: data.birth_location,
-    },
-    data.death_location && {
-      icon: <LuMapPin />,
-      title: data.death_year ? `Died ${data.death_year}` : 'Died',
-      text: data.death_location,
-    },
-    tradition && {
-      icon: <LuGlobe />,
-      title: 'Venerated',
-      text:
-        tradition === 'Both'
-          ? 'In the Catholic and Orthodox Churches'
-          : `In the ${tradition} Church`,
-    },
-  ].filter(Boolean) as {
-    icon: React.ReactNode
-    title: string
-    text: string
-  }[]
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -284,7 +190,7 @@ const SaintPage = async (props: NextPageProps) => {
           name={data.name}
           images={images}
           place={place}
-          kicker={[role, place].filter(Boolean).join(' · ')}
+          kicker={[role, place, years].filter(Boolean).join(' · ')}
           summary={summaryText}
           actions={
             <>
@@ -296,57 +202,9 @@ const SaintPage = async (props: NextPageProps) => {
                   Read the life
                 </Link>
               )}
-              {miracles.length > 0 && (
-                <Link
-                  href={`${base}/miracles`}
-                  className={styles.secondary}
-                >
-                  See the miracles
-                </Link>
-              )}
             </>
           }
         />
-
-        {stats.length > 0 && (
-          <div
-            className={styles.stats}
-            style={{ '--n': stats.length } as React.CSSProperties}
-          >
-            {stats.map((s) => {
-              const body = (
-                <>
-                  <span
-                    className={styles.statIcon}
-                    aria-hidden="true"
-                  >
-                    {s.icon}
-                  </span>
-                  <span>
-                    <b>{s.value}</b>
-                    <small>{s.label}</small>
-                  </span>
-                </>
-              )
-              return s.href ? (
-                <Link
-                  key={s.label}
-                  href={s.href}
-                  className={styles.stat}
-                >
-                  {body}
-                </Link>
-              ) : (
-                <div
-                  key={s.label}
-                  className={styles.stat}
-                >
-                  {body}
-                </div>
-              )
-            })}
-          </div>
-        )}
 
         <nav
           className={styles.tabs}
@@ -366,53 +224,14 @@ const SaintPage = async (props: NextPageProps) => {
 
         <div className={styles.layout}>
           <div className={styles.content}>
-            {highlights.length > 0 && (
-              <section className={styles.block}>
-                <div className={styles.highlights}>
-                  {highlights.map((h) => (
-                    <div key={h.title}>
-                      <span
-                        className={styles.hlIcon}
-                        aria-hidden="true"
-                      >
-                        {h.icon}
-                      </span>
-                      <div>
-                        <b>{h.title}</b>
-                        <span>{h.text}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
-
             <section
               className={styles.block}
               id="story"
               aria-labelledby="story-title"
             >
               <div className={styles.blockHead}>
-                <div>
-                  <p className={styles.eyebrow}>Biography</p>
-                  <h2 id="story-title">The story</h2>
-                </div>
-                {chapters.length > 0 && (
-                  <p>
-                    {plural(chapters.length, 'chapter', 'chapters')}
-                    {sources.count
-                      ? `, with ${plural(sources.count, 'source', 'sources')}`
-                      : ''}
-                    .
-                  </p>
-                )}
+                <h2 id="story-title">The story</h2>
               </div>
-              {data.summary && (
-                <div
-                  className={styles.prose}
-                  dangerouslySetInnerHTML={{ __html: data.summary }}
-                />
-              )}
               {chapters.length > 0 && (
                 <>
                   <ol className={styles.chapters}>
@@ -440,6 +259,99 @@ const SaintPage = async (props: NextPageProps) => {
                 </>
               )}
             </section>
+          </div>
+
+          <aside className={styles.side}>
+            <div className={styles.sideCard}>
+              {hasFeast && (
+                <div className={styles.sideTop}>
+                  <div>
+                    <p className={styles.eyebrow}>Feast day</p>
+                    <b>{feastValue}</b>
+                    {bothFeasts && (
+                      <small>
+                        Catholic {catholicFeast} · Orthodox{' '}
+                        {orthodoxFeast}
+                      </small>
+                    )}
+                  </div>
+                </div>
+              )}
+              {prayers.length > 0 && (
+                <div className={styles.sidePrayers}>
+                  {prayers.slice(0, 4).map((p) => (
+                    <Link
+                      key={p.prayer_slug}
+                      href={`${base}/novenas/${p.prayer_slug}`}
+                    >
+                      <span
+                        className={styles.prayerIcon}
+                        aria-hidden="true"
+                      >
+                        <LuHandHeart />
+                      </span>
+                      <span>{p.prayer_title}</span>
+                      <LuChevronRight aria-hidden="true" />
+                    </Link>
+                  ))}
+                </div>
+              )}
+              <a
+                href={APP_URL}
+                className={styles.appButton}
+              >
+                <LuSmartphone aria-hidden="true" />
+                Pray in the app
+              </a>
+              <div className={styles.rows}>
+                {data.patron && (
+                  <div>
+                    <span>Patron of</span>
+                    <span>{data.patron}</span>
+                  </div>
+                )}
+                {data.birth_location && (
+                  <div>
+                    <span>Born</span>
+                    <span>
+                      {[data.birth_year, data.birth_location]
+                        .filter(Boolean)
+                        .join(', ')}
+                    </span>
+                  </div>
+                )}
+                {data.death_location && (
+                  <div>
+                    <span>Died</span>
+                    <span>
+                      {[data.death_year, data.death_location]
+                        .filter(Boolean)
+                        .join(', ')}
+                    </span>
+                  </div>
+                )}
+                {tradition && (
+                  <div>
+                    <span>Venerated</span>
+                    <span>
+                      {tradition === 'Both'
+                        ? 'Catholic and Orthodox'
+                        : tradition}
+                    </span>
+                  </div>
+                )}
+                {data.relic_location && (
+                  <div>
+                    <span>Relics</span>
+                    <span>{data.relic_location}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div className={styles.rest}>
 
             {miracles.length > 0 && (
               <section
@@ -448,20 +360,7 @@ const SaintPage = async (props: NextPageProps) => {
                 aria-labelledby="miracles-title"
               >
                 <div className={styles.blockHead}>
-                  <div>
-                    <p className={styles.eyebrow}>Miracles</p>
-                    <h2 id="miracles-title">
-                      {plural(
-                        miracles.length,
-                        'recorded account',
-                        'recorded accounts',
-                      )}
-                    </h2>
-                  </div>
-                  <p>
-                    Each account names its source and says how the
-                    Church treated it.
-                  </p>
+                  <h2 id="miracles-title">Miracles</h2>
                 </div>
                 {groups.length > 1 && (
                   <div className={styles.groups}>
@@ -528,10 +427,7 @@ const SaintPage = async (props: NextPageProps) => {
                 aria-labelledby="prayers-title"
               >
                 <div className={styles.blockHead}>
-                  <div>
-                    <p className={styles.eyebrow}>Prayers</p>
-                    <h2 id="prayers-title">Pray with {data.name}</h2>
-                  </div>
+                  <h2 id="prayers-title">Prayers</h2>
                 </div>
                 <div className={styles.prayerList}>
                   {prayers.map((p) => (
@@ -560,11 +456,7 @@ const SaintPage = async (props: NextPageProps) => {
                 aria-labelledby="teachings-title"
               >
                 <div className={styles.blockHead}>
-                  <div>
-                    <p className={styles.eyebrow}>Teachings</p>
-                    <h2 id="teachings-title">The teachings</h2>
-                  </div>
-                  <p>{plural(teachings.length, "theme", "themes")}, in the saint&apos;s own words.</p>
+                  <h2 id="teachings-title">Teachings</h2>
                 </div>
                 <ol className={styles.chapters}>
                   {teachings.map((t, i) => (
@@ -591,10 +483,7 @@ const SaintPage = async (props: NextPageProps) => {
                 aria-labelledby="quotes-title"
               >
                 <div className={styles.blockHead}>
-                  <div>
-                    <p className={styles.eyebrow}>Quotes</p>
-                    <h2 id="quotes-title">In their own words</h2>
-                  </div>
+                  <h2 id="quotes-title">Quotes</h2>
                 </div>
                 <div className={styles.quotes}>
                   {quotes.slice(0, QUOTES_SHOWN).map((q, i) => (
@@ -620,10 +509,7 @@ const SaintPage = async (props: NextPageProps) => {
                 aria-labelledby="relics-title"
               >
                 <div className={styles.blockHead}>
-                  <div>
-                    <p className={styles.eyebrow}>Relics</p>
-                    <h2 id="relics-title">Where to pray at the relics</h2>
-                  </div>
+                  <h2 id="relics-title">Relics</h2>
                 </div>
                 <div className={styles.relic}>
                   {data.relic_image?.id && (
@@ -667,10 +553,7 @@ const SaintPage = async (props: NextPageProps) => {
                 aria-labelledby="images-title"
               >
                 <div className={styles.blockHead}>
-                  <div>
-                    <p className={styles.eyebrow}>Images</p>
-                    <h2 id="images-title">Images</h2>
-                  </div>
+                  <h2 id="images-title">Images</h2>
                 </div>
                 <div className={styles.gallery}>
                   {images.map((img) => (
@@ -696,77 +579,6 @@ const SaintPage = async (props: NextPageProps) => {
                 <ImageCredit image={image} />
               </figure>
             )}
-          </div>
-
-          <aside className={styles.side}>
-            <div className={styles.sideCard}>
-              {hasFeast && (
-                <div className={styles.sideTop}>
-                  <div>
-                    <p className={styles.eyebrow}>Feast day</p>
-                    <b>{feastValue}</b>
-                    {bothFeasts && (
-                      <small>
-                        Catholic {catholicFeast} · Orthodox{' '}
-                        {orthodoxFeast}
-                      </small>
-                    )}
-                  </div>
-                </div>
-              )}
-              {prayers.length > 0 && (
-                <div className={styles.sidePrayers}>
-                  {prayers.slice(0, 4).map((p) => (
-                    <Link
-                      key={p.prayer_slug}
-                      href={`${base}/novenas/${p.prayer_slug}`}
-                    >
-                      <span
-                        className={styles.prayerIcon}
-                        aria-hidden="true"
-                      >
-                        <LuHandHeart />
-                      </span>
-                      <span>{p.prayer_title}</span>
-                      <LuChevronRight aria-hidden="true" />
-                    </Link>
-                  ))}
-                </div>
-              )}
-              <a
-                href={APP_URL}
-                className={styles.appButton}
-              >
-                <LuSmartphone aria-hidden="true" />
-                Pray in the app
-              </a>
-              <p className={styles.note}>Free on iPhone and Android</p>
-              <div className={styles.rows}>
-                {data.patron && (
-                  <div>
-                    <span>Patron of</span>
-                    <span>{data.patron}</span>
-                  </div>
-                )}
-                {tradition && (
-                  <div>
-                    <span>Venerated</span>
-                    <span>
-                      {tradition === 'Both'
-                        ? 'Catholic and Orthodox'
-                        : tradition}
-                    </span>
-                  </div>
-                )}
-                {data.relic_location && (
-                  <div>
-                    <span>Relics</span>
-                    <span>{data.relic_location}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </aside>
         </div>
 
         {categories.length > 0 && (
@@ -778,10 +590,7 @@ const SaintPage = async (props: NextPageProps) => {
             labelledBy="related-title"
           >
             <div className={styles.blockHead}>
-              <div>
-                <p className={styles.eyebrow}>Keep exploring</p>
-                <h2 id="related-title">Related saints</h2>
-              </div>
+              <h2 id="related-title">Related saints</h2>
               <Link
                 href="/saints"
                 className={styles.more}

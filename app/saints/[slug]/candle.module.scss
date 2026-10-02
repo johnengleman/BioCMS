@@ -48,129 +48,6 @@
   @include candle.button-primary;
 }
 
-.secondary {
-  @include candle.button-outline;
-  min-height: 46px;
-  border-color: var(--ink-3);
-}
-
-// ---------- Stats bar over the bottom of the photo ----------
-.stats {
-  position: relative;
-  z-index: 3;
-  display: grid;
-  grid-template-columns: repeat(var(--n), minmax(0, 1fr));
-  margin: -46px 64px 0;
-  border-radius: var(--radius-xl);
-  background: var(--surface);
-  box-shadow:
-    var(--shadow-md),
-    inset 0 0 0 1px var(--line-soft);
-
-  @media (max-width: 1100px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    margin: -44px 24px 0;
-  }
-
-  // Phones: a plain row of figures under the photo, not boxes.
-  @media (max-width: 767px) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin: 0;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--hairline);
-    border-radius: 0;
-    background: none;
-    box-shadow: none;
-  }
-}
-
-.stat {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 18px 22px;
-  color: inherit;
-  @include candle.focus-ring;
-
-  & + & {
-    border-left: 1px solid var(--hairline);
-  }
-
-  b {
-    display: block;
-    font-size: 17px;
-    font-weight: 700;
-  }
-
-  small {
-    display: block;
-    font-size: 12.5px;
-    color: var(--ink-2);
-  }
-
-  @at-root a#{&}:hover b {
-    color: var(--wine);
-  }
-
-  @media (max-width: 1100px) {
-    &:nth-child(3) {
-      border-left: 0;
-    }
-
-    &:nth-child(n + 3) {
-      border-top: 1px solid var(--hairline);
-    }
-  }
-
-  @media (max-width: 767px) {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-    padding: 0 12px;
-    border-top: 0 !important;
-
-    &:first-child {
-      padding-left: 0;
-    }
-
-    &:nth-child(3) {
-      border-left: 1px solid var(--hairline);
-    }
-
-    &:nth-child(4) {
-      display: none;
-    }
-
-    b {
-      @include candle.title(21px, 600);
-    }
-
-    small {
-      font-size: 11.5px;
-    }
-  }
-}
-
-.statIcon {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: 40px;
-  height: 40px;
-  border-radius: var(--radius-pill);
-  background: var(--muted);
-  color: var(--wine);
-
-  svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  @media (max-width: 767px) {
-    display: none;
-  }
-}
-
 // ---------- Tabs ----------
 .tabs {
   position: sticky;
@@ -259,15 +136,27 @@
 }
 
 // ---------- Two columns ----------
+// The story with the side card beside it. The card stops with the
+// story; the sections after it use the full width (.rest).
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 0;
-  padding: 8px 0 40px;
+  align-items: start;
+  padding: 8px 0 0;
 
   @media (min-width: 1100px) {
     grid-template-columns: minmax(0, 1fr) 360px;
     gap: 72px;
+  }
+}
+
+.rest {
+  padding-bottom: 40px;
+
+  // Reading text keeps a comfortable line length at full width.
+  .prose {
+    max-width: 760px;
   }
 }
 
@@ -353,56 +242,6 @@
   svg {
     width: 16px;
     height: 16px;
-  }
-}
-
-// Facts as icon rows (no boxes).
-.highlights {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 18px 28px;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  > div {
-    display: grid;
-    grid-template-columns: 44px minmax(0, 1fr);
-    gap: 14px;
-    align-items: start;
-  }
-
-  b {
-    display: block;
-    font-size: 15px;
-  }
-
-  span {
-    font-size: 13.5px;
-    line-height: 1.45;
-    color: var(--ink-2);
-  }
-}
-
-.hlIcon {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-  background: var(--wine-tint);
-  color: var(--wine);
-
-  svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  @media (max-width: 767px) {
-    width: 36px;
-    height: 36px;
-    background: none;
   }
 }
 
@@ -651,8 +490,12 @@
   grid-template-columns: 1fr;
   gap: 22px;
 
+  // Two columns only when there is a relic photo; text alone uses the
+  // full width.
   @media (min-width: 768px) {
-    grid-template-columns: 280px minmax(0, 1fr);
+    &:has(> figure) {
+      grid-template-columns: 280px minmax(0, 1fr);
+    }
   }
 
   figure img {
@@ -705,16 +548,25 @@
 
 // ---------- Side card ----------
 .side {
-  display: none;
+  // Narrow screens: the card comes before the story. The feast day and
+  // the app button are already in the bar at the bottom of the phone
+  // screen, so the card shows only prayers and facts there.
+  @media (max-width: 1099px) {
+    order: -1;
+    margin-top: 22px;
+
+    .sideTop,
+    .sideCard > .appButton {
+      display: none;
+    }
+  }
 
   @media (min-width: 1100px) {
-    display: block;
+    padding-top: 14px;
   }
 }
 
 .sideCard {
-  position: sticky;
-  top: calc(var(--header-h) + 82px);
   padding: 24px;
   border-radius: var(--radius-2xl);
   background: var(--surface);
@@ -750,13 +602,6 @@
     width: 17px;
     height: 17px;
   }
-}
-
-.note {
-  margin-top: 10px;
-  text-align: center;
-  font-size: 12.5px;
-  color: var(--ink-3);
 }
 
 .rows {
