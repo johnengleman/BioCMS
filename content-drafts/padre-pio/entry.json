@@ -32,7 +32,9 @@
   ],
   "patron": "Civil defence volunteers (approved by the Vatican on a petition through the Italian bishops’ conference, per Wikipedia); also, popularly, adolescents, stress relief, and Pietrelcina",
   "relic_description": "<p>Padre Pio died in his cell at the Capuchin friary of San Giovanni Rotondo at about 2:30 a.m. on 23 September 1968, and about 100,000 people came to his funeral on 26 September. He was buried at San Giovanni Rotondo. His stigmata had faded before his death, and the doctor who examined his body is said to have found no wounds and no scars.</p>\n<p>The tomb was opened after midnight on 3 March 2008. Archbishop D’Ambrosio reported the body in fair condition: the skull partly skeletal, the chin and body well preserved, the hands looking as if manicured, and no visible stigmata. A silicone mask modeled on a 1968 photograph was made for the display. The body was shown from 24 April 2008, when Cardinal Saraiva Martins celebrated Mass for about 15,000 people, and the display was extended to September 2009. In April 2010 the remains were moved to a new crypt decorated in gold in the sanctuary at San Giovanni Rotondo.</p>\n<p>In February 2016, at the request of Pope Francis, his relics and those of St. Leopold Mandic were carried in procession down the Via della Conciliazione into St. Peter’s Basilica for the Jubilee of Mercy, and were there on Ash Wednesday, 10 February. Aleteia gives 5 to 11 February; another source gives 8 to 14 February. No miracle was claimed for the condition of the body, and the archbishop’s report did not call it incorrupt.</p>",
-  "relic_location": "Crypt of the sanctuary, San Giovanni Rotondo, Italy"
+  "relic_location": "Crypt of the sanctuary, San Giovanni Rotondo, Italy",
+  "profile_image": "51a2a716-00b1-4c67-827e-a57b68bd6eee",
+  "relic_image": "750019df-f160-4ed2-9cad-d50405c1f637"
  },
  "related": {
   "miracles": [
@@ -368,20 +370,20 @@
  },
  "images": [
   {
-   "role": "profile_image",
-   "title": "Photograph of Padre Pio dated 19 August 1919",
-   "note": "Named in the Italian Wikipedia caption (notes-own-words §8). Licence and rights page not checked.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
+   "role": "profile",
+   "directus_id": "51a2a716-00b1-4c67-827e-a57b68bd6eee",
+   "title": "Padre Pio showing the stigmata, 19 August 1919",
+   "license": "Public domain (PD-Italy, PD-old-auto-1923)",
+   "attribution": "Placido Bux (photograph, 19 August 1919), via Wikimedia Commons",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Padre-Pio-young.jpg"
   },
   {
-   "role": "profile_image",
-   "title": "Photograph of Padre Pio, about 1947",
-   "note": "Used on English Wikipedia (notes-witnesses §8). Licence not checked; a 1947 photograph may still be under copyright in Italy.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
+   "role": "relic",
+   "directus_id": "750019df-f160-4ed2-9cad-d50405c1f637",
+   "title": "Tomb of Padre Pio in the crypt at San Giovanni Rotondo (2006)",
+   "license": "CC BY 3.0",
+   "attribution": "Antonio Cioffi, CC BY 3.0, via Wikimedia Commons",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Teca_padre_pio_-_panoramio.jpg"
   }
  ],
  "sources": [
@@ -907,7 +909,7 @@
   "state": "draft",
   "item_id": null,
   "version_id": "ce4c8d51-824b-4377-885e-39574557e97f",
-  "expected_revision": "2026-10-01T05:53:48.180Z",
+  "expected_revision": "2026-10-02T00:38:58.466Z",
   "cms_url": "https://directus-production-2664.up.railway.app/admin/content/saints/+?version=draft&versionId=ce4c8d51-824b-4377-885e-39574557e97f"
  }
 }

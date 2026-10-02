@@ -9,8 +9,8 @@ import { join } from 'node:path';
 const BASE = 'https://directus-production-2664.up.railway.app';
 const FLOW = '78272fa0-8ae9-46fe-8675-bc8085c47315';
 const SAINT_FIELDS = ['name','slug','summary','biography','birth_location','death_location','patron','relic_description','relic_location',
-  'birth_year','death_year','feast_day_orthodox','feast_day_catholic','categories','venerated_in','profile_image','relic_image'];
-const RELATED = ['miracles','teachings','quotes'];
+  'birth_year','death_year','feast_day_orthodox','feast_day_catholic','categories','venerated_in','profile_image','relic_image','other_images'];
+const RELATED = ['miracles','teachings','quotes','prayers','books'];
 
 const [packetPath, ...flags] = process.argv.slice(2);
 if (!packetPath) throw Error('Usage: upload.mjs <entry.json> [--read]');
@@ -49,8 +49,19 @@ const slug = packet.saint?.slug;
 if (!slug) throw Error('Packet has no saint.slug');
 
 // The image is never uploaded here; a profile_image is sent only if the packet already holds a Directus file ID.
-const delta = Object.fromEntries(SAINT_FIELDS.filter(k => packet.saint[k] !== undefined && !(k.endsWith('_image') && !packet.saint[k])).map(k => [k, packet.saint[k]]));
-for (const k of RELATED) if (Array.isArray(packet.related?.[k]) && packet.related[k].length) delta[k] = packet.related[k];
+const delta = Object.fromEntries(SAINT_FIELDS.filter(k => packet.saint[k] !== undefined && !(k.endsWith('_image') && !packet.saint[k]) && !(k === 'other_images' && !packet.saint[k]?.length)).map(k => [k, packet.saint[k]]));
+for (const k of RELATED) {
+  let rows = packet.related?.[k];
+  if (!Array.isArray(rows)) continue;
+  // Prayers must match the Directus shape; notes or excerpts stay in the packet only.
+  if (k === 'prayers') {
+    const keep = ['prayer_title','prayer_slug','prayers','topics','prayer_image'];
+    const ok = rows.filter(r => r?.upload !== false && r?.prayer_title && r?.prayer_slug && Array.isArray(r?.prayers)).map(r => Object.fromEntries(Object.entries(r).filter(([key]) => keep.includes(key))));
+    if (ok.length < rows.length) console.log(`Skipping ${rows.length - ok.length} prayer item(s): not in the Directus shape (prayer_title, prayer_slug, prayers[]) or marked upload:false.`);
+    rows = ok;
+  }
+  if (rows.length) delta[k] = rows;
+}
 
 const read = (await trigger({ action: 'read', entries: [{ slug }] })).entries[0];
 console.log(`Read ${slug}: ${read.version_id ? `existing draft ${read.version_id} (revision ${read.expected_revision})` : 'no draft, no published entry'}`);
@@ -67,7 +78,7 @@ const saved = (await trigger({ action: 'save', entries: [{ slug, version_id, exp
 // Independent check: the stored draft must equal the packet, field by field.
 const problems = [];
 for (const [k, want] of Object.entries(delta)) {
-  const got = RELATED.includes(k) ? saved.delta?.[k]?.create : saved.delta?.[k];
+  const got = RELATED.includes(k) ? saved.delta?.[k]?.create : k === 'other_images' ? saved.delta?.[k]?.create?.map(r => r.directus_files_id) : saved.delta?.[k];
   if (!same(got, want)) problems.push(k);
 }
 if (problems.length) throw Error('Readback differs from packet in: ' + problems.join(', '));

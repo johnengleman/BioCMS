@@ -33,7 +33,11 @@
   ],
   "patron": "Universities, academies, colleges, and Catholic schools (Leo XIII, Cum hoc sit, 1880); principal patron of Naples; patron of Priverno (Piperno)",
   "relic_description": "<p>Thomas died at the Cistercian abbey of Fossanova on 7 March 1274 and was buried before the high altar. The monks moved the body secretly to the chapel of St. Stephen and, about seven months later, back to a marble tomb at the high altar; the grave was found fragrant and the body whole. In the fourteenth year after his death the abbot cut off the right hand for Thomas’s sister, the Countess of San Severino; a Count Thomas of San Severino later gave it to the Dominicans of Salerno.</p><p>In 1348 the body passed to the Count of Fondi. In 1368–69 Pope Urban V gave it to the Dominicans at the request of the Master of the Order, Elias of Toulouse, and on 28 January 1369 the relics entered the Dominican church at Toulouse. During the French Revolution they were moved to St. Sernin; in 1974 they returned to the church of the Jacobins. A gold and silver sarcophagus was blessed in 1878.</p><p>Other relics: the right arm went to the Dominicans of Paris and is now in Rome, at Santa Maria sopra Minerva (Conway; Catholic Encyclopedia); a bone of the left arm came to the cathedral of Naples in 1603. The head is contested: Conway says the Cistercians cut it off in 1304, a tradition places it at Priverno (Piperno), and a skull claimed as his was found at Fossanova in 1585. The body is not claimed to be incorrupt today.</p>",
-  "relic_location": "Church of the Jacobins, Toulouse, France (main relics)"
+  "relic_location": "Church of the Jacobins, Toulouse, France (main relics)",
+  "profile_image": "45c20a9a-a839-4af5-b7dc-ba89cfb7e7b1",
+  "other_images": [
+   "3c63cbf0-f62b-44d3-9873-ec6a055a3956"
+  ]
  },
  "related": {
   "miracles": [
@@ -370,28 +374,20 @@
  },
  "images": [
   {
-   "role": "profile_image",
-   "title": "Francisco de Zurbarán, painting of St. Thomas Aquinas",
-   "note": "Named as a candidate in notes-church-miracles §8 (not researched). File and rights not checked.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
+   "role": "profile",
+   "directus_id": "45c20a9a-a839-4af5-b7dc-ba89cfb7e7b1",
+   "title": "Saint Thomas Aquinas, by Carlo Crivelli (1476)",
+   "license": "Public domain (PD-art-old-100-expired)",
+   "attribution": "Carlo Crivelli, Saint Thomas Aquinas, 1476, National Gallery, London (public domain)",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Saint_Thomas_Aquinas_(Crivelli,_15th-century).jpg"
   },
   {
-   "role": "relic_image",
-   "title": "Sarcophagus of St. Thomas Aquinas, Church of the Jacobins, Toulouse",
-   "note": "Named in notes-church-miracles §8. File and rights not checked.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
-  },
-  {
-   "role": "other",
-   "title": "Abbey of Fossanova, where Thomas died",
-   "note": "Named in notes-witnesses §8 and notes-church-miracles §8. File and rights not checked.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
+   "role": "other-1",
+   "directus_id": "3c63cbf0-f62b-44d3-9873-ec6a055a3956",
+   "title": "Thomas Aquinas, by Justus of Ghent (about 1473-75)",
+   "license": "Public domain (PD-art / PD-old)",
+   "attribution": "Justus of Ghent (with Pedro Berruguete), Thomas Aquinas, c. 1473-76, Louvre MI 651 (public domain)",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Gand,_Juste_de_-_Berruguete,_Pedro_-_Saint_Thomas_d'Aquin,_MI_651_;_Campana_387.jpg"
   }
  ],
  "sources": [
@@ -719,7 +715,7 @@
   "state": "draft",
   "item_id": null,
   "version_id": "8f69b275-cc7d-4c58-afe5-c93fd5047993",
-  "expected_revision": "2026-10-01T14:00:39.333Z",
+  "expected_revision": "2026-10-02T00:40:46.387Z",
   "cms_url": "https://directus-production-2664.up.railway.app/admin/content/saints/+?version=draft&versionId=8f69b275-cc7d-4c58-afe5-c93fd5047993"
  }
 }

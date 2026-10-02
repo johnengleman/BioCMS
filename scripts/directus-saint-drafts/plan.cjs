@@ -19,9 +19,10 @@ module.exports = function plan(data) {
     if (request.action === 'read') { expected.push({ slug: entry.slug, id: version?.id ?? null }); continue; }
     if (version && version.id !== entry.version_id) throw Error('Reuse the existing draft version ID');
     const clean = JSON.parse(JSON.stringify(entry.delta));
-    for (const key of ['miracles','teachings','quotes']) {
+    for (const key of ['miracles','teachings','quotes','prayers','books']) {
       if (Object.hasOwn(clean,key)) clean[key] = { create: clean[key], update: [], delete: [] };
     }
+    if (Object.hasOwn(clean,'other_images')) clean.other_images = { create: clean.other_images.map(id => ({ directus_files_id: id })), update: [], delete: [] };
     const existing = stripAudit(version?.delta ?? {});
     const merged = { ...existing, ...clean };
     const unchanged = JSON.stringify(existing) === JSON.stringify(merged);

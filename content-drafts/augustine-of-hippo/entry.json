@@ -34,7 +34,9 @@
   ],
   "patron": "Theologians; also invoked against sore eyes (both listed by English Wikipedia; no older source was found for either)",
   "relic_description": "<p>Augustine died at Hippo on 28 August 430, during the Vandal siege, and was buried there; Butler names the church of Peace, called St. Stephen’s after Augustine placed relics of the martyr there in 424, and says the Arian Vandals respected his body and spared his library. Possidius says only that he was buried.</p>\n<p>According to Bede and to Oldrad's history of the translation, as Butler reports, African bishops exiled by the Vandal kings carried the relics to Sardinia about fifty years after his death. The Augustinian postulator Josef Sciberras notes that no reliable documents mention this transfer, and some scholars date it to the sixth or seventh century. About 720–725 Liutprand, king of the Lombards, bought the relics at a high price and brought them to Pavia, to the church of San Pietro in Ciel d’Oro. A twelfth-century story that he walked barefoot to Genoa to meet them is legend. In 1327, at the order of Pope John XXII, the Hermits of St. Augustine joined the canons who already served the church, and in 1362 a marble shrine, the Arca of St. Augustine, was commissioned.</p>\n<p>In 1580 Pope Gregory XIII forbade any search for the remains or any moving of them. On 1 October 1695 workmen at the crypt altar found a Carrara marble box about 120 cm long with letters read as the name of Augustine; inside were a second marble box and a silver box. Sciberras says the letters were in charcoal; Butler says the name was engraved. After a long inquiry, Bishop Francesco Pertusati of Pavia declared the relics authentic in July 1728, and Pope Benedict XIII confirmed his judgment in writing on 22 September 1728. An inventory in 1884 counted 225 pieces of bone.</p>\n<p>Other relics are reported elsewhere. In 1022 an archbishop of Canterbury obtained a piece of the left arm. In 1842 a part of the right arm (the cubitus) was given to Bishop Dupuch for Algeria; it is now in the basilica at Annaba, set in the arm of a marble statue. A tradition places his heart at Antwerp; it is unconfirmed. The relics at Pavia are shown to the faithful twice a year, on 24 April, the anniversary of his conversion, and on 28 August. Pope John Paul II venerated them in 2004, when they were brought to Rome, and Pope Benedict XVI visited the shrine on 22 April 2007.</p>",
-  "relic_location": "San Pietro in Ciel d’Oro, Pavia, Italy (main relics); part of the right arm in the basilica at Annaba, Algeria"
+  "relic_location": "San Pietro in Ciel d’Oro, Pavia, Italy (main relics); part of the right arm in the basilica at Annaba, Algeria",
+  "profile_image": "40ba4093-3746-4c1e-952a-9b5ae973385d",
+  "relic_image": "446dd11b-3f84-409b-855d-ae68be3efcb2"
  },
  "related": {
   "miracles": [
@@ -331,28 +333,20 @@
  },
  "images": [
   {
-   "role": "profile_image",
-   "title": "Arca of St. Augustine, San Pietro in Ciel d’Oro, Pavia (Giovanni di Balduccio and workshop, 1362–1365)",
-   "note": "Named in notes-church-miracles (Wikipedia). Rights not checked.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
+   "role": "profile",
+   "directus_id": "40ba4093-3746-4c1e-952a-9b5ae973385d",
+   "title": "Saint Augustine, by Philippe de Champaigne (c. 1645-1650)",
+   "license": "Public domain",
+   "attribution": "Philippe de Champaigne; Los Angeles County Museum of Art (M.88.177, gift of The Ahmanson Foundation)",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Saint_Augustine_by_Philippe_de_Champaigne.jpg"
   },
   {
-   "role": "other_images",
-   "title": "Benozzo Gozzoli, frescoes of the life of St. Augustine, Sant’Agostino, San Gimignano (15th century)",
-   "note": "Named in notes-witnesses (Boodts). Rights page and photograph licence not checked.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
-  },
-  {
-   "role": "relic_image",
-   "title": "Marble statue holding the arm relic, basilica at Annaba, Algeria",
-   "note": "Named in notes-church-miracles (Wikipedia). Rights not checked.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
+   "role": "relic",
+   "directus_id": "446dd11b-3f84-409b-855d-ae68be3efcb2",
+   "title": "Arca of Saint Augustine, San Pietro in Ciel d'Oro, Pavia",
+   "license": "CC BY-SA 4.0",
+   "attribution": "Monica Rondoni, CC BY-SA 4.0",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Pavia_-_Basilica_di_San_Pietro_in_Ciel_d%27Oro_-_Arca_marmorea_di_Sant%27Agostino.JPG"
   }
  ],
  "sources": [
@@ -696,7 +690,7 @@
   "state": "draft",
   "item_id": null,
   "version_id": "6732ecd9-01f4-463d-aea2-2c3b642ab599",
-  "expected_revision": "2026-10-01T13:20:59.304Z",
+  "expected_revision": "2026-10-02T00:39:05.662Z",
   "cms_url": "https://directus-production-2664.up.railway.app/admin/content/saints/+?version=draft&versionId=6732ecd9-01f4-463d-aea2-2c3b642ab599"
  }
 }

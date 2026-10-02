@@ -33,7 +33,12 @@
   ],
   "patron": "Italy (with St. Catherine of Siena; Pius XII, 18 June 1939); those who promote ecology (John Paul II, Inter Sanctos, 29 November 1979)",
   "relic_description": "<p>Francis died at the Portiuncula, near Assisi, at nightfall on 3 October 1226, and the next day his body was carried to Assisi and buried in the church of San Giorgio; Jordan of Giano says the people feared that Perugia would seize it. On 25 May 1230 (21 May in the 1868 English Bonaventure; the Catholic Encyclopedia’s article on Elias puts it a few days before 25 May) it was moved to the new church built by Brother Elias. According to a papal bull and the account printed by the annalist Wadding, the town’s rulers took the body into their own hands at the church, and it was buried far down beneath the high altar, where its place was forgotten.</p>\n<p>After failed searches in 1755 and 1802, a new search allowed by Pope Pius VII found it on 12 December 1818, after fifty-two nights of digging through rock: a Roman travertine sarcophagus inside an iron cage, holding his remains, which Key to Umbria calls essentially intact, with a rough stone for a pillow, a few coins, small beads, and a silver ring with a carnelian cut with Minerva (since lost). A crypt was built beneath the Lower Basilica of San Francesco. In 1934 the remains of Brothers Leo, Masseo, Rufino, and Angelo were moved into niches in the crypt wall, and the casket of Jacoba dei Settesoli to the stairs that lead down to it. An examination allowed by Paul VI in 1978 found a man about 1.57–1.58 m tall. From 21 February to 22 March 2026 the remains were shown in the lower church in the first public and prolonged exposition, and the Franciscans reported more than 350,000 pilgrims.</p>\n<p>Robinson (1906) knew of two writings in his own hand. The parchment he wrote for Brother Leo on La Verna in 1224, with the Praises of God and a blessing, is kept at the Sacro Convento in Assisi, where the convent’s records have mentioned it since 1348. A short letter to Leo is kept in the cathedral of Spoleto. Robinson wrote in 1906 that the original bull of 1223 confirming his Rule was kept at the Sacro Convento. Celano reports that, within three years of his death, the bolster Francis used in his sickness and pieces of his girdle were venerated as relics.</p>\n<p>Sources: Catholic Encyclopedia (1913), “St. Francis of Assisi”; Jordan of Giano, Chronica §50; Wadding, Annales Minorum, vol. 2; Key to Umbria, “San Francesco: Crypt” (facts only); OFM Conv., news pages of 23 February and 25 March 2026 (facts only); Paschal Robinson, The Writings of Saint Francis of Assisi (1906), pp. 64, 130, 146; Thomas of Celano, First Life, §120.</p>",
-  "relic_location": "Crypt of the Lower Basilica of San Francesco, Assisi, Italy"
+  "relic_location": "Crypt of the Lower Basilica of San Francesco, Assisi, Italy",
+  "profile_image": "e22e388a-71ae-471f-b73f-8194c293aca1",
+  "relic_image": "abb5ac03-a48b-45fd-a343-ae20f301ca15",
+  "other_images": [
+   "d9ac932a-e4b9-436d-ada9-7bda2160ec83"
+  ]
  },
  "related": {
   "miracles": [
@@ -555,36 +560,28 @@
  },
  "images": [
   {
-   "role": "profile_image",
-   "title": "Andrea della Robbia, statue of St. Francis, Santa Maria degli Angeli",
-   "note": "Frontispiece of Howell’s 1908 Celano (notes-witnesses §8). File and rights not checked.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
+   "role": "profile",
+   "directus_id": "e22e388a-71ae-471f-b73f-8194c293aca1",
+   "title": "St Francis of Assisi at Prayer",
+   "license": "Public domain (PD-Art, PD-old-auto-expired; artist died 1682)",
+   "attribution": "Bartolomé Esteban Murillo (1617-1682), St Francis of Assisi at Prayer, c. 1645-1650, Onze-Lieve-Vrouwekathedraal, Antwerp; image via Web Gallery of Art / Wikimedia Commons",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Bartolom%C3%A9_Esteban_Perez_Murillo_-_St_Francis_of_Assisi_at_Prayer_-_WGA16351.jpg"
   },
   {
-   "role": "profile_image",
-   "title": "Brother Leo’s parchment (Chartula) with the Praises of God and the Tau blessing, Sacro Convento, Assisi",
-   "note": "A public-domain photograph is said to be on Wikimedia Commons (notes-own-words §8). Not checked.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
+   "role": "other-1",
+   "directus_id": "d9ac932a-e4b9-436d-ada9-7bda2160ec83",
+   "title": "Saint Francis in Meditation (Zurbarán)",
+   "license": "Public domain (PD-Art, PD-old-auto-expired; artist died 1664)",
+   "attribution": "Francisco de Zurbarán (1598-1664), Saint Francis in Meditation, 1635-1639, National Gallery, London (NG230); image via Wikimedia Commons",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Francisco_de_Zurbar%C3%A1n_053.jpg"
   },
   {
-   "role": "other",
-   "title": "Sassetta, Francis before the Sultan; Giotto cycle in the Upper Basilica",
-   "note": "Named in the notes as public-domain paintings; files not checked.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
-  },
-  {
-   "role": "other",
-   "title": "Page scans: Elias’s letter (Wadding, Annales Minorum vol. 2, pp. 149–150), Leo letter (Quaracchi p. 116), Chartula (Quaracchi pp. 124–125), Jacques de Vitry (Douai 1597, fol. 353)",
-   "note": "Public-domain printed pages on archive.org (notes-extra-writings §13). Not downloaded.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
+   "role": "relic",
+   "directus_id": "abb5ac03-a48b-45fd-a343-ae20f301ca15",
+   "title": "Tomb of St Francis, Lower Basilica, Assisi",
+   "license": "CC0 1.0",
+   "attribution": "Gary Todd (photo taken 2000), via Wikimedia Commons; CC0, no credit required",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Assisi_Basilica_di_S._Francesco,_Tomb_of_St._Francis_(9809556204).jpg"
   }
  ],
  "sources": [
@@ -1063,7 +1060,7 @@
   "state": "draft",
   "item_id": null,
   "version_id": "f7fe6298-b800-4d59-9a27-eb9f9784cf1f",
-  "expected_revision": "2026-10-01T13:51:27.688Z",
+  "expected_revision": "2026-10-02T00:40:44.833Z",
   "cms_url": "https://directus-production-2664.up.railway.app/admin/content/saints/+?version=draft&versionId=f7fe6298-b800-4d59-9a27-eb9f9784cf1f"
  }
 }

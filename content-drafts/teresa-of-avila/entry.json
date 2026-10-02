@@ -31,7 +31,11 @@
   ],
   "patron": "Catholic writers and lace makers; invoked against heart ailments",
   "relic_description": "<p>Teresa died at Alba de Tormes on 4 October 1582 and was buried between the two grilles of the lower choir, with a wall of stones and lime built over the coffin. On 4 July 1583 Jerome Gracián, the provincial, opened the tomb; the nuns of Alba swore that the coffin and clothes had rotted but the body was whole, and Gracián cut off the left hand, which went to the Carmelites of Lisbon. In November 1585 the body was taken to St. Joseph’s in Ávila, and an arm was cut off to stay at Alba. The Duke of Alba and his uncle, the prior of the Order of St. John, obtained letters from Pope Sixtus V, and the body was returned to Alba on 23 August 1586. In March 1592 the bishop of Salamanca moved it to a new chest given by the Duchess of Alba. In 1750 it was clothed again and placed in a new silver shrine. It was opened in 1914, and again in 2024 for a scientific study. In October 2024 two radiographers reported in an interview that the body is better described as mummified than as literally incorrupt, and found a severe curvature of the spine.</p>\n<p>The body, the heart (kept in crystal) and an arm are at the Carmelite convent at Alba de Tormes. Her left hand, missing its index finger, is at a Carmelite convent in Lisbon. Her right foot and jaw are at Santa Maria della Scala in Rome, and part of her skull and some teeth at San Pancrazio in Rome. Smaller relics of flesh and of her habit are in Madrid and elsewhere, and relics of blood and teeth have reached Puebla in Mexico. The story of three “thorns” found in the heart’s reliquary is disputed.</p>\n<p>Sources: Silverio de Santa Teresa, ed., <em>Procesos de beatificación y canonización de Santa Teresa de Jesús</em>, vol. 1, pp. 83–84, 90–91, 101–102, <a href=\"https://archive.org/details/procesosdebeatif01silv\">https://archive.org/details/procesosdebeatif01silv</a>, and vol. 3, Rótulo arts. 97 and 101, <a href=\"https://archive.org/details/BMC20ProcesosDeBeatificacinYCanonizaciinDeSantaTeresaTomoIII\">https://archive.org/details/BMC20ProcesosDeBeatificacinYCanonizaciinDeSantaTeresaTomoIII</a>; Alice Lady Lovat, <em>The Life of Saint Teresa</em> (1912), pp. 607–608, <a href=\"https://archive.org/details/lifeofsaintteres00bensrich\">https://archive.org/details/lifeofsaintteres00bensrich</a>; <em>Aleteia</em>, 15 Oct. 2024, <a href=\"https://aleteia.org/2024/10/15/1st-results-from-exams-of-teresa-of-avilas-relics/\">https://aleteia.org/2024/10/15/1st-results-from-exams-of-teresa-of-avilas-relics/</a>.</p>",
-  "relic_location": "Carmelite convent, Alba de Tormes, Spain"
+  "relic_location": "Carmelite convent, Alba de Tormes, Spain",
+  "profile_image": "be16433d-3b4b-4acd-b238-61762785735b",
+  "other_images": [
+   "e1a98660-747b-48aa-8ffb-4d70ee4b56e3"
+  ]
  },
  "related": {
   "miracles": [
@@ -428,7 +432,8 @@
     ],
     "source": "Poesías IX, Obras, ed. Silverio (1915), vol. 6; kept in her breviary at her death. English: our translation.",
     "rights": "Spanish public-domain; English our own",
-    "note": "A poem used as a prayer, not a novena; the flow cannot save prayers yet. The longer “Eleva el pensamiento” version is a later gloss and is not included."
+    "note": "A poem used as a prayer, not a novena; the flow cannot save prayers yet. The longer “Eleva el pensamiento” version is a later gloss and is not included.",
+    "upload": false
    }
   ],
   "books": [],
@@ -512,28 +517,20 @@
  },
  "images": [
   {
-   "role": "profile_image",
-   "title": "Bernini, Ecstasy of St. Teresa, Santa Maria della Vittoria, Rome",
-   "note": "Named as an image candidate in notes-church-miracles §8 (santiebeati). The sculpture is public domain; a photograph with a verified free licence is still needed.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
+   "role": "profile",
+   "directus_id": "be16433d-3b4b-4acd-b238-61762785735b",
+   "title": "Saint Teresa of Avila, portrait by Fray Juan de la Miseria (1576)",
+   "license": "Public domain (PD-art-100-expired; artist died 1616)",
+   "attribution": "Fray Juan de la Miseria, 1576 (public domain)",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Teresa_de_Jes%C3%BAs_(cropped).jpg"
   },
   {
-   "role": "other_image",
-   "title": "Statue of St. Teresa with the title “Mater Spiritualium”, St. Peter’s Basilica",
-   "note": "Named in Paul VI’s homily of 1970 (notes-church-miracles §5). Rights of any photograph not checked.",
-   "state": "candidate_unverified",
-   "rights_page": null,
-   "directus_file_id": null
-  },
-  {
-   "role": "other_image",
-   "title": "Image of the wounded Christ at the Incarnation, Ávila; the death cell at Alba",
-   "note": "Leads only (notes-witnesses §8); not searched.",
-   "state": "lead",
-   "rights_page": null,
-   "directus_file_id": null
+   "role": "other-1",
+   "directus_id": "e1a98660-747b-48aa-8ffb-4d70ee4b56e3",
+   "title": "Saint Teresa of Avila, portrait by Fray Juan de la Miseria (1576), full view with signature",
+   "license": "Public domain (PD-art-100-expired; artist died 1616)",
+   "attribution": "Fray Juan de la Miseria, 1576 (public domain)",
+   "source_url": "https://commons.wikimedia.org/wiki/File:Teresa_de_Jes%C3%BAs.jpg"
   }
  ],
  "sources": [
@@ -913,7 +910,7 @@
   "state": "draft",
   "item_id": null,
   "version_id": "1e725007-ecd4-4fb4-8c1d-a477a0045b64",
-  "expected_revision": "2026-10-01T14:01:52.586Z",
+  "expected_revision": "2026-10-02T00:41:03.239Z",
   "cms_url": "https://directus-production-2664.up.railway.app/admin/content/saints/+?version=draft&versionId=1e725007-ecd4-4fb4-8c1d-a477a0045b64"
  }
 }

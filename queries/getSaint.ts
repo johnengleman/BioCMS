@@ -31,6 +31,8 @@ const query = gql`
         width
         height
         description
+        title
+        metadata
       }
       other_images {
         directus_files_id {
@@ -38,6 +40,8 @@ const query = gql`
           width
           height
           description
+          title
+          metadata
         }
       }
       books {
@@ -75,6 +79,8 @@ const query = gql`
         height
         description
         id
+        title
+        metadata
       }
     }
   }

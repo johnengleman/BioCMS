@@ -18,6 +18,7 @@ import SiteFooter from '../../../components/candle/SiteFooter/SiteFooter'
 import PhotoHero from '../../../components/candle/PhotoHero/PhotoHero'
 import Section from '../../../components/candle/Section/Section'
 import SaintSummary from '../../../components/saint/SaintSummary/SaintSummary'
+import ImageCredit from '../../../components/candle/ImageCredit/ImageCredit'
 import styles from './candle.module.scss'
 
 export const runtime = 'edge'
@@ -91,7 +92,9 @@ const SaintPage = async (props: NextPageProps) => {
   const quotes = (data.quotes || []).filter((q) => q.text)
   const prayers = data.prayers || []
   const hasRelic = Boolean(
-    data.relic_location || data.relic_description,
+    data.relic_location ||
+      data.relic_description ||
+      data.relic_image?.id,
   )
 
   const related =
@@ -173,6 +176,10 @@ const SaintPage = async (props: NextPageProps) => {
       ? image.height / image.width
       : 1.3
 
+  const galleryImages = (data.other_images ?? [])
+    .map((o) => o?.directus_files_id)
+    .filter((f) => f?.id)
+
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -243,6 +250,7 @@ const SaintPage = async (props: NextPageProps) => {
                 height={Math.round(440 * ratio)}
                 priority
               />
+              <ImageCredit image={image} />
             </figure>
           )}
           {data.summary && (
@@ -468,6 +476,27 @@ const SaintPage = async (props: NextPageProps) => {
             <div
               className={`${styles.tile} ${styles.relic}`}
             >
+              {data.relic_image?.id && (
+                <figure className={styles.photo}>
+                  <Image
+                    src={`${assets}/assets/${data.relic_image.id}?width=1200&format=webp&quality=82`}
+                    alt={
+                      data.relic_image.description ||
+                      `Relics of ${data.name}`
+                    }
+                    width={760}
+                    height={Math.round(
+                      760 *
+                        (data.relic_image.width &&
+                        data.relic_image.height
+                          ? data.relic_image.height /
+                            data.relic_image.width
+                          : 0.667),
+                    )}
+                  />
+                  <ImageCredit image={data.relic_image} />
+                </figure>
+              )}
               {data.relic_location && (
                 <p>
                   <span className={styles.factLabel}>
@@ -486,6 +515,35 @@ const SaintPage = async (props: NextPageProps) => {
                   }}
                 />
               )}
+            </div>
+          </Section>
+        )}
+
+        {galleryImages.length > 0 && (
+          <Section
+            id="images"
+            title="Images"
+          >
+            <div className={styles.gallery}>
+              {galleryImages.map((img) => (
+                <figure key={img.id} className={styles.photo}>
+                  <Image
+                    src={`${assets}/assets/${img.id}?width=900&format=webp&quality=82`}
+                    alt={
+                      img.description ||
+                      `Image of ${data.name}`
+                    }
+                    width={440}
+                    height={Math.round(
+                      440 *
+                        (img.width && img.height
+                          ? img.height / img.width
+                          : 0.75),
+                    )}
+                  />
+                  <ImageCredit image={img} />
+                </figure>
+              ))}
             </div>
           </Section>
         )}
