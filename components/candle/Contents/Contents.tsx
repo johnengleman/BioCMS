@@ -19,7 +19,8 @@ const split = (title: string) => {
 
 // The contents of a long page. Marks the section being read: the last
 // heading above the upper third of the screen.
-// `rail`: a list with numbers, counts and a reading-progress bar.
+// `rail`: a list with numbers and counts. Reading progress is the line
+// under the header (ReadingProgress), so the rail has no bar of its own.
 // `chips`: a sideways row of chips for phones.
 const Contents = ({
   title = 'Contents',
@@ -31,7 +32,6 @@ const Contents = ({
   variant?: 'rail' | 'chips'
 }) => {
   const [active, setActive] = useState(items[0]?.id)
-  const [progress, setProgress] = useState(0)
   const chipsRef = useRef<HTMLOListElement>(null)
 
   useEffect(() => {
@@ -49,9 +49,6 @@ const Contents = ({
         current = target
       }
       setActive(current.id)
-      const root = document.documentElement
-      const max = root.scrollHeight - window.innerHeight
-      setProgress(max > 0 ? Math.min(1, root.scrollTop / max) : 0)
     }
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update)
@@ -116,12 +113,6 @@ const Contents = ({
       aria-label={title}
     >
       <h2>{title}</h2>
-      <div
-        className={styles.progress}
-        aria-hidden="true"
-      >
-        <i style={{ width: `${progress * 100}%` }} />
-      </div>
       <ol>
         {items.map((item) => {
           const numbered = item.numbered !== false

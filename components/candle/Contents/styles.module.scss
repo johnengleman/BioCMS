@@ -2,9 +2,11 @@
 
 // ---------- Rail ----------
 .contents {
+  // Indented like the numbers inside the links below.
   h2 {
     @include candle.eyebrow;
     margin-bottom: 10px;
+    padding-left: 12px;
   }
 
   ol {
@@ -18,7 +20,8 @@
     grid-template-columns: 24px minmax(0, 1fr) auto;
     align-items: baseline;
     gap: 8px;
-    margin-left: -12px;
+    // The highlight starts 12px left of the number. (A negative margin
+    // here was clipped by the rail's scroll box.)
     padding: 9px 10px 9px 12px;
     border-radius: 12px;
     color: var(--ink-2);
@@ -62,22 +65,6 @@
   font-size: 16px;
   font-weight: 600;
   color: var(--ink-3);
-}
-
-.progress {
-  height: 3px;
-  margin: 0 0 14px;
-  overflow: hidden;
-  border-radius: 9px;
-  background: var(--hairline);
-
-  i {
-    display: block;
-    height: 100%;
-    border-radius: 9px;
-    background: var(--wine);
-    transition: width 0.15s linear;
-  }
 }
 
 // ---------- Chips (phones) ----------
