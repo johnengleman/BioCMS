@@ -26,11 +26,6 @@
     .photo img {
       transform: scale(1.04);
     }
-
-    .go {
-      background: var(--wine);
-      color: var(--on-dark);
-    }
   }
 }
 
@@ -101,59 +96,44 @@
   }
 }
 
+// The first five lines, fading into the card; the saint page has the
+// rest. Cards keep similar heights, so the waterfall reads as a set.
 .summary {
   @include candle.reading(15.5px);
+  max-height: calc(1.6em * 5);
   margin-top: 12px;
+  overflow: hidden;
   line-height: 1.6;
   color: var(--card-dark-ink-2);
+  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
 
   p + p {
     margin-top: 0.6em;
   }
-
-  // Phones show one column; keep long summaries short there.
-  @media (max-width: 639px) {
-    display: -webkit-box;
-    -webkit-line-clamp: 7;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
 }
 
+// One quiet line: feast day · years · church.
 .facts {
   display: flex;
-  align-items: center;
-  gap: 22px;
-  margin-top: 18px;
-  padding-top: 14px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+  padding-top: 12px;
   border-top: 1px solid var(--card-dark-line);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--card-dark-ink-2);
+  @include candle.lining;
 
-  small {
-    display: block;
-    font-size: 10.5px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  b {
+    font-weight: 600;
+    color: var(--card-dark-ink);
+  }
+
+  > * + *::before {
+    content: '·';
+    padding: 0 7px;
     color: var(--card-dark-ink-3);
   }
-
-  span {
-    display: block;
-    margin-top: 2px;
-    font-size: 13px;
-    font-weight: 650;
-    white-space: nowrap;
-  }
-}
-
-.go {
-  display: grid !important;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  margin: 0 0 0 auto !important;
-  flex: none;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 246, 234, 0.07);
-  @include candle.transition(background-color, color);
 }

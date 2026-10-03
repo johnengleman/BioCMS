@@ -23,6 +23,7 @@ import {
   roleLabel,
 } from '../../../utils/saintCard'
 import { APP_URL } from '../../../utils/site'
+import smartQuotes from '../../../utils/smartQuotes'
 import SiteHeader from '../../../components/candle/SiteHeader/SiteHeader'
 import SiteFooter from '../../../components/candle/SiteFooter/SiteFooter'
 import SaintHero from '../../../components/saint/SaintHero/SaintHero'
@@ -102,7 +103,7 @@ const SaintPage = async (props: NextPageProps) => {
   const role = roleLabel(data.categories)
   const place = placeLabel(data)
   const tradition = churchLabel(data.venerated_in)
-  const summaryText = plainText(data.summary)
+  const summaryText = smartQuotes(plainText(data.summary))
 
   const wordsTitle =
     teachings.length && quotes.length

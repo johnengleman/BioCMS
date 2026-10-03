@@ -12,22 +12,11 @@ import {
   roleLabel,
   yearsLabel,
 } from '../../../utils/saintCard'
+import { splitSaintName } from '../../../utils/saintNames'
+import smartQuotes from '../../../utils/smartQuotes'
 import styles from './styles.module.scss'
 
-const ArrowIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.8"
-    strokeLinecap="round"
-    aria-hidden="true"
-  >
-    <path d="M7 17L17 7M9 7h8v8" />
-  </svg>
-)
+const LONG_NAME = 28
 
 const badgeFor = (
   saint,
@@ -39,15 +28,14 @@ const badgeFor = (
   if (days === 0) return { label: 'Feast today', feast: true }
   if (days !== null && days <= 7)
     return { label: 'Feast this week', feast: false }
-  if (saint.death_year >= 1900)
-    return { label: '20th century', feast: false }
   return null
 }
 
 // A saint in the waterfall ("Travel" design): a dark card with a fixed
 // 16:10 image at the top, so photographs and icons look like one set.
-// Below it: role and place, the name, the saint's summary, and three
-// facts. Also used for "Related saints".
+// Below it: role and place, the short name, the first lines of the
+// saint's summary, and one line of facts (feast · years · church). Only
+// a near feast day gets a badge. Also used for "Related saints".
 const SaintSummary = ({ data }: { data: any }) => {
   const { church } = useTradition()
   const mounted = useMounted()
@@ -58,14 +46,16 @@ const SaintSummary = ({ data }: { data: any }) => {
   const kicker = [roleLabel(saint.categories), placeLabel(saint)]
     .filter(Boolean)
     .join(' · ')
+  const feastLabel = feastShort(feast)
   const facts = [
-    { label: 'Feast', value: feastShort(feast) },
-    {
-      label: 'Lived',
-      value: yearsLabel(saint.birth_year, saint.death_year),
-    },
-    { label: 'Church', value: churchLabel(saint.venerated_in) },
-  ].filter((fact) => fact.value)
+    yearsLabel(saint.birth_year, saint.death_year),
+    churchLabel(saint.venerated_in).replace(
+      'Both',
+      'Catholic and Orthodox',
+    ),
+  ].filter(Boolean)
+  const shortName =
+    name?.length > LONG_NAME ? splitSaintName(name).title : name
   const position =
     profile_image?.metadata?.object_position || 'center 22%'
 
@@ -101,24 +91,26 @@ const SaintSummary = ({ data }: { data: any }) => {
       </div>
       <div className={styles.body}>
         {kicker && <div className={styles.kicker}>{kicker}</div>}
-        <h3 className={styles.name}>{name}</h3>
+        <h3 className={styles.name}>{shortName}</h3>
         {summary && (
           <div
             className={styles.summary}
-            dangerouslySetInnerHTML={{ __html: summary }}
+            dangerouslySetInnerHTML={{ __html: smartQuotes(summary) }}
           />
         )}
-        <div className={styles.facts}>
-          {facts.map((fact) => (
-            <div key={fact.label}>
-              <small>{fact.label}</small>
-              <span>{fact.value}</span>
-            </div>
-          ))}
-          <span className={styles.go}>
-            <ArrowIcon />
-          </span>
-        </div>
+        {(feastLabel || facts.length > 0) && (
+          <p className={styles.facts}>
+            {feastLabel && (
+              <b>
+                <span className="visually-hidden">Feast day </span>
+                {feastLabel}
+              </b>
+            )}
+            {facts.map((fact) => (
+              <span key={fact}>{fact}</span>
+            ))}
+          </p>
+        )}
       </div>
     </Link>
   )
