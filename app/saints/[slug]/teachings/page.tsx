@@ -6,6 +6,7 @@ import {
   getBiography,
   getChapters,
   getMiracles,
+  plainText,
   splitSaintName,
 } from '../../../../utils/saintContent'
 import SiteHeader from '../../../../components/candle/SiteHeader/SiteHeader'
@@ -37,6 +38,13 @@ export const generateMetadata = async (
 const LONG_NAME = 28
 const QUOTES_SHOWN = 6
 
+// Letters and digits only, for comparing quotations.
+const quoteKey = (html: string) =>
+  plainText(html)
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, ' ')
+    .trim()
+
 const SaintTeachings = async (props: NextPageProps) => {
   const { slug } = await props.params
 
@@ -52,6 +60,21 @@ const SaintTeachings = async (props: NextPageProps) => {
   const quotes = (data.quotes || []).filter((q) => q.text)
   const lifeChapters = getChapters(data.biography)
   const miracles = getMiracles(data.miracles?.[0]?.miracles)
+
+  // "In their own words" leaves out quotes the teachings already quote.
+  const quoted = [
+    intro,
+    ...chapters.map((c) => c.html),
+  ]
+    .join(' ')
+    .match(/<blockquote[^>]*>[\s\S]*?<\/blockquote>/g)
+    ?.map(quoteKey)
+  const ownWords = quotes
+    .filter((q) => {
+      const key = quoteKey(q.text)
+      return !quoted?.some((block) => block.includes(key))
+    })
+    .slice(0, QUOTES_SHOWN)
 
   const parts = splitSaintName(data.name)
   const title =
@@ -70,7 +93,7 @@ const SaintTeachings = async (props: NextPageProps) => {
     ...chapters
       .filter((c) => c.id)
       .map((c) => ({ id: c.id, title: c.title })),
-    ...(quotes.length
+    ...(ownWords.length
       ? [
           {
             id: 'own-words',
@@ -165,7 +188,7 @@ const SaintTeachings = async (props: NextPageProps) => {
             </p>
           )}
 
-          {quotes.length > 0 && (
+          {ownWords.length > 0 && (
             <section className={styles.chapter}>
               <h2
                 id="own-words"
@@ -173,15 +196,11 @@ const SaintTeachings = async (props: NextPageProps) => {
               >
                 In their own words
               </h2>
-              <div className={styles.quotes}>
-                {quotes
-                  .slice(0, QUOTES_SHOWN)
-                  .map((q, i) => (
-                    <blockquote key={i}>
-                      {q.text}
-                    </blockquote>
-                  ))}
-              </div>
+              <ul className={styles.quotes}>
+                {ownWords.map((q, i) => (
+                  <li key={i}>“{q.text}”</li>
+                ))}
+              </ul>
             </section>
           )}
 

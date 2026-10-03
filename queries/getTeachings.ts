@@ -57,6 +57,7 @@ function getTeachingsQuery(church, filter) {
         slug
         categories
         summary
+        venerated_in
         birth_year
         death_year
         profile_image {

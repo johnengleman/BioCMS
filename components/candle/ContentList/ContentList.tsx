@@ -23,8 +23,9 @@ const years = (s: any) =>
     : ''
 
 // A saint's teachings or miracles, as one wide card: the portrait shown
-// whole on a beige panel, then the count, the name, the first lines,
-// the first few titles, and a button.
+// whole on a beige panel, then the name, the saint's summary, and the
+// first few titles. The whole card is one link (the name's link covers
+// it), and a quiet line of text says where it goes.
 const FeatureCard = ({
   item,
   kind,
@@ -34,21 +35,19 @@ const FeatureCard = ({
 }) => {
   // Built on the server (utils/listPreview).
   const {
-    count,
-    unit,
+    count = 0,
     intro,
+    summary,
+    church,
     titles = [],
   } = item.preview || {}
   const image = item.saint?.profile_image?.id
+  const meta = [years(item.saint), church].filter(Boolean).join(' · ')
+  const lead = summary || intro
 
   return (
     <article className={styles.feature}>
-      <Link
-        href={item.link}
-        className={styles.portrait}
-        tabIndex={-1}
-        aria-hidden="true"
-      >
+      <div className={styles.portrait}>
         {image && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -57,24 +56,18 @@ const FeatureCard = ({
             loading="lazy"
           />
         )}
-      </Link>
+      </div>
       <div className={styles.featureText}>
-        {count > 0 && (
-          <p className={styles.eyebrow}>
-            {count.toLocaleString('en-US')} {unit}
-          </p>
-        )}
         <h2>
-          <Link href={item.link}>
+          <Link
+            href={item.link}
+            className={styles.cardLink}
+          >
             {shortName(item.saint?.name)}
           </Link>
         </h2>
-        {years(item.saint) && (
-          <p className={styles.years}>
-            {years(item.saint)}
-          </p>
-        )}
-        {intro && <p className={styles.intro}>{intro}</p>}
+        {meta && <p className={styles.years}>{meta}</p>}
+        {lead && <p className={styles.intro}>{lead}</p>}
         {titles.length > 0 && (
           <ol className={styles.sections}>
             {titles
@@ -87,17 +80,17 @@ const FeatureCard = ({
               ))}
           </ol>
         )}
-        <Link
-          href={item.link}
+        <span
           className={styles.read}
+          aria-hidden="true"
         >
           {kind === 'miracles'
             ? count > 1
               ? `Read all ${count.toLocaleString('en-US')} accounts`
               : 'Read the account'
-            : 'Read the teachings'}
-          <span aria-hidden="true">→</span>
-        </Link>
+            : 'Read the teachings'}{' '}
+          →
+        </span>
       </div>
     </article>
   )

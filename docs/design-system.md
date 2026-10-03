@@ -110,6 +110,8 @@ Ink is for reading. Wine is for actions. Gold is for small details. Keep gold ra
   - `ReadingParts`: `ReadingHeader` (the saint banner), `ReadingLayout` (contents rail and phone chips), `NextCards`, and `NotesCard`.
   - `Contents` has a `rail` variant and a `chips` variant.
   - Also: `MiracleSearch`, `GroupMore`, `ReadingProgress`, and `NovenaDays`.
+- **Type scale (2026-10-02):** lists, reading pages and Books use the same scale as the saint page. Page titles 40 px (phones 28), section and chapter titles 30 to 32 px with a hairline, reading text 17.5 px, quotes 20 to 21 px, card titles 30 px. Numbers are small gold labels in the UI font (12 px), never large serif figures. Cards use `--radius-lg` or `--radius-xl`, not the larger radii.
+- **Hierarchy rules (2026-10-02):** helper text is one line with a "How to read this list" disclosure for the rest. Status labels are soft tints, never filled. Miracle accounts show the title, the label and two lines, and open on click (`MiracleEntries`; the full text shows without JavaScript). Quotes inside reading text are indented italic with a gold rule, not cards; "In their own words" leaves out quotes the page already quotes. Index cards (`ContentList`) are one link (the name's link covers the card), start with the saint's summary, and end with a text link, not a button.
 
 ## Contracts to keep
 

@@ -8,12 +8,13 @@ import {
   isApproved,
   splitSaintName,
 } from '../../../../utils/saintContent'
-import { LuBookMarked, LuInfo } from 'react-icons/lu'
+import { LuBookMarked, LuChevronRight } from 'react-icons/lu'
 import StatusPill from '../../../../components/candle/StatusPill/StatusPill'
 import GroupMore from '../../../../components/candle/GroupMore/GroupMore'
 import SiteHeader from '../../../../components/candle/SiteHeader/SiteHeader'
 import SiteFooter from '../../../../components/candle/SiteFooter/SiteFooter'
 import MiracleSearch from '../../../../components/candle/MiracleSearch/MiracleSearch'
+import MiracleEntries from '../../../../components/candle/MiracleEntries/MiracleEntries'
 import {
   NextCards,
   NotesCard,
@@ -69,6 +70,17 @@ const SaintMiracles = async (props: NextPageProps) => {
   const parts = splitSaintName(data.name)
   const title =
     data.name.length > LONG_NAME ? parts.title : data.name
+
+  // One short line; the full note opens under "How to read this list".
+  const lead = [
+    `Accounts attributed to ${parts.title}, each with its source.`,
+    approved && approved < entries.length
+      ? `Only ${approved} ${approved === 1 ? 'was' : 'were'} approved by the Church.`
+      : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+  const hasStatus = entries.some((e) => e.status)
 
   const meta = [
     entries.length
@@ -136,49 +148,46 @@ const SaintMiracles = async (props: NextPageProps) => {
         <ReadingLayout
           contents={contents}
           contentsTitle="In this list"
-          aside={
-            entries.some((e) => e.status) && (
-              <div className={list.legend}>
-                <p className={list.legendTitle}>
-                  What the labels mean
-                </p>
-                <div>
-                  <StatusPill
-                    status="approved"
-                    short
-                  />
-                  Examined and approved by the Church.
-                </div>
-                <div>
-                  <StatusPill
-                    status="sworn at a Church process"
-                    short
-                  />
-                  Given under oath at a Church process.
-                </div>
-                <div>
-                  <StatusPill
-                    status="reported"
-                    short
-                  />
-                  A report. The label says who made it.
-                </div>
-              </div>
-            )
-          }
         >
-          {intro && (
-            <div className={list.note}>
-              <span
-                className={list.noteIcon}
-                aria-hidden="true"
-              >
-                <LuInfo />
-              </span>
-              <div>
-                <b>How to read this list</b>
-                <div dangerouslySetInnerHTML={{ __html: intro }} />
-              </div>
+          {entries.length > 0 && (
+            <div className={list.lead}>
+              <p>{lead}</p>
+              {(intro || hasStatus) && (
+                <details className={list.howTo}>
+                  <summary>How to read this list</summary>
+                  {intro && (
+                    <div
+                      className={list.howToText}
+                      dangerouslySetInnerHTML={{ __html: intro }}
+                    />
+                  )}
+                  {hasStatus && (
+                    <div className={list.legend}>
+                      <div>
+                        <StatusPill
+                          status="approved"
+                          short
+                        />
+                        Examined and approved by the Church.
+                      </div>
+                      <div>
+                        <StatusPill
+                          status="sworn at a Church process"
+                          short
+                        />
+                        Given under oath at a Church process.
+                      </div>
+                      <div>
+                        <StatusPill
+                          status="reported"
+                          short
+                        />
+                        A report. The label says who made it.
+                      </div>
+                    </div>
+                  )}
+                </details>
+              )}
             </div>
           )}
 
@@ -188,6 +197,7 @@ const SaintMiracles = async (props: NextPageProps) => {
 
           {entries.length > 0 ? (
             <div id="miracle-list">
+              <MiracleEntries />
               {groups.map((group, g) => (
                 <section
                   key={group.id || g}
@@ -245,17 +255,17 @@ const SaintMiracles = async (props: NextPageProps) => {
                           <h3 id={entry.id}>
                             {entry.title}
                           </h3>
+                          {entry.status && (
+                            <div className={list.status}>
+                              <StatusPill status={entry.status} />
+                            </div>
+                          )}
                           <div
                             className={list.body}
                             dangerouslySetInnerHTML={{
                               __html: entry.html,
                             }}
                           />
-                          {entry.status && (
-                            <div className={list.status}>
-                              <StatusPill status={entry.status} />
-                            </div>
-                          )}
                           {entry.source && (
                             <p className={list.source}>
                               <LuBookMarked aria-hidden="true" />
@@ -267,6 +277,15 @@ const SaintMiracles = async (props: NextPageProps) => {
                             </p>
                           )}
                         </div>
+                        <button
+                          type="button"
+                          className={list.toggle}
+                          data-toggle
+                          aria-expanded="false"
+                          aria-label={`Full account: ${entry.title}`}
+                        >
+                          <LuChevronRight aria-hidden="true" />
+                        </button>
                       </li>
                     ))}
                   </ol>

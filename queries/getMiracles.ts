@@ -62,6 +62,7 @@ function getMiraclesQuery(church, filter, miraclesPreset) {
         slug
         categories
         summary
+        venerated_in
         birth_year
         death_year
         profile_image {

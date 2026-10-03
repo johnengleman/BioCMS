@@ -2,10 +2,10 @@
 
 .section {
   @include candle.container;
-  margin-top: var(--space-12);
+  margin-top: 32px;
 
   @media (min-width: 768px) {
-    margin-top: 64px;
+    margin-top: 40px;
   }
 }
 
@@ -14,10 +14,13 @@
   align-items: baseline;
   justify-content: space-between;
   gap: var(--space-4);
-  margin-bottom: var(--space-5);
+  margin-bottom: var(--space-4);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--hairline);
 
   h2 {
-    @include candle.title(clamp(30px, 3.6vw, 42px), 500);
+    @include candle.title(30px, 600);
+    line-height: 1.2;
     scroll-margin-top: calc(var(--header-h) + 24px);
   }
 }

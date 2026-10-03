@@ -41,7 +41,7 @@
 }
 
 .day {
-  padding-top: var(--space-12);
+  padding-top: 40px;
   text-align: center;
 
   & + & {
@@ -50,8 +50,9 @@
   }
 
   h2 {
-    margin: var(--space-1) 0 var(--space-6);
-    @include candle.title(clamp(36px, 5vw, 50px), 600);
+    margin: var(--space-1) 0 var(--space-4);
+    @include candle.title(32px, 600);
+    line-height: 1.15;
     scroll-margin-top: calc(var(--header-h) + 80px);
   }
 }
@@ -62,8 +63,8 @@
 }
 
 .prayer {
-  @include candle.reading(20px);
-  line-height: 1.8;
+  @include candle.reading(18px);
+  line-height: 1.75;
 
   p {
     margin: 0 0 1em;

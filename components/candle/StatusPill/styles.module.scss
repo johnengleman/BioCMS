@@ -1,11 +1,11 @@
 .pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 5px 11px;
+  gap: 5px;
+  padding: 3px 9px;
   border-radius: var(--radius-pill);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.25;
 
   svg {
@@ -15,9 +15,10 @@
   }
 }
 
+// Soft tints: a label must not outweigh the account's title.
 .approved {
-  background: var(--wine);
-  color: var(--on-dark);
+  background: var(--wine-tint);
+  color: var(--wine);
 }
 
 .sworn {
@@ -26,6 +27,9 @@
 }
 
 .reported {
-  background: var(--muted);
-  color: var(--ink-2);
+  padding-left: 0;
+  padding-right: 0;
+  background: none;
+  color: var(--ink-3);
+  font-weight: 500;
 }

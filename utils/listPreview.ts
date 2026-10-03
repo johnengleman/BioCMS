@@ -3,6 +3,7 @@ import {
   getBiography,
   getMiracleBook,
 } from './saintContent'
+import { churchLabel } from './saintCard'
 
 // Card data for the site-wide teachings and miracles lists. It runs
 // on the server, so the browser gets short text, not the full HTML.
@@ -12,12 +13,18 @@ export type Preview = {
   unit: string
   intro: string
   titles: string[]
+  // The saint's own summary, so a card starts with the person, not
+  // with a note about the list.
+  summary: string
+  church: string
 }
 
 const text = (html = '') =>
   cheerio.load(html).text().replace(/\s+/g, ' ').trim()
 
-const miraclePreview = (html?: string): Preview => {
+type Body = Omit<Preview, 'summary' | 'church'>
+
+const miraclePreview = (html?: string): Body => {
   const book = getMiracleBook(html)
   const entries = book.groups.flatMap((g) => g.entries)
   const intro =
@@ -32,7 +39,7 @@ const miraclePreview = (html?: string): Preview => {
   }
 }
 
-const teachingPreview = (html?: string): Preview => {
+const teachingPreview = (html?: string): Body => {
   const { intro, chapters } = getBiography(html)
   return {
     count: chapters.length,
@@ -46,10 +53,18 @@ export const withPreview = (
   kind: 'teachings' | 'miracles',
   items: any[] = [],
 ) =>
-  items.map(({ teachings, miracles, ...item }) => ({
-    ...item,
-    preview:
-      kind === 'miracles'
-        ? miraclePreview(miracles)
-        : teachingPreview(teachings),
-  }))
+  items.map(({ teachings, miracles, ...item }) => {
+    const { summary, venerated_in, ...saint } = item.saint || {}
+    const church = churchLabel(venerated_in)
+    return {
+      ...item,
+      saint,
+      preview: {
+        ...(kind === 'miracles'
+          ? miraclePreview(miracles)
+          : teachingPreview(teachings)),
+        summary: text(summary),
+        church: church === 'Both' ? 'Catholic and Orthodox' : church,
+      },
+    }
+  })

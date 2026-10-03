@@ -21,10 +21,10 @@
 .banner {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 36px;
+  gap: 32px;
   align-items: center;
-  padding: 30px 36px;
-  border-radius: var(--radius-3xl);
+  padding: 24px 32px;
+  border-radius: var(--radius-xl);
   background: var(--panel);
 
   @media (max-width: 1100px) {
@@ -34,11 +34,13 @@
   // Phones: portrait beside the title, figures below.
   @media (max-width: 767px) {
     grid-template-columns: 76px minmax(0, 1fr);
+    // The first row takes the spare height, so the label sits on the name.
+    grid-template-rows: 1fr auto;
     column-gap: 16px;
     row-gap: 0;
     align-items: end;
-    padding: 22px 20px 24px;
-    border-radius: 0 0 26px 26px;
+    padding: 18px 16px 20px;
+    border-radius: 0;
   }
 }
 
@@ -48,11 +50,11 @@
 
   img {
     width: auto;
-    max-width: 150px;
-    height: 170px;
+    max-width: 130px;
+    height: 150px;
     object-fit: contain;
-    border-radius: 8px;
-    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 14px 34px -14px hsla(28, 30%, 15%, 0.35);
   }
 
   @media (max-width: 767px) {
@@ -84,9 +86,13 @@
 }
 
 .title {
-  @include candle.title(clamp(30px, 4.2vw, 54px), 600);
-  margin: 8px 0 0;
-  letter-spacing: -0.02em;
+  @include candle.title(40px, 600);
+  margin: 6px 0 0;
+  line-height: 1.08;
+
+  @media (max-width: 767px) {
+    font-size: 28px;
+  }
 
   @media (max-width: 767px) {
     grid-column: 2;
@@ -108,10 +114,10 @@
   display: flex;
   flex-wrap: wrap;
   row-gap: 10px;
-  margin-top: 18px;
+  margin-top: 14px;
 
   div {
-    padding: 0 22px;
+    padding: 0 20px;
     border-left: 1px solid rgba(47, 38, 34, 0.14);
 
     &:first-child {
@@ -122,7 +128,7 @@
 
   b {
     display: block;
-    @include candle.title(28px, 600);
+    @include candle.title(22px, 600);
   }
 
   span {
@@ -143,7 +149,7 @@
     }
 
     b {
-      font-size: 21px;
+      font-size: 19px;
     }
 
     span {
@@ -167,14 +173,14 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  height: 42px;
-  padding: 0 18px;
+  height: 38px;
+  padding: 0 16px;
   border: 0;
   border-radius: var(--radius-pill);
   background: var(--surface);
   color: var(--ink);
-  font-size: 13.5px;
-  font-weight: 650;
+  font-size: 13px;
+  font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
   @include candle.transition(background-color);
@@ -199,9 +205,9 @@
   padding-bottom: var(--space-12);
 
   @media (min-width: 1100px) {
-    grid-template-columns: 270px minmax(0, var(--reading-width));
-    gap: 64px;
-    padding-top: 34px;
+    grid-template-columns: 260px minmax(0, var(--reading-width));
+    gap: 56px;
+    padding-top: 28px;
   }
 }
 
@@ -248,10 +254,10 @@
 
 // ---------- Reading text ----------
 .prose {
-  @include candle.reading(19px);
+  @include candle.reading(17.5px);
 
   @media (max-width: 767px) {
-    font-size: 18px;
+    font-size: 17px;
   }
 
   p,
@@ -274,50 +280,37 @@
   }
 
   h3 {
-    margin: 1.6em 0 0.5em;
-    @include candle.title(26px, 600);
+    margin: 1.5em 0 0.4em;
+    @include candle.title(22px, 600);
   }
 
-  // Quotations: a cream card with a gold opening mark.
+  // Quotations: indented italic with a thin gold rule, not a card, so
+  // the headings stay the strongest marks on the page.
   blockquote {
-    position: relative;
-    margin: 1.6em 0;
-    padding: 28px 30px 24px 70px;
-    border-radius: 22px;
-    background: var(--surface);
-    box-shadow:
-      var(--shadow-card),
-      inset 0 0 0 1px var(--line-soft);
-
-    &::before {
-      content: '\201C';
-      position: absolute;
-      top: 12px;
-      left: 22px;
-      font-family: var(--font-title);
-      font-size: 76px;
-      line-height: 1;
-      color: var(--gold-soft);
-    }
+    margin: 1.1em 0;
+    padding: 2px 0 2px 20px;
+    border-left: 2px solid var(--gold-soft);
 
     p {
       margin: 0;
       font-family: var(--font-title);
-      font-size: 25px;
+      font-size: 21px;
       font-style: italic;
       font-weight: 500;
-      line-height: 1.38;
+      line-height: 1.4;
       color: var(--ink);
+      @include candle.lining;
     }
 
     p + p {
-      margin-top: 12px;
+      margin-top: 8px;
     }
 
     // The citation line, whether in its own <p> or bare.
     cite,
     p:has(> cite) {
       display: block;
+      margin-top: 4px;
       font-family: var(--font-ui);
       font-size: 12.5px;
       font-style: normal;
@@ -326,20 +319,11 @@
       color: var(--ink-3);
     }
 
-    // Phones: a simple gold rule, not a card.
     @media (max-width: 767px) {
-      padding: 4px 0 4px 18px;
-      border-left: 2px solid var(--gold-soft);
-      border-radius: 0;
-      background: none;
-      box-shadow: none;
-
-      &::before {
-        display: none;
-      }
+      padding-left: 16px;
 
       p {
-        font-size: 22px;
+        font-size: 19px;
       }
     }
   }
@@ -356,27 +340,28 @@
   float: left;
   margin: 0.08em 0.12em 0 0;
   font-family: var(--font-title);
-  font-size: 4.6em;
+  font-size: 3.4em;
   font-weight: 600;
   line-height: 0.8;
   color: var(--wine);
 }
 
 .chapter {
-  margin-top: var(--space-12);
+  margin-top: 40px;
   scroll-margin-top: calc(var(--header-h) + 60px);
 }
 
-// "01" in gold, with a hairline to the right.
+// A small gold "01", with a hairline to the right.
 .chapterLabel {
   display: flex;
   align-items: center;
-  gap: 14px;
-  font-family: var(--font-title);
-  font-size: 54px;
-  font-weight: 500;
+  gap: 12px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
   line-height: 1;
-  color: var(--gold-soft);
+  color: var(--gold);
+  @include candle.lining;
 
   &::after {
     content: '';
@@ -384,16 +369,16 @@
     height: 1px;
     background: var(--hairline);
   }
-
-  @media (max-width: 767px) {
-    font-size: 40px;
-  }
 }
 
 .chapterTitle {
-  margin: 6px 0 20px;
-  @include candle.title(clamp(34px, 4vw, 46px), 600);
-  letter-spacing: -0.02em;
+  margin: 8px 0 14px;
+  @include candle.title(32px, 600);
+  line-height: 1.15;
+
+  @media (max-width: 767px) {
+    font-size: 28px;
+  }
   scroll-margin-top: calc(var(--header-h) + 60px);
 }
 
@@ -458,7 +443,7 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
-    padding: 18px 44px 18px 20px;
+    padding: 14px 40px 14px 16px;
     border-radius: var(--radius-xl);
     background: var(--surface);
     box-shadow:
@@ -474,7 +459,7 @@
 }
 
 .nextLabel {
-  @include candle.title(22px, 600);
+  @include candle.title(19px, 600);
 }
 
 .nextDetail {
@@ -491,36 +476,25 @@
   color: var(--ink-3);
 }
 
-// "In their own words" on the teachings page.
+// "In their own words" on the teachings page: a plain list.
 .quotes {
-  display: grid;
-  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--hairline);
 
-  blockquote {
-    position: relative;
-    margin: 0;
-    padding: 26px 26px 24px 64px;
-    border-radius: var(--radius-xl);
-    background: var(--surface);
-    box-shadow:
-      var(--shadow-card),
-      inset 0 0 0 1px var(--line-soft);
+  li {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--hairline);
     font-family: var(--font-title);
-    font-size: 23px;
+    font-size: 21px;
     font-style: italic;
     font-weight: 500;
     line-height: 1.4;
+    @include candle.lining;
 
-    &::before {
-      content: '\201C';
-      position: absolute;
-      top: 10px;
-      left: 20px;
-      font-family: var(--font-title);
-      font-size: 64px;
-      font-style: normal;
-      line-height: 1;
-      color: var(--gold-soft);
+    @media (max-width: 767px) {
+      font-size: 19px;
     }
   }
 }
