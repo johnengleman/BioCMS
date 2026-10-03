@@ -53,27 +53,8 @@
   }
 }
 
-.badge {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 6px 11px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 250, 243, 0.86);
-  color: var(--ink);
-  font-size: 11.5px;
-  font-weight: 700;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-.feastBadge {
-  background: var(--wine);
-  color: var(--on-dark);
-}
-
 .body {
-  padding: 18px 12px 6px;
+  padding: 18px 12px 14px;
 }
 
 .kicker {
@@ -82,6 +63,17 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--card-dark-ink-3);
+  @include candle.lining;
+}
+
+// The years lead the label, in gold.
+.year {
+  color: #e2c58f;
+}
+
+.dot {
+  padding: 0 7px;
+  opacity: 0.6;
 }
 
 .name {
@@ -96,44 +88,22 @@
   }
 }
 
-// The first five lines, fading into the card; the saint page has the
-// rest. Cards keep similar heights, so the waterfall reads as a set.
+// The whole summary: its length sets the card's height.
 .summary {
   @include candle.reading(15.5px);
-  max-height: calc(1.6em * 5);
   margin-top: 12px;
-  overflow: hidden;
   line-height: 1.6;
   color: var(--card-dark-ink-2);
-  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
-  mask-image: linear-gradient(to bottom, #000 55%, transparent);
 
   p + p {
     margin-top: 0.6em;
   }
-}
 
-// One quiet line: feast day · years · church.
-.facts {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 14px;
-  padding-top: 12px;
-  border-top: 1px solid var(--card-dark-line);
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.5;
-  color: var(--card-dark-ink-2);
-  @include candle.lining;
-
-  b {
-    font-weight: 600;
-    color: var(--card-dark-ink);
-  }
-
-  > * + *::before {
-    content: '·';
-    padding: 0 7px;
-    color: var(--card-dark-ink-3);
+  // Phones show one column; keep long summaries short there.
+  @media (max-width: 639px) {
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }

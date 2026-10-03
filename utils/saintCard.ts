@@ -2,21 +2,6 @@ import parseList from './parseList'
 
 // Small labels for the saint story cards (components/saint/SaintSummary).
 
-const MONTHS_SHORT = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
-]
-
 // "2000-10-01" → { month: 10, day: 1 }. Read as text, so the day never
 // shifts with time zones.
 export const feastParts = (date?: string | null) => {
@@ -24,37 +9,6 @@ export const feastParts = (date?: string | null) => {
   return match
     ? { month: Number(match[1]), day: Number(match[2]) }
     : null
-}
-
-// "Oct 1"
-export const feastShort = (date?: string | null) => {
-  const parts = feastParts(date)
-  return parts ? `${MONTHS_SHORT[parts.month - 1]} ${parts.day}` : ''
-}
-
-// The feast in the visitor's tradition, else the other calendar.
-export const feastFor = (
-  saint: {
-    feast_day_catholic?: string | null
-    feast_day_orthodox?: string | null
-  },
-  church?: string,
-) =>
-  church === 'orthodox'
-    ? saint.feast_day_orthodox || saint.feast_day_catholic
-    : saint.feast_day_catholic || saint.feast_day_orthodox
-
-// Days from today to the next feast (0 = today), in local time.
-export const daysUntilFeast = (date?: string | null) => {
-  const parts = feastParts(date)
-  if (!parts) return null
-  const now = new Date()
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
-  let next = new Date(now.getFullYear(), parts.month - 1, parts.day)
-  if (next < today) {
-    next = new Date(now.getFullYear() + 1, parts.month - 1, parts.day)
-  }
-  return Math.round((next.getTime() - today.getTime()) / 86400000)
 }
 
 // Plural category names as a short singular role ("Nuns" → "Nun").
@@ -116,5 +70,17 @@ export const churchLabel = (venerated?: unknown) => {
   return ''
 }
 
-export const yearsLabel = (birth?: number | null, death?: number | null) =>
-  birth || death ? `${birth || '?'}–${death || '?'}` : ''
+// "1873–1897". One-sided dates read "d. 1966" or "b. 1873", and negative
+// years read as BC, so a pill never shows a "?".
+const yearText = (year: number) => (year < 0 ? `${-year} BC` : String(year))
+
+export const yearsLabel = (birth?: number | null, death?: number | null) => {
+  if (birth && death) {
+    if (birth < 0 && death < 0) return `${-birth}–${yearText(death)}`
+    if (birth < 0) return `${yearText(birth)}–AD ${death}`
+    return `${yearText(birth)}–${yearText(death)}`
+  }
+  if (death) return `d. ${yearText(death)}`
+  if (birth) return `b. ${yearText(birth)}`
+  return ''
+}

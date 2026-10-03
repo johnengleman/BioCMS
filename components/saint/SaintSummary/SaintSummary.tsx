@@ -1,13 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useMounted } from '../../../hooks/useMounted'
-import { useTradition } from '../../../hooks/useTradition'
 import {
-  churchLabel,
-  daysUntilFeast,
-  feastFor,
-  feastShort,
   placeLabel,
   roleLabel,
   yearsLabel,
@@ -18,42 +12,21 @@ import styles from './styles.module.scss'
 
 const LONG_NAME = 28
 
-const badgeFor = (
-  saint,
-  feast: string | null | undefined,
-  mounted: boolean,
-) => {
-  // Feast badges depend on today's date, so they wait for the browser.
-  const days = mounted ? daysUntilFeast(feast) : null
-  if (days === 0) return { label: 'Feast today', feast: true }
-  if (days !== null && days <= 7)
-    return { label: 'Feast this week', feast: false }
-  return null
-}
-
 // A saint in the waterfall ("Travel" design): a dark card with a fixed
 // 16:10 image at the top, so photographs and icons look like one set.
-// Below it: role and place, the short name, the first lines of the
-// saint's summary, and one line of facts (feast · years · church). Only
-// a near feast day gets a badge. Also used for "Related saints".
+// Below it: the years (in gold, first, because how recent a saint is,
+// is the first thing a reader scans for), role and place, the short
+// name, and the whole summary. Summaries keep their own length, so the
+// cards have different heights and the waterfall stays lively. There is
+// no footer; the feast day and the rest are on the saint page. Also
+// used for "Related saints".
 const SaintSummary = ({ data }: { data: any }) => {
-  const { church } = useTradition()
-  const mounted = useMounted()
   const saint = data || {}
   const { name, profile_image, summary, slug } = saint
-  const feast = feastFor(saint, church)
-  const badge = badgeFor(saint, feast, mounted)
   const kicker = [roleLabel(saint.categories), placeLabel(saint)]
     .filter(Boolean)
     .join(' · ')
-  const feastLabel = feastShort(feast)
-  const facts = [
-    yearsLabel(saint.birth_year, saint.death_year),
-    churchLabel(saint.venerated_in).replace(
-      'Both',
-      'Catholic and Orthodox',
-    ),
-  ].filter(Boolean)
+  const years = yearsLabel(saint.birth_year, saint.death_year)
   const shortName =
     name?.length > LONG_NAME ? splitSaintName(name).title : name
   const position =
@@ -81,35 +54,33 @@ const SaintSummary = ({ data }: { data: any }) => {
             style={{ objectPosition: position }}
           />
         )}
-        {badge && (
-          <span
-            className={`${styles.badge} ${badge.feast ? styles.feastBadge : ''}`}
-          >
-            {badge.label}
-          </span>
-        )}
       </div>
       <div className={styles.body}>
-        {kicker && <div className={styles.kicker}>{kicker}</div>}
+        {(years || kicker) && (
+          <div className={styles.kicker}>
+            {years && (
+              <span className={styles.year}>
+                <span className="visually-hidden">Lived </span>
+                {years}
+              </span>
+            )}
+            {years && kicker && (
+              <span
+                className={styles.dot}
+                aria-hidden="true"
+              >
+                ·
+              </span>
+            )}
+            {kicker}
+          </div>
+        )}
         <h3 className={styles.name}>{shortName}</h3>
         {summary && (
           <div
             className={styles.summary}
             dangerouslySetInnerHTML={{ __html: smartQuotes(summary) }}
           />
-        )}
-        {(feastLabel || facts.length > 0) && (
-          <p className={styles.facts}>
-            {feastLabel && (
-              <b>
-                <span className="visually-hidden">Feast day </span>
-                {feastLabel}
-              </b>
-            )}
-            {facts.map((fact) => (
-              <span key={fact}>{fact}</span>
-            ))}
-          </p>
         )}
       </div>
     </Link>
