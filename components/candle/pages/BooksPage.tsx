@@ -2,7 +2,6 @@ import { getBooksBundle } from '../../../queries/getBooksBundle'
 import SiteHeader from '../SiteHeader/SiteHeader'
 import SiteFooter from '../SiteFooter/SiteFooter'
 import HomeHero from '../HomeHero/HomeHero'
-import { TraditionShowing } from '../TraditionText/TraditionText'
 import TraditionWelcome from '../TraditionWelcome/TraditionWelcome'
 import {
   BooksContent,
@@ -40,9 +39,6 @@ const BooksPage = async ({ genre = '' }: { genre?: string }) => {
             filters={<BooksPills />}
           />
           <div className={styles.results}>
-            <span>
-              <TraditionShowing prefix="Showing books for" />
-            </span>
             <BooksSaintMenu />
           </div>
           <BooksContent

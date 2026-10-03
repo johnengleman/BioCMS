@@ -12,23 +12,8 @@
   }
 }
 
-// "Showing Catholic saints · Change"
-.showing {
-  @include candle.container;
-  padding-top: var(--space-6);
-  font-size: 13px;
-  color: var(--ink-2);
-
-  a {
-    color: var(--wine);
-    font-weight: 650;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-}
-
 .list {
   @include candle.container;
-  margin-top: var(--space-5);
+  margin-top: var(--space-6);
   padding-bottom: var(--space-12);
 }

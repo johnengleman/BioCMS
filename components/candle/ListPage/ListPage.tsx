@@ -2,7 +2,6 @@ import type { ReactNode } from 'react'
 import SiteHeader from '../SiteHeader/SiteHeader'
 import SiteFooter from '../SiteFooter/SiteFooter'
 import ListHero from '../ListHero/ListHero'
-import { TraditionShowing } from '../TraditionText/TraditionText'
 import TraditionWelcome from '../TraditionWelcome/TraditionWelcome'
 import type { ListKind } from '../../../utils/listParams'
 import styles from './styles.module.scss'
@@ -36,9 +35,6 @@ const ListPage = ({
         subtitle={subtitle}
         filter={filter}
       />
-      <p className={styles.showing}>
-        <TraditionShowing />
-      </p>
       <div className={styles.list}>{children}</div>
     </main>
     <SiteFooter />
