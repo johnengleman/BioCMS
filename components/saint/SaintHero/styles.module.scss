@@ -16,41 +16,41 @@
 .single {
   height: auto;
   grid-template-columns: auto minmax(0, 1fr);
-  gap: 60px;
+  gap: 40px;
   align-items: center;
-  padding: 48px 60px;
+  padding: 32px 40px;
   overflow: hidden;
-  border-radius: var(--radius-3xl);
+  border-radius: var(--radius-xl);
   background: var(--panel);
 
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
     justify-items: center;
-    gap: 22px;
+    gap: 14px;
     height: auto;
-    padding: 26px 20px 30px;
+    padding: 18px 16px 20px;
     border-radius: 0;
     text-align: center;
   }
 }
 
 .portrait {
-  height: 400px;
+  height: 280px;
 
   img {
     width: auto;
     height: 100%;
-    border-radius: 10px;
-    box-shadow: var(--shadow-lg);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 14px 34px -14px hsla(28, 30%, 15%, 0.35);
   }
 
   @media (max-width: 767px) {
-    height: 300px;
+    height: 220px;
   }
 }
 
 .copy {
-  max-width: 580px;
+  max-width: 700px;
 }
 
 .kicker {
@@ -58,6 +58,7 @@
   align-items: center;
   gap: 6px;
   @include candle.eyebrow;
+  font-size: 12px;
 
   svg {
     width: 14px;
@@ -70,13 +71,18 @@
 }
 
 .singleTitle {
-  @include candle.title(clamp(40px, 5vw, 60px), 600);
-  margin: 12px 0 16px;
-  letter-spacing: -0.02em;
+  @include candle.title(48px, 600);
+  margin: 8px 0 12px;
+  line-height: 1.06;
+
+  @media (max-width: 767px) {
+    font-size: 36px;
+  }
 }
 
 .summary {
-  @include candle.reading(18px);
+  @include candle.reading(17.5px);
+  line-height: 1.65;
   color: var(--ink-2);
   display: -webkit-box;
   -webkit-line-clamp: 4;
@@ -84,7 +90,7 @@
   overflow: hidden;
 
   @media (max-width: 767px) {
-    font-size: 16.5px;
+    font-size: 17px;
   }
 }
 
@@ -92,19 +98,25 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 26px;
+  margin-top: 20px;
+
+  // The hero buttons are a step smaller than the site default.
+  a {
+    min-height: 42px;
+    padding: 0 20px;
+  }
 
   @media (max-width: 767px) {
     justify-content: center;
-    margin-top: 18px;
+    margin-top: 12px;
   }
 }
 
 .round {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
+  width: 42px;
+  height: 42px;
   border: 1px solid var(--hairline);
   border-radius: var(--radius-pill);
   background: var(--surface);
@@ -113,20 +125,20 @@
   @include candle.focus-ring;
 
   svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 }
 
 // Tablets: a tighter panel, so long names have room.
 @media (min-width: 768px) and (max-width: 1099px) {
   .single {
-    gap: 32px;
-    padding: 36px;
+    gap: 28px;
+    padding: 28px;
   }
 
   .portrait {
-    height: 320px;
+    height: 240px;
   }
 
   .singleTitle {

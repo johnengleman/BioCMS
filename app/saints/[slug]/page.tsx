@@ -29,7 +29,6 @@ import SaintHero from '../../../components/saint/SaintHero/SaintHero'
 import FeastValue from '../../../components/saint/FeastValue/FeastValue'
 import RelatedSaints from '../../../components/saint/RelatedSaints/RelatedSaints'
 import ImageCredit from '../../../components/candle/ImageCredit/ImageCredit'
-import StatusPill from '../../../components/candle/StatusPill/StatusPill'
 import styles from './candle.module.scss'
 
 import { NextPageProps } from '../../../types/nextjs'
@@ -46,9 +45,6 @@ export const generateMetadata = async (
   const { slug } = await props.params
   return saintMetadata(slug, 'saint')
 }
-
-const MIRACLES_SHOWN = 4
-const QUOTES_SHOWN = 4
 
 // "holy_women" -> "Holy Women"
 const formatCategory = (value: string) =>
@@ -88,9 +84,6 @@ const SaintPage = async (props: NextPageProps) => {
   const chapters = getChapters(data.biography)
   const miracleBook = getMiracleBook(data.miracles?.[0]?.miracles)
   const miracles = miracleBook.groups.flatMap((g) => g.entries)
-  const groups = miracleBook.groups.filter(
-    (g) => g.title && g.entries.length,
-  )
   const teachings = getChapters(data.teachings?.[0]?.teachings)
   const quotes = (data.quotes || []).filter((q) => q.text)
   const prayers = data.prayers || []
@@ -111,35 +104,25 @@ const SaintPage = async (props: NextPageProps) => {
   const tradition = churchLabel(data.venerated_in)
   const summaryText = plainText(data.summary)
 
+  const wordsTitle =
+    teachings.length && quotes.length
+      ? 'Teachings and quotes'
+      : teachings.length
+        ? 'Teachings'
+        : 'Quotes'
+
+  // The person first; miracles last.
   const tabs = [
     { href: '#story', label: 'Life' },
-    miracles.length && {
-      href: '#miracles',
-      label: 'Miracles',
-      count: miracles.length,
-    },
-    prayers.length && {
-      href: '#prayers',
-      label: 'Prayers',
-      count: prayers.length,
-    },
-    teachings.length && {
+    prayers.length && { href: '#prayers', label: 'Prayers' },
+    (teachings.length || quotes.length) && {
       href: '#teachings',
-      label: 'Teachings',
-      count: teachings.length,
-    },
-    quotes.length && {
-      href: '#quotes',
-      label: 'Quotes',
-      count: quotes.length,
+      label: teachings.length ? 'Teachings' : 'Quotes',
     },
     hasRelic && { href: '#relics', label: 'Relics' },
-    galleryImages.length && {
-      href: '#images',
-      label: 'Images',
-      count: images.length,
-    },
-  ].filter(Boolean) as { href: string; label: string; count?: number }[]
+    galleryImages.length && { href: '#images', label: 'Images' },
+    miracles.length && { href: '#miracles', label: 'Miracles' },
+  ].filter(Boolean) as { href: string; label: string }[]
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -151,11 +134,6 @@ const SaintPage = async (props: NextPageProps) => {
     deathPlace: data.death_location,
     description: data.summary,
   }
-
-  const largestGroup = Math.max(
-    1,
-    ...groups.map((g) => g.entries.length),
-  )
 
   return (
     <div className={styles.page}>
@@ -216,7 +194,6 @@ const SaintPage = async (props: NextPageProps) => {
               className={i === 0 ? styles.tabOn : undefined}
             >
               {t.label}
-              {t.count ? <em>{t.count}</em> : null}
             </a>
           ))}
         </nav>
@@ -228,9 +205,12 @@ const SaintPage = async (props: NextPageProps) => {
               id="story"
               aria-labelledby="story-title"
             >
-              <div className={styles.blockHead}>
-                <h2 id="story-title">The story</h2>
-              </div>
+              <h2
+                id="story-title"
+                className={styles.blockTitle}
+              >
+                The story
+              </h2>
               {chapters.length > 0 && (
                 <>
                   <ol className={styles.chapters}>
@@ -243,7 +223,6 @@ const SaintPage = async (props: NextPageProps) => {
                           <span className={styles.chapterTitle}>
                             {c.title}
                           </span>
-                          <LuChevronRight aria-hidden="true" />
                         </Link>
                       </li>
                     ))}
@@ -258,166 +237,6 @@ const SaintPage = async (props: NextPageProps) => {
                 </>
               )}
             </section>
-          </div>
-
-          <aside className={styles.side}>
-            <div className={styles.sideCard}>
-              {hasFeast && (
-                <div className={styles.sideTop}>
-                  <div>
-                    <p className={styles.eyebrow}>Feast day</p>
-                    <b>{feastValue}</b>
-                    {bothFeasts && (
-                      <small>
-                        Catholic {catholicFeast} · Orthodox{' '}
-                        {orthodoxFeast}
-                      </small>
-                    )}
-                  </div>
-                </div>
-              )}
-              {prayers.length > 0 && (
-                <div className={styles.sidePrayers}>
-                  {prayers.slice(0, 4).map((p) => (
-                    <Link
-                      key={p.prayer_slug}
-                      href={`${base}/novenas/${p.prayer_slug}`}
-                    >
-                      <span
-                        className={styles.prayerIcon}
-                        aria-hidden="true"
-                      >
-                        <LuHandHeart />
-                      </span>
-                      <span>{p.prayer_title}</span>
-                      <LuChevronRight aria-hidden="true" />
-                    </Link>
-                  ))}
-                </div>
-              )}
-              <a
-                href={APP_URL}
-                className={styles.appButton}
-              >
-                <LuSmartphone aria-hidden="true" />
-                Pray in the app
-              </a>
-              <div className={styles.rows}>
-                {data.patron && (
-                  <div>
-                    <span>Patron of</span>
-                    <span>{data.patron}</span>
-                  </div>
-                )}
-                {data.birth_location && (
-                  <div>
-                    <span>Born</span>
-                    <span>
-                      {[data.birth_year, data.birth_location]
-                        .filter(Boolean)
-                        .join(', ')}
-                    </span>
-                  </div>
-                )}
-                {data.death_location && (
-                  <div>
-                    <span>Died</span>
-                    <span>
-                      {[data.death_year, data.death_location]
-                        .filter(Boolean)
-                        .join(', ')}
-                    </span>
-                  </div>
-                )}
-                {tradition && (
-                  <div>
-                    <span>Venerated</span>
-                    <span>
-                      {tradition === 'Both'
-                        ? 'Catholic and Orthodox'
-                        : tradition}
-                    </span>
-                  </div>
-                )}
-                {data.relic_location && (
-                  <div>
-                    <span>Relics</span>
-                    <span>{data.relic_location}</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          </aside>
-        </div>
-
-        <div className={styles.rest}>
-
-            {miracles.length > 0 && (
-              <section
-                className={styles.block}
-                id="miracles"
-                aria-labelledby="miracles-title"
-              >
-                <div className={styles.blockHead}>
-                  <h2 id="miracles-title">Miracles</h2>
-                </div>
-                {groups.length > 1 && (
-                  <div className={styles.groups}>
-                    {groups.slice(0, 4).map((g) => (
-                      <Link
-                        key={g.id || g.title}
-                        href={`${base}/miracles#${g.id}`}
-                      >
-                        <small>{g.title}</small>
-                        <b>{g.entries.length}</b>
-                        <span className={styles.bar}>
-                          <i
-                            style={{
-                              width: `${Math.max(
-                                4,
-                                (g.entries.length / largestGroup) *
-                                  100,
-                              )}%`,
-                            }}
-                          />
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
-                )}
-                <ol className={styles.miracles}>
-                  {miracles.slice(0, MIRACLES_SHOWN).map((m) => (
-                    <li key={m.id || m.number}>
-                      <Link href={`${base}/miracles#${m.id}`}>
-                        <span className={styles.miracleNo}>
-                          {m.number}
-                        </span>
-                        <span>
-                          <span className={styles.miracleTitle}>
-                            {m.title}
-                          </span>
-                          {m.status && (
-                            <StatusPill
-                              status={m.status}
-                              short
-                            />
-                          )}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ol>
-                <Link
-                  href={`${base}/miracles`}
-                  className={styles.outline}
-                >
-                  {miracles.length > MIRACLES_SHOWN
-                    ? `Show all ${miracles.length.toLocaleString('en-US')} accounts`
-                    : 'Read the accounts'}
-                  <LuArrowRight aria-hidden="true" />
-                </Link>
-              </section>
-            )}
 
             {prayers.length > 0 && (
               <section
@@ -425,9 +244,12 @@ const SaintPage = async (props: NextPageProps) => {
                 id="prayers"
                 aria-labelledby="prayers-title"
               >
-                <div className={styles.blockHead}>
-                  <h2 id="prayers-title">Prayers</h2>
-                </div>
+                <h2
+                  id="prayers-title"
+                  className={styles.blockTitle}
+                >
+                  Prayers
+                </h2>
                 <div className={styles.prayerList}>
                   {prayers.map((p) => (
                     <Link
@@ -448,55 +270,40 @@ const SaintPage = async (props: NextPageProps) => {
               </section>
             )}
 
-            {teachings.length > 0 && (
+            {(teachings.length > 0 || quotes.length > 0) && (
               <section
                 className={styles.block}
                 id="teachings"
                 aria-labelledby="teachings-title"
               >
-                <div className={styles.blockHead}>
-                  <h2 id="teachings-title">Teachings</h2>
-                </div>
-                <ol className={styles.chapters}>
-                  {teachings.map((t, i) => (
-                    <li key={t.id || i}>
-                      <Link href={`${base}/teachings#${t.id}`}>
-                        <span className={styles.chapterNo}>
-                          {String(i + 1).padStart(2, '0')}
-                        </span>
-                        <span className={styles.chapterTitle}>
+                <h2
+                  id="teachings-title"
+                  className={styles.blockTitle}
+                >
+                  {wordsTitle}
+                </h2>
+                {quotes[0] && (
+                  <figure className={styles.quote}>
+                    <blockquote>{quotes[0].text}</blockquote>
+                    {quotes.length > 1 && (
+                      <figcaption>
+                        <Link href="/quotes">
+                          All {quotes.length} quotes
+                        </Link>
+                      </figcaption>
+                    )}
+                  </figure>
+                )}
+                {teachings.length > 0 && (
+                  <ul className={styles.teachings}>
+                    {teachings.map((t, i) => (
+                      <li key={t.id || i}>
+                        <Link href={`${base}/teachings#${t.id}`}>
                           {t.title}
-                        </span>
-                        <LuChevronRight aria-hidden="true" />
-                      </Link>
-                    </li>
-                  ))}
-                </ol>
-              </section>
-            )}
-
-            {quotes.length > 0 && (
-              <section
-                className={styles.block}
-                id="quotes"
-                aria-labelledby="quotes-title"
-              >
-                <div className={styles.blockHead}>
-                  <h2 id="quotes-title">Quotes</h2>
-                </div>
-                <div className={styles.quotes}>
-                  {quotes.slice(0, QUOTES_SHOWN).map((q, i) => (
-                    <blockquote key={i}>{q.text}</blockquote>
-                  ))}
-                </div>
-                {quotes.length > QUOTES_SHOWN && (
-                  <Link
-                    href="/quotes"
-                    className={styles.outline}
-                  >
-                    All {quotes.length} quotes
-                    <LuArrowRight aria-hidden="true" />
-                  </Link>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 )}
               </section>
             )}
@@ -507,9 +314,12 @@ const SaintPage = async (props: NextPageProps) => {
                 id="relics"
                 aria-labelledby="relics-title"
               >
-                <div className={styles.blockHead}>
-                  <h2 id="relics-title">Relics</h2>
-                </div>
+                <h2
+                  id="relics-title"
+                  className={styles.blockTitle}
+                >
+                  Relics
+                </h2>
                 <div className={styles.relic}>
                   {data.relic_image?.id && (
                     <figure>
@@ -551,9 +361,12 @@ const SaintPage = async (props: NextPageProps) => {
                 id="images"
                 aria-labelledby="images-title"
               >
-                <div className={styles.blockHead}>
-                  <h2 id="images-title">Images</h2>
-                </div>
+                <h2
+                  id="images-title"
+                  className={styles.blockTitle}
+                >
+                  Images
+                </h2>
                 <div className={styles.gallery}>
                   {images.map((img) => (
                     <figure key={img.id}>
@@ -573,11 +386,113 @@ const SaintPage = async (props: NextPageProps) => {
                 </div>
               </section>
             )}
+
+            {/* Miracles come last and stay quiet: readers meet the
+                person first. */}
+            {miracles.length > 0 && (
+              <Link
+                href={`${base}/miracles`}
+                id="miracles"
+                className={styles.quietRow}
+              >
+                Miracles and answered prayers
+                <span>
+                  {miracles.length.toLocaleString('en-US')}{' '}
+                  {miracles.length === 1 ? 'account' : 'accounts'}
+                  <LuChevronRight aria-hidden="true" />
+                </span>
+              </Link>
+            )}
+
             {images.length === 1 && image && (
               <figure className={styles.credit}>
                 <ImageCredit image={image} />
               </figure>
             )}
+          </div>
+
+          <aside className={styles.side}>
+            <div className={styles.sideCard}>
+              <dl className={styles.facts}>
+                {hasFeast && (
+                  <div className={styles.feast}>
+                    <dt>Feast day</dt>
+                    <dd>
+                      <b>{feastValue}</b>
+                      {bothFeasts && (
+                        <small>
+                          Catholic {catholicFeast} · Orthodox{' '}
+                          {orthodoxFeast}
+                        </small>
+                      )}
+                    </dd>
+                  </div>
+                )}
+                {data.birth_location && (
+                  <div>
+                    <dt>Born</dt>
+                    <dd>
+                      {[data.birth_year, data.birth_location]
+                        .filter(Boolean)
+                        .join(', ')}
+                    </dd>
+                  </div>
+                )}
+                {data.death_location && (
+                  <div>
+                    <dt>Died</dt>
+                    <dd>
+                      {[data.death_year, data.death_location]
+                        .filter(Boolean)
+                        .join(', ')}
+                    </dd>
+                  </div>
+                )}
+                {data.patron && (
+                  <div>
+                    <dt>Patron of</dt>
+                    <dd>{data.patron}</dd>
+                  </div>
+                )}
+                {tradition && (
+                  <div>
+                    <dt>Venerated</dt>
+                    <dd>
+                      {tradition === 'Both'
+                        ? 'Catholic and Orthodox'
+                        : tradition}
+                    </dd>
+                  </div>
+                )}
+              </dl>
+              {prayers.length > 0 && (
+                <div className={styles.sidePrayers}>
+                  {prayers.slice(0, 4).map((p) => (
+                    <Link
+                      key={p.prayer_slug}
+                      href={`${base}/novenas/${p.prayer_slug}`}
+                    >
+                      <span
+                        className={styles.prayerIcon}
+                        aria-hidden="true"
+                      >
+                        <LuHandHeart />
+                      </span>
+                      <span>{p.prayer_title}</span>
+                      <LuChevronRight aria-hidden="true" />
+                    </Link>
+                  ))}
+                </div>
+              )}
+              <a
+                href={APP_URL}
+                className={styles.appButton}
+              >
+                <LuSmartphone aria-hidden="true" />
+                Pray in the app
+              </a>
+            </div>
+          </aside>
         </div>
 
         {categories.length > 0 && (

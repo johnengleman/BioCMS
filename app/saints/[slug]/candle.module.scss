@@ -49,15 +49,17 @@
 }
 
 // ---------- Tabs ----------
+// Text tabs with an underline, as on Wikipedia.
 .tabs {
   position: sticky;
   top: var(--header-h);
   z-index: 10;
   display: flex;
-  gap: 6px;
+  gap: 24px;
   overflow-x: auto;
   scrollbar-width: none;
-  padding: 28px 0 14px;
+  margin-top: 18px;
+  border-bottom: 1px solid var(--hairline);
   background: var(--bg);
 
   &::-webkit-scrollbar {
@@ -68,147 +70,93 @@
     display: inline-flex;
     flex: none;
     align-items: center;
-    gap: 6px;
-    height: 40px;
-    padding: 0 18px;
-    border-radius: var(--radius-pill);
+    height: 44px;
+    border-bottom: 2px solid transparent;
     color: var(--ink-2);
-    font-size: 13.5px;
-    font-weight: 600;
-    @include candle.transition(background-color, color);
+    font-size: 14px;
+    font-weight: 500;
+    @include candle.transition(color, border-color);
     @include candle.focus-ring;
 
     &:hover {
-      background: var(--muted);
       color: var(--ink);
-    }
-
-    em {
-      font-style: normal;
-      font-size: 12px;
-      color: var(--ink-3);
     }
   }
 
   .tabOn {
-    background: var(--espresso);
-    color: var(--on-dark);
-
-    &:hover {
-      background: var(--espresso);
-      color: var(--on-dark);
-    }
-
-    em {
-      color: var(--on-dark-3);
-    }
+    border-bottom-color: var(--ink);
+    color: var(--ink);
   }
 
-  // Phones: text tabs with an underline.
   @media (max-width: 767px) {
-    margin: 0 calc(-1 * var(--space-4));
+    margin: 4px calc(-1 * var(--space-4)) 0;
     padding: 0 var(--space-4);
     gap: 22px;
-    border-bottom: 1px solid var(--hairline);
-
-    a {
-      height: 48px;
-      padding: 0;
-      border-bottom: 2px solid transparent;
-      border-radius: 0;
-
-      &:hover {
-        background: none;
-      }
-    }
-
-    .tabOn,
-    .tabOn:hover {
-      border-bottom-color: var(--ink);
-      background: none;
-      color: var(--ink);
-
-      em {
-        color: var(--ink-3);
-      }
-    }
   }
 }
 
 // ---------- Two columns ----------
-// The story with the side card beside it. The card stops with the
-// story; the sections after it use the full width (.rest).
+// All sections on the left, the fact card beside them.
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 0;
   align-items: start;
-  padding: 8px 0 0;
-
-  @media (min-width: 1100px) {
-    grid-template-columns: minmax(0, 1fr) 360px;
-    gap: 72px;
-  }
-}
-
-.rest {
   padding-bottom: 40px;
 
-  // Reading text keeps a comfortable line length at full width.
-  .prose {
-    max-width: 760px;
+  @media (min-width: 1100px) {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 48px;
   }
 }
 
 .content {
   min-width: 0;
+
+  // Reading text keeps a comfortable line length.
+  .prose {
+    max-width: 760px;
+  }
 }
 
 .block {
-  padding: 34px 0;
-  border-top: 1px solid var(--hairline);
-  scroll-margin-top: calc(var(--header-h) + 70px);
-
-  &:first-child {
-    padding-top: 14px;
-    border-top: 0;
-  }
+  padding-top: 30px;
+  scroll-margin-top: calc(var(--header-h) + 60px);
 
   @media (max-width: 767px) {
-    padding: 28px 0;
-
-    &:first-child {
-      padding-top: 22px;
-    }
+    padding-top: 26px;
   }
 }
 
+// A section title with a rule under it, as on Wikipedia.
+.blockTitle,
+.blockHead h2 {
+  @include candle.title(30px, 600);
+  line-height: 1.2;
+}
+
+.blockTitle {
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--hairline);
+}
+
 .blockHead {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-  align-items: end;
-  margin-bottom: 22px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 24px;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--hairline);
 
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-  }
-
-  h2 {
-    @include candle.title(clamp(30px, 3.4vw, 40px), 500);
-    margin-top: 6px;
-  }
-
-  > p {
-    color: var(--ink-2);
-    font-size: 14px;
-    line-height: 1.55;
+  .more {
+    margin-top: 0;
   }
 }
 
 .prose {
-  @include candle.reading(18.5px);
+  @include candle.reading(17.5px);
 
   p + p {
     margin-top: 0.8em;
@@ -221,13 +169,13 @@
   }
 
   @media (max-width: 767px) {
-    font-size: 17.5px;
+    font-size: 17px;
   }
 }
 
 .more {
   @include candle.link-chevron;
-  margin-top: 18px;
+  margin-top: 12px;
 
   svg {
     width: 16px;
@@ -235,37 +183,28 @@
   }
 }
 
-.outline {
-  @include candle.button-outline;
-  margin-top: 24px;
-
-  svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-// Numbered rows: chapters and teachings.
+// Numbered chapter rows, two columns on wide screens.
 .chapters {
-  margin: 22px 0 0;
+  margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--hairline);
+
+  @media (min-width: 768px) {
+    columns: 2;
+    column-gap: 28px;
+  }
+
+  li {
+    break-inside: avoid;
+  }
 
   a {
-    display: grid;
-    grid-template-columns: 40px minmax(0, 1fr) auto;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 8px 0;
     border-bottom: 1px solid var(--hairline);
     @include candle.focus-ring;
-
-    svg {
-      width: 16px;
-      height: 16px;
-      color: var(--ink-3);
-    }
 
     &:hover .chapterTitle {
       color: var(--wine);
@@ -274,118 +213,19 @@
 }
 
 .chapterNo {
-  @include candle.title(22px, 500);
-  color: var(--gold-soft);
+  flex: none;
+  width: 18px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold);
+  @include candle.lining;
 }
 
 .chapterTitle {
-  @include candle.title(22px, 600);
-  @include candle.transition(color);
-}
-
-// Miracles: group figures, then the first accounts.
-.groups {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-radius: 18px;
-  background: var(--muted);
-  margin-bottom: 8px;
-
-  @media (min-width: 900px) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  a {
-    display: block;
-    padding: 16px 18px;
-    @include candle.focus-ring;
-
-    &:hover b {
-      color: var(--wine);
-    }
-  }
-
-  a + a {
-    border-left: 1px solid var(--hairline);
-  }
-
-  small {
-    display: -webkit-box;
-    min-height: 2.6em;
-    overflow: hidden;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    font-size: 12.5px;
-    font-weight: 600;
-    line-height: 1.3;
-    color: var(--ink-2);
-  }
-
-  b {
-    display: block;
-    margin: 4px 0 10px;
-    @include candle.title(30px, 600);
-  }
-
-  @media (max-width: 899px) {
-    a:nth-child(3) {
-      border-left: 0;
-    }
-
-    a:nth-child(n + 3) {
-      border-top: 1px solid var(--hairline);
-    }
-  }
-}
-
-.bar {
-  display: block;
-  height: 3px;
-  border-radius: 9px;
-  background: #e2d5c3;
-
-  i {
-    display: block;
-    height: 100%;
-    border-radius: 9px;
-    background: var(--wine);
-  }
-}
-
-.miracles {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-
-  a {
-    display: grid;
-    grid-template-columns: 44px minmax(0, 1fr);
-    gap: 6px;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--hairline);
-    @include candle.focus-ring;
-
-    &:hover .miracleTitle {
-      color: var(--wine);
-    }
-
-    > span:last-child {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-    }
-  }
-}
-
-.miracleNo {
-  @include candle.title(24px, 500);
-  color: var(--wine);
-}
-
-.miracleTitle {
-  @include candle.title(22px, 600);
-  line-height: 1.2;
+  font-family: var(--font-reading);
+  font-size: 17px;
+  line-height: 1.4;
   @include candle.transition(color);
 }
 
@@ -406,7 +246,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 13px 14px;
+    padding: 11px 12px;
     font-size: 14px;
     font-weight: 600;
     @include candle.transition(background-color);
@@ -433,54 +273,79 @@
   display: grid;
   place-items: center;
   flex: none;
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
   background: var(--wine-tint);
   color: var(--wine);
 
   svg {
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
   }
 }
 
-// Quotes as cream cards in the title serif.
-.quotes {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 14px;
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+// One quote, then the teachings as a line of links.
+.quote {
+  margin: 4px 0 12px;
 
   blockquote {
-    position: relative;
     margin: 0;
-    padding: 26px 26px 24px 58px;
-    border-radius: var(--radius-xl);
-    background: var(--surface);
-    box-shadow:
-      var(--shadow-card),
-      inset 0 0 0 1px var(--line-soft);
     font-family: var(--font-title);
-    font-size: 22px;
+    font-size: 25px;
     font-style: italic;
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1.35;
     color: var(--ink);
+    @include candle.lining;
 
     &::before {
       content: '\201C';
-      position: absolute;
-      top: 10px;
-      left: 18px;
-      font-family: var(--font-title);
-      font-size: 60px;
-      font-style: normal;
-      line-height: 1;
-      color: var(--gold-soft);
+    }
+
+    &::after {
+      content: '\201D';
+    }
+  }
+
+  figcaption {
+    margin-top: 4px;
+    font-size: 13px;
+
+    a {
+      color: var(--wine);
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+    }
+  }
+}
+
+.teachings {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-reading);
+  font-size: 17px;
+  line-height: 1.7;
+
+  li + li::before {
+    content: '·';
+    margin: 0 8px;
+    color: var(--ink-3);
+  }
+
+  a {
+    color: var(--wine);
+    @include candle.focus-ring;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
   }
 }
@@ -519,6 +384,40 @@
   }
 }
 
+// Miracles: one quiet row at the end.
+.quietRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 30px;
+  padding: 12px 0;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  scroll-margin-top: calc(var(--header-h) + 60px);
+  @include candle.focus-ring;
+
+  span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--ink-3);
+    font-weight: 400;
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    color: var(--wine);
+  }
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -542,51 +441,76 @@
 }
 
 .credit {
+  margin-top: 20px;
   font-size: 12px;
   color: var(--ink-3);
 }
 
 // ---------- Side card ----------
 .side {
-  // Narrow screens: the card comes before the story. The feast day and
-  // the app button are already in the bar at the bottom of the phone
-  // screen, so the card shows only prayers and facts there.
+  // Narrow screens: the card comes first. The feast day and the app
+  // button are already in the bar at the bottom of the phone screen.
   @media (max-width: 1099px) {
     order: -1;
-    margin-top: 22px;
+    margin-top: 16px;
 
-    .sideTop,
+    .feast,
     .sideCard > .appButton {
       display: none;
     }
   }
 
   @media (min-width: 1100px) {
-    padding-top: 14px;
+    position: sticky;
+    top: calc(var(--header-h) + 60px);
+    padding-top: 30px;
   }
 }
 
 .sideCard {
-  padding: 24px;
-  border-radius: var(--radius-2xl);
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border-radius: var(--radius-lg);
   background: var(--surface);
   box-shadow:
     var(--shadow-md),
     inset 0 0 0 1px var(--line-soft);
+
+  @media (max-width: 1099px) {
+    box-shadow: inset 0 0 0 1px var(--hairline);
+  }
 }
 
-.sideTop {
-  margin-bottom: 18px;
+.facts {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+
+  div {
+    display: grid;
+    grid-template-columns: 86px minmax(0, 1fr);
+    gap: 12px;
+    align-items: baseline;
+  }
+
+  dt {
+    color: var(--ink-3);
+  }
+
+  dd {
+    margin: 0;
+  }
 
   b {
-    display: block;
-    margin-top: 4px;
-    @include candle.title(32px, 600);
+    @include candle.title(21px, 600);
   }
 
   small {
     display: block;
-    margin-top: 4px;
+    margin-top: 2px;
     font-size: 12.5px;
     color: var(--ink-2);
   }
@@ -595,48 +519,17 @@
 .appButton {
   @include candle.button-primary;
   width: 100%;
-  min-height: 50px;
-  margin-top: 16px;
+  min-height: 42px;
 
   svg {
-    width: 17px;
-    height: 17px;
-  }
-}
-
-.rows {
-  display: grid;
-  gap: 10px;
-  margin-top: 18px;
-  padding-top: 16px;
-  border-top: 1px solid var(--hairline);
-  font-size: 13.5px;
-
-  &:empty {
-    display: none;
-  }
-
-  div {
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
-  }
-
-  span:first-child {
-    flex: none;
-    color: var(--ink-2);
-  }
-
-  span:last-child {
-    font-weight: 600;
-    text-align: right;
+    width: 16px;
+    height: 16px;
   }
 }
 
 // ---------- Related saints ----------
 .related {
-  padding: 40px 0 24px;
-  border-top: 1px solid var(--hairline);
+  padding: 10px 0 24px;
 }
 
 .relatedGrid {
