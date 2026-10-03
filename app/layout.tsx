@@ -42,7 +42,7 @@ export const metadata = {
     'Catholic & Orthodox Saints, their Lives, Miracles Teachings and Prayers',
   icons: {
     icon: [
-      { url: '/favicons/favicon.ico' },
+      { url: '/favicon.ico' },
       {
         url: '/favicons/favicon-16x16.png',
         sizes: '16x16',
