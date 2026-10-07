@@ -1,0 +1,221 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Find a Saint · W2 Side index</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
+:root{--ink:#111;--ink2:#555;--mute:#767676;--line:#E2E2E2;--chip:#F1F1F1;--panel:#F5F5F5;--r:10px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.4;color:var(--ink);background:#666;
+  font-feature-settings:"cv11","ss01";-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block}
+.photo{position:fixed;inset:0;z-index:-1;background:#666 url(../../../public/images/hero/galilee.webp) center 46%/cover no-repeat;filter:grayscale(1)}
+.mobile-only{display:none}
+
+/* header */
+.hdr{position:sticky;top:0;z-index:40;height:56px;background:rgba(255,255,255,.8);
+  -webkit-backdrop-filter:blur(18px) saturate(1.1);backdrop-filter:blur(18px) saturate(1.1);
+  box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.hdr .in{display:flex;align-items:center;height:100%;padding:0 24px}
+.logo{font-size:20px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;margin-right:40px}
+.mark{display:none;width:32px;height:32px;border-radius:8px;background:var(--ink);color:#fff;font-weight:700;font-size:15px;
+  letter-spacing:-.02em;align-items:center;justify-content:center;flex:none}
+.nav{display:flex;gap:24px;height:100%}
+.nav a{position:relative;display:flex;align-items:center;font-size:14px;font-weight:500;color:var(--ink2)}
+.nav a.on{color:var(--ink);font-weight:600}
+.nav a.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--ink)}
+.search{margin-left:auto;display:flex;align-items:center;gap:8px;width:400px;height:36px;padding:0 14px;border-radius:18px;
+  background:#fff;border:1px solid var(--line);color:var(--mute);font-size:14px}
+.search svg{color:var(--ink2);flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:36px;padding:0 16px;border-radius:8px;
+  background:var(--ink);color:#fff;font-size:14px;font-weight:600;white-space:nowrap}
+.hdr .btn{margin-left:12px}
+.menu{display:none;width:40px;height:40px;align-items:center;justify-content:center;flex:none;margin-right:-8px}
+
+/* footer */
+.ft{position:relative;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 24px;
+  background:#fff;border-top:1px solid var(--line)}
+.seg{display:flex;gap:4px}
+.seg a{display:flex;align-items:center;height:30px;padding:0 12px;border-radius:6px;font-size:13px;font-weight:500;color:var(--ink2)}
+.seg a.on{background:var(--ink);color:#fff}
+.ft nav{display:flex;gap:24px;font-size:14px;font-weight:500;color:var(--ink2)}
+
+/* ---------------- home ---------------- */
+.home{display:grid;grid-template-columns:232px minmax(0,1fr);gap:12px;padding:12px 24px 40px;align-items:start}
+.side{position:sticky;top:68px}
+.rail{background:#fff;border-radius:var(--r);padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.06),0 10px 28px -14px rgba(0,0,0,.35)}
+.rail h4{margin:0 0 4px;height:20px;font-size:12.5px;line-height:20px;font-weight:600;color:var(--ink2)}
+.rail section+section{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.cats a{display:flex;align-items:center;justify-content:space-between;height:28px;margin:0 -8px;padding:0 8px;border-radius:6px;font-size:14px}
+.cats a:hover{background:var(--chip)}
+.cats small,.n{font-size:12.5px;color:var(--mute);font-variant-numeric:tabular-nums}
+.months{display:grid;grid-template-columns:repeat(4,50px);grid-auto-rows:28px}
+.months a{position:relative;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:13px;font-weight:600}
+.months a:hover{background:var(--chip)}
+.months a.off{color:var(--mute);font-weight:400;pointer-events:none}
+.months a.now::after{content:"";position:absolute;left:50%;bottom:2px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--ink)}
+.sorts{display:flex;gap:6px}
+.sorts a{display:flex;align-items:center;height:28px;padding:0 10px;border-radius:6px;background:var(--chip);font-size:13px;font-weight:500}
+.credit{position:relative;display:block;margin-top:12px;padding:0 2px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.credit::before{content:"";position:absolute;z-index:-1;left:-40px;right:-20px;top:-22px;bottom:-22px;
+  background:radial-gradient(closest-side,rgba(0,0,0,.42),rgba(0,0,0,0));pointer-events:none}
+.credit b{display:block;font-size:13px;line-height:18px;font-weight:600}
+.credit span{display:block;font-size:11.5px;line-height:16px;color:rgba(255,255,255,.85)}
+.credit a:hover{text-decoration:underline}
+
+.wall{display:flex;gap:12px;align-items:flex-start;min-height:800px}
+.col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:12px}
+.card{display:block;background:#fff;border-radius:var(--r);overflow:hidden;
+  box-shadow:0 1px 2px rgba(0,0,0,.06),0 10px 28px -14px rgba(0,0,0,.35)}
+.card .im{width:100%;height:124px;object-fit:cover;filter:grayscale(1);background:var(--panel)}
+.card .bd{padding:14px 14px 2px}
+.kick{font-size:12.5px;line-height:18px;font-weight:500;color:var(--ink2)}
+.card h3{margin:4px 0 8px;font-size:20px;line-height:1.2;font-weight:700;letter-spacing:-.012em}
+.card p{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink)}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px;height:30px;margin-top:12px;
+  border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2);white-space:nowrap}
+.credit-m{display:none}
+
+/* phone menu sheet (opens from the menu button; home.html#menu) */
+.sheet-menu{display:none}
+.sheet-menu:target{display:block;position:fixed;inset:0;z-index:60;background:#fff;overflow:auto;padding:0 16px 32px}
+.sm-top{display:flex;align-items:center;justify-content:space-between;height:52px;border-bottom:1px solid var(--line);margin:0 -16px;padding:0 16px}
+.sm-top b{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.sm-nav a{display:flex;align-items:center;justify-content:space-between;height:48px;border-bottom:1px solid var(--line);font-size:16px;font-weight:500}
+.sm-nav a.on{font-weight:700}
+.sheet-menu h4{margin:24px 0 4px;font-size:13px;font-weight:600;color:var(--ink2)}
+.sm-cats a{display:flex;align-items:center;justify-content:space-between;height:44px;border-bottom:1px solid var(--line);font-size:15px}
+.sm-months{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:44px;border-top:1px solid var(--line)}
+.sm-months a{position:relative;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);font-size:15px;font-weight:600}
+.sm-months a.off{color:var(--mute);font-weight:400}
+.sm-months a.now::after{content:"";position:absolute;left:50%;bottom:7px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--ink)}
+.sm-sort{display:flex;gap:8px}
+.sm-sort a{display:flex;align-items:center;height:36px;padding:0 14px;border-radius:6px;background:var(--chip);font-size:14px;font-weight:500}
+.sheet-menu .btn{width:100%;height:44px;margin-top:20px}
+
+/* ---------------- saint ---------------- */
+.page{margin:16px 24px 24px;background:#fff;border-radius:16px;padding:40px;box-shadow:0 20px 50px -24px rgba(0,0,0,.45)}
+.sgrid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;align-items:stretch}
+.idcol{position:relative}
+.portrait{margin:0}
+.portrait img{width:205px;height:320px;object-fit:contain;filter:grayscale(1)}
+.portrait figcaption{margin-top:8px;font-size:12.5px;line-height:1.4;color:var(--mute)}
+.facts{position:sticky;top:72px;margin-top:24px;background:var(--panel);border-radius:var(--r);padding:20px}
+.facts dl{margin:0}
+.facts .r{padding:8px 0;border-bottom:1px solid var(--line)}
+.facts .r:first-child{padding-top:0}
+.facts .r:last-child{border-bottom:0}
+.facts dt{font-size:13px;line-height:18px;color:var(--ink2)}
+.facts dd{margin:2px 0 0;font-size:14px;line-height:20px;font-weight:500}
+.facts .btn{display:flex;width:100%;height:38px;margin-top:12px}
+.main{min-width:0}
+.skick{font-size:12.5px;line-height:18px;font-weight:500;color:var(--ink2)}
+h1{margin:6px 0 14px;font-size:48px;line-height:1.05;font-weight:700;letter-spacing:-.025em}
+.lead{max-width:680px;font-size:17.5px;line-height:1.6}
+.lead p{margin:0}
+.lead .portrait-m{display:none}
+.tabs{position:sticky;top:56px;z-index:20;display:flex;gap:28px;height:44px;margin-top:28px;background:#fff;
+  border-bottom:1px solid var(--line)}
+.tabs a{display:flex;align-items:center;height:44px;margin-bottom:-1px;border-bottom:2px solid transparent;font-size:14px;font-weight:600;color:var(--ink2)}
+.tabs a.on{color:var(--ink);border-color:var(--ink)}
+h2{display:flex;align-items:baseline;justify-content:space-between;margin:48px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line);
+  font-size:26px;line-height:1.2;font-weight:600;letter-spacing:-.015em;scroll-margin-top:110px}
+h2 a{font-size:14px;font-weight:600;letter-spacing:0;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.list2{display:grid;grid-template-columns:1fr 1fr;column-gap:48px;margin:0;padding:0;list-style:none}
+.list2.chap{grid-template-rows:repeat(6,auto);grid-auto-flow:column}
+.list2.teach{grid-template-rows:repeat(3,auto);grid-auto-flow:column}
+.list2 li{display:flex;align-items:center;gap:14px;min-height:38px;border-bottom:1px solid var(--line);font-size:15px;font-weight:500}
+.list2 li b{width:20px;flex:none;font-size:12.5px;font-weight:500;color:var(--mute);font-variant-numeric:tabular-nums}
+.quotes{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin:0 0 24px}
+.quotes blockquote{margin:0;font-size:20px;line-height:1.4;font-weight:400;letter-spacing:-.01em}
+.body{max-width:680px;margin:0;font-size:17.5px;line-height:1.6}
+.place{margin:0 0 6px;font-size:15px;font-weight:600}
+.mrow{display:flex;align-items:center;justify-content:space-between;height:48px;margin-top:48px;border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);font-size:15px;color:var(--mute)}
+.photo-credit{position:absolute;top:56px;right:24px;z-index:5;height:16px;font-size:11.5px;line-height:16px;color:rgba(255,255,255,.85);
+  text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.photo-credit::before{content:"";position:absolute;z-index:-1;left:-30px;right:-24px;top:0;bottom:0;
+  background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.32) 30%)}
+.photo-credit a:hover{text-decoration:underline}
+.bbar{display:none}
+
+/* ---------------- phone ---------------- */
+@media (max-width:759px){
+  body{background:#fff;font-size:15px}
+  .photo{position:absolute;inset:auto 0;top:52px;height:88px;z-index:0;background-position:center 52%}
+  .hdr{height:52px;background:#fff;box-shadow:0 1px 0 var(--line)}
+  .hdr .in{padding:0 16px;gap:10px}
+  .logo,.nav,.hdr .btn{display:none}
+  .mark{display:flex}
+  .search{flex:1;width:auto;min-width:0;margin-left:0;background:var(--chip);border-color:transparent;font-size:15px}
+  .menu{display:flex}
+  .ft{flex-direction:column;align-items:flex-start;gap:14px;height:auto;padding:20px 16px 28px}
+  .ft nav{flex-wrap:wrap;gap:8px 20px}
+
+  .home{display:block;padding:0;position:relative;z-index:1;margin-top:72px}
+  .side{display:none}
+  .credit-m{display:block;position:absolute;z-index:2;left:16px;right:16px;top:104px;height:16px;font-size:11.5px;line-height:16px;
+    color:rgba(255,255,255,.85);text-shadow:0 1px 2px rgba(0,0,0,.6);white-space:nowrap}
+  .credit-m::before{content:"";position:absolute;z-index:-1;left:-16px;right:-16px;top:-12px;bottom:-6px;
+    background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.34))}
+  .wall{display:block;min-height:0;background:#fff;border-radius:16px 16px 0 0;padding:0 16px}
+  .card{border-radius:0;box-shadow:none;padding:20px 0;border-bottom:1px solid var(--line)}
+  .card:last-child{border-bottom:0}
+  .card .im{height:104px;border-radius:8px}
+  .card .bd{padding:0}
+  .kick{margin-top:12px}
+  .card h3{margin:3px 0 6px;font-size:19px}
+  .card p{font-size:15px}
+  .meta{height:auto;margin-top:10px;border-top:0}
+
+  .photo.saint{height:48px}
+  .photo-credit{position:absolute;top:61px;left:16px;right:16px;text-align:left}
+  .photo-credit::before{left:-16px;right:-16px;top:-9px;bottom:-12px;background:linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.3))}
+  .page{position:relative;z-index:1;margin:32px 0 0;border-radius:16px 16px 0 0;padding:20px 16px 8px;box-shadow:none}
+  .sgrid,.idcol,.main{display:contents}
+  .sgrid-wrap{display:flex;flex-direction:column;gap:0}
+  .portrait.d{display:none}
+  .skick{order:1}
+  h1{order:2;margin:4px 0 14px;font-size:36px;line-height:1.08}
+  .lead{order:3;font-size:17px}
+  .lead .portrait-m{display:block;float:left;width:104px;margin:5px 14px 6px 0}
+  .lead .portrait-m img{width:104px;height:162px;object-fit:contain;filter:grayscale(1)}
+  .lead .portrait-m figcaption{margin-top:6px;font-size:11.5px;line-height:1.35;color:var(--mute)}
+  .facts{order:4;position:static;margin:20px 0 0;padding:0;background:none;border-radius:0;border-top:1px solid var(--line)}
+  .facts .r,.facts .r:first-child{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:10px 0}
+  .facts .r:last-child{border-bottom:1px solid var(--line)}
+  .facts dd{margin:0}
+  .facts .btn{display:none}
+  .tabs{order:5;top:52px;height:40px;margin:24px -16px 0;padding:0 16px;gap:24px}
+  .tabs a{height:40px}
+  .sec{order:6}
+  h2{margin:36px 0 12px;font-size:24px;flex-wrap:wrap;gap:4px 12px}
+  .list2,.list2.chap,.list2.teach{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}
+  .quotes{grid-template-columns:1fr;gap:20px}
+  .body{font-size:17px}
+  .mrow{order:7;height:auto;min-height:48px;margin-top:36px;padding:12px 0;gap:12px;font-size:15px}
+  .bbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;height:52px;align-items:center;justify-content:space-between;
+    padding:0 16px;background:#fff;border-top:1px solid var(--line);transform:translateY(100%);transition:transform .2s}
+  .bbar.show{transform:none}
+  .bbar b{font-size:15px;font-weight:600}
+  .bbar .btn{height:36px}
+}
+</style></head><body class="pg-home"><div class="photo" role="img" aria-label="Sea of Galilee at sunset"></div><header class="hdr" data-n="1"><div class="in"><a class="logo" href="home.html">Find a Saint</a><a class="mark" href="home.html" aria-label="Find a Saint">F</a><nav class="nav"><a class="on" href="#">Saints</a><a class="" href="#">Miracles</a><a class="" href="#">Novenas</a><a class="" href="#">Teachings</a><a class="" href="#">Quotes</a><a class="" href="#">Books</a></nav><a class="search" href="#" role="search"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg><span>Search saints</span></a><a class="btn" href="#">Get the app</a><a class="menu" href="#menu" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></a></div></header><div class="credit-m" data-n="5m"><a href="#">Sea of Galilee</a> · <a href="#">Grant Barclay</a> · <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a></div><main class="home"><aside class="side"><div class="rail" data-n="2"><section class="cats"><h4>Categories</h4><a href="#"><span>Bishops</span><small>3</small></a><a href="#"><span>Hermits</span><small>3</small></a><a href="#"><span>Ascetics</span><small>3</small></a><a href="#"><span>Nuns</span><small>2</small></a><a href="#"><span>Holy Women</span><small>2</small></a><a href="#"><span>Missionaries</span><small>2</small></a><a href="#"><span>Converts</span><small>1</small></a><a href="#"><span>Fathers of the Church</span><small>1</small></a><a href="#"><span>Confessors</span><small>1</small></a></section><section data-n="3"><h4>Feast month</h4><div class="months"><a class="" href="#">Jan</a><a class="off" href="#">Feb</a><a class="" href="#">Mar</a><a class="off" href="#">Apr</a><a class="off" href="#">May</a><a class="" href="#">Jun</a><a class="" href="#">Jul</a><a class="" href="#">Aug</a><a class="" href="#">Sep</a><a class="now" href="#">Oct</a><a class="off" href="#">Nov</a><a class="" href="#">Dec</a></div></section><section data-n="4"><h4>Sort</h4><div class="sorts"><a href="#">Feast date</a><a href="#">A–Z</a></div></section></div><div class="credit" data-n="5"><b><a href="#">Sea of Galilee</a></b><span><a href="#">Grant Barclay</a> · <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a></span></div></aside><div class="wall" data-n="6"><a class="card" href="#" data-i="0" data-n="7"><img class="im" src="../../assets/therese-of-lisieux.jpg" alt="St. Thérèse of Lisieux" style="object-position:50% 19%" loading="eager"><div class="bd"><div class="kick">Carmelite nun · 1873–1897</div><h3>St. Thérèse of Lisieux</h3><p>As a small child she rolled on the floor in fury, and at about three she took a whole basket of doll clothes, saying, &quot;I choose everything!&quot; At twenty-four, dying of tuberculosis in a Normandy convent, she overheard a sister wonder what anyone could write about her, since she had never done anything worth speaking about. St. Thérèse of Lisieux wanted to be a great saint and found she was a grain of sand. In her last eighteen months even Heaven went dark for her, and she went on loving. How did the nun who had done nothing worth speaking about become one of the most loved saints of modern times, and a Doctor of the Church?
+</p><div class="meta"><span>Feast Oct 1</span><span>France</span></div></div></a><a class="card" href="#" data-i="1"><img class="im" src="../../assets/john-maximovitch.jpg" alt="St. John Maximovitch" style="object-position:50% 20%" loading="eager"><div class="bd"><div class="kick">Bishop · 1896–1966</div><h3>St. John Maximovitch</h3><p>St. John Maximovitch knew what it meant to lose a home. As a young man, he fled Russia with his family. As an Orthodox bishop, he helped others start again. He cared for children in Shanghai, visited sick people, and asked American leaders to help stranded refugees. His work later took him to Europe and San Francisco. People remembered his long prayers, his care for those in need, and the way he kept in touch as children grew up.</p><div class="meta"><span>Feast Jul 2</span><span>Russia · USA</span></div></div></a><a class="card" href="#" data-i="2"><img class="im" src="../../assets/francis-of-assisi.jpg" alt="St. Francis of Assisi" style="object-position:50% 14%" loading="eager"><div class="bd"><div class="kick">Friar · 1182–1226</div><h3>St. Francis of Assisi</h3><p>In a Perugia prison around 1202, a rich cloth merchant’s son laughed at his chains and told the other prisoners that the whole world would one day honor him. Within a few years he had kissed a leper’s hand and handed his clothes back to his father in front of the bishop. Later he crossed the lines of a crusade to preach to the Sultan of Egypt, gave away the leadership of the Order he had founded, and died on the bare ground in a habit that was only lent to him. How did a young man who wanted glory find it by owning nothing? His story begins with something he found bitter, and what it became.</p><div class="meta"><span>Feast Oct 4</span><span>Italy</span></div></div></a><a class="card" href="#" data-i="3"><img class="im" src="../../assets/teresa-of-avila.jpg" alt="St. Teresa of Ávila" style="object-position:50% 30%" loading="eager"><div class="bd"><div class="kick">Carmelite nun · 1515–1582</div><h3>St. Teresa of Ávila</h3><p>At seven, St. Teresa of Ávila slipped out of the city gate with her brother to be beheaded by the Moors, because the sight of God seemed cheap at that price. An uncle met them on the bridge. Years later, a charming nun whom visitors came to see, she gave up prayer for more than a year and struggled in it for years. Then she began founding convents, laughing at herself, while a preacher compared her to a fraud, the Inquisition took her book, and a papal envoy called her a restless gadabout. In 1970 she became the first woman Doctor of the Church. How? It began with one discovery: prayer is friendship.</p><div class="meta"><span>Feast Oct 15</span><span>Spain</span></div></div></a><a class="card" href="#" data-i="4"><img class="im" src="../../assets/anthony-of-padua.jpg" alt="St. Anthony of Padua" style="object-position:50% 20%" loading="eager"><div class="bd"><div class="kick">Franciscan friar · 1195–1231</div><h3>St. Anthony of Padua</h3><p>At a gathering of friars at Assisi in 1221, when the ministers chose the brothers they would take home, one sick, unknown friar from Portugal was passed over: St. Anthony alone was asked for by no one. He had joined the Franciscans to die as a martyr in Morocco, and illness and a storm had sent him back. Ten years later thirty thousand people stood silent in the fields of Padua to hear him, and when his grave was opened, his tongue was found fresh and red. How did the friar nobody wanted become the voice of a city?</p><div class="meta"><span>Feast Jun 13</span><span>Portugal · Italy</span></div></div></a><a class="card" href="#" data-i="5" data-n="8"><img class="im" src="../../assets/augustine-of-hippo.jpg" alt="St. Augustine of Hippo" style="object-position:50% 8%" loading="eager"><div class="bd"><div class="kick">Bishop · 354–430</div><h3>St. Augustine of Hippo</h3><p>As a young man, St. Augustine prayed to be made pure and added two words: &quot;not yet.&quot; He was afraid, he admitted, that God would answer too soon. He stole pears he did not want, lied to his mother on the shore at Carthage and sailed away while she prayed, and spent nine years in a sect. Then a child&#x27;s voice in a garden in Milan chanted &quot;Take up and read.&quot; The restless teacher became a priest seized by a crowd while he wept, a bishop with a verse against gossip inscribed on his table, and the author of the Confessions. How does a man who fears his own prayer become one of the great teachers of the Church?</p><div class="meta"><span>Feast Aug 28 · Orth. Jun 15</span></div></div></a><a class="card" href="#" data-i="6"><img class="im" src="../../assets/benedict-of-nursia.jpg" alt="St. Benedict of Nursia" style="object-position:50% 11%" loading="eager"><div class="bd"><div class="kick">Abbot · c. 480–547</div><h3>St. Benedict of Nursia</h3><p>The first monks who asked St. Benedict to be their abbot put poison in his wine. When he blessed the glass, it shattered, and he told them mildly that he had warned them: their way of life and his would never agree. Then he went back to his cave. He had left Rome to be alone with God, yet people kept finding him: a priest at Easter, shepherds, a Gothic king who tested him with a servant in royal robes, and a sister whose prayer brought down a storm to keep him talking all night. How did a hermit who fled the world become the father of monks who live together, and the patron of Europe?</p><div class="meta"><span>Feast Jul 11 · Orth. Mar 14</span></div></div></a><a class="card" href="#" data-i="7"><img class="im" src="../../assets/thomas-aquinas.jpg" alt="St. Thomas Aquinas" style="object-position:50% 26%" loading="eager"><div class="bd"><div class="kick">Dominican friar · 1225–1274</div><h3>St. Thomas Aquinas</h3><p>One morning in December 1273, after Mass in a chapel at Naples, St. Thomas Aquinas stopped writing his Summa in the middle of a treatise and never wrote again. By a sworn account at his canonization inquiry, he told his secretary that everything he had written seemed like straw compared with what he had seen. As a young man he had been seized on the road by his own brothers and held captive to keep him from becoming a friar. Later a pope offered him an archbishopric, and he refused it. This is the life of the silent student whom classmates, legend says, called the dumb ox, and of what the man who wrote so much about God wanted most.</p><div class="meta"><span>Feast Jan 28</span><span>Italy</span></div></div></a><a class="card" href="#" data-i="8"><img class="im" src="../../assets/nicholas-of-myra.jpg" alt="St. Nicholas of Myra" style="object-position:50% 14%" loading="eager"><div class="bd"><div class="kick">Bishop · c. 270–343</div><h3>St. Nicholas of Myra</h3><p>The oldest known story of Saint Nicholas has no Santa Claus and no bag of gold. It has a bishop of Myra running to an execution ground, taking the sword from the executioner&#x27;s hands, and telling the governor that the real criminal was a bribe. Almost nothing about him can be proved, yet Orthodox tradition ranks him among its most venerated saints, and the West calls him the patron of sailors and children. How did a man history barely recorded become the saint whom half of Christendom calls on in trouble? Every layer of his story, from the oldest to the latest, shows the same man.</p><div class="meta"><span>Feast Dec 6</span><span>Asia Minor</span></div></div></a><a class="card" href="#" data-i="9"><img class="im" src="../../assets/padre-pio.jpg" alt="St. Pio of Pietrelcina" style="object-position:50% 22%" loading="eager"><div class="bd"><div class="kick">Capuchin friar · 1887–1968</div><h3>St. Pio of Pietrelcina</h3><p>When red marks appeared on the palms of a young priest in a southern Italian village, he asked his parish priest to pray that Jesus would take them away. He was willing to suffer, he said, but all of it in hiding. Instead St. Pio carried bleeding wounds in his hands, feet, and side for fifty years. Doctors argued over them, the Holy Office silenced him, and pilgrims lined up before dawn to hear his Mass and confess to him. Asked how his humility survived it all, he laughed and talked about a gold watch. How did a man who wanted only to be a poor friar who prays carry such a gift without making it his own?</p><div class="meta"><span>Feast Sep 23</span><span>Italy</span></div></div></a><a class="card" href="#" data-i="10"><img class="im" src="../../assets/seraphim-of-sarov.jpg" alt="St. Seraphim of Sarov" style="object-position:50% 32%" loading="eager"><div class="bd"><div class="kick">Hermit monk · 1754–1833</div><h3>St. Seraphim of Sarov</h3><p>In September 1804 three peasants beat a hermit nearly to death in the forest near Sarov, looking for his money. He had put down his axe rather than fight them. They found an icon and some potatoes, and he begged that they go unpunished. St. Seraphim of Sarov spent thirty years in the forest, on a stone, in silence, and behind a locked door with an oak coffin in the entry. Then he spent his last years greeting every stranger, in any season, with &quot;My joy, Christ is risen!&quot; What was the treasure the robbers never found, and how did a man who once hid his face from passers-by end his life with a crowd at his door?</p><div class="meta"><span>Feast Jan 2</span><span>Russia</span></div></div></a><a class="card" href="#" data-i="11"><img class="im" src="../../assets/sergius-of-radonezh.jpg" alt="St. Sergius of Radonezh" style="object-position:50% 16%" loading="eager"><div class="bd"><div class="kick">Abbot · 1314–1392</div><h3>St. Sergius of Radonezh</h3><p>A plowman walked a long way to see the famous hegumen of a forest monastery near Radonezh, and found a man in a patched robe digging a garden. &quot;I came to see a prophet,&quot; he said, &quot;and you show me an orphan.&quot; Then a prince rode in and bowed to the gardener. St. Sergius of Radonezh was a boy who could not learn to read, a hermit who shared his last crust with a bear, and the monk whose blessing a grand prince sought before he marched against the Horde. How did he become the Hegumen of the Russian land without ever ceasing to be poor?</p><div class="meta"><span>Feast Sep 25</span><span>Russia</span></div></div></a></div></main><footer class="ft" data-n="9"><div class="seg" role="radiogroup" aria-label="Tradition"><a href="#" role="radio">Catholic</a><a href="#" role="radio">Orthodox</a><a class="on" href="#" role="radio" aria-checked="true">Both</a></div><nav><a href="#">Saints</a><a href="#">Miracles</a><a href="#">Novenas</a><a href="#">Teachings</a><a href="#">Quotes</a><a href="#">Books</a></nav></footer><div class="sheet-menu" id="menu" role="dialog" aria-label="Menu"><div class="sm-top"><b>Find a Saint</b><a class="menu" style="display:flex" href="#" aria-label="Close"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15"/></svg></a></div><nav class="sm-nav"><a class="on" href="#">Saints</a><a class="" href="#">Miracles</a><a class="" href="#">Novenas</a><a class="" href="#">Teachings</a><a class="" href="#">Quotes</a><a class="" href="#">Books</a></nav><h4>Categories</h4><div class="sm-cats"><a href="#"><span>Bishops</span><span class="n">3</span></a><a href="#"><span>Hermits</span><span class="n">3</span></a><a href="#"><span>Ascetics</span><span class="n">3</span></a><a href="#"><span>Nuns</span><span class="n">2</span></a><a href="#"><span>Holy Women</span><span class="n">2</span></a><a href="#"><span>Missionaries</span><span class="n">2</span></a><a href="#"><span>Converts</span><span class="n">1</span></a><a href="#"><span>Fathers of the Church</span><span class="n">1</span></a><a href="#"><span>Confessors</span><span class="n">1</span></a></div><h4>Feast month</h4><div class="sm-months"><a class="" href="#">Jan</a><a class="off" href="#">Feb</a><a class="" href="#">Mar</a><a class="off" href="#">Apr</a><a class="off" href="#">May</a><a class="" href="#">Jun</a><a class="" href="#">Jul</a><a class="" href="#">Aug</a><a class="" href="#">Sep</a><a class="now" href="#">Oct</a><a class="off" href="#">Nov</a><a class="" href="#">Dec</a></div><h4>Sort</h4><div class="sm-sort"><a href="#">Feast date</a><a href="#">A–Z</a></div><a class="btn" href="#">Get the app</a></div>
+<script>
+(function(){
+  var wall=document.querySelector('.wall');
+  var cards=[].slice.call(wall.querySelectorAll('.card'));
+  var COL=278,GAP=12,last='';
+  function layout(){
+    var phone=matchMedia('(max-width:759px)').matches;
+    var n=phone?1:Math.max(1,Math.floor((wall.clientWidth+GAP)/(COL+GAP)));
+    if((phone?'p':n)+''===last)return; last=(phone?'p':n)+'';
+    wall.innerHTML='';
+    if(phone){cards.forEach(function(c){wall.appendChild(c)});return}
+    var cols=[],h=[];
+    for(var i=0;i<n;i++){var d=document.createElement('div');d.className='col';wall.appendChild(d);cols.push(d);h.push(0)}
+    cards.forEach(function(c){var k=h.indexOf(Math.min.apply(null,h));cols[k].appendChild(c);h[k]+=c.offsetHeight+GAP});
+  }
+  layout();
+  (document.fonts?document.fonts.ready:Promise.resolve()).then(function(){last='';layout()});
+  addEventListener('resize',function(){layout()});
+})();
+</script></body></html>

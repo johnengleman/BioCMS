@@ -1,0 +1,212 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>St. Thérèse of Lisieux · W2 Side index</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
+:root{--ink:#111;--ink2:#555;--mute:#767676;--line:#E2E2E2;--chip:#F1F1F1;--panel:#F5F5F5;--r:10px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.4;color:var(--ink);background:#666;
+  font-feature-settings:"cv11","ss01";-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block}
+.photo{position:fixed;inset:0;z-index:-1;background:#666 url(../../../public/images/hero/galilee.webp) center 46%/cover no-repeat;filter:grayscale(1)}
+.mobile-only{display:none}
+
+/* header */
+.hdr{position:sticky;top:0;z-index:40;height:56px;background:rgba(255,255,255,.8);
+  -webkit-backdrop-filter:blur(18px) saturate(1.1);backdrop-filter:blur(18px) saturate(1.1);
+  box-shadow:0 1px 0 rgba(0,0,0,.06)}
+.hdr .in{display:flex;align-items:center;height:100%;padding:0 24px}
+.logo{font-size:20px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;margin-right:40px}
+.mark{display:none;width:32px;height:32px;border-radius:8px;background:var(--ink);color:#fff;font-weight:700;font-size:15px;
+  letter-spacing:-.02em;align-items:center;justify-content:center;flex:none}
+.nav{display:flex;gap:24px;height:100%}
+.nav a{position:relative;display:flex;align-items:center;font-size:14px;font-weight:500;color:var(--ink2)}
+.nav a.on{color:var(--ink);font-weight:600}
+.nav a.on::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--ink)}
+.search{margin-left:auto;display:flex;align-items:center;gap:8px;width:400px;height:36px;padding:0 14px;border-radius:18px;
+  background:#fff;border:1px solid var(--line);color:var(--mute);font-size:14px}
+.search svg{color:var(--ink2);flex:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:36px;padding:0 16px;border-radius:8px;
+  background:var(--ink);color:#fff;font-size:14px;font-weight:600;white-space:nowrap}
+.hdr .btn{margin-left:12px}
+.menu{display:none;width:40px;height:40px;align-items:center;justify-content:center;flex:none;margin-right:-8px}
+
+/* footer */
+.ft{position:relative;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 24px;
+  background:#fff;border-top:1px solid var(--line)}
+.seg{display:flex;gap:4px}
+.seg a{display:flex;align-items:center;height:30px;padding:0 12px;border-radius:6px;font-size:13px;font-weight:500;color:var(--ink2)}
+.seg a.on{background:var(--ink);color:#fff}
+.ft nav{display:flex;gap:24px;font-size:14px;font-weight:500;color:var(--ink2)}
+
+/* ---------------- home ---------------- */
+.home{display:grid;grid-template-columns:232px minmax(0,1fr);gap:12px;padding:12px 24px 40px;align-items:start}
+.side{position:sticky;top:68px}
+.rail{background:#fff;border-radius:var(--r);padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.06),0 10px 28px -14px rgba(0,0,0,.35)}
+.rail h4{margin:0 0 4px;height:20px;font-size:12.5px;line-height:20px;font-weight:600;color:var(--ink2)}
+.rail section+section{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.cats a{display:flex;align-items:center;justify-content:space-between;height:28px;margin:0 -8px;padding:0 8px;border-radius:6px;font-size:14px}
+.cats a:hover{background:var(--chip)}
+.cats small,.n{font-size:12.5px;color:var(--mute);font-variant-numeric:tabular-nums}
+.months{display:grid;grid-template-columns:repeat(4,50px);grid-auto-rows:28px}
+.months a{position:relative;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:13px;font-weight:600}
+.months a:hover{background:var(--chip)}
+.months a.off{color:var(--mute);font-weight:400;pointer-events:none}
+.months a.now::after{content:"";position:absolute;left:50%;bottom:2px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--ink)}
+.sorts{display:flex;gap:6px}
+.sorts a{display:flex;align-items:center;height:28px;padding:0 10px;border-radius:6px;background:var(--chip);font-size:13px;font-weight:500}
+.credit{position:relative;display:block;margin-top:12px;padding:0 2px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.45)}
+.credit::before{content:"";position:absolute;z-index:-1;left:-40px;right:-20px;top:-22px;bottom:-22px;
+  background:radial-gradient(closest-side,rgba(0,0,0,.42),rgba(0,0,0,0));pointer-events:none}
+.credit b{display:block;font-size:13px;line-height:18px;font-weight:600}
+.credit span{display:block;font-size:11.5px;line-height:16px;color:rgba(255,255,255,.85)}
+.credit a:hover{text-decoration:underline}
+
+.wall{display:flex;gap:12px;align-items:flex-start;min-height:800px}
+.col{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:12px}
+.card{display:block;background:#fff;border-radius:var(--r);overflow:hidden;
+  box-shadow:0 1px 2px rgba(0,0,0,.06),0 10px 28px -14px rgba(0,0,0,.35)}
+.card .im{width:100%;height:124px;object-fit:cover;filter:grayscale(1);background:var(--panel)}
+.card .bd{padding:14px 14px 2px}
+.kick{font-size:12.5px;line-height:18px;font-weight:500;color:var(--ink2)}
+.card h3{margin:4px 0 8px;font-size:20px;line-height:1.2;font-weight:700;letter-spacing:-.012em}
+.card p{margin:0;font-size:14.5px;line-height:1.5;color:var(--ink)}
+.meta{display:flex;justify-content:space-between;align-items:center;gap:8px;height:30px;margin-top:12px;
+  border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2);white-space:nowrap}
+.credit-m{display:none}
+
+/* phone menu sheet (opens from the menu button; home.html#menu) */
+.sheet-menu{display:none}
+.sheet-menu:target{display:block;position:fixed;inset:0;z-index:60;background:#fff;overflow:auto;padding:0 16px 32px}
+.sm-top{display:flex;align-items:center;justify-content:space-between;height:52px;border-bottom:1px solid var(--line);margin:0 -16px;padding:0 16px}
+.sm-top b{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.sm-nav a{display:flex;align-items:center;justify-content:space-between;height:48px;border-bottom:1px solid var(--line);font-size:16px;font-weight:500}
+.sm-nav a.on{font-weight:700}
+.sheet-menu h4{margin:24px 0 4px;font-size:13px;font-weight:600;color:var(--ink2)}
+.sm-cats a{display:flex;align-items:center;justify-content:space-between;height:44px;border-bottom:1px solid var(--line);font-size:15px}
+.sm-months{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:44px;border-top:1px solid var(--line)}
+.sm-months a{position:relative;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--line);font-size:15px;font-weight:600}
+.sm-months a.off{color:var(--mute);font-weight:400}
+.sm-months a.now::after{content:"";position:absolute;left:50%;bottom:7px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--ink)}
+.sm-sort{display:flex;gap:8px}
+.sm-sort a{display:flex;align-items:center;height:36px;padding:0 14px;border-radius:6px;background:var(--chip);font-size:14px;font-weight:500}
+.sheet-menu .btn{width:100%;height:44px;margin-top:20px}
+
+/* ---------------- saint ---------------- */
+.page{margin:16px 24px 24px;background:#fff;border-radius:16px;padding:40px;box-shadow:0 20px 50px -24px rgba(0,0,0,.45)}
+.sgrid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;align-items:stretch}
+.idcol{position:relative}
+.portrait{margin:0}
+.portrait img{width:205px;height:320px;object-fit:contain;filter:grayscale(1)}
+.portrait figcaption{margin-top:8px;font-size:12.5px;line-height:1.4;color:var(--mute)}
+.facts{position:sticky;top:72px;margin-top:24px;background:var(--panel);border-radius:var(--r);padding:20px}
+.facts dl{margin:0}
+.facts .r{padding:8px 0;border-bottom:1px solid var(--line)}
+.facts .r:first-child{padding-top:0}
+.facts .r:last-child{border-bottom:0}
+.facts dt{font-size:13px;line-height:18px;color:var(--ink2)}
+.facts dd{margin:2px 0 0;font-size:14px;line-height:20px;font-weight:500}
+.facts .btn{display:flex;width:100%;height:38px;margin-top:12px}
+.main{min-width:0}
+.skick{font-size:12.5px;line-height:18px;font-weight:500;color:var(--ink2)}
+h1{margin:6px 0 14px;font-size:48px;line-height:1.05;font-weight:700;letter-spacing:-.025em}
+.lead{max-width:680px;font-size:17.5px;line-height:1.6}
+.lead p{margin:0}
+.lead .portrait-m{display:none}
+.tabs{position:sticky;top:56px;z-index:20;display:flex;gap:28px;height:44px;margin-top:28px;background:#fff;
+  border-bottom:1px solid var(--line)}
+.tabs a{display:flex;align-items:center;height:44px;margin-bottom:-1px;border-bottom:2px solid transparent;font-size:14px;font-weight:600;color:var(--ink2)}
+.tabs a.on{color:var(--ink);border-color:var(--ink)}
+h2{display:flex;align-items:baseline;justify-content:space-between;margin:48px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--line);
+  font-size:26px;line-height:1.2;font-weight:600;letter-spacing:-.015em;scroll-margin-top:110px}
+h2 a{font-size:14px;font-weight:600;letter-spacing:0;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.list2{display:grid;grid-template-columns:1fr 1fr;column-gap:48px;margin:0;padding:0;list-style:none}
+.list2.chap{grid-template-rows:repeat(6,auto);grid-auto-flow:column}
+.list2.teach{grid-template-rows:repeat(3,auto);grid-auto-flow:column}
+.list2 li{display:flex;align-items:center;gap:14px;min-height:38px;border-bottom:1px solid var(--line);font-size:15px;font-weight:500}
+.list2 li b{width:20px;flex:none;font-size:12.5px;font-weight:500;color:var(--mute);font-variant-numeric:tabular-nums}
+.quotes{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin:0 0 24px}
+.quotes blockquote{margin:0;font-size:20px;line-height:1.4;font-weight:400;letter-spacing:-.01em}
+.body{max-width:680px;margin:0;font-size:17.5px;line-height:1.6}
+.place{margin:0 0 6px;font-size:15px;font-weight:600}
+.mrow{display:flex;align-items:center;justify-content:space-between;height:48px;margin-top:48px;border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);font-size:15px;color:var(--mute)}
+.photo-credit{position:absolute;top:56px;right:24px;z-index:5;height:16px;font-size:11.5px;line-height:16px;color:rgba(255,255,255,.85);
+  text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.photo-credit::before{content:"";position:absolute;z-index:-1;left:-30px;right:-24px;top:0;bottom:0;
+  background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.32) 30%)}
+.photo-credit a:hover{text-decoration:underline}
+.bbar{display:none}
+
+/* ---------------- phone ---------------- */
+@media (max-width:759px){
+  body{background:#fff;font-size:15px}
+  .photo{position:absolute;inset:auto 0;top:52px;height:88px;z-index:0;background-position:center 52%}
+  .hdr{height:52px;background:#fff;box-shadow:0 1px 0 var(--line)}
+  .hdr .in{padding:0 16px;gap:10px}
+  .logo,.nav,.hdr .btn{display:none}
+  .mark{display:flex}
+  .search{flex:1;width:auto;min-width:0;margin-left:0;background:var(--chip);border-color:transparent;font-size:15px}
+  .menu{display:flex}
+  .ft{flex-direction:column;align-items:flex-start;gap:14px;height:auto;padding:20px 16px 28px}
+  .ft nav{flex-wrap:wrap;gap:8px 20px}
+
+  .home{display:block;padding:0;position:relative;z-index:1;margin-top:72px}
+  .side{display:none}
+  .credit-m{display:block;position:absolute;z-index:2;left:16px;right:16px;top:104px;height:16px;font-size:11.5px;line-height:16px;
+    color:rgba(255,255,255,.85);text-shadow:0 1px 2px rgba(0,0,0,.6);white-space:nowrap}
+  .credit-m::before{content:"";position:absolute;z-index:-1;left:-16px;right:-16px;top:-12px;bottom:-6px;
+    background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.34))}
+  .wall{display:block;min-height:0;background:#fff;border-radius:16px 16px 0 0;padding:0 16px}
+  .card{border-radius:0;box-shadow:none;padding:20px 0;border-bottom:1px solid var(--line)}
+  .card:last-child{border-bottom:0}
+  .card .im{height:104px;border-radius:8px}
+  .card .bd{padding:0}
+  .kick{margin-top:12px}
+  .card h3{margin:3px 0 6px;font-size:19px}
+  .card p{font-size:15px}
+  .meta{height:auto;margin-top:10px;border-top:0}
+
+  .photo.saint{height:48px}
+  .photo-credit{position:absolute;top:61px;left:16px;right:16px;text-align:left}
+  .photo-credit::before{left:-16px;right:-16px;top:-9px;bottom:-12px;background:linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.3))}
+  .page{position:relative;z-index:1;margin:32px 0 0;border-radius:16px 16px 0 0;padding:20px 16px 8px;box-shadow:none}
+  .sgrid,.idcol,.main{display:contents}
+  .sgrid-wrap{display:flex;flex-direction:column;gap:0}
+  .portrait.d{display:none}
+  .skick{order:1}
+  h1{order:2;margin:4px 0 14px;font-size:36px;line-height:1.08}
+  .lead{order:3;font-size:17px}
+  .lead .portrait-m{display:block;float:left;width:104px;margin:5px 14px 6px 0}
+  .lead .portrait-m img{width:104px;height:162px;object-fit:contain;filter:grayscale(1)}
+  .lead .portrait-m figcaption{margin-top:6px;font-size:11.5px;line-height:1.35;color:var(--mute)}
+  .facts{order:4;position:static;margin:20px 0 0;padding:0;background:none;border-radius:0;border-top:1px solid var(--line)}
+  .facts .r,.facts .r:first-child{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:10px 0}
+  .facts .r:last-child{border-bottom:1px solid var(--line)}
+  .facts dd{margin:0}
+  .facts .btn{display:none}
+  .tabs{order:5;top:52px;height:40px;margin:24px -16px 0;padding:0 16px;gap:24px}
+  .tabs a{height:40px}
+  .sec{order:6}
+  h2{margin:36px 0 12px;font-size:24px;flex-wrap:wrap;gap:4px 12px}
+  .list2,.list2.chap,.list2.teach{grid-template-columns:1fr;grid-template-rows:none;grid-auto-flow:row}
+  .quotes{grid-template-columns:1fr;gap:20px}
+  .body{font-size:17px}
+  .mrow{order:7;height:auto;min-height:48px;margin-top:36px;padding:12px 0;gap:12px;font-size:15px}
+  .bbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;height:52px;align-items:center;justify-content:space-between;
+    padding:0 16px;background:#fff;border-top:1px solid var(--line);transform:translateY(100%);transition:transform .2s}
+  .bbar.show{transform:none}
+  .bbar b{font-size:15px;font-weight:600}
+  .bbar .btn{height:36px}
+}
+</style></head><body class="pg-saint"><div class="photo saint" role="img" aria-label="Sea of Galilee at sunset"></div><header class="hdr" data-n="1"><div class="in"><a class="logo" href="home.html">Find a Saint</a><a class="mark" href="home.html" aria-label="Find a Saint">F</a><nav class="nav"><a class="on" href="#">Saints</a><a class="" href="#">Miracles</a><a class="" href="#">Novenas</a><a class="" href="#">Teachings</a><a class="" href="#">Quotes</a><a class="" href="#">Books</a></nav><a class="search" href="#" role="search"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg><span>Search saints</span></a><a class="btn" href="#">Get the app</a><a class="menu" href="home.html#menu" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></a></div></header><div class="photo-credit" data-n="5m"><a href="#">Sea of Galilee</a> · <a href="#">Grant Barclay</a> · <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a></div><main class="page"><div class="sgrid sgrid-wrap"><aside class="idcol"><figure class="portrait d" data-n="2"><img src="../../assets/therese-of-lisieux.jpg" alt="St. Thérèse of Lisieux, holy card portrait"><figcaption>Holy card, 1916 · Public domain</figcaption></figure><div class="facts" data-n="3"><dl><div class="r"><dt>Feast</dt><dd>October 1</dd></div><div class="r"><dt>Born</dt><dd>1873, Alençon, France</dd></div><div class="r"><dt>Died</dt><dd>1897, Lisieux, France</dd></div><div class="r"><dt>Patron of</dt><dd>Missions, with St. Francis Xavier; France, with St. Joan of Arc</dd></div><div class="r"><dt>Venerated</dt><dd>Catholic</dd></div></dl><a class="btn" href="#">Pray in the app</a></div></aside><article class="main"><div class="skick" data-n="4">Carmelite nun · France · 1873–1897</div><h1>St. Thérèse of Lisieux</h1><div class="lead"><figure class="portrait-m"><img src="../../assets/therese-of-lisieux.jpg" alt="St. Thérèse of Lisieux, holy card portrait"><figcaption>Holy card, 1916 · Public domain</figcaption></figure><p>As a small child she rolled on the floor in fury, and at about three she took a whole basket of doll clothes, saying, &quot;I choose everything!&quot; At twenty-four, dying of tuberculosis in a Normandy convent, she overheard a sister wonder what anyone could write about her, since she had never done anything worth speaking about. St. Thérèse of Lisieux wanted to be a great saint and found she was a grain of sand. In her last eighteen months even Heaven went dark for her, and she went on loving. How did the nun who had done nothing worth speaking about become one of the most loved saints of modern times, and a Doctor of the Church?</p></div><nav class="tabs" data-n="5"><a class="on" href="#life">Life</a><a href="#teachings">Teachings</a><a href="#relics">Relics</a></nav><div class="sec"><h2 id="life" data-n="6">Life <a href="#">Read the full life →</a></h2><ol class="list2 chap"><li><b>01</b><span>Two Refused Vocations, One Marriage</span></li><li><b>02</b><span>The Child Who Chose Everything</span></li><li><b>03</b><span>A Sword and a Smile</span></li><li><b>04</b><span>I Cried for Having Cried</span></li><li><b>05</b><span>A Fourteen-Year-Old Before the Pope</span></li><li><b>06</b><span>Now I Am Here Forever</span></li><li><b>07</b><span>A Grain of Sand Lifted</span></li><li><b>08</b><span>Memories in Two-Sou Notebooks</span></li><li><b>09</b><span>Blood on Good Friday</span></li><li><b>10</b><span>The Slow Last Summer</span></li><li><b>11</b><span>My God, I Love You</span></li><li><b>12</b><span>A Book Instead of an Obituary</span></li></ol><h2 id="teachings">Words and teachings</h2><div class="quotes"><blockquote>“My vocation, I’ve found it at last: my vocation is love!”</blockquote><blockquote>“I’m made so that fear makes me back away; with love I don’t just go forward, I fly.”</blockquote></div><ul class="list2 teach"><li><a href="#">The little way</a></li><li><a href="#">Confidence and love</a></li><li><a href="#">The Offering to Merciful Love</a></li><li><a href="#">The trial of faith</a></li><li><a href="#">Missions and prayer for priests</a></li><li><a href="#">Suffering</a></li></ul><h2 id="relics">Relics</h2><p class="place">Carmel of Lisieux, Lisieux, France</p><p class="body">St. Thérèse was buried in the town cemetery of Lisieux on 4 October 1897. The coffin was opened on 6 September 1910, when only bones remained, and again on 10 August 1917.</p></div><a class="mrow" href="#" data-n="7"><span>Miracles and answered prayers · 322 accounts</span><span aria-hidden="true">→</span></a></article></div></main><footer class="ft" data-n="8"><div class="seg" role="radiogroup" aria-label="Tradition"><a href="#" role="radio">Catholic</a><a href="#" role="radio">Orthodox</a><a class="on" href="#" role="radio" aria-checked="true">Both</a></div><nav><a href="#">Saints</a><a href="#">Miracles</a><a href="#">Novenas</a><a href="#">Teachings</a><a href="#">Quotes</a><a href="#">Books</a></nav></footer><div class="bbar"><b>Feast Oct 1</b><a class="btn" href="#">Pray in the app</a></div>
+<script>
+(function(){
+  var facts=document.querySelector('.facts'),bar=document.querySelector('.bbar');
+  function upd(){
+    if(!matchMedia('(max-width:759px)').matches){bar.classList.remove('show');return}
+    var r=facts.getBoundingClientRect();
+    var foot=document.querySelector('.ft').getBoundingClientRect();
+    bar.classList.toggle('show', r.bottom<52 && foot.top>innerHeight);
+  }
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+})();
+</script></body></html>
