@@ -15,7 +15,8 @@ PAUSED, files on disk (resume from here)
 - mary-of-egypt: research done (notes.md); writer not started (tier B, one source: the Life)
 
 NEXT (not started), C C O pattern
-- clare-of-assisi (C), john-vianney (C), basil-the-great (O), thomas-more (C), dominic (C), bernadette-of-lourdes (C; check source copyright), gregory-palamas or spyridon (O)
+- clare-of-assisi (C): STARTED 2026-10-06 as the test of the new process (citations.md, copy edit before one check, facts.md); tier B standard mode
+- john-vianney (C), basil-the-great (O), thomas-more (C), dominic (C), bernadette-of-lourdes (C; check source copyright), gregory-palamas or spyridon (O)
 
 Skip (20th-century copyright): Faustina, Mother Teresa, John Paul II, Paisios, Kolbe.
 

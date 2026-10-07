@@ -90,14 +90,14 @@ Most lives move through the phases below. Use them as a checklist, so nothing im
 6. **Shaping the future:** writings (with dates, original language, and where the manuscripts are now), teachings stated in them, institutions founded, reforms, charitable works, and their documented impact. Connect each achievement to what was distinctive about the saint.
 7. **Last years and death:** later roles; the people the saint trained or guided; health; the circumstances, date, and place of death; documented last words and final acts; the burial and the first reactions.
 8. **The path to sainthood:** early veneration and the growth of the cult; reports at the tomb (attributed); the formal process and only the officially recognized miracles; beatification and canonization or glorification, with dates and places; the feast day, liturgical commemoration, and any notable hymns or prayers and their origins.
-9. **Enduring legacy:** influence on spirituality, theology, and Church life; pilgrimage, shrines, and relics; patronages; modern relevance shown by concrete, verifiable examples, such as communities the saint founded that still work, institutions that carry on the mission, or new scholarship. No vague claims of relevance.
+9. **The ending: what the saint changed, and why the saint is known.** Plan two answers, each with named examples and dates. (a) The effect on the Church: communities, rules, prayers, practices, councils, titles, or books that carry the saint's mark. (b) The reason for the fame: how the devotion spread and grew (pilgrims, a printed Life, canonization, a hymn, a movement), and what need people bring to this saint. Add one real case to open the section. Also list pilgrimage, shrines, relics, and patronages, and modern examples such as communities that still work or new scholarship. No vague claims of relevance.
 
 ### Sections
 
 Design the sections in chronological order. Use as many sections as the evidence supports, usually 8–16 for a well-documented life. Each section is a chapter of about 500–1,200 words. For each section, give:
 
 ```
-## S4 — "A Fourteen-Year-Old Before the Pope" (Rome, November 1887)
+## S4 — "Thérèse Asks the Pope to Let Her Enter" (Rome, November 1887)
 - Subheadlines: only if a long section needs signposts, 4–8 words each. Most sections need none.
 - Narrative job: the question or turning point that this section carries, in one sentence.
 - Stakes: what the saint wants, what stands in the way, and what it costs. Use only evidence.
@@ -119,7 +119,7 @@ Design the sections in chronological order. Use as many sections as the evidence
 
 Rules for the section plan:
 
-- **Heading = the story, not the category.** A section headline has 4–6 words, for example "A Fourteen-Year-Old Before the Pope". "Early Life" and "Legacy" are bad. Subheadlines have 4–8 words.
+- **Headings say plainly what happens.** See the rule of that name in `04-write-biography.md`: 3–8 plain words that tell the reader what the chapter is about, with no riddles or metaphors and no bare categories such as "Early Life".
 - **Chronology.** Inside each section, events follow the order in which they happened. The hook is the exception, and each section may have at most one short flash-forward when it raises the stakes. Evidence-based foreshadowing is allowed.
 - **Evidence and importance set the length.** A section with many cards and scenes gets more words. A thin period gets a short bridge. Never pad.
 - **Every section must earn its place.** It must change the reader's understanding of the person. If a section only repeats a pattern, merge it with another section.

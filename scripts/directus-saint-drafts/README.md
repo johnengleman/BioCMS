@@ -65,8 +65,10 @@ Related content is supplied as arrays, then staged inside the draft; do not pass
 ## Safeguards and limits
 
 - Admin-only; operations run with the caller's permissions.
-- Only item-less saint drafts in `directus_versions` are writable. No published-item writes or deletion.
-- Duplicate slugs/IDs, existing published slugs, stale revisions, unsupported fields, and unsafe HTML are rejected.
+- New saints: item-less drafts in `directus_versions`. Published saints (since 2026-10-05, owner-approved): the one `draft` version linked to the item. `upload.mjs` creates that version empty with `POST /versions` (so Directus records the item's hash), then the flow fills it. The flow never writes a `saints` item, never promotes, and never deletes.
+- On a published saint, the rows sent for miracles, teachings, or quotes replace that kind's live rows only when someone promotes the draft: live rows are updated in order, extra rows are created, and live rows beyond the new count are staged for deletion. `upload.mjs` prints any staged deletions. Prayers, books, and other images cannot be staged on a published saint. Use `--skip=teachings` to leave a kind untouched.
+- Duplicate slugs/IDs, a second draft for the same saint, stale revisions, unsupported fields, and unsafe HTML are rejected.
+- After changing `plan.cjs`, `result.cjs`, `validate.cjs`, or `build.mjs`, run the tests, then `node scripts/directus-saint-drafts/deploy.mjs` to update the live flow.
 - Supports 1–50 entries per request. Send requests serially: revision checks are not atomic concurrency locks.
 - Mixed creates and updates use separate operations, not a single all-or-nothing transaction.
 - Stops if the existing draft inventory exceeds 1,000 entries.

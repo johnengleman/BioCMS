@@ -23,7 +23,7 @@ module.exports = function validate(data) {
   const intFields = ['pages','best_sellers_rank','year'];
   const shortText = ['source','prayer_title','prayer_slug','author','store_link','type','amazon_book_cover','publisher','title'];
   function safeString(value) {
-    if (typeof value !== 'string' || value.length > 200000) throw Error('Invalid text');
+    if (typeof value !== 'string' || value.length > 500000) throw Error("Text longer than 500,000 characters");
     if (/<\s*(script|iframe|object|embed)\b|\bon\w+\s*=|javascript\s*:/i.test(value)) throw Error('Unsafe HTML');
   }
   function tagArray(value, allowed) {

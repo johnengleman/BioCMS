@@ -11,7 +11,22 @@ const run = (entries = [entry()], drafts = [], published = []) => plan({ $accoun
 test('creates only item-less draft with staged children', () => { const p = run(); assert.equal(p.creates[0].item, null); assert.equal(p.creates[0].key, 'draft'); assert.equal(p.creates[0].delta.miracles.create.length, 1); assert.equal(p.updates.length, 0); });
 test('rejects non-admin, publish, wrong collection, >50 entries', () => { const i = input([entry()]); assert.throws(() => validate({ ...i, $accountability: { user: 'x' } })); for (const body of [{...i.$trigger.body,action:'publish'},{...i.$trigger.body,collection:'users'},{...i.$trigger.body,entries:Array(51).fill(entry())}]) assert.throws(() => validate({...i,$trigger:{body}})); });
 test('rejects arbitrary fields, child IDs and unsafe HTML', () => { for (const delta of [{...entry().delta,status:'published'},{...entry().delta,miracles:[{id:1,miracles:'x'}]},{...entry().delta,biography:'<script>x</script>'}]) assert.throws(() => run([{...entry(),delta}])); });
-test('rejects duplicates and existing published slug', () => { assert.throws(() => run([entry(),entry()])); assert.throws(() => run([entry()],[],[{id:1,slug:entry().slug}])); });
+test('rejects duplicates; a published saint needs its linked draft first', () => { assert.throws(() => run([entry(),entry()])); assert.throws(() => run([entry()],[],[{id:1,slug:entry().slug,miracles:[7],teachings:[],quotes:[]}]), /no draft version yet/); });
+test('published saint: updates only its linked draft and stages row replacement', () => {
+  const pub = { id: 4, slug: entry().slug, miracles: [7], teachings: [8], quotes: [9, 10, 11] };
+  const draft = { id, key: 'draft', collection: 'saints', item: '4', date_created: '2026-10-05', delta: null };
+  const delta = { ...entry().delta, miracles: [{ miracles: '<p>New</p>' }, { miracles: '<p>Extra</p>' }], quotes: [{ text: 'Only one' }] };
+  const p = run([{ ...entry(), expected_revision: '2026-10-05', delta }], [draft], [pub]);
+  assert.equal(p.creates.length, 0); assert.equal(p.updates.length, 1); assert.equal(p.updates[0].id, id);
+  const m = p.expected[0].delta.miracles; assert.deepEqual(m.update.map(r => r.id), [7]); assert.equal(m.create.length, 1); assert.deepEqual(m.delete, []);
+  const q = p.expected[0].delta.quotes; assert.deepEqual(q.update.map(r => r.id), [9]); assert.deepEqual(q.delete, [10, 11]);
+  assert.equal(p.expected[0].item, '4');
+  const r = result({ plan_writes: p, read_back: [{ ...draft, delta: p.updates[0].delta, date_updated: '2026-10-06' }] }).entries[0];
+  assert.equal(r.item_id, '4'); assert.match(r.cms_url, /saints\/4\?version=draft/);
+  assert.throws(() => run([{ ...entry(), expected_revision: '2026-10-05', delta: { ...entry().delta, other_images: ['3f2b8f4e-1c0d-4b9a-8e7f-123456789abc'] } }], [draft], [pub]));
+  assert.throws(() => run([entry()], [draft, { ...draft, id: '9340121e-5c8b-4c99-a4d3-e2251939c951', item: null, delta: { slug: entry().slug } }], [pub]), /item-less draft also/);
+});
+test('read of a published saint reports its item and linked draft', () => { const i=input([{slug:'john-maximovitch'}]); i.$trigger.body.action='read'; const draft={id,key:'draft',collection:'saints',item:'4',date_created:'2026-10-05',delta:null}; const p=plan({$accountability:user,validate_request:validate(i),read_drafts:[draft],read_published:[{id:4,slug:'john-maximovitch',miracles:[],teachings:[],quotes:[]}]}); const r=result({plan_writes:p,read_back:[draft]}).entries[0]; assert.equal(r.version_id,id); assert.equal(r.item_id,'4'); });
 test('rejects stale revision and another saint version', () => { const draft = {id,key:'draft',collection:'saints',item:null,date_created:'2026-09-01',delta:{slug:entry().slug,name:'Old'}}; assert.throws(() => run([entry()],[draft])); assert.throws(() => run([{...entry(),expected_revision:'2026-09-01'}],[{...draft,delta:{slug:'other'}}])); });
 test('read makes no writes and preserves absent draft', () => { const i=input([{slug:'john-maximovitch'}]); i.$trigger.body.action='read'; const p=plan({$accountability:user,validate_request:validate(i),read_drafts:[],read_published:[]}); assert.deepEqual(p.creates,[]); assert.deepEqual(p.updates,[]); assert.equal(result({plan_writes:p,read_back:[]}).entries[0].version_id,null); });
 test('readback verifies exact content, supports idempotent retry', () => { const p=run(); const draft={...p.creates[0],date_created:'2026-09-01'}; assert.equal(result({plan_writes:p,read_back:[draft]}).entries[0].state,'draft'); const retry=run([entry()],[draft]); assert.equal(retry.updates.length,0); assert.throws(() => result({plan_writes:p,read_back:[{...draft,delta:{name:'wrong'}}]})); });

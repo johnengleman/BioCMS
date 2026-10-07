@@ -39,3 +39,8 @@ yarn-error.log*
 /dist/
 .vinext/
 .cloudflare/
+
+# saint entry pipeline: working files, not docs
+/content-drafts/*/images/
+/content-drafts/*/sources/
+/content-drafts/**/*.before-*

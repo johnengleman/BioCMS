@@ -1,6 +1,10 @@
 # Saint entry workflow
 
-**Fast mode (default):** three agents per saint, [fast-1-research.md](fast-1-research.md), [fast-2-write.md](fast-2-write.md), and [fast-3-check.md](fast-3-check.md), with up to five saints in parallel. The staged pipeline below is **deep mode**, for rare definitive entries.
+**Standard mode (default for tier A and B):** [fast-1-research.md](fast-1-research.md) (wide research), [fast-1b-outline.md](fast-1b-outline.md) (driving question, portrait, at most 15 chosen scenes), [fast-1c-scenes.md](fast-1c-scenes.md) (deep research of the chosen scenes only, one card each), [fast-2-write.md](fast-2-write.md), and [fast-3-check.md](fast-3-check.md), with up to five saints in parallel.
+
+**Lean mode (tier C, or on request):** the same without the outline and the scene research.
+
+The staged pipeline below is **deep mode**, for rare definitive entries. Its research has no fixed limit, so it is slow.
 
 The `saint-entry` skill in `BioCMS/.claude/skills/saint-entry/` runs all stages by itself. Say "create entries for St. X, St. Y". It asks once, for downloads, and saves Directus drafts. It never publishes. Add "review mode" to stop after the outlines.
 

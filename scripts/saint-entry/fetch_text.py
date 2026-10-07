@@ -6,6 +6,9 @@ Usage:
   fetch_text.py URL --grep "Nektarios"   # only the passages around each match
   fetch_text.py URL --max-words 8000
   fetch_text.py archive:<identifier> --grep "..."   # archive.org OCR text
+  fetch_text.py URL --save content-drafts/<slug>/sources/S7-life.txt --grep "..."
+      # keeps the full clean text on disk; later calls with the same --save path
+      # read the file and do not fetch again
 
 Why: agents lose many turns working out how to read each site. This script
 uses a browser User-Agent (vatican.va needs it), falls back to a direct IP
@@ -16,6 +19,7 @@ never from a WebFetch summary.
 """
 import argparse
 import html
+import os
 import re
 import subprocess
 import sys
@@ -83,13 +87,24 @@ def main():
     ap.add_argument("--grep", help='show only passages around this term; several terms: "a|b|c"')
     ap.add_argument("--context", type=int, default=600, help="characters around each match")
     ap.add_argument("--max-words", type=int, default=3000)
+    ap.add_argument("--save", help="file for the full clean text; if it exists, read it instead of fetching")
     a = ap.parse_args()
 
-    if a.url.startswith("archive:"):
-        ident = a.url.split(":", 1)[1]
-        text = fetch(f"https://archive.org/download/{ident}/{ident}_djvu.txt")
+    if a.save and os.path.exists(a.save):
+        text = open(a.save, encoding="utf-8").read()
     else:
-        text = clean(fetch(a.url))
+        if a.url.startswith("archive:"):
+            ident = a.url.split(":", 1)[1]
+            text = fetch(f"https://archive.org/download/{ident}/{ident}_djvu.txt")
+        else:
+            page = fetch(a.url)
+            # Plain text (an archive.org _djvu.txt, a .txt file) is not HTML: cleaning it as HTML
+            # would delete everything between stray "<" and ">" characters in the OCR.
+            text = clean(page) if re.search(r"(?i)<(html|body|div|p|article)\b", page[:20000]) else page.strip()
+        if a.save:
+            os.makedirs(os.path.dirname(a.save) or ".", exist_ok=True)
+            with open(a.save, "w", encoding="utf-8") as f:
+                f.write(f"Source: {a.url}\n\n{text}")
 
     if a.grep:
         flat = re.sub(r"\s+", " ", text)

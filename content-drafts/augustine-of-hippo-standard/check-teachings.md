@@ -1,0 +1,60 @@
+# Check of teachings.html (Augustine of Hippo, standard)
+
+Original kept as `teachings.html.before-check`. Fixed in place. Lint: `--kind teachings`, no MUST FIX and no CHECK lines (about 5,380 words).
+Sources read raw: Pius XI Latin and English (vatican.va, papalencyclicals.net); Catholic Encyclopedia (Portalie x3, Orange, Doctors, Hermits, Luther, Jansenism); Benedict XVI audiences of 9 Jan, 20 Feb 2008; Leo XIV homily; Lumen Gentium (English and Latin notes); CCC (Vatican and scborromeo); Trent V; Orange text (Fordham); Einhard; NPNF Letters 21 and 130, On the Gift of Perseverance, Homily 7 on 1 John; Latin Confessions VII and X, City of God XIV; Schaff; Sanidopoulos pages (Romanides, Photios, Nikodemos, Nektarios, Hierotheos); OCA 15 June.
+
+## Wrong or misattributed (the serious fixes)
+
+1. **Block quote from On the Gift of Perseverance.** The passage ("the will is prepared by the Lord, why do you rebuke me ...") is the objector's argument in chapter 6, and Augustine answers it ("To this we answer") in chapter 7. The essay gave it as his own plea. Replaced with his own words from chapter 17 (the will, Christ's prayer for Peter, "freedom by grace"), modernized; the cite now gives chapter 17. The lead-in and the paragraph after it were rewritten to match.
+2. **Florovsky.** "It was Augustine who formulated the doctrine" is Sanidopoulos's own sentence, not Florovsky's (Florovsky is quoted only for "Theodore wrote against St. Augustine's doctrine"). Now attributed to the Orthodox writer John Sanidopoulos.
+3. **Cyprian.** The essay said Cyprian "laid the basis" of the sacrament teaching. The Catholic Encyclopedia says Augustine corrected and perfected Cyprian; only Optatus "expressed the basis". Fixed.
+4. **Leo XIV, "first words".** His first words were the greeting. The Augustine line opens his homily after it. Now "in the first lines of his homily".
+5. **Hormisdas** (520): the Latin has "though the formal chapters are in the Church's records". The essay dropped it. Restored. (Possessor "had asked" is right: Latin "consulentem".)
+6. **Boniface II** (531): the essay said the Fathers "had settled the matter". The text says they discussed it fully. Fixed. The quotation now keeps only "Bishop Augustine of blessed memory".
+7. **Celestine block quote:** "saltem rumor" restored as "Not even a rumor"; "olim" restored as "in his time".
+8. **Confessions X.27.38 block quote:** the Latin has a clause between "ibi te quaerebam" and "mecum eras". Ellipsis added. "Later in the same book" was wrong (VII.10 and X.27 are different books); now "In Book 10".
+9. **Nikodemos prayer** quotation had an added comma ("Deliver us, O God"). Restored to the translation's exact words. Nikodemos places the prayer in Augustine's own time and names Gennadius as witness; the essay had placed the criticism "after 1453". Gennadius is now dated only as Patriarch after 1453, and his criticism is credited to Romanides's essay.
+10. **Einhard quotation:** restored to Turner's exact wording ("St. Augustine's", inner quotation marks). The writer had changed "St." to "Saint" inside the quotation. The invented image "the books sat on the king's table" was removed.
+11. **Gift of Perseverance / Retractations / Letter 130 / Homily 7 details:** "Letter 130 is his fullest teaching on prayer" (no source) removed; the "test for every prayer" and "Proba could run through all the prayers in Scripture" replaced with what Letter 130 12.22 says (nothing is prayed that the Lord's Prayer lacks); "Proba wrote to ask how to pray" now "asked him to write about prayer"; the kidnapper in Homily 7 wants "to sell", not "to steal".
+12. **Trinity rule:** Pius XI's Latin says the relative names tell the Persons apart and the essential names are singular. The essay said the first set "is said in the plural". Fixed. The CCC 264 paraphrase had changed "from the communion of both" into "from the Son too by the Father's gift"; fixed to follow the Catechism.
+13. **Sermons "taken down by shorthand writers and revised"**: the Catholic Encyclopedia only suggests it. Now Possidius's words as Benedict XVI quotes them ("transcribed and corrected").
+14. **"Library ... was copied again and again"**: no source (the biography notes that Possidius does not say the library survived). Now Benedict XVI's statement that copies of the works were very many.
+15. **Enchiridion** "who wanted the faith in short" (not in the source) removed. "On Christian Doctrine is the first treatise ever written": now the Catholic Encyclopedia's "historically the first" genuine treatise on explaining Scripture.
+16. **Marcellinus** was "a Roman governor who called both sides together". The Catholic Encyclopedia says only that, in the emperor's name, the proconsul sanctioned the Catholic victory. Now "a Roman official ... decided for them". Aurelius (not Marcellinus) is named with Augustine as the Catholic speaker.
+17. **"Those councils wrote to Rome against Pelagius"** (Carthage 398 etc. came before Pelagius): now "African councils", Innocent I 417. "Letter" from Augustine and four bishops: Pius XI says "letters".
+18. **John II** wrote "to certain senators" (Pius XI footnote), not "senators of Constantinople". Fixed.
+19. **Semipelagians:** "layman" for Prosper (no source) removed; "accepted that grace was needed" replaced with the Encyclopedia's "middle course ... goodwill has the precedence". "He answered in two books" now names On the Predestination of the Saints (and the 429 follow-up).
+20. **Absolutes and inflated claims.** "A century of quarrels ended there, and the Western Church spoke about grace in Augustine's way from then on" now the Encyclopedia's "triumph of moderate Augustinism", 430 to 529. "Augustine gave the Latin Church its rule" now "set down a rule". "Augustine's first and greatest teaching" removed. "Every Catholic ... learns the commandments in his numbering" now the Catechism's words. "In the Confessions he gave the Church a new way" (opening) now "showed ... a way"; the newness claim stays only as Benedict XVI's "without precedent". "Within a century" now "about a century". "Letter 120 sets out faith and reason most fully" now "the Catholic Encyclopedia names". "Orange ... made it law" now "took up the same teaching". "These four were the first Latin Doctors" now "the Western Church's four Doctors". "In the twelfth century" added for the canons regular (the 1059 synod only asked priests to share income).
+21. **Orange text:** "ancient Fathers" was said of the canons; it is in the conclusion. Now stated for the conclusion. The canons name no Augustine (verified).
+22. **Invented or unsupported detail in scenes**, checked against the biography and notes: "He had felt the fear from the first day" removed; now Possidius's report that he wept because he saw dangers ahead. "A tired mother" illustration removed. "Anyone who holds an office ... can take the lesson" and "The self that finds God finds everyone else there too" and "Correction done out of love is love" cut as unsourced morals. Table, money, hymn, Letter 21 scenes now match the biography. "Possidius ... forty years" is "about forty".
+23. **Catechism 1584** concerns the ordained minister, not "the sacraments". **Preface of the Saints**: the "Doctor of grace" wording is the Catechism's footnote ("citing the 'Doctor of grace'"), so it is credited to the footnote. CCC 406 now quoted for what Pelagius held (bad example).
+24. **Hierotheos / Greek East:** "for eight centuries almost nothing was read in Greek" replaced with Hierotheos's own statement, attributed.
+25. **Romanides:** kept as his opinion only, now described by his essay title and his claim (errors condemned by Orthodox councils). His Orange claim is not used. The OCA and Nikodemos texts are told plainly.
+26. **Place:** for the 8 Oct 393 council, "Hippo" was dropped (the Encyclopedia names only the plenary council under Aurelius).
+
+## Owner rules applied
+
+- **"Saint" before every saint's name** (headings, body, cite lines), not inside quotations, titles of works, or the sources list. Added for: Augustine, Monica, Possidius, Alypius, Evodius, Aurelius, Optatus, Cyprian, Jerome, Ambrose, Gregory the Great, Peter, Paul, Prosper, Caesarius, Nikodemos, Nektarios, and "Pope Saint" for Celestine I, Gelasius I, Hormisdas, Innocent I, Zosimus, Felix IV, Gregory the Great.
+- **Left plain, not sure or not a saint:** Cassian, Charlemagne, Einhard, Theodosius II, Marcellinus, Gennadius Scholarius, Hilary, Proba, Laurentius, Consentius, Heraclius, Possessor, Innocentius, Planoudes, Romanides (Father), Hierotheos. Popes Leo XIV, Benedict XVI, Pius XI, Pius VI, Boniface II, Boniface VIII, John II, Alexander IV, Alexander VIII, Innocent X, Benedict XIV are not saints. Please confirm Cassian and Marcellinus if the owner wants them titled.
+- **Trust the tradition.** Moved scholars' doubts out of the body into "A Note on the Sources", said respectfully: authorship of the Meditations, second Soliloquies, Athanasian Creed and the Kekragarion; the debate on the final text of the Rule; Orange and Trent not naming Augustine; how new his part was; Luther; the strict laws. Removed from the body: "a few works go under his name that he did not write", "Einhard does not say what the king made of it", "Trent's text does not name him", "who gave the Rule its final text is debated", "those words come to us from Possidius rather than from his own pen", and "readers still differ" on the Donatist laws. The Orthodox sections open with facts (feast on 15 June), not with reserve.
+
+## Checked and left as written
+
+Possidius's list (1,030; 300 letters; 600 sermons; 3,000 to 4,000) and the Benedictine counts; Retractations 426 to 428 and "of inestimable price"; City of God 413 to 426, 22 books; Confessions about 400, 13 books; On the Trinity finished about 420, part published without his knowledge, Letter 169 to Evodius (Benedict XVI); Carthage 411 (286 and 279); Felix 404; Heraclius 426; Ephesus summons (Pius XI para 26); Gelasius, Gregory block quote, Innocent I wording (Pius XI Latin); Orange 529 chapters (Catholic Encyclopedia, Orange); Trent canon 2 and "is of sin, and inclines to sin"; Hermits 1 March and 4 May 1256; Synod 1059 and twelfth century (Schaff); Luther 17 July 1505; Jansenius "ten times" and "thirty times"; Alexander VIII 1690; Benedict XIV 1748; Boniface VIII 1298 (Doctors article); CCC 158, 230, 264, 385, 406, 1372, 1398, 1584, 1994, 2065 to 2066, 2616, 2762; LG 32 and Sermon 340; Leo XIV's two quotations; Nektarios and Nikodemos; OCA title "Blessed Augustine, Bishop of Hippo". Rights: all Catechism, LG, Benedict XVI, Leo XIV, Orange and Boniface II uses are short quotations or paraphrase.
+
+## Not verified
+
+- The Catholic World Report page (Order of St Augustine, "thousands of members", first Augustinian pope) timed out. The claim stands on the notes (T-S27); Leo XIV's own election needs no source here.
+- Possidius ch. 22 to 24 were checked against the biography and the notes, not re-opened.
+- The 1641 Holy Office date and Innocent X's 1653 condemnation come from the notes (T-S12); the Jansenism page was reached only for the "ten and thirty times" statement.
+- "Augustine and Aurelius of Carthage" as Catholic spokesmen and "Saint Aurelius" status rely on the Catholic Encyclopedia and the usual calendar.
+
+## Notes for the editor
+
+- `teachings-notes.md` still lists the old text and the old quotation 4 (On the Gift of Perseverance, chapter 6). It is out of date; no file was changed except `teachings.html` and this report.
+- Heading ids (for example `what-augustine-left-us`) were kept although the heading text now begins "What Saint Augustine ...".
+- The Sources list was not changed. It still includes the Florovsky-related Sanidopoulos article (Photios), now cited for Sanidopoulos's own sentence.
+
+## Verdict
+
+Ready, after the editor reads this report. No MUST FIX remains; the serious fixes are the On the Gift of Perseverance block quote, the Florovsky and Cyprian misattributions, and the Nikodemos and Einhard quotations.
