@@ -30,7 +30,7 @@ META = {
     'benedict-of-nursia': dict(short='St. Benedict of Nursia', role='Abbot', place='Italy', years='c. 480–547', focus='50% 30%'),
     'thomas-aquinas': dict(short='St. Thomas Aquinas', role='Dominican friar', place='Italy', years='1225–1274', focus='50% 26%'),
     'nicholas-of-myra': dict(short='St. Nicholas of Myra', role='Bishop', place='Asia Minor', years='c. 270–343', focus='50% 14%'),
-    'padre-pio': dict(short='St. Padre Pio', role='Capuchin friar', place='Italy', years='1887–1968', focus='50% 22%'),
+    'padre-pio': dict(short='St. Pio of Pietrelcina', role='Capuchin friar', place='Italy', years='1887–1968', focus='50% 22%'),
     'seraphim-of-sarov': dict(short='St. Seraphim of Sarov', role='Hermit monk', place='Russia', years='1754–1833', focus='50% 32%'),
     'sergius-of-radonezh': dict(short='St. Sergius of Radonezh', role='Abbot', place='Russia', years='1314–1392', focus='50% 40%'),
 }
@@ -41,13 +41,13 @@ BY = {s['slug']: s for s in SAINTS}
 MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 # Names that appear in summaries without "St." The mock adds it.
-NAME_FIX = ['Thérèse of Lisieux', 'Thérèse', 'Teresa of Ávila', 'Augustine', 'Benedict', 'Padre Pio',
+NAME_FIX = ['Thérèse of Lisieux', 'Thérèse', 'Teresa of Ávila', 'Augustine', 'Benedict',
             'Seraphim of Sarov', 'Sergius of Radonezh', 'Anthony']
 
 
 def st(text):
     """Put "St." before every saint name in a text (hard requirement 6)."""
-    text = text.replace('Brother Thomas Aquinas', 'St. Thomas Aquinas')
+    text = text.replace('Brother Thomas Aquinas', 'St. Thomas Aquinas').replace('Padre Pio', 'St. Pio')
     for n in NAME_FIX:
         text = re.sub(r'(?<!St\. )(?<!Saint )\b' + re.escape(n) + r'\b', 'St. ' + n, text)
     return text

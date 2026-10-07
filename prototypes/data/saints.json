@@ -30,7 +30,10 @@
   "feast_c": null,
   "feast_o": "2000-07-02",
   "summary": "St. John Maximovitch knew what it meant to lose a home. As a young man, he fled Russia with his family. As an Orthodox bishop, he helped others start again. He cared for children in Shanghai, visited sick people, and asked American leaders to help stranded refugees. His work later took him to Europe and San Francisco. People remembered his long prayers, his care for those in need, and the way he kept in touch as children grew up.",
-  "cats": "[\"monastics\"]",
+  "cats": [
+   "monastics",
+   "Bishops"
+  ],
   "venerated": "[\"orthodox\"]",
   "patron": null,
   "birth": "Adamovka, Kharkov Governorate, Russian Empire (present-day Ukraine)",
@@ -246,7 +249,7 @@
  },
  {
   "slug": "padre-pio",
-  "name": "St. Padre Pio of Pietrelcina",
+  "name": "St. Pio of Pietrelcina",
   "by": 1887,
   "dy": 1968,
   "feast_c": "2000-09-23",
