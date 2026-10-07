@@ -1,0 +1,99 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>B · Lifeline · St. Thérèse of Lisieux</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"><style>
+:root{--paper:#EDF0F5;--ink:#0E1A2B;--ink2:#34425A;--mute:#5E6B7F;--line:#DDE2EB;--card:#fff;--c0:#2A4BFF;--c1:#FF5436;--c2:#F2A100;--c3:#12A072;--t0:#2038D6;--t1:#D93A1E;--t2:#9A6200;--t3:#0B7A56}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Epilogue',system-ui,sans-serif;font-weight:500;font-size:15px;line-height:1.4;color:var(--ink);background:var(--paper)}
+a{color:inherit;text-decoration:none}
+.photo{position:absolute;left:0;right:0;top:0;height:600px;background-position:center 45%;background-size:cover;z-index:0}
+.photo::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(14,26,43,0) 60%,var(--paper) 100%)}
+.credit{position:absolute;right:8px;top:150px;writing-mode:vertical-rl;z-index:2;font-size:11px;color:rgba(255,255,255,.95);text-shadow:0 1px 6px rgba(0,0,0,.8);font-weight:500}
+.page{position:relative;z-index:1}
+.wrap{max-width:1400px;margin:0 auto;padding:0 28px}
+.bar{background:#fff;border-bottom:1px solid var(--line);position:relative;z-index:3}
+.bar .in{display:flex;align-items:center;gap:26px;height:58px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.02em;white-space:nowrap}
+.mark{display:flex;flex-direction:column;gap:3px;width:26px}
+.mark i{display:block;height:4px;border-radius:2px}
+nav.main{display:flex;gap:2px}
+nav.main a{padding:8px 12px;font-weight:600;font-size:14px;color:var(--ink2);border-radius:8px}
+nav.main a.on{color:var(--ink);box-shadow:inset 0 -3px 0 var(--c0);border-radius:0}
+.sp{flex:1}
+.btn{background:var(--ink);color:#fff;border-radius:9px;height:38px;padding:0 15px;display:inline-flex;align-items:center;font-weight:700;font-size:13.5px}
+.tool{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.97);border-radius:14px;padding:10px 14px;margin-top:14px;box-shadow:0 14px 34px -18px rgba(8,16,30,.6)}
+.tool .s{display:flex;align-items:center;gap:9px;width:236px;height:44px;border-radius:9px;background:var(--paper);padding:0 13px;color:var(--mute);font-size:14px;flex:none}
+.ruler{flex:1;position:relative;height:54px}
+.rz{position:absolute;top:0;bottom:0;border-radius:6px;display:flex;align-items:flex-end;justify-content:flex-start;padding:0 0 3px 7px;font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;overflow:hidden}
+.rb{position:absolute;height:6px;border-radius:3px;box-shadow:0 0 0 1.5px #fff}
+.tick{position:absolute;top:0;width:1px;height:6px;background:rgba(14,26,43,.35)}
+.drop{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 13px;border-radius:9px;border:1px solid var(--line);font-weight:600;font-size:14px;flex:none;background:#fff}
+.grid{display:flex;gap:14px;align-items:flex-start;padding:18px 0 48px}
+.col{flex:1;display:flex;flex-direction:column;gap:14px;min-width:0}
+.card{background:var(--card);border-radius:12px;overflow:hidden;display:block;box-shadow:0 1px 2px rgba(14,26,43,.06),0 14px 28px -20px rgba(14,26,43,.55)}
+.card .strip{height:5px}
+.card .im{height:118px;background-size:cover}
+.card .bd{padding:12px 14px 13px}
+.life{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:700;color:var(--ink2);letter-spacing:.01em}
+.axis{position:relative;flex:1;height:3px;background:#DDE2EB;border-radius:2px}
+.axis i{position:absolute;top:-2px;height:7px;border-radius:2px;min-width:5px}
+.axis u{position:absolute;top:-1px;width:1px;height:5px;background:#B9C1CF}
+.kick{margin-top:9px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;letter-spacing:.01em}
+.kick i{display:block;width:8px;height:8px;border-radius:50%}
+.kick span{color:var(--mute);font-weight:600}
+.card h3{margin:3px 0 7px;font-size:18px;line-height:1.15;font-weight:800;letter-spacing:-.02em}
+.card p{margin:0;font-family:'Spectral',Georgia,serif;font-weight:400;font-size:14.4px;line-height:1.48;color:#222E42}
+.meta{display:flex;justify-content:space-between;margin-top:10px;font-size:12px;font-weight:600;color:var(--mute)}
+footer.foot{background:#0E1A2B;color:#C4CCD8;padding:26px 0 22px}
+footer .row{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.seg{display:inline-flex;background:#1B2A42;border-radius:10px;padding:3px}
+.seg span{padding:7px 15px;border-radius:8px;font-weight:600;font-size:13.5px;color:#9FB0C9}
+.seg span.on{background:#fff;color:var(--ink)}
+footer .links{display:flex;gap:18px;font-size:13.5px}
+footer .cr{margin-top:16px;font-size:12px;color:#77849A}
+/* saint page */
+.three{display:grid;grid-template-columns:244px minmax(0,1fr) 236px;gap:14px;align-items:stretch;margin-top:14px;padding-bottom:40px}
+.panel{background:#fff;border-radius:14px;padding:20px 22px;box-shadow:0 14px 30px -22px rgba(14,26,43,.55)}
+.side{display:flex;flex-direction:column;gap:14px}
+.stick{position:sticky;top:14px}
+.portrait{background:#fff;border-radius:14px;padding:14px 14px 12px;box-shadow:0 14px 30px -22px rgba(14,26,43,.55)}
+.portrait img{display:block;width:100%;border-radius:4px}
+.portrait small{display:block;margin-top:9px;font-size:11px;line-height:1.35;color:var(--mute);font-weight:500}
+.facts{padding:6px 18px 14px}
+.r{padding:10px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.4}
+.r:last-of-type{border-bottom:0}
+.r dt{font-size:12px;font-weight:700;color:var(--mute);letter-spacing:.04em;text-transform:uppercase;margin-bottom:2px}
+.r dd{margin:0;font-weight:600}
+.r.big dd{font-size:19px;font-weight:800;letter-spacing:-.01em}
+.facts .btn{display:flex;justify-content:center;margin-top:8px}
+.k{font-size:13px;font-weight:700;color:var(--t3);display:flex;align-items:center;gap:7px}
+.k i{display:block;width:9px;height:9px;border-radius:50%;background:var(--c3)}
+h1{margin:6px 0 16px;font-size:48px;line-height:1.02;font-weight:800;letter-spacing:-.035em}
+h1 em{font-style:normal;color:var(--t3)}
+.big-life{margin:0 0 18px}
+.big-life .ax{position:relative;height:6px;background:#DDE2EB;border-radius:3px;margin:20px 0 6px}
+.big-life .ax i{position:absolute;top:-4px;height:14px;border-radius:3px;background:var(--c3);min-width:7px;box-shadow:0 0 0 3px #fff}
+.big-life .ax b{position:absolute;top:-22px;font-size:12px;font-weight:800;color:var(--t3);white-space:nowrap}
+.big-life .tk{position:relative;height:14px;font-size:11px;font-weight:600;color:var(--mute)}
+.big-life .tk span{position:absolute;transform:translateX(-50%)}
+.lead{font-family:'Spectral',Georgia,serif;font-weight:400;font-size:17.5px;line-height:1.55;color:#1E293B;margin:0}
+.tabs{display:flex;gap:26px;border-bottom:1px solid var(--line);margin:24px 0 0;font-size:14px;font-weight:700;color:var(--mute)}
+.tabs a{padding:0 0 11px;margin-bottom:-1px;border-bottom:3px solid transparent}
+.tabs a.on{color:var(--ink);border-color:var(--c3)}
+h2{font-size:22px;line-height:1.2;font-weight:800;letter-spacing:-.02em;margin:26px 0 10px}
+.chap{columns:2;column-gap:30px;margin:0;padding:0;list-style:none;font-family:'Spectral',Georgia,serif;font-size:17px;line-height:1.35}
+.chap li{display:flex;gap:11px;padding:7px 0;border-bottom:1px solid var(--line);break-inside:avoid}
+.chap b{font-family:'Epilogue',sans-serif;font-size:12px;font-weight:800;color:var(--t3);padding-top:4px;min-width:18px}
+.more{display:inline-block;margin-top:12px;font-size:14px;font-weight:700;color:var(--t3)}
+blockquote{margin:0 0 10px;font-family:'Spectral',Georgia,serif;font-style:italic;font-size:21px;line-height:1.4;padding-left:16px;border-left:3px solid var(--c3)}
+.links2{font-size:15px;font-weight:600;line-height:1.9}
+.links2 a{color:var(--t3)}
+.links2 i{color:#B6BFCC;font-style:normal;margin:0 8px}
+p.body{font-family:'Spectral',Georgia,serif;font-size:17px;line-height:1.55;margin:0;color:#1E293B}
+.mrow{display:flex;justify-content:space-between;margin-top:26px;padding:13px 0;border-top:1px solid var(--line);font-size:15px;color:var(--ink2);font-weight:500}
+.mrow b{font-weight:700;color:var(--ink)}
+.rel h4{margin:0 0 6px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.rel a{display:flex;gap:11px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.rel a:last-child{border-bottom:0}
+.rel .th{width:46px;height:46px;border-radius:8px;background-size:cover;flex:none}
+.rel b{display:block;font-size:14px;line-height:1.2;font-weight:700}
+.rel span{font-size:12px;color:var(--mute);font-weight:600}
+</style></head><body><div class="photo" style="height:420px;background-image:url(../../public/images/hero/assisi.webp)"></div><div class="page"><div class="bar"><div class="wrap"><div class="in"><a class="logo" href="#"><span class="mark"><i style="background:#2A4BFF;width:55%;margin-left:0%"></i><i style="background:#FF5436;width:70%;margin-left:25%"></i><i style="background:#F2A100;width:40%;margin-left:55%"></i><i style="background:#12A072;width:30%;margin-left:70%"></i></span>Find a Saint</a><nav class="main"><a class="on" href="#">Saints</a><a class="" href="#">Miracles</a><a class="" href="#">Novenas</a><a class="" href="#">Teachings</a><a class="" href="#">Quotes</a><a class="" href="#">Books</a></nav><div class="sp"></div><a class="btn" href="#">Get the app</a></div></div></div><div class="wrap"><div class="credit">Assisi · Photo: Roberto Berti © FAI, CC BY-SA 4.0</div><div class="three"><div class="side"><div class="portrait"><img src="../assets/therese-of-lisieux.jpg" alt="St. Thérèse of Lisieux"><small>Holy card, Druck der Waisen-Lehrlinge Obergriningen, 1916 · Public domain</small></div><div class="panel facts stick"><dl style="margin:0"><div class="r big"><dt>Feast day</dt><dd>October 1</dd></div><div class="r"><dt>Born</dt><dd>1873, Alençon, Normandy, France</dd></div><div class="r"><dt>Died</dt><dd>1897, Carmel of Lisieux, Lisieux, Normandy, France</dd></div><div class="r"><dt>Patron of</dt><dd>Missions (with St. Francis Xavier, named by Pius XI, 14 December 1927); France (with St. Joan of Arc, named by Pius XII, 3 May 1944)</dd></div><div class="r"><dt>Venerated</dt><dd>Catholic</dd></div></dl><a class="btn" href="#">Pray in the app</a></div></div><div class="panel"><div class="k"><i></i>Modern · Carmelite nun · France</div><h1><em>St.</em> Thérèse of Lisieux</h1><div class="big-life"><div class="ax"><b style="right:6.37%">1873–1897 · 24 years</b><i style="left:92.45%;width:1.18%"></i></div><div class="tk"><span style="left:0.00%">1</span><span style="left:24.68%">500</span><span style="left:49.36%">1000</span><span style="left:74.04%">1500</span><span style="left:98.72%">2000</span></div></div><p class="lead">As a small child she rolled on the floor in fury, and at about three she took a whole basket of doll clothes, saying, &quot;I choose everything!&quot; At twenty-four, dying of tuberculosis in a Normandy convent, she overheard a sister wonder what anyone could write about her, since she had never done anything worth speaking about. St. Thérèse of Lisieux wanted to be a great saint and found she was a grain of sand. In her last eighteen months even Heaven went dark for her, and she went on loving. How did the nun who had done nothing worth speaking about become one of the most loved saints of modern times, and a Doctor of the Church?
+</p><div class="tabs"><a class="on" href="#">Life</a><a href="#">Teachings</a><a href="#">Relics</a><a href="#">Miracles</a></div><h2>Life</h2><ol class="chap"><li><b>01</b><span>Two Refused Vocations, One Marriage</span></li><li><b>02</b><span>The Child Who Chose Everything</span></li><li><b>03</b><span>A Sword and a Smile</span></li><li><b>04</b><span>I Cried for Having Cried</span></li><li><b>05</b><span>A Fourteen-Year-Old Before the Pope</span></li><li><b>06</b><span>Now I Am Here Forever</span></li><li><b>07</b><span>A Grain of Sand Lifted</span></li><li><b>08</b><span>Memories in Two-Sou Notebooks</span></li><li><b>09</b><span>Blood on Good Friday</span></li><li><b>10</b><span>The Slow Last Summer</span></li><li><b>11</b><span>My God, I Love You</span></li><li><b>12</b><span>A Book Instead of an Obituary</span></li></ol><a class="more" href="#">Read the full life →</a><h2>Words and teachings</h2><blockquote>“My vocation, I’ve found it at last: my vocation is love!”</blockquote><div class="links2"><a href="#">The little way</a><i>·</i><a href="#">Confidence and love</a><i>·</i><a href="#">The Offering to Merciful Love</a><i>·</i><a href="#">The trial of faith</a><i>·</i><a href="#">Missions and prayer for priests</a><i>·</i><a href="#">Suffering</a></div><h2>Relics</h2><p class="body">St. Thérèse was buried in the town cemetery of Lisieux on 4 October 1897. The coffin was opened on 6 September 1910, when only bones remained, and again on 10 August 1917.</p><div class="mrow"><span><b>Miracles and answered prayers</b> · 322 accounts</span><span>→</span></div></div><div class="side"><div class="panel rel stick"><h4>Related</h4><a href="#"><div class="th" style="background-image:url(../assets/teresa-of-avila.jpg);background-position:50% 30%"></div><div><b>St. Teresa of Ávila</b><span>Carmelite nun · 1515–1582</span></div></a><a href="#"><div class="th" style="background-image:url(../assets/francis-of-assisi.jpg);background-position:50% 14%"></div><div><b>St. Francis of Assisi</b><span>Friar · 1182–1226</span></div></a><a href="#"><div class="th" style="background-image:url(../assets/padre-pio.jpg);background-position:50% 22%"></div><div><b>St. Padre Pio</b><span>Capuchin friar · 1887–1968</span></div></a></div></div></div></div><footer class="foot"><div class="wrap"><div class="row"><a class="logo" style="color:#fff" href="#">Find a Saint</a><div class="seg"><span>Catholic</span><span>Orthodox</span><span class="on">Both</span></div><div class="sp"></div><div class="links"><a href="#">About</a><a href="#">Updates</a><a href="#">Contact</a><a href="#" style="color:#fff;font-weight:700">Get the app</a></div></div><div class="cr">Assisi · Photo: Roberto Berti © FAI, CC BY-SA 4.0</div></div></footer></div></body></html>

@@ -1,0 +1,332 @@
+[
+ {
+  "slug": "therese-of-lisieux",
+  "name": "St. Thérèse of Lisieux",
+  "by": 1873,
+  "dy": 1897,
+  "feast_c": "2000-10-01",
+  "feast_o": null,
+  "summary": "As a small child she rolled on the floor in fury, and at about three she took a whole basket of doll clothes, saying, \"I choose everything!\" At twenty-four, dying of tuberculosis in a Normandy convent, she overheard a sister wonder what anyone could write about her, since she had never done anything worth speaking about. Thérèse of Lisieux wanted to be a great saint and found she was a grain of sand. In her last eighteen months even Heaven went dark for her, and she went on loving. How did the nun who had done nothing worth speaking about become one of the most loved saints of modern times, and a Doctor of the Church?\n",
+  "cats": "[\"Nuns\",\"Holy_Women\",\"Monastics\",\"Miracle_Workers\",\"Patron Saints\"]",
+  "venerated": "[\"roman-catholic\"]",
+  "patron": "Missions (with Francis Xavier, named by Pius XI, 14 December 1927); France (with Joan of Arc, named by Pius XII, 3 May 1944)",
+  "birth": "Alençon, Normandy, France",
+  "death": "Carmel of Lisieux, Lisieux, Normandy, France",
+  "img": "9d33ee8f-4b7b-4a4b-8704-a357e97fda6a",
+  "w": 834,
+  "h": 1300,
+  "credit": "Druck der Waisen-Lehrlinge Obergriningen (printer), 1916 / Wikimedia Commons",
+  "license": "Public domain (PD-US-expired: published 1916; PD-Germany §134)",
+  "src": "https://commons.wikimedia.org/wiki/File:Kommunionbildchen_1916_Schwester_Theresia_vom_Kinde_Jesu.jpg",
+  "title": "St. Thérèse of Lisieux — First Communion holy card, 1916",
+  "file": "assets/therese-of-lisieux.jpg",
+  "bytes": 201152
+ },
+ {
+  "slug": "john-maximovitch",
+  "name": "St. John Maximovitch of Shanghai and San Francisco",
+  "by": 1896,
+  "dy": 1966,
+  "feast_c": null,
+  "feast_o": "2000-07-02",
+  "summary": "St. John Maximovitch knew what it meant to lose a home. As a young man, he fled Russia with his family. As an Orthodox bishop, he helped others start again. He cared for children in Shanghai, visited sick people, and asked American leaders to help stranded refugees. His work later took him to Europe and San Francisco. People remembered his long prayers, his care for those in need, and the way he kept in touch as children grew up.",
+  "cats": "[\"monastics\"]",
+  "venerated": "[\"orthodox\"]",
+  "patron": null,
+  "birth": "Adamovka, Kharkov Governorate, Russian Empire (present-day Ukraine)",
+  "death": "Seattle, Washington, United States",
+  "img": "742065a9-b222-46d8-8483-a81cb02b97b8",
+  "w": 3024,
+  "h": 4032,
+  "credit": "MKoala / Wikimedia Commons",
+  "license": "CC BY-SA 4.0",
+  "src": "https://commons.wikimedia.org/wiki/File:Icon_of_Our_Holy_Father_John_of_Shanghai_and_San_Francisco.jpg",
+  "title": "St. John of Shanghai and San Francisco — icon (MKoala)",
+  "file": "assets/john-maximovitch.jpg",
+  "bytes": 202981
+ },
+ {
+  "slug": "francis-of-assisi",
+  "name": "St. Francis of Assisi",
+  "by": 1182,
+  "dy": 1226,
+  "feast_c": "2000-10-04",
+  "feast_o": null,
+  "summary": "In a Perugia prison around 1202, a rich cloth merchant’s son laughed at his chains and told the other prisoners that the whole world would one day honor him. Within a few years he had kissed a leper’s hand and handed his clothes back to his father in front of the bishop. Later he crossed the lines of a crusade to preach to the Sultan of Egypt, gave away the leadership of the Order he had founded, and died on the bare ground in a habit that was only lent to him. How did a young man who wanted glory find it by owning nothing? His story begins with something he found bitter, and what it became.",
+  "cats": [
+   "Ascetics",
+   "Monastics",
+   "Missionaries",
+   "Miracle_Workers",
+   "Patron Saints"
+  ],
+  "venerated": [
+   "roman-catholic"
+  ],
+  "patron": "Italy (with St. Catherine of Siena; Pius XII, 18 June 1939); those who promote ecology (John Paul II, Inter Sanctos, 29 November 1979)",
+  "birth": "Assisi, Italy",
+  "death": "The Portiuncula (Santa Maria degli Angeli), near Assisi, Italy",
+  "img": "e22e388a-71ae-471f-b73f-8194c293aca1",
+  "credit": "Bartolomé Esteban Murillo (1617-1682), St Francis of Assisi at Prayer, c. 1645-1650, Onze-Lieve-Vrouwekathedraal, Antwerp; image via Web Gallery of Art / Wikimedia Commons",
+  "license": "Public domain (PD-Art, PD-old-auto-expired; artist died 1682)",
+  "src": "https://commons.wikimedia.org/wiki/File:Bartolom%C3%A9_Esteban_Perez_Murillo_-_St_Francis_of_Assisi_at_Prayer_-_WGA16351.jpg",
+  "title": "St Francis of Assisi at Prayer",
+  "file": "assets/francis-of-assisi.jpg",
+  "bytes": 174860
+ },
+ {
+  "slug": "teresa-of-avila",
+  "name": "St. Teresa of Ávila",
+  "by": 1515,
+  "dy": 1582,
+  "feast_c": "2000-10-15",
+  "feast_o": null,
+  "summary": "At seven, Teresa of Ávila slipped out of the city gate with her brother to be beheaded by the Moors, because the sight of God seemed cheap at that price. An uncle met them on the bridge. Years later, a charming nun whom visitors came to see, she gave up prayer for more than a year and struggled in it for years. Then she began founding convents, laughing at herself, while a preacher compared her to a fraud, the Inquisition took her book, and a papal envoy called her a restless gadabout. In 1970 she became the first woman Doctor of the Church. How? It began with one discovery: prayer is friendship.",
+  "cats": [
+   "Nuns",
+   "Monastics",
+   "Holy_Women",
+   "Patron Saints"
+  ],
+  "venerated": [
+   "roman-catholic"
+  ],
+  "patron": "Catholic writers and lace makers; invoked against heart ailments",
+  "birth": "Ávila, Spain",
+  "death": "Alba de Tormes, Spain",
+  "img": "be16433d-3b4b-4acd-b238-61762785735b",
+  "credit": "Fray Juan de la Miseria, 1576 (public domain)",
+  "license": "Public domain (PD-art-100-expired; artist died 1616)",
+  "src": "https://commons.wikimedia.org/wiki/File:Teresa_de_Jes%C3%BAs_(cropped).jpg",
+  "title": "Saint Teresa of Avila, portrait by Fray Juan de la Miseria (1576)",
+  "file": "assets/teresa-of-avila.jpg",
+  "bytes": 245357
+ },
+ {
+  "slug": "anthony-of-padua",
+  "name": "St. Anthony of Padua",
+  "by": 1195,
+  "dy": 1231,
+  "feast_c": "2000-06-13",
+  "feast_o": null,
+  "summary": "At a gathering of friars at Assisi in 1221, when the ministers chose the brothers they would take home, one sick, unknown friar from Portugal was passed over: Anthony alone was asked for by no one. He had joined the Franciscans to die as a martyr in Morocco, and illness and a storm had sent him back. Ten years later thirty thousand people stood silent in the fields of Padua to hear him, and when his grave was opened, his tongue was found fresh and red. How did the friar nobody wanted become the voice of a city?",
+  "cats": [
+   "Monastics",
+   "Missionaries",
+   "Miracle_Workers",
+   "Patron Saints"
+  ],
+  "venerated": [
+   "roman-catholic"
+  ],
+  "patron": "Invoked especially for the recovery of lost things (Catholic Encyclopedia, 1913); invoked by travellers; patron of Padua and of the Flemish (Baring-Gould, Lives of the Saints, 1914).",
+  "birth": "Lisbon, Portugal",
+  "death": "Arcella, just outside Padua, Italy",
+  "img": "fad3beb9-a944-4c37-950b-6f000fa56ac6",
+  "credit": "Giovanni Francesco Barbieri, called Guercino. Saint Anthony of Padua, etching, National Gallery of Art, Washington (Ailsa Mellon Bruce Fund, 1989.40.1). Via Wikimedia Commons.",
+  "license": "CC0 1.0 (public domain dedication)",
+  "src": "https://commons.wikimedia.org/wiki/File:Giovanni_Francesco_Barbieri,_called_Guercino,_Saint_Anthony_of_Padua,_NGA_71098.jpg",
+  "title": "Saint Anthony of Padua, etching by Guercino",
+  "file": "assets/anthony-of-padua.jpg",
+  "bytes": 319109
+ },
+ {
+  "slug": "augustine-of-hippo",
+  "name": "St. Augustine of Hippo",
+  "by": 354,
+  "dy": 430,
+  "feast_c": "2000-08-28",
+  "feast_o": "2000-06-15",
+  "summary": "As a young man, Augustine prayed to be made pure and added two words: \"not yet.\" He was afraid, he admitted, that God would answer too soon. He stole pears he did not want, lied to his mother on the shore at Carthage and sailed away while she prayed, and spent nine years in a sect. Then a child's voice in a garden in Milan chanted \"Take up and read.\" The restless teacher became a priest seized by a crowd while he wept, a bishop with a verse against gossip inscribed on his table, and the author of the Confessions. How does a man who fears his own prayer become one of the great teachers of the Church?",
+  "cats": [
+   "Bishops",
+   "Fathers_of_the_Church",
+   "Converts",
+   "Monastics"
+  ],
+  "venerated": [
+   "roman-catholic",
+   "orthodox"
+  ],
+  "patron": "Theologians; also invoked against sore eyes (both listed by English Wikipedia; no older source was found for either)",
+  "birth": "Tagaste (Thagaste), Numidia, Roman North Africa",
+  "death": "Hippo Regius, Numidia, Roman North Africa, during the Vandal siege",
+  "img": "40ba4093-3746-4c1e-952a-9b5ae973385d",
+  "credit": "Philippe de Champaigne; Los Angeles County Museum of Art (M.88.177, gift of The Ahmanson Foundation)",
+  "license": "Public domain",
+  "src": "https://commons.wikimedia.org/wiki/File:Saint_Augustine_by_Philippe_de_Champaigne.jpg",
+  "title": "Saint Augustine, by Philippe de Champaigne (c. 1645-1650)",
+  "file": "assets/augustine-of-hippo.jpg",
+  "bytes": 209817
+ },
+ {
+  "slug": "benedict-of-nursia",
+  "name": "St. Benedict of Nursia",
+  "by": 480,
+  "dy": 547,
+  "feast_c": "2000-07-11",
+  "feast_o": "2000-03-14",
+  "summary": "The first monks who asked Benedict to be their abbot put poison in his wine. When he blessed the glass, it shattered, and he told them mildly that he had warned them: their way of life and his would never agree. Then he went back to his cave. He had left Rome to be alone with God, yet people kept finding him: a priest at Easter, shepherds, a Gothic king who tested him with a servant in royal robes, and a sister whose prayer brought down a storm to keep him talking all night. How did a hermit who fled the world become the father of monks who live together, and the patron of Europe?",
+  "cats": [
+   "Monastics",
+   "Hermits",
+   "Miracle_Workers",
+   "Patron Saints"
+  ],
+  "venerated": [
+   "roman-catholic",
+   "orthodox"
+  ],
+  "patron": "Europe (principal patron, declared by Paul VI in Pacis nuntius, 24 October 1964). English Wikipedia also lists poison, students and schoolchildren, cavers, and farmers; not checked in an older source.",
+  "birth": "Province of Nursia, Italy",
+  "death": "Monte Cassino, Italy",
+  "img": "2abac437-c97b-4d6d-b8f2-4b327092ac07",
+  "credit": "Pietro Perugino (c. 1448-1523), via Web Gallery of Art; Pinacoteca Vaticana",
+  "license": "Public domain",
+  "src": "https://commons.wikimedia.org/wiki/File:Pietro_Perugino_-_Saint_Benedict_-_WGA17310.jpg",
+  "title": "Saint Benedict, by Pietro Perugino",
+  "file": "assets/benedict-of-nursia.jpg",
+  "bytes": 127544
+ },
+ {
+  "slug": "thomas-aquinas",
+  "name": "St. Thomas Aquinas",
+  "by": 1225,
+  "dy": 1274,
+  "feast_c": "2000-01-28",
+  "feast_o": null,
+  "summary": "One morning in December 1273, after Mass in a chapel at Naples, Brother Thomas Aquinas stopped writing his Summa in the middle of a treatise and never wrote again. By a sworn account at his canonization inquiry, he told his secretary that everything he had written seemed like straw compared with what he had seen. As a young man he had been seized on the road by his own brothers and held captive to keep him from becoming a friar. Later a pope offered him an archbishopric, and he refused it. This is the life of the silent student whom classmates, legend says, called the dumb ox, and of what the man who wrote so much about God wanted most.",
+  "cats": [
+   "Confessors",
+   "Monastics",
+   "Miracle_Workers",
+   "Patron Saints"
+  ],
+  "venerated": [
+   "roman-catholic"
+  ],
+  "patron": "Universities, academies, colleges, and Catholic schools (Leo XIII, Cum hoc sit, 1880); principal patron of Naples; patron of Priverno (Piperno)",
+  "birth": "Roccasecca, near Aquino, Italy (the family castle, or nearby)",
+  "death": "Cistercian abbey of Fossanova, near Maenza, Italy",
+  "img": "45c20a9a-a839-4af5-b7dc-ba89cfb7e7b1",
+  "credit": "Carlo Crivelli, Saint Thomas Aquinas, 1476, National Gallery, London (public domain)",
+  "license": "Public domain (PD-art-old-100-expired)",
+  "src": "https://commons.wikimedia.org/wiki/File:Saint_Thomas_Aquinas_(Crivelli,_15th-century).jpg",
+  "title": "Saint Thomas Aquinas, by Carlo Crivelli (1476)",
+  "file": "assets/thomas-aquinas.jpg",
+  "bytes": 357395
+ },
+ {
+  "slug": "nicholas-of-myra",
+  "name": "St. Nicholas of Myra",
+  "by": 270,
+  "dy": 343,
+  "feast_c": "2000-12-06",
+  "feast_o": "2000-12-06",
+  "summary": "The oldest known story of Saint Nicholas has no Santa Claus and no bag of gold. It has a bishop of Myra running to an execution ground, taking the sword from the executioner's hands, and telling the governor that the real criminal was a bribe. Almost nothing about him can be proved, yet Orthodox tradition ranks him among its most venerated saints, and the West calls him the patron of sailors and children. How did a man history barely recorded become the saint whom half of Christendom calls on in trouble? Every layer of his story, from the oldest to the latest, shows the same man.",
+  "cats": [
+   "Bishops",
+   "Miracle_Workers",
+   "Patron Saints"
+  ],
+  "venerated": [
+   "roman-catholic",
+   "orthodox"
+  ],
+  "patron": "Sailors, merchants, bakers, travellers, and children; Greece, Russia, the Kingdom of Naples, Sicily, Lorraine, Liège, Campen, Corfu, Freiburg, and Moscow (Catholic Encyclopedia, 1911)",
+  "birth": "Patara, Lycia",
+  "death": "Myra, Lycia (today Demre, Turkey)",
+  "img": "d2d50417-da5c-4dc4-9d97-968755ad32e2",
+  "credit": "Unknown artist, Saint Catherine's Monastery, Sinai, first half of the 13th century; photo via Wikimedia Commons (public domain)",
+  "license": "Public domain",
+  "src": "https://commons.wikimedia.org/wiki/File:St_Nicholas_Icon_Sinai_13th_century.jpg",
+  "title": "Saint Nicholas of Myra, icon, Sinai, 13th century",
+  "file": "assets/nicholas-of-myra.jpg",
+  "bytes": 320313
+ },
+ {
+  "slug": "padre-pio",
+  "name": "St. Padre Pio of Pietrelcina",
+  "by": 1887,
+  "dy": 1968,
+  "feast_c": "2000-09-23",
+  "feast_o": null,
+  "summary": "When red marks appeared on the palms of a young priest in a southern Italian village, he asked his parish priest to pray that Jesus would take them away. He was willing to suffer, he said, but all of it in hiding. Instead Padre Pio carried bleeding wounds in his hands, feet, and side for fifty years. Doctors argued over them, the Holy Office silenced him, and pilgrims lined up before dawn to hear his Mass and confess to him. Asked how his humility survived it all, he laughed and talked about a gold watch. How did a man who wanted only to be a poor friar who prays carry such a gift without making it his own?",
+  "cats": [
+   "Monastics",
+   "Miracle_Workers",
+   "Patron Saints"
+  ],
+  "venerated": [
+   "roman-catholic"
+  ],
+  "patron": "Civil defence volunteers (approved by the Vatican on a petition through the Italian bishops’ conference, per Wikipedia); also, popularly, adolescents, stress relief, and Pietrelcina",
+  "birth": "Pietrelcina, province of Benevento, Kingdom of Italy",
+  "death": "Capuchin friary of Our Lady of Grace (Santa Maria delle Grazie), San Giovanni Rotondo, Italy",
+  "img": "51a2a716-00b1-4c67-827e-a57b68bd6eee",
+  "credit": "Placido Bux (photograph, 19 August 1919), via Wikimedia Commons",
+  "license": "Public domain (PD-Italy, PD-old-auto-1923)",
+  "src": "https://commons.wikimedia.org/wiki/File:Padre-Pio-young.jpg",
+  "title": "Padre Pio showing the stigmata, 19 August 1919",
+  "file": "assets/padre-pio.jpg",
+  "bytes": 146055
+ },
+ {
+  "slug": "seraphim-of-sarov",
+  "name": "St. Seraphim of Sarov",
+  "by": 1754,
+  "dy": 1833,
+  "feast_c": null,
+  "feast_o": "2000-01-02",
+  "summary": "In September 1804 three peasants beat a hermit nearly to death in the forest near Sarov, looking for his money. He had put down his axe rather than fight them. They found an icon and some potatoes, and he begged that they go unpunished. Seraphim of Sarov spent thirty years in the forest, on a stone, in silence, and behind a locked door with an oak coffin in the entry. Then he spent his last years greeting every stranger, in any season, with \"My joy, Christ is risen!\" What was the treasure the robbers never found, and how did a man who once hid his face from passers-by end his life with a crowd at his door?",
+  "cats": [
+   "Ascetics",
+   "Hermits",
+   "Monastics",
+   "Miracle_Workers",
+   "Patron Saints"
+  ],
+  "venerated": [
+   "orthodox"
+  ],
+  "patron": "Nuclear scientists (first prayer service to him as their patron at Sarov, September 2007)",
+  "birth": "Kursk, Russian Empire",
+  "death": "Sarov Hermitage (Sarov Monastery), Russian Empire",
+  "img": "46712bb8-5298-451a-b8cd-fb810ad5b429",
+  "credit": "Anonymous Russian icon painter (Seraphimo-Diveevsky Monastery workshop?), after 1903; via Wikimedia Commons (uploaded by Shakko)",
+  "license": "Public domain (PD-old)",
+  "src": "https://commons.wikimedia.org/wiki/File:Seraphim_of_Sarov_(after_1903,_priv.coll).jpg",
+  "title": "Icon of St. Seraphim of Sarov, Seraphimo-Diveevsky workshop, after 1903",
+  "file": "assets/seraphim-of-sarov.jpg",
+  "bytes": 307160
+ },
+ {
+  "slug": "sergius-of-radonezh",
+  "name": "St. Sergius of Radonezh",
+  "by": 1314,
+  "dy": 1392,
+  "feast_c": null,
+  "feast_o": "2000-09-25",
+  "summary": "A plowman walked a long way to see the famous hegumen of a forest monastery near Radonezh, and found a man in a patched robe digging a garden. \"I came to see a prophet,\" he said, \"and you show me an orphan.\" Then a prince rode in and bowed to the gardener. Sergius of Radonezh was a boy who could not learn to read, a hermit who shared his last crust with a bear, and the monk whose blessing a grand prince sought before he marched against the Horde. How did he become the Hegumen of the Russian land without ever ceasing to be poor?",
+  "cats": [
+   "Monastics",
+   "Hermits",
+   "Ascetics",
+   "Miracle_Workers",
+   "Patron Saints"
+  ],
+  "venerated": [
+   "orthodox"
+  ],
+  "patron": "Russia; students",
+  "birth": "A village in the Rostov principality, Russia (named as Varnitsy, near Rostov)",
+  "death": "Trinity monastery near Radonezh (today the Trinity-Sergius Lavra), Russia",
+  "img": "af904c18-8efb-4998-a1dd-0059cd1e5c60",
+  "credit": "Unknown Yaroslavl icon painter, mid-17th century; Yaroslavl Historical, Architectural and Art Museum-Preserve (inv. I-394). Image via Wikimedia Commons.",
+  "license": "Public domain",
+  "src": "https://commons.wikimedia.org/wiki/File:Sergius_of_Radonezh_vita_icon_(17_c.,_Yaroslavl_museum).jpg",
+  "title": "Sergius of Radonezh with scenes from his life (Yaroslavl icon, mid-17th century)",
+  "file": "assets/sergius-of-radonezh.jpg",
+  "bytes": 485061
+ }
+]
