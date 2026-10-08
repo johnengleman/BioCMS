@@ -218,6 +218,7 @@ svg.up{flex:none;color:var(--azure)}
 .wm{font-family:var(--dsp);font-weight:700;letter-spacing:-.03em;line-height:1;white-space:nowrap;display:inline-block}
 .wm .i{position:relative;display:inline-block}
 .wm .i svg{position:absolute;left:50%;top:.04em;transform:translateX(-50%)}
+.wm.hwm .i svg{width:11px;height:11px;stroke-width:2.6;top:.02em;transform:translateX(-46%)}
 .badge{display:inline-grid;place-items:center;background:var(--azure);color:#fff;flex:none}
 .badge svg{color:#fff}
 .badge.s64{width:64px;height:64px;border-radius:14px}
