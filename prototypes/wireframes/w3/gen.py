@@ -514,6 +514,8 @@ def build_saint():
         ('Venerated', 'Catholic'),
     ]
     dl = ''.join(f'<dt>{k}</dt><dd>{E(v)}</dd>' for k, v in facts)
+    for n in ('St. Francis Xavier', 'St. Joan of Arc'):   # keep each patron name on one line
+        dl = dl.replace(n, f'<span style="white-space:nowrap">{n}</span>')
     cap = 'Holy card, 1916 · Public domain'
     alt = 'St. Thérèse of Lisieux, First Communion holy card, 1916'
     img = IMG.format(s['slug'])

@@ -351,75 +351,83 @@ def s_device():
     for slug in ORDER:
         m = META[slug]
         heads += f'<div><div class="kick">{E(m["role"])} · {m["years"]}</div>{name_block(slug)}</div>'
-    grid = f'<div class="heads">{heads}</div><div class="cap" style="margin-top:12px">Card name · 46 px versal · all 12 saints</div>'
+    grid = f'<div class="heads">{heads}</div><div class="cap" style="margin-top:12px">Card name · versal 1.5× · all 12 saints</div>'
     noof = ''.join(f'<div><div class="kick">{E(x["role"])} · {x["years"]}</div>{name_block(short=x["short"], col=x["col"])}</div>' for x in NO_OF)
-    grid += (f'<div class="heads" style="margin-top:40px;grid-template-columns:repeat(4,1fr)">{noof}</div>'
-             f'<div class="cap" style="margin-top:12px">Names without “of” · the given name leads · text only</div>')
+    grid += (f'<div class="heads" style="margin-top:40px">{noof}</div>'
+             f'<div class="cap" style="margin-top:12px">Names without “of” · text only, no image</div>')
 
     key = ''
-    for col, role in KEY:
-        who = [META[s]['short'] for s in ORDER if ROLE[s][1] == role]
-        who_t = ', '.join(who) if who else 'none of the 12'
-        letter = who[0].replace('St. ', '')[0] if who else 'M'
-        key += f'<div><span class="sw" style="color:var(--{col})">{letter}</span><b>{E(role)}</b><span>{E(who_t)}</span></div>'
-    key_use = f'<div class="use"><div class="key">{key}</div><span class="cap">Role colour key · six colours</span></div>'
+    for col, (way, who_def) in WAY.items():
+        who = [META[s]['short'] for s in ORDER if ROLE[s] == col]
+        who_t = ', '.join(who) if who else f'none of the 12 <em>· e.g. {LAY_EXAMPLES}</em>'
+        letter = who[0].replace('St. ', '')[0] if who else 'T'
+        key += (f'<div><span class="sw" style="color:var(--{col})">{letter}</span><b>{way}</b>'
+                f'<span><em>{E(who_def)}</em><br>{T(who_t) if who else who_t.replace("St. ", "St.&nbsp;")}</span></div>')
+    key_use = (f'<div class="use"><div class="key">{key}</div>'
+               f'<span class="cap">Way of life · Monastic before Clergy before Lay</span></div>')
+
+    az = ''
+    byletter = {}
+    for s in ORDER:
+        byletter.setdefault(split_name(META[s]['short'])[0][0], []).append(s)
+    for L in ('A', 'B', 'F'):
+        az += f'<div class="L"><b>{L}</b><div>' + ''.join(name_block(s, tag='div') for s in byletter[L]) + '</div></div>'
+    az_use = f'<div class="use"><div class="az">{az}</div><span class="cap">A–Z sort · letter headers</span></div>'
 
     tabs = ''
-    for col, name in (('magenta', 'St. Thérèse of Lisieux'), ('teal', 'St. Francis of Assisi'), ('cobalt', 'St. Nicholas of Myra')):
-        tabs += (f'<div style="margin-bottom:22px"><div class="cap" style="margin-bottom:6px"><b>{E(name)}</b></div>'
+    for col, name in (('magenta', 'St. Thérèse of Lisieux'), ('teal', 'St. Nicholas of Myra'), ('moss', 'St. Thomas More')):
+        tabs += (f'<div style="margin-bottom:22px"><div class="cap" style="margin-bottom:6px"><b>{T(name)}</b></div>'
                  f'<div class="tabs" style="--role:var(--{col})"><a class="on" href="#">Life</a><a href="#">Teachings</a><a href="#">Relics</a></div></div>')
-    tab_use = f'<div class="use"><div>{tabs}</div><span class="cap">Active tab in role colour</span></div>'
+    tab_use = f'<div class="use"><div>{tabs}</div><span class="cap">Active tab in the way colour</span></div>'
 
     # saint page block
     t = BY['therese-of-lisieux']
     chap = ''.join(f'<li><b>{i + 1:02d}</b><span>{E(c)}</span></li>' for i, c in enumerate(build.CHAPTERS[:6]))
-    facts = ''.join(f'<div class="r{" first" if i == 0 else ""}"><dt>{k}</dt><dd>{E(v)}</dd></div>' for i, (k, v) in enumerate(FACTS))
+    facts = ''.join(f'<div class="r{" first" if i == 0 else ""}"><dt>{k}</dt><dd>{T(v)}</dd></div>' for i, (k, v) in enumerate(FACTS))
     page = (f'<div class="page"><div><div class="top">'
             f'<div class="portrait"><img src="{ASSETS}/therese-of-lisieux.jpg" alt="St. Thérèse of Lisieux, holy card, 1916"><div class="cap">{E(TH_CREDIT)}</div></div><div></div>'
-            f'<div><div class="hd"><span class="vs" aria-hidden="true">T</span><div><div class="kick">Carmelite nun · France · 1873–1897</div>'
-            f'<h1 class="name"><span class="st">St.</span> Thérèse of Lisieux</h1></div></div>'
-            f'<p class="lead">{E(build.TH_SUMMARY.strip())}</p></div></div>'
+            f'<div><div class="kick">Carmelite nun · France · 1873–1897</div>'
+            f'{name_block("therese-of-lisieux", tag="h1", cls="nm name")}'
+            f'<p class="lead">{T(build.TH_SUMMARY.strip())}</p></div></div>'
             f'<div class="tabs" style="--role:var(--magenta)"><a class="on" href="#">Life</a><a href="#">Teachings</a><a href="#">Relics</a></div>'
             f'<h2 class="h2"><span>Life</span><a href="#">Read the full life →</a></h2><ol class="chap">{chap}</ol></div><div></div>'
             f'<aside class="facts"><dl style="margin:0">{facts}</dl><a class="btn" href="#">Pray in the app</a></aside></div>'
-            f'<div class="cap" style="margin-top:14px">Page name · 120 px versal · name 48 px</div>')
-    return grid + f'<div class="uses">{key_use}{tab_use}</div>' + page
+            f'<div class="cap" style="margin-top:14px">Page name 48 px · versal 72 px</div>')
+    return grid + f'<div class="uses">{key_use}{az_use}{tab_use}</div>' + page
 
 
 def s_type():
     sample = words(build.TH_SUMMARY, 60)
     rows = [
-        ('Big Shoulders Display 800<br>48 / 1.0', '<h1 class="name" style="margin:0"><span class="st">St.</span> Thérèse of Lisieux</h1>'),
+        ('Big Shoulders Display 800<br>48 / 1.0 · “St.” 500', name_block('therese-of-lisieux', tag='h1', cls='nm name')),
         ('Big Shoulders Display 800<br>22 / 1.05 · card name',
-         '<div class="cardname"><span class="st">St.</span> Pio of Pietrelcina</div><div class="cardname" style="margin-top:6px"><span class="st">St.</span> Seraphim of Sarov</div>'),
-        ('Libre Caslon Text 400<br>17.5 / 1.6 · body', f'<p class="body">{E(sample)}</p>'),
-        ('Libre Caslon Text 400<br>14.5 / 1.5 · summary', f'<p class="summ">{E(words(st(BY["padre-pio"]["summary"]), 40))}</p>'),
+         name_block('padre-pio', tag='div') + name_block('seraphim-of-sarov', tag='div')),
+        ('Libre Caslon Text 400<br>17.5 / 1.6 · body', f'<p class="body">{T(sample)}</p>'),
+        ('Libre Caslon Text 400<br>14.5 / 1.5 · summary', f'<p class="summ">{T(words(st(BY["padre-pio"]["summary"]), 40))}</p>'),
         ('Host Grotesk 500<br>12 caps +0.1em · kicker', '<div class="kick">Capuchin friar · 1887–1968</div>'),
         ('Host Grotesk 600<br>14 · tabs', '<div class="tabs" style="--role:var(--teal);max-width:320px"><a class="on" href="#">Life</a><a href="#">Teachings</a><a href="#">Relics</a></div>'),
         ('Host Grotesk 500<br>13 · chips', '<div class="ui-row"><span class="chip on">All <small>12</small></span><span class="chip">Bishops <small>3</small></span>'
          '<span class="chip">Hermits <small>3</small></span><span class="chip">Nuns <small>2</small></span><span class="chip butter">October <small>3</small></span></div>'),
-        ('Host Grotesk 600<br>14 · action', '<div class="ui-row"><a class="btn" href="#">Get the app</a><a class="link" href="#">Read the full life →</a><a class="link" href="#" style="color:var(--tealtext)">St. Francis of Assisi</a></div>'),
+        ('Host Grotesk 600<br>14 · action', '<div class="ui-row"><a class="btn" href="#">Get the app</a><a class="link" href="#">Read the full life →</a><a class="link" href="#" style="color:var(--tealtext)">St.&nbsp;Nicholas of Myra</a></div>'),
     ]
     left = ''.join(f'<div class="row"><span class="cap">{lab}</span><div>{body}</div></div>' for lab, body in rows)
-    facts = ''.join(f'<div class="r{" first" if i == 0 else ""}"><dt>{k}</dt><dd>{E(v)}</dd></div>' for i, (k, v) in enumerate(FACTS))
+    facts = ''.join(f'<div class="r{" first" if i == 0 else ""}"><dt>{k}</dt><dd>{T(v)}</dd></div>' for i, (k, v) in enumerate(FACTS))
     side = f'<div class="side"><aside class="facts"><dl style="margin:0">{facts}</dl></aside><div class="cap" style="margin-top:10px">Facts · label 13 · value 14</div></div>'
     return f'<div class="spec"><div>{left}</div>{side}</div>'
 
 
 def s_colour():
     sw = [
-        ('magenta', 'Magenta', 'Nuns · versal, tab', cr(PAL['magenta']) + ' on white'),
-        ('teal', 'Teal', 'Friars · versal only', cr(PAL['teal']) + ' on white'),
-        ('moss', 'Moss', 'Monks and hermits', cr(PAL['moss']) + ' on white'),
-        ('cobalt', 'Cobalt', 'Bishops · links, action', cr(PAL['cobalt']) + ' on white'),
-        ('ink', 'Ink', 'Doctors · text', cr(PAL['ink']) + ' on white'),
-        ('scarlet', 'Scarlet', 'Martyrs · versal only', cr(PAL['scarlet']) + ' on white'),
+        ('magenta', 'Magenta', 'Monastic · versal, tab', cr(PAL['magenta']) + ' on white'),
+        ('teal', 'Teal', 'Clergy · versal, tab', cr(PAL['teal']) + ' on white'),
+        ('moss', 'Moss', 'Lay · versal, tab', cr(PAL['moss']) + ' on white'),
+        ('cobalt', 'Cobalt', 'Links, action, mark', cr(PAL['cobalt']) + ' on white'),
+        ('ink', 'Ink', 'Text, names', cr(PAL['ink']) + ' on white'),
         ('white', 'White', 'Page, cards', '—'),
-        ('ink2', 'Ink 2', '"St.", kicker', cr(PAL['ink2']) + ' on white'),
+        ('ink2', 'Ink 2', 'Kicker', cr(PAL['ink2']) + ' on white'),
         ('ink3', 'Ink 3', 'Labels, meta', cr(PAL['ink3']) + ' on white'),
-        ('tealtext', 'Teal text', 'Friars · links', cr(PAL['tealtext']) + ' on white'),
+        ('tealtext', 'Teal text', 'Clergy · links', cr(PAL['tealtext']) + ' on white'),
         ('butter', 'Butter', 'Chip fill', cr(PAL['ink'], PAL['butter']) + ' ink on it'),
-        ('line', 'Line', 'Hairlines', '—'),
     ]
     out = ''
     for k, name, role, c in sw:
@@ -434,9 +442,8 @@ def s_photo():
     hdr = (f'<div class="hdr">{wordmark(32)}<nav>{nav}</nav><span class="sp"></span>'
            f'<div class="search">{SEARCH}<span>Search saints</span></div><a class="btn" href="#">Get the app</a></div>')
     chips = '<span class="chip on">All <small>12</small></span>' + ''.join(
-        f'<span class="chip">{k} <small>{n}</small></span>' for k, n in (('Bishops', 3), ('Hermits', 3), ('Ascetics', 3), ('Nuns', 2), ('Holy Women', 2)))
-    key = '<span class="keypill">' + ''.join(f'<span><i style="background:var(--{c})"></i>{r.split(" ")[0]}</span>' for c, r in KEY) + '</span>'
-    facet = f'<div class="facet">{chips}{key}<span class="credit">{E(CREDIT)}</span></div>'
+        f'<span class="chip">{k} <small>{n}</small></span>' for k, n in (('Bishops', 3), ('Hermits', 3), ('Ascetics', 3), ('Nuns', 2), ('Holy Women', 2), ('Missionaries', 2)))
+    facet = f'<div class="facet">{chips}<span class="credit">{E(CREDIT)}</span></div>'
     wall = '<div class="wall">' + ''.join(card(s) for s in ORDER[:5]) + '</div>'
     return (f'<div class="photo">{hdr}{facet}{wall}</div>'
             f'<div class="cap" style="margin:14px 64px 0">Header strip 180 · gap 16 · card 268</div>')
@@ -451,22 +458,22 @@ def s_phone():
         fl, _ = feast_line(s)
         return (f'<div class="prow"><div class="top"><div class="thumb"><img src="{ASSETS}/{slug}.jpg" alt="{E(m["short"])}" style="object-position:{m["focus"]}"></div>'
                 f'<div><div class="kick">{E(m["role"])} · {m["years"]}</div>{name_block(slug)}<div class="meta">{fl} · {E(m["place"])}</div></div></div>'
-                f'<p lang="en">{E(st(s["summary"]).strip())}</p></div>')
+                f'<p lang="en">{T(st(s["summary"]).strip())}</p></div>')
     home = (f'<div class="phone"><div class="ph-h"><span class="badge" style="width:32px;height:32px;border-radius:7px;font-size:22px">S</span>'
             f'<div class="search">{SEARCH}<span>Search saints</span></div><span style="color:var(--ink)">{MENU}</span></div>'
             f'<div class="pphoto"><span class="credit">{E(CREDIT)}</span></div><div class="sheet">'
             f'<div class="drops"><span>Category {CHEV}</span><span>Feast month {CHEV}</span><span>Sort {CHEV}</span></div>'
             f'{prow("therese-of-lisieux")}{prow("francis-of-assisi")}</div></div>')
-    facts = ''.join(f'<div class="r"><dt>{k}</dt><dd>{E(v)}</dd></div>' for k, v in FACTS)
+    facts = ''.join(f'<div class="r"><dt>{k}</dt><dd>{T(v)}</dd></div>' for k, v in FACTS)
     saint = (f'<div class="phone"><div class="ph-h"><span class="badge" style="width:32px;height:32px;border-radius:7px;font-size:22px">S</span>'
              f'<div class="search">{SEARCH}<span>Search saints</span></div><span style="color:var(--ink)">{MENU}</span></div>'
              f'<div class="psaint"><div class="kick" style="margin-top:12px">Carmelite nun · France · 1873–1897</div>'
-             f'<div class="hd"><span class="vs" aria-hidden="true">T</span><h1 class="name"><span class="st">St.</span> Thérèse<br>of Lisieux</h1></div>'
+             f'{name_block("therese-of-lisieux", tag="h1", cls="nm name")}'
              f'<div class="head2"><img src="{ASSETS}/therese-of-lisieux.jpg" alt="St. Thérèse of Lisieux, holy card, 1916">'
-             f'<p class="lead">{E(build.TH_SUMMARY.strip())}</p></div>'
+             f'<p class="lead">{T(build.TH_SUMMARY.strip())}</p></div>'
              f'<dl>{facts}</dl><div class="tabs" style="--role:var(--magenta)"><a class="on" href="#">Life</a><a href="#">Teachings</a><a href="#">Relics</a></div></div></div>')
-    caps = ('<div style="display:flex;gap:64px;margin-top:22px"><span class="cap" style="width:395px">Home · 375 · 40 px versal</span>'
-            '<span class="cap" style="width:395px">Saint page · name 36 · 78 px versal</span></div>')
+    caps = ('<div style="display:flex;gap:64px;margin-top:22px"><span class="cap" style="width:395px">Home · 375 · name 19</span>'
+            '<span class="cap" style="width:395px">Saint page · name 36 · versal 54</span></div>')
     return f'<div class="phones">{home}{saint}</div>{caps}'
 
 
@@ -489,7 +496,7 @@ def main():
     out = os.path.join(HERE, 'board.html')
     open(out, 'w').write(page)
     print('wrote', out, len(page) // 1024, 'KB')
-    for k in ('ink', 'ink2', 'ink3', 'magenta', 'teal', 'tealtext', 'moss', 'cobalt', 'scarlet'):
+    for k in ('ink', 'ink2', 'ink3', 'magenta', 'teal', 'tealtext', 'moss', 'cobalt'):
         print(f'{k:9s} {PAL[k]} {cr(PAL[k])}')
     print('ink on butter', cr(PAL['ink'], PAL['butter']), '· white on cobalt', cr('#FFFFFF', PAL['cobalt']))
 

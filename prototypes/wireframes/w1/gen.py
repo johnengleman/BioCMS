@@ -409,7 +409,7 @@ def build_saint():
         ('Feast', 'October 1'),
         ('Born', '1873, Alençon, France'),
         ('Died', '1897, Lisieux, France'),
-        ('Patron of', 'Missions, with St. Francis Xavier; France, with St. Joan of Arc'),
+        ('Patron of', 'Missions, with St. Francis\u00a0Xavier; France, with St. Joan\u00a0of\u00a0Arc'),
         ('Venerated', 'Catholic'),
     ]
     dl = ''.join(f'<div class="r"><dt>{k}</dt><dd>{E(v)}</dd></div>' for k, v in facts)

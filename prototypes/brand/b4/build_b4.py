@@ -3,9 +3,12 @@
 
 Run: python3 build_b4.py
 Reads the real data through ../../build.py (META, BY, st, feast, TH_SUMMARY, QUOTE).
+
+Round 2 (committee review 08): the 45° arrow is replaced by the "turn-up" stroke,
+a level line that bends upward in one curve. It lives in the wordmark and the badge.
+On cards it shows only on hover/focus and on "Read the full life".
 """
 import html
-import json
 import os
 import sys
 
@@ -14,8 +17,9 @@ sys.path.insert(0, os.path.join(HERE, '..', '..'))
 import build  # noqa: E402
 
 E = html.escape
-META, BY, st, feast = build.META, build.BY, build.st, build.feast
+BY, feast = build.BY, build.feast
 MONTHS = build.MONTHS
+NBSP = ' '
 
 ASSETS = '../../assets'
 HERO = '../../../public/images/hero'
@@ -24,28 +28,38 @@ SITE = 'Discover the Saints'
 NAV = ['Saints', 'Miracles', 'Novenas', 'Teachings', 'Quotes', 'Books']
 
 # Chair decision A6: "St. Pio of Pietrelcina", never "Padre Pio".
-META = dict(META)
+META = dict(build.META)
 META['padre-pio'] = dict(META['padre-pio'], short='St. Pio of Pietrelcina')
 
-# Names without "of". Text only: the site has no image for the last three.
-# Roles and years are plain, well-known facts.
+# Names without "of". Text only: the site has no image for these.
+# Roles follow the canonization titles: St. Joan of Arc was canonized (1920) as a virgin.
 TEXT_ONLY = [
     dict(short='St. Bernadette Soubirous', role='Nun', years='1844–1879'),
     dict(short='St. Maximilian Kolbe', role='Franciscan friar, martyr', years='1894–1941'),
     dict(short='St. Teresa Benedicta of the Cross', role='Carmelite nun, martyr', years='1891–1942'),
-    dict(short='St. Joan of Arc', role='Laywoman, martyr', years='1412–1431'),
+    dict(short='St. Joan of Arc', role='Virgin', years='1412–1431'),
 ]
 
 PAL = [
-    ('#FFFFFF', 'Page', 'page, cards', ''),
-    ('#141A24', 'Ink', 'names, body', ''),
-    ('#4B5563', 'Ink-2', 'kicker, facts labels', ''),
-    ('#66707F', 'Ink-3', 'meta, captions', ''),
-    ('#E5E8EE', 'Line', 'hairlines', ''),
-    ('#0E63CF', 'Azure', 'arrow, links, tab, button', 'both ways'),
-    ('#E3F0FF', 'Sky', 'selected chip', 'ink on it'),
-    ('#D6F26F', 'Lime', 'fill only: app button, month dot', 'ink on it'),
+    ('#FFFFFF', 'Page', 'page, cards'),
+    ('#141A24', 'Ink', 'names, body'),
+    ('#4B5563', 'Ink-2', 'kicker, facts labels'),
+    ('#66707F', 'Ink-3', 'meta, captions'),
+    ('#E5E8EE', 'Line', 'hairlines'),
+    ('#0E63CF', 'Azure', 'turn, links, tab, button'),
+    ('#E3F0FF', 'Sky', 'selected chip'),
+    ('#F6D55C', 'Butter', 'fill only: app button, month dot'),
 ]
+
+
+# ------------------------------------------------------------ text
+def st(text):
+    """build.st() plus a non-breaking space after every "St."."""
+    return build.st(text).replace('St. ', 'St.' + NBSP)
+
+
+def nb(name):
+    return name.replace('St. ', 'St.' + NBSP)
 
 
 # ------------------------------------------------------------ contrast
@@ -67,13 +81,13 @@ def cr(a, b='#FFFFFF'):
     return f'{contrast(a, b):.1f}:1'
 
 
-def swatch(hexc, name, role, note):
+def swatch(hexc, name, role):
     dark = lum(hexc) < 0.3
     if name in ('Page', 'Line'):
         con = ''
     elif name == 'Sky':
         con = f'{cr("#141A24", hexc)} ink · {cr("#0E63CF", hexc)} Azure'
-    elif name == 'Lime':
+    elif name == 'Butter':
         con = f'{cr("#141A24", hexc)} ink on it'
     elif name == 'Azure':
         con = f'{cr(hexc)} both ways'
@@ -85,28 +99,32 @@ def swatch(hexc, name, role, note):
 
 
 # ------------------------------------------------------------ device
-def arrow(size=16, cls=''):
-    """The rising arrow. 45° shaft, open two-stroke head, round caps."""
-    return (f'<svg class="up {cls}" width="{size}" height="{size}" viewBox="0 0 16 16" fill="none" '
-            f'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
-            f'<path d="M3.5 12.5 12.5 3.5M5.5 3.5h7v7"/></svg>')
+def turn(size=18, cls='', sw=2):
+    """The turn-up: a level stroke that bends upward in one curve, open head."""
+    h = round(size * 0.8)
+    return (f'<svg class="tn {cls}" width="{size}" height="{h}" viewBox="0 0 20 16" fill="none" stroke="currentColor" '
+            f'stroke-width="{sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+            f'<path d="M2 13.5h7a6 6 0 0 0 6-6V3"/><path d="M11.5 6.5 15 3l3.5 3.5"/></svg>')
 
 
 def wordmark(size, cls=''):
-    """'Discover the Saints'. The dot of the first i is the arrow (aria-label keeps the text)."""
-    a = max(round(size * 0.30), 10)
+    """'Discover the Saints' with the turn-up as its baseline rule: level under the words, then up."""
     return (f'<span class="wm {cls}" style="font-size:{size}px" role="img" aria-label="{SITE}">'
-            f'D<span class="i">ı{arrow(a)}</span>scover the Saints</span>')
+            f'<span class="wt">{SITE}</span>'
+            f'<svg class="wl" viewBox="0 0 12 20" preserveAspectRatio="xMaxYMax meet" fill="none" stroke="currentColor" '
+            f'stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+            f'<path d="M-4000 19.25H3a6 6 0 0 0 6-6V3.5M6 6.5 9 3.5l3 3"/></svg></span>')
 
 
 def badge(size):
-    a = {64: 36, 32: 18, 16: 10}[size]
-    return f'<span class="badge s{size}" aria-label="{SITE} app">{arrow(a)}</span>'
+    g = {64: 38, 32: 19, 16: 11}[size]
+    sw = {64: 2, 32: 2.2, 16: 2.6}[size]
+    return f'<span class="badge s{size}" aria-label="{SITE} app">{turn(g, "", sw)}</span>'
 
 
 def name_link(short, size=20, cls=''):
-    """A saint name that leads somewhere: name + the rising arrow."""
-    return f'<a class="nm {cls}" href="#">{E(short)}{arrow(round(size * 0.8))}</a>'
+    """A saint name as a link. The turn shows on hover/focus only (class .hover on the board)."""
+    return f'<a class="nm {cls}" href="#">{E(nb(short))}{turn(round(size * 0.85), "hv")}</a>'
 
 
 def feast_line(s):
@@ -116,31 +134,31 @@ def feast_line(s):
     return f'Feast {feast(s)}', True
 
 
-def card(slug):
+def card(slug, cls=''):
     s, m = BY[slug], META[slug]
     fl, show_place = feast_line(s)
     place = f'<span>{E(m["place"])}</span>' if show_place else ''
-    return (f'<article class="card"><img class="im" src="{ASSETS}/{slug}.jpg" alt="{E(m["short"])}" style="object-position:{m["focus"]}">'
+    return (f'<article class="card {cls}"><img class="im" src="{ASSETS}/{slug}.jpg" alt="{E(m["short"])}" style="object-position:{m["focus"]}">'
             f'<div class="bd"><div class="kick">{E(m["role"])} · {m["years"]}</div>'
             f'<h3>{name_link(m["short"])}</h3><p lang="en">{E(st(s["summary"]).strip())}</p>'
             f'<div class="meta"><span>{fl}</span>{place}</div></div></article>')
 
 
-def name_row(short, role, years):
-    return (f'<div class="nrow"><div class="kick">{E(role)} · {years}</div><h3>{name_link(short)}</h3></div>')
-
-
-def header():
-    nav = ''.join(f'<a href="#" class="{"on" if n == "Saints" else ""}">{n}</a>' for n in NAV)
-    return (f'<header class="hdr">{wordmark(20, "hwm")}<nav>{nav}</nav>'
-            f'<div class="search">{SEARCH_SVG}<span>Search saints</span></div>'
-            f'<a class="btn lime" href="#">Get the app</a></header>')
+def name_row(short, role, years, cls=''):
+    return (f'<div class="nrow {cls}"><div class="kick">{E(role)} · {years}</div><h3>{name_link(short)}</h3></div>')
 
 
 SEARCH_SVG = ('<svg width="15" height="15" viewBox="0 0 20 20" fill="none" stroke="currentColor" '
               'stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg>')
 MENU_SVG = ('<svg width="18" height="14" viewBox="0 0 18 14" stroke="currentColor" stroke-width="2" '
             'stroke-linecap="round" aria-hidden="true"><path d="M1 1h16M1 7h16M1 13h16"/></svg>')
+
+
+def header():
+    nav = ''.join(f'<a href="#" class="{"on" if n == "Saints" else ""}">{n}</a>' for n in NAV)
+    return (f'<header class="hdr">{wordmark(20, "hwm")}<nav>{nav}</nav>'
+            f'<div class="search">{SEARCH_SVG}<span>Search saints</span></div>'
+            f'<a class="btn butter" href="#">Get the app</a></header>')
 
 
 def credit(cls=''):
@@ -166,13 +184,13 @@ def first_words(text, n):
     return ' '.join(words[:best])
 
 
-SUMMARY_60 = first_words(build.TH_SUMMARY, 60)
-
+SUMMARY_60 = first_words(st(build.TH_SUMMARY), 60)
+LINK = '<a class="xl" href="#">{}</a>'
 TH_FACTS = [
     ('Feast', 'October 1'),
     ('Born', '1873, Alençon, France'),
     ('Died', '1897, Lisieux, France'),
-    ('Patron of', f'Missions, with {name_link("St. Francis Xavier", 14, "inl")}; France, with {name_link("St. Joan of Arc", 14, "inl")}'),
+    ('Patron of', f'Missions, with {LINK.format(nb("St. Francis Xavier"))}; France, with {LINK.format(nb("St. Joan of Arc"))}'),
     ('Venerated', 'Catholic'),
 ]
 TA_FACTS = [
@@ -203,7 +221,7 @@ def phone_row(slug):
 
 
 CSS = """
-:root{--ink:#141A24;--ink2:#4B5563;--ink3:#66707F;--line:#E5E8EE;--azure:#0E63CF;--sky:#E3F0FF;--lime:#D6F26F;
+:root{--ink:#141A24;--ink2:#4B5563;--ink3:#66707F;--line:#E5E8EE;--azure:#0E63CF;--sky:#E3F0FF;--butter:#F6D55C;
 --dsp:'Funnel Display',system-ui,sans-serif;--ui:'Funnel Sans',system-ui,sans-serif;--rd:'Brygada 1918',Georgia,serif;
 --shadow:0 1px 0 rgb(0 0 0/.04),0 10px 28px -14px rgb(0 0 0/.32)}
 *{box-sizing:border-box}
@@ -212,25 +230,24 @@ body{margin:0;width:1440px;background:#fff;color:var(--ink);font-family:var(--ui
 a{color:inherit;text-decoration:none}
 h1,h2,h3,p,dl,dd{margin:0}
 img{display:block}
-svg.up{flex:none;color:var(--azure)}
+svg.tn{flex:none;color:var(--azure)}
 
-/* wordmark */
-.wm{font-family:var(--dsp);font-weight:700;letter-spacing:-.03em;line-height:1;white-space:nowrap;display:inline-block}
-.wm .i{position:relative;display:inline-block}
-.wm .i svg{position:absolute;left:50%;top:.04em;transform:translateX(-50%)}
-.wm.hwm .i svg{width:11px;height:11px;stroke-width:2.6;top:.02em;transform:translateX(-46%)}
+/* wordmark: the turn-up is the baseline rule */
+.wm{font-family:var(--dsp);font-weight:700;letter-spacing:-.03em;line-height:1;white-space:nowrap;display:inline-block;position:relative;padding:0 .62em .3em 0;color:var(--ink)}
+.wm .wl{position:absolute;left:0;bottom:0;width:100%;height:1em;color:var(--azure);overflow:visible;display:block}
+.wm{overflow:hidden}
 .badge{display:inline-grid;place-items:center;background:var(--azure);color:#fff;flex:none}
 .badge svg{color:#fff}
 .badge.s64{width:64px;height:64px;border-radius:14px}
 .badge.s32{width:32px;height:32px;border-radius:7px}
 .badge.s16{width:16px;height:16px;border-radius:4px}
-.badge.s16 svg{stroke-width:2.4}
 
-/* names with the device */
-.nm{display:inline-flex;align-items:flex-start;gap:.3em;font-family:var(--dsp);font-weight:700;letter-spacing:-.012em;line-height:1.2}
-.nm svg{margin-top:.22em}
-.nm.inl{font-family:inherit;font-weight:500;letter-spacing:0;line-height:inherit;color:var(--azure);display:inline;white-space:nowrap}
-.nm.inl svg{vertical-align:-1px;margin:0 0 0 2px;display:inline}
+/* names: plain ink at rest; the turn appears on hover/focus */
+.nm{display:inline-flex;align-items:flex-start;gap:.3em;font-family:var(--dsp);font-weight:700;letter-spacing:-.012em;line-height:1.2;color:var(--ink)}
+.nm svg.hv{display:none;margin-top:.3em}
+.nm:hover svg.hv,.nm:focus-visible svg.hv,.hover .nm svg.hv{display:block}
+.hover .nm,.nm:hover{color:var(--azure)}
+.xl{color:var(--azure);font-weight:500;white-space:nowrap}
 
 /* board chrome */
 .sec{padding:0 64px;margin-top:64px}
@@ -241,13 +258,16 @@ svg.up{flex:none;color:var(--azure)}
 .cap b{font-weight:600;color:var(--ink2)}
 .top{padding:44px 64px 0;display:flex;align-items:baseline;justify-content:space-between;gap:40px}
 .top .id{font-size:12.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3)}
-.top .idea{font-family:var(--rd);font-size:18px;line-height:1.5;color:var(--ink2);text-align:right;max-width:760px}
+.top .idea{font-family:var(--rd);font-size:18px;line-height:1.5;color:var(--ink2);text-align:right;max-width:800px}
 
 /* 1 wordmark */
 .mark-row{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:end}
 .mark-row .cap{margin-top:18px}
 .badges{display:flex;align-items:flex-end;gap:28px}
 .wmset{display:flex;align-items:baseline;gap:40px;margin-top:28px}
+.glyphs{display:flex;align-items:flex-end;gap:36px;margin-top:28px}
+.glyphs .g{display:grid;gap:10px;justify-items:center}
+.glyphs svg{color:var(--azure)}
 
 /* 2 device */
 .dev{display:grid;grid-template-columns:192px 268px 268px 1fr;gap:12px 28px;align-items:start}
@@ -266,9 +286,8 @@ svg.up{flex:none;color:var(--azure)}
 .facts dt{font-size:13px;color:var(--ink3);font-weight:500}
 .facts dd{font-size:14px;color:var(--ink);font-weight:500;line-height:1.45}
 .h2{font-family:var(--dsp);font-size:26px;line-height:1.2;font-weight:600;letter-spacing:-.015em;padding-bottom:14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline}
-.h2 a{font-family:var(--ui);font-size:14px;font-weight:600;color:var(--azure);letter-spacing:0;display:inline-flex;align-items:center;gap:4px}
+.h2 a{font-family:var(--ui);font-size:14px;font-weight:600;color:var(--azure);letter-spacing:0;display:inline-flex;align-items:center;gap:6px}
 .mrow{display:flex;justify-content:space-between;align-items:center;height:48px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:15px;color:var(--ink3);font-weight:500}
-.mrow svg{color:var(--ink3)}
 .foot{display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#fff}
 .foot .sw{display:flex;gap:22px;height:100%;align-items:center}
 .foot .sw a{position:relative;font-size:14px;font-weight:500;color:var(--ink2);height:100%;display:flex;align-items:center}
@@ -282,8 +301,9 @@ svg.up{flex:none;color:var(--azure)}
 .card .bd{padding:12px 14px 0}
 .card h3{font-size:20px;line-height:1.2;margin:3px 0 8px}
 .card h3 .nm{text-wrap:balance}
-.card p{font-family:var(--rd);font-size:14.5px;line-height:1.5;color:var(--ink);hyphens:auto;text-wrap:pretty}
+.card p{font-family:var(--rd);font-weight:500;font-size:15px;line-height:1.5;color:var(--ink);hyphens:auto;text-wrap:pretty}
 .meta{display:flex;justify-content:space-between;align-items:center;height:30px;margin-top:10px;border-top:1px solid var(--line);font-size:12.5px;font-weight:500;color:var(--ink3);white-space:nowrap;gap:8px}
+.card.hover{box-shadow:0 1px 0 rgb(0 0 0/.04),0 16px 36px -14px rgb(14 99 207/.45)}
 
 /* 3 type */
 .type{display:grid;grid-template-columns:680px 1fr;gap:64px;align-items:start}
@@ -300,10 +320,10 @@ svg.up{flex:none;color:var(--azure)}
 .chip small{font-size:12px;color:var(--ink3);font-weight:500}
 .chip.on{background:var(--sky);box-shadow:none;color:var(--ink)}
 .chip.m{white-space:nowrap}
-.chip.m i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:inset 0 0 0 1px rgb(20 26 36/.25)}
+.chip.m i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--butter);box-shadow:inset 0 0 0 1px rgb(20 26 36/.25)}
 .quote{font-family:var(--rd);font-size:20px;line-height:1.4;color:var(--ink);hanging-punctuation:first;max-width:520px}
 .btn{display:inline-flex;align-items:center;justify-content:center;height:36px;padding:0 15px;border-radius:8px;background:var(--azure);color:#fff;font-size:14px;font-weight:600;white-space:nowrap}
-.btn.lime{background:var(--lime);color:var(--ink)}
+.btn.butter{background:var(--butter);color:var(--ink)}
 .facts + .btn{height:38px;margin-top:14px;width:100%}
 
 /* 4 palette */
@@ -347,21 +367,23 @@ background:linear-gradient(90deg,rgb(20 26 36/0),rgb(20 26 36/.55) 36px,rgb(20 2
 .ptop img{width:72px;height:90px;object-fit:cover}
 .ptop h3{font-size:19px;line-height:1.2;margin:3px 0 4px}
 .pmeta{font-size:12.5px;font-weight:500;color:var(--ink3)}
-.prow p{font-family:var(--rd);font-size:15px;line-height:1.5;margin-top:10px;hyphens:auto}
+.prow p{font-family:var(--rd);font-weight:500;font-size:15.5px;line-height:1.5;margin-top:10px;hyphens:auto}
 .phone-notes{display:grid;gap:20px;padding-top:8px;max-width:420px}
 .end{height:72px}
 """
 
 
 def main():
-    dev_cap = ('<div class="cap"><b>The rising arrow</b>'
-               '<div>On every saint name that opens a life.</div>'
-               '<div>Never on the page name. Never on an image.</div>'
-               '<div>Names stay plain ink.</div>'
-               '<div>16 px · stroke 2 · Azure</div></div>')
-    dev_cards = card('thomas-aquinas') + card('padre-pio')
+    dev_cap = ('<div class="cap"><b>The turn</b>'
+               '<div>Level, then up. One curve.</div>'
+               '<div>Wordmark and badge: always.</div>'
+               '<div>Names: on hover or focus only.</div>'
+               '<div>"Read the full life": always.</div>'
+               '<div>Never on an image.</div></div>')
+    dev_cards = card('thomas-aquinas') + card('padre-pio', 'hover')
     nrows = ''.join(name_row(**n) for n in TEXT_ONLY)
-    nrows_block = f'<div><div class="nrows">{nrows}</div><div class="cap" style="margin-top:12px">Names without an image · text only</div></div>'
+    nrows_block = (f'<div><div class="nrows">{nrows}</div>'
+                   f'<div class="cap" style="margin-top:12px">Names without an image · text only · at rest</div></div>')
 
     chips = ('<div class="chips"><span class="chip on">All <small>12</small></span>'
              '<span class="chip">Bishops <small>3</small></span><span class="chip">Hermits <small>3</small></span>'
@@ -372,63 +394,68 @@ def main():
     phone_rows = ''.join(phone_row(s) for s in ('therese-of-lisieux', 'thomas-aquinas', 'seraphim-of-sarov'))
     swatches = ''.join(swatch(*s) for s in PAL)
 
+    glyphs = ''.join(f'<div class="g">{turn(n, "", w)}<span class="cap">{n}</span></div>'
+                     for n, w in ((72, 1.6), (36, 1.8), (24, 2), (18, 2), (14, 2.2)))
+
     page = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">
 <title>B4 · Ascent · Discover the Saints brand board</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@500;600;700&family=Funnel+Sans:wght@400;500;600&family=Brygada+1918:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@500;600;700&family=Funnel+Sans:wght@400;500;600&family=Brygada+1918:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <style>{CSS}</style></head>
 <body>
 <div class="top"><div class="id">B4 · Ascent</div>
-<div class="idea">We know where the downward road ends. Every saint shows where the upward road ends. The brand is that direction: a rising arrow, in daylight blue.</div></div>
+<div class="idea">We know where the downward road ends. Every saint shows what happens when a life turns the other way. The brand is that turn: a level line that bends upward, in daylight blue.</div></div>
 
 <section class="sec"><div class="lbl">Wordmark</div>
-<div class="mark-row"><div>{wordmark(72)}<div class="cap">Funnel Display 700 · 72 · the i-dot is the arrow</div>
+<div class="mark-row"><div>{wordmark(72)}<div class="cap">Funnel Display 700 · 72 · the baseline rule turns up</div>
 <div class="wmset">{wordmark(32)}{wordmark(20)}<span class="cap">32 · 20</span></div></div>
-<div><div class="badges">{badge(64)}{badge(32)}{badge(16)}</div><div class="cap">App badge · 64 · 32 · 16 · the arrow alone</div></div></div>
+<div><div class="badges">{badge(64)}{badge(32)}{badge(16)}</div><div class="cap">App badge · 64 · 32 · 16 · the turn alone</div>
+<div class="glyphs">{glyphs}</div><div class="cap">The turn · 72 to 14 · stroke 1.6 to 2.2</div></div></div>
 </section>
 
 <section class="sec"><div class="lbl">Device</div>
-<div class="dev">{dev_cap}{dev_cards}{nrows_block}</div>
-<div class="use-row"><div><div class="kick-p">Dominican friar · Italy · 1225–1274</div><h1 class="name48">St. Thomas Aquinas</h1>
-<div class="cap" style="margin-top:10px">Page name: no arrow. You are there.</div>{facts(TA_FACTS)}
-<div class="h2" style="margin-top:40px">Life<a href="#">Read the full life{arrow(14)}</a></div>
-<div class="cap" style="margin-top:12px">Into the life: arrow</div>
-<div class="mrow" style="margin-top:28px"><span>Miracles and answered prayers · {build.N_MIRACLES} accounts</span>{arrow(14)}</div>
-<div class="cap" style="margin-top:12px">Miracles row: Ink-3, quiet</div></div>
-<div><div class="cap"><b>Cross-links in facts</b> · a saint named in text</div>{facts(TH_FACTS)}
-<div class="cap" style="margin-top:28px;margin-bottom:8px"><b>Footer</b> · Both active · Azure underline</div>{footer()}</div></div>
+<div class="dev">{dev_cap}<div>{card('thomas-aquinas')}<div class="cap" style="margin-top:10px">At rest · no mark</div></div>
+<div>{card('padre-pio', 'hover')}<div class="cap" style="margin-top:10px">Hover or focus · name turns Azure, the turn appears</div></div>{nrows_block}</div>
+<div class="use-row"><div><div class="kick-p">Dominican friar · Italy · 1225–1274</div><h1 class="name48">{nb("St. Thomas Aquinas")}</h1>
+<div class="cap" style="margin-top:10px">Page name: no mark. You are there.</div>{facts(TA_FACTS)}
+<div class="h2" style="margin-top:40px">Life<a href="#">Read the full life{turn(16)}</a></div>
+<div class="cap" style="margin-top:12px">Into the life: the turn, always</div>
+<div class="mrow" style="margin-top:28px"><span>Miracles and answered prayers · {build.N_MIRACLES} accounts</span><span>→</span></div>
+<div class="cap" style="margin-top:12px">Miracles row: Ink-3, plain arrow, quiet</div></div>
+<div><div class="cap" style="margin-bottom:8px"><b>Footer</b> · Both active · Azure underline</div>{footer()}
+<div class="cap" style="margin-top:28px"><b>Rule</b> · the turn is never a bullet, a divider or an icon in nav. Three places only.</div></div></div>
 </section>
 
 <section class="sec"><div class="lbl">Type</div>
 <div class="type">
-<div><div class="kick-p">Carmelite nun · France · 1873–1897</div><h1 class="name48">St. Thérèse of Lisieux</h1>
+<div><div class="kick-p">Carmelite nun · France · 1873–1897</div><h1 class="name48">{nb("St. Thérèse of Lisieux")}</h1>
 <p class="body">{E(SUMMARY_60)}</p><div class="cap" style="margin-top:14px">Funnel Display 700 · 48/1.05 &nbsp;·&nbsp; Brygada 1918 400 · 17.5/1.6</div>
-<div class="h2" style="margin-top:40px">Life<a href="#">Read the full life{arrow(14)}</a></div>
+<div class="h2" style="margin-top:40px">Life<a href="#">Read the full life{turn(16)}</a></div>
 <p class="quote" style="margin-top:20px">“{E(build.QUOTE)}”</p>
 <div class="cap" style="margin-top:12px">H2 Funnel Display 600 · 26 &nbsp;·&nbsp; quote Brygada 20/1.4</div>
 </div>
 <div class="spec">
 <div class="names"><div><div class="kick">Capuchin friar · 1887–1968</div><h3>{name_link("St. Pio of Pietrelcina")}</h3></div>
 <div><div class="kick">Hermit monk · 1754–1833</div><h3>{name_link("St. Seraphim of Sarov")}</h3></div></div>
-<div class="cap">Card name 20/1.2 · kicker Funnel Sans 12.5</div>
+<div class="cap">Card name 20/1.2 · kicker Funnel Sans 12.5 · summary Brygada 500 · 15/1.5</div>
 <div class="tabs"><a class="on" href="#">Life</a><a href="#">Teachings</a><a href="#">Relics</a></div>
 <div class="cap">Tabs 14 · Azure</div>
-{chips}<div class="cap">Chips 13 · Sky selected · Lime month dot</div>
+{chips}<div class="cap">Chips 13 · Sky selected · Butter month dot</div>
 {facts(TH_FACTS)}<a class="btn" href="#">Pray in the app</a>
-<div class="cap">Facts 13 / 14 · button 38 Azure</div>
+<div class="cap">Facts 13 / 14 · saints named in text are Azure links · button 38</div>
 </div></div>
 </section>
 
 <section class="sec"><div class="lbl">Palette</div>
 <div class="swatches">{swatches}</div>
-<div class="rules"><div class="cap">Action colour is cool: Azure.</div><div class="cap">Lime is a fill. Never text, never near an image.</div><div class="cap">No gold, no glow, no tint on the photo.</div></div>
+<div class="rules"><div class="cap">Action colour is cool: Azure.</div><div class="cap">Butter is a fill. Never text, never near a portrait.</div><div class="cap">No gold, no glow, no tint on the photo.</div></div>
 </section>
 
 <section class="sec bleed"><div class="lbl" style="padding:0 64px">Header</div>
 <div style="padding:0 64px"><div class="shot strip" style="background-image:url({HERO}/galilee.webp);background-position:center 58%">{header()}{credit()}</div></div>
 <div class="shot home" style="background-image:url({HERO}/galilee.webp);background-position:center 58%">{header()}<div class="wall">{home_cards}</div>{credit()}</div>
-<div class="cap home-cap"><b>Both</b> · Galilee, full colour · glass header · credit on the photo · cards 268, gap 12</div>
+<div class="cap home-cap"><b>Both</b> · Galilee, full colour · glass header · Butter button · credit on the photo · cards 268, gap 12 · no mark at rest</div>
 </section>
 
 <section class="sec"><div class="lbl">Phone</div>
@@ -438,8 +465,8 @@ def main():
 <div class="ph-photo" style="background-image:url({HERO}/galilee.webp)">{credit()}</div>
 <div class="ph-sheet"><div class="ph-filters"><span>Category ▾</span><span>Feast month ▾</span><span>Sort ▾</span></div>{phone_rows}</div></div>
 <div class="phone-notes"><div class="cap"><b>375 × 812</b> · rows, hairlines, no boxes</div>
-<div class="cap"><b>Arrow 15 px</b> after each name · the row is the link</div>
-<div class="cap"><b>Thumb 72×90</b> · summary in full · Brygada 15/1.5</div></div>
+<div class="cap"><b>Badge 32</b> is the only mark on the phone · the row is the link</div>
+<div class="cap"><b>Thumb 72×90</b> · summary in full · Brygada 500 · 15.5/1.5</div></div>
 </div>
 </section>
 <div class="end"></div>
@@ -448,7 +475,7 @@ def main():
     open(out, 'w').write(page)
     print('wrote', out, len(page) // 1024, 'KB')
     print('summary words:', len(SUMMARY_60.split()))
-    for hexc, name, role, note in PAL:
+    for hexc, name, role in PAL:
         print(name, hexc, cr(hexc), 'on white')
 
 
