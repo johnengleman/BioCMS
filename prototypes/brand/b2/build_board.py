@@ -72,9 +72,9 @@ def card(slug):
 
 def header(mode, cls=''):
     nav = ''.join(f'<a href="#" class="{"on" if n == "Saints" else ""}">{n}</a>' for n in NAV)
-    return (f'<header class="hdr {cls}"><a class="wm" href="#"><span class="lt">Discover</span> the Saints</a><nav>{nav}</nav>'
+    return (f'<header class="hdr {cls}"><a class="wm" href="#">Discover <em>the</em> Saints</a><nav>{nav}</nav>'
             f'<div class="search">{SEARCH_SVG}<span>Search saints</span></div>'
-            f'<a class="btn" href="#">Get the app</a>{stripe(mode, "edge")}</header>')
+            f'<a class="btn" href="#">Get the app</a></header>')
 
 
 def credit(key, cls=''):
@@ -95,7 +95,7 @@ def footer(mode, width=''):
 
 
 def badge(size):
-    return f'<span class="badge s{size}" aria-label="Discover the Saints app">D{stripe("b")}</span>'
+    return f'<span class="badge s{size}" aria-label="Discover the Saints app"><i class="lung" aria-hidden="true"></i></span>'
 
 
 # ------------------------------------------------------------ contrast
@@ -121,7 +121,7 @@ SWATCHES = [
     ('#4A4D55', 'Ink-2', 'kicker, facts', cr('#4A4D55') + ' on page'),
     ('#6B6E76', 'Ink-3', 'meta, captions', cr('#6B6E76') + ' on page'),
     ('#E4E6E8', 'Line', 'hairlines', ''),
-    ('#E8503A', 'Coral', 'Catholic mark', 'mark only, no text'),
+    ('#C8452B', 'Brick', 'Catholic mark', 'mark only · ' + cr('#C8452B') + ' on page'),
     ('#1B8A8F', 'Teal', 'Orthodox mark', 'mark only, no text'),
     ('#157277', 'Teal-text', 'links, tab, button', cr('#157277') + ' both ways'),
     ('#EEF4F4', 'Mist', 'chip fill', cr('#1B1B1F', '#EEF4F4') + ' ink on it'),
@@ -185,7 +185,7 @@ def phone_row(slug):
 
 
 CSS = """
-:root{--ink:#1B1B1F;--ink2:#4A4D55;--ink3:#6B6E76;--coral:#E8503A;--teal:#1B8A8F;--tt:#157277;--mist:#EEF4F4;--line:#E4E6E8;
+:root{--ink:#1B1B1F;--ink2:#4A4D55;--ink3:#6B6E76;--coral:#C8452B;--teal:#1B8A8F;--tt:#157277;--mist:#EEF4F4;--line:#E4E6E8;
 --ui:'Familjen Grotesk',system-ui,sans-serif;--rd:'Vollkorn',Georgia,serif;
 --shadow:0 1px 0 rgb(0 0 0/.04),0 10px 28px -14px rgb(0 0 0/.32)}
 *{box-sizing:border-box}
@@ -214,25 +214,26 @@ img{display:block}
 
 /* 1 wordmark */
 .mark-row{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:end}
-.wm72{font-size:72px;font-weight:700;letter-spacing:-.03em;line-height:1;margin-bottom:16px}
-.wm72 .lt,.wm .lt{font-weight:500;letter-spacing:-.02em}
+.wm72{font-size:72px;font-weight:700;letter-spacing:-.045em;line-height:1;margin-bottom:16px}
+.wm72 em,.wm em{font-family:var(--rd);font-style:italic;font-weight:400;color:var(--ink2);letter-spacing:0;font-size:.94em}
 .wm72 + .stripe{width:120px}
 .badges{display:flex;align-items:flex-end;gap:28px}
 .badge{position:relative;display:inline-grid;place-items:center;background:#fff;color:var(--ink);font-weight:700;overflow:hidden;line-height:1;flex:none;box-shadow:inset 0 0 0 1px var(--line),0 6px 16px -10px rgb(0 0 0/.35)}
-.badge .stripe{position:absolute;left:0;right:0;bottom:0}
-.badge.s64{width:64px;height:64px;border-radius:14px;font-size:38px;letter-spacing:-.03em}
-.badge.s32{width:32px;height:32px;border-radius:7px;font-size:19px;letter-spacing:-.03em}
-.badge.s32 .stripe{height:2px}
-.badge.s16{width:16px;height:16px;border-radius:4px;font-size:9.5px}
-.badge.s16 .stripe{height:1px}
-.badge.s64 span,.badge.s32 span,.badge.s16 span{transform:translateY(-2px)}
+.lung{display:block;border-radius:999px;background:linear-gradient(90deg,var(--coral) 50%,var(--teal) 50%)}
+.badge.s64{width:64px;height:64px;border-radius:14px}
+.badge.s64 .lung{width:40px;height:12px}
+.badge.s32{width:32px;height:32px;border-radius:7px}
+.badge.s32 .lung{width:20px;height:6px}
+.badge.s16{width:16px;height:16px;border-radius:4px}
+.badge.s16 .lung{width:10px;height:3px}
 .mark-row .cap{margin-top:16px}
 
 /* header strip on photo */
 .shot{position:relative;background-size:cover;overflow:hidden;width:100%}
-.hdr{position:relative;display:flex;align-items:center;gap:28px;height:60px;padding:0 64px 4px;background:rgb(255 255 255/.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.hdr .stripe.edge{position:absolute;left:0;right:0;bottom:0}
-.wm{font-size:20px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.shot.cool::before,.ph-photo.cool::before{content:"";position:absolute;inset:0;background:rgb(20 30 60/.18);mix-blend-mode:multiply;pointer-events:none}
+.hdr{position:relative;display:flex;align-items:center;gap:28px;height:60px;padding:0 64px 4px;background:rgb(247 250 252/.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.hdr::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:rgb(27 27 31/.1)}
+.wm{font-size:20px;font-weight:700;letter-spacing:-.03em;white-space:nowrap}
 .hdr nav{display:flex;gap:4px;margin-left:8px}
 .hdr nav a{padding:6px 10px;font-size:14px;font-weight:500;color:var(--ink2);border-radius:6px}
 .hdr nav a.on{color:var(--ink);font-weight:600}
@@ -318,7 +319,7 @@ background:linear-gradient(90deg,rgb(27 27 31/0),rgb(27 27 31/.55) 36px,rgb(27 2
 .home{height:716px}
 .home .hdr{padding-left:26px;padding-right:26px}
 .home .credit{bottom:16px;padding-right:26px}
-.home .wall{display:flex;gap:12px;padding:12px 26px 0;align-items:flex-start}
+.home .wall{position:relative;display:flex;gap:12px;padding:12px 26px 0;align-items:flex-start}
 .home-cap{padding:14px 64px 0}
 
 /* 6 phone */
@@ -352,11 +353,11 @@ def main():
         name = {'c': 'Catholic', 'o': 'Orthodox', 'b': 'Both'}[mode]
         place = PHOTOS[key][1].split(' · ')[0]
         strips += (f'<div class="strip-wrap"><div class="cap"><b>{name}</b> · {place}</div>'
-                   f'<div class="shot" style="{photo_style(key)}">{header(mode)}{credit(key)}</div></div>')
+                   f'<div class="shot{" cool" if key == "galilee" else ""}" style="{photo_style(key)}">{header(mode)}{credit(key)}</div></div>')
 
     cards = ''.join(card(s) for s in ('francis-of-assisi', 'seraphim-of-sarov', 'nicholas-of-myra', 'augustine-of-hippo'))
     cards_cap = ('<div class="cap"><b>Card edge</b>'
-                 f'<div>{stripe("c")}Coral · Catholic</div><div>{stripe("o")}Teal · Orthodox</div>'
+                 f'<div>{stripe("c")}Brick · Catholic</div><div>{stripe("o")}Teal · Orthodox</div>'
                  f'<div>{stripe("b")}Half each · both</div>'
                  '<div>No text on colour</div></div>')
 
@@ -391,8 +392,8 @@ def main():
 <div class="idea">The Church breathes with two lungs, East and West. The site wears the colour of the reader’s tradition.</div></div>
 
 <section class="sec"><div class="lbl">Wordmark</div>
-<div class="mark-row"><div><div class="wm72"><span class="lt">Discover</span> the Saints</div>{stripe("b")}<div class="cap">Familjen Grotesk 500 + 700 · 72</div></div>
-<div><div class="badges">{badge(64)}{badge(32)}{badge(16)}</div><div class="cap">Compact mark · 64 · 32 · 16</div></div></div>
+<div class="mark-row"><div><div class="wm72">Discover <em>the</em> Saints</div>{stripe("b")}<div class="cap">Familjen Grotesk 700 · Vollkorn italic “the”</div></div>
+<div><div class="badges">{badge(64)}{badge(32)}{badge(16)}</div><div class="cap">Mark from the stripe · 64 · 32 · 16</div></div></div>
 </section>
 
 <section class="sec"><div class="lbl">Device</div>
@@ -426,19 +427,19 @@ def main():
 
 <section class="sec"><div class="lbl">Palette</div>
 <div class="swatches">{swatches}</div>
-<div class="rules"><div class="cap">Action colour is cool: Teal-text.</div><div class="cap">Coral and Teal: 4 px marks only.</div><div class="cap">Never red with blue.</div></div>
+<div class="rules"><div class="cap">Action colour is cool: Teal-text.</div><div class="cap">Brick and Teal: 4 px marks only.</div><div class="cap">Never red with blue.</div></div>
 </section>
 
 <section class="sec bleed"><div class="lbl" style="padding:0 64px">Header</div>
-<div class="shot home" style="{photo_style('galilee')}">{header('b')}<div class="wall">{home_cards}</div>{credit('galilee')}</div>
-<div class="cap home-cap"><b>Both</b> · glass header · credit on photo</div>
+<div class="shot home cool" style="{photo_style('galilee')}">{header('b')}<div class="wall">{home_cards}</div>{credit('galilee')}</div>
+<div class="cap home-cap"><b>Both</b> · cool glass · credit on photo</div>
 </section>
 
 <section class="sec"><div class="lbl">Phone</div>
 <div class="phone-sec">
 <div class="phone"><div class="ph-hdr">{badge(32)}<div class="ph-search">{SEARCH_SVG}<span>Search saints</span></div>
 <span class="menu"><svg width="18" height="14" viewBox="0 0 18 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M1 1h16M1 7h16M1 13h16"/></svg></span></div>
-<div class="ph-photo" style="background-image:url({HERO}/galilee.webp)">{credit('galilee')}</div>
+<div class="ph-photo cool" style="background-image:url({HERO}/galilee.webp)">{credit('galilee')}</div>
 <div class="ph-sheet"><div class="ph-filters"><span>Category ▾</span><span>Feast month ▾</span><span>Sort ▾</span></div>{phone_rows}</div></div>
 <div class="phone-notes"><div class="cap"><b>375 × 812</b> · rows, hairlines, no boxes</div>
 <div class="cap"><b>Row stripe 24×4</b><div>{stripe("c")}St. Thérèse · Catholic</div><div>{stripe("b")}St. Nicholas · both</div><div>{stripe("o")}St. Seraphim · Orthodox</div></div>
@@ -447,6 +448,7 @@ def main():
 </section>
 <div class="end"></div>
 </body></html>'''
+    page = page.replace('St. ', 'St.\u00a0')
     out = os.path.join(HERE, 'board.html')
     open(out, 'w').write(page)
     print('wrote', out, len(page) // 1024, 'KB')

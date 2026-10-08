@@ -79,8 +79,8 @@ img{display:block}
 .mobile-only{display:none}
 
 /* header */
-.hdr{position:sticky;top:0;z-index:40;height:56px;background:rgba(255,255,255,.94);
-  -webkit-backdrop-filter:blur(18px) saturate(1.1);backdrop-filter:blur(18px) saturate(1.1);
+.hdr{position:sticky;top:0;z-index:40;height:56px;background:rgba(255,255,255,.98);
+  -webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);
   box-shadow:0 1px 0 rgba(0,0,0,.06)}
 .hdr .in{display:flex;align-items:center;height:100%;padding:0 24px}
 .logo{font-size:20px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;margin-right:40px}
@@ -203,7 +203,7 @@ h2 a{font-size:14px;font-weight:600;letter-spacing:0;text-decoration:underline;t
 .photo-credit{position:fixed;top:72px;right:24px;z-index:5;width:140px;font-size:11.5px;line-height:16px;color:rgba(255,255,255,.85);
   text-shadow:0 1px 2px rgba(0,0,0,.5)}
 .photo-credit::before{content:"";position:absolute;z-index:-1;left:-8px;right:-24px;top:-22px;bottom:-22px;
-  background:radial-gradient(closest-side,rgba(0,0,0,.45),rgba(0,0,0,0))}
+  background:radial-gradient(closest-side,rgba(0,0,0,.6),rgba(0,0,0,.3) 60%,rgba(0,0,0,0))}
 .photo-credit b{display:block;font-size:13px;line-height:18px;font-weight:600;color:#fff}
 .photo-credit span{display:block}
 .photo-credit .sep{display:none;font-style:normal}

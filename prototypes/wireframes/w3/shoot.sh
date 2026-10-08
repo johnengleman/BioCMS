@@ -16,6 +16,7 @@ done
 # extra states (viewport only)
 shot(){ node $P "$W/$1" $S/$2 $3 $4 >/dev/null; rm -f $S/$2-full.png; }
 shot 'home.html#y=1000' w3-home-1440-scrolled 1440 900
+shot 'home.html#browse' w3-home-1440-browse 1440 900
 shot 'saint.html#y=1250' w3-saint-1440-scrolled 1440 900
 shot 'home.html#y=900' w3-home-375-scrolled 375 812
 shot 'home.html#sheet' w3-home-375-feasts 375 812

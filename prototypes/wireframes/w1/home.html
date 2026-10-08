@@ -46,7 +46,7 @@ img{display:block}
 .months a:hover{background:var(--chip)}
 .facets .credit{flex:1;min-width:0;text-align:right;align-self:stretch;display:flex;align-items:center;justify-content:flex-end;
   margin-right:calc(-1 * var(--g));padding-right:var(--g);
-  background:linear-gradient(to left,rgb(0 0 0/.7),rgb(0 0 0/.68) 80%,rgb(0 0 0/0))}
+  background:linear-gradient(to right,rgb(0 0 0/0),rgb(0 0 0/.68) 12px,rgb(0 0 0/.7))}
 
 /* masonry */
 .wall{display:flex;gap:16px;align-items:flex-start;padding:12px var(--g) 0}
@@ -72,10 +72,10 @@ img{display:block}
 .foot nav{display:flex;gap:24px;font-size:14px;color:var(--ink2)}
 
 /* ---------------- saint page ---------------- */
-.cstrip{height:28px;display:flex;align-items:center;justify-content:flex-end;padding:0 24px;position:relative}
+.cstrip{height:28px;display:flex;align-items:center;justify-content:flex-end;padding:0 var(--g);position:relative}
 .cstrip::before{content:"";position:absolute;right:0;top:0;bottom:0;width:420px;background:linear-gradient(to left,rgb(0 0 0/.66),rgb(0 0 0/.6) 70%,rgb(0 0 0/0))}
 .cstrip .credit{position:relative;line-height:20px}
-.sheet{margin:0 24px;background:#fff;border-radius:16px;padding:40px;box-shadow:0 20px 50px -30px rgb(0 0 0/.5)}
+.sheet{margin:0 var(--g);background:#fff;border-radius:16px;padding:40px;box-shadow:0 20px 50px -30px rgb(0 0 0/.5)}
 .sgrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:48px;align-items:start}
 .sgrid>.main{grid-column:1;grid-row:1}
 .sgrid>.stream{grid-column:1;grid-row:2}

@@ -29,33 +29,32 @@ PAL = dict(
     surface='#F4F4F1',
 )
 
-# Role colour (the chair's key, decision C/B3).
-ROLE = {
-    'therese-of-lisieux': ('magenta', 'Nuns'),
-    'teresa-of-avila': ('magenta', 'Nuns'),
-    'francis-of-assisi': ('teal', 'Friars'),
-    'anthony-of-padua': ('teal', 'Friars'),
-    'padre-pio': ('teal', 'Friars'),
-    'benedict-of-nursia': ('moss', 'Monks and hermits'),
-    'seraphim-of-sarov': ('moss', 'Monks and hermits'),
-    'sergius-of-radonezh': ('moss', 'Monks and hermits'),
-    'john-maximovitch': ('cobalt', 'Bishops'),
-    'augustine-of-hippo': ('cobalt', 'Bishops'),
-    'nicholas-of-myra': ('cobalt', 'Bishops'),
-    'thomas-aquinas': ('ink', 'Doctors'),
+# Way of life -> colour. Three ways every saint has one of.
+# Rule: Monastic (a vow of religious life: monks, nuns, friars, hermits, abbots) wins over
+# Clergy (bishops and priests without such a vow), which wins over Lay (everyone else).
+WAY = {
+    'magenta': ('Monastic', 'monks, nuns, friars, hermits'),
+    'teal': ('Clergy', 'bishops, priests'),
+    'moss': ('Lay', 'laymen, laywomen'),
 }
-KEY = [('magenta', 'Nuns'), ('teal', 'Friars'), ('moss', 'Monks and hermits'),
-       ('cobalt', 'Bishops'), ('ink', 'Doctors'), ('scarlet', 'Martyrs')]
+ROLE = {
+    'therese-of-lisieux': 'magenta', 'teresa-of-avila': 'magenta', 'francis-of-assisi': 'magenta',
+    'anthony-of-padua': 'magenta', 'padre-pio': 'magenta', 'benedict-of-nursia': 'magenta',
+    'seraphim-of-sarov': 'magenta', 'sergius-of-radonezh': 'magenta', 'thomas-aquinas': 'magenta',
+    'john-maximovitch': 'teal', 'augustine-of-hippo': 'teal', 'nicholas-of-myra': 'teal',
+}
 ORDER = [s['slug'] for s in SAINTS]
 SITE = 'Discover the Saints'
 
-# Names without "of". Text only: the site has no image for the last two.
-# Role and years are plain, well-known facts (nun of Nevers; Franciscan friar killed at Auschwitz).
+# Names without "of", and the Lay colour. Text only: the site has no image for these.
+# Role and years are plain, well-known facts.
 NO_OF = [
-    dict(short='St. Thomas Aquinas', role='Dominican friar', years='1225–1274', col='ink'),
+    dict(short='St. Thomas Aquinas', role='Dominican friar', years='1225–1274', col='magenta'),
     dict(short='St. Bernadette Soubirous', role='Nun', years='1844–1879', col='magenta'),
-    dict(short='St. Maximilian Kolbe', role='Franciscan friar, martyr', years='1894–1941', col='scarlet'),
+    dict(short='St. Maximilian Kolbe', role='Franciscan friar', years='1894–1941', col='magenta'),
+    dict(short='St. Thomas More', role='Layman', years='1478–1535', col='moss'),
 ]
+LAY_EXAMPLES = 'St. Thomas More, St. Joan of Arc'
 
 
 def lum(hexcol):
@@ -89,13 +88,18 @@ def versal(slug):
     return given[0]
 
 
-def name_block(slug=None, cls='nm', short=None, col=None):
-    """Versal + two-line name. The versal is decorative (aria-hidden)."""
+def T(text):
+    """Escape, and keep "St." on the same line as the name."""
+    return E(text).replace('St. ', 'St.&nbsp;')
+
+
+def name_block(slug=None, tag='h3', short=None, col=None, cls='nm'):
+    """The name with the given name's own first letter as the versal, inline, 1.5x cap height."""
     if slug:
-        short, col = META[slug]['short'], ROLE[slug][0]
+        short, col = META[slug]['short'], ROLE[slug]
     given, tail = split_name(short)
-    return (f'<div class="{cls}"><span class="vs" style="color:var(--{col})" aria-hidden="true">{given[0]}</span>'
-            f'<h3><span class="st">St.</span> {E(given)}<br>{E(tail)}</h3></div>')
+    return (f'<{tag} class="{cls}" style="--role:var(--{col})"><span class="st">St.</span>&nbsp;'
+            f'<span class="vs">{E(given[0])}</span>{E(given[1:])} {E(tail)}</{tag}>')
 
 
 def wordmark(size, cls=''):
@@ -118,7 +122,7 @@ def card(slug, w=268, img_h=112):
     return (f'<article class="card" style="width:{w}px">'
             f'<div class="imw" style="height:{img_h}px"><img class="im" src="{ASSETS}/{slug}.jpg" alt="{E(m["short"])}" style="object-position:{m["focus"]}"></div>'
             f'<div class="bd"><div class="kick">{E(m["role"])} · {m["years"]}</div>{name_block(slug)}'
-            f'<p lang="en">{E(st(s["summary"]).strip())}</p>'
+            f'<p lang="en">{T(st(s["summary"]).strip())}</p>'
             f'<div class="meta"><span>{fl}</span>{place}</div></div></article>')
 
 
@@ -191,18 +195,26 @@ img{{display:block}}
 
 /* device */
 .kick{{font-size:12px;line-height:1.3;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}}
-.nm{{display:flex;align-items:flex-start;gap:7px;margin-top:5px}}
-.nm .vs{{font-family:var(--disp);font-weight:800;font-size:46px;line-height:46px;flex:none;margin-top:-1px}}
-.nm h3{{font-family:var(--disp);font-weight:800;font-size:22px;line-height:1.05;letter-spacing:0;color:var(--ink);text-wrap:balance}}
+/* the versal: the given name's own initial, 1.5x the name size, on the same baseline; the line box does not grow */
+.nm{{font-family:var(--disp);font-weight:800;font-size:22px;line-height:1.05;letter-spacing:0;color:var(--ink);padding-top:.38em;margin-top:2px}}
+.nm .st{{font-weight:500;color:var(--ink)}}
+.nm .vs{{font-size:1.5em;line-height:0;color:var(--role)}}
 .heads{{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 32px;padding:0 0 4px}}
 .heads > div{{padding:14px 0 14px;border-top:1px solid var(--line)}}
 .uses{{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:40px}}
 .use{{display:flex;flex-direction:column;gap:14px}}
 .key{{display:flex;flex-direction:column;border-top:1px solid var(--line)}}
-.key div{{display:grid;grid-template-columns:40px 170px 1fr;align-items:center;gap:14px;height:44px;border-bottom:1px solid var(--line);font-size:14px}}
+.key div{{display:grid;grid-template-columns:40px 96px 1fr;align-items:center;gap:14px;min-height:52px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.4}}
 .key .sw{{font-family:var(--disp);font-weight:800;font-size:30px;line-height:1}}
 .key b{{font-weight:600}}
 .key span{{color:var(--ink2)}}
+.key span em{{font-style:normal;color:var(--ink3)}}
+.az{{border-top:1px solid var(--line)}}
+.az .L{{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line)}}
+.az .L b{{font-family:var(--disp);font-weight:800;font-size:22px;line-height:1;color:var(--ink3)}}
+.az .nm{{font-size:20px;padding-top:.3em;margin:0 0 6px}}
+.az .nm:last-child{{margin-bottom:0}}
+.uses{{grid-template-columns:1fr 1fr 1fr;gap:40px}}
 .tabs{{display:flex;gap:24px;height:44px;border-bottom:1px solid var(--line);font-size:14px;font-weight:600;color:var(--ink2)}}
 .tabs a{{display:flex;align-items:center;height:44px;border-bottom:2px solid transparent;margin-bottom:-1px}}
 .tabs a.on{{color:var(--ink);border-color:var(--role,var(--cobalt))}}
@@ -212,9 +224,7 @@ img{{display:block}}
 .page .top{{display:grid;grid-template-columns:200px 32px 1fr;align-items:start}}
 .portrait img{{width:200px;height:312px;object-fit:contain;box-shadow:inset 0 0 0 1px rgb(0 0 0/.08)}}
 .portrait .cap{{margin-top:8px;font-size:11.5px}}
-.hd{{display:flex;align-items:last baseline;gap:14px}}
-.hd .vs{{font-family:var(--disp);font-weight:800;font-size:120px;line-height:.78;flex:none;color:var(--magenta)}}
-h1.name{{font-family:var(--disp);font-weight:800;font-size:48px;line-height:1;letter-spacing:0;color:var(--ink);margin-top:8px;text-wrap:balance}}
+h1.name{{font-size:48px;line-height:1;padding-top:.4em;margin-top:4px;text-wrap:balance}}
 .lead{{font-family:var(--body);font-size:17.5px;line-height:1.6;color:var(--ink);max-width:680px;margin-top:18px}}
 .page .tabs{{margin-top:28px}}
 h2.h2{{display:flex;align-items:baseline;justify-content:space-between;font-family:var(--disp);font-weight:800;font-size:26px;line-height:1.2;margin-top:48px;padding-bottom:14px;border-bottom:1px solid var(--line)}}
@@ -226,8 +236,8 @@ h2.h2 a{{font-family:var(--ui);font-size:14px;font-weight:600;color:var(--cobalt
 .facts .r{{display:grid;grid-template-columns:84px 1fr;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);line-height:1.45}}
 .facts .r:last-of-type{{border:0}}
 .facts dt{{font-size:13px;color:var(--ink3)}}
-.facts dd{{margin:0;font-size:14px;color:var(--ink)}}
-.facts .r.first dd{{font-family:var(--disp);font-weight:800;font-size:22px;line-height:1}}
+.facts dd{{margin:0;font-size:14px;color:var(--ink);font-variant-numeric:tabular-nums}}
+.facts .r.first dd{{font-weight:600}}
 .btn{{display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 16px;border-radius:8px;background:var(--cobalt);color:#fff;font-size:14px;font-weight:600;white-space:nowrap}}
 .facts .btn{{width:100%;margin-top:12px}}
 
@@ -237,6 +247,7 @@ h2.h2 a{{font-family:var(--ui);font-size:14px;font-weight:600;color:var(--cobalt
 .spec .row:first-child{{border-top:0;padding-top:0}}
 .spec .cap{{line-height:1.5}}
 .cardname{{font-family:var(--disp);font-weight:800;font-size:22px;line-height:1.05}}
+.spec .nm{{margin:0 0 8px}}
 .body{{font-family:var(--body);font-size:17.5px;line-height:1.6;max-width:680px;color:var(--ink)}}
 .summ{{font-family:var(--body);font-size:14.5px;line-height:1.5;max-width:240px}}
 .ui-row{{display:flex;align-items:center;gap:24px;flex-wrap:wrap}}
@@ -250,7 +261,7 @@ h2.h2 a{{font-family:var(--ui);font-size:14px;font-weight:600;color:var(--cobalt
 .spec .side .facts{{margin-top:0}}
 
 /* 04 swatches */
-.sw-grid{{display:grid;grid-template-columns:repeat(6,160px);gap:28px 16px}}
+.sw-grid{{display:grid;grid-template-columns:repeat(5,160px);gap:28px 16px}}
 .sw-grid .s{{display:flex;flex-direction:column;gap:8px}}
 .sw-grid .b{{height:96px;border-radius:8px}}
 .sw-grid .b.edge{{box-shadow:inset 0 0 0 1px var(--line)}}
@@ -273,8 +284,6 @@ h2.h2 a{{font-family:var(--ui);font-size:14px;font-weight:600;color:var(--cobalt
 .facet{{display:flex;align-items:center;gap:8px;height:30px;margin:12px 26px 0;color:#fff}}
 .facet .chip{{background:rgb(255 255 255/.92)}}
 .facet .chip.on{{background:var(--ink)}}
-.keypill{{display:inline-flex;align-items:center;gap:12px;height:30px;padding:0 12px;border-radius:15px;background:rgb(255 255 255/.92);font-size:12.5px;font-weight:500;color:var(--ink);margin-left:8px}}
-.keypill i{{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}}
 .credit{{margin-left:auto;display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:12px;background:rgb(255 255 255/.92);font-size:11.5px;font-weight:500;color:var(--ink2);letter-spacing:.01em}}
 .wall{{display:flex;gap:16px;align-items:flex-start;padding:0 18px 16px;margin-top:40px}}
 .card{{background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow);flex:none}}
@@ -300,15 +309,11 @@ h2.h2 a{{font-family:var(--ui);font-size:14px;font-weight:600;color:var(--cobalt
 .prow .thumb{{width:72px;height:90px;flex:none;position:relative}}
 .prow .thumb img{{width:100%;height:100%;object-fit:cover}}
 .prow .thumb::after{{content:'';position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgb(0 0 0/.08)}}
-.prow .nm{{margin-top:4px;gap:6px}}
-.prow .nm .vs{{font-size:40px;line-height:40px}}
-.prow .nm h3{{font-size:19px}}
+.prow .nm{{font-size:19px;margin-top:2px}}
 .prow .meta{{font-size:12.5px;color:var(--ink3);margin-top:6px;font-weight:500}}
 .prow p{{font-family:var(--body);font-size:15px;line-height:1.5;margin-top:10px;hyphens:auto}}
 .psaint{{padding:0 16px}}
-.psaint .hd{{gap:10px;margin-top:4px}}
-.psaint .hd .vs{{font-size:78px;line-height:.78}}
-.psaint h1.name{{font-size:36px;line-height:1.08;margin:0}}
+.psaint h1.name{{font-size:36px;line-height:1.08;margin-top:2px}}
 .psaint .head2{{margin-top:12px}}
 .psaint .head2::after{{content:'';display:block;clear:both}}
 .psaint .head2 img{{float:right;width:96px;height:150px;object-fit:contain;margin:4px 0 8px 14px;box-shadow:inset 0 0 0 1px rgb(0 0 0/.08)}}
