@@ -86,7 +86,7 @@ async function board(page, w, full) {
   .pg{width:${w}px;height:${H}px;flex:none;box-shadow:0 0 0 1px #D6D6D6;background:url('file://${img}') 0 0/${w}px auto no-repeat}
   .gap{position:relative;width:40px;height:${H}px;flex:none}
   .gap i{position:absolute;left:9px;width:22px;height:22px;border-radius:50%;background:#111;color:#fff;font:600 11.5px/22px Inter;text-align:center;font-style:normal}
-  .lg{width:280px;flex:none;position:sticky;top:0}
+  .lg{width:280px;flex:none;box-sizing:border-box;padding-left:24px;border-left:1px solid #D6D6D6}
   h1{font-size:15px;font-weight:700;margin:0 0 2px}
   .sub{font-size:12.5px;color:#555;margin:0 0 18px}
   ol{list-style:none;margin:0;padding:0}
