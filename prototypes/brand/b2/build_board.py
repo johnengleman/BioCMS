@@ -72,7 +72,7 @@ def card(slug):
 
 def header(mode, cls=''):
     nav = ''.join(f'<a href="#" class="{"on" if n == "Saints" else ""}">{n}</a>' for n in NAV)
-    return (f'<header class="hdr {cls}"><a class="wm" href="#">Discover the Saints</a><nav>{nav}</nav>'
+    return (f'<header class="hdr {cls}"><a class="wm" href="#"><span class="lt">Discover</span> the Saints</a><nav>{nav}</nav>'
             f'<div class="search">{SEARCH_SVG}<span>Search saints</span></div>'
             f'<a class="btn" href="#">Get the app</a>{stripe(mode, "edge")}</header>')
 
@@ -215,9 +215,10 @@ img{display:block}
 /* 1 wordmark */
 .mark-row{display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:end}
 .wm72{font-size:72px;font-weight:700;letter-spacing:-.03em;line-height:1;margin-bottom:16px}
+.wm72 .lt,.wm .lt{font-weight:500;letter-spacing:-.02em}
 .wm72 + .stripe{width:120px}
 .badges{display:flex;align-items:flex-end;gap:28px}
-.badge{position:relative;display:inline-grid;place-items:center;background:var(--ink);color:#fff;font-weight:700;overflow:hidden;line-height:1;flex:none}
+.badge{position:relative;display:inline-grid;place-items:center;background:#fff;color:var(--ink);font-weight:700;overflow:hidden;line-height:1;flex:none;box-shadow:inset 0 0 0 1px var(--line),0 6px 16px -10px rgb(0 0 0/.35)}
 .badge .stripe{position:absolute;left:0;right:0;bottom:0}
 .badge.s64{width:64px;height:64px;border-radius:14px;font-size:38px;letter-spacing:-.03em}
 .badge.s32{width:32px;height:32px;border-radius:7px;font-size:19px;letter-spacing:-.03em}
@@ -229,7 +230,7 @@ img{display:block}
 
 /* header strip on photo */
 .shot{position:relative;background-size:cover;overflow:hidden;width:100%}
-.hdr{position:relative;display:flex;align-items:center;gap:28px;height:60px;padding:0 64px 4px;background:rgb(255 255 255/.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.hdr{position:relative;display:flex;align-items:center;gap:28px;height:60px;padding:0 64px 4px;background:rgb(255 255 255/.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .hdr .stripe.edge{position:absolute;left:0;right:0;bottom:0}
 .wm{font-size:20px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
 .hdr nav{display:flex;gap:4px;margin-left:8px}
@@ -390,7 +391,7 @@ def main():
 <div class="idea">The Church breathes with two lungs, East and West. The site wears the colour of the reader’s tradition.</div></div>
 
 <section class="sec"><div class="lbl">Wordmark</div>
-<div class="mark-row"><div><div class="wm72">Discover the Saints</div>{stripe("b")}<div class="cap">Familjen Grotesk 700 · 72</div></div>
+<div class="mark-row"><div><div class="wm72"><span class="lt">Discover</span> the Saints</div>{stripe("b")}<div class="cap">Familjen Grotesk 500 + 700 · 72</div></div>
 <div><div class="badges">{badge(64)}{badge(32)}{badge(16)}</div><div class="cap">Compact mark · 64 · 32 · 16</div></div></div>
 </section>
 

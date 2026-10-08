@@ -69,6 +69,7 @@ async function board(page, w, h) {
       const t = NOTES[page][m.n] || ['']
       return { i: i + 1, y: Math.min(m.y + Math.min(m.h / 2, 18), H - 12), text: phone && t[1] ? t[1] : t[0] }
     })
+    for (let i = 1; i < legend.length; i++) legend[i].y = Math.max(legend[i].y, legend[i - 1].y + 28)
     const dots = legend.map(l => `<div class="dot" style="top:${40 + l.y - 11}px">${l.i}</div>`).join('')
     const leg = legend.map(l => `<li><span class="d">${l.i}</span><span>${l.text}</span></li>`).join('')
     const html = `<!doctype html><html><head><meta charset="utf-8"><style>

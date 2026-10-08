@@ -177,7 +177,7 @@ img{{display:block}}
 /* 01 wordmark */
 .wm{{font-family:var(--disp);font-weight:800;letter-spacing:-.005em;line-height:1;color:var(--ink);white-space:nowrap}}
 .wm .the{{font-weight:500;color:var(--ink2)}}
-.lock.dark .the,.hdr .the{{color:rgb(255 255 255/.8)}}
+.lock.dark .the{{color:rgb(255 255 255/.8)}}
 .badge{{display:inline-grid;place-items:center;background:var(--cobalt);color:#fff;font-family:var(--disp);font-weight:800;line-height:1;flex:none}}
 .s1{{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:end}}
 .s1 .big{{display:flex;flex-direction:column;gap:18px}}
@@ -259,14 +259,14 @@ h2.h2 a{{font-family:var(--ui);font-size:14px;font-weight:600;color:var(--cobalt
 .sw-grid .t code{{font-family:var(--ui);font-variant-numeric:tabular-nums;color:var(--ink2)}}
 
 /* 05 photo */
-.photo{{position:relative;width:1440px;overflow:hidden;background:#d9a060 url({GALILEE}) no-repeat;background-size:1736px auto;background-position:-180px -230px}}
-.photo::before{{content:'';position:absolute;inset:0 0 auto 0;height:230px;background:linear-gradient(rgb(12 10 8/.66),rgb(12 10 8/.52) 72px,rgb(12 10 8/.18) 150px,rgb(12 10 8/0) 230px);pointer-events:none}}
+.photo{{position:relative;width:1440px;overflow:hidden;background:#e9b070 url({GALILEE}) no-repeat;background-size:1736px auto;background-position:-180px 0}}
+.photo::before{{content:'';position:absolute;inset:0 0 auto 0;height:170px;background:linear-gradient(rgb(255 255 255/.78),rgb(255 255 255/.66) 72px,rgb(255 255 255/.2) 130px,rgb(255 255 255/0) 170px);pointer-events:none}}
 .photo > *{{position:relative}}
-.hdr{{display:flex;align-items:center;gap:28px;height:72px;padding:0 26px;color:#fff}}
-.hdr .wm{{color:#fff;font-size:32px}}
+.hdr{{display:flex;align-items:center;gap:28px;height:72px;padding:0 26px;color:var(--ink)}}
+.hdr .wm{{color:var(--ink);font-size:32px}}
 .hdr nav{{display:flex;gap:4px;margin-left:8px}}
-.hdr nav a{{padding:8px 10px;font-size:14px;font-weight:500;color:#fff}}
-.hdr nav a.on{{box-shadow:inset 0 -2px 0 #fff}}
+.hdr nav a{{padding:8px 10px;font-size:14px;font-weight:500;color:var(--ink)}}
+.hdr nav a.on{{box-shadow:inset 0 -2px 0 var(--ink)}}
 .hdr .sp{{flex:1}}
 .search{{display:flex;align-items:center;gap:10px;width:360px;height:40px;padding:0 16px;border-radius:20px;background:#fff;color:var(--ink3);font-size:14px}}
 .hdr .btn{{height:36px}}
@@ -309,8 +309,9 @@ h2.h2 a{{font-family:var(--ui);font-size:14px;font-weight:600;color:var(--cobalt
 .psaint .hd{{gap:10px;margin-top:4px}}
 .psaint .hd .vs{{font-size:78px;line-height:.78}}
 .psaint h1.name{{font-size:36px;line-height:1.08;margin:0}}
-.psaint .head2{{display:flex;gap:12px;align-items:flex-start;margin-top:12px}}
-.psaint .head2 img{{width:96px;height:150px;object-fit:contain;flex:none;box-shadow:inset 0 0 0 1px rgb(0 0 0/.08)}}
+.psaint .head2{{margin-top:12px}}
+.psaint .head2::after{{content:'';display:block;clear:both}}
+.psaint .head2 img{{float:right;width:96px;height:150px;object-fit:contain;margin:4px 0 8px 14px;box-shadow:inset 0 0 0 1px rgb(0 0 0/.08)}}
 .psaint .lead{{font-size:17px;line-height:1.55;margin-top:0}}
 .psaint dl{{margin:16px 0 0}}
 .psaint .r{{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:9px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.4}}
@@ -456,8 +457,8 @@ def s_phone():
              f'<div class="search">{SEARCH}<span>Search saints</span></div><span style="color:var(--ink)">{MENU}</span></div>'
              f'<div class="psaint"><div class="kick" style="margin-top:12px">Carmelite nun · France · 1873–1897</div>'
              f'<div class="hd"><span class="vs" aria-hidden="true">T</span><h1 class="name"><span class="st">St.</span> Thérèse<br>of Lisieux</h1></div>'
-             f'<div class="head2"><p class="lead">{E(build.TH_SUMMARY.strip())}</p>'
-             f'<img src="{ASSETS}/therese-of-lisieux.jpg" alt="St. Thérèse of Lisieux, holy card, 1916"></div>'
+             f'<div class="head2"><img src="{ASSETS}/therese-of-lisieux.jpg" alt="St. Thérèse of Lisieux, holy card, 1916">'
+             f'<p class="lead">{E(build.TH_SUMMARY.strip())}</p></div>'
              f'<dl>{facts}</dl><div class="tabs" style="--role:var(--magenta)"><a class="on" href="#">Life</a><a href="#">Teachings</a><a href="#">Relics</a></div></div></div>')
     caps = ('<div style="display:flex;gap:64px;margin-top:22px"><span class="cap" style="width:395px">Home · 375 · 40 px versal</span>'
             '<span class="cap" style="width:395px">Saint page · name 36 · 78 px versal</span></div>')
