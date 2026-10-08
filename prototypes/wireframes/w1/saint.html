@@ -1,5 +1,5 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>St. Thérèse of Lisieux · Discover the Saints</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
-:root{--ink:#111;--ink2:#555;--mute:#767676;--line:#E2E2E2;--chip:#F1F1F1;--panel:#F5F5F5;--g:26px}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>St.&nbsp;Thérèse of Lisieux · Discover the Saints</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
+:root{--ink:#111;--ink2:#555;--mute:#767676;--line:#E2E2E2;--chip:#F1F1F1;--panel:#F5F5F5;--g:48px}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.45;color:var(--ink);background:#808080;
@@ -32,24 +32,25 @@ img{display:block}
 .menu{display:none}
 
 /* facet row (desktop, on the photo, not sticky) */
-.facets{height:44px;display:flex;align-items:center;padding:0 var(--g);gap:22px;position:relative}
-.chips{display:flex;gap:6px;width:660px;flex:none}
+.facets{height:44px;display:flex;align-items:center;padding:0 var(--g);gap:16px;position:relative}
+.chips{display:flex;gap:5px;flex:none}
+.chip.more{gap:6px;font:500 13px/1 Inter,system-ui,sans-serif}
 .chip{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 10px;border-radius:15px;background:rgb(255 255 255/.92);
   font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;box-shadow:0 1px 2px rgb(0 0 0/.08)}
 .chip i{font-style:normal;color:var(--ink2);font-variant-numeric:tabular-nums}
 .chip.on{background:var(--ink);color:#fff}.chip.on i{color:rgb(255 255 255/.72)}
-.months{display:flex;width:408px;height:30px;flex:none;border-radius:15px;background:rgb(255 255 255/.92);box-shadow:0 1px 2px rgb(0 0 0/.08);overflow:hidden}
-.months a{position:relative;width:34px;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:500;color:var(--ink)}
+.months{display:flex;width:372px;height:30px;flex:none;border-radius:15px;background:rgb(255 255 255/.92);box-shadow:0 1px 2px rgb(0 0 0/.08);overflow:hidden}
+.months a{position:relative;width:31px;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:500;color:var(--ink)}
 .months a.off{color:var(--mute);font-weight:400;pointer-events:none}
 .months a.now::after{content:"";position:absolute;bottom:3px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:2px;background:var(--ink)}
 .months a:hover{background:var(--chip)}
-.facets .credit{flex:1;text-align:right;align-self:stretch;display:flex;align-items:center;justify-content:flex-end;
+.facets .credit{flex:1;min-width:0;text-align:right;align-self:stretch;display:flex;align-items:center;justify-content:flex-end;
   margin-right:calc(-1 * var(--g));padding-right:var(--g);
   background:linear-gradient(to left,rgb(0 0 0/.7),rgb(0 0 0/.68) 80%,rgb(0 0 0/0))}
 
 /* masonry */
-.wall{display:flex;gap:12px;align-items:flex-start;padding:12px var(--g) 0}
-.col{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px}
+.wall{display:flex;gap:16px;align-items:flex-start;padding:12px var(--g) 0}
+.col{flex:1;min-width:0;display:flex;flex-direction:column;gap:16px}
 .card{display:block;background:#fff;border-radius:10px;overflow:hidden;
   box-shadow:0 1px 2px rgb(0 0 0/.07),0 10px 24px -14px rgb(0 0 0/.35)}
 .card .im{width:100%;height:112px;object-fit:cover;filter:grayscale(1);background:#ddd}
@@ -60,7 +61,7 @@ img{display:block}
 .card .meta{display:flex;justify-content:space-between;align-items:center;height:30px;margin:12px 14px 6px;
   border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2);font-variant-numeric:tabular-nums}
 .card .pmeta{display:none}
-.pfilters,.pcredit{display:none}
+.pfilters,.pstrip,.hsearch{display:none}
 
 /* footer */
 .foot{margin-top:32px;background:#fff;border-top:1px solid var(--line)}
@@ -71,8 +72,9 @@ img{display:block}
 .foot nav{display:flex;gap:24px;font-size:14px;color:var(--ink2)}
 
 /* ---------------- saint page ---------------- */
-.cstrip{height:16px;display:flex;justify-content:flex-end;padding:0 24px}
-.cstrip .credit{padding:0 8px;margin-right:12px;border-radius:0 0 6px 6px;background:rgb(0 0 0/.58)}
+.cstrip{height:28px;display:flex;align-items:center;justify-content:flex-end;padding:0 24px;position:relative}
+.cstrip::before{content:"";position:absolute;right:0;top:0;bottom:0;width:420px;background:linear-gradient(to left,rgb(0 0 0/.66),rgb(0 0 0/.6) 70%,rgb(0 0 0/0))}
+.cstrip .credit{position:relative;line-height:20px}
 .sheet{margin:0 24px;background:#fff;border-radius:16px;padding:40px;box-shadow:0 20px 50px -30px rgb(0 0 0/.5)}
 .sgrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:48px;align-items:start}
 .sgrid>.main{grid-column:1;grid-row:1}
@@ -123,18 +125,21 @@ section:first-of-type .h2row{margin-top:32px}
   .photo{height:100vh}
   .hdr{height:52px;gap:10px;background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:0}
   .nav,.hdr .btn{display:none}
-  .logo{font-size:16px;letter-spacing:-.025em;margin-right:0}
-  .search{padding:0 12px;gap:7px}
-  .search span{white-space:nowrap;overflow:hidden}
+  .logo{font-size:18px;letter-spacing:-.025em;margin-right:0}
+  .hdr .search{display:none}
+  .hdr .sp{display:block!important}
+  .hsearch{display:flex;flex:none;width:40px;height:40px;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity .15s}
+  body.past .hsearch{visibility:visible;opacity:1}
   .mark{display:none;flex:none;width:32px;height:32px;border-radius:8px;background:var(--ink);color:#fff;align-items:center;justify-content:center;
     font-size:15px;font-weight:700;letter-spacing:-.02em}
   .search{flex:1;width:auto;min-width:0;height:36px}
   .hdr .sp{display:none}
   .menu{display:flex;flex:none;width:40px;height:40px;align-items:center;justify-content:center;margin-right:-6px}
   .facets{display:none}
-  .pcredit{display:flex;align-items:flex-end;justify-content:flex-end;height:80px;padding:0 16px 6px;position:relative}
-  .pcredit::before{content:"";position:absolute;inset:0;background:linear-gradient(rgb(0 0 0/0),rgb(0 0 0/.55) 70%)}
-  .pcredit .credit{position:relative}
+  .pstrip{display:block;position:relative;padding:10px 16px 0;height:76px}
+  .pstrip::before{content:"";position:absolute;inset:0;background:linear-gradient(rgb(0 0 0/.08),rgb(0 0 0/.58) 62%)}
+  .pstrip .search{position:relative;display:flex;width:100%;height:40px;border-radius:20px;background:rgb(255 255 255/.96);box-shadow:0 2px 10px rgb(0 0 0/.18)}
+  .pstrip .credit{position:relative;display:block;text-align:right;margin-top:5px}
   .home main{background:#fff;border-radius:16px 16px 0 0;position:relative}
   .pfilters{display:flex;align-items:center;height:40px;padding:0 16px;gap:6px;border-bottom:1px solid var(--line);font-size:14px;font-weight:500}
   .pfilters button{display:inline-flex;align-items:center;gap:5px;height:40px}
@@ -153,9 +158,7 @@ section:first-of-type .h2row{margin-top:32px}
   .foot nav{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:10px 28px;font-size:13.5px}
 
   /* saint */
-  .cstrip{height:44px;align-items:center;justify-content:flex-end;padding:0 16px;margin-bottom:-12px;position:relative}
-  .cstrip::before{content:"";position:absolute;inset:0;background:linear-gradient(rgb(0 0 0/.55),rgb(0 0 0/.62))}
-  .cstrip .credit{position:relative;background:none;margin:0;padding:0 0 10px}
+  .cstrip{display:none}
   .sheet{margin:0;border-radius:16px 16px 0 0;padding:20px 16px 8px;box-shadow:none;position:relative}
   .sgrid{display:flex;flex-direction:column;gap:0}
   .sgrid>.main{display:contents}
@@ -190,7 +193,7 @@ section:first-of-type .h2row{margin-top:32px}
   .bbar .btn{height:36px}
   .saint .foot{padding-bottom:52px}
 }
-</style></head><body class="saint"><div class="photo" aria-hidden="true"></div><header class="hdr" data-n="hdr"><a class="logo" href="home.html">Discover the Saints</a><nav class="nav"><a class="on" href="#">Saints</a><a class="" href="#">Miracles</a><a class="" href="#">Novenas</a><a class="" href="#">Teachings</a><a class="" href="#">Quotes</a><a class="" href="#">Books</a></nav><div class="sp"></div><label class="search" role="search"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg><span>Search saints</span></label><a class="btn" href="#">Get the app</a><button class="menu" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button></header><div class="cstrip"><span class="credit"><a data-n="credit" href="https://creativecommons.org/licenses/by/2.0/">Sea of Galilee · Grant Barclay · CC BY 2.0</a></span></div><main class="sheet"><div class="sgrid"><div class="main"><div class="top" data-n="top"><figure class="portrait" data-n="portrait"><img src="../../assets/therese-of-lisieux.jpg" alt="St. Thérèse of Lisieux, holy card, 1916"><figcaption>Holy card, 1916 · Public domain</figcaption></figure><div class="ident"><div class="hd"><div class="kick">Carmelite nun · France · 1873–1897</div><h1 data-n="name">St. Thérèse of Lisieux</h1></div><p class="lead">As a small child she rolled on the floor in fury, and at about three she took a whole basket of doll clothes, saying, &quot;I choose everything!&quot; At twenty-four, dying of tuberculosis in a Normandy convent, she overheard a sister wonder what anyone could write about her, since she had never done anything worth speaking about. St. Thérèse of Lisieux wanted to be a great saint and found she was a grain of sand. In her last eighteen months even Heaven went dark for her, and she went on loving. How did the nun who had done nothing worth speaking about become one of the most loved saints of modern times, and a Doctor of the Church?</p></div></div></div><aside class="facts" data-n="facts"><dl><div class="r"><dt>Feast</dt><dd>October 1</dd></div><div class="r"><dt>Born</dt><dd>1873, Alençon, France</dd></div><div class="r"><dt>Died</dt><dd>1897, Lisieux, France</dd></div><div class="r"><dt>Patron of</dt><dd>Missions, with St. Francis Xavier; France, with St. Joan of Arc</dd></div><div class="r"><dt>Venerated</dt><dd>Catholic</dd></div></dl><a class="btn" href="#">Pray in the app</a></aside><div class="stream"><nav class="tabs" data-n="tabs"><a class="on" href="#life">Life</a><a href="#teachings">Teachings</a><a href="#relics">Relics</a></nav><section id="life"><div class="h2row" data-n="life"><h2>Life</h2><a class="more" href="#">Read the full life →</a></div><ol class="chap"><li><b>01</b><a href="#">Two Refused Vocations, One Marriage</a></li><li><b>02</b><a href="#">The Child Who Chose Everything</a></li><li><b>03</b><a href="#">A Sword and a Smile</a></li><li><b>04</b><a href="#">I Cried for Having Cried</a></li><li><b>05</b><a href="#">A Fourteen-Year-Old Before the Pope</a></li><li><b>06</b><a href="#">Now I Am Here Forever</a></li><li><b>07</b><a href="#">A Grain of Sand Lifted</a></li><li><b>08</b><a href="#">Memories in Two-Sou Notebooks</a></li><li><b>09</b><a href="#">Blood on Good Friday</a></li><li><b>10</b><a href="#">The Slow Last Summer</a></li><li><b>11</b><a href="#">My God, I Love You</a></li><li><b>12</b><a href="#">A Book Instead of an Obituary</a></li></ol></section><section id="teachings"><div class="h2row" data-n="teach"><h2>Words and teachings</h2></div><ul class="themes"><li><a href="#">The little way</a><span>→</span></li><li><a href="#">Confidence and love</a><span>→</span></li><li><a href="#">The Offering to Merciful Love</a><span>→</span></li><li><a href="#">The trial of faith</a><span>→</span></li><li><a href="#">Missions and prayer for priests</a><span>→</span></li><li><a href="#">Suffering</a><span>→</span></li></ul><div class="quotes"><blockquote>“My vocation, I’ve found it at last: my vocation is love!”</blockquote><blockquote>“I’m made so that fear makes me back away; with love I don’t just go forward, I fly.”</blockquote></div></section><section id="relics"><div class="h2row" data-n="relics"><h2>Relics</h2></div><p class="place">Carmel of Lisieux, Lisieux, France</p><p class="body">St. Thérèse was buried in the town cemetery of Lisieux on 4 October 1897. The coffin was opened on 6 September 1910, when only bones remained, and again on 10 August 1917.</p></section><a class="mrow" href="#" data-n="mrow"><b>Miracles and answered prayers · 322 accounts</b><span>→</span></a></div></div></main><footer class="foot" data-n="foot"><div class="in"><div class="trad" role="radiogroup" aria-label="Tradition"><button role="radio" aria-checked="false">Catholic</button><button role="radio" aria-checked="false">Orthodox</button><button class="on" role="radio" aria-checked="true">Both</button></div><div class="sp"></div><nav><a href="#">Saints</a><a href="#">Miracles</a><a href="#">Novenas</a><a href="#">Teachings</a><a href="#">Quotes</a><a href="#">Books</a></nav></div></footer><div class="bbar" data-n="bbar"><b>Oct 1</b><a class="btn" href="#">Pray in the app</a></div>
+</style></head><body class="saint"><div class="photo" aria-hidden="true"></div><header class="hdr" data-n="hdr"><a class="logo" href="home.html">Discover the Saints</a><nav class="nav"><a class="on" href="#">Saints</a><a class="" href="#">Miracles</a><a class="" href="#">Novenas</a><a class="" href="#">Teachings</a><a class="" href="#">Quotes</a><a class="" href="#">Books</a></nav><div class="sp"></div><label class="search" role="search"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg><span>Search saints</span></label><a class="btn" href="#">Get the app</a><button class="hsearch" aria-label="Search"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg></button><button class="menu" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg></button></header><div class="cstrip"><span class="credit"><a data-n="credit" href="https://creativecommons.org/licenses/by/2.0/">Sea of Galilee · Grant Barclay · CC BY 2.0</a></span></div><div class="pstrip"><label class="search" role="search" data-n="psearch"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg><span>Search saints</span></label><span class="credit"><a data-n="credit" href="https://creativecommons.org/licenses/by/2.0/">Sea of Galilee · Grant Barclay · CC BY 2.0</a></span></div><main class="sheet"><div class="sgrid"><div class="main"><div class="top" data-n="top"><figure class="portrait" data-n="portrait"><img src="../../assets/therese-of-lisieux.jpg" alt="St.&nbsp;Thérèse of Lisieux, holy card, 1916"><figcaption>Holy card, 1916 · Public domain</figcaption></figure><div class="ident"><div class="hd"><div class="kick">Carmelite nun · France · 1873–1897</div><h1 data-n="name">St.&nbsp;Thérèse of Lisieux</h1></div><p class="lead">As a small child she rolled on the floor in fury, and at about three she took a whole basket of doll clothes, saying, &quot;I choose everything!&quot; At twenty-four, dying of tuberculosis in a Normandy convent, she overheard a sister wonder what anyone could write about her, since she had never done anything worth speaking about. St.&nbsp;Thérèse of Lisieux wanted to be a great saint and found she was a grain of sand. In her last eighteen months even Heaven went dark for her, and she went on loving. How did the nun who had done nothing worth speaking about become one of the most loved saints of modern times, and a Doctor of the Church?</p></div></div></div><aside class="facts" data-n="facts"><dl><div class="r"><dt>Feast</dt><dd>October 1</dd></div><div class="r"><dt>Born</dt><dd>1873, Alençon, France</dd></div><div class="r"><dt>Died</dt><dd>1897, Lisieux, France</dd></div><div class="r"><dt>Patron of</dt><dd>Missions, with St.&nbsp;Francis Xavier; France, with St.&nbsp;Joan of Arc</dd></div><div class="r"><dt>Venerated</dt><dd>Catholic</dd></div></dl><a class="btn" href="#">Pray in the app</a></aside><div class="stream"><nav class="tabs" data-n="tabs"><a class="on" href="#life">Life</a><a href="#teachings">Teachings</a><a href="#relics">Relics</a></nav><section id="life"><div class="h2row" data-n="life"><h2>Life</h2><a class="more" href="#">Read the full life →</a></div><ol class="chap"><li><b>01</b><a href="#">Two Refused Vocations, One Marriage</a></li><li><b>02</b><a href="#">The Child Who Chose Everything</a></li><li><b>03</b><a href="#">A Sword and a Smile</a></li><li><b>04</b><a href="#">I Cried for Having Cried</a></li><li><b>05</b><a href="#">A Fourteen-Year-Old Before the Pope</a></li><li><b>06</b><a href="#">Now I Am Here Forever</a></li><li><b>07</b><a href="#">A Grain of Sand Lifted</a></li><li><b>08</b><a href="#">Memories in Two-Sou Notebooks</a></li><li><b>09</b><a href="#">Blood on Good Friday</a></li><li><b>10</b><a href="#">The Slow Last Summer</a></li><li><b>11</b><a href="#">My God, I Love You</a></li><li><b>12</b><a href="#">A Book Instead of an Obituary</a></li></ol></section><section id="teachings"><div class="h2row" data-n="teach"><h2>Words and teachings</h2></div><ul class="themes"><li><a href="#">The little way</a><span>→</span></li><li><a href="#">Confidence and love</a><span>→</span></li><li><a href="#">The Offering to Merciful Love</a><span>→</span></li><li><a href="#">The trial of faith</a><span>→</span></li><li><a href="#">Missions and prayer for priests</a><span>→</span></li><li><a href="#">Suffering</a><span>→</span></li></ul><div class="quotes"><blockquote>“My vocation, I’ve found it at last: my vocation is love!”</blockquote><blockquote>“I’m made so that fear makes me back away; with love I don’t just go forward, I fly.”</blockquote></div></section><section id="relics"><div class="h2row" data-n="relics"><h2>Relics</h2></div><p class="place">Carmel of Lisieux, Lisieux, France</p><p class="body">St.&nbsp;Thérèse was buried in the town cemetery of Lisieux on 4 October 1897. The coffin was opened on 6 September 1910, when only bones remained, and again on 10 August 1917.</p></section><a class="mrow" href="#" data-n="mrow"><b>Miracles and answered prayers · 322 accounts</b><span>→</span></a></div></div></main><footer class="foot" data-n="foot"><div class="in"><div class="trad" role="radiogroup" aria-label="Tradition"><button role="radio" aria-checked="false">Catholic</button><button role="radio" aria-checked="false">Orthodox</button><button class="on" role="radio" aria-checked="true">Both</button></div><div class="sp"></div><nav><a href="#">Saints</a><a href="#">Miracles</a><a href="#">Novenas</a><a href="#">Teachings</a><a href="#">Quotes</a><a href="#">Books</a></nav></div></footer><div class="bbar" data-n="bbar"><b>Oct 1</b><a class="btn" href="#">Pray in the app</a></div>
 <script>
 (function(){
   var facts=document.querySelector('.facts'),bar=document.querySelector('.bbar');
@@ -204,4 +207,8 @@ section:first-of-type .h2row{margin-top:32px}
   var m=location.hash.match(/^#y=(\d+)/);if(m){history.replaceState(null,'',location.pathname);setTimeout(function(){window.scrollTo(0,+m[1]);on()},50)}
   on();
 })();
+</script>
+<script>
+(function(){var ps=document.querySelector('.pstrip .search');function f(){document.body.classList.toggle('past',ps.getBoundingClientRect().bottom<52)}
+window.addEventListener('scroll',f,{passive:true});f()})();
 </script></body></html>

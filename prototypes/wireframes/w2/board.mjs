@@ -12,12 +12,13 @@ fs.mkdirSync(TMP, { recursive: true })
 
 const NOTES = {
   home: {
-    '1': ['Glass header 56: logo, 6 nav links, search 400×36, “Get the app”.', 'Header 52: “Discover the Saints” 16/700, search pill, menu. The menu sheet holds nav, Categories, months, Sort.'],
+    '1': ['Glass header 56: logo, 6 nav links, search 400×36, “Get the app”.', 'Header 52: “Discover the Saints” 16/700, search pill, menu (nav + “Get the app”).'],
     '2': ['Side index, x 24, w 232, sticky at 68. 9 non-empty categories, counts right.'],
     '3': ['Feast month 4 × 3 (50×28). One click. Empty months muted; dot = October.'],
     '4': ['Sort: Feast date · A–Z (A–Z ignores “St.”).'],
     '5': ['Photo credit on the photo, sticky with the rail. Galilee = Both.'],
     '5m': ['Photo y 52–140, credit on the photo at y 120.'],
+    '3m': ['Filter row 40: Category ▾ · Feast month ▾ · Sort ▾. Each opens a full-height sheet.'],
     '6': ['Masonry x 268–1416: 4 × 278, gap 12, top 68. saints.json order, shortest column first.', 'Sheet from y 124, radius 16. Plain rows, 20 padding, hairlines.'],
     '7': ['Card: image 278×124 (≤ 1/3), kicker role · years, name 20, full summary 14.5, meta row 30.', 'Row: crop 343×104, kicker, name 19, full summary 15, meta.'],
     '8': ['Feasts differ: “Feast Aug 28 · Orth. Jun 15”; the place drops.'],
@@ -25,10 +26,10 @@ const NOTES = {
   },
   saint: {
     '1': ['Glass header 56 with search on every page.', 'Header 52: “Discover the Saints” 16/700, search pill, menu.'],
-    '5m': ['Credit on the photo strip, horizontal, first screen.'],
-    '2': ['Identity column 240: portrait whole 205×320, no frame, caption.'],
+    '5m': ['Credit on the photo, right margin, 2 lines, first screen.', 'Credit on the photo strip, horizontal, first screen.'],
+    '2': ['Sheet 1088 centred: identity column 240 | 48 | main 720. Portrait whole 205×320, caption.'],
     '3': ['Facts card #F5F5F5, sticky at 72 when the portrait leaves. “Pray in the app” 38.', 'Facts as plain rows (label 96), before the story, Feast first.'],
-    '4': ['Kicker, then the name 48 (largest text), full summary 17.5, measure 680.', 'Kicker, name 36 full width, portrait 104×162 floated in the summary.'],
+    '4': ['Kicker, then the name 48 (largest text), full summary 17.5 fills the 720 column.', 'Kicker, name 36 full width, portrait 104×162 floated in the summary.'],
     '5': ['Tabs Life · Teachings · Relics, 44, sticky at 56. No Miracles tab.', 'Underline tabs 40, sticky at 52.'],
     '6': ['H2 26 with hairline. “Read the full life →” ends the Life row. 12 chapters in 2 columns.'],
     '7': ['Miracles: one quiet row after Relics, 48 h, 15 px muted.'],
@@ -107,6 +108,10 @@ for (const pg of ['home', 'saint']) {
 {
   const { p, ctx } = await open(`${W2}/home.html#menu`, 375, 812)
   await p.screenshot({ path: `${OUT}/w2-home-375-menu.png` }); await ctx.close()
+}
+{
+  const { p, ctx } = await open(`${W2}/home.html#f-month`, 375, 812)
+  await p.screenshot({ path: `${OUT}/w2-home-375-month.png` }); await ctx.close()
 }
 {
   const { p, ctx } = await open(`${W2}/home.html`, 1440, 900)

@@ -6,6 +6,7 @@ Run: python3 wireframes/w2/gen.py   (from /home/user/BioCMS/prototypes)
 """
 import html
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -59,6 +60,8 @@ CURRENT_MONTH = 9  # October (today 2026-10-07)
 ICON_SEARCH = ('<svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" '
                'stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/>'
                '<path d="m14 14 4 4"/></svg>')
+CHEV = ('<svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.6" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 3.5 3 3 3-3"/></svg>')
 ICON_MENU = ('<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" '
              'stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/></svg>')
 ICON_X = ('<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" '
@@ -76,7 +79,7 @@ img{display:block}
 .mobile-only{display:none}
 
 /* header */
-.hdr{position:sticky;top:0;z-index:40;height:56px;background:rgba(255,255,255,.8);
+.hdr{position:sticky;top:0;z-index:40;height:56px;background:rgba(255,255,255,.94);
   -webkit-backdrop-filter:blur(18px) saturate(1.1);backdrop-filter:blur(18px) saturate(1.1);
   box-shadow:0 1px 0 rgba(0,0,0,.06)}
 .hdr .in{display:flex;align-items:center;height:100%;padding:0 24px}
@@ -136,6 +139,10 @@ img{display:block}
 .meta{display:flex;justify-content:space-between;align-items:center;gap:8px;height:30px;margin-top:12px;
   border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2);white-space:nowrap}
 .credit-m{display:none}
+.frow{display:none}
+.frow-line{display:none}
+.fsheet{display:none;outline:none}
+.fsheet:target{display:block;position:fixed;inset:0;z-index:60;background:#fff;overflow:auto;padding:0 16px 32px}
 
 /* phone menu sheet (opens from the menu button; home.html#menu) */
 .sheet-menu{display:none;outline:none}
@@ -155,7 +162,7 @@ img{display:block}
 .sheet-menu .btn{width:100%;height:44px;margin-top:20px}
 
 /* ---------------- saint ---------------- */
-.page{margin:16px 24px 24px;background:#fff;border-radius:16px;padding:40px;box-shadow:0 20px 50px -24px rgba(0,0,0,.45)}
+.page{max-width:1088px;margin:16px auto 24px;background:#fff;border-radius:16px;padding:40px;box-shadow:0 20px 50px -24px rgba(0,0,0,.45)}
 .sgrid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;align-items:stretch}
 .idcol{position:relative}
 .portrait{margin:0}
@@ -172,7 +179,7 @@ img{display:block}
 .main{min-width:0}
 .skick{font-size:12.5px;line-height:18px;font-weight:500;color:var(--ink2)}
 h1{margin:6px 0 14px;font-size:48px;line-height:1.05;font-weight:700;letter-spacing:-.025em}
-.lead{max-width:680px;font-size:17.5px;line-height:1.6}
+.lead{max-width:720px;font-size:17.5px;line-height:1.6}
 .lead p{margin:0}
 .lead .portrait-m{display:none}
 .tabs{position:sticky;top:56px;z-index:20;display:flex;gap:28px;height:44px;margin-top:28px;background:#fff;
@@ -189,14 +196,20 @@ h2 a{font-size:14px;font-weight:600;letter-spacing:0;text-decoration:underline;t
 .list2 li b{width:20px;flex:none;font-size:12.5px;font-weight:500;color:var(--mute);font-variant-numeric:tabular-nums}
 .quotes{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin:0 0 24px}
 .quotes blockquote{margin:0;font-size:20px;line-height:1.4;font-weight:400;letter-spacing:-.01em}
-.body{max-width:680px;margin:0;font-size:17.5px;line-height:1.6}
+.body{max-width:720px;margin:0;font-size:17.5px;line-height:1.6}
 .place{margin:0 0 6px;font-size:15px;font-weight:600}
 .mrow{display:flex;align-items:center;justify-content:space-between;height:48px;margin-top:48px;border-top:1px solid var(--line);
   border-bottom:1px solid var(--line);font-size:15px;color:var(--mute)}
-.photo-credit{position:absolute;top:56px;right:24px;z-index:5;height:16px;font-size:11.5px;line-height:16px;color:rgba(255,255,255,.85);
+.photo-credit{position:fixed;top:72px;right:24px;z-index:5;width:140px;font-size:11.5px;line-height:16px;color:rgba(255,255,255,.85);
   text-shadow:0 1px 2px rgba(0,0,0,.5)}
-.photo-credit::before{content:"";position:absolute;z-index:-1;left:-30px;right:-24px;top:0;bottom:0;
-  background:linear-gradient(90deg,rgba(0,0,0,0),rgba(0,0,0,.45) 30%)}
+.photo-credit::before{content:"";position:absolute;z-index:-1;left:-8px;right:-24px;top:-22px;bottom:-22px;
+  background:radial-gradient(closest-side,rgba(0,0,0,.45),rgba(0,0,0,0))}
+.photo-credit b{display:block;font-size:13px;line-height:18px;font-weight:600;color:#fff}
+.photo-credit span{display:block}
+.photo-credit .sep{display:none;font-style:normal}
+@media (min-width:760px) and (max-width:1399px){.page{margin:40px 24px 24px}
+  .photo-credit{position:absolute;top:56px;right:24px;width:auto;height:40px;display:flex;align-items:center;gap:6px}
+  .photo-credit b{font-size:12px}.photo-credit span{display:inline}.photo-credit .sep{display:none}}
 .photo-credit a:hover{text-decoration:underline}
 .bbar{display:none}
 
@@ -219,7 +232,12 @@ h2 a{font-size:14px;font-weight:600;letter-spacing:0;text-decoration:underline;t
     color:rgba(255,255,255,.85);text-shadow:0 1px 2px rgba(0,0,0,.6);white-space:nowrap}
   .credit-m::before{content:"";position:absolute;z-index:-1;left:-16px;right:-16px;top:-12px;bottom:-6px;
     background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,.34))}
-  .wall{display:block;min-height:0;background:#fff;border-radius:16px 16px 0 0;padding:0 16px}
+  .wall{display:block;min-height:0;background:#fff;padding:0 16px}
+  .frow{display:flex;align-items:center;height:40px;margin:0;padding:0 16px;background:#fff;border-radius:16px 16px 0 0;
+    font-size:14px;font-weight:600;white-space:nowrap}
+  .frow a{display:flex;align-items:center;gap:4px;height:40px}
+  .frow i{font-style:normal;color:var(--mute);margin:0 9px;font-weight:400}
+  .frow-line{display:block;height:1px;background:var(--line);margin:0 16px}
   .card{border-radius:0;box-shadow:none;padding:20px 0;border-bottom:1px solid var(--line)}
   .card:last-child{border-bottom:0}
   .card .im{height:104px;border-radius:8px}
@@ -230,7 +248,9 @@ h2 a{font-size:14px;font-weight:600;letter-spacing:0;text-decoration:underline;t
   .meta{height:auto;margin-top:10px;border-top:0}
 
   .photo.saint{height:48px}
-  .photo-credit{position:absolute;top:61px;left:16px;right:16px;text-align:left}
+  .photo-credit{position:absolute;top:61px;left:16px;right:16px;width:auto;height:16px;text-align:left;white-space:nowrap}
+  .photo-credit b{display:inline;font-size:11.5px;line-height:16px;font-weight:500;color:inherit}
+  .photo-credit span,.photo-credit .sep{display:inline}
   .photo-credit::before{left:-16px;right:-16px;top:-9px;bottom:-12px;background:linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.3))}
   .page{position:relative;z-index:1;margin:32px 0 0;border-radius:16px 16px 0 0;padding:20px 16px 8px;box-shadow:none}
   .sgrid,.idcol,.main{display:contents}
@@ -303,6 +323,11 @@ def credit_one_line(cls):
             f'<a href="{LIC_URL}">{CREDIT_LIC}</a></div>')
 
 
+def credit_saint():
+    return (f'<div class="photo-credit" data-n="5m"><b><a href="#">{CREDIT_PLACE}</a></b><i class="sep"> · </i>'
+            f'<span><a href="#">{CREDIT_BY}</a> · <a href="{LIC_URL}">{CREDIT_LIC}</a></span></div>')
+
+
 def card(i, slug):
     s, m = B.BY[slug], B.META[slug]
     name = m['short']
@@ -346,13 +371,17 @@ def menu_sheet():
         if i == CURRENT_MONTH:
             cls.append('now')
         months += f'<a class="{" ".join(cls)}" href="#">{mo}</a>'
+    def sheet(id_, title, inner):
+        return (f'<div class="fsheet" id="{id_}" role="dialog" aria-label="{title}">'
+                f'<div class="sm-top"><b>{title}</b><a class="menu" style="display:flex" href="#" aria-label="Close">{ICON_X}</a></div>'
+                f'{inner}</div>')
     return ('<div class="sheet-menu" id="menu" role="dialog" aria-label="Menu">'
             f'<div class="sm-top"><b>Discover the Saints</b><a class="menu" style="display:flex" href="#" aria-label="Close">{ICON_X}</a></div>'
             f'<nav class="sm-nav">{nav}</nav>'
-            f'<h4>Categories</h4><div class="sm-cats">{cats}</div>'
-            f'<h4>Feast month</h4><div class="sm-months">{months}</div>'
-            '<h4>Sort</h4><div class="sm-sort"><a href="#">Feast date</a><a href="#">A–Z</a></div>'
-            '<a class="btn" href="#">Get the app</a></div>')
+            '<a class="btn" href="#">Get the app</a></div>'
+            + sheet('f-cat', 'Category', f'<div class="sm-cats">{cats}</div>')
+            + sheet('f-month', 'Feast month', f'<div class="sm-months" style="border-top:0">{months}</div>')
+            + sheet('f-sort', 'Sort', '<div class="sm-cats"><a href="#">Feast date</a><a href="#">A–Z</a></div>'))
 
 
 MASONRY_JS = r"""
@@ -383,7 +412,9 @@ def build_home():
     body = ('<body class="pg-home"><div class="photo" role="img" aria-label="Sea of Galilee at sunset"></div>'
             + header()
             + credit_one_line('credit-m')
-            + f'<main class="home">{rail()}<div class="wall" data-n="6">{cards}</div></main>'
+            + '<main class="home">' + rail()
+            + f'<nav class="frow" data-n="3m"><a href="#f-cat">Category {CHEV}</a><i>·</i><a href="#f-month">Feast month {CHEV}</a><i>·</i><a href="#f-sort">Sort {CHEV}</a></nav>'
+            + f'<div class="frow-line mobile-hair"></div><div class="wall" data-n="6">{cards}</div></main>'
             + footer(9) + menu_sheet() + MASONRY_JS + '</body></html>')
     return head('Discover the Saints · W2 Side index') + body
 
@@ -444,7 +475,7 @@ def build_saint():
             f'<article class="main">{main}</article></div></main>')
     body = ('<body class="pg-saint"><div class="photo saint" role="img" aria-label="Sea of Galilee at sunset"></div>'
             + header('home.html#menu')
-            + credit_one_line('photo-credit')
+            + credit_saint()
             + page + footer(8)
             + '<div class="bbar"><b>Feast Oct 1</b><a class="btn" href="#">Pray in the app</a></div>'
             + BBAR_JS + '</body></html>')
@@ -454,6 +485,7 @@ def build_saint():
 def main():
     for name, content in (('home.html', build_home()), ('saint.html', build_saint())):
         p = os.path.join(HERE, name)
+        content = re.sub(r'\b(St\.|Saint) (?=[A-ZÀ-Ý])', r'\1&nbsp;', content)
         open(p, 'w').write(content)
         print('wrote', p, len(content) // 1024, 'KB')
 

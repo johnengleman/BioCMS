@@ -27,6 +27,17 @@ NAV = B.NAV
 # ------------------------------------------------------------------ data
 META = {k: dict(v) for k, v in B.META.items()}
 META['padre-pio']['short'] = 'St. Pio of Pietrelcina'       # spec A6
+# Crop fixes (review 07): no cut heads or faces.
+for _k, _f in {'augustine-of-hippo': '50% 9%', 'benedict-of-nursia': '50% 6%', 'nicholas-of-myra': '50% 17%',
+               'therese-of-lisieux': '50% 16%'}.items():
+    META[_k]['focus'] = _f
+# St. Sergius is a small figure inside a vita icon: show the centre panel only.
+VIEWBOX = {'sergius-of-radonezh': 'inset(16% 25% 70% 25%)'}
+
+
+def nbsp(page):
+    """Review 07 fix 1: "St." / "Saint" never break from the name."""
+    return page.replace('St. ', 'St.&nbsp;').replace('Saint ', 'Saint&nbsp;')
 
 # Categories: case-normalised, non-empty, <= 60 % of saints (spec A11).
 def cats(s):
@@ -78,7 +89,7 @@ MENU = ('<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="cur
 
 # ------------------------------------------------------------------ css
 CSS = r"""
-:root{--ink:#111;--ink2:#555;--mute:#767676;--line:#E2E2E2;--chip:#F1F1F1;--panel:#F5F5F5;--g:26px}
+:root{--ink:#111;--ink2:#555;--mute:#767676;--line:#E2E2E2;--chip:#F1F1F1;--panel:#F5F5F5;--g:48px}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;font-family:Inter,system-ui,sans-serif;font-size:14px;line-height:1.45;color:var(--ink);background:#808080;
@@ -111,24 +122,25 @@ img{display:block}
 .menu{display:none}
 
 /* facet row (desktop, on the photo, not sticky) */
-.facets{height:44px;display:flex;align-items:center;padding:0 var(--g);gap:22px;position:relative}
-.chips{display:flex;gap:6px;width:660px;flex:none}
+.facets{height:44px;display:flex;align-items:center;padding:0 var(--g);gap:16px;position:relative}
+.chips{display:flex;gap:5px;flex:none}
+.chip.more{gap:6px;font:500 13px/1 Inter,system-ui,sans-serif}
 .chip{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 10px;border-radius:15px;background:rgb(255 255 255/.92);
   font-size:13px;font-weight:500;color:var(--ink);white-space:nowrap;box-shadow:0 1px 2px rgb(0 0 0/.08)}
 .chip i{font-style:normal;color:var(--ink2);font-variant-numeric:tabular-nums}
 .chip.on{background:var(--ink);color:#fff}.chip.on i{color:rgb(255 255 255/.72)}
-.months{display:flex;width:408px;height:30px;flex:none;border-radius:15px;background:rgb(255 255 255/.92);box-shadow:0 1px 2px rgb(0 0 0/.08);overflow:hidden}
-.months a{position:relative;width:34px;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:500;color:var(--ink)}
+.months{display:flex;width:372px;height:30px;flex:none;border-radius:15px;background:rgb(255 255 255/.92);box-shadow:0 1px 2px rgb(0 0 0/.08);overflow:hidden}
+.months a{position:relative;width:31px;display:flex;align-items:center;justify-content:center;font-size:12.5px;font-weight:500;color:var(--ink)}
 .months a.off{color:var(--mute);font-weight:400;pointer-events:none}
 .months a.now::after{content:"";position:absolute;bottom:3px;left:50%;width:4px;height:4px;margin-left:-2px;border-radius:2px;background:var(--ink)}
 .months a:hover{background:var(--chip)}
-.facets .credit{flex:1;text-align:right;align-self:stretch;display:flex;align-items:center;justify-content:flex-end;
+.facets .credit{flex:1;min-width:0;text-align:right;align-self:stretch;display:flex;align-items:center;justify-content:flex-end;
   margin-right:calc(-1 * var(--g));padding-right:var(--g);
   background:linear-gradient(to left,rgb(0 0 0/.7),rgb(0 0 0/.68) 80%,rgb(0 0 0/0))}
 
 /* masonry */
-.wall{display:flex;gap:12px;align-items:flex-start;padding:12px var(--g) 0}
-.col{flex:1;min-width:0;display:flex;flex-direction:column;gap:12px}
+.wall{display:flex;gap:16px;align-items:flex-start;padding:12px var(--g) 0}
+.col{flex:1;min-width:0;display:flex;flex-direction:column;gap:16px}
 .card{display:block;background:#fff;border-radius:10px;overflow:hidden;
   box-shadow:0 1px 2px rgb(0 0 0/.07),0 10px 24px -14px rgb(0 0 0/.35)}
 .card .im{width:100%;height:112px;object-fit:cover;filter:grayscale(1);background:#ddd}
@@ -139,7 +151,7 @@ img{display:block}
 .card .meta{display:flex;justify-content:space-between;align-items:center;height:30px;margin:12px 14px 6px;
   border-top:1px solid var(--line);font-size:12.5px;color:var(--ink2);font-variant-numeric:tabular-nums}
 .card .pmeta{display:none}
-.pfilters,.pcredit{display:none}
+.pfilters,.pstrip,.hsearch{display:none}
 
 /* footer */
 .foot{margin-top:32px;background:#fff;border-top:1px solid var(--line)}
@@ -150,8 +162,9 @@ img{display:block}
 .foot nav{display:flex;gap:24px;font-size:14px;color:var(--ink2)}
 
 /* ---------------- saint page ---------------- */
-.cstrip{height:16px;display:flex;justify-content:flex-end;padding:0 24px}
-.cstrip .credit{padding:0 8px;margin-right:12px;border-radius:0 0 6px 6px;background:rgb(0 0 0/.58)}
+.cstrip{height:28px;display:flex;align-items:center;justify-content:flex-end;padding:0 24px;position:relative}
+.cstrip::before{content:"";position:absolute;right:0;top:0;bottom:0;width:420px;background:linear-gradient(to left,rgb(0 0 0/.66),rgb(0 0 0/.6) 70%,rgb(0 0 0/0))}
+.cstrip .credit{position:relative;line-height:20px}
 .sheet{margin:0 24px;background:#fff;border-radius:16px;padding:40px;box-shadow:0 20px 50px -30px rgb(0 0 0/.5)}
 .sgrid{display:grid;grid-template-columns:minmax(0,1fr) 300px;column-gap:48px;align-items:start}
 .sgrid>.main{grid-column:1;grid-row:1}
@@ -202,18 +215,21 @@ section:first-of-type .h2row{margin-top:32px}
   .photo{height:100vh}
   .hdr{height:52px;gap:10px;background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom:0}
   .nav,.hdr .btn{display:none}
-  .logo{font-size:16px;letter-spacing:-.025em;margin-right:0}
-  .search{padding:0 12px;gap:7px}
-  .search span{white-space:nowrap;overflow:hidden}
+  .logo{font-size:18px;letter-spacing:-.025em;margin-right:0}
+  .hdr .search{display:none}
+  .hdr .sp{display:block!important}
+  .hsearch{display:flex;flex:none;width:40px;height:40px;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity .15s}
+  body.past .hsearch{visibility:visible;opacity:1}
   .mark{display:none;flex:none;width:32px;height:32px;border-radius:8px;background:var(--ink);color:#fff;align-items:center;justify-content:center;
     font-size:15px;font-weight:700;letter-spacing:-.02em}
   .search{flex:1;width:auto;min-width:0;height:36px}
   .hdr .sp{display:none}
   .menu{display:flex;flex:none;width:40px;height:40px;align-items:center;justify-content:center;margin-right:-6px}
   .facets{display:none}
-  .pcredit{display:flex;align-items:flex-end;justify-content:flex-end;height:80px;padding:0 16px 6px;position:relative}
-  .pcredit::before{content:"";position:absolute;inset:0;background:linear-gradient(rgb(0 0 0/0),rgb(0 0 0/.55) 70%)}
-  .pcredit .credit{position:relative}
+  .pstrip{display:block;position:relative;padding:10px 16px 0;height:76px}
+  .pstrip::before{content:"";position:absolute;inset:0;background:linear-gradient(rgb(0 0 0/.08),rgb(0 0 0/.58) 62%)}
+  .pstrip .search{position:relative;display:flex;width:100%;height:40px;border-radius:20px;background:rgb(255 255 255/.96);box-shadow:0 2px 10px rgb(0 0 0/.18)}
+  .pstrip .credit{position:relative;display:block;text-align:right;margin-top:5px}
   .home main{background:#fff;border-radius:16px 16px 0 0;position:relative}
   .pfilters{display:flex;align-items:center;height:40px;padding:0 16px;gap:6px;border-bottom:1px solid var(--line);font-size:14px;font-weight:500}
   .pfilters button{display:inline-flex;align-items:center;gap:5px;height:40px}
@@ -232,9 +248,7 @@ section:first-of-type .h2row{margin-top:32px}
   .foot nav{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:10px 28px;font-size:13.5px}
 
   /* saint */
-  .cstrip{height:44px;align-items:center;justify-content:flex-end;padding:0 16px;margin-bottom:-12px;position:relative}
-  .cstrip::before{content:"";position:absolute;inset:0;background:linear-gradient(rgb(0 0 0/.55),rgb(0 0 0/.62))}
-  .cstrip .credit{position:relative;background:none;margin:0;padding:0 0 10px}
+  .cstrip{display:none}
   .sheet{margin:0;border-radius:16px 16px 0 0;padding:20px 16px 8px;box-shadow:none;position:relative}
   .sgrid{display:flex;flex-direction:column;gap:0}
   .sgrid>.main{display:contents}
@@ -288,11 +302,24 @@ def header():
             f'<nav class="nav">{nav}</nav><div class="sp"></div>'
             f'<label class="search" role="search">{SEARCH}<span>Search saints</span></label>'
             '<a class="btn" href="#">Get the app</a>'
+            f'<button class="hsearch" aria-label="Search">{SEARCH}</button>'
             f'<button class="menu" aria-label="Menu">{MENU}</button></header>')
 
 
 def credit():
     return f'<span class="credit"><a data-n="credit" href="{CREDIT_URL}">{E(CREDIT)}</a></span>'
+
+
+def pstrip():
+    return (f'<div class="pstrip"><label class="search" role="search" data-n="psearch">{SEARCH}<span>Search saints</span></label>'
+            f'{credit()}</div>')
+
+
+PAST_JS = r"""
+<script>
+(function(){var ps=document.querySelector('.pstrip .search');function f(){document.body.classList.toggle('past',ps.getBoundingClientRect().bottom<52)}
+window.addEventListener('scroll',f,{passive:true});f()})();
+</script>"""
 
 
 def footer():
@@ -309,7 +336,8 @@ def card(s):
     alt = m['short']
     meta_txt = line if two else f'{line} · {place}'
     return (f'<a class="card" href="saint.html">'
-            f'<img class="im" src="{IMG}{s["file"]}" alt="{E(alt)}" style="object-position:{m["focus"]}">'
+            f'<img class="im" src="{IMG}{s["file"]}" alt="{E(alt)}" style="object-position:{m["focus"]}'
+            f'{";object-view-box:" + VIEWBOX[s["slug"]] if s["slug"] in VIEWBOX else ""}">'
             f'<div class="id"><div class="kick">{E(m["role"])} · {m["years"]}</div><h3>{E(m["short"])}</h3>'
             f'<div class="pmeta">{E(meta_txt)}</div></div>'
             f'<p class="sum">{E(B.st(s["summary"]).strip())}</p>'
@@ -321,7 +349,7 @@ MASONRY_JS = r"""
 (function(){
   var wall=document.querySelector('.wall'),cards=[].slice.call(wall.querySelectorAll('.card'));
   function lay(){
-    var w=wall.clientWidth-52,n=window.innerWidth<=720?1:Math.max(2,Math.floor((w+12)/280));
+    var g=parseFloat(getComputedStyle(wall).paddingLeft)*2,w=wall.clientWidth-g,n=window.innerWidth<=720?1:Math.max(2,Math.floor((w+16)/272));
     wall.innerHTML='';var cols=[];
     for(var i=0;i<n;i++){var c=document.createElement('div');c.className='col';wall.appendChild(c);cols.push(c)}
     cards.forEach(function(k){var best=cols[0];cols.forEach(function(c){if(c.offsetHeight<best.offsetHeight)best=c});best.appendChild(k)});
@@ -335,6 +363,7 @@ MASONRY_JS = r"""
 def build_home():
     chips = f'<a class="chip on" href="#">All <i>{len(B.SAINTS)}</i></a>'
     chips += ''.join(f'<a class="chip" href="#">{c} <i>{COUNT[c]}</i></a>' for c in ROW_CATS)
+    chips += f'<button class="chip more" aria-haspopup="true">More {CHEV}</button>'
     months = ''.join(
         f'<a class="{"off" if i + 1 not in FEAST_MONTHS else ""}{" now" if i + 1 == CUR_MONTH else ""}" href="#"'
         f' title="Feasts in {m}">{m}</a>' for i, m in enumerate(MONTHS))
@@ -342,11 +371,12 @@ def build_home():
     out = (head('Discover the Saints', 'home') + header()
            + f'<div class="facets"><nav class="chips" data-n="chips">{chips}</nav>'
              f'<nav class="months" data-n="months" aria-label="Feast month">{months}</nav>{credit()}</div>'
-           + f'<div class="pcredit">{credit()}</div>'
+           + pstrip()
            + '<main><div class="pfilters" data-n="pfilters">'
              f'<button>Category {CHEV}</button><span>·</span><button>Feast month {CHEV}</button><span>·</span><button>Sort {CHEV}</button></div>'
              f'<div class="wall" data-n="wall">{cards}</div></main>'
-           + footer() + MASONRY_JS + '</body></html>')
+           + footer() + MASONRY_JS + PAST_JS + '</body></html>')
+    out = nbsp(out)
     open(os.path.join(HERE, 'home.html'), 'w').write(out)
     print('home.html', len(out) // 1024, 'KB')
 
@@ -385,7 +415,7 @@ def build_saint():
     dl = ''.join(f'<div class="r"><dt>{k}</dt><dd>{E(v)}</dd></div>' for k, v in facts)
     lead = E(B.TH_SUMMARY.strip())
     out = (head('St. Thérèse of Lisieux · Discover the Saints', 'saint') + header()
-           + f'<div class="cstrip">{credit()}</div>'
+           + f'<div class="cstrip">{credit()}</div>' + pstrip()
            + '<main class="sheet"><div class="sgrid"><div class="main">'
              '<div class="top" data-n="top">'
              f'<figure class="portrait" data-n="portrait"><img src="{IMG}{s["file"]}" alt="St. Thérèse of Lisieux, holy card, 1916">'
@@ -406,7 +436,8 @@ def build_saint():
              '</div></div></main>'
            + footer()
            + '<div class="bbar" data-n="bbar"><b>Oct 1</b><a class="btn" href="#">Pray in the app</a></div>'
-           + SAINT_JS + '</body></html>')
+           + SAINT_JS + PAST_JS + '</body></html>')
+    out = nbsp(out)
     open(os.path.join(HERE, 'saint.html'), 'w').write(out)
     print('saint.html', len(out) // 1024, 'KB')
 
