@@ -26,7 +26,7 @@ NAV = b.NAV
 
 # Decision A6: "St. Pio of Pietrelcina" (META already carries it). Decision A14: kicker = role · years.
 META = {k: dict(v) for k, v in b.META.items()}
-for _k, _f in {'augustine-of-hippo': '50% 9%', 'benedict-of-nursia': '50% 11%', 'nicholas-of-myra': '50% 17%'}.items():
+for _k, _f in {'augustine-of-hippo': '50% 9%', 'benedict-of-nursia': '50% 6%', 'nicholas-of-myra': '50% 17%'}.items():
     META[_k]['focus'] = _f
 # St. Sergius: the saint is a small figure inside a 17th-c. vita icon; view the centre panel only.
 VIEWBOX = {'sergius-of-radonezh': 'inset(16% 25% 70% 25%)'}
