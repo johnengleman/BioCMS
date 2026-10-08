@@ -291,7 +291,7 @@ h2.h2 a{{font-family:var(--ui);font-size:14px;font-weight:600;color:var(--cobalt
 .phone .ph-h{{display:flex;align-items:center;gap:10px;height:52px;padding:0 16px;background:#fff}}
 .phone .search{{flex:1;width:auto;height:36px;font-size:14px}}
 .phone .pphoto{{height:96px;background:url({GALILEE}) no-repeat;background-size:720px auto;background-position:-140px -70px;position:relative}}
-.phone .pphoto .credit{{position:absolute;right:12px;bottom:26px;height:22px;font-size:11px;margin:0}}
+.phone .pphoto .credit{{position:absolute;right:12px;bottom:26px;height:24px;font-size:11.5px;margin:0}}
 .phone .sheet{{position:relative;margin-top:-16px;background:#fff;border-radius:16px 16px 0 0;padding:0 16px}}
 .phone .drops{{display:flex;align-items:center;gap:18px;height:40px;font-size:13px;font-weight:600;color:var(--ink2);border-bottom:1px solid var(--line)}}
 .phone .drops span{{display:inline-flex;align-items:center;gap:5px}}
