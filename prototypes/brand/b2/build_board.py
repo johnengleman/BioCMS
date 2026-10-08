@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Brand board B2 "Two Lungs" for Find a Saint. Writes board.html next to this file.
+"""Brand board B2 "Two Lungs" for Discover the Saints. Writes board.html next to this file.
 
 Run: python3 build_board.py
 Data and helpers come from prototypes/build.py (not edited here).
@@ -72,7 +72,7 @@ def card(slug):
 
 def header(mode, cls=''):
     nav = ''.join(f'<a href="#" class="{"on" if n == "Saints" else ""}">{n}</a>' for n in NAV)
-    return (f'<header class="hdr {cls}"><a class="wm" href="#">Find a Saint</a><nav>{nav}</nav>'
+    return (f'<header class="hdr {cls}"><a class="wm" href="#">Discover the Saints</a><nav>{nav}</nav>'
             f'<div class="search">{SEARCH_SVG}<span>Search saints</span></div>'
             f'<a class="btn" href="#">Get the app</a>{stripe(mode, "edge")}</header>')
 
@@ -95,7 +95,7 @@ def footer(mode, width=''):
 
 
 def badge(size):
-    return f'<span class="badge s{size}" aria-label="Find a Saint app">S{stripe("b")}</span>'
+    return f'<span class="badge s{size}" aria-label="Discover the Saints app">D{stripe("b")}</span>'
 
 
 # ------------------------------------------------------------ contrast
@@ -257,6 +257,11 @@ background:linear-gradient(90deg,rgb(27 27 31/0),rgb(27 27 31/.55) 36px,rgb(27 2
 .cards-row .cap{padding-top:4px;display:grid;gap:14px}
 .cards-row .cap div{display:flex;align-items:center;gap:10px}
 .cards-row .cap .stripe{width:24px}
+.every-row{display:grid;grid-template-columns:192px 268px 1fr;gap:12px 32px;align-items:start;margin-bottom:56px}
+.every-row .cap{padding-top:4px;display:grid;gap:10px}
+.every{display:grid;gap:36px;padding-top:4px}
+.every .facts{margin-top:4px;max-width:360px}
+.every .facts div:first-child{border-top:0}
 
 /* name use + footer */
 .use-row{display:grid;grid-template-columns:600px 1fr;gap:64px;margin-top:56px;align-items:start}
@@ -354,6 +359,13 @@ def main():
                  f'<div>{stripe("b")}Half each · both</div>'
                  '<div>No text on colour</div></div>')
 
+    every = ''.join(
+        f'<div><h1 class="name48">{E(n)}</h1>{stripe("c")}'
+        f'<dl class="facts"><div><dt>Venerated</dt><dd>{stripe("c", "mark")}Catholic</dd></div></dl></div>'
+        for n in ('St. Bernadette Soubirous', 'St. Maximilian Kolbe'))
+    every_cap = ('<div class="cap"><b>Every name</b><div>With or without “of”</div>'
+                 '<div>No image yet: name only</div></div>')
+
     foots = ''.join(f'<div><div class="cap"><b>{n}</b> active</div>{footer(m)}</div>'
                     for m, n in (('c', 'Catholic'), ('o', 'Orthodox'), ('b', 'Both')))
 
@@ -369,21 +381,22 @@ def main():
 
     page = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">
-<title>B2 · Two Lungs · Find a Saint brand board</title>
+<title>Discover the Saints · B2 Two Lungs · brand board</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Vollkorn:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>{CSS}</style></head>
 <body>
-<div class="top"><div class="id">B2 · Two Lungs</div>
+<div class="top"><div class="id">Discover the Saints · B2 · Two Lungs</div>
 <div class="idea">The Church breathes with two lungs, East and West. The site wears the colour of the reader’s tradition.</div></div>
 
 <section class="sec"><div class="lbl">Wordmark</div>
-<div class="mark-row"><div><div class="wm72">Find a Saint</div>{stripe("b")}<div class="cap">Familjen Grotesk 700 · 72</div></div>
-<div><div class="badges">{badge(64)}{badge(32)}{badge(16)}</div><div class="cap">App badge · 64 · 32 · 16</div></div></div>
+<div class="mark-row"><div><div class="wm72">Discover the Saints</div>{stripe("b")}<div class="cap">Familjen Grotesk 700 · 72</div></div>
+<div><div class="badges">{badge(64)}{badge(32)}{badge(16)}</div><div class="cap">Compact mark · 64 · 32 · 16</div></div></div>
 </section>
 
 <section class="sec"><div class="lbl">Device</div>
 <div class="cards-row">{cards_cap}{cards}</div>
+<div class="every-row">{every_cap}{card("thomas-aquinas")}<div class="every">{every}</div></div>
 <div class="strips">{strips}</div>
 <div class="use-row"><div><div class="kick-p">Bishop · Asia Minor · c. 270–343</div><h1 class="name48">St. Nicholas of Myra</h1>{stripe("b")}
 <div class="cap">Under the name · Venerated fact</div>{facts(NIC_FACTS)}</div>

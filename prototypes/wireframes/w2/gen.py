@@ -81,8 +81,6 @@ img{display:block}
   box-shadow:0 1px 0 rgba(0,0,0,.06)}
 .hdr .in{display:flex;align-items:center;height:100%;padding:0 24px}
 .logo{font-size:20px;font-weight:700;letter-spacing:-.02em;white-space:nowrap;margin-right:40px}
-.mark{display:none;width:32px;height:32px;border-radius:8px;background:var(--ink);color:#fff;font-weight:700;font-size:15px;
-  letter-spacing:-.02em;align-items:center;justify-content:center;flex:none}
 .nav{display:flex;gap:24px;height:100%}
 .nav a{position:relative;display:flex;align-items:center;font-size:14px;font-weight:500;color:var(--ink2)}
 .nav a.on{color:var(--ink);font-weight:600}
@@ -140,7 +138,7 @@ img{display:block}
 .credit-m{display:none}
 
 /* phone menu sheet (opens from the menu button; home.html#menu) */
-.sheet-menu{display:none}
+.sheet-menu{display:none;outline:none}
 .sheet-menu:target{display:block;position:fixed;inset:0;z-index:60;background:#fff;overflow:auto;padding:0 16px 32px}
 .sm-top{display:flex;align-items:center;justify-content:space-between;height:52px;border-bottom:1px solid var(--line);margin:0 -16px;padding:0 16px}
 .sm-top b{font-size:17px;font-weight:700;letter-spacing:-.01em}
@@ -208,9 +206,9 @@ h2 a{font-size:14px;font-weight:600;letter-spacing:0;text-decoration:underline;t
   .photo{position:absolute;inset:auto 0;top:52px;height:88px;z-index:0;background-position:center 52%}
   .hdr{height:52px;background:#fff;box-shadow:0 1px 0 var(--line)}
   .hdr .in{padding:0 16px;gap:10px}
-  .logo,.nav,.hdr .btn{display:none}
-  .mark{display:flex}
-  .search{flex:1;width:auto;min-width:0;margin-left:0;background:var(--chip);border-color:transparent;font-size:15px}
+  .nav,.hdr .btn,.sx{display:none}
+  .logo{flex:none;margin-right:0;font-size:16px;letter-spacing:-.02em}
+  .search{flex:1;width:auto;min-width:0;margin-left:2px;overflow:hidden;white-space:nowrap;background:var(--chip);border-color:transparent;font-size:15px}
   .menu{display:flex}
   .ft{flex-direction:column;align-items:flex-start;gap:14px;height:auto;padding:20px 16px 28px}
   .ft nav{flex-wrap:wrap;gap:8px 20px}
@@ -258,8 +256,8 @@ h2 a{font-size:14px;font-weight:600;letter-spacing:0;text-decoration:underline;t
   .body{font-size:17px}
   .mrow{order:7;height:auto;min-height:48px;margin-top:36px;padding:12px 0;gap:12px;font-size:15px}
   .bbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;height:52px;align-items:center;justify-content:space-between;
-    padding:0 16px;background:#fff;border-top:1px solid var(--line);transform:translateY(100%);transition:transform .2s}
-  .bbar.show{transform:none}
+    padding:0 16px;background:#fff;border-top:1px solid var(--line);visibility:hidden;opacity:0;transition:opacity .2s,visibility .2s}
+  .bbar.show{visibility:visible;opacity:1}
   .bbar b{font-size:15px;font-weight:600}
   .bbar .btn{height:36px}
 }
@@ -279,9 +277,9 @@ def head(title, extra_css=''):
 def header(menu_href='#menu'):
     nav = ''.join(f'<a class="{"on" if n == "Saints" else ""}" href="#">{n}</a>' for n in NAV)
     return ('<header class="hdr" data-n="1"><div class="in">'
-            '<a class="logo" href="home.html">Find a Saint</a><a class="mark" href="home.html" aria-label="Find a Saint">F</a>'
+            '<a class="logo" href="home.html">Discover the Saints</a>'
             f'<nav class="nav">{nav}</nav>'
-            f'<a class="search" href="#" role="search">{ICON_SEARCH}<span>Search saints</span></a>'
+            f'<a class="search" href="#" role="search">{ICON_SEARCH}<span>Search<span class="sx"> saints</span></span></a>'
             '<a class="btn" href="#">Get the app</a>'
             f'<a class="menu" href="{menu_href}" aria-label="Menu">{ICON_MENU}</a>'
             '</div></header>')
@@ -349,7 +347,7 @@ def menu_sheet():
             cls.append('now')
         months += f'<a class="{" ".join(cls)}" href="#">{mo}</a>'
     return ('<div class="sheet-menu" id="menu" role="dialog" aria-label="Menu">'
-            f'<div class="sm-top"><b>Find a Saint</b><a class="menu" style="display:flex" href="#" aria-label="Close">{ICON_X}</a></div>'
+            f'<div class="sm-top"><b>Discover the Saints</b><a class="menu" style="display:flex" href="#" aria-label="Close">{ICON_X}</a></div>'
             f'<nav class="sm-nav">{nav}</nav>'
             f'<h4>Categories</h4><div class="sm-cats">{cats}</div>'
             f'<h4>Feast month</h4><div class="sm-months">{months}</div>'
@@ -387,7 +385,7 @@ def build_home():
             + credit_one_line('credit-m')
             + f'<main class="home">{rail()}<div class="wall" data-n="6">{cards}</div></main>'
             + footer(9) + menu_sheet() + MASONRY_JS + '</body></html>')
-    return head('Find a Saint · W2 Side index') + body
+    return head('Discover the Saints · W2 Side index') + body
 
 
 # ------------------------------------------------------------- saint page
@@ -439,7 +437,7 @@ def build_saint():
             f'<h2 id="teachings">Words and teachings</h2><div class="quotes">{quotes}</div><ul class="list2 teach">{teach}</ul>'
             f'<h2 id="relics">Relics</h2><p class="place">{RELIC_PLACE}</p><p class="body">{E(B.RELIC_SHORT)}</p>'
             '</div>'
-            f'<a class="mrow" href="#" data-n="7"><span>Miracles and answered prayers · {B.N_MIRACLES} accounts</span><span aria-hidden="true">→</span></a>')
+            f'<a class="mrow" href="#" data-n="7"><span>Miracles and answered prayers · <span style="white-space:nowrap">{B.N_MIRACLES} accounts</span></span><span aria-hidden="true">→</span></a>')
     page = ('<main class="page"><div class="sgrid sgrid-wrap">'
             f'<aside class="idcol">{portrait_d}<div class="facts" data-n="3"><dl>{facts}</dl>'
             '<a class="btn" href="#">Pray in the app</a></div></aside>'

@@ -176,6 +176,8 @@ img{{display:block}}
 
 /* 01 wordmark */
 .wm{{font-family:var(--disp);font-weight:800;letter-spacing:-.005em;line-height:1;color:var(--ink);white-space:nowrap}}
+.wm .the{{font-weight:500;color:var(--ink2)}}
+.lock.dark .the,.hdr .the{{color:rgb(255 255 255/.8)}}
 .badge{{display:inline-grid;place-items:center;background:var(--cobalt);color:#fff;font-family:var(--disp);font-weight:800;line-height:1;flex:none}}
 .s1{{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:end}}
 .s1 .big{{display:flex;flex-direction:column;gap:18px}}
@@ -329,13 +331,13 @@ def s_wordmark():
     badges = ''.join(f'<div><span class="badge" style="width:{w}px;height:{w}px;border-radius:{round(w * .22)}px;font-size:{round(w * .68)}px">S</span>'
                      f'<span class="cap">{w}</span></div>' for w in (64, 32, 16))
     lock = (f'<div class="lockups"><div class="lock light"><span class="badge" style="width:28px;height:28px;border-radius:6px;font-size:19px">S</span>'
-            f'<span class="wm" style="font-size:28px">Find a Saint</span></div>'
+            f'{wordmark(28)}</div>'
             f'<div class="lock dark"><span class="badge" style="width:28px;height:28px;border-radius:6px;font-size:19px;background:#fff;color:var(--cobalt)">S</span>'
-            f'<span class="wm" style="font-size:28px">Find a Saint</span></div>'
+            f'{wordmark(28)}</div>'
             f'<span class="cap">Lockup · 28 px</span></div>')
-    return (f'<div class="s1"><div class="big"><div class="wm" style="font-size:72px">Find a Saint</div>'
-            f'<span class="cap">Big Shoulders Display 800 · 72 px</span></div>'
-            f'<div><div class="badges">{badges}</div><div class="cap" style="margin-top:10px;text-align:right">App badge · Cobalt</div></div></div>{lock}')
+    return (f'<div class="s1"><div class="big">{wordmark(72)}'
+            f'<span class="cap">Big Shoulders Display 800 · 72 px · “the” 500</span></div>'
+            f'<div><div class="badges">{badges}</div><div class="cap" style="margin-top:10px;text-align:right">Compact mark · app icon, favicon</div></div></div>{lock}')
 
 
 def s_device():
@@ -344,6 +346,9 @@ def s_device():
         m = META[slug]
         heads += f'<div><div class="kick">{E(m["role"])} · {m["years"]}</div>{name_block(slug)}</div>'
     grid = f'<div class="heads">{heads}</div><div class="cap" style="margin-top:12px">Card name · 46 px versal · all 12 saints</div>'
+    noof = ''.join(f'<div><div class="kick">{E(x["role"])} · {x["years"]}</div>{name_block(short=x["short"], col=x["col"])}</div>' for x in NO_OF)
+    grid += (f'<div class="heads" style="margin-top:40px;grid-template-columns:repeat(4,1fr)">{noof}</div>'
+             f'<div class="cap" style="margin-top:12px">Names without “of” · the given name leads · text only</div>')
 
     key = ''
     for col, role in KEY:
@@ -420,7 +425,7 @@ def s_colour():
 
 def s_photo():
     nav = ''.join(f'<a href="#"{" class=on" if n == "Saints" else ""}>{n}</a>' for n in NAV)
-    hdr = (f'<div class="hdr"><span class="wm">Find a Saint</span><nav>{nav}</nav><span class="sp"></span>'
+    hdr = (f'<div class="hdr">{wordmark(32)}<nav>{nav}</nav><span class="sp"></span>'
            f'<div class="search">{SEARCH}<span>Search saints</span></div><a class="btn" href="#">Get the app</a></div>')
     chips = '<span class="chip on">All <small>12</small></span>' + ''.join(
         f'<span class="chip">{k} <small>{n}</small></span>' for k, n in (('Bishops', 3), ('Hermits', 3), ('Ascetics', 3), ('Nuns', 2), ('Holy Women', 2)))
@@ -463,10 +468,10 @@ def main():
     fonts = ('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;800&'
              'family=Libre+Caslon+Text:ital,wght@0,400;1,400&family=Host+Grotesk:wght@400;500;600&display=swap')
     page = (f'<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=1440">'
-            f'<title>B3 Versal · Find a Saint brand board</title>'
+            f'<title>B3 Versal · {SITE} brand board</title>'
             f'<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
             f'<link href="{fonts}" rel="stylesheet"><style>{CSS}</style></head><body>'
-            f'<div class="head"><span class="id"><b>B3 · Versal</b> Find a Saint · brand board</span>'
+            f'<div class="head"><span class="id"><b>B3 · Versal</b> {SITE} · brand board</span>'
             f'<span class="idea">The big initial of old books, made flat and modern. Its colour shows the saint\'s way of life.</span></div>'
             + sec('01', 'Wordmark', s_wordmark())
             + sec('02', 'The versal', s_device())

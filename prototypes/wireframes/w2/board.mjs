@@ -12,7 +12,7 @@ fs.mkdirSync(TMP, { recursive: true })
 
 const NOTES = {
   home: {
-    '1': ['Glass header 56: logo, 6 nav links, search 400×36, “Get the app”.', 'Header 52: mark, search pill, menu. The menu sheet holds nav, Categories, months, Sort.'],
+    '1': ['Glass header 56: logo, 6 nav links, search 400×36, “Get the app”.', 'Header 52: “Discover the Saints” 16/700, search pill, menu. The menu sheet holds nav, Categories, months, Sort.'],
     '2': ['Side index, x 24, w 232, sticky at 68. 9 non-empty categories, counts right.'],
     '3': ['Feast month 4 × 3 (50×28). One click. Empty months muted; dot = October.'],
     '4': ['Sort: Feast date · A–Z (A–Z ignores “St.”).'],
@@ -24,7 +24,7 @@ const NOTES = {
     '9': ['Footer 64: Catholic · Orthodox · Both (Both active), nav right.', 'Footer: tradition switch (Both active), nav.'],
   },
   saint: {
-    '1': ['Glass header 56 with search on every page.', 'Header 52: mark, search pill, menu.'],
+    '1': ['Glass header 56 with search on every page.', 'Header 52: “Discover the Saints” 16/700, search pill, menu.'],
     '5m': ['Credit on the photo strip, horizontal, first screen.'],
     '2': ['Identity column 240: portrait whole 205×320, no frame, caption.'],
     '3': ['Facts card #F5F5F5, sticky at 72 when the portrait leaves. “Pray in the app” 38.', 'Facts as plain rows (label 96), before the story, Feast first.'],

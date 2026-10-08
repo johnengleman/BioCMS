@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""W3 "Photo search" wireframe: home.html + saint.html (one responsive file each).
+"""W3 "Photo search" wireframe for Discover the Saints: home.html + saint.html (one responsive file each).
 
 Spec: committee/05-chair.md, sections A, B (shared + W3), D.
 Run: python3 gen.py   (writes home.html and saint.html next to this file)
@@ -134,7 +134,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
 /* ---------- compact header (after the photo header scrolls away) */
 .compact{position:fixed;inset:0 0 auto 0;height:56px;z-index:20;display:flex;align-items:center;gap:16px;padding:0 var(--gut);
-  background:rgb(255 255 255/.8);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);
+  background:rgb(255 255 255/.88);-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);
   box-shadow:0 1px 0 rgb(0 0 0/.08);transform:translateY(-100%);transition:transform .2s ease;color:var(--ink)}
 body.scrolled .compact{transform:none}
 .compact .logo{font-size:18px;margin-right:12px}
@@ -235,6 +235,8 @@ body.scrolled .compact{transform:none}
   .bar{position:sticky;top:0;height:52px;background:#fff;color:var(--ink);gap:10px;z-index:30;box-shadow:0 1px 0 var(--line)}
   .bar .nav,.bar .app{display:none}
   .mark,.menu{display:inline-flex}
+  .bar .sp{display:none}
+  .menu{margin-left:auto}
   .bar .logo{font-size:17px}
   .bar .wm{transition:opacity .15s}
   .bar .search.m{display:none;flex:1;height:36px;padding:0 12px;font-size:14px;background:var(--chip);gap:8px}
@@ -330,7 +332,7 @@ JS = r"""
   function onScroll(){
     var y=scrollY;B.classList.toggle('scrolled',phone()?y>110:y>104);
     var tabs=document.querySelectorAll('[data-spy]');if(!tabs.length)return;
-    var cur=null;['life','teachings','relics'].forEach(function(id){var el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<140)cur=id});
+    var cur=null;['life','teachings','relics'].forEach(function(id){var el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<innerHeight*0.35)cur=id});
     if(!cur)cur='life';
     tabs.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur)});
   }
@@ -361,7 +363,7 @@ def head(title):
 def bar(saint=False):
     nav = ''.join(f'<a href="{"home.html" if n == "Saints" else "#"}"{" class=on" if n == "Saints" else ""}>{n}</a>' for n in NAV)
     return (f'<header class="bar" data-d="1" data-m="1">'
-            f'<a class="logo" href="home.html"><span class="mark" aria-hidden="true">Fs</span><span class="wm">Find a Saint</span></a>'
+            f'<a class="logo" href="home.html"><span class="mark" aria-hidden="true">D</span><span class="wm">Discover the Saints</span></a>'
             f'<nav class="nav" aria-label="Main">{nav}</nav>'
             f'<a class="search m" href="#" role="search">{I_SEARCH}Search saints</a>'
             f'<span class="sp"></span><a class="app" href="#">Get the app</a>'
@@ -381,7 +383,7 @@ def compact(saint=False):
         nav = ''.join(f'<a href="#"{" class=on" if n == "Saints" else ""}>{n}</a>' for n in NAV)
         mid = f'<nav class="navc">{nav}</nav>'
     right = '' if saint else f'<button class="browse">Browse {I_CHEV}</button>'
-    return (f'<header class="compact" aria-label="Compact header"><a class="logo" href="home.html">Find a Saint</a>{mid}'
+    return (f'<header class="compact" aria-label="Compact header"><a class="logo" href="home.html">Discover the Saints</a>{mid}'
             f'<span class="sp"></span>{right}<a class="search" href="#" role="search">{I_SEARCH}Search saints</a>'
             f'<a class="app" href="#">Get the app</a></header>')
 
@@ -445,7 +447,7 @@ def build_home():
         if s['slug'] == 'augustine-of-hippo':
             extra = ' data-d="6"'
         cards.append(card(s, extra))
-    page = (head('Find a Saint') + '<body class="home">'
+    page = (head('Discover the Saints') + '<body class="home">'
             '<div class="photo" role="img" aria-label="Sea of Galilee at sunset"></div>'
             + bar() + hero() + compact()
             + f'<main class="wall" id="wall">{index_tile()}{"".join(cards)}</main>'
@@ -492,7 +494,7 @@ def build_saint():
     sbar = ('<nav class="sbar" aria-label="Sections" data-m="6"><nav>'
             '<a href="#life" data-spy class="on">Life</a><a href="#teachings" data-spy>Teachings</a><a href="#relics" data-spy>Relics</a>'
             '</nav><a class="pray" href="#">Pray</a></nav>')
-    page = (head('St. Thérèse of Lisieux · Find a Saint') + '<body class="saint">'
+    page = (head('St. Thérèse of Lisieux · Discover the Saints') + '<body class="saint">'
             '<div class="photo" role="img" aria-label="Sea of Galilee at sunset"></div>'
             + bar(saint=True) + hero() + compact(saint=True)
             + f'<article class="sheet">'

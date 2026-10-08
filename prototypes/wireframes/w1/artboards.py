@@ -25,6 +25,7 @@ LEGEND = {
         ('credit', 'Photo strip 52–148 with credit. Sheet from y 132, radius 16.'),
         ('pfilters', 'Category ▾ · Feast month ▾ · Sort ▾. Each opens a full-height sheet.'),
         ('card', 'Plain rows from y 172: thumb 72 × 90, kicker, name, feast. Full summary. Hairlines.'),
+        ('card2', 'Two feasts differ: "Feast Aug 28 · Orth. Jun 15"; place drops.'),
         ('foot', 'Footer: tradition switch; nav in 2 rows.'),
     ],
     'saint-1440': [
@@ -80,11 +81,11 @@ def main(path):
         n = notes[key]['notes']
         # synthetic notes: first card and the first two-feast card
         n.setdefault('card', {'y': notes[key]['firstCardY']})
-        if key == 'home-1440':
-            n['card2'] = {'y': notes[key].get('card2Y') or 0}
+        if page == 'home':
+            n['card2'] = {'y': notes[key].get('card2Y')}
         dots, lis, last, i = [], [], -99, 0
         for k, text in items:
-            if k is None or k not in n or not n[k].get('y'):
+            if k is None or k not in n or n[k].get('y') is None:
                 lis.append(f'<li class="n"><b>–</b><span>{E(text)}</span></li>')
                 continue
             i += 1
