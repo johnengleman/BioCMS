@@ -85,15 +85,16 @@ export const yearsLabel = (birth?: number | null, death?: number | null) => {
   return ''
 }
 
-// The summary on a saint card (decided 2026-10-22): whole sentences
-// until the text passes `min` words, stopping before it passes `max`,
-// never mid-sentence. Different lengths give the waterfall its varying
-// card heights. The full summary stays on the saint page.
+// The summary on a saint card: a hook of one or two sentences. Whole
+// sentences until the text passes `min` words, stopping before it
+// passes `max`, never mid-sentence. Different lengths give the
+// waterfall its varying card heights. The full summary stays on the
+// saint page. (Halved on 2026-10-22: the first window read too long.)
 const SENTENCE_END = /(?<=[.!?]["”’)]?)\s+(?=[A-Z“"‘(])/
 
 export const cardSummary = (
   summary?: string | null,
-  { min = 40, max = 70 } = {},
+  { min = 18, max = 36 } = {},
 ) => {
   const text = (summary || '')
     .replace(/<[^>]+>/g, ' ')

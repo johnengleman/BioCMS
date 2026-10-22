@@ -91,7 +91,7 @@ Ink is for reading. Wine is for actions. Candle gold is the light on night; `--g
 
 ### Saints
 
-- **`SaintSummary`:** the night card in the waterfall. A 3:4 portrait (4:3 on phones), the feast day in candle gold above the name, one line of years, role and place, and `cardSummary()` (two or three sentences inside a 40 to 70 word window). Hairline only; on hover the hairline lights.
+- **`SaintSummary`:** the night card in the waterfall. A 3:4 portrait (4:3 on phones), the feast day in candle gold above the name, one line of years, role and place, and `cardSummary()` (one or two sentences inside an 18 to 36 word window). Hairline only; on hover the hairline lights.
 - **`SaintsListClient`:** the masonic waterfall, with up to 4 columns and 22px gaps (14px on phones). It inserts `AppCard` as the seventh item.
   - **The waterfall stays in v4 (decided 2026-10-22).** Cards of varying height are the point: the list should feel organic, like a wall of icons, not a grid. The variation comes from the summary length. The full summary stays on the saint page.
 - **`SaintsFilterBar`:** one row of text links (All, Feast today, 20th Century, Patron Saints, the chosen category or month with ✕), counts as small gold figures, an underline on the chosen one, and "More", which opens the panel with every category and the twelve months. "Sort by: Newest ⌄" is plain text on the right. The tradition choice is only in the footer.
