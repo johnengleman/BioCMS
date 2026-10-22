@@ -1,7 +1,7 @@
 import { getBooksBundle } from '../../../queries/getBooksBundle'
 import SiteHeader from '../SiteHeader/SiteHeader'
 import SiteFooter from '../SiteFooter/SiteFooter'
-import HomeHero from '../HomeHero/HomeHero'
+import NightHero from '../NightHero/NightHero'
 import TraditionWelcome from '../TraditionWelcome/TraditionWelcome'
 import {
   BooksContent,
@@ -27,17 +27,14 @@ const BooksPage = async ({ genre = '' }: { genre?: string }) => {
       initial={initial}
     >
       <div className={styles.page}>
-        <SiteHeader
-          active="/books"
-          overlay
-        />
+        <SiteHeader active="/books" />
         <main>
-          <HomeHero
-            size="short"
+          <NightHero
             title="Books"
             subtitle="Lives, writings, and devotions to read next, chosen for each saint."
-            filters={<BooksPills />}
-          />
+          >
+            <BooksPills />
+          </NightHero>
           <div className={styles.results}>
             <BooksSaintMenu />
           </div>

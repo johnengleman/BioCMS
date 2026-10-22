@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import Search from '../../page/Search/Search'
 import Logo from '../Logo/Logo'
-import ScrollState from './ScrollState'
 import { APP_URL } from '../../../utils/site'
 import styles from './styles.module.scss'
 
@@ -61,34 +60,19 @@ const PhoneIcon = () => (
   </svg>
 )
 
-// The site header. By default it is a frosted bar at the top of the
-// page. With `overlay`, it sits over a hero photo with light text and
-// glass controls, and turns into the frosted bar once the visitor
-// scrolls (see ScrollState).
+// The site header: a frosted paper bar with text links (design v4).
 const SiteHeader = ({
   active,
-  overlay = false,
   search = true,
 }: {
   active?: string
-  // False on pages whose hero already has the search.
+  // False on pages whose top band already has the search.
   search?: boolean
-  overlay?: boolean
 }) => (
   <>
-    {overlay && <ScrollState />}
-    <header
-      className={`${styles.header} ${overlay ? styles.overlay : ''}`}
-    >
+    <header className={styles.header}>
       <div className={styles.row}>
-        <span className={styles.logoDark}>
-          <Logo />
-        </span>
-        {overlay && (
-          <span className={styles.logoLight}>
-            <Logo tone="light" />
-          </span>
-        )}
+        <Logo />
 
         <nav
           className={styles.nav}

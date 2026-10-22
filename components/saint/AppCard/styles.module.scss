@@ -1,11 +1,12 @@
 @use '../../../styles/candle.scss' as candle;
 
+// Cream among the night cards, so it stands out. A hairline, no shadow.
 .card {
   overflow: hidden;
   padding: 28px 26px 0;
-  border-radius: var(--radius-2xl);
+  border-radius: var(--radius-sm);
   background: linear-gradient(160deg, #efe2cc 0%, #e6d4b8 100%);
-  box-shadow: var(--shadow-card);
+  box-shadow: inset 0 0 0 1px var(--line-soft);
 }
 
 .kicker {

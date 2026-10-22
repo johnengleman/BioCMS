@@ -17,7 +17,6 @@ import {
 import type { Church } from '../../../utils/site'
 import type { FeastSaint } from '../../../queries/getTodaysFeast'
 import type { SaintCounts } from '../../../queries/getSaintCounts'
-import FilterPills from '../FilterPills/FilterPills'
 import PillMenu from '../PillMenu/PillMenu'
 import CategoryIcon from '../CategoryIcon/CategoryIcon'
 import styles from './styles.module.scss'
@@ -135,9 +134,9 @@ const SORT_LABELS: Record<string, string> = {
 const capital = (value: string) =>
   value.charAt(0).toUpperCase() + value.slice(1)
 
-// The saints filters: a short row of quick pills (All, Feast today, the
-// presets), the chosen category or month as a pill you can clear, and
-// "More filters", which opens one panel with every category and the
+// The saints filters (design v4): one row of text links (All, Feast
+// today, the presets), the chosen category or month as a link you can
+// clear, and "More", which opens one panel with every category and the
 // twelve feast months. Nothing scrolls or hides off screen. Sort is
 // plain text on the right, so it does not look like a filter.
 export const SaintsFilterBar = ({
@@ -169,12 +168,20 @@ export const SaintsFilterBar = ({
             ? capital(view.month)
             : ''
 
-        const pills = [
+        // One row of text links (design v4): no icons, counts as small
+        // gold figures, the chosen one underlined.
+        const links: {
+          key: string
+          label: string
+          href: string
+          selected: boolean
+          count?: number
+          clear?: boolean
+        }[] = [
           {
             key: 'all',
             label: 'All',
             count: count.total,
-            icon: <CategoryIcon name="all" />,
             href: saintsHref({ sort: view.sort }),
             selected:
               !view.category &&
@@ -188,7 +195,6 @@ export const SaintsFilterBar = ({
                   key: 'feast_today',
                   label: 'Feast today',
                   count: feasts,
-                  icon: <CategoryIcon name="feast_today" />,
                   href: saintsHref({ feast: true, sort: view.sort }),
                   selected: view.feast,
                 },
@@ -198,7 +204,6 @@ export const SaintsFilterBar = ({
             key: preset,
             label: PRESET_LABELS[preset],
             count: count.presets[preset],
-            icon: <CategoryIcon name={preset} />,
             href: saintsHref({ preset, sort: view.sort }),
             selected: view.preset === preset,
           })),
@@ -209,9 +214,9 @@ export const SaintsFilterBar = ({
                 {
                   key: 'chosen',
                   label: chosen,
-                  icon: <LuX aria-label="Clear" />,
                   href: saintsHref({ sort: view.sort }),
                   selected: true,
+                  clear: true,
                 },
               ]
             : []),
@@ -233,23 +238,36 @@ export const SaintsFilterBar = ({
         return (
           <div className={styles.bar}>
             <div className={styles.top}>
-              <FilterPills
-                label="Filter saints"
-                pills={pills}
-                wrap
-                after={
-                  <button
-                    type="button"
-                    className={`${styles.more} ${open ? styles.open : ''}`}
-                    aria-expanded={open}
-                    aria-controls={panelId}
-                    onClick={() => setOpen(!open)}
+              <nav
+                className={styles.row}
+                aria-label="Filter saints"
+              >
+                {links.map((link) => (
+                  <Link
+                    key={link.key}
+                    href={link.href}
+                    scroll={false}
+                    aria-current={link.selected ? 'true' : undefined}
+                    className={link.clear ? styles.clear : undefined}
                   >
-                    More filters
-                    <LuChevronDown aria-hidden="true" />
-                  </button>
-                }
-              />
+                    {link.label}
+                    {typeof link.count === 'number' && (
+                      <em>{link.count.toLocaleString('en-US')}</em>
+                    )}
+                    {link.clear && <LuX aria-label="Clear" />}
+                  </Link>
+                ))}
+                <button
+                  type="button"
+                  className={`${styles.more} ${open ? styles.open : ''}`}
+                  aria-expanded={open}
+                  aria-controls={panelId}
+                  onClick={() => setOpen(!open)}
+                >
+                  More
+                  <LuChevronDown aria-hidden="true" />
+                </button>
+              </nav>
               <PillMenu
                 label="Sort by"
                 variant="text"

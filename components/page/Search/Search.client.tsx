@@ -8,6 +8,7 @@ import Fuse from 'fuse.js'
 import { Saint } from '../../saint/SaintSummary/interfaces'
 import { useOnClickOutside } from 'usehooks-ts'
 import styles from './styles.module.scss'
+import { imageUrl } from '../../../utils/imageUrl'
 
 // Saint search: a field with a drop-down of results. The header uses
 // the compact field; the home page photo uses `variant="hero"`.
@@ -63,7 +64,6 @@ const SearchClient = ({
   }
 
   const open = query.length > 1
-  const assets = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS
 
   const onKeyDown = (
     event: React.KeyboardEvent<HTMLInputElement>,
@@ -163,7 +163,7 @@ const SearchClient = ({
                 <span className={styles.profile}>
                   {option.profile_image?.id && (
                     <img
-                      src={`${assets}/assets/${option.profile_image.id}?width=96&height=96&fit=cover&format=webp&quality=80`}
+                      src={imageUrl(option.profile_image, { width: 96, height: 96, fit: 'cover', quality: 80 })}
                       width={44}
                       height={44}
                       alt=""

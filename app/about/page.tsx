@@ -3,6 +3,7 @@ import Link from 'next/link'
 import SiteHeader from '../../components/candle/SiteHeader/SiteHeader'
 import SiteFooter from '../../components/candle/SiteFooter/SiteFooter'
 import PhotoHero from '../../components/candle/PhotoHero/PhotoHero'
+import { HERO_PHOTOS, type Church } from '../../utils/site'
 import styles from './candle.module.scss'
 
 // Static text. Rebuilt hourly so the page is cached like the others.
@@ -105,6 +106,52 @@ const About = () => {
               <span aria-hidden="true"> ›</span>
             </Link>
           </div>
+
+          <section
+            className={styles.places}
+            aria-labelledby="places-title"
+          >
+            <p className={styles.eyebrow}>Three places</p>
+            <h2 id="places-title">Where the saints walked</h2>
+            <ul>
+              {(['all', 'catholic', 'orthodox'] as Church[]).map(
+                (church) => {
+                  const photo = HERO_PHOTOS[church]
+                  return (
+                    <li key={church}>
+                      <figure>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={photo.srcSmall}
+                          alt={photo.alt}
+                          loading="lazy"
+                          style={{ objectPosition: photo.position }}
+                        />
+                        <figcaption>
+                          {photo.place} · Photo:{' '}
+                          <a
+                            href={photo.sourceUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {photo.author}
+                          </a>
+                          ,{' '}
+                          <a
+                            href={photo.licenseUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {photo.license}
+                          </a>
+                        </figcaption>
+                      </figure>
+                    </li>
+                  )
+                },
+              )}
+            </ul>
+          </section>
 
           {/* "Get the app" buttons link here (utils/site.ts APP_URL)
               until the store pages are public. */}

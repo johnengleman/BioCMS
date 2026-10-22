@@ -5,7 +5,7 @@ import { properties } from '../../../utils/properties'
 import SaintsListClient from '../../saint/SaintsList/SaintsListClient'
 import SiteHeader from '../SiteHeader/SiteHeader'
 import SiteFooter from '../SiteFooter/SiteFooter'
-import HomeHero from '../HomeHero/HomeHero'
+import TodayBand from '../TodayBand/TodayBand'
 import Search from '../../page/Search/Search'
 import TraditionText from '../TraditionText/TraditionText'
 import TraditionWelcome from '../TraditionWelcome/TraditionWelcome'
@@ -34,7 +34,8 @@ const CATEGORIES = properties.saints.filters.category.map(
 
 // The saints list, for /saints and for each /saints/category/<name>.
 // Built ahead of time for "Both traditions", newest first. The tradition,
-// preset, feast month and sort are applied in the browser.
+// preset, feast month and sort are applied in the browser. The page
+// opens on today (TodayBand), then the filters and the waterfall.
 const SaintsPage = async ({ category = '' }: { category?: string }) => {
   const [initialSaints, counts, todays] = await Promise.all([
     getSaints({
@@ -48,8 +49,8 @@ const SaintsPage = async ({ category = '' }: { category?: string }) => {
     getSaintCounts(),
     getTodaysFeast(),
   ])
-  // The day the page was built. The Feast today filter switches to the
-  // visitor's own date once the page loads.
+  // The day the page was built. The band and the Feast today filter
+  // switch to the visitor's own date once the page loads.
   const now = new Date()
   const builtOn = { month: now.getUTCMonth() + 1, day: now.getUTCDate() }
 
@@ -57,13 +58,12 @@ const SaintsPage = async ({ category = '' }: { category?: string }) => {
     <div className={styles.page}>
       <SiteHeader
         active="/saints"
-        overlay
         search={false}
       />
       <main>
-        <HomeHero
-          size="split"
-          title="Discover the saints"
+        <TodayBand
+          todays={todays}
+          builtOn={builtOn}
           subtitle={
             <TraditionText
               all={SUBTITLES.all}

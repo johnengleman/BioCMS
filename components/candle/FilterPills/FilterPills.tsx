@@ -12,9 +12,9 @@ export type Pill = {
 }
 
 // One row of filter pills (links). On phones the row scrolls sideways.
-// `tone="glass"` is for a row that sits on a hero photo. `wrap` lets the
-// pills flow onto more lines instead, so none is hidden. `after` goes
-// at the end of the row (a button, for example).
+// `tone="night"` is for a row on a night band. `wrap` lets the pills
+// flow onto more lines instead, so none is hidden. `after` goes at the
+// end of the row (a button, for example).
 const FilterPills = ({
   pills,
   label,
@@ -24,12 +24,12 @@ const FilterPills = ({
 }: {
   pills: Pill[]
   label: string
-  tone?: 'light' | 'glass'
+  tone?: 'light' | 'night'
   wrap?: boolean
   after?: ReactNode
 }) => (
   <nav
-    className={`${styles.pills} ${tone === 'glass' ? styles.glass : ''} ${wrap ? styles.wrap : ''}`}
+    className={`${styles.pills} ${tone === 'night' ? styles.night : ''} ${wrap ? styles.wrap : ''}`}
     aria-label={label}
   >
     {pills.map((pill) => (

@@ -1,109 +1,101 @@
 @use '../../../styles/candle.scss' as candle;
 
-// The dark story card. The image is a fixed 16:10 crop, so every card
-// starts the same way; the text sets the card's height.
+// The night card: a 3:4 portrait, then the words. The text sets the
+// card's height. A hairline, no shadow; on hover the hairline lights.
 .card {
   position: relative;
   display: block;
-  padding: 10px;
-  border-radius: var(--radius-2xl);
-  background: var(--card-dark);
-  color: var(--card-dark-ink);
-  box-shadow:
-    0 2px 6px hsla(20, 30%, 10%, 0.08),
-    0 18px 40px -20px hsla(20, 35%, 10%, 0.45),
-    inset 0 0 0 1px var(--card-dark-line);
-  @include candle.transition(box-shadow, transform);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--night-2);
+  color: var(--on-night);
+  box-shadow: inset 0 0 0 1px var(--night-line);
+  @include candle.transition(box-shadow);
   @include candle.focus-ring;
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow:
-      0 4px 10px hsla(20, 30%, 10%, 0.1),
-      0 28px 56px -22px hsla(20, 35%, 10%, 0.55),
-      inset 0 0 0 1px var(--card-dark-line);
+    box-shadow: inset 0 0 0 1px rgba(217, 169, 90, 0.45);
 
-    .photo img {
-      transform: scale(1.04);
+    .name {
+      color: var(--candle-soft);
     }
+  }
+
+  &:focus-visible {
+    outline-color: var(--candle);
   }
 }
 
 .photo {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
-  border-radius: var(--radius-lg);
-  background: var(--espresso-2);
+  background: var(--night);
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s var(--ease);
   }
 
+  // A soft light from above the portrait.
   &::after {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: inherit;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+    background:
+      linear-gradient(
+        180deg,
+        rgba(217, 169, 90, 0.08) 0%,
+        rgba(217, 169, 90, 0) 40%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(27, 21, 19, 0) 70%,
+        rgba(27, 21, 19, 0.35) 100%
+      );
     pointer-events: none;
+  }
+
+  // Phones show one column: a shorter crop.
+  @media (max-width: 639px) {
+    aspect-ratio: 4 / 3;
   }
 }
 
 .body {
-  padding: 18px 12px 14px;
+  padding: 16px 18px 20px;
 }
 
-.kicker {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--card-dark-ink-3);
-  @include candle.lining;
-}
-
-// The years lead the label, in gold.
-.year {
-  color: #e2c58f;
-}
-
-.dot {
-  padding: 0 7px;
-  opacity: 0.6;
+.feast {
+  @include candle.inscription(var(--candle));
 }
 
 .name {
-  @include candle.title(28px, 600);
+  @include candle.title(27px, 600);
   margin-top: 6px;
-  color: var(--card-dark-ink);
-  line-height: 1.04;
+  color: var(--on-night);
+  line-height: 1.06;
   letter-spacing: -0.01em;
+  @include candle.transition(color);
 
   @media (max-width: 767px) {
-    font-size: 26px;
+    font-size: 25px;
   }
 }
 
-// The whole summary: its length sets the card's height.
+.meta {
+  margin-top: 6px;
+  font-family: var(--font-ui);
+  font-size: 12.5px;
+  color: var(--on-night-3);
+  @include candle.lining;
+}
+
+// Two or three sentences: their length sets the card's height.
 .summary {
   @include candle.reading(15.5px);
   margin-top: 12px;
   line-height: 1.6;
-  color: var(--card-dark-ink-2);
-
-  p + p {
-    margin-top: 0.6em;
-  }
-
-  // Phones show one column; keep long summaries short there.
-  @media (max-width: 639px) {
-    display: -webkit-box;
-    -webkit-line-clamp: 7;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
+  color: var(--on-night-2);
 }

@@ -74,27 +74,29 @@
   }
 }
 
-// On a hero photo.
-.glass {
+// On a night band: hairline pills; the chosen one is lit.
+.night {
   a {
-    @include candle.glass;
+    border-color: var(--night-line);
+    background: transparent;
+    color: var(--on-night-2);
 
     &:hover {
-      border-color: rgba(255, 246, 234, 0.4);
-      background: rgba(255, 246, 234, 0.22);
-      color: var(--on-dark);
+      border-color: var(--on-night-3);
+      background: rgba(255, 240, 220, 0.04);
+      color: var(--on-night);
     }
   }
 
   .count {
-    color: rgba(255, 246, 234, 0.65);
+    color: var(--on-night-3);
   }
 
   .selected,
   .selected:hover {
-    border-color: transparent;
-    background: var(--on-dark);
-    color: var(--ink);
+    border-color: var(--on-night);
+    background: var(--on-night);
+    color: var(--night);
 
     .count {
       color: var(--ink-3);

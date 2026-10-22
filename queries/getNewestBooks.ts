@@ -62,6 +62,7 @@ function getNewestBooksQuery({ church, preset }) {
             venerated_in
             profile_image {
                 id
+                filename_disk
             }
           }
         }

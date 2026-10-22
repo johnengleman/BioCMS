@@ -28,6 +28,7 @@ const query = gql`
       patron
       profile_image {
         id
+        filename_disk
         width
         height
         description
@@ -37,6 +38,7 @@ const query = gql`
       other_images {
         directus_files_id {
           id
+          filename_disk
           width
           height
           description
@@ -69,6 +71,7 @@ const query = gql`
         prayer_slug
         prayer_image {
           id
+          filename_disk
         }
         prayers
       }

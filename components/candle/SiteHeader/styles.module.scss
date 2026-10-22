@@ -1,13 +1,15 @@
 @use '../../../styles/candle.scss' as candle;
 
-// ---------- The frosted bar (default) ----------
+// The site header (design v4): a frosted paper bar with text links,
+// an underline on the current page, a quiet outline app button and
+// the search and menu buttons.
 .header {
   position: sticky;
   font-family: var(--font-ui);
   top: 0;
   z-index: 50;
   height: var(--header-h);
-  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: saturate(140%) blur(16px);
   -webkit-backdrop-filter: saturate(140%) blur(16px);
   box-shadow: 0 1px 0 var(--hairline);
@@ -26,31 +28,26 @@
   }
 }
 
-.logoLight {
-  display: none;
-}
 
-// Pill navigation (desktop).
+// Text navigation (desktop).
 .nav {
   display: none;
-  gap: 2px;
-  padding: 4px;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-pill);
-  background: var(--muted);
+  gap: 26px;
 
   @media (min-width: 1100px) {
     display: flex;
   }
 
   a {
-    padding: 8px 16px;
-    border-radius: var(--radius-pill);
+    display: inline-flex;
+    align-items: center;
+    height: var(--header-h);
+    border-bottom: 2px solid transparent;
     color: var(--ink-2);
-    font-size: 13px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     white-space: nowrap;
-    @include candle.transition(color, background-color);
+    @include candle.transition(color, border-color);
     @include candle.focus-ring;
 
     &:hover {
@@ -58,9 +55,9 @@
     }
 
     &[aria-current='page'] {
-      background: var(--surface);
+      border-bottom-color: var(--ink);
       color: var(--ink);
-      box-shadow: var(--shadow-sm);
+      font-weight: 600;
     }
   }
 }
@@ -73,7 +70,16 @@
 }
 
 .app {
-  @include candle.button-dark;
+  @include candle.button-outline;
+  min-height: 40px;
+  padding: 0 var(--space-4);
+  border-color: var(--hairline);
+  font-size: 13px;
+
+  &:hover {
+    border-color: var(--ink);
+    background: transparent;
+  }
 
   span {
     display: none;
@@ -97,7 +103,7 @@
     height: 40px;
     border: 1px solid var(--hairline);
     border-radius: var(--radius-pill);
-    background: var(--surface);
+    background: transparent;
     color: var(--ink);
     cursor: pointer;
     list-style: none;
@@ -109,7 +115,7 @@
     }
 
     &:hover {
-      border-color: var(--ink-3);
+      border-color: var(--ink);
     }
   }
 
@@ -169,114 +175,4 @@
 .panelLinkSmall {
   @include candle.menu-item;
   color: var(--ink-2);
-}
-
-// ---------- Over a hero photo ----------
-// The header floats over the rounded hero (see HomeHero). Its row is
-// inset so that it lines up with the hero's content. Once the page
-// scrolls (<html data-scrolled>), it becomes the frosted bar.
-.overlay {
-  position: fixed;
-  right: 0;
-  left: 0;
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  box-shadow: none;
-  @include candle.transition(background-color, box-shadow, top);
-
-  @media (min-width: 768px) {
-    top: 14px;
-
-    .row {
-      padding: 0 calc(var(--space-8) + var(--space-6));
-    }
-  }
-
-  .logoDark {
-    display: none;
-  }
-
-  .logoLight {
-    display: block;
-  }
-
-  .nav {
-    @include candle.glass;
-
-    a {
-      color: rgba(255, 246, 234, 0.82);
-
-      &:hover {
-        color: var(--on-dark);
-      }
-
-      &[aria-current='page'] {
-        background: var(--on-dark);
-        color: var(--ink);
-      }
-    }
-  }
-
-  .app {
-    background: var(--on-dark);
-    color: var(--ink);
-
-    &:hover {
-      background: #fff;
-    }
-  }
-
-  .panel summary {
-    @include candle.glass;
-  }
-
-  :global(html[data-scrolled]) & {
-    top: 0;
-    background: color-mix(in srgb, var(--bg) 86%, transparent);
-    backdrop-filter: saturate(140%) blur(16px);
-    -webkit-backdrop-filter: saturate(140%) blur(16px);
-    box-shadow: 0 1px 0 var(--hairline);
-
-    .row {
-      @media (min-width: 768px) {
-        padding: 0 var(--space-8);
-      }
-    }
-
-    .logoDark {
-      display: block;
-    }
-
-    .logoLight {
-      display: none;
-    }
-
-    .nav {
-      border-color: var(--hairline);
-      background: var(--muted);
-      backdrop-filter: none;
-
-      a {
-        color: var(--ink-2);
-
-        &[aria-current='page'] {
-          background: var(--surface);
-          color: var(--ink);
-        }
-      }
-    }
-
-    .app {
-      background: var(--espresso);
-      color: var(--on-dark);
-    }
-
-    .panel summary {
-      border-color: var(--hairline);
-      background: var(--surface);
-      color: var(--ink);
-      backdrop-filter: none;
-    }
-  }
 }

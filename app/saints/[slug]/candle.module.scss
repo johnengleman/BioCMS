@@ -1,6 +1,7 @@
 @use '../../../styles/candle.scss' as candle;
 
-// Saint page, "Travel" design (docs/redesign-plan.md, phase 2).
+// Saint page, design v4: the night panel (SaintHero) and then paper,
+// with a contents rail beside the sections.
 .page {
   min-height: 100vh;
   background: var(--bg);
@@ -11,92 +12,7 @@
   @include candle.container;
 }
 
-.eyebrow {
-  @include candle.eyebrow;
-}
-
-.crumbs {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  padding: 20px 0 16px;
-  font-size: 13px;
-  color: var(--ink-2);
-
-  svg {
-    width: 14px;
-    height: 14px;
-    color: var(--ink-3);
-  }
-
-  a:hover {
-    color: var(--ink);
-  }
-
-  [aria-current] {
-    color: var(--ink);
-    font-weight: 600;
-  }
-
-  @media (max-width: 767px) {
-    display: none;
-  }
-}
-
-.primary {
-  @include candle.button-primary;
-}
-
-// ---------- Tabs ----------
-// Text tabs with an underline, as on Wikipedia.
-.tabs {
-  position: sticky;
-  top: var(--header-h);
-  z-index: 10;
-  display: flex;
-  gap: 24px;
-  overflow-x: auto;
-  scrollbar-width: none;
-  margin-top: 18px;
-  border-bottom: 1px solid var(--hairline);
-  background: var(--bg);
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  a {
-    display: inline-flex;
-    flex: none;
-    align-items: center;
-    height: 44px;
-    border-bottom: 2px solid transparent;
-    color: var(--ink-2);
-    font-size: 14px;
-    font-weight: 500;
-    @include candle.transition(color, border-color);
-    @include candle.focus-ring;
-
-    &:hover {
-      color: var(--ink);
-    }
-  }
-
-  .tabOn {
-    border-bottom-color: var(--ink);
-    color: var(--ink);
-  }
-
-  @media (max-width: 767px) {
-    margin: 4px calc(-1 * var(--space-4)) 0;
-    padding: 0 var(--space-4);
-    gap: 22px;
-  }
-}
-
-// ---------- Two columns ----------
-// All sections on the left, the fact card beside them.
+// ---------- Rail and content ----------
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
@@ -104,8 +20,19 @@
   padding-bottom: 40px;
 
   @media (min-width: 1100px) {
-    grid-template-columns: minmax(0, 1fr) 300px;
-    gap: 48px;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 56px;
+  }
+}
+
+.rail {
+  display: none;
+
+  @media (min-width: 1100px) {
+    position: sticky;
+    top: calc(var(--header-h) + 28px);
+    display: block;
+    padding-top: 36px;
   }
 }
 
@@ -118,24 +45,42 @@
   }
 }
 
-.block {
-  padding-top: 30px;
-  scroll-margin-top: calc(var(--header-h) + 60px);
+// Phones and tablets: the sections as underline tabs, sticky.
+.phoneTabs {
+  position: sticky;
+  top: var(--header-h);
+  z-index: 10;
+  margin: 0 calc(-1 * var(--space-4));
+  border-bottom: 1px solid var(--hairline);
+  background: var(--bg);
 
-  @media (max-width: 767px) {
-    padding-top: 26px;
+  @media (min-width: 768px) {
+    margin: 0 calc(-1 * var(--space-8));
+  }
+
+  @media (min-width: 1100px) {
+    display: none;
   }
 }
 
-// A section title with a rule under it, as on Wikipedia.
+.block {
+  padding-top: 34px;
+  scroll-margin-top: calc(var(--header-h) + 60px);
+
+  @media (max-width: 767px) {
+    padding-top: 28px;
+  }
+}
+
+// A section title with a rule under it.
 .blockTitle,
 .blockHead h2 {
-  @include candle.title(30px, 600);
+  @include candle.title(32px, 600);
   line-height: 1.2;
 }
 
 .blockTitle {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--hairline);
 }
@@ -183,7 +128,7 @@
   }
 }
 
-// Numbered chapter rows, two columns on wide screens.
+// Chapter rows with roman numerals, two columns on wide screens.
 .chapters {
   margin: 0;
   padding: 0;
@@ -201,7 +146,7 @@
   a {
     display: flex;
     align-items: baseline;
-    gap: 10px;
+    gap: 12px;
     padding: 8px 0;
     border-bottom: 1px solid var(--hairline);
     @include candle.focus-ring;
@@ -214,9 +159,9 @@
 
 .chapterNo {
   flex: none;
-  width: 18px;
-  font-family: var(--font-ui);
-  font-size: 12px;
+  min-width: 28px;
+  font-family: var(--font-title);
+  font-size: 14px;
   font-weight: 600;
   color: var(--gold);
   @include candle.lining;
@@ -229,17 +174,9 @@
   @include candle.transition(color);
 }
 
-// Prayers: shown in the side card on wide screens, here otherwise.
-.prayersBlock {
-  @media (min-width: 1100px) {
-    display: none;
-  }
-}
-
-.prayerList,
-.sidePrayers {
+.prayerList {
   border: 1px solid var(--hairline);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   overflow: hidden;
 
   a {
@@ -285,18 +222,25 @@
   }
 }
 
-// One quote, then the teachings as a line of links.
+// One quotation set like scripture, between the story and the rest:
+// large italic, centered, between two gold hairlines.
 .quote {
-  margin: 4px 0 12px;
+  margin: 40px auto 6px;
+  padding: 28px 0 24px;
+  max-width: 34ch;
+  border-top: 1px solid var(--gold-soft);
+  border-bottom: 1px solid var(--gold-soft);
+  text-align: center;
 
   blockquote {
     margin: 0;
     font-family: var(--font-title);
-    font-size: 25px;
+    font-size: 30px;
     font-style: italic;
     font-weight: 500;
-    line-height: 1.35;
+    line-height: 1.3;
     color: var(--ink);
+    text-wrap: balance;
     @include candle.lining;
 
     &::before {
@@ -309,11 +253,14 @@
   }
 
   figcaption {
-    margin-top: 4px;
-    font-size: 13px;
+    @include candle.inscription(var(--gold));
+    margin-top: 14px;
 
     a {
       color: var(--wine);
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 600;
 
       &:hover {
         text-decoration: underline;
@@ -321,31 +268,39 @@
       }
     }
   }
+
+  @media (max-width: 767px) {
+    margin-top: 30px;
+    padding: 22px 0 18px;
+
+    blockquote {
+      font-size: 24px;
+    }
+  }
 }
 
-.teachings {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
+// More quotations, as a plain list.
+.quoteList {
+  margin: 18px 0 0;
   padding: 0;
   list-style: none;
-  font-family: var(--font-reading);
-  font-size: 17px;
-  line-height: 1.7;
 
-  li + li::before {
-    content: '·';
-    margin: 0 8px;
-    color: var(--ink-3);
-  }
+  li {
+    padding: 10px 0;
+    border-top: 1px solid var(--hairline);
+    font-family: var(--font-title);
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: 1.4;
+    @include candle.lining;
 
-  a {
-    color: var(--wine);
-    @include candle.focus-ring;
+    &::before {
+      content: '\201C';
+    }
 
-    &:hover {
-      text-decoration: underline;
-      text-underline-offset: 3px;
+    &::after {
+      content: '\201D';
     }
   }
 }
@@ -363,9 +318,13 @@
     }
   }
 
+  figure {
+    margin: 0;
+  }
+
   figure img {
     width: 100%;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-sm);
   }
 }
 
@@ -390,7 +349,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  margin-top: 30px;
+  margin-top: 34px;
   padding: 12px 0;
   border-top: 1px solid var(--hairline);
   border-bottom: 1px solid var(--hairline);
@@ -418,17 +377,30 @@
   }
 }
 
+// Images on night, edge to edge inside the content column.
+.imagesBlock {
+  .blockTitle {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
+}
+
 .gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
+  padding: 16px;
+  background: var(--night);
 
   @media (min-width: 768px) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    padding: 20px;
   }
 
   figure {
     margin: 0;
+    color: var(--on-night-3);
   }
 
   img {
@@ -436,95 +408,13 @@
     aspect-ratio: 3 / 4;
     object-fit: cover;
     object-position: center 22%;
-    border-radius: var(--radius-lg);
   }
 }
 
 .credit {
-  margin-top: 20px;
+  margin: 20px 0 0;
   font-size: 12px;
   color: var(--ink-3);
-}
-
-// ---------- Side card ----------
-.side {
-  // Narrow screens: the card comes first. The feast day and the app
-  // button are already in the bar at the bottom of the phone screen.
-  @media (max-width: 1099px) {
-    order: -1;
-    margin-top: 16px;
-
-    .feast,
-    .sideCard > .appButton {
-      display: none;
-    }
-  }
-
-  @media (min-width: 1100px) {
-    position: sticky;
-    top: calc(var(--header-h) + 60px);
-    padding-top: 30px;
-  }
-}
-
-.sideCard {
-  display: grid;
-  gap: 14px;
-  padding: 16px;
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow:
-    var(--shadow-md),
-    inset 0 0 0 1px var(--line-soft);
-
-  @media (max-width: 1099px) {
-    box-shadow: inset 0 0 0 1px var(--hairline);
-  }
-}
-
-.facts {
-  display: grid;
-  gap: 9px;
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.4;
-
-  div {
-    display: grid;
-    grid-template-columns: 86px minmax(0, 1fr);
-    gap: 12px;
-    align-items: baseline;
-  }
-
-  dt {
-    color: var(--ink-3);
-  }
-
-  dd {
-    margin: 0;
-  }
-
-  b {
-    @include candle.title(21px, 600);
-  }
-
-  small {
-    display: block;
-    margin-top: 2px;
-    font-size: 12.5px;
-    color: var(--ink-2);
-  }
-}
-
-.appButton {
-  @include candle.button-primary;
-  width: 100%;
-  min-height: 42px;
-
-  svg {
-    width: 16px;
-    height: 16px;
-  }
 }
 
 // ---------- Related saints ----------
@@ -547,6 +437,16 @@
   }
 }
 
+.appButton {
+  @include candle.button-primary;
+  min-height: 42px;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 // ---------- Phone bar ----------
 .mobileBar {
   position: sticky;
@@ -557,8 +457,9 @@
   align-items: center;
   gap: 12px;
   padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
-  border-top: 1px solid var(--hairline);
-  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border-top: 1px solid var(--night-line);
+  background: color-mix(in srgb, var(--night) 92%, transparent);
+  color: var(--on-night);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 
@@ -569,13 +470,19 @@
 
   span {
     font-size: 12.5px;
-    color: var(--ink-2);
+    color: var(--on-night-2);
   }
 
   .appButton {
     width: auto;
     min-height: 44px;
     margin: 0;
+    background: var(--candle);
+    color: var(--night);
+
+    &:hover {
+      background: var(--candle-soft);
+    }
   }
 
   @media (min-width: 1100px) {

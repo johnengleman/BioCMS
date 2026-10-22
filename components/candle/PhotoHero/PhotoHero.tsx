@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import styles from './styles.module.scss'
 
 // A calm beige banner at the top of the simple pages (about, updates,
-// not found). Pages with lists use HomeHero, with a photo.
+// not found). List pages use NightHero and the saints list TodayBand.
 const PhotoHero = ({
   children,
   align = 'left',

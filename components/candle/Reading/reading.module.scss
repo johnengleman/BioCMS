@@ -1,6 +1,6 @@
 @use '../../../styles/candle.scss' as candle;
 
-// Long reading pages, "Travel" design (docs/redesign-plan.md, phase 3).
+// Long reading pages (design v4): a night banner, then paper.
 
 .page {
   min-height: 100vh;
@@ -8,39 +8,42 @@
   color: var(--ink);
 }
 
-// ---------- Saint banner ----------
-.bannerShell {
-  @include candle.container;
-  padding-top: 18px;
-
-  @media (max-width: 767px) {
-    padding: 0;
-  }
+// ---------- Saint banner (night) ----------
+.banner {
+  @include candle.night-band(var(--glow-top));
 }
 
-.banner {
+// The portrait, dimmed and blurred, as the light behind the banner.
+.bannerBackdrop {
+  position: absolute;
+  inset: -20%;
+  width: 140%;
+  height: 140%;
+  object-fit: cover;
+  object-position: center 20%;
+  opacity: 0.22;
+  filter: blur(40px) saturate(0.7);
+  pointer-events: none;
+}
+
+.bannerInner {
+  @include candle.container;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 32px;
+  gap: 28px;
   align-items: center;
-  padding: 24px 32px;
-  border-radius: var(--radius-xl);
-  background: var(--panel);
+  padding-top: 28px;
+  padding-bottom: 28px;
 
   @media (max-width: 1100px) {
     grid-template-columns: auto minmax(0, 1fr);
   }
 
-  // Phones: portrait beside the title, figures below.
   @media (max-width: 767px) {
-    grid-template-columns: 76px minmax(0, 1fr);
-    // The first row takes the spare height, so the label sits on the name.
-    grid-template-rows: 1fr auto;
+    grid-template-columns: 64px minmax(0, 1fr);
     column-gap: 16px;
-    row-gap: 0;
-    align-items: end;
-    padding: 18px 16px 20px;
-    border-radius: 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 }
 
@@ -48,121 +51,68 @@
   display: block;
   @include candle.focus-ring;
 
+  &:focus-visible {
+    outline-color: var(--candle);
+  }
+
   img {
+    display: block;
     width: auto;
-    max-width: 130px;
-    height: 150px;
+    max-width: 120px;
+    height: 140px;
     object-fit: contain;
-    border-radius: var(--radius-sm);
-    box-shadow: 0 14px 34px -14px hsla(28, 30%, 15%, 0.35);
+    @include candle.portrait-lit;
   }
 
   @media (max-width: 767px) {
-    grid-row: 1 / span 2;
-    align-self: center;
-
     img {
-      max-width: 76px;
-      height: 104px;
+      max-width: 64px;
+      height: 86px;
     }
   }
 }
 
 .bannerCopy {
   min-width: 0;
-
-  @media (max-width: 767px) {
-    display: contents;
-  }
 }
 
 .eyebrow {
-  @include candle.eyebrow;
-
-  @media (max-width: 767px) {
-    grid-column: 2;
-    align-self: end;
-  }
+  @include candle.inscription(var(--candle));
 }
 
 .title {
-  @include candle.title(40px, 600);
+  @include candle.title(40px, 500);
   margin: 6px 0 0;
   line-height: 1.08;
+  color: var(--on-night);
 
   @media (max-width: 767px) {
     font-size: 28px;
   }
-
-  @media (max-width: 767px) {
-    grid-column: 2;
-    margin-top: 4px;
-  }
 }
 
+// "18 chapters · 42 min read · 11 sources"
 .meta {
-  margin-top: 6px;
-  font-size: 14px;
-  color: var(--ink-2);
-
-  @media (max-width: 767px) {
-    grid-column: 2;
-  }
-}
-
-.stats {
   display: flex;
   flex-wrap: wrap;
-  row-gap: 10px;
-  margin-top: 14px;
+  margin-top: 8px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--on-night-2);
+  @include candle.lining;
 
-  div {
-    padding: 0 20px;
-    border-left: 1px solid rgba(47, 38, 34, 0.14);
-
-    &:first-child {
-      padding-left: 0;
-      border-left: 0;
-    }
-  }
-
-  b {
-    display: block;
-    @include candle.title(22px, 600);
-  }
-
-  span {
-    font-size: 12.5px;
-    color: var(--ink-2);
-  }
-
-  @media (max-width: 767px) {
-    grid-column: 1 / -1;
-    flex-wrap: nowrap;
-
-    div {
-      padding: 0 12px;
-    }
-
-    div:nth-child(n + 4) {
-      display: none;
-    }
-
-    b {
-      font-size: 19px;
-    }
-
-    span {
-      font-size: 11.5px;
-    }
+  span + span::before {
+    content: '·';
+    margin: 0 8px;
+    color: var(--on-night-3);
   }
 }
 
 .bannerActions {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  align-self: start;
+  gap: 8px;
+  align-self: center;
 
   @media (max-width: 1100px) {
     display: none;
@@ -175,15 +125,16 @@
   gap: 8px;
   height: 38px;
   padding: 0 16px;
-  border: 0;
+  border: 1px solid var(--night-line);
   border-radius: var(--radius-pill);
-  background: var(--surface);
-  color: var(--ink);
+  background: transparent;
+  color: var(--on-night);
+  font-family: var(--font-ui);
   font-size: 13px;
   font-weight: 600;
   white-space: nowrap;
   cursor: pointer;
-  @include candle.transition(background-color);
+  @include candle.transition(border-color, background-color);
   @include candle.focus-ring;
 
   svg {
@@ -192,7 +143,12 @@
   }
 
   &:hover {
-    background: #fff;
+    border-color: var(--on-night-3);
+    background: rgba(255, 240, 220, 0.04);
+  }
+
+  &:focus-visible {
+    outline-color: var(--candle);
   }
 }
 
@@ -351,13 +307,13 @@
   scroll-margin-top: calc(var(--header-h) + 60px);
 }
 
-// A small gold "01", with a hairline to the right.
+// A gold roman numeral, with a hairline to the right.
 .chapterLabel {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-family: var(--font-ui);
-  font-size: 12px;
+  gap: 14px;
+  font-family: var(--font-title);
+  font-size: 26px;
   font-weight: 600;
   line-height: 1;
   color: var(--gold);
@@ -372,22 +328,21 @@
 }
 
 .chapterTitle {
-  margin: 8px 0 14px;
-  @include candle.title(32px, 600);
-  line-height: 1.15;
+  margin: 10px 0 16px;
+  @include candle.title(40px, 600);
+  line-height: 1.1;
 
   @media (max-width: 767px) {
-    font-size: 28px;
+    font-size: 30px;
   }
   scroll-margin-top: calc(var(--header-h) + 60px);
 }
 
-// Sources, research notes and credits: smaller, in a card.
+// Sources, research notes and credits: smaller, under a rule.
 .notes {
   margin-top: var(--space-12);
-  padding: var(--space-6);
-  border-radius: var(--radius-xl);
-  background: var(--muted);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--hairline);
 
   section + section {
     margin-top: var(--space-6);
@@ -443,13 +398,9 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
-    padding: 14px 40px 14px 16px;
-    border-radius: var(--radius-xl);
-    background: var(--surface);
-    box-shadow:
-      var(--shadow-card),
-      inset 0 0 0 1px var(--line-soft);
-    @include candle.card-hover;
+    padding: 14px 40px 14px 0;
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
     @include candle.focus-ring;
 
     &:hover .nextChevron {

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import parseList from '../../../utils/parseList'
 import { splitSaintName } from '../../../utils/saintNames'
 import styles from './styles.module.scss'
+import { imageUrl } from '../../../utils/imageUrl'
 
 // "spiritual_and_ascetic_writings" -> "Spiritual & ascetic writings"
 export const genreLabel = (value: string) => {
@@ -66,7 +67,7 @@ const BookCard = ({
           >
             {saint.profile_image?.id && (
               <img
-                src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${saint.profile_image.id}?width=80&height=80&fit=cover&format=webp`}
+                src={imageUrl(saint.profile_image, { width: 80, height: 80, fit: 'cover' })}
                 alt=""
                 loading="lazy"
               />

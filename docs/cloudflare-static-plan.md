@@ -231,3 +231,47 @@ Changes for Cloudflare:
    do not wait 1 to 2 s.
 5. **`.next` types:** `vite build` can leave stale files in `.next/types`.
    Delete that folder if `tsc` complains.
+
+## Images from Cloudflare, not Railway (2026-10-22)
+
+Every image on the site used to be fetched from Directus on Railway
+(`/assets/<id>?width=…`), which resized it on the fly. When Directus
+cannot reach its file storage (`Service "assets" is unavailable.
+Couldn't reach the storage location.`), every portrait on the site
+breaks. Directus already stores files with its S3 driver, so the
+originals live in a bucket; the site can read them from Cloudflare
+directly and leave Directus for uploads only.
+
+The code side is done: `utils/imageUrl.ts` builds every image URL, and
+every query fetches `filename_disk` (the object key in the bucket).
+With `NEXT_PUBLIC_IMAGE_HOST` empty, nothing changes. To switch:
+
+1. **Check where the files are.** In Railway, the Directus service has
+   `STORAGE_S3_ENDPOINT`, `STORAGE_S3_BUCKET`, `STORAGE_S3_KEY`,
+   `STORAGE_S3_SECRET` and `STORAGE_S3_REGION`. If the endpoint is
+   `<account>.r2.cloudflarestorage.com`, the bucket is already R2. If
+   not, create an R2 bucket, copy the objects (`rclone sync` from one
+   S3 remote to the other), and point these variables at R2
+   (`REGION=auto`). This is also where the current outage lives: the
+   key, secret or endpoint no longer work.
+2. **Attach a custom domain to the bucket** in R2, for example
+   `images.findasaint.com`. The zone is already on Cloudflare, so the
+   DNS record is created for you. Objects are then public at
+   `https://images.findasaint.com/<filename_disk>`.
+3. **Enable Image Transformations** on the zone: Cloudflare dashboard,
+   Images, Transformations, select `findasaint.com`, turn it on. The
+   first 5,000 unique transformations a month are free, then $0.50 per
+   1,000. Each saint uses about six variants.
+4. **Set the variable** `NEXT_PUBLIC_IMAGE_HOST=https://images.findasaint.com`
+   in the Worker's build environment (it is read at build time) and
+   rebuild. If Directus has a `STORAGE_S3_ROOT` prefix, set
+   `NEXT_PUBLIC_IMAGE_ROOT` to it as well.
+5. **Check one image** such as
+   `https://images.findasaint.com/cdn-cgi/image/width=720,quality=80,format=auto/<filename_disk>`.
+   It should answer with `content-type: image/avif` or `image/webp`.
+
+Files uploaded in Directus from then on appear in the bucket at once,
+so nothing else changes in the editorial workflow. Set
+`Cache-Control: public, max-age=31536000, immutable` as the bucket's
+default object header so the edge keeps originals for a year; file
+names never change (they are the file id).

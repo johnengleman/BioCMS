@@ -8,18 +8,20 @@ export type FeastSaint = {
   name: string
   slug: string
   venerated_in?: string | null
-  profile_image?: { id: string; metadata?: any } | null
+  profile_image?: { id: string; filename_disk?: string | null; metadata?: any } | null
   feast_day_catholic?: string | null
   feast_day_orthodox?: string | null
 }
 
-// Saints of either tradition whose feast is yesterday, today or
-// tomorrow (UTC). The browser then picks the ones for its own local
-// date and tradition (the "Feast today" filter), so it matches the
-// visitor's calendar day.
+// Saints of either tradition whose feast is between yesterday and
+// eight days from now (UTC). The browser then picks the ones for its
+// own local date and tradition (the Today band, the week strip and the
+// "Feast today" filter), so it matches the visitor's calendar day.
+const DAYS = Array.from({ length: 10 }, (_, i) => i - 1)
+
 export const getTodaysFeast = async () => {
   const now = Date.now()
-  const days = [-1, 0, 1].map((offset) => {
+  const days = DAYS.map((offset) => {
     const d = new Date(now + offset * 86400000)
     return { month: d.getUTCMonth() + 1, day: d.getUTCDate() }
   })
@@ -47,6 +49,7 @@ export const getTodaysFeast = async () => {
         death_location
         profile_image {
           id
+          filename_disk
           width
           height
           metadata

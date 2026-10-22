@@ -62,6 +62,7 @@ function getTeachingsQuery(church, filter) {
         death_year
         profile_image {
             id
+            filename_disk
           }
         }
       }

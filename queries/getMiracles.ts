@@ -67,6 +67,7 @@ function getMiraclesQuery(church, filter, miraclesPreset) {
         death_year
         profile_image {
             id
+            filename_disk
           }
         }
       }

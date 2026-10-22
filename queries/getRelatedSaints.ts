@@ -61,6 +61,7 @@ export const getRelatedSaints = async ({
         feast_day_orthodox
         profile_image {
           id
+          filename_disk
           metadata
         }
       }

@@ -17,22 +17,27 @@ import {
   getMiracleBook,
   plainText,
 } from '../../../utils/saintContent'
+import { firstPart, toRoman } from '../../../utils/saintNames'
 import {
   churchLabel,
-  placeLabel,
-  roleLabel,
+  yearsLabel,
 } from '../../../utils/saintCard'
 import { APP_URL } from '../../../utils/site'
 import smartQuotes from '../../../utils/smartQuotes'
 import SiteHeader from '../../../components/candle/SiteHeader/SiteHeader'
 import SiteFooter from '../../../components/candle/SiteFooter/SiteFooter'
-import SaintHero from '../../../components/saint/SaintHero/SaintHero'
+import SaintHero, {
+  type Fact,
+  type Moment,
+} from '../../../components/saint/SaintHero/SaintHero'
 import FeastValue from '../../../components/saint/FeastValue/FeastValue'
 import RelatedSaints from '../../../components/saint/RelatedSaints/RelatedSaints'
 import ImageCredit from '../../../components/candle/ImageCredit/ImageCredit'
+import Contents from '../../../components/candle/Contents/Contents'
 import styles from './candle.module.scss'
 
 import { NextPageProps } from '../../../types/nextjs'
+import { imageUrl } from '../../../utils/imageUrl'
 
 // Built ahead of time and refreshed every four minutes. Saints not
 // built yet are built on the first visit.
@@ -54,6 +59,28 @@ const formatCategory = (value: string) =>
     .replace(/\b\w/g, (c) => c.toUpperCase())
     .replace(/\b(Of|The)\b/g, (w) => w.toLowerCase())
 
+// Six chapters spread across the life, for the strip under the hero.
+// A dated "key moments" field can replace this later; until then the
+// chapter titles are the moments.
+const MOMENTS = 6
+const pickMoments = (
+  chapters: { id: string; title: string }[],
+  base: string,
+): Moment[] => {
+  const n = chapters.length
+  const indexes =
+    n <= MOMENTS
+      ? chapters.map((_, i) => i)
+      : Array.from({ length: MOMENTS }, (_, k) =>
+          Math.round((k * (n - 1)) / (MOMENTS - 1)),
+        )
+  return indexes.map((i) => ({
+    number: i + 1,
+    title: chapters[i].title,
+    href: `${base}/biography#${chapters[i].id}`,
+  }))
+}
+
 const SaintPage = async (props: NextPageProps) => {
   const { slug } = await props.params
 
@@ -63,10 +90,7 @@ const SaintPage = async (props: NextPageProps) => {
   const base = `/saints/${slug}`
   const categories = parseList(data.categories)
 
-  const years =
-    data.birth_year || data.death_year
-      ? `${data.birth_year || '?'}–${data.death_year || '?'}`
-      : ''
+  const years = yearsLabel(data.birth_year, data.death_year)
 
   const catholicFeast = formatFeast(data.feast_day_catholic)
   const orthodoxFeast = formatFeast(data.feast_day_orthodox)
@@ -100,9 +124,9 @@ const SaintPage = async (props: NextPageProps) => {
     .filter((f) => f?.id)
   const images = [image, ...galleryImages].filter((f) => f?.id)
 
-  const role = roleLabel(data.categories)
-  const place = placeLabel(data)
   const tradition = churchLabel(data.venerated_in)
+  const traditionText =
+    tradition === 'Both' ? 'Catholic and Orthodox' : tradition
   const summaryText = smartQuotes(plainText(data.summary))
 
   const wordsTitle =
@@ -112,18 +136,81 @@ const SaintPage = async (props: NextPageProps) => {
         ? 'Teachings'
         : 'Quotes'
 
+  // The inscription line: feast, tradition, years.
+  const inscription = [
+    hasFeast && <>Feast day {feastValue}</>,
+    traditionText,
+    years,
+  ]
+
+  const facts: Fact[] = []
+  if (bothFeasts)
+    facts.push({
+      label: 'Feast day',
+      value: feastValue,
+      detail: `Catholic ${catholicFeast} · Orthodox ${orthodoxFeast}`,
+    })
+  if (data.birth_year || data.birth_location)
+    facts.push({
+      label: 'Born',
+      value: data.birth_year ? yearsLabel(data.birth_year, null).replace(/^b\. /, '') : '—',
+      detail: data.birth_location,
+    })
+  if (data.death_year || data.death_location)
+    facts.push({
+      label: 'Died',
+      value: data.death_year ? yearsLabel(null, data.death_year).replace(/^d\. /, '') : '—',
+      detail: data.death_location,
+    })
+  if (data.patron)
+    facts.push({ label: 'Patron of', value: data.patron })
+  if (data.relic_location)
+    facts.push({
+      label: 'Relics',
+      value: firstPart(data.relic_location),
+      detail: data.relic_location.includes(',')
+        ? data.relic_location.split(',').slice(1).join(',').trim()
+        : undefined,
+    })
+  const onSite = [
+    chapters.length && `${chapters.length} chapters`,
+    miracles.length &&
+      `${miracles.length} ${miracles.length === 1 ? 'miracle' : 'miracles'}`,
+    quotes.length &&
+      `${quotes.length} ${quotes.length === 1 ? 'quote' : 'quotes'}`,
+    prayers.length &&
+      `${prayers.length} ${prayers.length === 1 ? 'novena' : 'novenas'}`,
+  ].filter(Boolean) as string[]
+  if (onSite.length)
+    facts.push({
+      label: 'On this site',
+      value: onSite
+        .slice(0, 3)
+        .map((s) => s.split(' ')[0])
+        .join(' · '),
+      detail: onSite
+        .slice(0, 3)
+        .map((s) => s.split(' ').slice(1).join(' '))
+        .join(' · '),
+    })
+
+  const moments = pickMoments(chapters, base)
+
   // The person first; miracles last.
-  const tabs = [
-    { href: '#story', label: 'Life' },
-    prayers.length && { href: '#prayers', label: 'Prayers' },
+  const sections = [
+    { id: 'story', title: 'The story' },
+    prayers.length && { id: 'prayers', title: 'Prayers' },
     (teachings.length || quotes.length) && {
-      href: '#teachings',
-      label: teachings.length ? 'Teachings' : 'Quotes',
+      id: 'teachings',
+      title: teachings.length ? 'Teachings' : 'Quotes',
     },
-    hasRelic && { href: '#relics', label: 'Relics' },
-    galleryImages.length && { href: '#images', label: 'Images' },
-    miracles.length && { href: '#miracles', label: 'Miracles' },
-  ].filter(Boolean) as { href: string; label: string }[]
+    hasRelic && { id: 'relics', title: 'Relics' },
+    galleryImages.length && { id: 'images', title: 'Images' },
+    miracles.length && {
+      id: 'miracles',
+      title: `Miracles (${miracles.length})`,
+    },
+  ].filter(Boolean) as { id: string; title: string }[]
 
   const structuredData = {
     '@context': 'https://schema.org',
@@ -145,377 +232,333 @@ const SaintPage = async (props: NextPageProps) => {
         }}
       />
       <SiteHeader active="/saints" />
-      <main className={styles.main}>
-        <nav
-          className={styles.crumbs}
-          aria-label="Breadcrumb"
-        >
-          <Link href="/saints">Saints</Link>
-          {categories[0] && (
-            <>
-              <LuChevronRight aria-hidden="true" />
-              <Link
-                href={`/saints?filter=${String(categories[0]).toLowerCase()}`}
-              >
-                {formatCategory(String(categories[0]))}
-              </Link>
-            </>
-          )}
-          <LuChevronRight aria-hidden="true" />
-          <span aria-current="page">{data.name}</span>
-        </nav>
-
+      <main>
         <SaintHero
           name={data.name}
           image={image}
-          kicker={[role, place, years].filter(Boolean).join(' · ')}
+          inscription={inscription}
           summary={summaryText}
-          actions={
-            <>
-              {chapters.length > 0 && (
-                <Link
-                  href={`${base}/biography`}
-                  className={styles.primary}
-                >
-                  Read the life
-                </Link>
-              )}
-            </>
+          primary={
+            chapters.length > 0
+              ? {
+                  href: `${base}/biography`,
+                  label: `Read the life · ${chapters.length} chapters`,
+                }
+              : undefined
           }
-        />
-
-        <nav
-          className={styles.tabs}
-          aria-label="On this page"
-        >
-          {tabs.map((t, i) => (
-            <a
-              key={t.href}
-              href={t.href}
-              className={i === 0 ? styles.tabOn : undefined}
-            >
-              {t.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className={styles.layout}>
-          <div className={styles.content}>
-            <section
-              className={styles.block}
-              id="story"
-              aria-labelledby="story-title"
-            >
-              <h2
-                id="story-title"
-                className={styles.blockTitle}
-              >
-                The story
-              </h2>
-              {chapters.length > 0 && (
+          secondary={
+            prayers[0]
+              ? {
+                  href: `${base}/novenas/${prayers[0].prayer_slug}`,
+                  label: 'Pray a novena',
+                }
+              : miracles.length
+                ? { href: `${base}/miracles`, label: 'The miracles' }
+                : undefined
+          }
+          facts={facts}
+          moments={moments}
+          momentsLabel={
+            chapters.length
+              ? `The life in moments · ${chapters.length} chapters`
+              : undefined
+          }
+          crumbs={
+            <nav aria-label="Breadcrumb">
+              <Link href="/saints">Saints</Link>
+              {categories[0] && (
                 <>
-                  <ol className={styles.chapters}>
-                    {chapters.map((c, i) => (
-                      <li key={c.id || i}>
-                        <Link href={`${base}/biography#${c.id}`}>
-                          <span className={styles.chapterNo}>
-                            {String(i + 1).padStart(2, '0')}
-                          </span>
-                          <span className={styles.chapterTitle}>
-                            {c.title}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ol>
+                  <LuChevronRight aria-hidden="true" />
                   <Link
-                    href={`${base}/biography`}
-                    className={styles.more}
+                    href={`/saints/category/${String(categories[0]).toLowerCase()}`}
                   >
-                    Read the full life
-                    <LuArrowRight aria-hidden="true" />
+                    {formatCategory(String(categories[0]))}
                   </Link>
                 </>
               )}
-            </section>
+              <LuChevronRight aria-hidden="true" />
+              <span aria-current="page">{data.name}</span>
+            </nav>
+          }
+        />
 
-            {prayers.length > 0 && (
-              <section
-                className={`${styles.block} ${styles.prayersBlock}`}
-                id="prayers"
-                aria-labelledby="prayers-title"
-              >
-                <h2
-                  id="prayers-title"
-                  className={styles.blockTitle}
-                >
-                  Prayers
-                </h2>
-                <div className={styles.prayerList}>
-                  {prayers.map((p) => (
-                    <Link
-                      key={p.prayer_slug}
-                      href={`${base}/novenas/${p.prayer_slug}`}
-                    >
-                      <span
-                        className={styles.prayerIcon}
-                        aria-hidden="true"
-                      >
-                        <LuHandHeart />
-                      </span>
-                      <span>{p.prayer_title}</span>
-                      <LuChevronRight aria-hidden="true" />
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            )}
+        <div className={styles.main}>
+          <div className={styles.layout}>
+            <aside className={styles.rail}>
+              <Contents
+                title="On this page"
+                items={sections}
+              />
+            </aside>
 
-            {(teachings.length > 0 || quotes.length > 0) && (
+            <div className={styles.content}>
+              <div className={styles.phoneTabs}>
+                <Contents
+                  title="On this page"
+                  items={sections}
+                  variant="chips"
+                />
+              </div>
+
               <section
                 className={styles.block}
-                id="teachings"
-                aria-labelledby="teachings-title"
+                id="story"
+                aria-labelledby="story-title"
               >
                 <h2
-                  id="teachings-title"
+                  id="story-title"
                   className={styles.blockTitle}
                 >
-                  {wordsTitle}
+                  The story
                 </h2>
-                {quotes[0] && (
-                  <figure className={styles.quote}>
-                    <blockquote>{quotes[0].text}</blockquote>
+                {chapters.length > 0 && (
+                  <>
+                    <ol className={styles.chapters}>
+                      {chapters.map((c, i) => (
+                        <li key={c.id || i}>
+                          <Link href={`${base}/biography#${c.id}`}>
+                            <span className={styles.chapterNo}>
+                              {toRoman(i + 1)}
+                            </span>
+                            <span className={styles.chapterTitle}>
+                              {c.title}
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ol>
+                    <Link
+                      href={`${base}/biography`}
+                      className={styles.more}
+                    >
+                      Read the full life
+                      <LuArrowRight aria-hidden="true" />
+                    </Link>
+                  </>
+                )}
+              </section>
+
+              {quotes[0] && (
+                <figure className={styles.quote}>
+                  <blockquote>{smartQuotes(quotes[0].text)}</blockquote>
+                  <figcaption>
+                    {data.name}
                     {quotes.length > 1 && (
-                      <figcaption>
+                      <>
+                        {' · '}
                         <Link href="/quotes">
                           All {quotes.length} quotes
                         </Link>
-                      </figcaption>
+                      </>
                     )}
-                  </figure>
-                )}
-                {teachings.length > 0 && (
-                  <ul className={styles.teachings}>
-                    {teachings.map((t, i) => (
-                      <li key={t.id || i}>
-                        <Link href={`${base}/teachings#${t.id}`}>
-                          {t.title}
-                        </Link>
-                      </li>
+                  </figcaption>
+                </figure>
+              )}
+
+              {prayers.length > 0 && (
+                <section
+                  className={styles.block}
+                  id="prayers"
+                  aria-labelledby="prayers-title"
+                >
+                  <h2
+                    id="prayers-title"
+                    className={styles.blockTitle}
+                  >
+                    Prayers
+                  </h2>
+                  <div className={styles.prayerList}>
+                    {prayers.map((p) => (
+                      <Link
+                        key={p.prayer_slug}
+                        href={`${base}/novenas/${p.prayer_slug}`}
+                      >
+                        <span
+                          className={styles.prayerIcon}
+                          aria-hidden="true"
+                        >
+                          <LuHandHeart />
+                        </span>
+                        <span>{p.prayer_title}</span>
+                        <LuChevronRight aria-hidden="true" />
+                      </Link>
                     ))}
-                  </ul>
-                )}
-              </section>
-            )}
-
-            {hasRelic && (
-              <section
-                className={styles.block}
-                id="relics"
-                aria-labelledby="relics-title"
-              >
-                <h2
-                  id="relics-title"
-                  className={styles.blockTitle}
-                >
-                  Relics
-                </h2>
-                <div className={styles.relic}>
-                  {data.relic_image?.id && (
-                    <figure>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${data.relic_image.id}?width=1200&format=webp&quality=82`}
-                        alt={
-                          data.relic_image.description ||
-                          `Relics of ${data.name}`
-                        }
-                        loading="lazy"
-                      />
-                      <ImageCredit image={data.relic_image} />
-                    </figure>
-                  )}
-                  <div>
-                    {data.relic_location && (
-                      <p className={styles.relicPlace}>
-                        <LuMapPin aria-hidden="true" />
-                        {data.relic_location}
-                      </p>
-                    )}
-                    {data.relic_description && (
-                      <div
-                        className={styles.prose}
-                        dangerouslySetInnerHTML={{
-                          __html: data.relic_description,
-                        }}
-                      />
-                    )}
                   </div>
-                </div>
-              </section>
-            )}
+                </section>
+              )}
 
-            {images.length > 1 && (
-              <section
-                className={styles.block}
-                id="images"
-                aria-labelledby="images-title"
-              >
-                <h2
-                  id="images-title"
-                  className={styles.blockTitle}
+              {(teachings.length > 0 || quotes.length > 1) && (
+                <section
+                  className={styles.block}
+                  id="teachings"
+                  aria-labelledby="teachings-title"
                 >
-                  Images
-                </h2>
-                <div className={styles.gallery}>
-                  {images.map((img) => (
-                    <figure key={img.id}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${img.id}?width=800&format=webp&quality=82`}
-                        alt={
-                          img.metadata?.alt_text ||
-                          img.description ||
-                          `Image of ${data.name}`
-                        }
-                        loading="lazy"
-                      />
-                      <ImageCredit image={img} />
-                    </figure>
-                  ))}
-                </div>
-              </section>
-            )}
+                  <h2
+                    id="teachings-title"
+                    className={styles.blockTitle}
+                  >
+                    {wordsTitle}
+                  </h2>
+                  {teachings.length > 0 && (
+                    <ol className={styles.chapters}>
+                      {teachings.map((t, i) => (
+                        <li key={t.id || i}>
+                          <Link href={`${base}/teachings#${t.id}`}>
+                            <span className={styles.chapterNo}>
+                              {toRoman(i + 1)}
+                            </span>
+                            <span className={styles.chapterTitle}>
+                              {t.title}
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                  {teachings.length > 0 && (
+                    <Link
+                      href={`${base}/teachings`}
+                      className={styles.more}
+                    >
+                      Read the teachings
+                      <LuArrowRight aria-hidden="true" />
+                    </Link>
+                  )}
+                  {quotes.length > 1 && (
+                    <ul className={styles.quoteList}>
+                      {quotes.slice(1, 4).map((q, i) => (
+                        <li key={i}>{smartQuotes(q.text)}</li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              )}
 
-            {/* Miracles come last and stay quiet: readers meet the
-                person first. */}
-            {miracles.length > 0 && (
-              <Link
-                href={`${base}/miracles`}
-                id="miracles"
-                className={styles.quietRow}
-              >
-                Miracles and answered prayers
-                <span>
-                  {miracles.length.toLocaleString('en-US')}{' '}
-                  {miracles.length === 1 ? 'account' : 'accounts'}
-                  <LuChevronRight aria-hidden="true" />
-                </span>
-              </Link>
-            )}
+              {hasRelic && (
+                <section
+                  className={styles.block}
+                  id="relics"
+                  aria-labelledby="relics-title"
+                >
+                  <h2
+                    id="relics-title"
+                    className={styles.blockTitle}
+                  >
+                    Relics
+                  </h2>
+                  <div className={styles.relic}>
+                    {data.relic_image?.id && (
+                      <figure>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={imageUrl(data.relic_image, { width: 1200, quality: 82 })}
+                          alt={
+                            data.relic_image.description ||
+                            `Relics of ${data.name}`
+                          }
+                          loading="lazy"
+                        />
+                        <ImageCredit image={data.relic_image} />
+                      </figure>
+                    )}
+                    <div>
+                      {data.relic_location && (
+                        <p className={styles.relicPlace}>
+                          <LuMapPin aria-hidden="true" />
+                          {data.relic_location}
+                        </p>
+                      )}
+                      {data.relic_description && (
+                        <div
+                          className={styles.prose}
+                          dangerouslySetInnerHTML={{
+                            __html: data.relic_description,
+                          }}
+                        />
+                      )}
+                    </div>
+                  </div>
+                </section>
+              )}
 
-            {images.length === 1 && image && (
-              <figure className={styles.credit}>
-                <ImageCredit image={image} />
-              </figure>
-            )}
+              {images.length > 1 && (
+                <section
+                  className={`${styles.block} ${styles.imagesBlock}`}
+                  id="images"
+                  aria-labelledby="images-title"
+                >
+                  <h2
+                    id="images-title"
+                    className={styles.blockTitle}
+                  >
+                    Images
+                  </h2>
+                  <div className={styles.gallery}>
+                    {images.map((img) => (
+                      <figure key={img.id}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={imageUrl(img, { width: 800, quality: 82 })}
+                          alt={
+                            img.metadata?.alt_text ||
+                            img.description ||
+                            `Image of ${data.name}`
+                          }
+                          loading="lazy"
+                        />
+                        <ImageCredit image={img} />
+                      </figure>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Miracles come last and stay quiet: readers meet the
+                  person first. */}
+              {miracles.length > 0 && (
+                <Link
+                  href={`${base}/miracles`}
+                  id="miracles"
+                  className={styles.quietRow}
+                >
+                  Miracles and answered prayers
+                  <span>
+                    {miracles.length.toLocaleString('en-US')}{' '}
+                    {miracles.length === 1 ? 'account' : 'accounts'}
+                    <LuChevronRight aria-hidden="true" />
+                  </span>
+                </Link>
+              )}
+
+              {images.length === 1 && image && (
+                <figure className={styles.credit}>
+                  <ImageCredit image={image} />
+                </figure>
+              )}
+            </div>
           </div>
 
-          <aside className={styles.side}>
-            <div className={styles.sideCard}>
-              <dl className={styles.facts}>
-                {hasFeast && (
-                  <div className={styles.feast}>
-                    <dt>Feast day</dt>
-                    <dd>
-                      <b>{feastValue}</b>
-                      {bothFeasts && (
-                        <small>
-                          Catholic {catholicFeast} · Orthodox{' '}
-                          {orthodoxFeast}
-                        </small>
-                      )}
-                    </dd>
-                  </div>
-                )}
-                {data.birth_location && (
-                  <div>
-                    <dt>Born</dt>
-                    <dd>
-                      {[data.birth_year, data.birth_location]
-                        .filter(Boolean)
-                        .join(', ')}
-                    </dd>
-                  </div>
-                )}
-                {data.death_location && (
-                  <div>
-                    <dt>Died</dt>
-                    <dd>
-                      {[data.death_year, data.death_location]
-                        .filter(Boolean)
-                        .join(', ')}
-                    </dd>
-                  </div>
-                )}
-                {data.patron && (
-                  <div>
-                    <dt>Patron of</dt>
-                    <dd>{data.patron}</dd>
-                  </div>
-                )}
-                {tradition && (
-                  <div>
-                    <dt>Venerated</dt>
-                    <dd>
-                      {tradition === 'Both'
-                        ? 'Catholic and Orthodox'
-                        : tradition}
-                    </dd>
-                  </div>
-                )}
-              </dl>
-              {prayers.length > 0 && (
-                <div className={styles.sidePrayers}>
-                  {prayers.slice(0, 4).map((p) => (
-                    <Link
-                      key={p.prayer_slug}
-                      href={`${base}/novenas/${p.prayer_slug}`}
-                    >
-                      <span
-                        className={styles.prayerIcon}
-                        aria-hidden="true"
-                      >
-                        <LuHandHeart />
-                      </span>
-                      <span>{p.prayer_title}</span>
-                      <LuChevronRight aria-hidden="true" />
-                    </Link>
-                  ))}
-                </div>
-              )}
-              <a
-                href={APP_URL}
-                className={styles.appButton}
-              >
-                <LuSmartphone aria-hidden="true" />
-                Pray in the app
-              </a>
-            </div>
-          </aside>
+          {categories.length > 0 && (
+            <RelatedSaints
+              slug={slug}
+              categories={categories}
+              className={styles.related}
+              gridClassName={styles.relatedGrid}
+              labelledBy="related-title"
+            >
+              <div className={styles.blockHead}>
+                <h2 id="related-title">Related saints</h2>
+                <Link
+                  href="/saints"
+                  className={styles.more}
+                >
+                  All saints
+                  <LuArrowRight aria-hidden="true" />
+                </Link>
+              </div>
+            </RelatedSaints>
+          )}
         </div>
-
-        {categories.length > 0 && (
-          <RelatedSaints
-            slug={slug}
-            categories={categories}
-            className={styles.related}
-            gridClassName={styles.relatedGrid}
-            labelledBy="related-title"
-          >
-            <div className={styles.blockHead}>
-              <h2 id="related-title">Related saints</h2>
-              <Link
-                href="/saints"
-                className={styles.more}
-              >
-                All saints
-                <LuArrowRight aria-hidden="true" />
-              </Link>
-            </div>
-          </RelatedSaints>
-        )}
       </main>
 
       <div className={styles.mobileBar}>

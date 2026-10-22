@@ -123,7 +123,7 @@ export const BooksPills = () => {
     <FilterPills
       label="Filter books by genre"
       pills={pills}
-      tone="glass"
+      tone="night"
     />
   )
 }
