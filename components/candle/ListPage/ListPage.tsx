@@ -24,10 +24,7 @@ const ListPage = ({
   children: ReactNode
 }) => (
   <div className={styles.page}>
-    <SiteHeader
-      active={path}
-      overlay
-    />
+    <SiteHeader active={path} />
     <main>
       <ListHero
         kind={kind}

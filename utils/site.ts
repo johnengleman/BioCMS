@@ -1,4 +1,4 @@
-// Site-wide settings for the "Travel" design (docs/redesign-plan.md).
+// Site-wide settings (docs/design-system.md).
 
 // The prayer app. Replace with the App Store / Google Play page when it
 // is public.
@@ -12,9 +12,8 @@ export const CHURCH_LABELS: Record<Church, string> = {
   orthodox: 'Orthodox saints',
 }
 
-// The photo behind the top of list pages follows the visitor's
-// tradition. CC BY and CC BY-SA require the credit line, so it is shown
-// on the photo.
+// Three landscapes, one per tradition, shown on the About page with
+// their credit lines (CC BY and CC BY-SA require them).
 export const HERO_PHOTOS: Record<
   Church,
   {

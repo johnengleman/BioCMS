@@ -11,7 +11,7 @@ const label = (value: string) => {
   return text.charAt(0).toUpperCase() + text.slice(1)
 }
 
-// One row of glass filter pills with counts. Each pill is the address
+// One row of filter pills with counts, on night. Each pill is the address
 // of a page built ahead of time (/miracles/era/modern_era). Filters with
 // no items in the visitor's tradition are left out.
 const ListPills = ({
@@ -47,7 +47,7 @@ const ListPills = ({
     <FilterPills
       label={`Filter ${title.toLowerCase()}`}
       pills={pills}
-      tone="glass"
+      tone="night"
     />
   )
 }

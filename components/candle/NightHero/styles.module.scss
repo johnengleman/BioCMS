@@ -1,0 +1,41 @@
+@use '../../../styles/candle.scss' as candle;
+
+.band {
+  @include candle.night-band(var(--glow-top));
+}
+
+.inner {
+  @include candle.container;
+  padding-top: 40px;
+  padding-bottom: 26px;
+
+  @media (max-width: 767px) {
+    padding-top: 26px;
+    padding-bottom: 18px;
+  }
+}
+
+.eyebrow {
+  @include candle.inscription(var(--candle));
+}
+
+.title {
+  @include candle.title(clamp(40px, 5vw, 64px), 500);
+  margin: 6px 0 0;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--on-night);
+}
+
+.subtitle {
+  max-width: 54ch;
+  margin-top: 12px;
+  font-family: var(--font-reading);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--on-night-2);
+}
+
+.filters {
+  margin-top: 22px;
+}

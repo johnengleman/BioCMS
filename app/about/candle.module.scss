@@ -124,3 +124,64 @@
     color: var(--ink-2);
   }
 }
+
+// The three landscapes that once headed the list pages, kept here
+// with their credit lines (CC BY and CC BY-SA require them), misted
+// toward the paper.
+.places {
+  margin-top: var(--space-16);
+
+  h2 {
+    @include candle.title(32px, 600);
+    margin-top: var(--space-2);
+  }
+
+  ul {
+    display: grid;
+    gap: var(--space-4);
+    margin: var(--space-6) 0 0;
+    padding: 0;
+    list-style: none;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  figure {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(248, 243, 235, 0.1) 0%,
+        rgba(248, 243, 235, 0.55) 100%
+      );
+      pointer-events: none;
+    }
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    filter: saturate(0.8);
+  }
+
+  figcaption {
+    margin-top: var(--space-2);
+    font-size: 12px;
+    color: var(--ink-3);
+
+    a {
+      color: var(--ink-2);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+}

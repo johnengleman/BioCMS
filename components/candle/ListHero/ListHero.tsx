@@ -1,11 +1,10 @@
 import { filtersFor, type ListKind } from '../../../utils/listParams'
 import { getListCounts } from '../../../queries/getListCounts'
-import HomeHero from '../HomeHero/HomeHero'
+import NightHero from '../NightHero/NightHero'
 import ListPills from './ListPills'
 
-// The top of a list page: a short photo hero (the photo follows the
-// visitor's tradition), the title, and one row of glass filter pills
-// with counts. The tradition choice itself is in the site footer.
+// The top of a list page: a night band with the title and one row of
+// filter pills with counts. The tradition choice is in the site footer.
 const ListHero = async ({
   kind,
   title,
@@ -17,20 +16,18 @@ const ListHero = async ({
   subtitle: string
   filter: string
 }) => (
-  <HomeHero
-    size="short"
+  <NightHero
     title={title}
     subtitle={subtitle}
-    filters={
-      <ListPills
-        kind={kind}
-        title={title}
-        filter={filter}
-        filters={filtersFor(kind)}
-        counts={await getListCounts(kind)}
-      />
-    }
-  />
+  >
+    <ListPills
+      kind={kind}
+      title={title}
+      filter={filter}
+      filters={filtersFor(kind)}
+      counts={await getListCounts(kind)}
+    />
+  </NightHero>
 )
 
 export default ListHero
