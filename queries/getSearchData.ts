@@ -9,7 +9,7 @@ type Saint = {
   venerated_in: string
   birth_year: number
   death_year: number
-  profile_image: { id: string } | null
+  profile_image: { id: string; filename_disk?: string | null } | null
 }
 
 type SaintsResponse = {
@@ -29,6 +29,7 @@ const query = `
       death_year
       profile_image {
         id
+        filename_disk
       }
     }
   }

@@ -8,7 +8,7 @@ export type FeastSaint = {
   name: string
   slug: string
   venerated_in?: string | null
-  profile_image?: { id: string; metadata?: any } | null
+  profile_image?: { id: string; filename_disk?: string | null; metadata?: any } | null
   feast_day_catholic?: string | null
   feast_day_orthodox?: string | null
 }
@@ -49,6 +49,7 @@ export const getTodaysFeast = async () => {
         death_location
         profile_image {
           id
+          filename_disk
           width
           height
           metadata

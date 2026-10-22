@@ -11,6 +11,7 @@ import {
 import { formatFeast, splitSaintName } from '../../../utils/saintNames'
 import smartQuotes from '../../../utils/smartQuotes'
 import styles from './styles.module.scss'
+import { imageUrl } from '../../../utils/imageUrl'
 
 const LONG_NAME = 28
 
@@ -47,10 +48,10 @@ const SaintSummary = ({ data }: { data: any }) => {
     >
       <div className={styles.photo}>
         {profile_image?.id && (
-          // Directus resizes the image; next/image is unoptimized.
+          // Resized by Cloudflare or Directus (utils/imageUrl).
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${profile_image.id}?width=720&format=webp&quality=80`}
+            src={imageUrl(profile_image, { width: 720, quality: 80 })}
             alt={
               profile_image?.metadata?.alt_text ||
               profile_image?.description ||

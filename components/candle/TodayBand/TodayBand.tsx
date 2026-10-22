@@ -10,8 +10,8 @@ import { roleLabel, yearsLabel } from '../../../utils/saintCard'
 import { splitSaintName } from '../../../utils/saintNames'
 import { saintsHref } from '../../../utils/listParams'
 import styles from './styles.module.scss'
+import { imageUrl } from '../../../utils/imageUrl'
 
-const assets = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS
 const WEEK = 7
 const SHOWN = 6
 const LONG_NAME = 28
@@ -167,7 +167,7 @@ const TodayBand = ({
                           {saint.profile_image?.id && (
                             // eslint-disable-next-line @next/next/no-img-element
                             <img
-                              src={`${assets}/assets/${saint.profile_image.id}?width=160&format=webp&quality=78`}
+                              src={imageUrl(saint.profile_image, { width: 160, quality: 78 })}
                               alt=""
                               loading="lazy"
                               style={{

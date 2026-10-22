@@ -4,12 +4,11 @@ import { LuArrowLeft } from 'react-icons/lu'
 import Contents from '../Contents/Contents'
 import ShareButton from '../ShareButton/ShareButton'
 import styles from './reading.module.scss'
+import { imageUrl, type ImageFile } from '../../../utils/imageUrl'
 
 // Shared parts of the long reading pages (biography, miracles,
 // teachings, novenas): the saint banner, the contents rail and the
 // next links.
-
-const assets = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS
 
 // "322 accounts" → { value: "322", label: "Accounts" }. Items without
 // a leading number show as a line under the title.
@@ -37,7 +36,7 @@ export const ReadingHeader = ({
   eyebrow: string
   title: string
   meta: string[]
-  image?: { id: string } | null
+  image?: ImageFile | null
   backHref: string
   backLabel?: string
 }) => {
@@ -56,7 +55,7 @@ export const ReadingHeader = ({
         // eslint-disable-next-line @next/next/no-img-element
         <img
           className={styles.bannerBackdrop}
-          src={`${assets}/assets/${image.id}?width=600&format=webp&quality=60`}
+          src={imageUrl(image, { width: 600, quality: 60 })}
           alt=""
           aria-hidden="true"
         />
@@ -70,7 +69,7 @@ export const ReadingHeader = ({
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`${assets}/assets/${image.id}?width=360&format=webp&quality=80`}
+              src={imageUrl(image, { width: 360, quality: 80 })}
               alt=""
             />
           </Link>

@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import ShareButton from '../../candle/ShareButton/ShareButton'
 import { splitSaintName, toRoman } from '../../../utils/saintNames'
 import styles from './styles.module.scss'
+import { imageUrl } from '../../../utils/imageUrl'
 
 type Img = {
   id: string
@@ -24,8 +25,6 @@ export type Moment = {
   title: string
   href: string
 }
-
-const assets = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS
 
 // The top of a saint's page, on night: the portrait lit from above,
 // the inscription line (feast, tradition, years), the name with its
@@ -69,7 +68,7 @@ const SaintHero = ({
           <figure className={styles.portrait}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`${assets}/assets/${image.id}?width=900&format=webp&quality=82`}
+              src={imageUrl(image, { width: 900, quality: 82 })}
               alt={
                 image.metadata?.alt_text ||
                 image.description ||

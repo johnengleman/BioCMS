@@ -37,6 +37,7 @@ import Contents from '../../../components/candle/Contents/Contents'
 import styles from './candle.module.scss'
 
 import { NextPageProps } from '../../../types/nextjs'
+import { imageUrl } from '../../../utils/imageUrl'
 
 // Built ahead of time and refreshed every four minutes. Saints not
 // built yet are built on the first visit.
@@ -450,7 +451,7 @@ const SaintPage = async (props: NextPageProps) => {
                       <figure>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${data.relic_image.id}?width=1200&format=webp&quality=82`}
+                          src={imageUrl(data.relic_image, { width: 1200, quality: 82 })}
                           alt={
                             data.relic_image.description ||
                             `Relics of ${data.name}`
@@ -497,7 +498,7 @@ const SaintPage = async (props: NextPageProps) => {
                       <figure key={img.id}>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={`${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${img.id}?width=800&format=webp&quality=82`}
+                          src={imageUrl(img, { width: 800, quality: 82 })}
                           alt={
                             img.metadata?.alt_text ||
                             img.description ||

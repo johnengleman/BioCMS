@@ -6,10 +6,10 @@ import { useTradition } from '../../../hooks/useTradition'
 import { fetchList } from '../../../utils/api'
 import { splitSaintName, toRoman } from '../../../utils/saintNames'
 import styles from './styles.module.scss'
+import { imageUrl } from '../../../utils/imageUrl'
 
 type Kind = 'teachings' | 'miracles' | 'quotes' | 'prayers'
 
-const assets = process.env.NEXT_PUBLIC_DIRECTUS_ASSETS
 const LONG_NAME = 28
 
 const shortName = (name = '') =>
@@ -41,7 +41,7 @@ const FeatureCard = ({
     church,
     titles = [],
   } = item.preview || {}
-  const image = item.saint?.profile_image?.id
+  const image = item.saint?.profile_image
   const meta = [years(item.saint), church].filter(Boolean).join(' · ')
   const lead = summary || intro
 
@@ -51,7 +51,7 @@ const FeatureCard = ({
         {image && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={`${assets}/assets/${image}?width=480&format=webp&quality=78`}
+            src={imageUrl(image, { width: 480, quality: 78 })}
             alt=""
             loading="lazy"
           />
@@ -97,7 +97,7 @@ const FeatureCard = ({
 }
 
 const QuoteCard = ({ item }: { item: any }) => {
-  const image = item.saint?.profile_image?.id
+  const image = item.saint?.profile_image
   const name = shortName(item.saint?.name)
   const body = (
     <>
@@ -105,7 +105,7 @@ const QuoteCard = ({ item }: { item: any }) => {
       <span className={styles.author}>
         {image && (
           <img
-            src={`${assets}/assets/${image}?width=96&height=96&fit=cover&format=webp&quality=78`}
+            src={imageUrl(image, { width: 96, height: 96, fit: 'cover', quality: 78 })}
             alt=""
             loading="lazy"
           />
@@ -134,7 +134,7 @@ const QuoteCard = ({ item }: { item: any }) => {
 }
 
 const PrayerCard = ({ item }: { item: any }) => {
-  const image = item.saint?.profile_image?.id
+  const image = item.saint?.profile_image
   return (
     <Link
       href={item.link}
@@ -142,7 +142,7 @@ const PrayerCard = ({ item }: { item: any }) => {
     >
       {image && (
         <img
-          src={`${assets}/assets/${image}?width=200&height=200&fit=cover&format=webp&quality=78`}
+          src={imageUrl(image, { width: 200, height: 200, fit: 'cover', quality: 78 })}
           alt=""
           loading="lazy"
         />

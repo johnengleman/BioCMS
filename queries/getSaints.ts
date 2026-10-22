@@ -98,6 +98,7 @@ function getSaintsQuery(church, filter, saintPreset, sort) {
         feast_day_orthodox
         profile_image {
           id
+          filename_disk
           width
           height
           metadata

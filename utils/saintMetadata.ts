@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getSaint } from '../queries/getSaint'
 import { splitSaintName } from './saintNames'
+import { imageUrl } from './imageUrl'
 
 // Titles, description, canonical link and share image for each
 // saint's pages.
@@ -85,7 +86,7 @@ export const saintMetadata = async (
   const description = describe(saint.summary)
   const url = `${process.env.NEXT_PUBLIC_SITE_URL}/saints/${slug}${paths[page]}`
   const image = saint.profile_image?.id
-    ? `${process.env.NEXT_PUBLIC_DIRECTUS_ASSETS}/assets/${saint.profile_image.id}?width=1200&format=jpg&quality=80`
+    ? imageUrl(saint.profile_image, { width: 1200, quality: 80, format: 'jpg' })
     : undefined
 
   return {
