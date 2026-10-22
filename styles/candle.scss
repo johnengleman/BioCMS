@@ -4,8 +4,7 @@
 // lines keep working.
 //
 // v4 "Light in a quiet room": the night-band, glow, portrait-lit and
-// inscription mixins are the new surfaces. `glass` and the card hover
-// lift belong to the v3 travel look and go away as pages move over.
+// inscription mixins are the sacred surfaces; paper keeps the rest.
 
 @mixin container {
   width: 100%;
@@ -163,16 +162,6 @@
   box-shadow:
     0 30px 60px -30px rgba(0, 0, 0, 0.9),
     0 0 60px -10px rgba(217, 169, 90, 0.25);
-}
-
-// A glass pill that sits on a photo. v3 only: it leaves with the photo
-// heroes (SiteHeader overlay, FilterPills tone="glass").
-@mixin glass {
-  border: 1px solid rgba(255, 246, 234, 0.24);
-  background: rgba(255, 246, 234, 0.13);
-  color: var(--on-dark);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
 }
 
 // Filled wine capsule ("Read all 322 accounts").

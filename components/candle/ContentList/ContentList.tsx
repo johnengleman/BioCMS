@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useTradition } from '../../../hooks/useTradition'
 import { fetchList } from '../../../utils/api'
-import { splitSaintName } from '../../../utils/saintNames'
+import { splitSaintName, toRoman } from '../../../utils/saintNames'
 import styles from './styles.module.scss'
 
 type Kind = 'teachings' | 'miracles' | 'quotes' | 'prayers'
@@ -74,7 +74,7 @@ const FeatureCard = ({
               .slice(0, 4)
               .map((title: string, i: number) => (
                 <li key={i}>
-                  <em>{i + 1}</em>
+                  <em>{toRoman(i + 1)}</em>
                   <span>{title}</span>
                 </li>
               ))}

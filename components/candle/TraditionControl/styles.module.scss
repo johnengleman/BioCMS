@@ -38,23 +38,39 @@
   }
 }
 
-// On the espresso footer.
+// On the night footer: three words on one hairline, the chosen one
+// with a candle rule under it (design v4).
 .dark {
-  border-color: rgba(255, 246, 234, 0.12);
-  background: rgba(255, 246, 234, 0.07);
+  gap: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid var(--night-line);
+  border-radius: 0;
+  background: transparent;
 
   button {
-    color: var(--on-dark-2);
+    min-height: 42px;
+    margin-bottom: -1px;
+    padding: 0 var(--space-3);
+    border-bottom: 2px solid transparent;
+    border-radius: 0;
+    color: var(--on-night-3);
 
     &:hover {
-      color: var(--card-dark-ink);
+      color: var(--on-night);
+    }
+
+    &:focus-visible {
+      outline-color: var(--candle);
     }
   }
 
   .selected,
   .selected:hover {
-    background: var(--on-dark);
-    color: var(--ink);
+    border-bottom-color: var(--candle);
+    background: transparent;
+    color: var(--on-night);
+    box-shadow: none;
   }
 }
 

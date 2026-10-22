@@ -23,8 +23,9 @@ const toStat = (text: string) => {
     : null
 }
 
-// A beige panel with the saint's portrait shown whole, the page kind
-// ("The miracles of"), the name, and its figures.
+// A night banner (design v4): the portrait, dimmed and blurred, behind
+// the page kind ("The life of") in candle gold, the name, and one line
+// of figures. The small lit portrait at the left goes back to the saint.
 export const ReadingHeader = ({
   eyebrow,
   title,
@@ -45,9 +46,22 @@ export const ReadingHeader = ({
     label: string
   }[]
   const lines = meta.filter((m) => !toStat(m))
+  const figures = [
+    ...stats.map((s) => `${s.value} ${s.label.toLowerCase()}`),
+    ...lines,
+  ]
   return (
-    <div className={styles.bannerShell}>
-      <section className={styles.banner}>
+    <section className={styles.banner}>
+      {image?.id && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          className={styles.bannerBackdrop}
+          src={`${assets}/assets/${image.id}?width=600&format=webp&quality=60`}
+          alt=""
+          aria-hidden="true"
+        />
+      )}
+      <div className={styles.bannerInner}>
         {image?.id && (
           <Link
             href={backHref}
@@ -64,18 +78,12 @@ export const ReadingHeader = ({
         <div className={styles.bannerCopy}>
           <p className={styles.eyebrow}>{eyebrow}</p>
           <h1 className={styles.title}>{title}</h1>
-          {lines.length > 0 && (
-            <p className={styles.meta}>{lines.join(' · ')}</p>
-          )}
-          {stats.length > 0 && (
-            <div className={styles.stats}>
-              {stats.map((s) => (
-                <div key={s.label}>
-                  <b>{s.value}</b>
-                  <span>{s.label}</span>
-                </div>
+          {figures.length > 0 && (
+            <p className={styles.meta}>
+              {figures.map((f, i) => (
+                <span key={i}>{f}</span>
               ))}
-            </div>
+            </p>
           )}
         </div>
         <div className={styles.bannerActions}>
@@ -92,8 +100,8 @@ export const ReadingHeader = ({
             label="Share"
           />
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   )
 }
 

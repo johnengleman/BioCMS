@@ -10,6 +10,7 @@ import {
   getSources,
   splitSaintName,
 } from '../../../../utils/saintContent'
+import { toRoman } from '../../../../utils/saintNames'
 import SiteHeader from '../../../../components/candle/SiteHeader/SiteHeader'
 import SiteFooter from '../../../../components/candle/SiteFooter/SiteFooter'
 import ReadingProgress from '../../../../components/candle/ReadingProgress/ReadingProgress'
@@ -144,7 +145,7 @@ const Biography = async (props: NextPageProps) => {
               className={styles.chapter}
             >
               <p className={styles.chapterLabel}>
-                {String(i + 1).padStart(2, '0')}
+                {toRoman(i + 1)}
               </p>
               <h2
                 id={chapter.id}
