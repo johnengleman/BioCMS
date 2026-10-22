@@ -1,7 +1,11 @@
-// Shared component styles for the "Travel" design (v3). Values come
-// from the CSS variables in styles/variables.css. Rules:
-// docs/design-system.md. The file keeps its old name so that existing
-// `@use '…/candle.scss' as candle` lines keep working.
+// Shared component styles. Values come from the CSS variables in
+// styles/variables.css. Rules: docs/design-system.md. The file keeps
+// its old name so that existing `@use '…/candle.scss' as candle`
+// lines keep working.
+//
+// v4 "Light in a quiet room": the night-band, glow, portrait-lit and
+// inscription mixins are the new surfaces. `glass` and the card hover
+// lift belong to the v3 travel look and go away as pages move over.
 
 @mixin container {
   width: 100%;
@@ -104,7 +108,65 @@
   color: var(--on-dark);
 }
 
-// A glass pill that sits on a photo.
+// Small letterspaced capitals that read like a plaque
+// ("FEAST DAY · 2 JULY · ORTHODOX"). On night pass var(--candle);
+// on paper keep the default, because candle gold is too light for
+// small text on paper.
+@mixin inscription($color: var(--ink-3)) {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-inscription);
+  text-transform: uppercase;
+  color: $color;
+  @include lining;
+}
+
+// A night surface with one soft light. Heroes, today's feast, quotes
+// and the saint card. The glow fades in once on page load; reduced
+// motion gets it at rest (globals.css zeroes animation durations).
+@mixin night-band($glow: var(--glow)) {
+  position: relative;
+  overflow: hidden;
+  background: var(--night);
+  color: var(--on-night);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: $glow;
+    pointer-events: none;
+    animation: candle-rise var(--duration-slow) var(--ease) both;
+  }
+
+  > * {
+    position: relative;
+  }
+}
+
+@keyframes candle-rise {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+// A portrait lit from above on night: a thin candle hairline and a
+// glow, no drop shadow that implies a floating card.
+@mixin portrait-lit {
+  border: 1px solid rgba(217, 169, 90, 0.5);
+  outline: 1px solid rgba(0, 0, 0, 0.35);
+  box-shadow:
+    0 30px 60px -30px rgba(0, 0, 0, 0.9),
+    0 0 60px -10px rgba(217, 169, 90, 0.25);
+}
+
+// A glass pill that sits on a photo. v3 only: it leaves with the photo
+// heroes (SiteHeader overlay, FilterPills tone="glass").
 @mixin glass {
   border: 1px solid rgba(255, 246, 234, 0.24);
   background: rgba(255, 246, 234, 0.13);
@@ -193,14 +255,14 @@
     inset 0 0 0 1px var(--line-soft);
 }
 
+// Hover: the ring darkens. Nothing lifts or floats (v4).
 @mixin card-hover {
-  @include transition(box-shadow, transform);
+  @include transition(box-shadow);
 
   &:hover {
     box-shadow:
-      var(--shadow-hover),
-      inset 0 0 0 1px var(--line-soft);
-    transform: translateY(-3px);
+      var(--shadow-card),
+      inset 0 0 0 1px var(--ink-3);
   }
 }
 

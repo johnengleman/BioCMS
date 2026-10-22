@@ -1,10 +1,19 @@
-# Find a Saint design system: "Travel" (v3)
+# Find a Saint design system: "Light in a quiet room" (v4)
 
-Approved direction (2026-10-01): calm, professional, and modern, like a top travel site, with Apple-style clarity. Airbnb gives the structure. The user's other examples add detail: Propel (cards, filter chips with counts), a travel app (title on the photo, glass buttons), Indotravi (photo hero, stats bar), and The Books (beige panel, whole portrait). The palette is the prayer app's palette, made warmer.
+Approved direction (2026-10-22): the site should feel like stepping into a sacred space, read like a modern editorial product, and show a saint's whole life at a glance. The brief, with the Mobbin references and a mock of the saint page: https://claude.ai/artifact/SeN2VxvK3AQ1ohX9ofJ2Ze.
 
-There is no church atmosphere: no candles, halos, gilt frames, or ornament.
+Sacred comes from light, stillness and inscription, never from ornament. No drawn halos, gilt frames, candle illustrations or crosses as decoration. Atmosphere comes from:
 
-The mockups are in `design-mockups/airbnb/`. The build plan and the history of the decisions are in `docs/redesign-plan.md`.
+- **One light source.** Dark warm "night" surfaces with one soft candle-gold glow behind the portrait or the title (`--glow`, `night-band`). Gold is the light: a gradient, a hairline, an inscription. Never a filled button or a badge.
+- **Night for presence, paper for reading.** Heroes, today's feast, quotes and the saint card sit on night. Biographies, teachings and miracle accounts stay on paper. The handoff between the two is the rhythm of a page.
+- **Inscription, not labels.** Small letterspaced capitals for fact lines ("FEAST DAY · 2 JULY · ORTHODOX", the `inscription` mixin). Italic Cormorant for a saint's epithet and for quotations. Lining figures everywhere.
+- **The liturgical pulse.** The saints list opens on today: the date, the saints of the day, a week strip.
+- **The whole life in one screen.** Name, feast, lived, born, died, patron, venerated, relics and a six-moment timeline before any prose.
+- **Stillness.** Fewer boxes and chips, more space. One slow fade of the glow on load (`--duration-slow`). Nothing lifts or floats on hover; only color changes. No glass.
+
+The v3 "Travel" look (photo heroes, glass chips, the hover lift, the sticky facts card) is being replaced page by page. The build order is in the brief: tokens, the saint hero and fact strip, Today on the saints list, the cards, the reading pages. Until a page moves over, its v3 components stay as documented below.
+
+The v3 mockups are in `design-mockups/airbnb/`. The history of the v3 decisions is in `docs/redesign-plan.md`.
 
 ## Files
 
@@ -30,9 +39,13 @@ Use a token or a mixin for every value. Do not add new hex colors, spaces, or ra
 | `--gold`, `--gold-soft`, `--gold-tint` | Small details only: chapter numbers, quote marks, the "sworn" label |
 | `--espresso`, `--espresso-2` | Dark buttons, the active tab, the footer |
 | `--on-dark`, `--on-dark-2`, `--on-dark-3` | Text on wine, espresso, and photos |
-| `--card-dark*` | The dark saint story cards |
+| `--card-dark*` | The dark saint story cards (v3; night replaces them) |
+| `--night`, `--night-2`, `--night-line` | The sacred surfaces: heroes, today, quotes, the saint card; cards and sheets on night; hairlines on night |
+| `--on-night`, `--on-night-2`, `--on-night-3` | Text on night |
+| `--candle`, `--candle-soft` | The light on night: glow stops, inscriptions, timeline ticks, italic epithets. Too light for small text on paper; use `--gold` there |
+| `--glow`, `--glow-top` | The one soft light behind a portrait (left) or a title (top) |
 
-Ink is for reading. Wine is for actions. Gold is for small details. Keep gold rare.
+Ink is for reading. Wine is for actions. Candle gold is the light on night; `--gold` stays for small details on paper.
 
 ## Type
 
@@ -55,9 +68,9 @@ Ink is for reading. Wine is for actions. Gold is for small details. Keep gold ra
 ## Mixins (`styles/candle.scss`)
 
 - **Layout:** `container`.
-- **Type:** `title($size, $weight)`, `page-title`, `reading($size)`, `eyebrow`, `lining`.
-- **Controls:** `pill`, `pill-selected`, `glass` (on a photo), `button-primary`, `button-dark`, `button-outline`, `link-chevron`.
-- **Surfaces:** `card`, `card-hover`, `portrait`, `menu-panel`, `menu-item`.
+- **Type:** `title($size, $weight)`, `page-title`, `reading($size)`, `eyebrow`, `inscription($color)`, `lining`.
+- **Controls:** `pill`, `pill-selected`, `button-primary`, `button-dark`, `button-outline`, `link-chevron`. `glass` is v3 only and leaves with the photo heroes.
+- **Surfaces:** `night-band($glow)`, `portrait-lit`, `card`, `card-hover` (ring darkens, no lift), `portrait`, `menu-panel`, `menu-item`.
 - **Helpers:** `focus-ring`, `transition`.
 
 ## Components
@@ -92,6 +105,7 @@ Ink is for reading. Wine is for actions. Gold is for small details. Keep gold ra
   - It has a fixed 16:10 image, so photographs and icons look like one set.
   - Below the image: the role and country, the name, the full `summary` (written when the entry is created), and Feast, Lived, and Church.
 - **`SaintsListClient`:** the masonic waterfall, with up to 4 columns and 22px gaps (14px on phones). It inserts `AppCard` as the seventh item.
+  - **The waterfall stays in v4 (decided 2026-10-22).** Cards of varying height are the point: the list should feel organic, like a wall of icons, not a grid. The variation comes from the summary. Show the first two to three sentences, cut at a sentence end inside a word window (about 40 to 70 words), never mid-sentence, so each card's height follows its own text. The full summary stays on the saint page. The v4 card is portrait-first with the feast date as an inscription above the name.
 - **`SaintHero`:** the top of a saint page. Always one layout (decided 2026-10-02): the profile portrait (280 px high, 220 on phones) shown whole on a beige panel (padding 32 × 40), with the name, summary and actions beside it. Other images never change the top; they appear in the Images tab and section further down.
   - The line above the name is role · place · years. One button, "Read the life", plus share. No stats bar under the hero.
 - **Saint page body (2026-10-02, revised):** hierarchy and order follow the person, not the miracles: the name is always the largest element, then the story, then words and teachings, then relics and images, and miracles last as one quiet link row ("Miracles and answered prayers · N accounts"), never a large number. Type follows a Wikipedia-like scale, a step larger: hero name 48 px (phones 36), summary 17.5 px, section titles 30 px with a hairline under them, chapter rows 17 px in the reading serif in two columns, reading text 17.5 px, facts and tabs 14 px. Tabs are text with an underline at every width, without counts. The side card (300 px) sits beside every section and is sticky: feast day, born, died, patron, venerated, novenas, "Pray in the app". "Teachings and quotes" shows one quote and the teachings as a line of links. Below 1100 px the card comes before the story and drops the feast and app button, which are in the phone's bottom bar. Mockup: design-mockups/wiki-scale/hero-a2.html.

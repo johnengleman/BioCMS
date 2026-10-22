@@ -3,8 +3,10 @@
  * The full system and its rules: docs/design-system.md.
  * SCSS mixins that use these: styles/candle.scss.
  *
- * "Travel" design (v3): the prayer app palette, made warmer.
- * Ink is for reading. Wine is for actions. Gold is for small details.
+ * v4 "Light in a quiet room": sacred through light, stillness and
+ * inscription, never ornament. Night surfaces carry presence (heroes,
+ * today's feast, quotes, the saint card); paper carries reading.
+ * Ink is for reading. Wine is for actions. Candle gold is the light.
  */
 :root {
   /* Surfaces */
@@ -40,6 +42,30 @@
   --card-dark-ink-2: #d9cbbb;
   --card-dark-ink-3: #b9a796;
   --card-dark-line: rgba(255, 246, 234, 0.07);
+
+  /* Night (v4): the sacred surfaces. Heroes, today's feast, quotes and
+     the saint card sit on night; reading stays on paper. One light
+     source: candle gold as a glow behind portraits and titles, and as
+     the small-capitals inscriptions. Never as a filled button. */
+  --night: #1b1513;
+  --night-2: #27201d; /* cards and sheets on night */
+  --night-line: rgba(255, 240, 220, 0.1); /* hairlines on night */
+  --on-night: #f5ead9;
+  --on-night-2: #cdbba6;
+  --on-night-3: #9a877a;
+  --candle: #d9a95a; /* the light on night; not for small text on paper */
+  --candle-soft: #f0d49a; /* glow stops, italic epithets */
+  --glow: radial-gradient(
+    42% 70% at 22% 45%,
+    rgba(217, 169, 90, 0.26),
+    rgba(217, 169, 90, 0) 70%
+  );
+  --glow-top: radial-gradient(
+    60% 55% at 50% 0%,
+    rgba(217, 169, 90, 0.22),
+    rgba(217, 169, 90, 0) 70%
+  );
+  --tracking-inscription: 0.16em;
 
   /* Type */
   --font-title: var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
@@ -93,4 +119,5 @@
   /* Motion */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --duration: 0.2s;
+  --duration-slow: 0.9s; /* the one slow fade: the glow on page load */
 }
