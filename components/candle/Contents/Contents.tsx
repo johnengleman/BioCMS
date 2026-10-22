@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { toRoman } from '../../../utils/saintNames'
 import styles from './styles.module.scss'
 
 type Item = {
@@ -26,10 +27,13 @@ const Contents = ({
   title = 'Contents',
   items,
   variant = 'rail',
+  numerals = 'roman',
 }: {
   title?: string
   items: Item[]
   variant?: 'rail' | 'chips'
+  // Roman numerals read as inscriptions (design v4).
+  numerals?: 'roman' | 'arabic'
 }) => {
   const [active, setActive] = useState(items[0]?.id)
   const chipsRef = useRef<HTMLOListElement>(null)
@@ -127,7 +131,11 @@ const Contents = ({
                 }
               >
                 <span className={styles.number}>
-                  {numbered ? number : ''}
+                  {numbered
+                    ? numerals === 'roman'
+                      ? toRoman(number)
+                      : number
+                    : ''}
                 </span>
                 <span>{text}</span>
                 {count && <em>{count}</em>}
