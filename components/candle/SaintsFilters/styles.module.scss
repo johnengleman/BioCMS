@@ -2,50 +2,101 @@
 
 .bar {
   @include candle.container;
-  margin-top: var(--space-6);
+  margin-top: var(--space-4);
 
   @media (max-width: 767px) {
-    margin-top: var(--space-5);
+    margin-top: var(--space-2);
   }
 }
 
-// The pills on the left (they wrap), "Sort by" on the right.
+// The text links on the left (they wrap), "Sort by" on the right, on
+// one hairline.
 .top {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: var(--space-4);
-
-  > nav {
-    min-width: 0;
-  }
+  border-bottom: 1px solid var(--hairline);
 
   @media (max-width: 767px) {
     flex-direction: column;
-    gap: var(--space-2);
+    align-items: stretch;
+    gap: 0;
   }
 }
 
-// "More filters": a pill that opens the panel, with a chevron.
-.more {
-  @include candle.pill;
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 24px;
+  min-width: 0;
 
-  svg {
-    width: 15px;
-    height: 15px;
-    @include candle.transition(transform);
-  }
-}
-
-@media (max-width: 480px) {
+  a,
   .more {
-    min-height: 36px;
-    padding: 0 var(--space-3);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 44px;
+    margin-bottom: -1px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: none;
+    color: var(--ink-2);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    @include candle.transition(color, border-color);
+    @include candle.focus-ring;
+
+    &:hover {
+      color: var(--ink);
+    }
+
+    em {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      color: var(--gold);
+      @include candle.lining;
+    }
+
+    svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    &[aria-current='true'] {
+      border-bottom-color: var(--ink);
+      color: var(--ink);
+      font-weight: 600;
+    }
   }
+
+  @media (max-width: 767px) {
+    gap: 0 18px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+// The chosen category or month: underlined, with a ✕ to clear it.
+.clear svg {
+  color: var(--ink-3);
+}
+
+.more svg {
+  @include candle.transition(transform);
 }
 
 .open {
-  border-color: var(--ink);
   color: var(--ink);
 
   svg {
@@ -55,19 +106,13 @@
 
 // Every category and the twelve feast months, all in view at once.
 .panel {
-  margin-top: var(--space-3);
-  padding: var(--space-5) var(--space-6) var(--space-6);
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-xl);
-  background: var(--surface);
-  box-shadow: var(--shadow-sm);
+  padding: var(--space-5) 0 var(--space-6);
+  border-bottom: 1px solid var(--hairline);
 
   h3 {
+    @include candle.inscription;
+    font-size: 11px;
     margin: 0 0 var(--space-3);
-    font-family: var(--font-ui);
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--ink);
   }
 
   ul {
@@ -75,16 +120,12 @@
     padding: 0;
     list-style: none;
   }
-
-  @media (max-width: 767px) {
-    padding: var(--space-4);
-  }
 }
 
 .categories {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: var(--space-1) var(--space-4);
+  gap: 0 var(--space-6);
   padding-bottom: var(--space-5) !important;
   margin-bottom: var(--space-5) !important;
   border-bottom: 1px solid var(--hairline);
@@ -93,32 +134,33 @@
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    padding: 7px var(--space-2);
-    border-radius: var(--radius-md);
+    padding: 7px 0;
     font-size: 14px;
     color: var(--ink);
+    @include candle.transition(color);
     @include candle.focus-ring;
 
     svg {
       flex-shrink: 0;
-      width: 16px;
-      height: 16px;
-      color: var(--ink-2);
+      width: 15px;
+      height: 15px;
+      color: var(--ink-3);
     }
 
     em {
       margin-left: auto;
       font-style: normal;
       font-size: 12px;
-      color: var(--ink-3);
+      color: var(--gold);
+      @include candle.lining;
     }
 
     &:hover {
-      background: var(--muted);
+      color: var(--wine);
     }
 
     &[aria-current='true'] {
-      background: var(--muted);
+      color: var(--wine);
       font-weight: 650;
     }
   }
@@ -142,11 +184,12 @@
     display: block;
     padding: 8px 0;
     border: 1px solid var(--hairline);
-    border-radius: var(--radius-md);
     font-size: 13px;
     font-weight: 600;
     text-align: center;
     color: var(--ink-2);
+    @include candle.lining;
+    @include candle.transition(color, border-color);
     @include candle.focus-ring;
 
     &:hover {
@@ -155,7 +198,9 @@
     }
 
     &[aria-current='true'] {
-      @include candle.pill-selected;
+      border-color: var(--ink);
+      background: var(--ink);
+      color: var(--bg);
     }
   }
 

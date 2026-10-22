@@ -1,36 +1,44 @@
 'use client'
 
 import Link from 'next/link'
+import { useTradition } from '../../../hooks/useTradition'
 import {
+  cardSummary,
   placeLabel,
   roleLabel,
   yearsLabel,
 } from '../../../utils/saintCard'
-import { splitSaintName } from '../../../utils/saintNames'
+import { formatFeast, splitSaintName } from '../../../utils/saintNames'
 import smartQuotes from '../../../utils/smartQuotes'
 import styles from './styles.module.scss'
 
 const LONG_NAME = 28
 
-// A saint in the waterfall ("Travel" design): a dark card with a fixed
-// 16:10 image at the top, so photographs and icons look like one set.
-// Below it: the years (in gold, first, because how recent a saint is,
-// is the first thing a reader scans for), role and place, the short
-// name, and the whole summary. Summaries keep their own length, so the
-// cards have different heights and the waterfall stays lively. There is
-// no footer; the feast day and the rest are on the saint page. Also
-// used for "Related saints".
+// A saint in the waterfall (design v4): a night card, portrait first,
+// the feast day as an inscription above the name, then role, place and
+// years, and the first two or three sentences of the summary. The
+// summaries differ in length, so the cards differ in height and the
+// waterfall stays organic. Also used for "Related saints".
 const SaintSummary = ({ data }: { data: any }) => {
   const saint = data || {}
+  const { church } = useTradition()
   const { name, profile_image, summary, slug } = saint
-  const kicker = [roleLabel(saint.categories), placeLabel(saint)]
+  const meta = [
+    yearsLabel(saint.birth_year, saint.death_year),
+    roleLabel(saint.categories),
+    placeLabel(saint),
+  ]
     .filter(Boolean)
     .join(' · ')
-  const years = yearsLabel(saint.birth_year, saint.death_year)
+  const catholic = formatFeast(saint.feast_day_catholic)
+  const orthodox = formatFeast(saint.feast_day_orthodox)
+  const feast =
+    church === 'orthodox' ? orthodox || catholic : catholic || orthodox
   const shortName =
     name?.length > LONG_NAME ? splitSaintName(name).title : name
   const position =
-    profile_image?.metadata?.object_position || 'center 22%'
+    profile_image?.metadata?.object_position || 'center 20%'
+  const excerpt = cardSummary(summary)
 
   return (
     <Link
@@ -49,38 +57,23 @@ const SaintSummary = ({ data }: { data: any }) => {
               `Image of ${name}`
             }
             width={720}
-            height={450}
+            height={960}
             loading="lazy"
             style={{ objectPosition: position }}
           />
         )}
       </div>
       <div className={styles.body}>
-        {(years || kicker) && (
-          <div className={styles.kicker}>
-            {years && (
-              <span className={styles.year}>
-                <span className="visually-hidden">Lived </span>
-                {years}
-              </span>
-            )}
-            {years && kicker && (
-              <span
-                className={styles.dot}
-                aria-hidden="true"
-              >
-                ·
-              </span>
-            )}
-            {kicker}
-          </div>
+        {feast && (
+          <p className={styles.feast}>
+            <span className="visually-hidden">Feast day </span>
+            {feast}
+          </p>
         )}
         <h3 className={styles.name}>{shortName}</h3>
-        {summary && (
-          <div
-            className={styles.summary}
-            dangerouslySetInnerHTML={{ __html: smartQuotes(summary) }}
-          />
+        {meta && <p className={styles.meta}>{meta}</p>}
+        {excerpt && (
+          <p className={styles.summary}>{smartQuotes(excerpt)}</p>
         )}
       </div>
     </Link>
